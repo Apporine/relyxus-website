@@ -354,43 +354,19 @@ export function SiteHeader() {
   );
 }
 
-const footerGroups: {
-  title: string;
-  links: { label: string; href: string }[];
-}[] = [
-  {
-    title: "Product",
-    links: [
-      { label: "Overview", href: "/product" },
-      { label: "Investigation", href: "/product/investigation" },
-      { label: "Governed actions", href: "/product/governed-actions" },
-      { label: "Reporting", href: "/product/reporting" },
-      { label: "Integrations", href: "/integrations" },
-      { label: "Security", href: "/security" },
-    ],
-  },
-  {
-    title: "Evaluate",
-    links: [
-      { label: "Deployment", href: "/deployment" },
-      { label: "Financial services", href: "/solutions/financial-services" },
-      { label: "Replay", href: "/replay" },
-      { label: "Pricing", href: "/pricing" },
-      { label: "Resources", href: "/resources" },
-      { label: "Request a demo", href: "/demo" },
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      { label: "About", href: "/company" },
-      { label: "Contact", href: "/contact" },
-      { label: "Privacy policy", href: "/privacy" },
-      { label: "Terms", href: "/terms" },
-      { label: "Accessibility", href: "/accessibility" },
-    ],
-  },
-];
+const footerNav = [
+  { label: "Product", href: "/product" },
+  { label: "Deployment", href: "/deployment" },
+  { label: "Security", href: "/security" },
+  { label: "Contact", href: "/contact" },
+  { label: "Request a demo", href: "/demo" },
+] as const;
+
+const footerLegal = [
+  { label: "Privacy policy", href: "/privacy" },
+  { label: "Terms", href: "/terms" },
+  { label: "Accessibility", href: "/accessibility" },
+] as const;
 
 export function SiteFooter() {
   const [preferencesOpen, setPreferencesOpen] = useState(false);
@@ -436,65 +412,33 @@ export function SiteFooter() {
   }, [preferencesOpen, closePreferences]);
   return (
     <footer className="site-footer">
-      <div className="container footer-main">
-        <div className="footer-brand">
+      <div className="container footer-shell">
+        <div className="footer-row">
           <Wordmark />
-          <p>
-            Understand the incident.
-            <br />
-            Control what happens next.
-          </p>
-          <Link href="/demo" className="footer-cta">
-            Request a demo <ArrowRight size={15} aria-hidden="true" />
-          </Link>
+          <nav className="footer-nav" aria-label="Footer">
+            {footerNav.map(item => (
+              <Link key={item.href} href={item.href}>
+                {item.label}
+              </Link>
+            ))}
+          </nav>
         </div>
-        <nav className="footer-groups-desktop" aria-label="Footer">
-          {footerGroups.map(group => (
-            <div className="footer-group" key={group.title}>
-              <h2>{group.title}</h2>
-              {group.links.map(item => (
-                <Link key={item.href} href={item.href}>
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-          ))}
-        </nav>
-        <div className="footer-groups-mobile">
-          {footerGroups.map(group => (
-            <details className="footer-group-accordion" key={group.title}>
-              <summary>
-                {group.title}
-                <span aria-hidden="true">＋</span>
-              </summary>
-              <div>
-                {group.links.map(item => (
-                  <Link key={item.href} href={item.href}>
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </details>
-          ))}
+        <div className="footer-row footer-legal-row">
+          <nav className="footer-legal" aria-label="Legal">
+            {footerLegal.map(item => (
+              <Link key={item.href} href={item.href}>
+                {item.label}
+              </Link>
+            ))}
+            <button
+              ref={preferenceTrigger}
+              type="button"
+              onClick={() => setPreferencesOpen(true)}
+            >
+              Cookie preferences
+            </button>
+          </nav>
         </div>
-      </div>
-      <div className="container footer-bottom">
-        <span>© {new Date().getFullYear()} Relyxus</span>
-        <span className="footer-bottom-links">
-          <Link href="/privacy">Privacy policy</Link>
-          <Link href="/terms">Terms</Link>
-          <Link href="/accessibility">Accessibility</Link>
-          <button
-            ref={preferenceTrigger}
-            type="button"
-            onClick={() => setPreferencesOpen(true)}
-          >
-            Cookie preferences
-          </button>
-        </span>
-        <span className="footer-region">
-          Built for teams that keep people in the loop.
-        </span>
       </div>
       {preferencesOpen && (
         <div

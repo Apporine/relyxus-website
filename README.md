@@ -219,14 +219,14 @@ flowchart TD
 
 ### Implementation map
 
-| Layer | Path | Role |
-| --- | --- | --- |
-| Shared validation + delivery | `shared/contact.ts` | Payload rules, email body, Resend/FormSubmit send |
-| Vercel function | `api/contact.ts` | Production `POST /api/contact` |
-| Express route | `server/contact.ts` | Local full-stack `POST /api/contact` |
-| Vite middleware | `vite.config.ts` | Local static-dev `POST /api/contact` |
-| Form UI | `client/src/pages/Demo.tsx` | Validation, submit, success/error states |
-| Contact page | `client/src/pages/MarketingPages.tsx` | Routing cards + mailto list |
+| Layer                        | Path                                  | Role                                              |
+| ---------------------------- | ------------------------------------- | ------------------------------------------------- |
+| Shared validation + delivery | `shared/contact.ts`                   | Payload rules, email body, Resend/FormSubmit send |
+| Vercel function              | `api/contact.ts`                      | Production `POST /api/contact`                    |
+| Express route                | `server/contact.ts`                   | Local full-stack `POST /api/contact`              |
+| Vite middleware              | `vite.config.ts`                      | Local static-dev `POST /api/contact`              |
+| Form UI                      | `client/src/pages/Demo.tsx`           | Validation, submit, success/error states          |
+| Contact page                 | `client/src/pages/MarketingPages.tsx` | Routing cards + mailto list                       |
 
 ### First-time FormSubmit note
 
@@ -263,10 +263,10 @@ flowchart LR
 
 ### Recommended Vercel env vars
 
-| Variable | Required | Purpose |
-| --- | --- | --- |
-| `RESEND_API_KEY` | Recommended | Preferred transactional email provider |
-| `CONTACT_FROM_EMAIL` | Optional | Verified sender, e.g. `Relyxus Website <hello@your-domain>` |
+| Variable             | Required    | Purpose                                                     |
+| -------------------- | ----------- | ----------------------------------------------------------- |
+| `RESEND_API_KEY`     | Recommended | Preferred transactional email provider                      |
+| `CONTACT_FROM_EMAIL` | Optional    | Verified sender, e.g. `Relyxus Website <hello@your-domain>` |
 
 Without Resend, FormSubmit fallback is used (see note above).
 
@@ -320,19 +320,19 @@ SEO helpers:
 
 ## Scripts
 
-| Command | Description |
-| --- | --- |
-| `pnpm dev:static` | Vite marketing site on port `3000` |
-| `pnpm dev` | Express + Vite full stack |
+| Command             | Description                                      |
+| ------------------- | ------------------------------------------------ |
+| `pnpm dev:static`   | Vite marketing site on port `3000`               |
+| `pnpm dev`          | Express + Vite full stack                        |
 | `pnpm build:static` | Production static build → `dist/public` (Vercel) |
-| `pnpm build` | Static build + bundled Express server → `dist/` |
-| `pnpm start` | Run bundled Express server (`dist/index.js`) |
-| `pnpm preview` | Preview static production build |
-| `pnpm check` | TypeScript (`tsc --noEmit`) |
-| `pnpm test` | Vitest unit tests |
-| `pnpm format` | Prettier write |
-| `pnpm db:migrate` | Apply Drizzle migrations |
-| `pnpm db:push` | Generate + migrate schema changes |
+| `pnpm build`        | Static build + bundled Express server → `dist/`  |
+| `pnpm start`        | Run bundled Express server (`dist/index.js`)     |
+| `pnpm preview`      | Preview static production build                  |
+| `pnpm check`        | TypeScript (`tsc --noEmit`)                      |
+| `pnpm test`         | Vitest unit tests                                |
+| `pnpm format`       | Prettier write                                   |
+| `pnpm db:migrate`   | Apply Drizzle migrations                         |
+| `pnpm db:push`      | Generate + migrate schema changes                |
 
 ---
 
@@ -340,13 +340,13 @@ SEO helpers:
 
 See `.env.example`.
 
-| Variable | Used by | Notes |
-| --- | --- | --- |
-| `RESEND_API_KEY` | Contact delivery | Preferred path for production email |
-| `CONTACT_FROM_EMAIL` | Contact delivery | Must be allowed/verified by Resend |
-| `PORT` | Express | Defaults to `3000` |
-| `DATABASE_URL` | Drizzle / server | Optional; unused for static marketing deploy |
-| `MANUS_*` / OAuth vars | Platform template helpers | Only needed for full platform/auth features |
+| Variable               | Used by                   | Notes                                        |
+| ---------------------- | ------------------------- | -------------------------------------------- |
+| `RESEND_API_KEY`       | Contact delivery          | Preferred path for production email          |
+| `CONTACT_FROM_EMAIL`   | Contact delivery          | Must be allowed/verified by Resend           |
+| `PORT`                 | Express                   | Defaults to `3000`                           |
+| `DATABASE_URL`         | Drizzle / server          | Optional; unused for static marketing deploy |
+| `MANUS_*` / OAuth vars | Platform template helpers | Only needed for full platform/auth features  |
 
 Never commit real secrets. Configure production values in the Vercel project settings.
 
@@ -354,12 +354,18 @@ Never commit real secrets. Configure production values in the Vercel project set
 
 ## Quality checks
 
-Before opening a PR:
+Automated gates keep `develop` deployable:
+
+| Gate               | When                   | What runs                                                         |
+| ------------------ | ---------------------- | ----------------------------------------------------------------- |
+| Husky `pre-commit` | Every local commit     | `lint-staged` (Prettier) → `pnpm check` → `pnpm test`             |
+| Husky `pre-push`   | Every local push       | `pnpm build:static`                                               |
+| GitHub Actions CI  | Push / PR to `develop` | format check, typecheck, tests, static build, output verification |
+
+Before opening a PR (or run the same suite CI uses):
 
 ```bash
-pnpm check
-pnpm test
-pnpm build:static
+pnpm ci
 ```
 
 Contact smoke check (with local static server running):
@@ -404,14 +410,14 @@ Practical rules used in this repo:
 
 ## Tech stack
 
-| Area | Choice |
-| --- | --- |
-| UI | React 19, Wouter, Tailwind CSS 4, Radix UI, Framer Motion |
-| Build | Vite 7, TypeScript 5.9, pnpm |
-| API (optional) | Express, tRPC, Drizzle ORM, MySQL |
-| Contact | Shared validator + Resend / FormSubmit |
-| Hosting | Vercel static output + serverless `/api/contact` |
-| SEO | Meta tags, canonical, OG/Twitter, JSON-LD, robots, sitemap |
+| Area           | Choice                                                     |
+| -------------- | ---------------------------------------------------------- |
+| UI             | React 19, Wouter, Tailwind CSS 4, Radix UI, Framer Motion  |
+| Build          | Vite 7, TypeScript 5.9, pnpm                               |
+| API (optional) | Express, tRPC, Drizzle ORM, MySQL                          |
+| Contact        | Shared validator + Resend / FormSubmit                     |
+| Hosting        | Vercel static output + serverless `/api/contact`           |
+| SEO            | Meta tags, canonical, OG/Twitter, JSON-LD, robots, sitemap |
 
 ---
 

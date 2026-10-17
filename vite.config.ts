@@ -56,7 +56,7 @@ function writeToLogFile(source: LogSource, entries: unknown[]) {
   const logPath = path.join(LOG_DIR, `${source}.log`);
 
   // Format entries with timestamps
-  const lines = entries.map((entry) => {
+  const lines = entries.map(entry => {
     const ts = new Date().toISOString();
     return `[${ts}] ${JSON.stringify(entry)}`;
   });
@@ -131,7 +131,7 @@ function vitePluginManusDebugCollector(): Plugin {
         }
 
         let body = "";
-        req.on("data", (chunk) => {
+        req.on("data", chunk => {
           body += chunk.toString();
         });
 
@@ -163,7 +163,11 @@ function vitePluginPublicPlatformConfig(): Plugin {
       });
     },
     generateBundle() {
-      this.emitFile({ type: "asset", fileName: "api/platform/config.js", source: publicPlatformScript() });
+      this.emitFile({
+        type: "asset",
+        fileName: "api/platform/config.js",
+        source: publicPlatformScript(),
+      });
     },
   };
 }
@@ -179,10 +183,11 @@ function vitePluginContactApi(): Plugin {
         }
 
         const chunks: Buffer[] = [];
-        req.on("data", (chunk) => chunks.push(Buffer.from(chunk)));
+        req.on("data", chunk => chunks.push(Buffer.from(chunk)));
         req.on("end", async () => {
           try {
-            const { deliverContactEmail, validateContactPayload } = await import("./shared/contact");
+            const { deliverContactEmail, validateContactPayload } =
+              await import("./shared/contact");
             const raw = Buffer.concat(chunks).toString("utf8");
             const body = raw ? JSON.parse(raw) : {};
             const validated = validateContactPayload(body);
@@ -207,7 +212,10 @@ function vitePluginContactApi(): Plugin {
             res.end(
               JSON.stringify({
                 ok: false,
-                error: error instanceof Error ? error.message : "Unexpected delivery error",
+                error:
+                  error instanceof Error
+                    ? error.message
+                    : "Unexpected delivery error",
               })
             );
           }

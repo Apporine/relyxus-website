@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+set -e
+
+echo "→ static production build"
+pnpm build:static

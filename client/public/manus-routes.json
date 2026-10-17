@@ -1,1 +1,24 @@
-{"routes":[{"path":"/","title":"Relyxus — Incident response, with control"},{"path":"/product","title":"Product"},{"path":"/product/investigation","title":"Investigation"},{"path":"/product/governed-actions","title":"Governed actions"},{"path":"/product/reporting","title":"Reporting"},{"path":"/deployment","title":"Deployment"},{"path":"/security","title":"Security"},{"path":"/integrations","title":"Integrations"},{"path":"/integrations/:slug","title":"Integration detail"},{"path":"/solutions/financial-services","title":"Financial services"},{"path":"/replay","title":"Incident Replay"},{"path":"/pricing","title":"Pricing"},{"path":"/demo","title":"Request a demo"},{"path":"/resources","title":"Resources"},{"path":"/resources/:slug","title":"Resource article"},{"path":"/company","title":"Company"},{"path":"/contact","title":"Contact"},{"path":"/privacy","title":"Privacy"},{"path":"/terms","title":"Terms"},{"path":"/accessibility","title":"Accessibility"}]}
+{
+  "routes": [
+    { "path": "/", "title": "Relyxus — Incident response, with control" },
+    { "path": "/product", "title": "Product" },
+    { "path": "/product/investigation", "title": "Investigation" },
+    { "path": "/product/governed-actions", "title": "Governed actions" },
+    { "path": "/product/reporting", "title": "Reporting" },
+    { "path": "/deployment", "title": "Deployment" },
+    { "path": "/security", "title": "Security" },
+    { "path": "/integrations", "title": "Integrations" },
+    { "path": "/integrations/:slug", "title": "Integration detail" },
+    { "path": "/solutions/financial-services", "title": "Financial services" },
+    { "path": "/replay", "title": "Incident Replay" },
+    { "path": "/pricing", "title": "Pricing" },
+    { "path": "/demo", "title": "Request a demo" },
+    { "path": "/resources", "title": "Resources" },
+    { "path": "/resources/:slug", "title": "Resource article" },
+    { "path": "/company", "title": "Company" },
+    { "path": "/contact", "title": "Contact" },
+    { "path": "/privacy", "title": "Privacy" },
+    { "path": "/terms", "title": "Terms" },
+    { "path": "/accessibility", "title": "Accessibility" }
+  ]
+}

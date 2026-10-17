@@ -3,7 +3,12 @@ export const CONTACT_RECIPIENTS = [
   "bisma.idrees@apporine.com",
 ] as const;
 
-export const ENQUIRY_TYPES = ["Demo", "Replay pilot", "Deployment", "Pricing"] as const;
+export const ENQUIRY_TYPES = [
+  "Demo",
+  "Replay pilot",
+  "Deployment",
+  "Pricing",
+] as const;
 
 export type EnquiryType = (typeof ENQUIRY_TYPES)[number];
 
@@ -27,7 +32,10 @@ function asString(value: unknown): string {
 }
 
 export function validateContactPayload(body: unknown): ContactValidationResult {
-  const input = typeof body === "object" && body !== null ? (body as Record<string, unknown>) : {};
+  const input =
+    typeof body === "object" && body !== null
+      ? (body as Record<string, unknown>)
+      : {};
   const name = asString(input.name);
   const email = asString(input.email);
   const company = asString(input.company);
@@ -39,16 +47,22 @@ export function validateContactPayload(body: unknown): ContactValidationResult {
   const errors: Record<string, string> = {};
 
   if (name.length < 2) errors.name = "Enter your name (at least 2 characters).";
-  else if (name.length > 100) errors.name = "Name must be 100 characters or fewer.";
+  else if (name.length > 100)
+    errors.name = "Name must be 100 characters or fewer.";
 
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = "Enter a valid work email address.";
-  else if (email.length > 254) errors.email = "Email address must be 254 characters or fewer.";
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+    errors.email = "Enter a valid work email address.";
+  else if (email.length > 254)
+    errors.email = "Email address must be 254 characters or fewer.";
 
   if (company.length < 2) errors.company = "Enter your company name.";
-  else if (company.length > 160) errors.company = "Company must be 160 characters or fewer.";
+  else if (company.length > 160)
+    errors.company = "Company must be 160 characters or fewer.";
 
-  if (!ENQUIRY_TYPES.includes(enquiry as EnquiryType)) errors.enquiry = "Choose an enquiry type.";
-  if (message.length > 2000) errors.message = "Message must be 2,000 characters or fewer.";
+  if (!ENQUIRY_TYPES.includes(enquiry as EnquiryType))
+    errors.enquiry = "Choose an enquiry type.";
+  if (message.length > 2000)
+    errors.message = "Message must be 2,000 characters or fewer.";
 
   if (Object.keys(errors).length > 0) return { ok: false, errors };
 
@@ -115,7 +129,8 @@ export async function deliverContactEmail(
   env: NodeJS.ProcessEnv = process.env
 ): Promise<{ ok: true; provider: string } | { ok: false; error: string }> {
   const { subject, text, html } = buildContactEmail(data);
-  const from = env.CONTACT_FROM_EMAIL || "Relyxus Website <onboarding@resend.dev>";
+  const from =
+    env.CONTACT_FROM_EMAIL || "Relyxus Website <onboarding@resend.dev>";
   const apiKey = env.RESEND_API_KEY?.trim();
 
   if (apiKey) {
@@ -136,38 +151,47 @@ export async function deliverContactEmail(
     });
     if (!response.ok) {
       const detail = await response.text();
-      return { ok: false, error: `Email provider rejected the message (${response.status}). ${detail}` };
+      return {
+        ok: false,
+        error: `Email provider rejected the message (${response.status}). ${detail}`,
+      };
     }
     return { ok: true, provider: "resend" };
   }
 
   // Fallback that works without a Resend key after FormSubmit activates the inbox once.
-  const response = await fetch(`https://formsubmit.co/ajax/${CONTACT_RECIPIENTS[0]}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    body: JSON.stringify({
-      name: data.name,
-      email: data.email,
-      company: data.company,
-      enquiry: data.enquiry,
-      role: data.role || "Not provided",
-      deployment: data.deployment || "Not sure yet",
-      marketing: data.marketing ? "Yes" : "No",
-      message: data.message || "(No additional message)",
-      _subject: subject,
-      _template: "table",
-      _captcha: "false",
-      _cc: CONTACT_RECIPIENTS[1],
-      _replyto: data.email,
-    }),
-  });
+  const response = await fetch(
+    `https://formsubmit.co/ajax/${CONTACT_RECIPIENTS[0]}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        name: data.name,
+        email: data.email,
+        company: data.company,
+        enquiry: data.enquiry,
+        role: data.role || "Not provided",
+        deployment: data.deployment || "Not sure yet",
+        marketing: data.marketing ? "Yes" : "No",
+        message: data.message || "(No additional message)",
+        _subject: subject,
+        _template: "table",
+        _captcha: "false",
+        _cc: CONTACT_RECIPIENTS[1],
+        _replyto: data.email,
+      }),
+    }
+  );
 
   if (!response.ok) {
     const detail = await response.text();
-    return { ok: false, error: `Unable to deliver enquiry (${response.status}). ${detail}` };
+    return {
+      ok: false,
+      error: `Unable to deliver enquiry (${response.status}). ${detail}`,
+    };
   }
 
   return { ok: true, provider: "formsubmit" };

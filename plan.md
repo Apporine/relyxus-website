@@ -2,7 +2,7 @@
 
 ## Scope and source authority
 
-Build the complete public marketing and evaluation website described in the supplied Cursor prompt and website specification, preserving the supplied product UI semantics. The site is not the operational Relyxus application. The user's latest direction rejects the initial Ivory-and-blue treatment: a more kinetic, high-energy visual system now supersedes the earlier dark-hero recommendation and the first implementation. The archive does not contain the referenced *Relyxus Master Product Specification v2.3*; therefore release availability, supported integrations, certification, customer proof, commercial terms, legal/privacy text, and operational destinations will not be invented. Release-dependent architecture is presented as documented intent with availability requiring product confirmation. No backend, lead endpoint, analytics, or third-party service is configured; the enquiry flow will clearly remain a local preview and will never claim delivery.
+Build the complete public marketing and evaluation website described in the supplied Cursor prompt and website specification, preserving the supplied product UI semantics. The site is not the operational Relyxus application. The user's latest direction rejects the initial Ivory-and-blue treatment: a more kinetic, high-energy visual system now supersedes the earlier dark-hero recommendation and the first implementation. The archive does not contain the referenced _Relyxus Master Product Specification v2.3_; therefore release availability, supported integrations, certification, customer proof, commercial terms, legal/privacy text, and operational destinations will not be invented. Release-dependent architecture is presented as documented intent with availability requiring product confirmation. No backend, lead endpoint, analytics, or third-party service is configured; the enquiry flow will clearly remain a local preview and will never claim delivery.
 
 ## Five design principles
 
@@ -60,7 +60,6 @@ Homepage: contained accessible navigation; kinetic Signal Noir hero with a purpo
 ## Delivery boundary
 
 Provide and verify a working development preview. Do not publish publicly. A successful preview/checkpoint is not a publication claim. Real enquiry delivery, legal/privacy publication, approved corporate identity/legal entity, release status, connector catalogue and sign-in/support destinations remain launch dependencies until supplied and configured.
-
 
 ## Follow-up polish direction
 

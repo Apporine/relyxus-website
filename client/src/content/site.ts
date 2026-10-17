@@ -11,14 +11,9 @@ export const navGroups: NavGroup[] = [
         description: "Follow evidence from first signal to reviewed outcome.",
       },
       {
-        label: "Investigation",
+        label: "Investigate & act",
         href: "/product/investigation",
-        description: "See how hypotheses stay tied to their sources.",
-      },
-      {
-        label: "Governed actions",
-        href: "/product/governed-actions",
-        description: "Keep proposed changes behind policy and approval.",
+        description: "Evidence first, then policy and human approval.",
       },
       {
         label: "Reporting",
@@ -136,7 +131,7 @@ export const productOutcomes = [
       "Policy limits, scope and the required human approvals stay in view before an action can proceed.",
     detail:
       "A proposed change waits at an explicit approval gate. Your policies decide who can move it forward.",
-    href: "/product/governed-actions",
+    href: "/product/investigation#governed-actions",
     visual: "gate",
   },
   {

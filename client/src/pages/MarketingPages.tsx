@@ -26,8 +26,9 @@ type ProductRoute =
   | "governed-actions"
   | "reporting"
   | "security";
+
 const productCopy: Record<
-  Exclude<ProductRoute, "security">,
+  "overview" | "reporting",
   {
     eyebrow: string;
     title: string;
@@ -49,30 +50,6 @@ const productCopy: Record<
     limitation:
       "Connector coverage and deployment options vary by release. We’ll walk through what applies to your team during an evaluation.",
     next: { label: "Explore the incident walkthrough", href: "/#walkthrough" },
-  },
-  investigation: {
-    eyebrow: "PRODUCT / INVESTIGATION",
-    title: "A likely cause, with the evidence to inspect.",
-    summary:
-      "Help responders make sense of an incident without hiding uncertainty or cutting a hypothesis off from its sources.",
-    question: "What is known, and what still needs checking?",
-    mechanism:
-      "Approved evidence comes together in context. A ranked hypothesis stays next to an alternative, and you can open the sources behind each statement.",
-    limitation:
-      "Correlation is not confirmation. Incomplete evidence is expected, and responders still decide what is supported.",
-    next: { label: "View the incident walkthrough", href: "/#walkthrough" },
-  },
-  "governed-actions": {
-    eyebrow: "PRODUCT / GOVERNED ACTIONS",
-    title: "A proposal is not an execution.",
-    summary:
-      "Keep the target, policy and human approval visible between a suggested change and anything that could touch a live service.",
-    question: "Who is allowed to change what—and under which conditions?",
-    mechanism:
-      "Read-only investigation stays separate from action. A proposal carries scope, policy, approvals and a verification plan. Waiting or blocked is a valid outcome.",
-    limitation:
-      "Nothing on this website runs against production. Autonomy levels are configured with your team; we do not assume every level is switched on.",
-    next: { label: "Compare deployment boundaries", href: "/deployment" },
   },
   reporting: {
     eyebrow: "PRODUCT / REPORTING",
@@ -108,32 +85,6 @@ function CapabilityGraphic({ kind }: { kind: string }) {
           <span>Record</span>
         </div>
       )}
-      {kind === "investigation" && (
-        <>
-          <div className="capability-hypothesis">
-            <span>LIKELY EXPLANATION</span>
-            <strong>Routing change may be relevant.</strong>
-            <small>Source linked · uncertainty retained</small>
-          </div>
-          <div className="capability-source-bars">
-            <i />
-            <i />
-            <i />
-          </div>
-        </>
-      )}
-      {kind === "governed-actions" && (
-        <>
-          <div className="capability-proposal">PROPOSED CHANGE</div>
-          <div className="capability-gate">
-            <ShieldCheck size={19} />
-            <span>
-              POLICY GATE<small>Approver roles required</small>
-            </span>
-          </div>
-          <div className="capability-wait">Waiting for review</div>
-        </>
-      )}
       {kind === "reporting" && (
         <>
           <div className="capability-report">
@@ -165,8 +116,138 @@ function CapabilityGraphic({ kind }: { kind: string }) {
   );
 }
 
+function InvestigateActPage() {
+  return (
+    <>
+      <PageMeta
+        title="Investigate and act"
+        description="Investigate with source-linked evidence, then keep proposed actions behind policy and human approval."
+      />
+      <PageIntro
+        eyebrow="PRODUCT / INVESTIGATE & ACT"
+        title="Understand first. Change only with approval."
+        summary="Pull approved evidence into one investigation, keep uncertainty visible, and put policy and people between any proposal and a live service."
+        tone="ink"
+      >
+        <PrimaryLink href="/demo">Discuss this workflow</PrimaryLink>
+        <a className="button button-secondary" href="/#walkthrough">
+          See the walkthrough <ArrowRight size={16} aria-hidden="true" />
+        </a>
+      </PageIntro>
+
+      <section className="workflow-split section-pad">
+        <div className="container workflow-split-grid">
+          <article id="investigation">
+            <p className="eyebrow">01 / INVESTIGATE</p>
+            <h2>A likely cause, with evidence you can inspect.</h2>
+            <p>
+              Approved sources come together in context. A ranked hypothesis
+              stays next to an alternative, and every claim stays linked to what
+              supports it—or what is still missing.
+            </p>
+            <ul className="workflow-points">
+              <li>
+                <Check size={15} aria-hidden="true" /> Read-only evidence in one
+                place
+              </li>
+              <li>
+                <Check size={15} aria-hidden="true" /> Uncertainty kept visible
+              </li>
+              <li>
+                <Check size={15} aria-hidden="true" /> Sources open for review
+              </li>
+            </ul>
+          </article>
+          <article id="governed-actions">
+            <p className="eyebrow">02 / GOVERN</p>
+            <h2>A proposal is not an execution.</h2>
+            <p>
+              Investigation stays separate from action. A proposed change
+              carries scope, policy, required approvers and a verification plan.
+              Waiting or blocked is a valid outcome.
+            </p>
+            <ul className="workflow-points">
+              <li>
+                <Check size={15} aria-hidden="true" /> Target and policy shown
+                before action
+              </li>
+              <li>
+                <Check size={15} aria-hidden="true" /> Human approval required
+              </li>
+              <li>
+                <Check size={15} aria-hidden="true" /> Nothing on this site
+                touches production
+              </li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section className="workflow-strip section-pad">
+        <div className="container">
+          <SectionTitle
+            eyebrow="ONE PATH"
+            title="From signal to a reviewed decision."
+            summary="The same control model runs through investigation and action: evidence first, people before change."
+          />
+          <div className="workflow-steps" aria-hidden="true">
+            <div>
+              <span>01</span>
+              <strong>Signal</strong>
+              <small>Context arrives</small>
+            </div>
+            <i />
+            <div>
+              <span>02</span>
+              <strong>Evidence</strong>
+              <small>Sources inspected</small>
+            </div>
+            <i />
+            <div className="workflow-step-gate">
+              <span>03</span>
+              <strong>Gate</strong>
+              <small>Policy + approval</small>
+            </div>
+            <i />
+            <div>
+              <span>04</span>
+              <strong>Record</strong>
+              <small>Decision preserved</small>
+            </div>
+          </div>
+          <div className="limitation-box workflow-boundary">
+            <CircleAlert size={18} aria-hidden="true" />
+            <p>
+              <strong>Important boundary.</strong> Correlation is not
+              confirmation. Autonomy levels are configured with your team; we do
+              not assume every level is switched on.
+            </p>
+          </div>
+          <div className="workflow-links">
+            <TextLink href="/deployment">
+              Compare deployment boundaries
+            </TextLink>
+            <TextLink href="/security">Explore security and trust</TextLink>
+          </div>
+        </div>
+      </section>
+
+      <ActionBand
+        title="Discuss what this workflow would mean for your team."
+        summary="Start with the sources, permission boundaries and deployment questions that matter in your environment."
+        href="/demo?type=Demo"
+        label="Request a demo"
+      />
+    </>
+  );
+}
+
 export function ProductPage({ page }: { page: ProductRoute }) {
   if (page === "security") return <SecurityPage />;
+  if (page === "investigation" || page === "governed-actions") {
+    return <InvestigateActPage />;
+  }
+
   const content = productCopy[page];
   return (
     <>
@@ -182,7 +263,7 @@ export function ProductPage({ page }: { page: ProductRoute }) {
       >
         <PrimaryLink href="/demo">Discuss this workflow</PrimaryLink>
         <Link className="button button-secondary" href="/deployment">
-          Review deployment <ArrowRight size={16} />
+          Review deployment <ArrowRight size={16} aria-hidden="true" />
         </Link>
       </PageIntro>
       {page === "overview" && (
@@ -213,10 +294,9 @@ export function ProductPage({ page }: { page: ProductRoute }) {
             <h2>{content.question}</h2>
             <p className="lead-copy">{content.mechanism}</p>
             <div className="limitation-box">
-              <CircleAlert size={18} />
+              <CircleAlert size={18} aria-hidden="true" />
               <p>
-                <strong>Important boundary</strong>
-                {content.limitation}
+                <strong>Important boundary.</strong> {content.limitation}
               </p>
             </div>
             <TextLink href={content.next.href}>{content.next.label}</TextLink>
@@ -224,108 +304,69 @@ export function ProductPage({ page }: { page: ProductRoute }) {
           <CapabilityGraphic kind={page} />
         </div>
       </section>
-      {page === "overview" ? (
-        <section className="product-explorer-section section-pad">
-          <div className="container">
-            <SectionTitle
-              eyebrow="EXPLORE FOUR OUTCOMES"
-              title="Keep the whole response understandable."
-              summary="Each capability answers a different operational question. We’ll confirm scope with you during an evaluation."
-            />
-            <ProductExplorer />
-          </div>
-        </section>
-      ) : (
-        <section className="capability-questions section-pad">
-          <div className="container">
-            <SectionTitle
-              eyebrow="EVALUATION QUESTIONS"
-              title="What to validate with your own team."
-              summary="Use these questions to make an evaluation concrete without assuming a capability is available."
-            />
-            <div className="question-grid">
-              <article>
-                <span>01</span>
-                <h3>Inputs</h3>
-                <p>
-                  Which approved sources, fields and time windows are in scope?
-                </p>
-              </article>
-              <article>
-                <span>02</span>
-                <h3>Decision</h3>
-                <p>
-                  What remains a human judgement, approval or classification?
-                </p>
-              </article>
-              <article>
-                <span>03</span>
-                <h3>Evidence</h3>
-                <p>
-                  Can a reviewer inspect the source, uncertainty and any missing
-                  context?
-                </p>
-              </article>
-              <article>
-                <span>04</span>
-                <h3>Limits</h3>
-                <p>What does the current release not support or guarantee?</p>
-              </article>
-            </div>
-          </div>
-        </section>
-      )}
       {page === "overview" && (
-        <section className="autonomy-section section-pad">
-          <div className="container autonomy-layout">
-            <div>
-              <p className="eyebrow">AUTONOMY IS A POLICY CHOICE</p>
-              <h2>More automation isn’t always the goal.</h2>
-              <p>
-                Use this vocabulary to talk about permission boundaries with
-                your team. Not every level needs to be on from day one.
-              </p>
-              <InlineAvailability>
-                Configured with your policies
-              </InlineAvailability>
+        <>
+          <section className="product-explorer-section section-pad">
+            <div className="container">
+              <SectionTitle
+                eyebrow="EXPLORE FOUR OUTCOMES"
+                title="Keep the whole response understandable."
+                summary="Each capability answers a different operational question. We’ll confirm scope with you during an evaluation."
+              />
+              <ProductExplorer />
             </div>
-            <div className="autonomy-list">
-              {[
-                {
-                  level: "L0",
-                  label: "Observe",
-                  text: "Collect context; no suggestion or action.",
-                },
-                {
-                  level: "L1",
-                  label: "Suggest",
-                  text: "A person considers and executes any suggestion.",
-                },
-                {
-                  level: "L2",
-                  label: "One-click approval",
-                  text: "A permitted action still waits for explicit approval.",
-                },
-                {
-                  level: "L3",
-                  label: "Four-eyes",
-                  text: "Distinct eligible approvers review the action.",
-                },
-                {
-                  level: "L4",
-                  label: "Automatic within limits",
-                  text: "Any automatic path is limited by policy and requires confirmation.",
-                },
-              ].map(item => (
-                <div key={item.level}>
-                  <span>{item.level}</span>
-                  <strong>{item.label}</strong>
-                  <p>{item.text}</p>
-                </div>
-              ))}
+          </section>
+          <section className="autonomy-section section-pad">
+            <div className="container autonomy-layout">
+              <div>
+                <p className="eyebrow">AUTONOMY IS A POLICY CHOICE</p>
+                <h2>More automation isn’t always the goal.</h2>
+                <p>
+                  Use this vocabulary to talk about permission boundaries with
+                  your team. Not every level needs to be on from day one.
+                </p>
+                <InlineAvailability>
+                  Configured with your policies
+                </InlineAvailability>
+              </div>
+              <div className="autonomy-list">
+                {[
+                  {
+                    level: "L0",
+                    label: "Observe",
+                    text: "Collect context; no suggestion or action.",
+                  },
+                  {
+                    level: "L1",
+                    label: "Suggest",
+                    text: "A person considers and executes any suggestion.",
+                  },
+                  {
+                    level: "L2",
+                    label: "One-click approval",
+                    text: "A permitted action still waits for explicit approval.",
+                  },
+                  {
+                    level: "L3",
+                    label: "Four-eyes",
+                    text: "Distinct eligible approvers review the action.",
+                  },
+                  {
+                    level: "L4",
+                    label: "Automatic within limits",
+                    text: "Any automatic path is limited by policy and requires confirmation.",
+                  },
+                ].map(item => (
+                  <div key={item.level}>
+                    <span>{item.level}</span>
+                    <strong>{item.label}</strong>
+                    <p>{item.text}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </>
       )}
       <ActionBand
         title={
@@ -344,36 +385,37 @@ export function ProductPage({ page }: { page: ProductRoute }) {
 function SecurityPage() {
   const items = [
     {
-      icon: <GitBranchIcon />,
+      icon: <Gauge size={18} aria-hidden="true" />,
       label: "Data flows and deployment",
-      text: "Map source evidence, model routes and operational paths. Hosting location alone does not prove that every flow stays within the same boundary.",
+      text: "Map source evidence, model routes and operational paths. Hosting location alone does not prove every flow stays inside one boundary.",
     },
     {
-      icon: <Fingerprint size={19} />,
+      icon: <Fingerprint size={18} aria-hidden="true" />,
       label: "Identity and access",
-      text: "Review who can access an incident and which permissions are required. Exact mechanisms and release scope need product confirmation.",
+      text: "Review who can open an incident and which permissions are required. Exact mechanisms need product confirmation.",
     },
     {
-      icon: <SparkleIcon />,
+      icon: <CircleAlert size={18} aria-hidden="true" />,
       label: "AI data handling",
-      text: "Confirm the approved model route, evidence handling and any provider-specific terms. Do not infer a universal retention or training commitment.",
+      text: "Confirm the approved model route, evidence handling and provider terms. Do not infer a universal retention or training commitment.",
     },
     {
-      icon: <ShieldCheck size={19} />,
+      icon: <ShieldCheck size={18} aria-hidden="true" />,
       label: "Action safety",
-      text: "Separate read-only investigation from proposed action, policy checks, approval and verification.",
+      text: "Keep read-only investigation separate from proposed action, policy checks, approval and verification.",
     },
     {
-      icon: <FileText size={19} />,
+      icon: <FileText size={18} aria-hidden="true" />,
       label: "Evidence and assurance",
-      text: "Ask which records are retained and what approved assurance documents are available. No certification or test status is asserted here.",
+      text: "Ask which records are retained and what approved assurance documents are available. No certification status is asserted here.",
     },
     {
-      icon: <UsersRound size={19} />,
+      icon: <UsersRound size={18} aria-hidden="true" />,
       label: "Support and continuity",
       text: "Confirm access, expiry, revocation, update, backup and exit arrangements against approved customer documentation.",
     },
   ];
+
   return (
     <>
       <PageMeta
@@ -389,7 +431,11 @@ function SecurityPage() {
         <PrimaryLink href="/deployment">
           Compare deployment boundaries
         </PrimaryLink>
+        <Link className="button button-secondary" href="/demo?type=Deployment">
+          Discuss security review <ArrowRight size={16} aria-hidden="true" />
+        </Link>
       </PageIntro>
+
       <section className="security-intro section-pad" id="data-boundaries">
         <div className="container security-lead">
           <div>
@@ -397,8 +443,7 @@ function SecurityPage() {
             <h2>Start with what your reviewers need to know.</h2>
             <p className="lead-copy">
               This page walks through the questions security and architecture
-              teams usually ask: where data flows, who can act, and how AI
-              routes are handled. It is not a certification claim or audit
+              teams usually ask. It is not a certification claim or audit
               report.
             </p>
             <InlineAvailability>
@@ -408,33 +453,37 @@ function SecurityPage() {
           <CapabilityGraphic kind="security" />
         </div>
       </section>
+
       <section className="security-topics section-pad">
         <div className="container">
           <SectionTitle
             eyebrow="QUESTIONS TO TAKE INTO REVIEW"
             title="Explain the mechanism, then verify its status."
+            summary="Use these topics to structure a review conversation with your team."
           />
-          <div className="security-topic-list">
+          <div className="security-topic-grid">
             {items.map((item, index) => (
               <article key={item.label}>
-                <span className="security-topic-number">0{index + 1}</span>
-                <span className="security-topic-icon">{item.icon}</span>
-                <div>
-                  <h3>{item.label}</h3>
-                  <p>{item.text}</p>
-                </div>
-                <InlineAvailability>Verify</InlineAvailability>
+                <header>
+                  <span className="security-topic-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span className="security-topic-icon">{item.icon}</span>
+                </header>
+                <h3>{item.label}</h3>
+                <p>{item.text}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
+
       <section className="assurance-status-band">
         <div className="container assurance-status-inner">
-          <span className="assurance-symbol">
+          <span className="assurance-symbol" aria-hidden="true">
             <ShieldCheck size={21} />
           </span>
-          <div>
+          <div className="assurance-copy">
             <p className="eyebrow">ASSURANCE DOCUMENTS</p>
             <h2>Need the security pack for your review?</h2>
             <p>
@@ -444,10 +493,11 @@ function SecurityPage() {
             </p>
           </div>
           <Link className="button button-primary" href="/demo?type=Deployment">
-            Discuss security review <ArrowRight size={16} />
+            Request the review pack <ArrowRight size={16} aria-hidden="true" />
           </Link>
         </div>
       </section>
+
       <ActionBand
         title="Make the boundary part of the evaluation."
         summary="Discuss model routing, source scope and the assurance material your reviewers need."
@@ -456,13 +506,6 @@ function SecurityPage() {
       />
     </>
   );
-}
-
-function GitBranchIcon() {
-  return <Gauge size={19} />;
-}
-function SparkleIcon() {
-  return <ShieldCheck size={19} />;
 }
 
 export function FinancialServicesPage() {
@@ -475,7 +518,7 @@ export function FinancialServicesPage() {
       <PageIntro
         eyebrow="SOLUTIONS / FINANCIAL SERVICES"
         title="Keep incident response explainable when services matter most."
-        summary="A disrupted payment journey carries engineering, customer and resilience questions. This example shows where evidence and human decisions fit—without promising a regulatory outcome."
+        summary="A disrupted payment journey carries engineering, customer and resilience questions. This example shows where evidence and human decisions fitΓÇöwithout promising a regulatory outcome."
         tone="blue"
       >
         <PrimaryLink href="/demo?type=Demo">Discuss your context</PrimaryLink>
@@ -492,7 +535,7 @@ export function FinancialServicesPage() {
             <p>
               The point is not to declare a cause from timing alone. The
               responder needs a way to inspect evidence, understand what remains
-              uncertain and keep any proposed change behind the organisation’s
+              uncertain and keep any proposed change behind the organisationΓÇÖs
               approval rules.
             </p>
             <span className="example-flag">
@@ -569,7 +612,7 @@ export function FinancialServicesPage() {
             <h3>How does investigation work?</h3>
             <ArrowRight size={16} />
           </Link>
-          <Link href="/product/governed-actions">
+          <Link href="/product/investigation#governed-actions">
             <span>02</span>
             <h3>Who approves changes?</h3>
             <ArrowRight size={16} />
@@ -606,7 +649,7 @@ export function CompanyPage() {
       <PageIntro
         eyebrow="COMPANY / PRINCIPLES"
         title="Clarity becomes control."
-        summary="Relyxus is built for teams that want explainable evidence and governed action—not a black box that quietly changes production."
+        summary="Relyxus is built for teams that want explainable evidence and governed actionΓÇönot a black box that quietly changes production."
         tone="ink"
       >
         <PrimaryLink href="/product">Explore the product</PrimaryLink>
@@ -626,8 +669,8 @@ export function CompanyPage() {
             <p>
               Relyxus is developed by Apporine. For team introductions,
               commercial details or support routing, reach us through the
-              contact page or enquiry form and we’ll connect you with the right
-              people.
+              contact page or enquiry form and weΓÇÖll connect you with the
+              right people.
             </p>
             <InlineAvailability>
               Talk to us for the latest company details
@@ -671,7 +714,7 @@ export function ContactPage() {
             <span>01 / EVALUATION</span>
             <h2>Demo or Replay pilot</h2>
             <p>
-              Tell us about the workflow or historical incidents you’d like to
+              Tell us about the workflow or historical incidents youΓÇÖd like to
               walk through together.
             </p>
             <Link href="/demo?type=Replay%20pilot">
@@ -746,7 +789,7 @@ export function LegalPage({
             <h3>Share an accessibility issue</h3>
             <p>
               If something is hard to use, tell us through the contact page or
-              enquiry form and we’ll look into it.
+              enquiry form and weΓÇÖll look into it.
             </p>
             <TextLink href="/contact">Contact the team</TextLink>
           </div>

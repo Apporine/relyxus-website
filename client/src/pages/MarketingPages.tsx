@@ -1,6 +1,7 @@
 import { ArrowRight, CircleAlert } from "lucide-react";
 import { Link } from "wouter";
 import { pageMeta } from "@/content/meta";
+import { ContactArt, ResourcesArt } from "@/components/marketing/HeroArt";
 import {
   PageMeta,
   PageIntro,
@@ -18,6 +19,7 @@ export function ContactPage() {
       <PageIntro
         eyebrow="Contact"
         title="Talk to the people behind Relyxus"
+        art={<ContactArt />}
         summary="Use the enquiry form to start a conversation with the team that looks after Relyxus."
         tone="blue"
       >
@@ -79,6 +81,7 @@ export function LegalPage({
         <PageIntro
           eyebrow="Accessibility"
           title={pageMeta["/accessibility"].h1}
+          art={<ResourcesArt />}
           summary={pageMeta["/accessibility"].body}
           tone="blue"
         />
@@ -117,6 +120,7 @@ export function LegalPage({
         <PageIntro
           eyebrow="Privacy policy"
           title={pageMeta["/privacy"].h1}
+          art={<ResourcesArt />}
           summary="This policy covers the Relyxus website and enquiry forms. It does not replace contract terms for a paid deployment."
           tone="blue"
         />
@@ -187,6 +191,7 @@ export function LegalPage({
       <PageIntro
         eyebrow="Terms"
         title={pageMeta["/terms"].h1}
+        art={<ResourcesArt />}
         summary={pageMeta["/terms"].body}
         tone="blue"
       />

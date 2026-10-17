@@ -107,15 +107,15 @@ export function Wordmark({ onClick }: { onClick?: () => void }) {
       aria-label="Relyxus home"
       onClick={onClick}
     >
-      <img
-        className="wordmark-mark"
-        src="/Icon.png"
-        alt=""
-        width={24}
-        height={24}
-        decoding="async"
-      />
-      <span>relyxus</span>
+      <span className="wm" aria-hidden="true">
+        <span>rel</span>
+        <span>y</span>
+        <svg className="wm-x" viewBox="0 0 14 18">
+          <path className="wm-x1" d="M1.5 2.5 L12.5 15.5" />
+          <path className="wm-x2" d="M12.5 2.5 L1.5 15.5" />
+        </svg>
+        <span>us</span>
+      </span>
     </Link>
   );
 }
@@ -373,6 +373,39 @@ const footerLegal = [
   { label: "Accessibility", href: "/accessibility" },
 ] as const;
 
+/** Animations default to on. Visitors can switch them off; the choice is remembered. */
+function MotionToggle() {
+  const [off, setOff] = useState(false);
+  useEffect(() => {
+    try {
+      setOff(localStorage.getItem("rx-motion") === "off");
+    } catch {
+      /* storage unavailable */
+    }
+  }, []);
+  useEffect(() => {
+    document.documentElement.dataset.motion = off ? "off" : "on";
+  }, [off]);
+  return (
+    <button
+      type="button"
+      className="motion-toggle"
+      aria-pressed={off}
+      onClick={() => {
+        const next = !off;
+        setOff(next);
+        try {
+          localStorage.setItem("rx-motion", next ? "off" : "on");
+        } catch {
+          /* storage unavailable */
+        }
+      }}
+    >
+      Animations: {off ? "off" : "on"}
+    </button>
+  );
+}
+
 export function SiteFooter() {
   return (
     <footer className="site-footer">
@@ -396,10 +429,9 @@ export function SiteFooter() {
             ))}
           </nav>
           <p className="footer-copy">
-            © {new Date().getFullYear()} Apporine. All rights reserved. Product
-            images show sample data.
+            © {new Date().getFullYear()} Apporine. All rights reserved.
           </p>
-          <span className="footer-legal-spacer" aria-hidden="true" />
+          <MotionToggle />
         </div>
       </div>
     </footer>
@@ -452,24 +484,29 @@ export function PageHero({
   title,
   summary,
   tone = "ivory",
+  art,
   children,
 }: {
   eyebrow: string;
   title: string;
   summary: string;
   tone?: "ivory" | "blue" | "ink";
+  art?: React.ReactNode;
   children?: React.ReactNode;
 }) {
   return (
     <section className={`page-hero page-hero-${tone}`}>
-      <div className="container page-hero-inner">
-        <p className="eyebrow page-hero-eyebrow">
-          <span className="eyebrow-line" aria-hidden="true" />
-          <span>{eyebrow}</span>
-        </p>
-        <h1>{title}</h1>
-        <p className="page-hero-summary">{summary}</p>
-        {children && <div className="page-hero-actions">{children}</div>}
+      <div className={`container page-hero-inner ${art ? "has-art" : ""}`}>
+        <div className="page-hero-text">
+          <p className="eyebrow page-hero-eyebrow">
+            <span className="eyebrow-line" aria-hidden="true" />
+            <span>{eyebrow}</span>
+          </p>
+          <h1>{title}</h1>
+          <p className="page-hero-summary">{summary}</p>
+          {children && <div className="page-hero-actions">{children}</div>}
+        </div>
+        {art && <div className="page-hero-art">{art}</div>}
       </div>
     </section>
   );
@@ -641,16 +678,24 @@ export function PageIntro({
   title,
   summary,
   tone = "ivory",
+  art,
   children,
 }: {
   eyebrow: string;
   title: string;
   summary: string;
   tone?: "ivory" | "blue" | "ink";
+  art?: React.ReactNode;
   children?: React.ReactNode;
 }) {
   return (
-    <PageHero eyebrow={eyebrow} title={title} summary={summary} tone={tone}>
+    <PageHero
+      eyebrow={eyebrow}
+      title={title}
+      summary={summary}
+      tone={tone}
+      art={art}
+    >
       {children}
     </PageHero>
   );

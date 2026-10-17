@@ -1,12 +1,4 @@
-import { useEffect, useState } from "react";
-import {
-  ArrowRight,
-  ArrowUpRight,
-  Check,
-  Pause,
-  Play,
-  ShieldCheck,
-} from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, ShieldCheck } from "lucide-react";
 import { Link } from "wouter";
 import {
   FounderNote,
@@ -15,6 +7,7 @@ import {
   DataBand,
   TextLink,
 } from "@/components/marketing/PublicSite";
+import { BrainMap } from "@/components/marketing/BrainMap";
 import { OutcomeStage } from "@/components/marketing/OutcomeStage";
 import {
   pathCards,
@@ -24,190 +17,6 @@ import {
 } from "@/content/site";
 import { track } from "@/lib/analytics";
 import { pageMeta } from "@/content/meta";
-
-type HubMode = "investigate" | "approve" | "record";
-
-const hubModes: { key: HubMode; label: string; caption: string }[] = [
-  {
-    key: "investigate",
-    label: "Investigate",
-    caption: "Alerts, changes and logs flow into one investigation.",
-  },
-  {
-    key: "approve",
-    label: "Approve",
-    caption:
-      "A proposed fix waits at the gate for the people your policy names.",
-  },
-  {
-    key: "record",
-    label: "Record",
-    caption: "Every step lands in an ordered record you can hand to audit.",
-  },
-];
-
-const hubSources = [
-  { label: "Alerts", tone: "coral", y: 54 },
-  { label: "Logs and traces", tone: "cyan", y: 124 },
-  { label: "Changes", tone: "violet", y: 194 },
-  { label: "Tickets", tone: "amber", y: 264 },
-] as const;
-
-function IncidentHub() {
-  const [mode, setMode] = useState<HubMode>("investigate");
-  const [paused, setPaused] = useState(false);
-  const active = hubModes.find(item => item.key === mode) ?? hubModes[0];
-
-  useEffect(() => {
-    if (paused) return;
-    const timer = window.setTimeout(() => {
-      const next =
-        (hubModes.findIndex(item => item.key === mode) + 1) % hubModes.length;
-      setMode(hubModes[next].key);
-    }, 4500);
-    return () => window.clearTimeout(timer);
-  }, [mode, paused]);
-  return (
-    <div
-      className="hx-hub"
-      data-mode={mode}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
-      <svg
-        viewBox="0 0 560 372"
-        role="img"
-        aria-label="Sources flow into one incident record. An approval gate and an audit trail flow out."
-      >
-        {hubSources.map(source => (
-          <g key={source.label} className={`hx-source tone-${source.tone}`}>
-            <path
-              className="hx-lane"
-              d={`M120 ${source.y} C190 ${source.y}, 190 160, 250 160`}
-            />
-            <path
-              className="hx-flow"
-              d={`M120 ${source.y} C190 ${source.y}, 190 160, 250 160`}
-            />
-            <rect
-              x="8"
-              y={source.y - 15}
-              width="112"
-              height="30"
-              rx="15"
-              className="hx-chip"
-            />
-            <circle cx="26" cy={source.y} r="4" className="hx-dot" />
-            <text x="38" y={source.y + 4} className="hx-chip-text">
-              {source.label}
-            </text>
-          </g>
-        ))}
-        <g className="hx-core">
-          <circle cx="290" cy="160" r="46" className="hx-core-halo" />
-          <circle cx="290" cy="160" r="34" className="hx-core-disc" />
-          <text x="290" y="156" textAnchor="middle" className="hx-core-text">
-            Incident
-          </text>
-          <text x="290" y="172" textAnchor="middle" className="hx-core-text">
-            record
-          </text>
-        </g>
-        <g className="hx-out hx-out-approve">
-          <path className="hx-lane" d="M324 160 C380 160, 380 92, 430 92" />
-          <path className="hx-flow" d="M324 160 C380 160, 380 92, 430 92" />
-          <rect
-            x="430"
-            y="68"
-            width="122"
-            height="48"
-            rx="14"
-            className="hx-card"
-          />
-          <text x="446" y="89" className="hx-card-title">
-            Approval gate
-          </text>
-          <text x="446" y="105" className="hx-card-sub">
-            2 approvers
-          </text>
-        </g>
-        <g className="hx-out hx-out-record">
-          <path className="hx-lane" d="M324 160 C380 160, 380 228, 430 228" />
-          <path className="hx-flow" d="M324 160 C380 160, 380 228, 430 228" />
-          <rect
-            x="430"
-            y="204"
-            width="122"
-            height="48"
-            rx="14"
-            className="hx-card"
-          />
-          <text x="446" y="225" className="hx-card-title">
-            Audit trail
-          </text>
-          <text x="446" y="241" className="hx-card-sub">
-            Every step logged
-          </text>
-        </g>
-        <g className="hx-timeline">
-          <path className="hx-lane" d="M70 340 H490" />
-          <path
-            className="hx-timeline-fill"
-            d="M70 340 H490"
-            style={{
-              strokeDashoffset:
-                420 - 210 * hubModes.findIndex(i => i.key === mode),
-            }}
-          />
-          {hubModes.map((item, index) => (
-            <g
-              key={item.key}
-              role="button"
-              tabIndex={0}
-              aria-label={`Show ${item.label}`}
-              aria-pressed={mode === item.key}
-              className={`hx-stage-node ${mode === item.key ? "is-on" : ""}`}
-              onClick={() => setMode(item.key)}
-              onKeyDown={event => {
-                if (event.key === "Enter" || event.key === " ") {
-                  event.preventDefault();
-                  setMode(item.key);
-                }
-              }}
-            >
-              <circle
-                cx={70 + index * 210}
-                cy="340"
-                r="18"
-                className="hx-stage-hit"
-              />
-              <circle
-                cx={70 + index * 210}
-                cy="340"
-                r="7"
-                className="hx-stage-dot"
-              />
-              <text x={70 + index * 210} y="368" textAnchor="middle">
-                {item.label}
-              </text>
-            </g>
-          ))}
-        </g>
-      </svg>
-      <p className="hx-hub-caption" aria-live="polite">
-        {active.caption}
-      </p>
-      <button
-        type="button"
-        className="hx-pause"
-        aria-label={paused ? "Play the animation" : "Pause the animation"}
-        onClick={() => setPaused(value => !value)}
-      >
-        {paused ? <Play size={14} /> : <Pause size={14} />}
-      </button>
-    </div>
-  );
-}
 
 function Hero() {
   return (
@@ -245,7 +54,7 @@ function Hero() {
             </a>
           </div>
         </div>
-        <IncidentHub />
+        <BrainMap />
       </div>
     </section>
   );
@@ -305,7 +114,6 @@ function InAction() {
             loading="lazy"
             decoding="async"
           />
-          <figcaption>Product screenshot with sample data</figcaption>
         </figure>
       </div>
     </section>
@@ -328,11 +136,9 @@ function Proof() {
   return (
     <section className="hx-section hx-proof">
       <div className="container">
-        <h2 className="hx-h2">Where we are today</h2>
+        <h2 className="hx-h2">See Relyxus at work</h2>
         <p className="hx-sub">
-          Relyxus is built by Apporine and still in development. These screens
-          use sample data, and we’re talking to regulated teams about Replay
-          pilots.
+          The screens your team would use during an incident.
         </p>
         <ul className="hx-proof-list">
           {proofPoints.map(point => (
@@ -346,7 +152,6 @@ function Proof() {
                 />
               )}
               <div className="hx-proof-text">
-                <span className="hx-status">{point.status}</span>
                 <h3>{point.title}</h3>
                 <p>{point.detail}</p>
               </div>

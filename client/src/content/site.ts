@@ -53,7 +53,7 @@ export const navGroups: NavGroup[] = [
       {
         label: "Replay pilot",
         href: "/demo?type=Replay%20pilot",
-        description: "Try Relyxus on incidents you already solved.",
+        description: "Try Relyxus on past incidents, read-only.",
       },
     ],
   },
@@ -159,9 +159,9 @@ export const regulatoryClocks = [
     label: "to file the final DORA report on a major ICT incident",
   },
   {
-    value: "31 Mar 2025",
+    value: "Always",
     label:
-      "when UK firms had to stay within impact tolerance for every important business service (FCA and PRA)",
+      "UK firms must stay within impact tolerance for every important business service (FCA and PRA)",
   },
 ] as const;
 
@@ -175,6 +175,10 @@ export const regulatorySources = [
     href: "https://www.fca.org.uk/firms/operational-resilience",
   },
 ] as const;
+
+/** One line wherever a Replay pilot is offered. */
+export const replayExplainer =
+  "Replay pilot: we replay a few past incidents with read-only access, so you can compare what Relyxus finds with what you know. No change to live systems.";
 
 export type DataPoint = { value: string; label: string };
 export type DataSource = { label: string; href: string };
@@ -191,25 +195,8 @@ export const outageData = {
   ] as DataPoint[],
   sources: [
     {
-      label: "Uptime Institute annual outage analysis",
-      href: "https://www.businesswire.com/news/home/20260513289344/en",
-    },
-  ] as DataSource[],
-};
-
-/** IBM Cost of a Data Breach Report 2025: 600 organisations, 16 countries. */
-export const breachData = {
-  items: [
-    {
-      value: "241 days",
-      label: "on average to identify and contain a breach",
-    },
-    { value: "$4.44M", label: "global average cost of a breach" },
-  ] as DataPoint[],
-  sources: [
-    {
-      label: "IBM Cost of a Data Breach 2025",
-      href: "https://cyberscoop.com/ibm-cost-data-breach-2025/",
+      label: "Uptime Institute, Annual Outage Analysis 2026",
+      href: "https://www.itweb.co.za/article/uptime-announces-annual-outage-analysis-report-2026/o1Jr5MxPNOwMKdWL",
     },
   ] as DataSource[],
 };
@@ -220,18 +207,22 @@ export const perspectiveFacts = {
     value: "#1",
     label:
       "cause of operational incidents reported to the FCA in 2022 to 2023: third-party issues",
+    payoff:
+      "Relyxus puts recent changes next to your own alerts in the same timeline.",
     source: {
-      label: "FCA, as reported by Computing",
-      href: "https://www.computing.co.uk/news/2024/fca-warns-finance-companies-on-cyber-resilience",
+      label: "FCA, CrowdStrike outage: lessons for operational resilience",
+      href: "https://www.fca.org.uk/firms/operational-resilience/crowdstrike-outage-lessons-operational-resilience",
     },
   },
   resilience: {
-    value: "CP24/28",
+    value: "+20%",
     label:
-      "the FCA’s December 2024 consultation on standard templates for incident and third-party reporting",
+      "rise in operational incident notifications to the FCA in 2023, ahead of its rules on standard incident reporting",
+    payoff:
+      "Relyxus logs the timeline as the incident runs, so the report starts as a draft.",
     source: {
-      label: "Grant Thornton summary of CP24/28",
-      href: "https://www.grantthornton.co.uk/insights/fca-consults-on-operational-resilience-and-third-party-reporting/",
+      label: "FCA, Consultation Paper CP24/28",
+      href: "https://www.fca.org.uk/publication/consultation/cp24-28.pdf",
     },
   },
 } as const;
@@ -361,7 +352,8 @@ export const proofPoints: readonly {
 }[] = [
   {
     title: "Incidents",
-    detail: "Severity, impact and ownership in one list.",
+    detail:
+      "Every incident with its severity, owner and age, so nothing sits unowned.",
     image: {
       src: "/product/overview-incidents.png",
       alt: "The Relyxus incidents list showing severity, status, owner and age",
@@ -369,7 +361,8 @@ export const proofPoints: readonly {
   },
   {
     title: "Command centre",
-    detail: "What needs attention, and what is waiting on a decision.",
+    detail:
+      "What needs attention and what is waiting on a decision, before anyone asks.",
     image: {
       src: "/product/overview-command-centre.png",
       alt: "The Relyxus command centre with active incidents, approvals and service health",
@@ -377,7 +370,8 @@ export const proofPoints: readonly {
   },
   {
     title: "Incident war room",
-    detail: "Timeline, ranked causes and the pending approval on one screen.",
+    detail:
+      "The timeline, ranked causes and the approval waiting on someone, so nobody asks for a status update.",
     image: {
       src: "/product/overview-investigation.png",
       alt: "A Relyxus incident with its timeline, ranked hypotheses and a production approval waiting",
@@ -396,15 +390,32 @@ export const resources: readonly {
 }[] = [
   {
     slug: "what-makes-incident-response-controlled",
-    title: "What makes incident response controlled?",
+    title:
+      "Controlled incident response: 4 things to separate before you automate",
     category: "Field guide",
     description:
       "Keep evidence, suggestions, approvals and verified outcomes apart before you add automation.",
     time: "4 minute read",
   },
   {
+    slug: "dora-major-incident-reports",
+    title: "DORA major incident reports: what to have ready for each deadline",
+    category: "Checklist",
+    description:
+      "The three reporting stages, and what to capture while the incident is still running.",
+    time: "5 minute read",
+  },
+  {
+    slug: "post-incident-report-audit",
+    title: "A post-incident report that stands up to audit",
+    category: "Template",
+    description:
+      "Five sections every report needs, and the evidence that belongs behind each one.",
+    time: "4 minute read",
+  },
+  {
     slug: "deployment-guide",
-    title: "Choosing how to run Relyxus",
+    title: "Self-hosted vs dedicated: a checklist for your architecture review",
     category: "Guide",
     description:
       "Who operates what, where data goes and what to ask before you decide. Shared with teams in an evaluation.",
@@ -413,10 +424,10 @@ export const resources: readonly {
   },
   {
     slug: "replay-guide",
-    title: "Trying Relyxus on incidents you already solved",
+    title: "Replay pilot: prove value on past incidents",
     category: "Guide",
     description:
-      "How a Replay pilot is scoped and reviewed. Shared with teams in an evaluation.",
+      "How a pilot is scoped and reviewed, from choosing incidents to comparing results. Shared with teams in an evaluation.",
     time: "Request access",
     gatedType: "Replay pilot",
   },
@@ -431,7 +442,8 @@ export const articleBodies: Record<
   }
 > = {
   "what-makes-incident-response-controlled": {
-    title: "What makes incident response controlled?",
+    title:
+      "Controlled incident response: 4 things to separate before you automate",
     intro:
       "A good incident workflow keeps a clear line between what the evidence suggests and what a person is allowed to change.",
     sections: [
@@ -453,6 +465,56 @@ export const articleBodies: Record<
       },
     ],
   },
+  "dora-major-incident-reports": {
+    title: "DORA major incident reports: what to have ready for each deadline",
+    intro:
+      "Under DORA, a major ICT-related incident is reported in stages. Knowing what each stage needs before an incident starts makes the clock far easier to live with.",
+    sections: [
+      {
+        heading: "The three deadlines",
+        body: "The initial notification is due within 4 hours of classifying the incident as major, and no later than 24 hours after you become aware of it. An intermediate report follows within 72 hours of the initial notification. The final report closes the incident out within one month. Check the current technical standards and your regulator’s guidance for what applies to your firm.",
+      },
+      {
+        heading: "Classify early, and write down when",
+        body: "The 4-hour clock starts at classification, but the 24-hour limit runs from awareness, so waiting does not buy time. Record the time of detection and the time of classification, and who made the call.",
+      },
+      {
+        heading: "Capture as you go",
+        body: "Keep a running log from the first alert: services and customers affected, the working cause and the evidence behind it, what was ruled out, actions proposed and who approved them, and every customer or regulator communication. Each stage of the report is then a summary of the log, not a reconstruction.",
+      },
+      {
+        heading: "Practise on a past incident",
+        body: "Take an incident you closed last year and fill in each stage from your records. The gaps you find, such as a missing timestamp or an unclear owner, are the ones that would cost you hours during a real one.",
+      },
+    ],
+  },
+  "post-incident-report-audit": {
+    title: "A post-incident report that stands up to audit",
+    intro:
+      "A report is useful when someone who wasn’t there can follow what happened, what was decided and why.",
+    sections: [
+      {
+        heading: "The timeline, in order",
+        body: "List detection, classification, each decision and each action with its time and source. Use the time the event happened, not the time it was written up.",
+      },
+      {
+        heading: "The impact, in your own numbers",
+        body: "Say who was affected, for how long and what it cost, using figures you can show. If a number is an estimate, label it as one.",
+      },
+      {
+        heading: "The cause, and the evidence behind it",
+        body: "State the cause you settled on and link the evidence. Include the alternatives you ruled out and how, because that is what a reviewer asks about first.",
+      },
+      {
+        heading: "Decisions and approvals",
+        body: "Record each change that was proposed, who approved it, under which policy, and how the result was verified. A change with no named approver is a finding waiting to happen.",
+      },
+      {
+        heading: "Follow-ups with owners and dates",
+        body: "Every action gets a named owner and a date. Review them at the next incident review so the list does not go stale.",
+      },
+    ],
+  },
 };
 
 /** Topics on the Contact page. Each links to the enquiry form with the type preselected. */
@@ -460,6 +522,7 @@ export const contactTopics = [
   {
     key: "demo",
     label: "See a demo",
+    hint: "On an incident like yours",
     type: "Demo",
     title: "See Relyxus on an incident like yours",
     text: "Tell us which tools your team uses and we’ll walk through an incident from alert to record.",
@@ -469,15 +532,17 @@ export const contactTopics = [
   {
     key: "replay",
     label: "Try a Replay pilot",
+    hint: "On incidents you already solved",
     type: "Replay pilot",
     title: "Replay incidents you already solved",
-    text: "Pick past incidents your team knows well and compare what Relyxus finds with what you know.",
+    text: "We replay a few past incidents with read-only access, so you can compare what Relyxus finds with what you know. No change to live systems.",
     points: ["You choose the incidents", "Read-only access only"],
     cta: "Start a pilot enquiry",
   },
   {
     key: "security",
     label: "Get the security pack",
+    hint: "For your reviewers",
     type: "Security pack",
     title: "Get the pack your reviewers need",
     text: "Written for security and architecture teams, and shared with teams in an evaluation.",
@@ -487,6 +552,7 @@ export const contactTopics = [
   {
     key: "pricing",
     label: "Talk pricing",
+    hint: "A proposal in writing",
     type: "Pricing",
     title: "Talk to us about pricing",
     text: "Pricing depends on how you would run Relyxus. Tell us a little and we’ll come back with a proposal.",

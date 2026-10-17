@@ -17,7 +17,7 @@ import {
 } from "@/components/marketing/HeroArt";
 import { ProductTour } from "@/components/marketing/ProductTour";
 import { track } from "@/lib/analytics";
-import { breachData, outageData, perspectiveFacts } from "@/content/site";
+import { outageData, perspectiveFacts } from "@/content/site";
 import { pageMeta } from "@/content/meta";
 
 export function ProductPage() {
@@ -41,15 +41,16 @@ export function ProductPage() {
       </PageIntro>
 
       <DataBand
-        title="What a major outage costs"
+        title="Every hour to cause is money"
         items={outageData.items}
         sources={outageData.sources}
       />
 
       <section className="hx-section">
         <div className="container">
-          <h2 className="hx-h2">A tour of the product</h2>
-          <p className="hx-sub"> Hover to pause, or pick a screen.</p>
+          <h2 className="hx-h2">
+            Five screens your team will live in during an incident
+          </h2>
           <ProductTour />
         </div>
       </section>
@@ -101,7 +102,7 @@ export function SecurityPage() {
         eyebrow="Security"
         title="Made for your security review"
         art={<SecurityArt />}
-        summary="Three commitments up front. The detail goes to your reviewers in the security pack."
+        summary={pageMeta["/security"].body}
         tone="blue"
       >
         <PrimaryLink href="/demo?type=Security%20pack">
@@ -111,6 +112,10 @@ export function SecurityPage() {
 
       <section className="hx-section" id="data-boundaries">
         <div className="container">
+          <h2 className="hx-h2 hx-lead-heading">
+            Every tool you add is a new risk. Here is how we keep Relyxus from
+            being one.
+          </h2>
           <div className="hx-commitments">
             {commitments.map(item => (
               <article key={item.title}>
@@ -123,12 +128,6 @@ export function SecurityPage() {
         </div>
       </section>
 
-      <DataBand
-        title="Why reviewers ask how fast you can contain"
-        items={breachData.items}
-        sources={breachData.sources}
-      />
-
       <section className="hx-section">
         <div className="container">
           <div className="hx-magnet">
@@ -138,10 +137,6 @@ export function SecurityPage() {
                 Data flows, identity and access, how AI data is handled, action
                 safety, assurance status and support arrangements. We share it
                 with teams in an evaluation.
-              </p>
-              <p>
-                We don’t claim any certification on this site. Ask us for the
-                current status of each.
               </p>
             </div>
             <PrimaryLink href="/demo?type=Security%20pack">
@@ -235,6 +230,9 @@ export function FinancialServicesPage() {
             <aside className="hx-fact-card">
               <strong>{perspectiveFacts[active].value}</strong>
               <p>{perspectiveFacts[active].label}</p>
+              <span className="hx-fact-payoff">
+                {perspectiveFacts[active].payoff}
+              </span>
               <a
                 href={perspectiveFacts[active].source.href}
                 target="_blank"
@@ -255,7 +253,7 @@ export function FinancialServicesPage() {
       </section>
 
       <ActionBand
-        title="Start with your incident context"
+        title="Tell us the payments incident that hurt most"
         summary="Tell us about the tools you run and the incidents that hurt most."
         href="/demo?type=Demo"
         label="Request a demo"
@@ -272,8 +270,8 @@ export function CompanyPage() {
         description={pageMeta["/company"].description}
       />
       <PageIntro
-        eyebrow="Company"
-        title="We build Relyxus at Apporine"
+        eyebrow="Built by Apporine"
+        title={pageMeta["/company"].h1}
         art={<CompanyArt />}
         summary="We make incident response easier to explain, for the teams who have to explain it."
         tone="ink"
@@ -317,10 +315,6 @@ export function CompanyPage() {
                   height={810}
                   loading="lazy"
                 />
-                <figcaption>
-                  Severity, impact and the approval waiting on someone, in one
-                  view.
-                </figcaption>
               </figure>
             </div>
           </div>

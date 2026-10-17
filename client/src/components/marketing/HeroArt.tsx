@@ -152,7 +152,6 @@ export function ContactArt() {
           <i />
           <i />
         </span>
-        <small>We reply by email</small>
       </div>
     </div>
   );

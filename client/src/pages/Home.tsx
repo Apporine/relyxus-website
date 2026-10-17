@@ -84,7 +84,11 @@ function ResourceStrip() {
 export default function Home() {
   return (
     <>
-      <PageMeta title="AI incident response, with control" description="Relyxus brings evidence into one incident investigation and keeps proposed actions behind policy and human review." />
+      <PageMeta
+        title="AI incident response, with control"
+        description="Relyxus brings evidence from your tools into one investigation, explains likely causes, and keeps proposed actions behind policy and human approval."
+        keywords="Relyxus, AI incident response, governed actions, incident investigation, regulated teams, SRE, security"
+      />
       <section className="hero-section">
         <div className="container hero-layout">
           <div className="hero-copy">

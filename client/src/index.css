@@ -2271,17 +2271,22 @@
     font-size: 7px;
   }
   .page-hero {
-    padding-block: 60px;
+    padding-block: 52px;
+  }
+  .page-hero-eyebrow {
+    gap: 12px;
+    margin-bottom: 18px;
   }
   .page-hero h1 {
-    font-size: clamp(39px, 10vw, 56px);
+    font-size: clamp(36px, 9vw, 52px);
+    line-height: 1.14;
   }
   .page-hero-summary {
-    margin-top: 15px;
+    margin-top: 18px;
     font-size: 16px;
   }
   .page-hero-actions {
-    margin-top: 21px;
+    margin-top: 24px;
   }
   .page-hero-actions .button {
     width: 100%;

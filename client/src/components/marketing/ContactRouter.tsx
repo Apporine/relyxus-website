@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Check, Mail, Pause, Play, Users } from "lucide-react";
 import { PrimaryLink } from "@/components/marketing/PublicSite";
-import { contactTopics } from "@/content/site";
+import { contactTopics, replyPromise } from "@/content/site";
 
 const TEAM = { x: 470, y: 180 };
 
@@ -126,7 +126,7 @@ export function ContactRouter() {
           <span className="hx-status">What happens next</span>
           <ol>
             <li>You send a short note.</li>
-            <li>We read it and reply by email.</li>
+            <li>A person replies by email {replyPromise}.</li>
             <li>If it helps, we set up a call.</li>
           </ol>
           <PrimaryLink href={`/demo?type=${encodeURIComponent(topic.type)}`}>

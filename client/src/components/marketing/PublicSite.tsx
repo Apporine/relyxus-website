@@ -3,7 +3,12 @@ import { createPortal } from "react-dom";
 import { Link, useLocation } from "wouter";
 import { ArrowRight, ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
 import {
+  assurance,
+  companyDetails,
   founderNote,
+  founders,
+  integrations,
+  proofStrip,
   navGroups,
   type DataPoint,
   type DataSource,
@@ -435,7 +440,23 @@ export function SiteFooter() {
           </nav>
           <p className="footer-copy">
             © {new Date().getFullYear()} Apporine. All rights reserved.
+            {companyDetails.registration && ` ${companyDetails.registration}.`}
+            {companyDetails.location && ` ${companyDetails.location}.`}
           </p>
+          {(companyDetails.email || companyDetails.linkedin) && (
+            <p className="footer-contact">
+              {companyDetails.email && (
+                <a href={`mailto:${companyDetails.email}`}>
+                  {companyDetails.email}
+                </a>
+              )}
+              {companyDetails.linkedin && (
+                <a href={companyDetails.linkedin} rel="noreferrer">
+                  LinkedIn
+                </a>
+              )}
+            </p>
+          )}
           <MotionToggle />
         </div>
       </div>
@@ -630,6 +651,92 @@ export function FounderNote() {
             </p>
           </div>
         </div>
+      </div>
+    </section>
+  );
+}
+
+/** Logos, a pilot quote, one metric and named integrations. Renders nothing until filled. */
+export function ProofStrip() {
+  const { logos, quote, metric } = proofStrip;
+  if (!logos.length && !quote && !metric && !integrations.length) return null;
+  return (
+    <section className="hx-proofstrip" aria-label="Proof">
+      <div className="container">
+        {metric && (
+          <p className="hx-metric">
+            <strong>{metric.value}</strong> {metric.label}
+            <small>{metric.source}</small>
+          </p>
+        )}
+        {quote && (
+          <blockquote className="hx-quote">
+            <p>{quote.text}</p>
+            <footer>
+              {quote.name}, {quote.role}
+            </footer>
+          </blockquote>
+        )}
+        {logos.length > 0 && (
+          <ul className="hx-logos" aria-label="Customers and partners">
+            {logos.map(logo => (
+              <li key={logo.name}>
+                {logo.src ? (
+                  <img src={logo.src} alt={logo.name} loading="lazy" />
+                ) : (
+                  logo.name
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
+        {integrations.length > 0 && (
+          <div className="hx-integrations">
+            <span>Works with</span>
+            <ul>
+              {integrations.map(name => (
+                <li key={name}>{name}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+export function AssuranceList() {
+  if (!assurance.length) return null;
+  return (
+    <ul className="hx-assurance">
+      {assurance.map(item => (
+        <li key={item.label}>
+          <strong>{item.label}</strong>
+          <span>{item.status}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+export function FoundersGrid() {
+  if (!founders.length) return null;
+  return (
+    <section className="hx-section">
+      <div className="container">
+        <h2 className="hx-h2">The people building Relyxus</h2>
+        <ul className="hx-founders">
+          {founders.map(person => (
+            <li key={person.name}>
+              {person.photo && (
+                <img src={person.photo} alt={person.name} loading="lazy" />
+              )}
+              <h3>{person.name}</h3>
+              <span>{person.role}</span>
+              <p>{person.background}</p>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

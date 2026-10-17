@@ -3,6 +3,8 @@ import { ArrowRight, Check, ShieldCheck } from "lucide-react";
 import { Link } from "wouter";
 import {
   ActionBand,
+  AssuranceList,
+  FoundersGrid,
   PageIntro,
   DataBand,
   PageMeta,
@@ -17,7 +19,7 @@ import {
 } from "@/components/marketing/HeroArt";
 import { ProductTour } from "@/components/marketing/ProductTour";
 import { track } from "@/lib/analytics";
-import { outageData, perspectiveFacts } from "@/content/site";
+import { outageData, packPromise, perspectiveFacts } from "@/content/site";
 import { pageMeta } from "@/content/meta";
 
 export function ProductPage() {
@@ -136,8 +138,9 @@ export function SecurityPage() {
               <p>
                 Data flows, identity and access, how AI data is handled, action
                 safety, assurance status and support arrangements. We share it
-                with teams in an evaluation.
+                with teams in an evaluation, {packPromise}.
               </p>
+              <AssuranceList />
             </div>
             <PrimaryLink href="/demo?type=Security%20pack">
               Request the security pack
@@ -320,6 +323,8 @@ export function CompanyPage() {
           </div>
         </div>
       </section>
+
+      <FoundersGrid />
 
       <ActionBand
         title="Say hello"

@@ -64,21 +64,13 @@ export function PageMeta({
       "@type": "Organization",
       name: SITE_NAME,
       url: window.location.origin,
-      email: "aoon.syed@apporine.com",
       description,
       sameAs: [],
       contactPoint: [
         {
           "@type": "ContactPoint",
           contactType: "sales",
-          email: "aoon.syed@apporine.com",
-          areaServed: "Worldwide",
-          availableLanguage: ["English"],
-        },
-        {
-          "@type": "ContactPoint",
-          contactType: "sales",
-          email: "bisma.idrees@apporine.com",
+          url: `${window.location.origin}/contact`,
           areaServed: "Worldwide",
           availableLanguage: ["English"],
         },
@@ -109,11 +101,14 @@ export function Wordmark({ onClick }: { onClick?: () => void }) {
       aria-label="Relyxus home"
       onClick={onClick}
     >
-      <span className="wordmark-glyph" aria-hidden="true">
-        <i />
-        <i />
-        <i />
-      </span>
+      <img
+        className="wordmark-mark"
+        src="/Icon.jpg"
+        alt=""
+        width={22}
+        height={22}
+        decoding="async"
+      />
       <span>relyxus</span>
     </Link>
   );

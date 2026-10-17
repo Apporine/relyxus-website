@@ -5,7 +5,6 @@ import {
   FileText,
   Fingerprint,
   Gauge,
-  Mail,
   ShieldCheck,
   UsersRound,
 } from "lucide-react";
@@ -20,7 +19,6 @@ import {
   InlineAvailability,
 } from "@/components/marketing/PublicSite";
 import { ProductExplorer } from "@/components/marketing/Explorers";
-import { CONTACT_RECIPIENTS } from "@shared/contact";
 
 type ProductRoute =
   | "overview"
@@ -657,12 +655,12 @@ export function ContactPage() {
     <>
       <PageMeta
         title="Contact"
-        description="Contact Relyxus for a demo, Replay pilot, deployment discussion or pricing conversation. Enquiries go to the Apporine team."
+        description="Contact Relyxus for a demo, Replay pilot, deployment discussion or pricing conversation."
       />
       <PageIntro
         eyebrow="CONTACT / TEAM"
         title="Talk to the people behind Relyxus."
-        summary="Use the enquiry form or email us directly. Messages reach the Apporine team that looks after Relyxus."
+        summary="Use the enquiry form to start a conversation with the team that looks after Relyxus."
         tone="blue"
       >
         <PrimaryLink href="/demo">Send an enquiry</PrimaryLink>
@@ -692,29 +690,20 @@ export function ContactPage() {
             </Link>
           </article>
           <article>
-            <span>03 / DIRECT EMAIL</span>
-            <h2>Prefer to write us yourself?</h2>
+            <span>03 / GENERAL</span>
+            <h2>Something else?</h2>
             <p>
-              These inboxes receive website enquiries and replies come from the
-              same team.
+              Use the enquiry form for other questions. We aim to reply as soon
+              as we can.
             </p>
-            <div className="contact-email-list">
-              {CONTACT_RECIPIENTS.map(email => (
-                <a
-                  key={email}
-                  href={`mailto:${email}`}
-                  className="contact-email-link"
-                >
-                  <Mail size={15} aria-hidden="true" />
-                  {email}
-                </a>
-              ))}
-            </div>
+            <Link href="/demo">
+              Open the enquiry form <ArrowRight size={15} />
+            </Link>
           </article>
         </div>
         <p className="container contact-caveat">
-          We aim to reply as soon as we can. Please avoid sending credentials or
-          sensitive incident data by email.
+          Please avoid sending credentials or sensitive incident data through
+          the form.
         </p>
       </section>
     </>
@@ -746,7 +735,7 @@ export function LegalPage({
             <p>
               Pages use semantic regions, visible focus, text labels,
               reduced-motion rules and accessible form patterns. The incident
-              walkthrough includes a readable transcript.
+              walkthrough is keyboard operable through its step list.
             </p>
             <h3>Still improving</h3>
             <p>
@@ -785,9 +774,8 @@ export function LegalPage({
             <h2>What happens when you contact us</h2>
             <p>
               When you submit the demo or contact form, your name, work email,
-              company and message details are emailed to the Apporine team at
-              aoon.syed@apporine.com and bisma.idrees@apporine.com so we can
-              respond.
+              company and message details are emailed to the Relyxus team so we
+              can respond.
             </p>
             <p>
               Optional marketing preference is recorded with the enquiry if you

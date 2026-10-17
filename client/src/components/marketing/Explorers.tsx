@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
 import {
-  ArrowLeft,
   ArrowRight,
   Check,
   ChevronDown,
@@ -263,8 +262,6 @@ function StepIllustration({ kind }: { kind: string }) {
 export function IncidentWalkthrough() {
   const [active, setActive] = useState(0);
   const step = steps[active];
-  const move = (next: number) =>
-    setActive(Math.max(0, Math.min(steps.length - 1, next)));
   return (
     <div className="walkthrough" aria-label="Example incident walkthrough">
       <div
@@ -279,7 +276,7 @@ export function IncidentWalkthrough() {
             aria-pressed={active === index}
             aria-current={active === index ? "step" : undefined}
             className={`walkthrough-step ${active === index ? "active" : ""}`}
-            onClick={() => move(index)}
+            onClick={() => setActive(index)}
           >
             <span className="walkthrough-number">{item.number}</span>
             <span>
@@ -291,20 +288,6 @@ export function IncidentWalkthrough() {
             </span>
           </button>
         ))}
-        <div className="walkthrough-transcript">
-          <details>
-            <summary>
-              Read the full transcript <ChevronDown size={15} />
-            </summary>
-            <ol>
-              {steps.map(item => (
-                <li key={item.id}>
-                  <strong>{item.label}:</strong> {item.caption}
-                </li>
-              ))}
-            </ol>
-          </details>
-        </div>
       </div>
       <div
         className="walkthrough-panel"
@@ -327,40 +310,6 @@ export function IncidentWalkthrough() {
           <span className="example-stamp">EXAMPLE</span>
         </div>
         <StepIllustration kind={step.kind} />
-        <div className="walkthrough-controls">
-          <button
-            type="button"
-            className="walk-control walk-control-back"
-            onClick={() => move(active - 1)}
-            disabled={active === 0}
-          >
-            <ArrowLeft size={16} />
-            Back
-          </button>
-          <div
-            className="walk-dots"
-            aria-label={`Step ${active + 1} of ${steps.length}`}
-          >
-            {steps.map((item, index) => (
-              <button
-                type="button"
-                key={item.id}
-                aria-label={`Go to step ${index + 1}: ${item.label}`}
-                aria-current={active === index ? "step" : undefined}
-                onClick={() => move(index)}
-              />
-            ))}
-          </div>
-          <button
-            type="button"
-            className="walk-control walk-control-next"
-            onClick={() => move(active + 1)}
-            disabled={active === steps.length - 1}
-          >
-            Next
-            <ArrowRight size={16} />
-          </button>
-        </div>
       </div>
     </div>
   );
@@ -516,7 +465,7 @@ function DeploymentDiagram({
   topology: string;
   mode: string;
 }) {
-  const isAirgap = topology === "isolated";
+  const isVendorHosted = topology === "dedicated";
   return (
     <div
       className={`deployment-diagram topology-${topology}`}
@@ -525,7 +474,7 @@ function DeploymentDiagram({
     >
       <div className="diagram-customer-boundary">
         <span className="diagram-boundary-label">
-          {topology === "hosted" || topology === "dedicated"
+          {isVendorHosted
             ? "ILLUSTRATIVE SCOPE / PATHS TO CONFIRM"
             : "CUSTOMER OPERATING BOUNDARY"}
         </span>
@@ -541,12 +490,10 @@ function DeploymentDiagram({
           <span />
         </div>
         <div
-          className={`diagram-platform ${topology === "hosted" || topology === "dedicated" ? "vendor-hosted" : "customer-hosted"}`}
+          className={`diagram-platform ${isVendorHosted ? "vendor-hosted" : "customer-hosted"}`}
         >
           <span className="diagram-platform-label">
-            {topology === "hosted" || topology === "dedicated"
-              ? "RELYXUS ENVIRONMENT"
-              : "RELYXUS PLATFORM"}
+            {isVendorHosted ? "RELYXUS ENVIRONMENT" : "RELYXUS PLATFORM"}
           </span>
           <div className="diagram-product-node">
             <b>INVESTIGATE</b>
@@ -562,28 +509,16 @@ function DeploymentDiagram({
           <div className="diagram-model-node">
             <span>MODEL ROUTE</span>
             <b>
-              {isAirgap
-                ? "Isolated route / support to confirm"
-                : mode === "Self-hosted"
-                  ? "Customer cloud or local"
-                  : "Approved route / customer account"}
+              {mode === "Self-hosted"
+                ? "Customer cloud or local"
+                : "Approved route / customer account"}
             </b>
           </div>
         </div>
-        {isAirgap ? (
-          <div className="airgap-edge">
-            <span>
-              ISOLATED NETWORK
-              <br />
-              No required external service path
-            </span>
-          </div>
-        ) : (
-          <div className="diagram-external-node">
-            <span>APPROVED PATHS</span>
-            <small>Exact routes require review</small>
-          </div>
-        )}
+        <div className="diagram-external-node">
+          <span>APPROVED PATHS</span>
+          <small>Exact routes require review</small>
+        </div>
       </div>
       <div className="diagram-legend">
         <span>
@@ -592,11 +527,9 @@ function DeploymentDiagram({
         <span>
           <i className="legend-review" /> Policy and human review
         </span>
-        {!isAirgap && (
-          <span>
-            <i className="legend-dashed" /> Path to confirm
-          </span>
-        )}
+        <span>
+          <i className="legend-dashed" /> Path to confirm
+        </span>
       </div>
     </div>
   );
@@ -607,7 +540,7 @@ export function DeploymentExplorer({ compact = false }: { compact?: boolean }) {
   const mode = useMemo(
     () =>
       deploymentModes.find(item => item.key === selectedKey) ??
-      deploymentModes[2],
+      deploymentModes[0],
     [selectedKey]
   );
   return (
@@ -644,7 +577,7 @@ export function DeploymentExplorer({ compact = false }: { compact?: boolean }) {
               onClick={() => setSelectedKey(item.key)}
             >
               {item.label}
-              <span>Availability to confirm</span>
+              <span>{item.availability}</span>
             </button>
           ))}
         </div>

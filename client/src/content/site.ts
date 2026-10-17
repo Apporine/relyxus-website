@@ -174,22 +174,10 @@ export type DeploymentMode = {
   path: string;
   updates: string;
   responsibility: string;
-  topology: "hosted" | "dedicated" | "customer" | "isolated";
+  topology: "dedicated" | "customer";
 };
 
 export const deploymentModes: DeploymentMode[] = [
-  {
-    key: "saas",
-    label: "SaaS",
-    availability: "Discuss fit for your region",
-    operator: "Relyxus cloud",
-    model: "Approved hosted route or customer model account",
-    path: "Approved connections from your environment; review region and egress conditions together.",
-    updates: "Managed service updates with a clear release process.",
-    responsibility:
-      "Relyxus operates the platform. You choose approved sources, region and model route.",
-    topology: "hosted",
-  },
   {
     key: "dedicated",
     label: "Dedicated",
@@ -215,19 +203,6 @@ export const deploymentModes: DeploymentMode[] = [
     responsibility:
       "You operate the hosting environment. Model location and outbound paths are separate choices.",
     topology: "customer",
-  },
-  {
-    key: "air-gapped",
-    label: "Air-gapped",
-    availability: "Discuss offline requirements",
-    operator: "Isolated customer network",
-    model: "Isolated model route; support path agreed with you",
-    path: "Normal operation is not shown as depending on an external model, cloud service or public-internet route.",
-    updates:
-      "Offline update and signed package process agreed for your environment.",
-    responsibility:
-      "You control the isolated environment; offline operation, licensing and support are validated with your team.",
-    topology: "isolated",
   },
 ];
 

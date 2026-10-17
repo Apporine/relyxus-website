@@ -344,7 +344,8 @@ export const founderNote: {
   heading: "Why we built Relyxus",
   paragraphs: [
     "An incident gets decided in the first hour and explained for weeks afterwards. The people on call carry both jobs.",
-    "We built Relyxus so the explanation exists by the time the incident is over: what we saw, what we believed, who said yes. We keep a person in charge of every change, and we keep the record honest about what we didn’t know.",
+    "We built Relyxus so the explanation exists by the time the incident is over: what we saw, what we believed, who said yes.",
+    "Three rules shape it. Nothing changes without a person’s approval. Every claim links to the evidence behind it. And the record is honest about what we didn’t know, because that is what a regulator, an auditor and your own team will ask about first.",
   ],
   signature: "The Relyxus team",
 };

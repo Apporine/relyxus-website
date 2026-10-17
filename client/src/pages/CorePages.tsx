@@ -264,6 +264,21 @@ export function FinancialServicesPage() {
   );
 }
 
+const principles = [
+  {
+    title: "A person decides",
+    text: "Nothing changes in your systems until the approvers you name say yes.",
+  },
+  {
+    title: "Evidence on every claim",
+    text: "Every likely cause links to the sources behind it, so your team can check our work.",
+  },
+  {
+    title: "Honest about gaps",
+    text: "The record says what we didn’t know, because that is what an auditor asks about first.",
+  },
+] as const;
+
 export function CompanyPage() {
   return (
     <>
@@ -294,11 +309,6 @@ export function CompanyPage() {
               is built for both.
             </p>
             <p>
-              Three rules shape everything we build: nothing changes without a
-              person’s approval, every claim links to its evidence, and the
-              record is honest about what we didn’t know.
-            </p>
-            <p>
               For introductions, commercial details or support, send us an
               enquiry and we’ll put you in touch with the right person.
             </p>
@@ -324,6 +334,21 @@ export function CompanyPage() {
                 />
               </figure>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="hx-section">
+        <div className="container">
+          <h2 className="hx-h2">How we work</h2>
+          <div className="hx-commitments">
+            {principles.map(item => (
+              <article key={item.title}>
+                <Check size={20} aria-hidden="true" />
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>

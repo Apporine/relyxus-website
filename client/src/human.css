@@ -2970,3 +2970,7 @@ html[data-motion="off"] .hx-scene-draw {
 .hx-trustbar svg {
   color: var(--hx-mint);
 }
+
+.hx-h2 + .hx-commitments {
+  margin-top: 28px;
+}

@@ -53,7 +53,7 @@ const template = await readFile(path.join(dist, "index.html"), "utf8");
 
 function setMeta(html, attr, key, content) {
   const pattern = new RegExp(
-    String.raw`(<meta ${attr}="${key}"\s+content=")[^"]*(")`
+    String.raw`(<meta\s+${attr}="${key}"\s+content=")[^"]*(")`
   );
   return pattern.test(html)
     ? html.replace(pattern, `$1${esc(content)}$2`)

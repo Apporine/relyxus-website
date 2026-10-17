@@ -12,30 +12,6 @@ export const DEFAULT_KEYWORDS = [
   "deployment boundaries",
 ].join(", ");
 
-export const STATIC_ROUTES = [
-  "/",
-  "/product",
-  "/product/investigation",
-  "/product/governed-actions",
-  "/product/reporting",
-  "/deployment",
-  "/security",
-  "/integrations",
-  "/solutions/financial-services",
-  "/replay",
-  "/pricing",
-  "/demo",
-  "/resources",
-  "/resources/governed-incident-response",
-  "/resources/deployment-choices",
-  "/resources/replay-methodology",
-  "/company",
-  "/contact",
-  "/privacy",
-  "/terms",
-  "/accessibility",
-] as const;
-
 export function upsertMeta(
   attribute: "name" | "property",
   key: string,

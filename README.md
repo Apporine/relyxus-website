@@ -68,7 +68,7 @@ relyxus-website/
 ├── client/               # Vite React app (marketing site)
 │   ├── public/           # Static assets, robots.txt, sitemap.xml, OG cover
 │   └── src/
-│       ├── components/   # UI kit + marketing shell
+│       ├── components/   # Marketing shell and explorers
 │       ├── content/      # Nav, product copy, resources, deployment modes
 │       ├── pages/        # Route-level pages
 │       └── lib/          # Helpers (SEO, utils, tRPC client)
@@ -276,7 +276,7 @@ Deploy from the **`develop`** branch (or connect Vercel to `develop`) so product
 
 ## Routing map
 
-Client routes live in `client/src/App.tsx` and are mirrored in `client/public/manus-routes.json`.
+Client routes live in `client/src/App.tsx`.
 
 ```mermaid
 flowchart TD

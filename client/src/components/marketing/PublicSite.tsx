@@ -4,8 +4,8 @@ import { ArrowRight, ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
 import {
   founderNote,
   navGroups,
-  regulatoryClocks,
-  regulatorySources,
+  type DataPoint,
+  type DataSource,
   type NavItem,
 } from "@/content/site";
 import {
@@ -532,13 +532,23 @@ export function TextLink({
   );
 }
 
-export function RegulatoryBand({ title }: { title: string }) {
+export function DataBand({
+  title,
+  items,
+  sources,
+  note = "Public figures; check the latest edition.",
+}: {
+  title: string;
+  items: readonly DataPoint[];
+  sources: readonly DataSource[];
+  note?: string;
+}) {
   return (
-    <section className="hx-band" aria-label="Regulatory reporting clocks">
+    <section className="hx-band" aria-label={title}>
       <div className="container">
         <h2 className="hx-band-title">{title}</h2>
         <dl className="hx-facts">
-          {regulatoryClocks.map(clock => (
+          {items.map(clock => (
             <div key={clock.value}>
               <dt>{clock.value}</dt>
               <dd>{clock.label}</dd>
@@ -547,7 +557,7 @@ export function RegulatoryBand({ title }: { title: string }) {
         </dl>
         <p className="hx-source-line">
           Sources:{" "}
-          {regulatorySources.map((source, index) => (
+          {sources.map((source, index) => (
             <span key={source.href}>
               {index > 0 && ", "}
               <a href={source.href} target="_blank" rel="noreferrer">
@@ -555,7 +565,7 @@ export function RegulatoryBand({ title }: { title: string }) {
               </a>
             </span>
           ))}
-          . Which rules apply depends on your firm.
+          . {note}
         </p>
       </div>
     </section>

@@ -13,6 +13,7 @@ import {
 } from "@/components/marketing/PublicSite";
 import { ENQUIRY_TYPES, type EnquiryType } from "@shared/contact";
 import { pageMeta } from "@/content/meta";
+import { demoVariants } from "@/content/site";
 
 type FormValues = {
   name: string;
@@ -69,6 +70,7 @@ export function DemoPage() {
     message: "",
     marketing: false,
   });
+  const variant = demoVariants[values.enquiry] ?? demoVariants.Demo;
   const [errors, setErrors] = useState<FormErrors>({});
   const [showSummary, setShowSummary] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -201,41 +203,26 @@ export function DemoPage() {
         description={pageMeta["/demo"].description}
       />
       <PageIntro
-        eyebrow="EVALUATE / REQUEST A DEMO"
-        title="Tell us what you want to explore."
-        summary="Share a little context about your team and we’ll follow up. Pick a demo, Replay pilot, security pack, readiness checklist or pricing discussion."
+        eyebrow={variant.eyebrow}
+        title={variant.title}
+        summary={variant.summary}
         tone="ivory"
       />
       <section className="demo-section section-pad">
         <div className="container demo-layout">
           <aside className="demo-aside">
-            <p className="eyebrow">A CONVERSATION WITH CONTEXT</p>
-            <h2>Start with the question your team needs answered.</h2>
-            <p>
-              Choose the enquiry that fits. You can change the selection below.
-            </p>
+            <h2>{variant.asideTitle}</h2>
+            <p>{variant.asideText}</p>
             <div className="demo-agenda">
-              <div>
-                <span>01</span>
-                <div>
-                  <strong>Walk through an incident</strong>
-                  <small>Inspect evidence and human review.</small>
+              {variant.agenda.map((item, index) => (
+                <div key={item.title}>
+                  <span>0{index + 1}</span>
+                  <div>
+                    <strong>{item.title}</strong>
+                    <small>{item.text}</small>
+                  </div>
                 </div>
-              </div>
-              <div>
-                <span>02</span>
-                <div>
-                  <strong>Discuss deployment</strong>
-                  <small>Review operating and model boundaries.</small>
-                </div>
-              </div>
-              <div>
-                <span>03</span>
-                <div>
-                  <strong>Agree an evaluation</strong>
-                  <small>Define scope, evidence and misses.</small>
-                </div>
-              </div>
+              ))}
             </div>
             <div className="demo-privacy-note">
               <LockKeyhole size={17} />
@@ -244,7 +231,7 @@ export function DemoPage() {
                 not include credentials or sensitive incident data.
               </p>
             </div>
-            <TextLink href="/deployment">Read deployment guidance</TextLink>
+            <TextLink href="/security">Read the security summary</TextLink>
           </aside>
           <div className="demo-form-card">
             <div className="demo-form-heading">

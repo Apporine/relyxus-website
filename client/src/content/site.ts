@@ -77,9 +77,9 @@ export const navGroups: NavGroup[] = [
 export const productOutcomes = [
   {
     key: "cause",
-    label: "Faster cause",
+    label: "Start from the cause",
     eyebrow: "Investigate",
-    title: "Start from a likely cause, with its sources attached.",
+    title: "Start from a likely cause, with every source attached.",
     summary:
       "Alerts, changes and service context land in one investigation. Your team sees what points to a cause and what still doesn’t fit.",
     detail:
@@ -89,7 +89,7 @@ export const productOutcomes = [
   },
   {
     key: "action",
-    label: "Controlled action",
+    label: "Approve safely",
     eyebrow: "Act",
     title: "Nothing runs until the right people say so.",
     summary:
@@ -101,7 +101,7 @@ export const productOutcomes = [
   },
   {
     key: "record",
-    label: "Audit-ready record",
+    label: "Report on time",
     eyebrow: "Report",
     title: "The write-up is half done before the incident closes.",
     summary:
@@ -156,8 +156,12 @@ export const pathCards = [
 export const regulatoryClocks = [
   {
     value: "4 hours",
+    label: "to send DORA’s first notice once an incident is classed as major",
+  },
+  {
+    value: "24 hours",
     label:
-      "to send DORA’s first notice once an incident is classed as major, and 24 hours at most from first awareness",
+      "the latest point for that first notice, counted from when you become aware",
   },
   {
     value: "72 hours",
@@ -166,11 +170,6 @@ export const regulatoryClocks = [
   {
     value: "1 month",
     label: "to file the final DORA report on a major ICT incident",
-  },
-  {
-    value: "Always",
-    label:
-      "UK firms must stay within impact tolerance for every important business service (FCA and PRA)",
   },
 ] as const;
 
@@ -217,7 +216,7 @@ export const perspectiveFacts = {
     label:
       "cause of operational incidents reported to the FCA in 2022 to 2023: third-party issues",
     payoff:
-      "Relyxus puts recent changes next to your own alerts in the same timeline.",
+      "Whoever caused it, Relyxus puts the recent changes and your own alerts on one timeline.",
     source: {
       label: "FCA, CrowdStrike outage: lessons for operational resilience",
       href: "https://www.fca.org.uk/firms/operational-resilience/crowdstrike-outage-lessons-operational-resilience",
@@ -249,7 +248,7 @@ export const demoVariants: Record<
   }
 > = {
   Demo: {
-    eyebrow: "Request a demo",
+    eyebrow: "Book a 30-minute demo",
     title: "See Relyxus on an incident like yours",
     summary:
       "Tell us which tools your team uses and we’ll walk through an incident from alert to record.",
@@ -347,7 +346,7 @@ export const founderNote: {
     "An incident gets decided in the first hour and explained for weeks afterwards. The people on call carry both jobs.",
     "We built Relyxus so the explanation exists by the time the incident is over: what we saw, what we believed, who said yes. We keep a person in charge of every change, and we keep the record honest about what we didn’t know.",
   ],
-  signature: "The Relyxus team at Apporine",
+  signature: "The Relyxus team",
 };
 
 /**
@@ -401,7 +400,7 @@ export const resources: readonly {
     slug: "what-makes-incident-response-controlled",
     title:
       "Controlled incident response: 4 things to separate before you automate",
-    category: "Field guide",
+    category: "Free",
     description:
       "Keep evidence, suggestions, approvals and verified outcomes apart before you add automation.",
     time: "4 minute read",
@@ -409,7 +408,7 @@ export const resources: readonly {
   {
     slug: "dora-major-incident-reports",
     title: "DORA major incident reports: what to have ready for each deadline",
-    category: "Checklist",
+    category: "Free",
     description:
       "The three reporting stages, and what to capture while the incident is still running.",
     time: "5 minute read",
@@ -417,7 +416,7 @@ export const resources: readonly {
   {
     slug: "post-incident-report-audit",
     title: "A post-incident report that stands up to audit",
-    category: "Template",
+    category: "Free",
     description:
       "Five sections every report needs, and the evidence that belongs behind each one.",
     time: "4 minute read",
@@ -425,7 +424,7 @@ export const resources: readonly {
   {
     slug: "deployment-guide",
     title: "Self-hosted vs dedicated: a checklist for your architecture review",
-    category: "Guide",
+    category: "For evaluations",
     description:
       "Who operates what, where data goes and what to ask before you decide. Shared with teams in an evaluation.",
     time: "Request access",
@@ -434,7 +433,7 @@ export const resources: readonly {
   {
     slug: "replay-guide",
     title: "Replay pilot: prove value on past incidents",
-    category: "Guide",
+    category: "For evaluations",
     description:
       "How a pilot is scoped and reviewed, from choosing incidents to comparing results. Shared with teams in an evaluation.",
     time: "Request access",
@@ -536,7 +535,7 @@ export const contactTopics = [
     title: "See Relyxus on an incident like yours",
     text: "Tell us which tools your team uses and we’ll walk through an incident from alert to record.",
     points: ["Your tools, your kind of incident", "Your questions come first"],
-    cta: "Request a demo",
+    cta: "Book a 30-minute demo",
   },
   {
     key: "replay",
@@ -594,7 +593,7 @@ export const proofStrip: {
   metric: {
     value: "18 Mar 2027",
     label:
-      "UK operational incident reporting rules apply, with one standard regime across the FCA, PRA and Bank of England",
+      "UK firms report incidents under one FCA, PRA and Bank of England regime. Relyxus keeps the record as the incident runs, so your report starts as a draft.",
     source: "FCA Policy Statement PS26/2, published 18 March 2026",
     href: "https://www.fca.org.uk/publication/policy/ps26-2.pdf",
   },
@@ -614,11 +613,26 @@ export const integrations: readonly string[] = [
 
 /** Assurance status shown on the Security page, e.g. { label: "SOC 2 Type II", status: "In progress, target Q3 2027" }. */
 export const assurance: readonly { label: string; status: string }[] = [
-  { label: "Data flows and identity", status: "Included" },
-  { label: "How AI data is handled", status: "Included" },
-  { label: "Action safety and approvals", status: "Included" },
-  { label: "Assurance status", status: "Included" },
-  { label: "Support and continuity", status: "Included" },
+  {
+    label: "Data flows and identity",
+    status: "Where evidence goes, and who can see and do what.",
+  },
+  {
+    label: "How AI data is handled",
+    status: "What reaches a model, and under which controls.",
+  },
+  {
+    label: "Action safety and approvals",
+    status: "How a proposed change waits for the approvers you name.",
+  },
+  {
+    label: "Assurance status",
+    status: "Current certification and testing status, with dates.",
+  },
+  {
+    label: "Support and continuity",
+    status: "Access, updates, backup and exit arrangements.",
+  },
 ];
 
 export const founders: readonly {

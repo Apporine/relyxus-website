@@ -3,7 +3,7 @@
     "title": "Relyxus — Find the cause of payments incidents, with an audit-ready record",
     "description": "Relyxus pulls logs, changes and alerts from the tools you already run, points to the likely cause, and writes the audit record as you work. Nothing changes in your systems until your approvers say yes.",
     "h1": "Know why payments failed before the regulator asks.",
-    "body": "Relyxus pulls logs, changes and alerts from the tools you already run, points to the likely cause, and writes the audit record as you work. Nothing changes in your systems until your approvers say yes."
+    "body": "Relyxus pulls logs, changes and alerts from your existing tools, points to the likely cause, and writes the audit record while you work. Nothing changes until your approvers say yes."
   },
   "/product": {
     "title": "Product",
@@ -26,7 +26,7 @@
   "/resources": {
     "title": "Resources",
     "description": "Practical guides for regulated incident teams: DORA reporting, post-incident reports and controlled incident response.",
-    "h1": "Practical guides for regulated incident teams",
+    "h1": "Guides for the incident you’ll have to explain",
     "body": "Start with the free guides. Two deeper guides are shared during an evaluation."
   },
   "/resources/what-makes-incident-response-controlled": {

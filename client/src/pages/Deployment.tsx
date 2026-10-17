@@ -70,7 +70,7 @@ export function DeploymentPage() {
           </div>
         </div>
       </section>
-      <section className="boundary-questions-section">
+      <section className="boundary-questions-section section-pad">
         <div className="container">
           <div className="boundary-questions-head">
             <div>
@@ -82,37 +82,39 @@ export function DeploymentPage() {
               licensing paths from the platform location alone.
             </p>
           </div>
-          <div className="boundary-question-list">
+          <div className="boundary-question-grid">
             {[
               {
-                icon: <GitBranch size={18} />,
+                icon: <GitBranch size={18} aria-hidden="true" />,
                 title: "Evidence",
                 text: "Which source fields may be read, where are they processed, and what retention applies?",
               },
               {
-                icon: <ShieldCheck size={18} />,
+                icon: <ShieldCheck size={18} aria-hidden="true" />,
                 title: "Model calls",
                 text: "Which model route is approved, and what terms apply to the provider and the request?",
               },
               {
-                icon: <Check size={18} />,
+                icon: <Check size={18} aria-hidden="true" />,
                 title: "Notifications and records",
                 text: "Which notification, audit and backup paths exist, and who can access each?",
               },
               {
-                icon: <CircleAlert size={18} />,
+                icon: <CircleAlert size={18} aria-hidden="true" />,
                 title: "Support and licensing",
                 text: "What metadata is exchanged for support or licensing, including under restricted operation?",
               },
             ].map((item, index) => (
-              <div key={item.title}>
-                <span className="boundary-q-number">0{index + 1}</span>
-                <span className="boundary-q-icon">{item.icon}</span>
-                <div>
-                  <h3>{item.title}</h3>
-                  <p>{item.text}</p>
-                </div>
-              </div>
+              <article key={item.title}>
+                <header>
+                  <span className="boundary-q-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span className="boundary-q-icon">{item.icon}</span>
+                </header>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
             ))}
           </div>
           <p className="boundary-caveat">

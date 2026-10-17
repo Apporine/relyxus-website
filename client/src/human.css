@@ -3142,3 +3142,16 @@ body {
 .public-site .demo-privacy-note strong {
   color: var(--hx-text);
 }
+
+.hx-test-index {
+  color: var(--hx-accent);
+  font-weight: 800;
+  font-size: 14px;
+}
+.hx-test-offer {
+  margin-top: 28px;
+}
+.hx-holdus {
+  margin-top: 24px;
+  font-size: 18px;
+}

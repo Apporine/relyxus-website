@@ -138,11 +138,42 @@ function PathCards() {
   );
 }
 
+const tests = [
+  {
+    title: "Every cause has its evidence",
+    text: "Pick any likely cause. Open the sources behind it and check them yourself.",
+  },
+  {
+    title: "Nothing runs without an approver",
+    text: "Try to push a change through. It waits for the people your policy names.",
+  },
+  {
+    title: "The record builds as you go",
+    text: "Ask for the timeline mid-incident. It already exists, in order, with sources.",
+  },
+] as const;
+
 function ReplayBand() {
   return (
-    <section className="hx-section">
+    <section className="hx-section" id="test-us">
       <div className="container">
-        <div className="hx-magnet">
+        <h2 className="hx-h2 hx-lead-heading">
+          Don’t take our word for it. Test three things.
+        </h2>
+        <p className="hx-sub">
+          In a demo or a Replay pilot, ask us to prove each one on an incident
+          you already know.
+        </p>
+        <div className="hx-commitments">
+          {tests.map((test, index) => (
+            <article key={test.title}>
+              <span className="hx-test-index">0{index + 1}</span>
+              <h3>{test.title}</h3>
+              <p>{test.text}</p>
+            </article>
+          ))}
+        </div>
+        <div className="hx-magnet hx-test-offer">
           <div>
             <span className="hx-pill">Replay pilot</span>
             <h2 className="hx-h2">Try it on incidents you’ve already closed</h2>

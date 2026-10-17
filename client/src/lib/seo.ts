@@ -36,8 +36,14 @@ export const STATIC_ROUTES = [
   "/accessibility",
 ] as const;
 
-export function upsertMeta(attribute: "name" | "property", key: string, content: string) {
-  let element = document.querySelector<HTMLMetaElement>(`meta[${attribute}="${key}"]`);
+export function upsertMeta(
+  attribute: "name" | "property",
+  key: string,
+  content: string
+) {
+  let element = document.querySelector<HTMLMetaElement>(
+    `meta[${attribute}="${key}"]`
+  );
   if (!element) {
     element = document.createElement("meta");
     element.setAttribute(attribute, key);

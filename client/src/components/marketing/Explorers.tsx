@@ -1,81 +1,739 @@
 import { useMemo, useState } from "react";
-import { ArrowLeft, ArrowRight, Check, ChevronDown, CircleAlert, ExternalLink, FileText, GitBranch, ShieldCheck, Sparkles } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Check,
+  ChevronDown,
+  CircleAlert,
+  ExternalLink,
+  FileText,
+  GitBranch,
+  ShieldCheck,
+  Sparkles,
+} from "lucide-react";
 import { Link } from "wouter";
 import { deploymentModes, productOutcomes } from "@/content/site";
 import { InlineAvailability } from "@/components/marketing/PublicSite";
 
 const steps = [
-  { id: "context", label: "Context", number: "01", short: "Understand impact", title: "What changed for the people relying on this service?", caption: "An example payment journey is shown as affected. The responder can see the service signal and recent change in one place.", kind: "context" },
-  { id: "evidence", label: "Evidence", number: "02", short: "Inspect evidence", title: "A likely cause—not a confirmed one.", caption: "The timing makes a recent route change worth inspecting. A dependency timeout remains an alternative explanation.", kind: "evidence" },
-  { id: "review", label: "Human review", number: "03", short: "Review the gate", title: "The proposal is waiting for the people policy requires.", caption: "The rollback shown here is an example proposal. It is not executed from this website or connected to any production service.", kind: "review" },
-  { id: "record", label: "Record", number: "04", short: "Inspect the record", title: "Preserve what was known, decided and checked.", caption: "The example record keeps source links and a report draft that still needs human classification, review and submission.", kind: "record" },
+  {
+    id: "context",
+    label: "Context",
+    number: "01",
+    short: "Understand impact",
+    title: "What changed for the people relying on this service?",
+    caption:
+      "An example payment journey is shown as affected. The responder can see the service signal and recent change in one place.",
+    kind: "context",
+  },
+  {
+    id: "evidence",
+    label: "Evidence",
+    number: "02",
+    short: "Inspect evidence",
+    title: "A likely cause—not a confirmed one.",
+    caption:
+      "The timing makes a recent route change worth inspecting. A dependency timeout remains an alternative explanation.",
+    kind: "evidence",
+  },
+  {
+    id: "review",
+    label: "Human review",
+    number: "03",
+    short: "Review the gate",
+    title: "The proposal is waiting for the people policy requires.",
+    caption:
+      "The rollback shown here is an example proposal. It is not executed from this website or connected to any production service.",
+    kind: "review",
+  },
+  {
+    id: "record",
+    label: "Record",
+    number: "04",
+    short: "Inspect the record",
+    title: "Preserve what was known, decided and checked.",
+    caption:
+      "The example record keeps source links and a report draft that still needs human classification, review and submission.",
+    kind: "record",
+  },
 ];
 
 function StepIllustration({ kind }: { kind: string }) {
-  if (kind === "context") return <div className="step-visual step-context-visual"><div className="step-visual-title"><span>ILLUSTRATIVE INCIDENT / RX-204</span><span>EXAMPLE</span></div><div className="context-path"><span>PAYMENTS API</span><i /><span>AUTHORIZATION</span><i /><span>LEDGER ADAPTER</span></div><div className="impact-band"><CircleAlert size={17} /><span><strong>Service signal observed</strong><small>Customer payment flow may be affected</small></span><span className="time">09:14 UTC</span></div><div className="change-chip"><GitBranch size={14} /> Recent change <b>billing-router 2.8.1</b><span>09:08 UTC</span></div></div>;
-  if (kind === "evidence") return <div className="step-visual step-evidence-visual"><div className="step-visual-title"><span>LIKELY CAUSE</span><span className="ai-tag"><Sparkles size={12} /> HYPOTHESIS</span></div><h3>Recent routing change may be relevant.</h3><p className="uncertainty-line">Confidence is not confirmation. Review the source and alternative.</p><div className="evidence-source-list"><div><span className="source-index">A</span><span><strong>Deployment record</strong><small>Route configuration changed shortly before the alert.</small></span><details className="source-detail"><summary>Details</summary><p>Illustrative change record: billing-router 2.8.1 adjusted routing shortly before the signal. Timing supports investigation, not causation.</p></details></div><div><span className="source-index">B</span><span><strong>Dependency signal</strong><small>ledger-adapter responses are also under review.</small></span><details className="source-detail"><summary>Details</summary><p>Illustrative dependency trace: intermittent ledger-adapter timeouts remain an alternative that needs review.</p></details></div></div><details className="evidence-detail"><summary>What if evidence is incomplete? <ChevronDown size={15} /></summary><p>The example remains uncertain. An unavailable source is recorded as unavailable; it is not silently treated as evidence for the leading hypothesis.</p></details><details className="evidence-detail"><summary>Why it is not confirmed <ChevronDown size={15} /></summary><p>Timing provides correlation, not proof. The example does not rule out a dependency issue or another cause.</p></details></div>;
-  if (kind === "review") return <div className="step-visual step-review-visual"><div className="step-visual-title"><span>PROPOSED ACTION / EXAMPLE</span><span className="waiting-tag">WAITING</span></div><div className="proposal-box"><span className="proposal-icon"><GitBranch size={16} /></span><div><small>Proposed change</small><strong>Roll back billing-router 2.8.1</strong><span>Scope: example payment routing service</span></div></div><div className="approval-gate"><span className="gate-line" /><span className="gate-shield"><ShieldCheck size={16} /></span><div><small>POLICY GATE</small><strong>Two distinct approver roles required</strong></div></div><div className="approval-steps"><span><i />Service owner <b>Required</b></span><span><i />Change authority <b>Required</b></span></div><div className="blocked-callout"><ShieldCheck size={14} /><span><strong>Blocked in this example.</strong> The proposal waits; no action has been taken.</span></div><details className="evidence-detail"><summary>Show illustrative approval sequence <ChevronDown size={15} /></summary><p>Service owner review → separate change-authority review → policy re-check. This sequence is illustrative and cannot approve a production change.</p></details></div>;
-  return <div className="step-visual step-record-visual"><div className="step-visual-title"><span>INCIDENT RECORD / DRAFT</span><span className="draft-tag">NEEDS REVIEW</span></div><div className="record-timeline"><div><span className="record-dot record-blue" /><span><small>09:14 UTC</small><strong>Service signal observed</strong><em>Source attached · illustrative</em></span></div><div><span className="record-dot record-violet" /><span><small>09:16 UTC</small><strong>Hypothesis recorded</strong><em>Hypothesis · source-linked · uncertainty retained</em></span></div><div><span className="record-dot record-muted" /><span><small>Pending</small><strong>Human review required</strong><em>No action or report submission from this demo</em></span></div></div><div className="report-draft"><FileText size={17} /><span><strong>Incident report draft</strong><small>Classification, review and submission remain human responsibilities.</small></span><span className="draft-status">Draft</span></div><div className="verification-note"><Check size={14} /> Illustrative check recorded; no external system is connected.</div></div>;
+  if (kind === "context")
+    return (
+      <div className="step-visual step-context-visual">
+        <div className="step-visual-title">
+          <span>ILLUSTRATIVE INCIDENT / RX-204</span>
+          <span>EXAMPLE</span>
+        </div>
+        <div className="context-path">
+          <span>PAYMENTS API</span>
+          <i />
+          <span>AUTHORIZATION</span>
+          <i />
+          <span>LEDGER ADAPTER</span>
+        </div>
+        <div className="impact-band">
+          <CircleAlert size={17} />
+          <span>
+            <strong>Service signal observed</strong>
+            <small>Customer payment flow may be affected</small>
+          </span>
+          <span className="time">09:14 UTC</span>
+        </div>
+        <div className="change-chip">
+          <GitBranch size={14} /> Recent change <b>billing-router 2.8.1</b>
+          <span>09:08 UTC</span>
+        </div>
+      </div>
+    );
+  if (kind === "evidence")
+    return (
+      <div className="step-visual step-evidence-visual">
+        <div className="step-visual-title">
+          <span>LIKELY CAUSE</span>
+          <span className="ai-tag">
+            <Sparkles size={12} /> HYPOTHESIS
+          </span>
+        </div>
+        <h3>Recent routing change may be relevant.</h3>
+        <p className="uncertainty-line">
+          Confidence is not confirmation. Review the source and alternative.
+        </p>
+        <div className="evidence-source-list">
+          <div>
+            <span className="source-index">A</span>
+            <span>
+              <strong>Deployment record</strong>
+              <small>
+                Route configuration changed shortly before the alert.
+              </small>
+            </span>
+            <details className="source-detail">
+              <summary>Details</summary>
+              <p>
+                Illustrative change record: billing-router 2.8.1 adjusted
+                routing shortly before the signal. Timing supports
+                investigation, not causation.
+              </p>
+            </details>
+          </div>
+          <div>
+            <span className="source-index">B</span>
+            <span>
+              <strong>Dependency signal</strong>
+              <small>ledger-adapter responses are also under review.</small>
+            </span>
+            <details className="source-detail">
+              <summary>Details</summary>
+              <p>
+                Illustrative dependency trace: intermittent ledger-adapter
+                timeouts remain an alternative that needs review.
+              </p>
+            </details>
+          </div>
+        </div>
+        <details className="evidence-detail">
+          <summary>
+            What if evidence is incomplete? <ChevronDown size={15} />
+          </summary>
+          <p>
+            The example remains uncertain. An unavailable source is recorded as
+            unavailable; it is not silently treated as evidence for the leading
+            hypothesis.
+          </p>
+        </details>
+        <details className="evidence-detail">
+          <summary>
+            Why it is not confirmed <ChevronDown size={15} />
+          </summary>
+          <p>
+            Timing provides correlation, not proof. The example does not rule
+            out a dependency issue or another cause.
+          </p>
+        </details>
+      </div>
+    );
+  if (kind === "review")
+    return (
+      <div className="step-visual step-review-visual">
+        <div className="step-visual-title">
+          <span>PROPOSED ACTION / EXAMPLE</span>
+          <span className="waiting-tag">WAITING</span>
+        </div>
+        <div className="proposal-box">
+          <span className="proposal-icon">
+            <GitBranch size={16} />
+          </span>
+          <div>
+            <small>Proposed change</small>
+            <strong>Roll back billing-router 2.8.1</strong>
+            <span>Scope: example payment routing service</span>
+          </div>
+        </div>
+        <div className="approval-gate">
+          <span className="gate-line" />
+          <span className="gate-shield">
+            <ShieldCheck size={16} />
+          </span>
+          <div>
+            <small>POLICY GATE</small>
+            <strong>Two distinct approver roles required</strong>
+          </div>
+        </div>
+        <div className="approval-steps">
+          <span>
+            <i />
+            Service owner <b>Required</b>
+          </span>
+          <span>
+            <i />
+            Change authority <b>Required</b>
+          </span>
+        </div>
+        <div className="blocked-callout">
+          <ShieldCheck size={14} />
+          <span>
+            <strong>Blocked in this example.</strong> The proposal waits; no
+            action has been taken.
+          </span>
+        </div>
+        <details className="evidence-detail">
+          <summary>
+            Show illustrative approval sequence <ChevronDown size={15} />
+          </summary>
+          <p>
+            Service owner review → separate change-authority review → policy
+            re-check. This sequence is illustrative and cannot approve a
+            production change.
+          </p>
+        </details>
+      </div>
+    );
+  return (
+    <div className="step-visual step-record-visual">
+      <div className="step-visual-title">
+        <span>INCIDENT RECORD / DRAFT</span>
+        <span className="draft-tag">NEEDS REVIEW</span>
+      </div>
+      <div className="record-timeline">
+        <div>
+          <span className="record-dot record-blue" />
+          <span>
+            <small>09:14 UTC</small>
+            <strong>Service signal observed</strong>
+            <em>Source attached · illustrative</em>
+          </span>
+        </div>
+        <div>
+          <span className="record-dot record-violet" />
+          <span>
+            <small>09:16 UTC</small>
+            <strong>Hypothesis recorded</strong>
+            <em>Hypothesis · source-linked · uncertainty retained</em>
+          </span>
+        </div>
+        <div>
+          <span className="record-dot record-muted" />
+          <span>
+            <small>Pending</small>
+            <strong>Human review required</strong>
+            <em>No action or report submission from this demo</em>
+          </span>
+        </div>
+      </div>
+      <div className="report-draft">
+        <FileText size={17} />
+        <span>
+          <strong>Incident report draft</strong>
+          <small>
+            Classification, review and submission remain human responsibilities.
+          </small>
+        </span>
+        <span className="draft-status">Draft</span>
+      </div>
+      <div className="verification-note">
+        <Check size={14} /> Illustrative check recorded; no external system is
+        connected.
+      </div>
+    </div>
+  );
 }
 
 export function IncidentWalkthrough() {
   const [active, setActive] = useState(0);
   const step = steps[active];
-  const move = (next: number) => setActive(Math.max(0, Math.min(steps.length - 1, next)));
+  const move = (next: number) =>
+    setActive(Math.max(0, Math.min(steps.length - 1, next)));
   return (
     <div className="walkthrough" aria-label="Example incident walkthrough">
-      <div className="walkthrough-step-list" role="group" aria-label="Walkthrough steps">
-        {steps.map((item, index) => <button key={item.id} type="button" aria-pressed={active === index} aria-current={active === index ? "step" : undefined} className={`walkthrough-step ${active === index ? "active" : ""}`} onClick={() => move(index)}><span className="walkthrough-number">{item.number}</span><span><strong>{item.label}</strong><small>{item.short}</small></span><span className="step-arrow"><ArrowRight size={16} /></span></button>)}
-        <div className="walkthrough-transcript"><details><summary>Read the full transcript <ChevronDown size={15} /></summary><ol>{steps.map((item) => <li key={item.id}><strong>{item.label}:</strong> {item.caption}</li>)}</ol></details></div>
+      <div
+        className="walkthrough-step-list"
+        role="group"
+        aria-label="Walkthrough steps"
+      >
+        {steps.map((item, index) => (
+          <button
+            key={item.id}
+            type="button"
+            aria-pressed={active === index}
+            aria-current={active === index ? "step" : undefined}
+            className={`walkthrough-step ${active === index ? "active" : ""}`}
+            onClick={() => move(index)}
+          >
+            <span className="walkthrough-number">{item.number}</span>
+            <span>
+              <strong>{item.label}</strong>
+              <small>{item.short}</small>
+            </span>
+            <span className="step-arrow">
+              <ArrowRight size={16} />
+            </span>
+          </button>
+        ))}
+        <div className="walkthrough-transcript">
+          <details>
+            <summary>
+              Read the full transcript <ChevronDown size={15} />
+            </summary>
+            <ol>
+              {steps.map(item => (
+                <li key={item.id}>
+                  <strong>{item.label}:</strong> {item.caption}
+                </li>
+              ))}
+            </ol>
+          </details>
+        </div>
       </div>
-      <div className="walkthrough-panel" id="walkthrough-panel" role="region" aria-label={`${step.label}, step ${active + 1} of ${steps.length}`}>
-        <div className="walkthrough-panel-head" aria-live="polite" aria-atomic="true"><div><span className="panel-label">STEP {step.number} OF 04 / {step.label.toUpperCase()}</span><h3>{step.title}</h3><p>{step.caption}</p></div><span className="example-stamp">EXAMPLE</span></div>
+      <div
+        className="walkthrough-panel"
+        id="walkthrough-panel"
+        role="region"
+        aria-label={`${step.label}, step ${active + 1} of ${steps.length}`}
+      >
+        <div
+          className="walkthrough-panel-head"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          <div>
+            <span className="panel-label">
+              STEP {step.number} OF 04 / {step.label.toUpperCase()}
+            </span>
+            <h3>{step.title}</h3>
+            <p>{step.caption}</p>
+          </div>
+          <span className="example-stamp">EXAMPLE</span>
+        </div>
         <StepIllustration kind={step.kind} />
-        <div className="walkthrough-controls"><button type="button" className="walk-control walk-control-back" onClick={() => move(active - 1)} disabled={active === 0}><ArrowLeft size={16} />Back</button><div className="walk-dots" aria-label={`Step ${active + 1} of ${steps.length}`}>{steps.map((item, index) => <button type="button" key={item.id} aria-label={`Go to step ${index + 1}: ${item.label}`} aria-current={active === index ? "step" : undefined} onClick={() => move(index)} />)}</div><button type="button" className="walk-control walk-control-next" onClick={() => move(active + 1)} disabled={active === steps.length - 1}>Next<ArrowRight size={16} /></button></div>
+        <div className="walkthrough-controls">
+          <button
+            type="button"
+            className="walk-control walk-control-back"
+            onClick={() => move(active - 1)}
+            disabled={active === 0}
+          >
+            <ArrowLeft size={16} />
+            Back
+          </button>
+          <div
+            className="walk-dots"
+            aria-label={`Step ${active + 1} of ${steps.length}`}
+          >
+            {steps.map((item, index) => (
+              <button
+                type="button"
+                key={item.id}
+                aria-label={`Go to step ${index + 1}: ${item.label}`}
+                aria-current={active === index ? "step" : undefined}
+                onClick={() => move(index)}
+              />
+            ))}
+          </div>
+          <button
+            type="button"
+            className="walk-control walk-control-next"
+            onClick={() => move(active + 1)}
+            disabled={active === steps.length - 1}
+          >
+            Next
+            <ArrowRight size={16} />
+          </button>
+        </div>
       </div>
     </div>
   );
 }
 
 function MiniVisual({ type }: { type: string }) {
-  return <div className={`outcome-visual outcome-${type}`} aria-hidden="true"><div className="outcome-visual-top"><span /><span /><span /></div>{type === "trace" && <><div className="trace-node"><i /> Evidence source <b>01</b></div><div className="trace-path" /><div className="trace-answer"><Sparkles size={13} /> Likely explanation</div><div className="trace-path trace-short" /><div className="trace-node"><i /> Alternative retained <b>02</b></div></>}{type === "gate" && <><div className="gate-proposal-mini">Proposed change</div><div className="mini-gate"><ShieldCheck size={18} /></div><div className="gate-approved-mini">Human review<br /><b>Required</b></div></>}{type === "record" && <><div className="mini-record-title">Incident record <span>Draft</span></div><div className="record-bars"><i /><i /><i /></div><div className="mini-record-caption">Source-linked · needs review</div></>}{type === "replay" && <><div className="mini-replay-head">Evaluation scope</div><div className="mini-replay-flow"><span>Known cause</span><i /> <span>Hypothesis</span><i /> <span>Review misses</span></div><div className="mini-replay-note">No guaranteed score</div></>}</div>;
+  return (
+    <div className={`outcome-visual outcome-${type}`} aria-hidden="true">
+      <div className="outcome-visual-top">
+        <span />
+        <span />
+        <span />
+      </div>
+      {type === "trace" && (
+        <>
+          <div className="trace-node">
+            <i /> Evidence source <b>01</b>
+          </div>
+          <div className="trace-path" />
+          <div className="trace-answer">
+            <Sparkles size={13} /> Likely explanation
+          </div>
+          <div className="trace-path trace-short" />
+          <div className="trace-node">
+            <i /> Alternative retained <b>02</b>
+          </div>
+        </>
+      )}
+      {type === "gate" && (
+        <>
+          <div className="gate-proposal-mini">Proposed change</div>
+          <div className="mini-gate">
+            <ShieldCheck size={18} />
+          </div>
+          <div className="gate-approved-mini">
+            Human review
+            <br />
+            <b>Required</b>
+          </div>
+        </>
+      )}
+      {type === "record" && (
+        <>
+          <div className="mini-record-title">
+            Incident record <span>Draft</span>
+          </div>
+          <div className="record-bars">
+            <i />
+            <i />
+            <i />
+          </div>
+          <div className="mini-record-caption">
+            Source-linked · needs review
+          </div>
+        </>
+      )}
+      {type === "replay" && (
+        <>
+          <div className="mini-replay-head">Evaluation scope</div>
+          <div className="mini-replay-flow">
+            <span>Known cause</span>
+            <i /> <span>Hypothesis</span>
+            <i /> <span>Review misses</span>
+          </div>
+          <div className="mini-replay-note">No guaranteed score</div>
+        </>
+      )}
+    </div>
+  );
 }
 
 export function ProductExplorer() {
-  const [selectedKey, setSelectedKey] = useState<string>(productOutcomes[0].key);
-  const selected = useMemo(() => productOutcomes.find((item) => item.key === selectedKey) ?? productOutcomes[0], [selectedKey]);
-  const renderOutcome = (item: (typeof productOutcomes)[number]) => <><div className="preview-inner" aria-live="polite" aria-atomic="true"><p className="preview-eyebrow">{item.eyebrow}</p><h3>{item.title}</h3><p>{item.summary}</p><div className="preview-detail"><span className="detail-rule" /><span>{item.detail}</span></div><Link className="text-link" href={item.href}>Explore {item.label.toLowerCase()} <ArrowRight size={16} /></Link></div><MiniVisual type={item.visual} /></>;
-  return <div className="product-explorer">
-    <div className="product-choice-list" role="group" aria-label="Product outcomes">
-      {productOutcomes.map((item, index) => <div className="product-choice-row" key={item.key}><button id={`product-choice-${item.key}`} type="button" data-index={index + 1} aria-pressed={selectedKey === item.key} aria-expanded={selectedKey === item.key} aria-controls={`product-mobile-panel-${item.key} product-preview`} className={`product-choice ${selectedKey === item.key ? "selected" : ""}`} onClick={() => setSelectedKey(item.key)}><span className="product-choice-index">0{index + 1}</span><span><strong>{item.label}</strong><small>{item.eyebrow}</small></span><ArrowRight size={16} /></button><div id={`product-mobile-panel-${item.key}`} className="product-mobile-panel" role="region" aria-labelledby={`product-choice-${item.key}`} hidden={selectedKey !== item.key}><div className="product-preview">{renderOutcome(item)}</div></div></div>)}
+  const [selectedKey, setSelectedKey] = useState<string>(
+    productOutcomes[0].key
+  );
+  const selected = useMemo(
+    () =>
+      productOutcomes.find(item => item.key === selectedKey) ??
+      productOutcomes[0],
+    [selectedKey]
+  );
+  const renderOutcome = (item: (typeof productOutcomes)[number]) => (
+    <>
+      <div className="preview-inner" aria-live="polite" aria-atomic="true">
+        <p className="preview-eyebrow">{item.eyebrow}</p>
+        <h3>{item.title}</h3>
+        <p>{item.summary}</p>
+        <div className="preview-detail">
+          <span className="detail-rule" />
+          <span>{item.detail}</span>
+        </div>
+        <Link className="text-link" href={item.href}>
+          Explore {item.label.toLowerCase()} <ArrowRight size={16} />
+        </Link>
+      </div>
+      <MiniVisual type={item.visual} />
+    </>
+  );
+  return (
+    <div className="product-explorer">
+      <div
+        className="product-choice-list"
+        role="group"
+        aria-label="Product outcomes"
+      >
+        {productOutcomes.map((item, index) => (
+          <div className="product-choice-row" key={item.key}>
+            <button
+              id={`product-choice-${item.key}`}
+              type="button"
+              data-index={index + 1}
+              aria-pressed={selectedKey === item.key}
+              aria-expanded={selectedKey === item.key}
+              aria-controls={`product-mobile-panel-${item.key} product-preview`}
+              className={`product-choice ${selectedKey === item.key ? "selected" : ""}`}
+              onClick={() => setSelectedKey(item.key)}
+            >
+              <span className="product-choice-index">0{index + 1}</span>
+              <span>
+                <strong>{item.label}</strong>
+                <small>{item.eyebrow}</small>
+              </span>
+              <ArrowRight size={16} />
+            </button>
+            <div
+              id={`product-mobile-panel-${item.key}`}
+              className="product-mobile-panel"
+              role="region"
+              aria-labelledby={`product-choice-${item.key}`}
+              hidden={selectedKey !== item.key}
+            >
+              <div className="product-preview">{renderOutcome(item)}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div
+        className="product-preview"
+        id="product-preview"
+        role="region"
+        aria-labelledby={`product-choice-${selected.key}`}
+      >
+        {renderOutcome(selected)}
+      </div>
     </div>
-    <div className="product-preview" id="product-preview" role="region" aria-labelledby={`product-choice-${selected.key}`}>{renderOutcome(selected)}</div>
-  </div>;
+  );
 }
 
-function DeploymentDiagram({ topology, mode }: { topology: string; mode: string }) {
+function DeploymentDiagram({
+  topology,
+  mode,
+}: {
+  topology: string;
+  mode: string;
+}) {
   const isAirgap = topology === "isolated";
-  return <div className={`deployment-diagram topology-${topology}`} role="img" aria-label={`${mode} conceptual deployment boundary. The adjacent text comparison describes the operating model; confirm exact source, model and support paths for the released product.`}>
-    <div className="diagram-customer-boundary"><span className="diagram-boundary-label">{topology === "hosted" || topology === "dedicated" ? "ILLUSTRATIVE SCOPE / PATHS TO CONFIRM" : "CUSTOMER OPERATING BOUNDARY"}</span><div className="diagram-source-node"><span>APPROVED SOURCES</span><i /><i /><i /></div><div className="diagram-flow" aria-hidden="true"><span /><span /><span /></div>
-      <div className={`diagram-platform ${topology === "hosted" || topology === "dedicated" ? "vendor-hosted" : "customer-hosted"}`}><span className="diagram-platform-label">{topology === "hosted" || topology === "dedicated" ? "RELYXUS ENVIRONMENT" : "RELYXUS PLATFORM"}</span><div className="diagram-product-node"><b>INVESTIGATE</b><small>Read-only evidence</small></div><div className="diagram-policy-node"><ShieldCheck size={15} /><span><b>POLICY GATE</b><small>Human approval</small></span></div><div className="diagram-model-node"><span>MODEL ROUTE</span><b>{isAirgap ? "Isolated route / support to confirm" : mode === "Self-hosted" ? "Customer cloud or local" : "Approved route / customer account"}</b></div></div>
-      {isAirgap ? <div className="airgap-edge"><span>ISOLATED NETWORK<br />No required external service path</span></div> : <div className="diagram-external-node"><span>APPROVED PATHS</span><small>Exact routes require review</small></div>}
+  return (
+    <div
+      className={`deployment-diagram topology-${topology}`}
+      role="img"
+      aria-label={`${mode} conceptual deployment boundary. The adjacent text comparison describes the operating model; confirm exact source, model and support paths for the released product.`}
+    >
+      <div className="diagram-customer-boundary">
+        <span className="diagram-boundary-label">
+          {topology === "hosted" || topology === "dedicated"
+            ? "ILLUSTRATIVE SCOPE / PATHS TO CONFIRM"
+            : "CUSTOMER OPERATING BOUNDARY"}
+        </span>
+        <div className="diagram-source-node">
+          <span>APPROVED SOURCES</span>
+          <i />
+          <i />
+          <i />
+        </div>
+        <div className="diagram-flow" aria-hidden="true">
+          <span />
+          <span />
+          <span />
+        </div>
+        <div
+          className={`diagram-platform ${topology === "hosted" || topology === "dedicated" ? "vendor-hosted" : "customer-hosted"}`}
+        >
+          <span className="diagram-platform-label">
+            {topology === "hosted" || topology === "dedicated"
+              ? "RELYXUS ENVIRONMENT"
+              : "RELYXUS PLATFORM"}
+          </span>
+          <div className="diagram-product-node">
+            <b>INVESTIGATE</b>
+            <small>Read-only evidence</small>
+          </div>
+          <div className="diagram-policy-node">
+            <ShieldCheck size={15} />
+            <span>
+              <b>POLICY GATE</b>
+              <small>Human approval</small>
+            </span>
+          </div>
+          <div className="diagram-model-node">
+            <span>MODEL ROUTE</span>
+            <b>
+              {isAirgap
+                ? "Isolated route / support to confirm"
+                : mode === "Self-hosted"
+                  ? "Customer cloud or local"
+                  : "Approved route / customer account"}
+            </b>
+          </div>
+        </div>
+        {isAirgap ? (
+          <div className="airgap-edge">
+            <span>
+              ISOLATED NETWORK
+              <br />
+              No required external service path
+            </span>
+          </div>
+        ) : (
+          <div className="diagram-external-node">
+            <span>APPROVED PATHS</span>
+            <small>Exact routes require review</small>
+          </div>
+        )}
+      </div>
+      <div className="diagram-legend">
+        <span>
+          <i className="legend-read" /> Read / evidence
+        </span>
+        <span>
+          <i className="legend-review" /> Policy and human review
+        </span>
+        {!isAirgap && (
+          <span>
+            <i className="legend-dashed" /> Path to confirm
+          </span>
+        )}
+      </div>
     </div>
-    <div className="diagram-legend"><span><i className="legend-read" /> Read / evidence</span><span><i className="legend-review" /> Policy and human review</span>{!isAirgap && <span><i className="legend-dashed" /> Path to confirm</span>}</div>
-  </div>;
+  );
 }
 
 export function DeploymentExplorer({ compact = false }: { compact?: boolean }) {
   const [selectedKey, setSelectedKey] = useState("self-hosted");
-  const mode = useMemo(() => deploymentModes.find((item) => item.key === selectedKey) ?? deploymentModes[2], [selectedKey]);
-  return <section className={`deployment-section section-pad ${compact ? "deployment-section-compact" : ""}`} id="deployment-explorer"><div className="container">
-    <div className="deployment-heading"><div><p className="eyebrow">ARCHITECTURE, MADE VISIBLE</p><h2>Choose where Relyxus runs.</h2><p>Compare the operating models side by side, then confirm the exact path with your team.</p></div>{compact && <Link href="/deployment" className="text-link">Explore deployment <ArrowRight size={16} /></Link>}</div>
-    <div className="deployment-tabs" role="group" aria-label="Deployment modes">{deploymentModes.map((item) => <button type="button" aria-pressed={item.key === selectedKey} key={item.key} onClick={() => setSelectedKey(item.key)}>{item.label}<span>Availability to confirm</span></button>)}</div>
-    <div className="deployment-content" id="deployment-panel" role="region" aria-label={`${mode.label} deployment details`}>
-      <div className="deployment-diagram-wrap"><div className="diagram-heading" aria-live="polite" aria-atomic="true"><div><span className="diagram-kicker">DOCUMENTED ARCHITECTURE / {mode.label.toUpperCase()}</span><h3>{mode.label} boundary</h3></div><InlineAvailability>{mode.availability}</InlineAvailability></div><DeploymentDiagram topology={mode.topology} mode={mode.label} /><p className="deployment-diagram-caption">Illustrative architecture. Use it to frame the conversation, then confirm the live paths for your release.</p></div>
-      <div className="deployment-facts"><div><span>PLATFORM OPERATOR</span><strong>{mode.operator}</strong></div><div><span>MODEL LOCATION</span><strong>{mode.model}</strong></div><div><span>CONNECTION PATH</span><strong>{mode.path}</strong></div><div><span>UPDATE METHOD</span><strong>{mode.updates}</strong></div><div className="responsibility-fact"><span>RESPONSIBILITIES</span><p>{mode.responsibility}</p></div><details className="leave-environment"><summary>What may leave this environment? <ChevronDown size={15} /></summary><p>Evidence, model calls, notifications, backups, support access and licensing metadata depend on configuration and release. Review each path individually; deployment location alone does not prove that every flow stays inside one boundary.</p></details>
-        <div className="package-note"><strong>Two delivery paths, not extra deployment modes</strong><p>Package A installs on an existing conformant customer platform. Package B creates a customer-owned cloud foundation before installing the same release. Compatibility and availability require product confirmation.</p><Link href="/deployment">Read the full deployment comparison <ArrowRight size={15} /></Link></div>
+  const mode = useMemo(
+    () =>
+      deploymentModes.find(item => item.key === selectedKey) ??
+      deploymentModes[2],
+    [selectedKey]
+  );
+  return (
+    <section
+      className={`deployment-section section-pad ${compact ? "deployment-section-compact" : ""}`}
+      id="deployment-explorer"
+    >
+      <div className="container">
+        <div className="deployment-heading">
+          <div>
+            <p className="eyebrow">ARCHITECTURE, MADE VISIBLE</p>
+            <h2>Choose where Relyxus runs.</h2>
+            <p>
+              Compare the operating models side by side, then confirm the exact
+              path with your team.
+            </p>
+          </div>
+          {compact && (
+            <Link href="/deployment" className="text-link">
+              Explore deployment <ArrowRight size={16} />
+            </Link>
+          )}
+        </div>
+        <div
+          className="deployment-tabs"
+          role="group"
+          aria-label="Deployment modes"
+        >
+          {deploymentModes.map(item => (
+            <button
+              type="button"
+              aria-pressed={item.key === selectedKey}
+              key={item.key}
+              onClick={() => setSelectedKey(item.key)}
+            >
+              {item.label}
+              <span>Availability to confirm</span>
+            </button>
+          ))}
+        </div>
+        <div
+          className="deployment-content"
+          id="deployment-panel"
+          role="region"
+          aria-label={`${mode.label} deployment details`}
+        >
+          <div className="deployment-diagram-wrap">
+            <div
+              className="diagram-heading"
+              aria-live="polite"
+              aria-atomic="true"
+            >
+              <div>
+                <span className="diagram-kicker">
+                  DOCUMENTED ARCHITECTURE / {mode.label.toUpperCase()}
+                </span>
+                <h3>{mode.label} boundary</h3>
+              </div>
+              <InlineAvailability>{mode.availability}</InlineAvailability>
+            </div>
+            <DeploymentDiagram topology={mode.topology} mode={mode.label} />
+            <p className="deployment-diagram-caption">
+              Illustrative architecture. Use it to frame the conversation, then
+              confirm the live paths for your release.
+            </p>
+          </div>
+          <div className="deployment-facts">
+            <div>
+              <span>PLATFORM OPERATOR</span>
+              <strong>{mode.operator}</strong>
+            </div>
+            <div>
+              <span>MODEL LOCATION</span>
+              <strong>{mode.model}</strong>
+            </div>
+            <div>
+              <span>CONNECTION PATH</span>
+              <strong>{mode.path}</strong>
+            </div>
+            <div>
+              <span>UPDATE METHOD</span>
+              <strong>{mode.updates}</strong>
+            </div>
+            <div className="responsibility-fact">
+              <span>RESPONSIBILITIES</span>
+              <p>{mode.responsibility}</p>
+            </div>
+            <details className="leave-environment">
+              <summary>
+                What may leave this environment? <ChevronDown size={15} />
+              </summary>
+              <p>
+                Evidence, model calls, notifications, backups, support access
+                and licensing metadata depend on configuration and release.
+                Review each path individually; deployment location alone does
+                not prove that every flow stays inside one boundary.
+              </p>
+            </details>
+            <div className="package-note">
+              <strong>Two delivery paths, not extra deployment modes</strong>
+              <p>
+                Package A installs on an existing conformant customer platform.
+                Package B creates a customer-owned cloud foundation before
+                installing the same release. Compatibility and availability
+                require product confirmation.
+              </p>
+              <Link href="/deployment">
+                Read the full deployment comparison <ArrowRight size={15} />
+              </Link>
+            </div>
+          </div>
+        </div>
+        <div
+          className="deployment-compare"
+          aria-label="Static deployment comparison"
+        >
+          {deploymentModes.map(item => (
+            <div key={item.key}>
+              <strong>{item.label}</strong>
+              <span>{item.operator}</span>
+              <span>{item.model}</span>
+              <small>{item.availability}</small>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-    <div className="deployment-compare" aria-label="Static deployment comparison">{deploymentModes.map((item) => <div key={item.key}><strong>{item.label}</strong><span>{item.operator}</span><span>{item.model}</span><small>{item.availability}</small></div>)}</div>
-  </div></section>;
+    </section>
+  );
 }

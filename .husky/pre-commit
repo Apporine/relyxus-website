@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+set -e
+
+echo "→ lint-staged (format staged files)"
+pnpm exec lint-staged
+
+echo "→ typecheck"
+pnpm check
+
+echo "→ unit tests"
+pnpm test

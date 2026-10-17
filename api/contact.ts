@@ -26,7 +26,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
     return res.status(200).json({ ok: true, provider: result.provider });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Unexpected delivery error";
+    const message =
+      error instanceof Error ? error.message : "Unexpected delivery error";
     return res.status(500).json({ ok: false, error: message });
   }
 }

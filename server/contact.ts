@@ -18,7 +18,8 @@ export function registerContactRoutes(app: Express) {
       }
       res.status(200).json({ ok: true, provider: result.provider });
     } catch (error) {
-      const message = error instanceof Error ? error.message : "Unexpected delivery error";
+      const message =
+        error instanceof Error ? error.message : "Unexpected delivery error";
       res.status(500).json({ ok: false, error: message });
     }
   });

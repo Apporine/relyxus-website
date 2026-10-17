@@ -182,6 +182,11 @@ function Router() {
           <LegalPage page="privacy" />
         </WithLayout>
       </Route>
+      <Route path="/privacy-policy">
+        <WithLayout>
+          <LegalPage page="privacy" />
+        </WithLayout>
+      </Route>
       <Route path="/terms">
         <WithLayout>
           <LegalPage page="terms" />

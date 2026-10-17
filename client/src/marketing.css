@@ -315,12 +315,12 @@ svg {
   color: #243e7f;
 }
 .wordmark-mark {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   display: block;
   flex: none;
-  object-fit: cover;
-  border-radius: 4px;
+  object-fit: contain;
+  background: transparent;
 }
 .wordmark-glyph {
   position: relative;

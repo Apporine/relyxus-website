@@ -759,35 +759,65 @@ export function LegalPage({
     return (
       <>
         <PageMeta
-          title="Privacy"
-          description="How Relyxus handles website enquiry details and what we do not collect on this marketing site."
+          title="Privacy policy"
+          description="Privacy policy for the Relyxus marketing website: what we collect from enquiries, how we use it, and what we do not track."
         />
         <PageIntro
-          eyebrow="COMPANY / PRIVACY"
+          eyebrow="COMPANY / PRIVACY POLICY"
           title="We only ask for what we need to reply."
-          summary="Enquiry details are used to respond to your message. This marketing site does not load analytics or marketing trackers."
+          summary="This privacy policy covers the Relyxus marketing website and enquiry forms. It does not replace contract terms for a paid deployment."
           tone="blue"
         />
         <section className="legal-copy section-pad">
           <div className="container legal-copy-inner">
-            <p className="eyebrow">WEBSITE ENQUIRIES</p>
-            <h2>What happens when you contact us</h2>
+            <p className="eyebrow">SCOPE</p>
+            <h2>Who this policy covers</h2>
             <p>
-              When you submit the demo or contact form, your name, work email,
-              company and message details are emailed to the Relyxus team so we
-              can respond.
+              This page applies to visitors of the Relyxus marketing website and
+              people who submit the demo or contact form. Product deployments
+              and customer environments are covered by separate agreements.
             </p>
+
+            <h3>What we collect from the enquiry form</h3>
             <p>
-              Optional marketing preference is recorded with the enquiry if you
-              choose it. Please do not send passwords, secrets or sensitive
-              incident data through the form.
+              When you submit an enquiry we receive the details you enter: name,
+              work email, company, enquiry type, and any optional role,
+              deployment interest, message, or marketing preference.
             </p>
+
+            <h3>How we use that information</h3>
+            <p>
+              We use enquiry details to respond to your request, follow up on a
+              demo or evaluation conversation, and keep a record of the
+              exchange. We do not sell form submissions.
+            </p>
+
+            <h3>What this site does not load</h3>
+            <p>
+              This marketing site does not load analytics or marketing trackers
+              today. Cookie preference controls are available if that changes.
+            </p>
+
+            <h3>What not to send</h3>
+            <p>
+              Please do not include passwords, secrets, credentials, or
+              sensitive incident data in the form. Use a secure channel agreed
+              with the team for anything confidential.
+            </p>
+
+            <h3>How long we keep enquiry details</h3>
+            <p>
+              We keep enquiry correspondence for as long as needed to complete
+              the conversation and maintain ordinary business records, then
+              remove or archive it according to internal retention practice.
+            </p>
+
             <div className="limitation-box">
               <CircleAlert size={18} />
               <p>
-                <strong>Need a fuller privacy notice?</strong> Ask us via the
-                contact page and we can share the latest organisational wording
-                for your review.
+                <strong>Questions about privacy?</strong> Use the contact page
+                or enquiry form and we can share the latest organisational
+                wording for your review.
               </p>
             </div>
             <TextLink href="/contact">Contact the team</TextLink>

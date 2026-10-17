@@ -57,6 +57,51 @@ function Hero() {
   );
 }
 
+function RoleGlyph({ kind }: { kind: "converge" | "clock" | "gate" }) {
+  return (
+    <svg className="rg" viewBox="0 0 120 120" aria-hidden="true">
+      {kind === "converge" && (
+        <>
+          {[24, 60, 96].map((y, index) => (
+            <g key={y}>
+              <path className="hx-lane" d={`M10 ${y} C50 ${y}, 54 60, 90 60`} />
+              <path
+                className="hx-flow"
+                style={{ animationDelay: `${index * 0.3}s` }}
+                d={`M10 ${y} C50 ${y}, 54 60, 90 60`}
+              />
+            </g>
+          ))}
+          <circle className="tl-dot" cx="96" cy="60" r="10" />
+        </>
+      )}
+      {kind === "clock" && (
+        <>
+          <circle className="rg-track" cx="60" cy="60" r="42" />
+          <circle className="rg-count" cx="60" cy="60" r="42" />
+          <text className="rg-text" x="60" y="68" textAnchor="middle">
+            4h
+          </text>
+        </>
+      )}
+      {kind === "gate" && (
+        <>
+          <path className="hx-lane" d="M8 60 H112" />
+          <rect
+            className="tl-gate"
+            x="56"
+            y="20"
+            width="8"
+            height="80"
+            rx="4"
+          />
+          <circle className="tl-card" cx="22" cy="60" r="9" />
+        </>
+      )}
+    </svg>
+  );
+}
+
 function PathCards() {
   return (
     <section className="hx-section" aria-labelledby="hx-path-title">
@@ -64,6 +109,10 @@ function PathCards() {
         <h2 id="hx-path-title" className="hx-h2">
           One incident. Three teams who have to answer for it.
         </h2>
+        <p className="hx-sub">
+          Same alert, three different questions. Relyxus answers each one from
+          the same evidence.
+        </p>
         <div className="hx-paths">
           {pathCards.map(card => (
             <Link
@@ -74,11 +123,12 @@ function PathCards() {
                 track("path_card_click", { path: card.key, place: "home" })
               }
             >
+              <RoleGlyph kind={card.glyph} />
               <span className="hx-path-label">{card.label}</span>
-              <h3>{card.title}</h3>
-              <p>{card.text}</p>
-              <span className="hx-path-go" aria-hidden="true">
-                <ArrowUpRight size={18} />
+              <h3>{card.question}</h3>
+              <p>{card.answer}</p>
+              <span className="hx-path-cta">
+                {card.cta} <ArrowUpRight size={15} aria-hidden="true" />
               </span>
             </Link>
           ))}

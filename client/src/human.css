@@ -2845,3 +2845,90 @@ html[data-motion="off"] .hx-scene-draw {
   margin: 0;
   font-size: 13px;
 }
+
+/* ---------- Role cards ---------- */
+.hx-path {
+  min-height: 300px;
+  padding-bottom: 64px;
+}
+.hx-path .rg {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 92px;
+  height: 92px;
+  opacity: 0.9;
+  transition: transform 0.4s ease;
+}
+.hx-path:hover .rg {
+  transform: scale(1.1);
+}
+.hx-path h3 {
+  max-width: 78%;
+  font-size: 24px;
+}
+.hx-path-cta {
+  position: absolute;
+  left: 28px;
+  bottom: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--hx-mint);
+  font-size: 14px;
+  font-weight: 700;
+}
+.hx-path-engineering:hover {
+  border-color: var(--hx-cyan);
+}
+.hx-path-resilience:hover {
+  border-color: var(--hx-violet);
+}
+.hx-path-security:hover {
+  border-color: var(--hx-amber);
+}
+.rg-track {
+  fill: none;
+  stroke: var(--hx-border-strong);
+  stroke-width: 6;
+}
+.rg-count {
+  fill: none;
+  stroke: var(--hx-violet);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 264;
+  stroke-dashoffset: 264;
+  transform: rotate(-90deg);
+  transform-origin: 60px 60px;
+  animation: rg-count 6s ease-in-out infinite;
+}
+.rg-text {
+  fill: var(--hx-text);
+  font:
+    800 22px Inter,
+    system-ui,
+    sans-serif;
+}
+@keyframes rg-count {
+  0% {
+    stroke-dashoffset: 264;
+  }
+  70%,
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.hx-path .rg {
+  position: static;
+  width: 84px;
+  height: 84px;
+  margin-bottom: 4px;
+}
+.hx-path h3 {
+  max-width: none;
+}
+.hx-path {
+  min-height: 340px;
+}

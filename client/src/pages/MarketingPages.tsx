@@ -7,16 +7,40 @@ import { CONTACT_RECIPIENTS } from "@shared/contact";
 type ProductRoute = "overview" | "investigation" | "governed-actions" | "reporting" | "security";
 const productCopy: Record<Exclude<ProductRoute, "security">, { eyebrow: string; title: string; summary: string; question: string; mechanism: string; limitation: string; next: { label: string; href: string } }> = {
   overview: {
-    eyebrow: "PRODUCT / OVERVIEW", title: "Follow the incident from first signal to reviewed outcome.", summary: "Relyxus is presented as an incident-response layer that helps teams bring approved evidence into one investigation, review a likely explanation, and keep people in control of proposed actions.", question: "What does Relyxus add to the tools we already use?", mechanism: "The intended workflow connects a signal to evidence, a human decision and a durable record. Relyxus is not presented as a replacement metrics or log database. Which sources and capabilities are available depends on the confirmed release.", limitation: "This overview reflects supplied design guidance. Product release scope, connector availability and supported deployment modes need owner confirmation.", next: { label: "Explore the incident walkthrough", href: "/#walkthrough" },
+    eyebrow: "PRODUCT / OVERVIEW",
+    title: "Follow the incident from first signal to reviewed outcome.",
+    summary: "Relyxus helps teams pull approved evidence into one investigation, weigh a likely explanation, and keep people in charge of any proposed action.",
+    question: "What does Relyxus add to the tools we already use?",
+    mechanism: "It connects a signal to evidence, a human decision and a record you can revisit. It is not meant to replace your metrics or log store. What you can connect depends on your environment and the release you run.",
+    limitation: "Connector coverage and deployment options vary by release. We’ll walk through what applies to your team during an evaluation.",
+    next: { label: "Explore the incident walkthrough", href: "/#walkthrough" },
   },
   investigation: {
-    eyebrow: "PRODUCT / INVESTIGATION", title: "A likely cause, with the evidence to inspect.", summary: "Investigation should help a responder make sense of an incident without hiding uncertainty or separating a hypothesis from the sources behind it.", question: "What is known, and what still needs checking?", mechanism: "The intended design gathers approved source evidence in context, presents a ranked hypothesis and keeps an alternative explanation visible. Source detail should be reachable from the statement it supports.", limitation: "A correlation is not a confirmed cause. Evidence may be incomplete or unavailable; a responder remains responsible for deciding what is supported. Specific release and connector coverage requires confirmation.", next: { label: "View the incident walkthrough", href: "/#walkthrough" },
+    eyebrow: "PRODUCT / INVESTIGATION",
+    title: "A likely cause, with the evidence to inspect.",
+    summary: "Help responders make sense of an incident without hiding uncertainty or cutting a hypothesis off from its sources.",
+    question: "What is known, and what still needs checking?",
+    mechanism: "Approved evidence comes together in context. A ranked hypothesis stays next to an alternative, and you can open the sources behind each statement.",
+    limitation: "Correlation is not confirmation. Incomplete evidence is expected, and responders still decide what is supported.",
+    next: { label: "View the incident walkthrough", href: "/#walkthrough" },
   },
   "governed-actions": {
-    eyebrow: "PRODUCT / GOVERNED ACTIONS", title: "A proposal is not an execution.", summary: "Keep the target, policy and human approval visible between a suggested change and an action that could affect a live service.", question: "Who is allowed to change what—and under which conditions?", mechanism: "The design model separates read-only investigation from action execution. A proposed action carries a scope, the applicable policy, approval requirements and a verification plan. A blocked proposal remains an honest end state.", limitation: "No action is triggered from this marketing website. The supplied design vocabulary describes autonomy levels from observe and suggest through approval and tightly limited automatic execution; what is released and configured must be reviewed with the product owner.", next: { label: "Compare deployment boundaries", href: "/deployment" },
+    eyebrow: "PRODUCT / GOVERNED ACTIONS",
+    title: "A proposal is not an execution.",
+    summary: "Keep the target, policy and human approval visible between a suggested change and anything that could touch a live service.",
+    question: "Who is allowed to change what—and under which conditions?",
+    mechanism: "Read-only investigation stays separate from action. A proposal carries scope, policy, approvals and a verification plan. Waiting or blocked is a valid outcome.",
+    limitation: "Nothing on this website runs against production. Autonomy levels are configured with your team; we do not assume every level is switched on.",
+    next: { label: "Compare deployment boundaries", href: "/deployment" },
   },
   reporting: {
-    eyebrow: "PRODUCT / REPORTING", title: "Keep the evidence with the incident record.", summary: "A source-linked timeline can support clear handoffs and report preparation while keeping classification, review and submission with people.", question: "Can a draft show where each statement came from?", mechanism: "The intended design keeps events ordered, connects report fields to their sources, and distinguishes a prepared draft from a reviewed and approved report.", limitation: "A regulator-facing report is a draft, not an automatically submitted filing. Completeness, jurisdictional rules and product availability require human and specialist review.", next: { label: "Discuss an evaluation", href: "/demo?type=Demo" },
+    eyebrow: "PRODUCT / REPORTING",
+    title: "Keep the evidence with the incident record.",
+    summary: "A source-linked timeline helps with handoffs and draft reports while classification, review and submission stay with people.",
+    question: "Can a draft show where each statement came from?",
+    mechanism: "Events stay ordered, report fields stay tied to sources, and a prepared draft is clearly different from a reviewed and approved report.",
+    limitation: "A regulator-facing report is still a draft until people finish it. Completeness and jurisdiction rules need human judgment.",
+    next: { label: "Discuss an evaluation", href: "/demo?type=Demo" },
   },
 };
 
@@ -32,9 +56,9 @@ export function ProductPage({ page }: { page: ProductRoute }) {
     <PageIntro eyebrow={content.eyebrow} title={content.title} summary={content.summary} tone="ink"><PrimaryLink href="/demo">Discuss this workflow</PrimaryLink><Link className="button button-secondary" href="/deployment">Review deployment <ArrowRight size={16} /></Link></PageIntro>
     {page === "overview" && <section className="product-overview-callout"><div className="container overview-callout-inner"><div><p className="eyebrow">ONE INCIDENT / A READABLE SEQUENCE</p><h2>Investigation informs a decision. It doesn’t make the decision disappear.</h2><p>Read approved evidence. Review a likely explanation. Keep policy and human approval in the action path. Record what happened and what is still unknown.</p></div><CapabilityGraphic kind="overview" /></div></section>}
     <section className="capability-detail-section section-pad"><div className="container capability-detail-grid"><div className="capability-detail-copy"><p className="eyebrow">{page === "overview" ? "THE MECHANISM" : "THE QUESTION TO ASK"}</p><h2>{content.question}</h2><p className="lead-copy">{content.mechanism}</p><div className="limitation-box"><CircleAlert size={18} /><p><strong>Important boundary</strong>{content.limitation}</p></div><TextLink href={content.next.href}>{content.next.label}</TextLink></div><CapabilityGraphic kind={page} /></div></section>
-    {page === "overview" ? <section className="product-explorer-section section-pad"><div className="container"><SectionTitle eyebrow="EXPLORE FOUR OUTCOMES" title="Keep the whole response understandable." summary="Each capability answers a different operational question. Availability and scope still need release-owner confirmation." /><ProductExplorer /></div></section> : <section className="capability-questions section-pad"><div className="container"><SectionTitle eyebrow="EVALUATION QUESTIONS" title="What to validate with your own team." summary="Use these questions to make an evaluation concrete without assuming a capability is available." /><div className="question-grid"><article><span>01</span><h3>Inputs</h3><p>Which approved sources, fields and time windows are in scope?</p></article><article><span>02</span><h3>Decision</h3><p>What remains a human judgement, approval or classification?</p></article><article><span>03</span><h3>Evidence</h3><p>Can a reviewer inspect the source, uncertainty and any missing context?</p></article><article><span>04</span><h3>Limits</h3><p>What does the current release not support or guarantee?</p></article></div></div></section>}
-    {page === "overview" && <section className="autonomy-section section-pad"><div className="container autonomy-layout"><div><p className="eyebrow">AUTONOMY IS A POLICY CHOICE</p><h2>More automation isn’t always the goal.</h2><p>The supplied design guide describes this vocabulary for discussing permission boundaries. It is not a statement that every level is available in the current release.</p><InlineAvailability>Release scope requires product review</InlineAvailability></div><div className="autonomy-list">{[{ level: "L0", label: "Observe", text: "Collect context; no suggestion or action." }, { level: "L1", label: "Suggest", text: "A person considers and executes any suggestion." }, { level: "L2", label: "One-click approval", text: "A permitted action still waits for explicit approval." }, { level: "L3", label: "Four-eyes", text: "Distinct eligible approvers review the action." }, { level: "L4", label: "Automatic within limits", text: "Any automatic path is limited by policy and requires confirmation." }].map((item) => <div key={item.level}><span>{item.level}</span><strong>{item.label}</strong><p>{item.text}</p></div>)}</div></div></section>}
-    <ActionBand title={page === "overview" ? "Follow the workflow, one decision at a time." : "Discuss what this workflow would mean for your team."} summary="A useful evaluation starts with the sources, permission boundaries and release scope that matter in your environment." href="/demo?type=Demo" label="Request a demo" />
+    {page === "overview" ? <section className="product-explorer-section section-pad"><div className="container"><SectionTitle eyebrow="EXPLORE FOUR OUTCOMES" title="Keep the whole response understandable." summary="Each capability answers a different operational question. We’ll confirm scope with you during an evaluation." /><ProductExplorer /></div></section> : <section className="capability-questions section-pad"><div className="container"><SectionTitle eyebrow="EVALUATION QUESTIONS" title="What to validate with your own team." summary="Use these questions to make an evaluation concrete without assuming a capability is available." /><div className="question-grid"><article><span>01</span><h3>Inputs</h3><p>Which approved sources, fields and time windows are in scope?</p></article><article><span>02</span><h3>Decision</h3><p>What remains a human judgement, approval or classification?</p></article><article><span>03</span><h3>Evidence</h3><p>Can a reviewer inspect the source, uncertainty and any missing context?</p></article><article><span>04</span><h3>Limits</h3><p>What does the current release not support or guarantee?</p></article></div></div></section>}
+    {page === "overview" && <section className="autonomy-section section-pad"><div className="container autonomy-layout"><div><p className="eyebrow">AUTONOMY IS A POLICY CHOICE</p><h2>More automation isn’t always the goal.</h2><p>Use this vocabulary to talk about permission boundaries with your team. Not every level needs to be on from day one.</p><InlineAvailability>Configured with your policies</InlineAvailability></div><div className="autonomy-list">{[{ level: "L0", label: "Observe", text: "Collect context; no suggestion or action." }, { level: "L1", label: "Suggest", text: "A person considers and executes any suggestion." }, { level: "L2", label: "One-click approval", text: "A permitted action still waits for explicit approval." }, { level: "L3", label: "Four-eyes", text: "Distinct eligible approvers review the action." }, { level: "L4", label: "Automatic within limits", text: "Any automatic path is limited by policy and requires confirmation." }].map((item) => <div key={item.level}><span>{item.level}</span><strong>{item.label}</strong><p>{item.text}</p></div>)}</div></div></section>}
+    <ActionBand title={page === "overview" ? "Follow the workflow, one decision at a time." : "Discuss what this workflow would mean for your team."} summary="Start with the sources, permission boundaries and deployment questions that matter in your environment." href="/demo?type=Demo" label="Request a demo" />
   </>;
 }
 
@@ -50,9 +74,9 @@ function SecurityPage() {
   return <>
     <PageMeta title="Security and trust" description="Understand the questions to ask about Relyxus data boundaries, access, AI routes, actions and assurance material." />
     <PageIntro eyebrow="SECURITY / TRANSPARENCY FIRST" title="Understand the boundary before the badge." summary="A useful security review explains where data flows, who can act, and which commitments are backed by current evidence." tone="blue"><PrimaryLink href="/deployment">Compare deployment boundaries</PrimaryLink></PageIntro>
-    <section className="security-intro section-pad" id="data-boundaries"><div className="container security-lead"><div><p className="eyebrow">A REVIEW, NOT A CERTIFICATION CLAIM</p><h2>Start with what your reviewers need to know.</h2><p className="lead-copy">The supplied materials describe intended product controls but do not include the current release specification or approved assurance pack. This page presents the review topics; it does not claim an audit, certification or customer status.</p><InlineAvailability>Product and security confirmation required</InlineAvailability></div><CapabilityGraphic kind="security" /></div></section>
+    <section className="security-intro section-pad" id="data-boundaries"><div className="container security-lead"><div><p className="eyebrow">A REVIEW, NOT A BADGE WALL</p><h2>Start with what your reviewers need to know.</h2><p className="lead-copy">This page walks through the questions security and architecture teams usually ask: where data flows, who can act, and how AI routes are handled. It is not a certification claim or audit report.</p><InlineAvailability>Discuss your review pack with us</InlineAvailability></div><CapabilityGraphic kind="security" /></div></section>
     <section className="security-topics section-pad"><div className="container"><SectionTitle eyebrow="QUESTIONS TO TAKE INTO REVIEW" title="Explain the mechanism, then verify its status." /><div className="security-topic-list">{items.map((item, index) => <article key={item.label}><span className="security-topic-number">0{index + 1}</span><span className="security-topic-icon">{item.icon}</span><div><h3>{item.label}</h3><p>{item.text}</p></div><InlineAvailability>Verify</InlineAvailability></article>)}</div></div></section>
-    <section className="assurance-status-band"><div className="container assurance-status-inner"><span className="assurance-symbol"><ShieldCheck size={21} /></span><div><p className="eyebrow">ASSURANCE DOCUMENTS</p><h2>No document catalogue has been configured.</h2><p>Restricted or public security documents must be provided by an approved document owner and linked through a real access-controlled service. No assurance status, issuer or review date is implied.</p></div><Link className="button button-primary" href="/demo?type=Deployment">Discuss security review <ArrowRight size={16} /></Link></div></section>
+    <section className="assurance-status-band"><div className="container assurance-status-inner"><span className="assurance-symbol"><ShieldCheck size={21} /></span><div><p className="eyebrow">ASSURANCE DOCUMENTS</p><h2>Need the security pack for your review?</h2><p>Ask us for the current documents under a proper access path. We will not invent certifications, issuers or review dates on this page.</p></div><Link className="button button-primary" href="/demo?type=Deployment">Discuss security review <ArrowRight size={16} /></Link></div></section>
     <ActionBand title="Make the boundary part of the evaluation." summary="Discuss model routing, source scope and the assurance material your reviewers need." href="/demo?type=Deployment" label="Discuss deployment" />
   </>;
 }
@@ -67,12 +91,57 @@ export function FinancialServicesPage() {
     <section className="financial-story section-pad"><div className="container financial-story-grid"><div><p className="eyebrow">PAYMENT SCENARIO / EXAMPLE</p><h2>Several signals. One decision to make.</h2><p className="lead-copy">An authorisation service raises a signal. A routing change occurred nearby. A downstream dependency may also be involved.</p><p>The point is not to declare a cause from timing alone. The responder needs a way to inspect evidence, understand what remains uncertain and keep any proposed change behind the organisation’s approval rules.</p><span className="example-flag"><CircleAlert size={15} /> Illustrative example; no customer or service data</span></div><div className="finance-storyboard"><div><span>01 / SERVICE</span><strong>Payment authorisation signal</strong><small>Impact is investigated, not assumed.</small></div><div><span>02 / EVIDENCE</span><strong>Recent change + dependency context</strong><small>Correlation is not confirmation.</small></div><div><span>03 / DECISION</span><strong>Proposal waits behind policy</strong><small>Required human roles remain visible.</small></div></div></div></section>
     <section className="financial-perspectives section-pad"><div className="container"><SectionTitle eyebrow="TWO DIRECTLY ACCESSIBLE PERSPECTIVES" title="Engineering and resilience share the same evidence." summary="Both views remain on this page; choose a section link to jump directly to the question you need to answer." /><div className="perspective-jumps"><a href="#engineering">For engineering <ArrowRight size={15} /></a><a href="#resilience">For resilience <ArrowRight size={15} /></a></div><div className="perspective-row" id="engineering"><span>ENGINEERING</span><div><h3>Can we understand the service path?</h3><p>Trace the alert, inspect the recent change and keep the affected dependency in view. Validate source permissions, supported versions and operational fit with the product owner.</p><TextLink href="/product/investigation">Explore investigation</TextLink></div></div><div className="perspective-row" id="resilience"><span>RESILIENCE</span><div><h3>Can we explain what was decided?</h3><p>Keep approval requirements, evidence provenance and report-draft responsibilities visible. Classification, human approval and submission remain distinct steps.</p><TextLink href="/product/reporting">Explore reporting</TextLink></div></div></div></section>
     <section className="financial-questions"><div className="container financial-question-grid"><Link href="/product/investigation"><span>01</span><h3>How does investigation work?</h3><ArrowRight size={16} /></Link><Link href="/product/governed-actions"><span>02</span><h3>Who approves changes?</h3><ArrowRight size={16} /></Link><Link href="/deployment"><span>03</span><h3>Where does the data go?</h3><ArrowRight size={16} /></Link><Link href="/security"><span>04</span><h3>What should security review?</h3><ArrowRight size={16} /></Link></div></section>
-    <ActionBand title="Start with your incident context." summary="Discuss the evidence, the permission boundary and which release facts need to be confirmed." href="/demo" label="Request a demo" />
+    <ActionBand title="Start with your incident context." summary="Tell us about the evidence you care about, the permission boundary you need, and how you deploy today." href="/demo" label="Request a demo" />
   </>;
 }
 
 export function CompanyPage() {
-  return <><PageMeta title="Company" description="Learn the principles behind Relyxus and review which company details remain to be confirmed." /><PageIntro eyebrow="COMPANY / PRINCIPLES" title="Clarity becomes control." summary="The Relyxus product story focuses on explainable evidence and governed action; release details still require confirmation." tone="ink"><PrimaryLink href="/product">Explore the product</PrimaryLink></PageIntro><section className="company-page section-pad"><div className="container company-grid"><div><p className="eyebrow">A PRINCIPLE, NOT A PROMISE</p><h2>Give people a clearer place to decide.</h2></div><div><p className="lead-copy">The intended workflow begins with the incident a responder needs to understand, then makes the human decision boundary visible before a proposed action.</p><p>The supplied materials do not include approved corporate ownership, team biographies, legal entity details, office locations or a public support destination. Those details are deliberately not invented here.</p><InlineAvailability>Company profile requires owner review</InlineAvailability><div className="company-rails"><span>Measured</span><span>Candid</span><span>Dependable</span></div></div></div></section><ActionBand title="Explore the product story." summary="See the workflow and review the documented deployment questions." href="/product" label="Explore product" /></>;
+  return (
+    <>
+      <PageMeta
+        title="Company"
+        description="Meet the principles behind Relyxus: clearer evidence, visible human control, and honest deployment boundaries."
+      />
+      <PageIntro
+        eyebrow="COMPANY / PRINCIPLES"
+        title="Clarity becomes control."
+        summary="Relyxus is built for teams that want explainable evidence and governed action—not a black box that quietly changes production."
+        tone="ink"
+      >
+        <PrimaryLink href="/product">Explore the product</PrimaryLink>
+      </PageIntro>
+      <section className="company-page section-pad">
+        <div className="container company-grid">
+          <div>
+            <p className="eyebrow">HOW WE WORK</p>
+            <h2>Give people a clearer place to decide.</h2>
+          </div>
+          <div>
+            <p className="lead-copy">
+              We start with the incident a responder actually needs to understand, then keep the human decision boundary
+              visible before anything can change a live service.
+            </p>
+            <p>
+              Relyxus is developed by Apporine. For team introductions, commercial details or support routing, reach us
+              through the contact page or enquiry form and we’ll connect you with the right people.
+            </p>
+            <InlineAvailability>Talk to us for the latest company details</InlineAvailability>
+            <div className="company-rails">
+              <span>Measured</span>
+              <span>Candid</span>
+              <span>Dependable</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <ActionBand
+        title="Explore the product story."
+        summary="See the workflow and compare the deployment questions your team will want answered."
+        href="/product"
+        label="Explore product"
+      />
+    </>
+  );
 }
 
 export function ContactPage() {

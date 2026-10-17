@@ -343,7 +343,7 @@ export function TextLink({ href, children }: { href: string; children: React.Rea
   return <Link href={href} className="text-link">{children}<ArrowUpRight size={16} aria-hidden="true" /></Link>;
 }
 
-export function InlineAvailability({ children = "Release availability to be confirmed" }: { children?: React.ReactNode }) {
+export function InlineAvailability({ children = "Confirm during evaluation" }: { children?: React.ReactNode }) {
   return <span className="availability-note"><span className="availability-dot" aria-hidden="true" />{children}</span>;
 }
 

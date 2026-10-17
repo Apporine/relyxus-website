@@ -1380,11 +1380,19 @@ body {
 .public-site .security-topic-grid > article,
 .public-site .workflow-split-grid > article,
 .public-site .workflow-steps,
+.public-site .workflow-step,
+.public-site .workflow-carousel-panel,
 .public-site .finance-storyboard > div,
 .public-site .autonomy-list > div {
   color: #e9eef8;
   border-color: #37445c;
   background: #141b2a;
+}
+.public-site .workflow-step.is-active {
+  background: #1a2436;
+}
+.public-site .workflow-step-gate.is-active {
+  background: #17332e;
 }
 .public-site .capability-graphic-head,
 .public-site .capability-graphic-head span,

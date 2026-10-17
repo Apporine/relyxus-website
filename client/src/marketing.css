@@ -4215,44 +4215,150 @@ svg {
   background: #0d111c;
   color: #e8edf7;
 }
+.workflow-carousel {
+  margin-top: 8px;
+}
 .workflow-steps {
   display: grid;
-  grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   align-items: stretch;
   gap: 0;
-  margin-top: 8px;
   border: 1px solid #37445c;
-  background: #141b2a;
+  background: #101622;
+  overflow: hidden;
 }
-.workflow-steps > div {
+.workflow-step {
+  position: relative;
   display: grid;
   gap: 6px;
-  padding: 22px 18px;
+  min-height: 118px;
+  padding: 22px 18px 26px;
+  text-align: left;
+  color: inherit;
+  border: 0;
+  border-inline-end: 1px solid #37445c;
+  background: #141b2a;
+  cursor: pointer;
+  opacity: 0.62;
+  transition:
+    opacity 220ms ease,
+    background-color 220ms ease,
+    color 220ms ease;
 }
-.workflow-steps > div > span {
+.workflow-step:last-child {
+  border-inline-end: 0;
+}
+.workflow-step > span {
   color: #84e8d4;
   font:
     10px/1.4 ui-monospace,
     monospace;
 }
-.workflow-steps strong {
+.workflow-step strong {
   color: #f0f4fb;
   font-size: 15px;
   font-weight: 570;
 }
-.workflow-steps small {
+.workflow-step small {
   color: #aeb9cd;
   font-size: 12px;
 }
-.workflow-steps > i {
-  width: 1px;
-  background: #37445c;
-}
 .workflow-step-gate {
-  background: #17332e;
+  background: #132623;
 }
 .workflow-step-gate strong {
   color: #d8fff2;
+}
+.workflow-step.is-active {
+  opacity: 1;
+  background: #1a2436;
+  z-index: 1;
+}
+.workflow-step-gate.is-active {
+  background: #17332e;
+}
+.workflow-step-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: transparent;
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+.workflow-step.is-active .workflow-step-progress {
+  background: #84e8d4;
+  animation: workflow-step-fill 3.2s linear forwards;
+}
+.workflow-step-gate.is-active .workflow-step-progress {
+  background: #9ce6d9;
+}
+@keyframes workflow-step-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .workflow-step,
+  .workflow-carousel-panel {
+    transition: none;
+  }
+  .workflow-step.is-active .workflow-step-progress {
+    animation: none;
+    transform: scaleX(1);
+  }
+}
+.workflow-carousel-panel {
+  display: grid;
+  gap: 8px;
+  min-height: 84px;
+  margin-top: 0;
+  padding: 18px 20px;
+  border: 1px solid #37445c;
+  border-top: 0;
+  background: #141b2a;
+}
+.workflow-carousel-panel > span {
+  color: #84e8d4;
+  font:
+    10px/1.4 ui-monospace,
+    monospace;
+  letter-spacing: 0.06em;
+}
+.workflow-carousel-panel p {
+  margin: 0;
+  max-width: 62ch;
+  color: #d6dfed;
+  font-size: 15px;
+  line-height: 1.55;
+}
+.workflow-carousel-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+.workflow-carousel-dots button {
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  border: 1px solid #5d6e88;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+.workflow-carousel-dots button[aria-current="step"] {
+  border-color: #9ce6d9;
+  background: #84e8d4;
+  box-shadow: inset 0 0 0 3px #141b2a;
+}
+.workflow-carousel-dots button:focus-visible {
+  outline: 2px solid #9fb8ff;
+  outline-offset: 2px;
 }
 .workflow-boundary {
   margin-top: 28px;
@@ -4436,11 +4542,14 @@ svg {
   .workflow-steps {
     grid-template-columns: 1fr 1fr;
   }
-  .workflow-steps > i {
-    display: none;
-  }
-  .workflow-steps > div {
+  .workflow-step {
     border-bottom: 1px solid #37445c;
+  }
+  .workflow-step:nth-child(2n) {
+    border-inline-end: 0;
+  }
+  .workflow-step:nth-last-child(-n + 2) {
+    border-bottom: 0;
   }
   .security-topic-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -4479,13 +4588,13 @@ svg {
   .question-grid {
     grid-template-columns: 1fr;
   }
-  .workflow-steps > div,
+  .workflow-step,
   .security-topic-grid > article,
   .question-grid article {
     border-inline-end: 0 !important;
     border-bottom: 1px solid #37445c;
   }
-  .workflow-steps > div:last-child,
+  .workflow-step:last-child,
   .security-topic-grid > article:last-child,
   .question-grid article:last-child {
     border-bottom: 0;

@@ -2,55 +2,91 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { ArrowRight, ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
 import { navGroups, type NavItem } from "@/content/site";
+import {
+  DEFAULT_KEYWORDS,
+  SITE_NAME,
+  upsertJsonLd,
+  upsertLink,
+  upsertMeta,
+} from "@/lib/seo";
 
-export function PageMeta({ title, description }: { title: string; description: string }) {
+export function PageMeta({
+  title,
+  description,
+  keywords = DEFAULT_KEYWORDS,
+  noindex = false,
+}: {
+  title: string;
+  description: string;
+  keywords?: string;
+  noindex?: boolean;
+}) {
   useEffect(() => {
-    document.title = `${title} | Relyxus`;
-    let meta = document.querySelector<HTMLMetaElement>('meta[name="description"]');
-    if (!meta) {
-      meta = document.createElement("meta");
-      meta.name = "description";
-      document.head.appendChild(meta);
-    }
-    meta.content = description;
-    let ogTitle = document.querySelector<HTMLMetaElement>('meta[property="og:title"]');
-    if (!ogTitle) {
-      ogTitle = document.createElement("meta");
-      ogTitle.setAttribute("property", "og:title");
-      document.head.appendChild(ogTitle);
-    }
-    ogTitle.content = `${title} | Relyxus`;
-    let ogDescription = document.querySelector<HTMLMetaElement>('meta[property="og:description"]');
-    if (!ogDescription) {
-      ogDescription = document.createElement("meta");
-      ogDescription.setAttribute("property", "og:description");
-      document.head.appendChild(ogDescription);
-    }
-    ogDescription.content = description;
-    const canonicalUrl = new URL(window.location.pathname + window.location.search, window.location.origin).href;
+    const fullTitle = `${title} | ${SITE_NAME}`;
+    const canonicalUrl = new URL(window.location.pathname, window.location.origin).href;
     const imageUrl = new URL("/og-cover.svg", window.location.origin).href;
-    let canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement("link");
-      canonical.rel = "canonical";
-      document.head.appendChild(canonical);
-    }
-    canonical.href = canonicalUrl;
-    const socialMeta: Array<["property" | "name", string, string]> = [
-      ["property", "og:type", "website"], ["property", "og:url", canonicalUrl], ["property", "og:image", imageUrl],
-      ["name", "twitter:card", "summary_large_image"], ["name", "twitter:title", `${title} | Relyxus`],
-      ["name", "twitter:description", description], ["name", "twitter:image", imageUrl],
-    ];
-    for (const [attribute, key, content] of socialMeta) {
-      let element = document.querySelector<HTMLMetaElement>(`meta[${attribute}="${key}"]`);
-      if (!element) {
-        element = document.createElement("meta");
-        element.setAttribute(attribute, key);
-        document.head.appendChild(element);
-      }
-      element.content = content;
-    }
-  }, [title, description]);
+
+    document.title = fullTitle;
+    document.documentElement.lang = "en";
+
+    upsertMeta("name", "description", description);
+    upsertMeta("name", "keywords", keywords);
+    upsertMeta("name", "author", "Apporine / Relyxus");
+    upsertMeta("name", "robots", noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large");
+    upsertMeta("name", "theme-color", "#0b0e18");
+    upsertMeta("property", "og:site_name", SITE_NAME);
+    upsertMeta("property", "og:locale", "en_US");
+    upsertMeta("property", "og:type", "website");
+    upsertMeta("property", "og:title", fullTitle);
+    upsertMeta("property", "og:description", description);
+    upsertMeta("property", "og:url", canonicalUrl);
+    upsertMeta("property", "og:image", imageUrl);
+    upsertMeta("property", "og:image:alt", `${SITE_NAME} — incident response with control`);
+    upsertMeta("name", "twitter:card", "summary_large_image");
+    upsertMeta("name", "twitter:title", fullTitle);
+    upsertMeta("name", "twitter:description", description);
+    upsertMeta("name", "twitter:image", imageUrl);
+    upsertLink("canonical", canonicalUrl);
+
+    upsertJsonLd("relyxus-org-schema", {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: window.location.origin,
+      email: "aoon.syed@apporine.com",
+      description,
+      sameAs: [],
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          contactType: "sales",
+          email: "aoon.syed@apporine.com",
+          areaServed: "Worldwide",
+          availableLanguage: ["English"],
+        },
+        {
+          "@type": "ContactPoint",
+          contactType: "sales",
+          email: "bisma.idrees@apporine.com",
+          areaServed: "Worldwide",
+          availableLanguage: ["English"],
+        },
+      ],
+    });
+
+    upsertJsonLd("relyxus-webpage-schema", {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: fullTitle,
+      description,
+      url: canonicalUrl,
+      isPartOf: {
+        "@type": "WebSite",
+        name: SITE_NAME,
+        url: window.location.origin,
+      },
+    });
+  }, [title, description, keywords, noindex]);
   return null;
 }
 

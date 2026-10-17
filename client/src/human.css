@@ -3015,26 +3015,26 @@ body {
   color: var(--hx-canvas);
 }
 
-/* Primary violet drives actions; accent cyan marks evidence and links. */
+/* Support orange drives every call to action; accent cyan marks evidence and links. */
 .public-site .button-primary {
-  color: var(--hx-canvas) !important;
-  border-color: var(--hx-primary) !important;
-  background: var(--hx-primary) !important;
+  color: var(--hx-base) !important;
+  border-color: var(--hx-support) !important;
+  background: var(--hx-support) !important;
   box-shadow: none;
 }
 .public-site .button-primary:hover {
-  color: var(--hx-canvas) !important;
+  color: var(--hx-base) !important;
   border-color: color-mix(
     in srgb,
-    var(--hx-primary) 80%,
+    var(--hx-support) 82%,
     var(--hx-canvas)
   ) !important;
   background: color-mix(
     in srgb,
-    var(--hx-primary) 82%,
+    var(--hx-support) 82%,
     var(--hx-canvas)
   ) !important;
-  box-shadow: 0 10px 32px rgba(112, 64, 255, 0.45);
+  box-shadow: 0 10px 32px rgba(255, 105, 77, 0.45);
 }
 .public-site .button-secondary,
 .public-site .button-outline {
@@ -3049,8 +3049,8 @@ body {
 }
 .hx-toggle button[aria-pressed="true"],
 .hx-tabs button[aria-pressed="true"] {
-  background: var(--hx-primary);
-  color: var(--hx-canvas);
+  background: var(--hx-support);
+  color: var(--hx-base);
 }
 .hx-stage-tab[aria-pressed="true"] {
   background: rgba(112, 64, 255, 0.18);
@@ -3106,19 +3106,16 @@ body {
     transform: scale(1.22);
     filter: drop-shadow(0 0 10px var(--hx-accent));
   }
-  9% {
-    stroke-opacity: 0.5;
-    transform: scale(1);
-    filter: none;
-  }
+  9%,
   100% {
+    stroke: rgba(252, 250, 255, 0.78);
     stroke-opacity: 0.5;
     transform: scale(1);
     filter: none;
   }
 }
 .orb-node {
-  stroke: var(--c);
+  stroke: rgba(252, 250, 255, 0.78);
 }
 
 /* Legacy tinted notes: dark cards with a violet edge. */

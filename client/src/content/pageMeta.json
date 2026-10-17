@@ -1,0 +1,74 @@
+{
+  "/": {
+    "title": "Find the cause of an incident, with every step on the record",
+    "description": "Relyxus pulls evidence from your existing tools into one investigation for incident, SRE and resilience teams. Nothing runs until the right people approve it.",
+    "h1": "Find the cause of a payments incident, with every step on the record.",
+    "body": "Relyxus pulls evidence from the tools you already run into one investigation. Nothing changes in your systems until the right people approve it."
+  },
+  "/product": {
+    "title": "Product",
+    "description": "One investigation per incident, an approval step before any change, and a record ready for audit.",
+    "h1": "From first alert to a record you can hand to audit",
+    "body": "One investigation per incident. A person approves every change. The write-up is half done before the incident closes."
+  },
+  "/security": {
+    "title": "Security",
+    "description": "Read-only by default, your data stays in your environment, and a person approves every action. Request the security pack for detail.",
+    "h1": "Made for your security review",
+    "body": "Three commitments up front. The detail goes to your reviewers in the security pack."
+  },
+  "/solutions/financial-services": {
+    "title": "Financial services",
+    "description": "Help engineering and resilience teams at regulated financial firms find the cause of a payments incident and keep every step on the record.",
+    "h1": "When a payment fails, the whole firm is asking why",
+    "body": "Engineering needs the cause. Resilience needs the record. Relyxus gives both the same evidence."
+  },
+  "/resources": {
+    "title": "Resources",
+    "description": "Short reads for incident, SRE and resilience teams at regulated firms, plus guides we share in an evaluation.",
+    "h1": "Short reads for teams who run incidents",
+    "body": "One guide you can read now, and two we share when you start an evaluation."
+  },
+  "/resources/what-makes-incident-response-controlled": {
+    "title": "What makes incident response controlled?",
+    "description": "A good incident workflow keeps a clear line between what the evidence suggests and what a person is allowed to change.",
+    "h1": "What makes incident response controlled?",
+    "body": "A good incident workflow keeps a clear line between what the evidence suggests and what a person is allowed to change."
+  },
+  "/demo": {
+    "title": "Request a demo",
+    "description": "Request a Relyxus demo, Replay pilot, security pack, readiness checklist or pricing conversation. Your enquiry is emailed to the Apporine team.",
+    "h1": "Tell us what you want to explore",
+    "body": "Share a little context about your team and we will follow up."
+  },
+  "/company": {
+    "title": "Company",
+    "description": "Relyxus is built by Apporine for incident, SRE and resilience teams at regulated firms.",
+    "h1": "We build Relyxus at Apporine",
+    "body": "We make incident response easier to explain, for the teams who have to explain it."
+  },
+  "/contact": {
+    "title": "Contact",
+    "description": "Talk to the Relyxus team about a demo, a Replay pilot, the security pack or pricing.",
+    "h1": "Talk to the people behind Relyxus",
+    "body": "Use the enquiry form to start a conversation with the team that looks after Relyxus."
+  },
+  "/privacy": {
+    "title": "Privacy policy",
+    "description": "What the Relyxus website collects from enquiries, how we use it, and what we don't track.",
+    "h1": "We only ask for what we need to reply",
+    "body": "This privacy policy covers the Relyxus marketing website and enquiry forms."
+  },
+  "/terms": {
+    "title": "Terms",
+    "description": "Terms for evaluating Relyxus and using this website.",
+    "h1": "Terms for this website",
+    "body": "This site helps you evaluate Relyxus. Formal contract terms are agreed separately for paid engagements."
+  },
+  "/accessibility": {
+    "title": "Accessibility",
+    "description": "How the Relyxus website supports keyboard, touch, reduced motion and readable layouts.",
+    "h1": "Accessibility",
+    "body": "This site is built for keyboard, touch, reduced motion and narrow screens. We keep improving it as the product grows."
+  }
+}

@@ -200,24 +200,28 @@ body,
   opacity: 0.35;
   animation: hx-flow 1.6s linear infinite;
 }
-.tone-coral .hx-dot,
-.tone-coral .hx-flow {
+.tone-coral .hx-dot {
   fill: var(--hx-coral);
+}
+.tone-coral .hx-flow {
   stroke: var(--hx-coral);
 }
-.tone-cyan .hx-dot,
-.tone-cyan .hx-flow {
+.tone-cyan .hx-dot {
   fill: var(--hx-cyan);
+}
+.tone-cyan .hx-flow {
   stroke: var(--hx-cyan);
 }
-.tone-violet .hx-dot,
-.tone-violet .hx-flow {
+.tone-violet .hx-dot {
   fill: var(--hx-violet);
+}
+.tone-violet .hx-flow {
   stroke: var(--hx-violet);
 }
-.tone-amber .hx-dot,
-.tone-amber .hx-flow {
+.tone-amber .hx-dot {
   fill: var(--hx-amber);
+}
+.tone-amber .hx-flow {
   stroke: var(--hx-amber);
 }
 .hx-dot {
@@ -696,4 +700,18 @@ body,
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 16px;
+}
+
+@media (max-width: 440px) {
+  .hx-facts {
+    grid-template-columns: 1fr;
+  }
+  .hx-toggle {
+    display: flex;
+    width: 100%;
+  }
+  .hx-toggle button {
+    flex: 1;
+    padding-inline: 8px;
+  }
 }

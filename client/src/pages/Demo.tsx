@@ -12,6 +12,7 @@ import {
   TextLink,
 } from "@/components/marketing/PublicSite";
 import { ENQUIRY_TYPES, type EnquiryType } from "@shared/contact";
+import { pageMeta } from "@/content/meta";
 
 type FormValues = {
   name: string;
@@ -196,13 +197,13 @@ export function DemoPage() {
   return (
     <>
       <PageMeta
-        title="Request a demo"
-        description="Request a Relyxus demo, Replay pilot, deployment discussion or pricing conversation. Your enquiry is emailed to the Apporine team."
+        title={pageMeta["/demo"].title}
+        description={pageMeta["/demo"].description}
       />
       <PageIntro
         eyebrow="EVALUATE / REQUEST A DEMO"
         title="Tell us what you want to explore."
-        summary="Share a little context about your team and we’ll follow up. Pick a demo, Replay pilot, deployment chat or pricing discussion."
+        summary="Share a little context about your team and we’ll follow up. Pick a demo, Replay pilot, security pack, readiness checklist or pricing discussion."
         tone="ivory"
       />
       <section className="demo-section section-pad">

@@ -4314,14 +4314,20 @@ svg {
 .security-lead .availability-note {
   margin-top: 18px;
 }
-.security-boundary-graphic {
-  display: grid;
-  gap: 10px;
-  margin-top: auto;
-  margin-bottom: auto;
+.capability-security {
+  justify-content: flex-start;
+  gap: 16px;
 }
-.security-boundary-graphic span,
-.security-boundary-graphic b {
+.security-boundary-graphic {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+  min-height: 0;
+  flex: 1;
+}
+.security-flow-bound,
+.security-flow-gate {
   display: inline-flex;
   width: fit-content;
   padding: 8px 10px;
@@ -4330,13 +4336,52 @@ svg {
   background: #17332e;
   font-size: 11px;
   letter-spacing: 0.04em;
+  font-weight: 650;
 }
-.security-boundary-graphic i {
-  display: block;
-  width: 1px;
-  height: 14px;
-  margin-inline-start: 18px;
-  background: #5d6e88;
+.security-flow-steps {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid #37445c;
+  background: #101622;
+  flex: 1;
+}
+.security-flow-steps > li {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: 10px;
+  row-gap: 2px;
+  align-items: start;
+  padding: 12px 14px;
+  border-bottom: 1px solid #37445c;
+}
+.security-flow-steps > li:last-child {
+  border-bottom: 0;
+}
+.security-flow-steps em {
+  grid-row: 1 / span 2;
+  align-self: center;
+  color: #84e8d4;
+  font:
+    10px/1.4 ui-monospace,
+    monospace;
+  font-style: normal;
+  letter-spacing: 0.04em;
+}
+.security-flow-steps strong {
+  color: #f0f4fb;
+  font-size: 13px;
+  font-weight: 570;
+}
+.security-flow-steps small {
+  color: #aeb9cd;
+  font-size: 11px;
+}
+.security-flow-gate {
+  margin-top: auto;
 }
 .security-topic-grid {
   display: grid;

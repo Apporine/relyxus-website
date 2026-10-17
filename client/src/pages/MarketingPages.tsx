@@ -135,12 +135,30 @@ function CapabilityGraphic({ kind }: { kind: string }) {
       )}
       {kind === "security" && (
         <div className="security-boundary-graphic">
-          <span>YOUR ENVIRONMENT</span>
-          <i />
-          <i />
-          <i />
-          <b>REVIEW EACH PATH</b>
-          <i />
+          <span className="security-flow-bound">YOUR ENVIRONMENT</span>
+          <ol className="security-flow-steps">
+            <li>
+              <em>01</em>
+              <strong>Evidence</strong>
+              <small>What may be read</small>
+            </li>
+            <li>
+              <em>02</em>
+              <strong>Model calls</strong>
+              <small>Approved route</small>
+            </li>
+            <li>
+              <em>03</em>
+              <strong>Records</strong>
+              <small>Notify · audit · backup</small>
+            </li>
+            <li>
+              <em>04</em>
+              <strong>Support</strong>
+              <small>Metadata exchanged</small>
+            </li>
+          </ol>
+          <b className="security-flow-gate">REVIEW EACH PATH</b>
         </div>
       )}
     </div>

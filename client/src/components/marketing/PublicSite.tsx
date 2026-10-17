@@ -39,7 +39,8 @@ export function PageMeta({
     ).href;
     const imageUrl = new URL("/og-cover.png", window.location.origin).href;
 
-    document.title = fullTitle;
+    // The browser tab shows only the product name, as in the navbar.
+    document.title = "relyxus";
     document.documentElement.lang = "en";
 
     upsertMeta("name", "description", description);

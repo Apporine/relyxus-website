@@ -8,7 +8,6 @@ import {
   ShieldCheck,
   UsersRound,
 } from "lucide-react";
-import { useEffect, useState } from "react";
 import { Link } from "wouter";
 import {
   PageMeta,
@@ -22,120 +21,30 @@ import {
 import { ProductExplorer } from "@/components/marketing/Explorers";
 
 const workflowPathSteps = [
-  {
-    number: "01",
-    label: "Signal",
-    short: "Context arrives",
-    detail:
-      "An alert or change lands with enough context to open an investigation.",
-    tone: "default" as const,
-  },
-  {
-    number: "02",
-    label: "Evidence",
-    short: "Sources inspected",
-    detail:
-      "Approved sources stay linked to the hypothesis so uncertainty can be reviewed.",
-    tone: "default" as const,
-  },
-  {
-    number: "03",
-    label: "Gate",
-    short: "Policy + approval",
-    detail:
-      "A proposed change waits on policy checks and the people who must approve it.",
-    tone: "gate" as const,
-  },
-  {
-    number: "04",
-    label: "Record",
-    short: "Decision preserved",
-    detail:
-      "What was decided—and what stayed unknown—remains available for handoff.",
-    tone: "default" as const,
-  },
+  { number: "01", label: "Signal", short: "Context arrives" },
+  { number: "02", label: "Evidence", short: "Sources inspected" },
+  { number: "03", label: "Gate", short: "Policy + approval" },
+  { number: "04", label: "Record", short: "Decision preserved" },
 ] as const;
 
-function WorkflowPathCarousel() {
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const step = workflowPathSteps[active];
-
-  useEffect(() => {
-    if (paused) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      return;
-    }
-    const timer = window.setInterval(() => {
-      setActive(current => (current + 1) % workflowPathSteps.length);
-    }, 3200);
-    return () => window.clearInterval(timer);
-  }, [paused]);
-
+function WorkflowPathScroller() {
+  const loop = [...workflowPathSteps, ...workflowPathSteps];
   return (
     <div
-      className="workflow-carousel"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocusCapture={() => setPaused(true)}
-      onBlurCapture={event => {
-        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
-          setPaused(false);
-        }
-      }}
+      className="workflow-scroller"
+      aria-label="Workflow path: Signal, Evidence, Gate, Record"
     >
-      <div
-        className="workflow-steps"
-        role="tablist"
-        aria-label="Workflow path steps"
-      >
-        {workflowPathSteps.map((item, index) => (
-          <button
-            key={item.number}
-            type="button"
-            role="tab"
-            id={`workflow-step-${item.number}`}
-            aria-selected={active === index}
-            aria-controls="workflow-step-panel"
-            className={[
-              "workflow-step",
-              item.tone === "gate" ? "workflow-step-gate" : "",
-              active === index ? "is-active" : "",
-            ]
-              .filter(Boolean)
-              .join(" ")}
-            onClick={() => setActive(index)}
+      <div className="workflow-scroller-track">
+        {loop.map((item, index) => (
+          <div
+            key={`${item.number}-${index}`}
+            className="workflow-scroller-item"
+            aria-hidden={index >= workflowPathSteps.length}
           >
             <span>{item.number}</span>
             <strong>{item.label}</strong>
             <small>{item.short}</small>
-            <i className="workflow-step-progress" aria-hidden="true" />
-          </button>
-        ))}
-      </div>
-      <div
-        className="workflow-carousel-panel"
-        id="workflow-step-panel"
-        role="tabpanel"
-        aria-labelledby={`workflow-step-${step.number}`}
-        aria-live="polite"
-      >
-        <span>STEP {step.number} OF 04</span>
-        <p>{step.detail}</p>
-      </div>
-      <div
-        className="workflow-carousel-dots"
-        role="group"
-        aria-label="Step markers"
-      >
-        {workflowPathSteps.map((item, index) => (
-          <button
-            key={item.number}
-            type="button"
-            aria-label={`Show ${item.label}`}
-            aria-current={active === index ? "step" : undefined}
-            onClick={() => setActive(index)}
-          />
+          </div>
         ))}
       </div>
     </div>
@@ -312,7 +221,7 @@ function InvestigateActPage() {
             title="From signal to a reviewed decision."
             summary="The same control model runs through investigation and action: evidence first, people before change."
           />
-          <WorkflowPathCarousel />
+          <WorkflowPathScroller />
           <div className="limitation-box workflow-boundary">
             <CircleAlert size={18} aria-hidden="true" />
             <p>

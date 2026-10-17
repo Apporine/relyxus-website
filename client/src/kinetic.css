@@ -1341,6 +1341,8 @@ body {
 .public-site .autonomy-section,
 .public-site .workflow-split,
 .public-site .workflow-strip,
+.public-site .deployment-package-section,
+.public-site .boundary-questions-section,
 .public-site .security-intro,
 .public-site .security-topics,
 .public-site .financial-story,
@@ -1363,6 +1365,8 @@ body {
 .public-site .security-lead h2,
 .public-site .workflow-split-grid h2,
 .public-site .company-copy h2,
+.public-site .boundary-questions-head h2,
+.public-site .package-grid h3,
 .public-site .financial-story h2,
 .public-site .autonomy-layout h2 {
   color: #f1f4fb !important;
@@ -1372,6 +1376,8 @@ body {
 .public-site .security-lead p,
 .public-site .workflow-split-grid p,
 .public-site .company-copy p,
+.public-site .boundary-questions-head p,
+.public-site .package-grid p,
 .public-site .financial-story p,
 .public-site .autonomy-layout p {
   color: #b0bbce !important;
@@ -1383,6 +1389,8 @@ body {
 .public-site .security-topic-grid > article,
 .public-site .workflow-split-grid > article,
 .public-site .workflow-scroller,
+.public-site .package-grid > article,
+.public-site .boundary-question-grid > article,
 .public-site .finance-storyboard > div,
 .public-site .autonomy-list > div {
   color: #e9eef8;
@@ -1441,12 +1449,15 @@ body {
 }
 .public-site .question-grid article > span:first-child,
 .public-site .security-topic-number,
+.public-site .boundary-q-number,
+.public-site .package-index,
 .public-site .finance-storyboard > div > span {
   color: #84e8d4;
 }
 .public-site .question-grid article h3,
 .public-site .security-topic-list h3,
 .public-site .security-topic-grid h3,
+.public-site .boundary-question-grid h3,
 .public-site .finance-storyboard strong,
 .public-site .autonomy-list strong {
   color: #f0f4fb !important;
@@ -1454,9 +1465,14 @@ body {
 .public-site .question-grid article p,
 .public-site .security-topic-list p,
 .public-site .security-topic-grid p,
+.public-site .boundary-question-grid p,
+.public-site .boundary-caveat,
 .public-site .finance-storyboard small,
 .public-site .autonomy-list p {
   color: #aeb9cd !important;
+}
+.public-site .boundary-q-icon {
+  color: var(--rx-web-action);
 }
 .public-site .assurance-status-band {
   color: #f3f5fb;

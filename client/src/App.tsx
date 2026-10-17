@@ -75,6 +75,7 @@ const retired: [string, string][] = [
   ["/integrations/:slug", "/security"],
   ["/replay", "/demo?type=Replay%20pilot"],
   ["/pricing", "/demo?type=Pricing"],
+  ["/accessibility", "/"],
 ];
 
 function Router() {
@@ -145,11 +146,6 @@ function Router() {
       <Route path="/terms">
         <WithLayout>
           <LegalPage page="terms" />
-        </WithLayout>
-      </Route>
-      <Route path="/accessibility">
-        <WithLayout>
-          <LegalPage page="accessibility" />
         </WithLayout>
       </Route>
       <Route>

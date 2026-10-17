@@ -1350,6 +1350,7 @@ body {
 .public-site .resources-index,
 .public-site .resource-article,
 .public-site .company-section,
+.public-site .company-page,
 .public-site .contact-section,
 .public-site .legal-content,
 .public-site .not-found-section,
@@ -1361,6 +1362,7 @@ body {
 .public-site .capability-detail-copy h2,
 .public-site .security-lead h2,
 .public-site .workflow-split-grid h2,
+.public-site .company-copy h2,
 .public-site .financial-story h2,
 .public-site .autonomy-layout h2 {
   color: #f1f4fb !important;
@@ -1369,6 +1371,7 @@ body {
 .public-site .capability-detail-copy p,
 .public-site .security-lead p,
 .public-site .workflow-split-grid p,
+.public-site .company-copy p,
 .public-site .financial-story p,
 .public-site .autonomy-layout p {
   color: #b0bbce !important;

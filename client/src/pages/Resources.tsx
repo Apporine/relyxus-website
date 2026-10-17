@@ -13,38 +13,24 @@ export function ResourcesPage() {
     <>
       <PageMeta
         title="Resources"
-        description="Read practical explainers on governed incident response, deployment boundaries and honest historical incident evaluation."
+        description="Short reads for incident, SRE and resilience teams at regulated firms, plus guides we share in an evaluation."
       />
       <PageIntro
-        eyebrow="RESOURCES / EVALUATION GUIDES"
-        title="A useful evaluation starts with better questions."
-        summary="Read the mechanisms and the trade-offs before you decide what to test. These notes are written for evaluation conversations, not as a claim that every option is already live."
+        eyebrow="Resources"
+        title="Short reads for teams who run incidents"
+        summary="One guide you can read now, and two we share when you start an evaluation."
         tone="ivory"
       />
       <section className="resources-index section-pad">
-        <div className="container resources-featured">
-          <div className="resources-index-intro">
-            <p className="eyebrow">PUBLIC READING</p>
-            <h2>Understand the control model, not just the category.</h2>
-            <p>
-              Start with the human decision boundary, compare deployment paths
-              and agree how an evaluation will treat misses.
-            </p>
-            <span className="content-review-note">
-              Field notes for evaluation conversations
-            </span>
-          </div>
-          <div className="resources-card-list">
-            {resources.map((item, index) => (
-              <Link
-                href={`/resources/${item.slug}`}
-                className="resource-card-large"
-                key={item.slug}
-              >
+        <div className="container resources-card-list hx-resource-grid">
+          {resources.map(item => {
+            const href = item.gatedType
+              ? `/demo?type=${encodeURIComponent(item.gatedType)}`
+              : `/resources/${item.slug}`;
+            return (
+              <Link href={href} className="resource-card-large" key={item.slug}>
                 <div className="resource-card-meta">
-                  <span>
-                    0{index + 1} / {item.category.toUpperCase()}
-                  </span>
+                  <span>{item.category}</span>
                   <span>
                     <Clock3 size={13} />
                     {item.time}
@@ -53,29 +39,17 @@ export function ResourcesPage() {
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
                 <span className="resource-card-link">
-                  Read the explainer <ArrowUpRight size={16} />
+                  {item.gatedType ? "Request the guide" : "Read the guide"}{" "}
+                  <ArrowUpRight size={16} />
                 </span>
               </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-      <section className="resource-guidance">
-        <div className="container resource-guidance-inner">
-          <div>
-            <p className="eyebrow">PUBLICATION NOTE</p>
-            <h2>No invented customer proof.</h2>
-          </div>
-          <p>
-            You will not find fabricated case studies, quotes, certifications or
-            scorecards here. The library focuses on the questions worth asking
-            before a pilot.
-          </p>
+            );
+          })}
         </div>
       </section>
       <ActionBand
-        title="Bring a question to the evaluation."
-        summary="Ask about a demo or Replay pilot and we’ll get back to you by email."
+        title="Bring a question to the team"
+        summary="Ask about a demo or a Replay pilot and we’ll reply by email."
         href="/demo"
         label="Open the enquiry form"
       />
@@ -93,8 +67,8 @@ export function ResourceArticle({ slug }: { slug: string }) {
           description="This public resource was not found."
         />
         <PageIntro
-          eyebrow="RESOURCES / NOT FOUND"
-          title="That resource isn’t in the library."
+          eyebrow="Resources"
+          title="That guide isn’t here"
           summary="Browse the current explainers or return to the home page."
         />
         <section className="section-pad">
@@ -113,20 +87,15 @@ export function ResourceArticle({ slug }: { slug: string }) {
             <ArrowLeft size={15} />
             All resources
           </Link>
-          <span>FIELD NOTES / FOR EVALUATION</span>
+          <span>Field guide</span>
         </div>
         <header className="article-header container">
-          <p className="eyebrow">PRACTICAL EXPLAINER</p>
           <h1>{article.title}</h1>
           <p className="article-deck">{article.intro}</p>
-          <div className="article-meta">
-            <span>Written for evaluation teams</span>
-            <span>Bring your own constraints</span>
-          </div>
         </header>
         <div className="article-layout container">
           <aside className="article-toc">
-            <span>IN THIS GUIDE</span>
+            <span>In this guide</span>
             {article.sections.map((section, index) => (
               <a key={section.heading} href={`#section-${index + 1}`}>
                 {section.heading}
@@ -141,23 +110,15 @@ export function ResourceArticle({ slug }: { slug: string }) {
                 <p>{section.body}</p>
               </section>
             ))}
-            <aside className="article-source-note">
-              <strong>Scope note</strong>
-              <p>
-                These explainers help you ask better questions. Confirm exact
-                capabilities and commitments with us for your release and
-                environment.
-              </p>
-            </aside>
             <Link className="text-link" href="/demo">
-              Discuss the questions with Relyxus <ArrowRight size={16} />
+              Talk to us about these questions <ArrowRight size={16} />
             </Link>
           </div>
         </div>
       </article>
       <ActionBand
-        title="Keep the conversation grounded in your context."
-        summary="Bring the workflow, source permissions and deployment boundaries you need to evaluate."
+        title="See it on an incident like yours"
+        summary="Tell us which tools your team uses and we’ll walk through an incident end to end."
         href="/demo"
         label="Request a demo"
       />

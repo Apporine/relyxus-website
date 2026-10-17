@@ -1,17 +1,27 @@
-import { Route, Switch } from "wouter";
+import { Redirect, Route, Switch } from "wouter";
 import { lazy, Suspense } from "react";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { PublicLayout } from "@/components/marketing/PublicSite";
 const Home = lazy(() => import("@/pages/Home"));
 const ProductPage = lazy(() =>
-  import("@/pages/MarketingPages").then(module => ({
+  import("@/pages/CorePages").then(module => ({
     default: module.ProductPage,
   }))
 );
+const SecurityPage = lazy(() =>
+  import("@/pages/CorePages").then(module => ({
+    default: module.SecurityPage,
+  }))
+);
 const CompanyPage = lazy(() =>
-  import("@/pages/MarketingPages").then(module => ({
+  import("@/pages/CorePages").then(module => ({
     default: module.CompanyPage,
+  }))
+);
+const FinancialServicesPage = lazy(() =>
+  import("@/pages/CorePages").then(module => ({
+    default: module.FinancialServicesPage,
   }))
 );
 const LegalPage = lazy(() =>
@@ -19,24 +29,9 @@ const LegalPage = lazy(() =>
     default: module.LegalPage,
   }))
 );
-const FinancialServicesPage = lazy(() =>
-  import("@/pages/MarketingPages").then(module => ({
-    default: module.FinancialServicesPage,
-  }))
-);
 const ContactPage = lazy(() =>
   import("@/pages/MarketingPages").then(module => ({
     default: module.ContactPage,
-  }))
-);
-const IntegrationDetail = lazy(() =>
-  import("@/pages/Integrations").then(module => ({
-    default: module.IntegrationDetail,
-  }))
-);
-const IntegrationsPage = lazy(() =>
-  import("@/pages/Integrations").then(module => ({
-    default: module.IntegrationsPage,
   }))
 );
 const ResourceArticle = lazy(() =>
@@ -51,21 +46,6 @@ const ResourcesPage = lazy(() =>
 );
 const DemoPage = lazy(() =>
   import("@/pages/Demo").then(module => ({ default: module.DemoPage }))
-);
-const DeploymentPage = lazy(() =>
-  import("@/pages/Deployment").then(module => ({
-    default: module.DeploymentPage,
-  }))
-);
-const ReplayPage = lazy(() =>
-  import("@/pages/EvaluationPages").then(module => ({
-    default: module.ReplayPage,
-  }))
-);
-const PricingPage = lazy(() =>
-  import("@/pages/EvaluationPages").then(module => ({
-    default: module.PricingPage,
-  }))
 );
 const NotFound = lazy(() => import("@/pages/NotFound"));
 
@@ -85,6 +65,18 @@ function WithLayout({ children }: { children: React.ReactNode }) {
   );
 }
 
+/** Pages folded into /product, /security or the demo form. */
+const retired: [string, string][] = [
+  ["/product/investigation", "/product"],
+  ["/product/governed-actions", "/product"],
+  ["/product/reporting", "/product"],
+  ["/deployment", "/security"],
+  ["/integrations", "/security"],
+  ["/integrations/:slug", "/security"],
+  ["/replay", "/demo?type=Replay%20pilot"],
+  ["/pricing", "/demo?type=Pricing"],
+];
+
 function Router() {
   return (
     <Switch>
@@ -95,61 +87,24 @@ function Router() {
       </Route>
       <Route path="/product">
         <WithLayout>
-          <ProductPage page="overview" />
-        </WithLayout>
-      </Route>
-      <Route path="/product/investigation">
-        <WithLayout>
-          <ProductPage page="investigation" />
-        </WithLayout>
-      </Route>
-      <Route path="/product/governed-actions">
-        <WithLayout>
-          <ProductPage page="governed-actions" />
-        </WithLayout>
-      </Route>
-      <Route path="/product/reporting">
-        <WithLayout>
-          <ProductPage page="reporting" />
-        </WithLayout>
-      </Route>
-      <Route path="/deployment">
-        <WithLayout>
-          <DeploymentPage />
+          <ProductPage />
         </WithLayout>
       </Route>
       <Route path="/security">
         <WithLayout>
-          <ProductPage page="security" />
+          <SecurityPage />
         </WithLayout>
-      </Route>
-      <Route path="/integrations">
-        <WithLayout>
-          <IntegrationsPage />
-        </WithLayout>
-      </Route>
-      <Route path="/integrations/:slug">
-        {params => (
-          <WithLayout>
-            <IntegrationDetail slug={params.slug} />
-          </WithLayout>
-        )}
       </Route>
       <Route path="/solutions/financial-services">
         <WithLayout>
           <FinancialServicesPage />
         </WithLayout>
       </Route>
-      <Route path="/replay">
-        <WithLayout>
-          <ReplayPage />
-        </WithLayout>
-      </Route>
-      <Route path="/pricing">
-        <WithLayout>
-          <PricingPage />
-        </WithLayout>
-      </Route>
+      {retired.map(([from, to]) => (
+        <Route path={from} key={from}>
+          <Redirect to={to} replace />
+        </Route>
+      ))}
       <Route path="/demo">
         <WithLayout>
           <DemoPage />

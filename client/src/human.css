@@ -587,3 +587,113 @@ body,
     animation: none;
   }
 }
+
+/* ---------- Inner pages ---------- */
+.hx-sub {
+  margin: 12px 0 28px;
+  color: var(--hx-muted) !important;
+}
+.hx-screens {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 32px;
+}
+.hx-screen {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--hx-border);
+  border-radius: var(--hx-radius);
+  background: #05070f;
+}
+.hx-screen img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.hx-screen figcaption {
+  display: grid;
+  gap: 2px;
+  padding: 14px 18px;
+  border-top: 1px solid var(--hx-border);
+  color: var(--hx-muted);
+  font-size: 14px;
+}
+.hx-screen figcaption strong {
+  color: var(--hx-text);
+}
+.hx-commitments {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.hx-commitments article {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  padding: 28px;
+  border: 1px solid var(--hx-border);
+  border-radius: var(--hx-radius);
+  background: var(--hx-card);
+}
+.hx-commitments svg {
+  color: var(--hx-mint);
+}
+.hx-commitments h3 {
+  margin: 0;
+  color: var(--hx-text) !important;
+  font-size: 22px;
+  line-height: 1.2;
+}
+.hx-commitments p {
+  margin: 0;
+  color: var(--hx-muted) !important;
+}
+.hx-tabs {
+  display: inline-flex;
+  gap: 4px;
+  margin-bottom: 36px;
+  padding: 4px;
+  border: 1px solid var(--hx-border);
+  border-radius: 999px;
+}
+.hx-tabs button {
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--hx-muted);
+  font-weight: 700;
+  cursor: pointer;
+}
+.hx-tabs button[aria-pressed="true"] {
+  background: var(--hx-mint);
+  color: #04120d;
+}
+.hx-perspective {
+  display: grid;
+  gap: 16px;
+  max-width: 720px;
+}
+.hx-perspective p {
+  margin: 0;
+  color: var(--hx-muted) !important;
+  font-size: 18px !important;
+}
+.hx-inline-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px !important;
+}
+@media (max-width: 900px) {
+  .hx-screens,
+  .hx-commitments {
+    grid-template-columns: 1fr;
+  }
+}
+.hx-resource-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+}

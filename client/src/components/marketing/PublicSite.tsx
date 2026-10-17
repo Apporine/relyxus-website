@@ -31,7 +31,7 @@ export function PageMeta({
       window.location.pathname,
       window.location.origin
     ).href;
-    const imageUrl = new URL("/Icon.png", window.location.origin).href;
+    const imageUrl = new URL("/og-cover.png", window.location.origin).href;
 
     document.title = fullTitle;
     document.documentElement.lang = "en";

@@ -3849,26 +3849,10 @@ svg {
   color: #465774;
   font-size: 12px;
 }
-.footer-group-accordion a,
-.footer-bottom-links button,
+.footer-legal button,
 .perspective-jumps a,
 .contact-option-grid a {
   min-height: 44px;
-}
-.footer-bottom-links button {
-  display: inline-flex;
-  align-items: center;
-  padding-inline: 0;
-  color: inherit;
-  border: 0;
-  background: transparent;
-  font: inherit;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  cursor: pointer;
-}
-.footer-bottom-links button:hover {
-  color: #fff;
 }
 .walkthrough-step:focus-visible,
 .deployment-tabs button:focus-visible,
@@ -3886,11 +3870,6 @@ svg {
 .source-detail summary:focus-visible {
   outline-offset: 2px;
 }
-@media (max-width: 900px) {
-  .footer-group-accordion a {
-    min-height: 44px;
-  }
-}
 @media (max-width: 640px) {
   .hero-layout {
     grid-template-columns: minmax(0, 1fr);
@@ -3903,16 +3882,5 @@ svg {
   }
   .walkthrough-step-list {
     display: block;
-  }
-  .footer-bottom-links {
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px 13px;
-  }
-  .footer-bottom-links > a,
-  .footer-bottom-links button {
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
   }
 }

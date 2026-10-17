@@ -14,6 +14,7 @@ import {
   proofPoints,
   regulatoryClocks,
   regulatorySources,
+  replayExplainer,
 } from "@/content/site";
 import { track } from "@/lib/analytics";
 import { pageMeta } from "@/content/meta";
@@ -27,21 +28,16 @@ function Hero() {
             For incident, SRE and resilience teams at regulated firms
           </span>
           <h1>
-            Find the cause of a payments incident, with every step{" "}
-            <em>on the record.</em>
+            Know why payments failed <em>before the regulator asks.</em>
           </h1>
-          <p className="hx-lede">
-            Relyxus pulls evidence from the tools you already run into one
-            investigation. Nothing changes in your systems until the right
-            people approve it.
-          </p>
+          <p className="hx-lede">{pageMeta["/"].body}</p>
           <div className="hx-actions">
             <Link
               href="/demo"
               className="button button-primary"
               onClick={() => track("cta_click", { place: "hero", cta: "demo" })}
             >
-              Request a demo <ArrowRight size={16} aria-hidden="true" />
+              Book a 30-minute demo <ArrowRight size={16} aria-hidden="true" />
             </Link>
             <a
               href="#in-action"
@@ -50,7 +46,7 @@ function Hero() {
                 track("cta_click", { place: "hero", cta: "see-it" })
               }
             >
-              See it in action
+              Watch an incident unfold
             </a>
           </div>
         </div>
@@ -65,7 +61,7 @@ function PathCards() {
     <section className="hx-section" aria-labelledby="hx-path-title">
       <div className="container">
         <h2 id="hx-path-title" className="hx-h2">
-          Start where your job starts
+          One incident. Three teams who have to answer for it.
         </h2>
         <div className="hx-paths">
           {pathCards.map(card => (
@@ -96,10 +92,12 @@ function InAction() {
     <section className="hx-action" id="in-action">
       <div className="container">
         <div className="hx-action-head">
-          <h2 className="hx-h2">One screen from first alert to approval</h2>
+          <h2 className="hx-h2">
+            Everyone on the incident, looking at the same facts
+          </h2>
           <p>
-            The command centre shows what is happening, who owns it and what is
-            waiting on a decision.
+            Who owns it, what it costs, and what is waiting on a decision, on
+            one screen.
           </p>
         </div>
         <figure className="hx-shot">
@@ -124,7 +122,7 @@ function Outcomes() {
   return (
     <section className="hx-section product-explorer-section">
       <div className="container">
-        <h2 className="hx-h2">What your team gets</h2>
+        <h2 className="hx-h2">What changes in your next incident</h2>
         <OutcomeStage />
       </div>
     </section>
@@ -136,9 +134,9 @@ function Proof() {
   return (
     <section className="hx-section hx-proof">
       <div className="container">
-        <h2 className="hx-h2">See Relyxus at work</h2>
+        <h2 className="hx-h2">What your team sees at 3am</h2>
         <p className="hx-sub">
-          The screens your team would use during an incident.
+          The three screens the whole team works from during an incident.
         </p>
         <ul className="hx-proof-list">
           {proofPoints.map(point => (
@@ -158,8 +156,9 @@ function Proof() {
             </li>
           ))}
         </ul>
+        <p className="hx-replay-note">{replayExplainer}</p>
         <TextLink href="/demo?type=Replay%20pilot">
-          Talk to us about a Replay pilot
+          Try it on incidents you’ve already closed
         </TextLink>
       </div>
     </section>
@@ -213,8 +212,8 @@ function LeadMagnet() {
               Incident-readiness checklist for regulated teams
             </h2>
             <p>
-              Check your evidence, ownership and record-keeping before the next
-              incident rather than during it.
+              Are you ready for your next major incident? Check your evidence,
+              ownership and record-keeping before it happens, not during it.
             </p>
           </div>
           <PrimaryLink href="/demo?type=Readiness%20checklist">
@@ -230,7 +229,17 @@ function ClosingBand() {
   return (
     <section className="hx-closing">
       <div className="container hx-closing-grid">
-        <h2 className="hx-h2">Book a demo or start a Replay pilot</h2>
+        <div>
+          <h2 className="hx-h2">
+            Show us the incident that hurt most. We’ll show you how Relyxus
+            would have handled it.
+          </h2>
+          <p className="hx-closing-note">
+            Prefer to test it yourself?{" "}
+            <Link href="/demo?type=Replay%20pilot">Start a Replay pilot</Link>.
+            We replay a few past incidents with read-only access.
+          </p>
+        </div>
         <div className="hx-actions">
           <Link
             href="/demo"
@@ -239,7 +248,7 @@ function ClosingBand() {
               track("cta_click", { place: "closing", cta: "demo" })
             }
           >
-            Request a demo <ArrowRight size={16} aria-hidden="true" />
+            Book a 30-minute demo <ArrowRight size={16} aria-hidden="true" />
           </Link>
           <Link href="/security" className="hx-quiet-link">
             <ShieldCheck size={16} aria-hidden="true" /> Read the security

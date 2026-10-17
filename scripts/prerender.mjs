@@ -7,7 +7,6 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-const TAB_TITLE = "r e l y x u s";
 const dist = path.resolve(import.meta.dirname, "../dist/public");
 // SITE_URL wins; on Vercel fall back to the production domain it exposes.
 const siteUrl = (
@@ -26,7 +25,9 @@ const meta = JSON.parse(
 );
 const pages = Object.entries(meta).map(([route, copy]) => ({
   path: route,
-  title: `${copy.title} | Relyxus`,
+  title: copy.title.includes("Relyxus")
+    ? copy.title
+    : `${copy.title} | Relyxus`,
   description: copy.description,
   h1: copy.h1,
   body: copy.body,
@@ -65,7 +66,7 @@ for (const page of pages) {
   let html = template;
   html = html.replace(
     /<title>[\s\S]*?<\/title>/,
-    `<title>${TAB_TITLE}</title>`
+    `<title>${esc(page.title)}</title>`
   );
   html = setMeta(html, "name", "description", page.description);
   html = setMeta(html, "property", "og:title", page.title);

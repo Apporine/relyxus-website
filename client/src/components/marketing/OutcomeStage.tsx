@@ -218,10 +218,10 @@ function RecordScene() {
 const scenes = [CauseScene, ActionScene, RecordScene];
 
 const nodes = [
-  { x: 70, label: "Your tools" },
-  { x: 290, label: "Investigate" },
-  { x: 510, label: "Approve" },
-  { x: 730, label: "Record" },
+  { x: 70, label: "No new tools" },
+  { x: 290, label: "Cause first" },
+  { x: 510, label: "Safe approvals" },
+  { x: 730, label: "Report ready" },
 ] as const;
 
 export function OutcomeStage() {
@@ -275,7 +275,7 @@ export function OutcomeStage() {
         className="hx-pipeline"
         viewBox="0 0 800 130"
         role="group"
-        aria-label="Workflow: your tools, investigate, approve, record"
+        aria-label="Workflow: no new tools, cause first, safe approvals, report ready"
       >
         <path className="hx-lane" d="M70 50 H730" />
         <path

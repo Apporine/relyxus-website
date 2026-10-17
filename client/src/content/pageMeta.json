@@ -1,9 +1,9 @@
 {
   "/": {
-    "title": "Find the cause of an incident, with every step on the record",
-    "description": "Relyxus pulls evidence from your existing tools into one investigation for incident, SRE and resilience teams. Nothing runs until the right people approve it.",
-    "h1": "Find the cause of a payments incident, with every step on the record.",
-    "body": "Relyxus pulls evidence from the tools you already run into one investigation. Nothing changes in your systems until the right people approve it."
+    "title": "Relyxus — Find the cause of payments incidents, with an audit-ready record",
+    "description": "Relyxus pulls logs, changes and alerts from the tools you already run, points to the likely cause, and writes the audit record as you work. Nothing changes in your systems until your approvers say yes.",
+    "h1": "Know why payments failed before the regulator asks.",
+    "body": "Relyxus pulls logs, changes and alerts from the tools you already run, points to the likely cause, and writes the audit record as you work. Nothing changes in your systems until your approvers say yes."
   },
   "/product": {
     "title": "Product",
@@ -15,7 +15,7 @@
     "title": "Security",
     "description": "Read-only by default, your data stays in your environment, and a person approves every action. Request the security pack for detail.",
     "h1": "Made for your security review",
-    "body": "Three commitments up front. The detail goes to your reviewers in the security pack."
+    "body": "Three commitments your reviewers can test. The full detail is in the security pack."
   },
   "/solutions/financial-services": {
     "title": "Financial services",
@@ -25,14 +25,14 @@
   },
   "/resources": {
     "title": "Resources",
-    "description": "Short reads for incident, SRE and resilience teams at regulated firms, plus guides we share in an evaluation.",
-    "h1": "Short reads for teams who run incidents",
-    "body": "One guide you can read now, and two we share when you start an evaluation."
+    "description": "Practical guides for regulated incident teams: DORA reporting, post-incident reports and controlled incident response.",
+    "h1": "Practical guides for regulated incident teams",
+    "body": "Start with the free guides. Two deeper guides are shared during an evaluation."
   },
   "/resources/what-makes-incident-response-controlled": {
-    "title": "What makes incident response controlled?",
+    "title": "Controlled incident response: 4 things to separate before you automate",
     "description": "A good incident workflow keeps a clear line between what the evidence suggests and what a person is allowed to change.",
-    "h1": "What makes incident response controlled?",
+    "h1": "Controlled incident response: 4 things to separate before you automate",
     "body": "A good incident workflow keeps a clear line between what the evidence suggests and what a person is allowed to change."
   },
   "/demo": {
@@ -44,13 +44,13 @@
   "/company": {
     "title": "Company",
     "description": "Relyxus is built by Apporine for incident, SRE and resilience teams at regulated firms.",
-    "h1": "We build Relyxus at Apporine",
+    "h1": "Incident response you can explain to anyone",
     "body": "We make incident response easier to explain, for the teams who have to explain it."
   },
   "/contact": {
     "title": "Contact",
     "description": "Talk to the Relyxus team about a demo, a Replay pilot, the security pack or pricing.",
-    "h1": "Pick a topic and we’ll take it from there",
+    "h1": "Talk to the team behind Relyxus",
     "body": "Choose what you want to talk about. We read every note and reply by email."
   },
   "/privacy": {
@@ -64,5 +64,17 @@
     "description": "Terms for evaluating Relyxus and using this website.",
     "h1": "Terms for this website",
     "body": "This site helps you evaluate Relyxus. Formal contract terms are agreed separately for paid engagements."
+  },
+  "/resources/dora-major-incident-reports": {
+    "title": "DORA major incident reports: what to have ready for each deadline",
+    "description": "The three DORA reporting stages, and what to capture while a major incident is still running.",
+    "h1": "DORA major incident reports: what to have ready for each deadline",
+    "body": "Under DORA, a major ICT-related incident is reported in stages. Knowing what each stage needs before an incident starts makes the clock far easier to live with."
+  },
+  "/resources/post-incident-report-audit": {
+    "title": "A post-incident report that stands up to audit",
+    "description": "Five sections every post-incident report needs, and the evidence that belongs behind each one.",
+    "h1": "A post-incident report that stands up to audit",
+    "body": "A report is useful when someone who wasn’t there can follow what happened, what was decided and why."
   }
 }

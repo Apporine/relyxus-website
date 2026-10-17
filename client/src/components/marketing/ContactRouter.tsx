@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Check, Mail, Pause, Play } from "lucide-react";
+import { Check, Mail, Pause, Play, Users } from "lucide-react";
 import { PrimaryLink } from "@/components/marketing/PublicSite";
 import { contactTopics } from "@/content/site";
 
@@ -61,8 +61,11 @@ export function ContactRouter() {
                 {on && <path className="hx-flow cr-flow" d={beam(index)} />}
                 <rect x="20" y={y} width="200" height="54" rx="27" />
                 <circle cx="48" cy={y + 27} r="7" />
-                <text x="68" y={y + 32}>
+                <text x="68" y={y + 25}>
                   {item.label}
+                </text>
+                <text className="cr-hint" x="68" y={y + 43}>
+                  {item.hint}
                 </text>
               </g>
             );
@@ -84,29 +87,17 @@ export function ContactRouter() {
           <path className="hx-lane" d={REPLY} />
           <circle className="cr-halo" cx={TEAM.x} cy={TEAM.y} r="72" />
           <circle className="cr-team" cx={TEAM.x} cy={TEAM.y} r="52" />
-          <text
-            className="cr-team-text"
-            x={TEAM.x}
-            y={TEAM.y - 2}
-            textAnchor="middle"
-          >
-            Relyxus
-          </text>
-          <text
-            className="cr-team-sub"
-            x={TEAM.x}
-            y={TEAM.y + 16}
-            textAnchor="middle"
-          >
-            TEAM
-          </text>
+          <Users
+            className="cr-team-icon"
+            x={TEAM.x - 20}
+            y={TEAM.y - 20}
+            width={40}
+            height={40}
+          />
 
           <g className="cr-reply">
             <circle cx="650" cy="180" r="34" />
             <Mail x={638} y={168} width={24} height={24} />
-            <text x="650" y="236" textAnchor="middle">
-              Reply by email
-            </text>
           </g>
         </svg>
         <button

@@ -487,6 +487,10 @@ export function DemoPage() {
                 respond to this enquiry. See our{" "}
                 <a href="/privacy">privacy policy</a> for more information.
               </p>
+              <p className="demo-reply-note">
+                Your note goes straight to the Relyxus team, and we reply by
+                email.
+              </p>
               <button
                 type="submit"
                 className="button button-primary demo-submit"

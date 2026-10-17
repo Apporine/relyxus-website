@@ -12,7 +12,6 @@ import {
 import {
   DEFAULT_KEYWORDS,
   SITE_NAME,
-  TAB_TITLE,
   upsertJsonLd,
   upsertLink,
   upsertMeta,
@@ -31,9 +30,10 @@ export function PageMeta({
 }) {
   useEffect(() => {
     const normalized = title.trim();
-    const fullTitle =
-      !normalized || normalized.toLowerCase() === SITE_NAME.toLowerCase()
-        ? SITE_NAME
+    const fullTitle = !normalized
+      ? SITE_NAME
+      : normalized.toLowerCase().includes(SITE_NAME.toLowerCase())
+        ? normalized
         : `${normalized} | ${SITE_NAME}`;
     const canonicalUrl = new URL(
       window.location.pathname,
@@ -41,8 +41,7 @@ export function PageMeta({
     ).href;
     const imageUrl = new URL("/og-cover.png", window.location.origin).href;
 
-    // The browser tab shows only the product name, as in the navbar.
-    document.title = TAB_TITLE;
+    document.title = fullTitle;
     document.documentElement.lang = "en";
 
     upsertMeta("name", "description", description);
@@ -579,7 +578,7 @@ export function DataBand({
   title,
   items,
   sources,
-  note = "Public figures; check the latest edition.",
+  note = "",
 }: {
   title: string;
   items: readonly DataPoint[];
@@ -608,7 +607,7 @@ export function DataBand({
               </a>
             </span>
           ))}
-          . {note}
+          {note ? `. ${note}` : ""}
         </p>
       </div>
     </section>

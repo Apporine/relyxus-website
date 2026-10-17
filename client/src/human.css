@@ -2684,3 +2684,41 @@ html[data-motion="off"] .hx-scene-draw {
     grid-template-columns: 1fr;
   }
 }
+
+/* ---------- Content audit additions ---------- */
+.hx-lead-heading {
+  max-width: 760px;
+  margin-bottom: 28px;
+}
+.hx-replay-note,
+.hx-closing-note {
+  max-width: 680px;
+  margin: 20px 0 12px;
+  color: var(--hx-muted) !important;
+  font-size: 16px !important;
+}
+.hx-closing-note a {
+  color: var(--hx-mint);
+}
+.hx-closing-grid h2 {
+  max-width: 760px;
+}
+.hx-fact-payoff {
+  color: var(--hx-text);
+  font-size: 15px;
+  font-weight: 600;
+}
+.cr-hint {
+  fill: var(--hx-muted) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+}
+.cr-team-icon {
+  color: var(--hx-mint);
+  stroke: var(--hx-mint);
+}
+.demo-reply-note {
+  margin: 4px 0 0;
+  color: var(--hx-muted);
+  font-size: 14px;
+}

@@ -7,6 +7,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
+const TAB_TITLE = "r e l y x u s";
 const dist = path.resolve(import.meta.dirname, "../dist/public");
 // SITE_URL wins; on Vercel fall back to the production domain it exposes.
 const siteUrl = (
@@ -62,7 +63,10 @@ function setMeta(html, attr, key, content) {
 
 for (const page of pages) {
   let html = template;
-  html = html.replace(/<title>[\s\S]*?<\/title>/, "<title>relyxus</title>");
+  html = html.replace(
+    /<title>[\s\S]*?<\/title>/,
+    `<title>${TAB_TITLE}</title>`
+  );
   html = setMeta(html, "name", "description", page.description);
   html = setMeta(html, "property", "og:title", page.title);
   html = setMeta(html, "property", "og:description", page.description);

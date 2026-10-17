@@ -1,4 +1,6 @@
 export const SITE_NAME = "Relyxus";
+/** Browser tab text: the wordmark, letter-spaced with hair spaces like the navbar. */
+export const TAB_TITLE = "r e l y x u s";
 export const DEFAULT_DESCRIPTION =
   "Relyxus helps regulated teams investigate incidents with evidence in one place and keep proposed actions behind policy and human approval.";
 export const DEFAULT_KEYWORDS = [

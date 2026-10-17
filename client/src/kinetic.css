@@ -572,6 +572,7 @@ body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSyst
 .public-site .contact-option-grid h2 { color: #f1f4fb !important; }
 .public-site .contact-option-grid p { color: #b4bfd2 !important; }
 .public-site .contact-option-grid a { color: var(--rx-web-action); }
+.public-site .contact-email-link { color: var(--rx-web-action); }
 .public-site .contact-caveat { color: #aeb9cc; }
 .public-site .legal-copy { color: #e7ecf6; background: #0d101a !important; }
 .public-site .legal-copy-inner h2 { color: #f0f4fb !important; }

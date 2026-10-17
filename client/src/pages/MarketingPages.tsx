@@ -1,7 +1,8 @@
-import { ArrowRight, Check, CircleAlert, FileText, Fingerprint, Gauge, ShieldCheck, UsersRound } from "lucide-react";
+import { ArrowRight, Check, CircleAlert, FileText, Fingerprint, Gauge, Mail, ShieldCheck, UsersRound } from "lucide-react";
 import { Link } from "wouter";
 import { PageMeta, PageIntro, SectionTitle, TextLink, PrimaryLink, ActionBand, InlineAvailability } from "@/components/marketing/PublicSite";
 import { ProductExplorer } from "@/components/marketing/Explorers";
+import { CONTACT_RECIPIENTS } from "@shared/contact";
 
 type ProductRoute = "overview" | "investigation" | "governed-actions" | "reporting" | "security";
 const productCopy: Record<Exclude<ProductRoute, "security">, { eyebrow: string; title: string; summary: string; question: string; mechanism: string; limitation: string; next: { label: string; href: string } }> = {
@@ -75,7 +76,58 @@ export function CompanyPage() {
 }
 
 export function ContactPage() {
-  return <><PageMeta title="Contact" description="Contact and enquiry routing for Relyxus. The preview form is not connected to an inbox." /><PageIntro eyebrow="CONTACT / ROUTING" title="The right conversation starts with the right route." summary="Choose the topic that best fits your evaluation. The enquiry form on this preview is not connected to a sales or support inbox." tone="blue"><PrimaryLink href="/demo">Open the enquiry preview</PrimaryLink></PageIntro><section className="contact-options section-pad"><div className="container contact-option-grid"><article><span>01 / EVALUATION</span><h2>Demo or Replay pilot</h2><p>Describe the workflow or historical incidents you would want to evaluate. Preview-only: details are not sent.</p><Link href="/demo?type=Replay%20pilot">Choose a pilot enquiry <ArrowRight size={15} /></Link></article><article><span>02 / ARCHITECTURE</span><h2>Deployment or pricing</h2><p>Review operating boundaries and commercial-scope questions. No quote, availability or meeting is confirmed here.</p><Link href="/demo?type=Deployment">Choose a deployment enquiry <ArrowRight size={15} /></Link></article></div><p className="container contact-caveat">No public email, telephone number, office location, support portal or response-time commitment was supplied for this site.</p></section></>;
+  return (
+    <>
+      <PageMeta
+        title="Contact"
+        description="Contact Relyxus for a demo, Replay pilot, deployment discussion or pricing conversation. Enquiries go to the Apporine team."
+      />
+      <PageIntro
+        eyebrow="CONTACT / TEAM"
+        title="Talk to the people behind Relyxus."
+        summary="Use the enquiry form or email us directly. Messages reach the Apporine team that looks after Relyxus."
+        tone="blue"
+      >
+        <PrimaryLink href="/demo">Send an enquiry</PrimaryLink>
+      </PageIntro>
+      <section className="contact-options section-pad">
+        <div className="container contact-option-grid">
+          <article>
+            <span>01 / EVALUATION</span>
+            <h2>Demo or Replay pilot</h2>
+            <p>Tell us about the workflow or historical incidents you’d like to walk through together.</p>
+            <Link href="/demo?type=Replay%20pilot">
+              Start a pilot enquiry <ArrowRight size={15} />
+            </Link>
+          </article>
+          <article>
+            <span>02 / ARCHITECTURE</span>
+            <h2>Deployment or pricing</h2>
+            <p>Ask about operating boundaries, hosting options or what shapes a commercial discussion.</p>
+            <Link href="/demo?type=Deployment">
+              Start a deployment enquiry <ArrowRight size={15} />
+            </Link>
+          </article>
+          <article>
+            <span>03 / DIRECT EMAIL</span>
+            <h2>Prefer to write us yourself?</h2>
+            <p>These inboxes receive website enquiries and replies come from the same team.</p>
+            <div className="contact-email-list">
+              {CONTACT_RECIPIENTS.map((email) => (
+                <a key={email} href={`mailto:${email}`} className="contact-email-link">
+                  <Mail size={15} aria-hidden="true" />
+                  {email}
+                </a>
+              ))}
+            </div>
+          </article>
+        </div>
+        <p className="container contact-caveat">
+          We aim to reply as soon as we can. Please avoid sending credentials or sensitive incident data by email.
+        </p>
+      </section>
+    </>
+  );
 }
 
 export function LegalPage({ page }: { page: "privacy" | "terms" | "accessibility" }) {

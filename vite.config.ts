@@ -168,7 +168,63 @@ function vitePluginPublicPlatformConfig(): Plugin {
   };
 }
 
-const plugins = [vitePluginPublicPlatformConfig(), react(), tailwindcss(), jsxLocPlugin(), vitePluginManusDebugCollector()];
+function vitePluginContactApi(): Plugin {
+  return {
+    name: "relyxus-contact-api",
+    configureServer(server) {
+      server.middlewares.use("/api/contact", async (req, res, next) => {
+        if (req.method !== "POST") {
+          next();
+          return;
+        }
+
+        const chunks: Buffer[] = [];
+        req.on("data", (chunk) => chunks.push(Buffer.from(chunk)));
+        req.on("end", async () => {
+          try {
+            const { deliverContactEmail, validateContactPayload } = await import("./shared/contact");
+            const raw = Buffer.concat(chunks).toString("utf8");
+            const body = raw ? JSON.parse(raw) : {};
+            const validated = validateContactPayload(body);
+            res.setHeader("Content-Type", "application/json");
+            res.setHeader("Cache-Control", "no-store");
+            if (!validated.ok) {
+              res.statusCode = 400;
+              res.end(JSON.stringify({ ok: false, errors: validated.errors }));
+              return;
+            }
+            const result = await deliverContactEmail(validated.data);
+            if (!result.ok) {
+              res.statusCode = 502;
+              res.end(JSON.stringify({ ok: false, error: result.error }));
+              return;
+            }
+            res.statusCode = 200;
+            res.end(JSON.stringify({ ok: true, provider: result.provider }));
+          } catch (error) {
+            res.statusCode = 500;
+            res.setHeader("Content-Type", "application/json");
+            res.end(
+              JSON.stringify({
+                ok: false,
+                error: error instanceof Error ? error.message : "Unexpected delivery error",
+              })
+            );
+          }
+        });
+      });
+    },
+  };
+}
+
+const plugins = [
+  vitePluginPublicPlatformConfig(),
+  vitePluginContactApi(),
+  react(),
+  tailwindcss(),
+  jsxLocPlugin(),
+  vitePluginManusDebugCollector(),
+];
 
 export default defineConfig({
   plugins,

@@ -40,7 +40,7 @@ export const navGroups: NavGroup[] = [
     label: "Company",
     items: [
       { label: "About Relyxus", href: "/company", description: "The product and its operating principles." },
-      { label: "Contact", href: "/contact", description: "See the current enquiry boundary." },
+      { label: "Contact", href: "/contact", description: "Email the team or send an enquiry." },
       { label: "Accessibility", href: "/accessibility", description: "Read the accessibility approach." },
     ],
   },

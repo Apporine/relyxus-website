@@ -3152,3 +3152,55 @@ body {
   margin-top: 24px;
   font-size: 18px;
 }
+
+/* Navbar: hover and selected states use Support orange. */
+.public-site .nav-trigger:hover,
+.public-site .nav-trigger:focus-visible,
+.public-site .nav-trigger[aria-expanded="true"],
+.public-site .nav-item.is-open .nav-trigger {
+  color: var(--hx-support) !important;
+  border-color: var(--hx-support) !important;
+}
+.public-site .nav-popover-head {
+  border-bottom-color: var(--hx-border) !important;
+}
+.public-site .nav-popover-link {
+  color: var(--hx-text);
+  border-color: transparent;
+}
+.public-site .nav-popover-link small {
+  color: var(--hx-muted) !important;
+}
+.public-site .nav-popover-link:hover,
+.public-site .nav-popover-link:focus-visible {
+  background: rgba(255, 105, 77, 0.12) !important;
+  border-color: var(--hx-support) !important;
+  color: var(--hx-text) !important;
+}
+.public-site .nav-popover-link:hover strong,
+.public-site .nav-popover-link:focus-visible strong,
+.public-site .nav-popover-link:hover svg,
+.public-site .nav-popover-link:focus-visible svg {
+  color: var(--hx-support) !important;
+}
+.public-site .nav-popover-link:hover small,
+.public-site .nav-popover-link:focus-visible small {
+  color: var(--hx-muted) !important;
+}
+.public-site .mobile-nav-group summary:hover,
+.public-site .mobile-nav-group[open] > summary,
+.public-site .mobile-nav-group-links a:hover,
+.public-site .mobile-nav-group-links a:focus-visible {
+  color: var(--hx-support) !important;
+}
+.public-site .mobile-nav-group[open] > summary svg,
+.public-site .mobile-nav-group summary:hover svg {
+  color: var(--hx-support) !important;
+}
+
+.public-site .nav-trigger:hover .nav-chevron,
+.public-site .nav-trigger[aria-expanded="true"] .nav-chevron,
+.public-site .nav-item.is-open .nav-chevron {
+  color: var(--hx-support) !important;
+  stroke: var(--hx-support) !important;
+}

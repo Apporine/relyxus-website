@@ -2677,3 +2677,10 @@ html[data-motion="off"] .hx-scene-draw {
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 900px) {
+  .mobile-nav-group-links {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}

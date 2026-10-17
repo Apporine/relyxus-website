@@ -8,6 +8,7 @@ import {
   ShieldCheck,
   UsersRound,
 } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Link } from "wouter";
 import {
   PageMeta,
@@ -19,6 +20,145 @@ import {
   InlineAvailability,
 } from "@/components/marketing/PublicSite";
 import { ProductExplorer } from "@/components/marketing/Explorers";
+
+const productSurfaces = [
+  {
+    key: "command",
+    label: "Command Centre",
+    caption: "See what needs attention before the queue grows.",
+    src: "/product/overview-command-centre.png",
+    width: 1024,
+    height: 728,
+  },
+  {
+    key: "incidents",
+    label: "Incidents",
+    caption: "Keep severity, impact and ownership in one list.",
+    src: "/product/overview-incidents.png",
+    width: 1024,
+    height: 728,
+  },
+  {
+    key: "investigation",
+    label: "Investigation",
+    caption: "Ranked hypotheses stay tied to supporting evidence.",
+    src: "/product/overview-investigation.png",
+    width: 1024,
+    height: 728,
+  },
+  {
+    key: "approvals",
+    label: "Approvals",
+    caption: "Policy, consequence and human approval stay visible.",
+    src: "/product/overview-approvals.png",
+    width: 1024,
+    height: 728,
+  },
+  {
+    key: "services",
+    label: "Services",
+    caption: "Move from an incident to the dependency map.",
+    src: "/product/overview-services.png",
+    width: 1024,
+    height: 728,
+  },
+] as const;
+
+function ProductSurfaceShowcase() {
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const current = productSurfaces[active];
+
+  useEffect(() => {
+    if (paused) return;
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+    const timer = window.setInterval(() => {
+      setActive(index => (index + 1) % productSurfaces.length);
+    }, 4200);
+    return () => window.clearInterval(timer);
+  }, [paused]);
+
+  return (
+    <div
+      className="product-showcase"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocusCapture={() => setPaused(true)}
+      onBlurCapture={event => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+          setPaused(false);
+        }
+      }}
+    >
+      <div
+        className="product-showcase-tabs"
+        role="tablist"
+        aria-label="Product surfaces"
+      >
+        {productSurfaces.map((item, index) => (
+          <button
+            key={item.key}
+            type="button"
+            role="tab"
+            id={`product-surface-tab-${item.key}`}
+            aria-selected={active === index}
+            aria-controls="product-surface-panel"
+            className={active === index ? "is-active" : undefined}
+            onClick={() => setActive(index)}
+          >
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            {item.label}
+          </button>
+        ))}
+      </div>
+
+      <div
+        className="product-showcase-stage"
+        id="product-surface-panel"
+        role="tabpanel"
+        aria-labelledby={`product-surface-tab-${current.key}`}
+      >
+        {productSurfaces.map((item, index) => {
+          const offset = index - active;
+          const wrapped =
+            ((offset % productSurfaces.length) + productSurfaces.length) %
+            productSurfaces.length;
+          const layer =
+            wrapped === 0 ? "is-front" : wrapped === 1 ? "is-mid" : "is-back";
+          const visible = wrapped <= 2;
+          return (
+            <figure
+              key={item.key}
+              className={`product-showcase-card ${layer}${
+                visible ? " is-visible" : ""
+              }`}
+              data-active={active === index ? "true" : "false"}
+              aria-hidden={active !== index}
+            >
+              <img
+                src={item.src}
+                alt={active === index ? `${item.label}: ${item.caption}` : ""}
+                width={item.width}
+                height={item.height}
+                loading={index === 0 ? "eager" : "lazy"}
+                decoding="async"
+              />
+            </figure>
+          );
+        })}
+        <p className="product-showcase-caption" aria-live="polite">
+          <strong>{current.label}</strong>
+          <span>{current.caption}</span>
+        </p>
+      </div>
+    </div>
+  );
+}
 
 const workflowPathSteps = [
   { number: "01", label: "Signal", short: "Context arrives" },
@@ -292,21 +432,14 @@ export function ProductPage({ page }: { page: ProductRoute }) {
         </Link>
       </PageIntro>
       {page === "overview" && (
-        <section className="product-overview-callout">
-          <div className="container overview-callout-inner">
-            <div>
-              <p className="eyebrow">ONE INCIDENT / A READABLE SEQUENCE</p>
-              <h2>
-                Investigation informs a decision. It doesn’t make the decision
-                disappear.
-              </h2>
-              <p>
-                Read approved evidence. Review a likely explanation. Keep policy
-                and human approval in the action path. Record what happened and
-                what is still unknown.
-              </p>
-            </div>
-            <CapabilityGraphic kind="overview" />
+        <section className="product-showcase-section section-pad">
+          <div className="container">
+            <SectionTitle
+              eyebrow="INSIDE THE PRODUCT"
+              title="Follow an incident from attention to approval."
+              summary="These views show how responders move through evidence, hypotheses and governed action—without this website connecting to any live system."
+            />
+            <ProductSurfaceShowcase />
           </div>
         </section>
       )}

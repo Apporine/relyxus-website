@@ -77,7 +77,7 @@ for (const page of pages) {
   html = setMeta(html, "name", "twitter:image", image);
   const canonical = `<link rel="canonical" href="${siteUrl}${page.path}" />`;
   html = html.replace("</head>", `    ${canonical}\n  </head>`);
-  const content = `<div id="root"><div style="max-width:720px;margin:0 auto;padding:96px 24px;color:#f4f6fb;font-family:Inter,system-ui,sans-serif"><p>${nav}</p><h1>${esc(page.h1)}</h1><p>${esc(page.body)}</p></div></div>`;
+  const content = `<div id="root"><div style="max-width:720px;margin:0 auto;padding:96px 24px;color:#FCFAFF;font-family:Inter,system-ui,sans-serif"><p>${nav}</p><h1>${esc(page.h1)}</h1><p>${esc(page.body)}</p></div></div>`;
   html = html.replace('<div id="root"></div>', content);
   const dir = path.join(dist, page.path);
   if (page.path !== "/") await mkdir(dir, { recursive: true });

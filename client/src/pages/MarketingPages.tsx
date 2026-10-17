@@ -543,7 +543,7 @@ export function FinancialServicesPage() {
       <PageIntro
         eyebrow="SOLUTIONS / FINANCIAL SERVICES"
         title="Keep incident response explainable when services matter most."
-        summary="A disrupted payment journey carries engineering, customer and resilience questions. This example shows where evidence and human decisions fitΓÇöwithout promising a regulatory outcome."
+        summary="A disrupted payment journey carries engineering, customer and resilience questions. This example shows where evidence and human decisions fit—without promising a regulatory outcome."
         tone="blue"
       >
         <PrimaryLink href="/demo?type=Demo">Discuss your context</PrimaryLink>
@@ -560,7 +560,7 @@ export function FinancialServicesPage() {
             <p>
               The point is not to declare a cause from timing alone. The
               responder needs a way to inspect evidence, understand what remains
-              uncertain and keep any proposed change behind the organisationΓÇÖs
+              uncertain and keep any proposed change behind the organisation's
               approval rules.
             </p>
             <span className="example-flag">
@@ -674,18 +674,20 @@ export function CompanyPage() {
       <PageIntro
         eyebrow="COMPANY / PRINCIPLES"
         title="Clarity becomes control."
-        summary="Relyxus is built for teams that want explainable evidence and governed actionΓÇönot a black box that quietly changes production."
+        summary="Relyxus is built for teams that want explainable evidence and governed action—not a black box that quietly changes production."
         tone="ink"
       >
         <PrimaryLink href="/product">Explore the product</PrimaryLink>
+        <Link className="button button-secondary" href="/contact">
+          Contact the team <ArrowRight size={16} aria-hidden="true" />
+        </Link>
       </PageIntro>
+
       <section className="company-page section-pad">
         <div className="container company-grid">
-          <div>
+          <div className="company-copy">
             <p className="eyebrow">HOW WE WORK</p>
             <h2>Give people a clearer place to decide.</h2>
-          </div>
-          <div>
             <p className="lead-copy">
               We start with the incident a responder actually needs to
               understand, then keep the human decision boundary visible before
@@ -694,20 +696,63 @@ export function CompanyPage() {
             <p>
               Relyxus is developed by Apporine. For team introductions,
               commercial details or support routing, reach us through the
-              contact page or enquiry form and weΓÇÖll connect you with the
+              contact page or enquiry form and we&apos;ll connect you with the
               right people.
             </p>
             <InlineAvailability>
               Talk to us for the latest company details
             </InlineAvailability>
-            <div className="company-rails">
-              <span>Measured</span>
-              <span>Candid</span>
-              <span>Dependable</span>
+            <ul className="company-rails" aria-label="Working principles">
+              <li>Measured</li>
+              <li>Candid</li>
+              <li>Dependable</li>
+            </ul>
+          </div>
+
+          <div className="company-shot-stack" aria-hidden="false">
+            <p className="company-shot-kicker">
+              <span>ILLUSTRATIVE UI</span>
+              <span>NOT CONNECTED</span>
+            </p>
+            <div className="company-shot-stage">
+              <figure className="company-shot company-shot-back">
+                <div className="company-shot-chrome">
+                  <i />
+                  <i />
+                  <i />
+                  <span>Command Centre</span>
+                </div>
+                <img
+                  src="/product/command-centre.png"
+                  alt="Relyxus Command Centre showing active incidents, approvals and service health"
+                  width={1600}
+                  height={1000}
+                  loading="lazy"
+                />
+              </figure>
+              <figure className="company-shot company-shot-front">
+                <div className="company-shot-chrome">
+                  <i />
+                  <i />
+                  <i />
+                  <span>Needs attention</span>
+                </div>
+                <img
+                  src="/product/command-centre-attention.png"
+                  alt="Relyxus Command Centre highlighting a SEV1 incident and a production approval waiting for review"
+                  width={1600}
+                  height={1000}
+                  loading="lazy"
+                />
+                <figcaption>
+                  Severity, impact and the approval gate stay in one view.
+                </figcaption>
+              </figure>
             </div>
           </div>
         </div>
       </section>
+
       <ActionBand
         title="Explore the product story."
         summary="See the workflow and compare the deployment questions your team will want answered."
@@ -739,8 +784,8 @@ export function ContactPage() {
             <span>01 / EVALUATION</span>
             <h2>Demo or Replay pilot</h2>
             <p>
-              Tell us about the workflow or historical incidents youΓÇÖd like to
-              walk through together.
+              Tell us about the workflow or historical incidents you&apos;d like
+              to walk through together.
             </p>
             <Link href="/demo?type=Replay%20pilot">
               Start a pilot enquiry <ArrowRight size={15} />
@@ -814,7 +859,7 @@ export function LegalPage({
             <h3>Share an accessibility issue</h3>
             <p>
               If something is hard to use, tell us through the contact page or
-              enquiry form and weΓÇÖll look into it.
+              enquiry form and we'll look into it.
             </p>
             <TextLink href="/contact">Contact the team</TextLink>
           </div>

@@ -560,3 +560,37 @@ export const contactTopics = [
     cta: "Ask about pricing",
   },
 ] as const;
+
+/** Service promises. Change here once, used everywhere. */
+export const replyPromise = "within one business day";
+export const packPromise = "typically within two business days";
+
+/**
+ * Real-world proof. Everything below renders only when filled in, so nothing
+ * appears until it is true. Add only facts you can show a buyer.
+ */
+export const proofStrip: {
+  logos: readonly { name: string; src?: string }[];
+  quote: { text: string; name: string; role: string } | null;
+  metric: { value: string; label: string; source: string } | null;
+} = { logos: [], quote: null, metric: null };
+
+/** Tools Relyxus really connects to today, by name. */
+export const integrations: readonly string[] = [];
+
+/** Assurance status shown on the Security page, e.g. { label: "SOC 2 Type II", status: "In progress, target Q3 2027" }. */
+export const assurance: readonly { label: string; status: string }[] = [];
+
+export const founders: readonly {
+  name: string;
+  role: string;
+  background: string;
+  photo?: string;
+}[] = [];
+
+export const companyDetails: {
+  registration?: string;
+  location?: string;
+  email?: string;
+  linkedin?: string;
+} = {};

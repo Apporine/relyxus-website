@@ -14,7 +14,7 @@ import {
 import { ENQUIRY_TYPES, type EnquiryType } from "@shared/contact";
 import { pageMeta } from "@/content/meta";
 import { EnquiryArt } from "@/components/marketing/EnquiryArt";
-import { demoVariants } from "@/content/site";
+import { demoVariants, replyPromise } from "@/content/site";
 
 type FormValues = {
   name: string;
@@ -488,8 +488,8 @@ export function DemoPage() {
                 <a href="/privacy">privacy policy</a> for more information.
               </p>
               <p className="demo-reply-note">
-                Your note goes straight to the Relyxus team, and we reply by
-                email.
+                Your note goes straight to the Relyxus team, and a person
+                replies {replyPromise}.
               </p>
               <button
                 type="submit"

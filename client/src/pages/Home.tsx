@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import {
   FounderNote,
   PageMeta,
+  ProofStrip,
   PrimaryLink,
   DataBand,
   TextLink,
@@ -269,6 +270,7 @@ export default function Home() {
         keywords="Relyxus, incident investigation, payments incidents, operational resilience, SRE, regulated firms"
       />
       <Hero />
+      <ProofStrip />
       <PathCards />
       <DataBand
         title="Regulators start the clock before you know the cause"

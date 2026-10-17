@@ -2722,3 +2722,126 @@ html[data-motion="off"] .hx-scene-draw {
   color: var(--hx-muted);
   font-size: 14px;
 }
+
+/* ---------- Proof slots (render only when filled) ---------- */
+.hx-proofstrip {
+  padding: 28px 0;
+  border-block: 1px solid var(--hx-border);
+  background: rgba(255, 255, 255, 0.02);
+}
+.hx-proofstrip .container {
+  display: grid;
+  gap: 24px;
+}
+.hx-metric {
+  margin: 0;
+  color: var(--hx-text) !important;
+  font-size: 20px !important;
+}
+.hx-metric strong {
+  color: var(--hx-mint);
+  font-size: 40px;
+}
+.hx-metric small {
+  display: block;
+  color: var(--hx-muted);
+  font-size: 13px;
+}
+.hx-quote {
+  margin: 0;
+  max-width: 760px;
+}
+.hx-quote p {
+  margin: 0 0 8px;
+  color: var(--hx-text) !important;
+  font-size: 22px !important;
+  font-weight: 600;
+}
+.hx-quote footer {
+  color: var(--hx-muted);
+}
+.hx-logos,
+.hx-integrations ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--hx-muted);
+  font-weight: 700;
+}
+.hx-logos img {
+  height: 28px;
+  width: auto;
+  filter: grayscale(1) brightness(1.6);
+}
+.hx-integrations {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+}
+.hx-integrations > span {
+  color: var(--hx-muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+.hx-integrations li {
+  padding: 4px 12px;
+  border: 1px solid var(--hx-border-strong);
+  border-radius: 999px;
+  font-size: 14px;
+}
+.hx-assurance {
+  display: grid;
+  gap: 8px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.hx-assurance li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  color: var(--hx-muted);
+}
+.hx-assurance strong {
+  color: var(--hx-text);
+}
+.hx-founders {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.hx-founders img {
+  width: 100%;
+  max-width: 220px;
+  aspect-ratio: 1;
+  border-radius: var(--hx-radius);
+  object-fit: cover;
+}
+.hx-founders h3 {
+  margin: 12px 0 2px;
+  color: var(--hx-text) !important;
+  font-size: 20px;
+}
+.hx-founders span {
+  color: var(--hx-mint);
+  font-size: 14px;
+  font-weight: 700;
+}
+.hx-founders p {
+  margin: 8px 0 0;
+  color: var(--hx-muted) !important;
+  font-size: 15px !important;
+}
+.footer-contact {
+  display: flex;
+  gap: 16px;
+  margin: 0;
+  font-size: 13px;
+}

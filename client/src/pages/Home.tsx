@@ -2,12 +2,14 @@ import { useState } from "react";
 import { ArrowRight, ArrowUpRight, Check, ShieldCheck } from "lucide-react";
 import { Link } from "wouter";
 import {
+  FounderNote,
   PageMeta,
   PrimaryLink,
+  RegulatoryBand,
   TextLink,
 } from "@/components/marketing/PublicSite";
 import { ProductExplorer } from "@/components/marketing/Explorers";
-import { pathCards, productFacts, proofPoints } from "@/content/site";
+import { pathCards, proofPoints } from "@/content/site";
 import { track } from "@/lib/analytics";
 import { pageMeta } from "@/content/meta";
 
@@ -212,26 +214,6 @@ function PathCards() {
   );
 }
 
-function FactBand() {
-  return (
-    <section className="hx-band" aria-label="Relyxus in numbers">
-      <div className="container">
-        <h2 className="hx-band-title">
-          Your evidence already exists. We put it in one place.
-        </h2>
-        <dl className="hx-facts">
-          {productFacts.map(fact => (
-            <div key={fact.value + fact.label}>
-              <dt>{fact.value}</dt>
-              <dd>{fact.label}</dd>
-            </div>
-          ))}
-        </dl>
-      </div>
-    </section>
-  );
-}
-
 function InAction() {
   return (
     <section className="hx-action" id="in-action">
@@ -391,10 +373,11 @@ export default function Home() {
       />
       <Hero />
       <PathCards />
-      <FactBand />
+      <RegulatoryBand title="Regulators start the clock before you know the cause" />
       <InAction />
       <Outcomes />
       <Proof />
+      <FounderNote />
       <TrustInBrief />
       <LeadMagnet />
       <ClosingBand />

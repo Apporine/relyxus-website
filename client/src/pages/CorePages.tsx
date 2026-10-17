@@ -4,8 +4,10 @@ import { Link } from "wouter";
 import {
   ActionBand,
   PageIntro,
+  FounderNote,
   PageMeta,
   PrimaryLink,
+  RegulatoryBand,
 } from "@/components/marketing/PublicSite";
 import {
   IncidentWalkthrough,
@@ -265,6 +267,8 @@ export function FinancialServicesPage() {
         </div>
       </section>
 
+      <RegulatoryBand title="The reporting clocks your resilience team works to" />
+
       <ActionBand
         title="Start with your incident context"
         summary="Tell us about the tools you run and the incidents that hurt most."
@@ -340,6 +344,8 @@ export function CompanyPage() {
           </div>
         </div>
       </section>
+
+      <FounderNote />
 
       <ActionBand
         title="Say hello"

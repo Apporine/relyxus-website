@@ -457,7 +457,10 @@ export function PageHero({
   return (
     <section className={`page-hero page-hero-${tone}`}>
       <div className="container page-hero-inner">
-        <p className="eyebrow">{eyebrow}</p>
+        <p className="eyebrow page-hero-eyebrow">
+          <span className="eyebrow-line" aria-hidden="true" />
+          <span>{eyebrow}</span>
+        </p>
         <h1>{title}</h1>
         <p className="page-hero-summary">{summary}</p>
         {children && <div className="page-hero-actions">{children}</div>}

@@ -1226,18 +1226,28 @@ body {
 }
 .public-site .page-hero h1 {
   color: #f3f5fb !important;
-  font-size: clamp(48px, 6.2vw, 82px);
-  line-height: 0.98;
-  letter-spacing: -0.075em;
+  font-size: clamp(44px, 5.6vw, 76px);
+  line-height: 1.12;
+  letter-spacing: -0.06em;
 }
-.public-site .page-hero .eyebrow {
+.public-site .page-hero .eyebrow,
+.public-site .page-hero-eyebrow {
   color: #86efd5 !important;
 }
+.public-site .page-hero-eyebrow {
+  gap: 16px;
+  margin-bottom: 22px;
+}
+.public-site .page-hero-eyebrow .eyebrow-line {
+  background: var(--rx-web-action);
+  box-shadow: 0 0 12px rgba(105, 240, 203, 0.55);
+}
 .public-site .page-hero-summary {
+  margin-top: 22px;
   color: #b5c0d1 !important;
 }
 .public-site .page-hero-actions {
-  margin-top: 28px;
+  margin-top: 30px;
 }
 .public-site .button {
   min-height: 48px;
@@ -1312,11 +1322,16 @@ body {
 .public-site .section-title p:last-child {
   color: var(--rx-text) !important;
 }
-.public-site .section-title p:last-child:not(.eyebrow) {
-  color: #aeb9cc !important;
-}
 .public-site .section-title .eyebrow {
+  margin-bottom: 16px;
   color: #80f0d5 !important;
+}
+.public-site .section-title h2 {
+  line-height: 1.12;
+}
+.public-site .section-title p:last-child:not(.eyebrow) {
+  margin-top: 18px;
+  color: #aeb9cc !important;
 }
 
 /* Route-specific details and editorial content. */
@@ -3153,16 +3168,17 @@ body {
   max-width: 720px;
 }
 .public-site .action-band .eyebrow {
+  margin: 0 0 16px;
   color: #8af0d5 !important;
   font-size: 11px;
   letter-spacing: 0.16em;
 }
 .public-site .action-band h2 {
   max-width: 700px;
-  margin: 11px 0 12px;
+  margin: 0 0 16px;
   color: #f4f6fc !important;
   font-size: clamp(30px, 3.2vw, 46px);
-  line-height: 1.06;
+  line-height: 1.12;
   letter-spacing: -0.045em;
 }
 .public-site .action-band p:not(.eyebrow) {

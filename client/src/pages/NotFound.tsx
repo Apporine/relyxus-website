@@ -19,7 +19,7 @@ export default function NotFound() {
           <h1>That page isn’t part of this story.</h1>
           <p>
             The link may be outdated, or the page may have moved. Start from
-            home, or jump into the product and deployment paths.
+            home, or jump into the product and security pages.
           </p>
           <div className="not-found-actions">
             <Link className="button button-primary" href="/">
@@ -35,7 +35,7 @@ export default function NotFound() {
           </div>
           <ul className="not-found-links">
             <li>
-              <Link href="/deployment">Deployment</Link>
+              <Link href="/security">Security</Link>
             </li>
             <li>
               <Link href="/privacy">Privacy policy</Link>

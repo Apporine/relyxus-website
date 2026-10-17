@@ -356,7 +356,6 @@ export function SiteHeader() {
 
 const footerNav = [
   { label: "Product", href: "/product" },
-  { label: "Deployment", href: "/deployment" },
   { label: "Security", href: "/security" },
   { label: "Contact", href: "/contact" },
   { label: "Request a demo", href: "/demo" },
@@ -541,8 +540,8 @@ export function InlineAvailability({
 }
 
 export function ActionBand({
-  title = "See how Relyxus would fit your team.",
-  summary = "Walk through an incident, discuss deployment requirements and agree what a useful evaluation would measure.",
+  title = "See how Relyxus would fit your team",
+  summary = "Walk through an incident together and see what it would mean for your team.",
   href = "/demo",
   label = "Request a demo",
 }: {
@@ -555,14 +554,13 @@ export function ActionBand({
     <section className="action-band">
       <div className="container action-band-inner">
         <div>
-          <p className="eyebrow">A CLEAR NEXT STEP</p>
           <h2>{title}</h2>
           <p>{summary}</p>
         </div>
         <div className="action-band-actions">
           <PrimaryLink href={href}>{label}</PrimaryLink>
-          <Link href="/deployment" className="action-quiet">
-            Review deployment options{" "}
+          <Link href="/security" className="action-quiet">
+            Read the security summary{" "}
             <ArrowRight size={16} aria-hidden="true" />
           </Link>
         </div>

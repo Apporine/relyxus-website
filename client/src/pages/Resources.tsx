@@ -1,6 +1,7 @@
 import { ArrowLeft, ArrowRight, ArrowUpRight, Clock3 } from "lucide-react";
 import { Link } from "wouter";
 import { pageMeta } from "@/content/meta";
+import { ResourcesArt } from "@/components/marketing/HeroArt";
 import { articleBodies, resources } from "@/content/site";
 import {
   ActionBand,
@@ -19,6 +20,7 @@ export function ResourcesPage() {
       <PageIntro
         eyebrow="Resources"
         title={pageMeta["/resources"].h1}
+        art={<ResourcesArt />}
         summary={pageMeta["/resources"].body}
         tone="ivory"
       />

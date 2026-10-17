@@ -362,13 +362,11 @@ export const founderNote: {
 export const proofPoints: readonly {
   title: string;
   detail: string;
-  status: string;
   image?: { src: string; alt: string };
 }[] = [
   {
     title: "Incidents",
     detail: "Severity, impact and ownership in one list.",
-    status: "In development, sample data",
     image: {
       src: "/product/overview-incidents.png",
       alt: "The Relyxus incidents list showing severity, status, owner and age",
@@ -377,7 +375,6 @@ export const proofPoints: readonly {
   {
     title: "Command centre",
     detail: "What needs attention, and what is waiting on a decision.",
-    status: "In development, sample data",
     image: {
       src: "/product/overview-command-centre.png",
       alt: "The Relyxus command centre with active incidents, approvals and service health",
@@ -386,7 +383,6 @@ export const proofPoints: readonly {
   {
     title: "Incident war room",
     detail: "Timeline, ranked causes and the pending approval on one screen.",
-    status: "In development, sample data",
     image: {
       src: "/product/overview-investigation.png",
       alt: "A Relyxus incident with its timeline, ranked hypotheses and a production approval waiting",

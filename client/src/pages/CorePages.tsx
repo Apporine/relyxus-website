@@ -8,7 +8,13 @@ import {
   PageMeta,
   PrimaryLink,
 } from "@/components/marketing/PublicSite";
-import { IncidentWalkthrough } from "@/components/marketing/Explorers";
+import { BrainMap } from "@/components/marketing/BrainMap";
+import { IncidentTimeline } from "@/components/marketing/IncidentTimeline";
+import {
+  CompanyArt,
+  FinanceArt,
+  SecurityArt,
+} from "@/components/marketing/HeroArt";
 import { ProductTour } from "@/components/marketing/ProductTour";
 import { track } from "@/lib/analytics";
 import { breachData, outageData, perspectiveFacts } from "@/content/site";
@@ -24,6 +30,7 @@ export function ProductPage() {
       <PageIntro
         eyebrow="Product"
         title="From first alert to a record you can hand to audit"
+        art={<BrainMap compact />}
         summary="One investigation per incident. A person approves every change. The write-up is half done before the incident closes."
         tone="ink"
       >
@@ -42,20 +49,19 @@ export function ProductPage() {
       <section className="hx-section">
         <div className="container">
           <h2 className="hx-h2">A tour of the product</h2>
-          <p className="hx-sub">
-            Sample data. Hover to pause, or pick a screen.
-          </p>
+          <p className="hx-sub"> Hover to pause, or pick a screen.</p>
           <ProductTour />
         </div>
       </section>
 
-      <section className="hx-section walkthrough-section" id="walkthrough">
+      <section className="hx-section" id="walkthrough">
         <div className="container">
           <h2 className="hx-h2">Follow one incident</h2>
           <p className="hx-sub">
-            A payments authorisation failure, from alert to a reviewed decision.
+            A payments authorisation failure, from first alert to a reviewed
+            decision.
           </p>
-          <IncidentWalkthrough />
+          <IncidentTimeline />
         </div>
       </section>
 
@@ -94,6 +100,7 @@ export function SecurityPage() {
       <PageIntro
         eyebrow="Security"
         title="Made for your security review"
+        art={<SecurityArt />}
         summary="Three commitments up front. The detail goes to your reviewers in the security pack."
         tone="blue"
       >
@@ -194,6 +201,7 @@ export function FinancialServicesPage() {
       <PageIntro
         eyebrow="Financial services"
         title="When a payment fails, the whole firm is asking why"
+        art={<FinanceArt />}
         summary="Engineering needs the cause. Resilience needs the record. Relyxus gives both the same evidence."
         tone="blue"
       >
@@ -266,6 +274,7 @@ export function CompanyPage() {
       <PageIntro
         eyebrow="Company"
         title="We build Relyxus at Apporine"
+        art={<CompanyArt />}
         summary="We make incident response easier to explain, for the teams who have to explain it."
         tone="ink"
       >
@@ -287,10 +296,6 @@ export function CompanyPage() {
             <p>
               For introductions, commercial details or support, send us an
               enquiry and we’ll put you in touch with the right person.
-            </p>
-            <p className="hx-inline-note">
-              <ShieldCheck size={16} aria-hidden="true" /> Product images show
-              sample data.
             </p>
           </div>
           <div className="company-shot-stack">

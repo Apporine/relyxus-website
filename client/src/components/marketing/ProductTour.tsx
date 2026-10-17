@@ -15,7 +15,7 @@ const screens: {
     key: "command",
     label: "Command centre",
     src: "/product/overview-command-centre.png",
-    alt: "The Relyxus command centre with sample data",
+    alt: "The Relyxus command centre",
     callouts: [
       { x: 18, y: 13, w: 80, h: 9, text: "Severity and money at risk, first" },
       { x: 77, y: 29, w: 21, h: 34, text: "Approvals waiting on someone" },
@@ -25,7 +25,7 @@ const screens: {
     key: "incidents",
     label: "Incidents",
     src: "/product/overview-incidents.png",
-    alt: "The Relyxus incident list with sample data",
+    alt: "The Relyxus incident list",
     callouts: [
       { x: 19, y: 14, w: 78, h: 12, text: "Active incidents by severity" },
       {
@@ -41,7 +41,7 @@ const screens: {
     key: "war-room",
     label: "War room",
     src: "/product/overview-investigation.png",
-    alt: "A Relyxus incident with its timeline and ranked causes, sample data",
+    alt: "A Relyxus incident with its timeline and ranked causes",
     callouts: [
       {
         x: 36,
@@ -57,7 +57,7 @@ const screens: {
     key: "approvals",
     label: "Approvals",
     src: "/product/overview-approvals.png",
-    alt: "The Relyxus approvals queue with sample data",
+    alt: "The Relyxus approvals queue",
     callouts: [
       {
         x: 19,
@@ -79,7 +79,7 @@ const screens: {
     key: "services",
     label: "Services",
     src: "/product/overview-services.png",
-    alt: "The Relyxus service dependency map with sample data",
+    alt: "The Relyxus service dependency map",
     callouts: [
       { x: 15, y: 14, w: 26, h: 60, text: "Service health at a glance" },
       {
@@ -137,8 +137,19 @@ export function ProductTour() {
 
   const current = screens[screen];
   const focus = current.callouts[beat];
-  const originX = focus.x + focus.w / 2;
-  const originY = focus.y + focus.h / 2;
+  const zoom = 1.22;
+  const clamp = (value: number, min: number, max: number) =>
+    Math.min(max, Math.max(min, value));
+  const shiftX = clamp(
+    50 - (focus.x + focus.w / 2) * zoom,
+    100 - 100 * zoom,
+    0
+  );
+  const shiftY = clamp(
+    50 - (focus.y + focus.h / 2) * zoom,
+    100 - 100 * zoom,
+    0
+  );
 
   const tilt = (event: React.MouseEvent) => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -174,8 +185,9 @@ export function ProductTour() {
             <div
               className="hx-tour-zoom"
               style={{
-                transformOrigin: `${originX}% ${originY}%`,
-                transform: started ? "scale(1.28)" : "scale(1)",
+                transform: started
+                  ? `translate3d(${shiftX}%, ${shiftY}%, 0) scale(${zoom})`
+                  : "translate3d(0, 0, 0) scale(1)",
               }}
             >
               {screens.map((item, index) => (

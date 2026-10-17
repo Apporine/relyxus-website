@@ -7,7 +7,7 @@
     <path d="M820 270 C900 270 900 170 990 170"/>
   </g>
   <g fill="#f4f6fb" font-family="Inter, Arial, sans-serif">
-    <text x="80" y="110" font-size="34" font-weight="800">relyxus</text>
+    <text x="80" y="110" font-size="34" font-weight="500" letter-spacing="7">rely<tspan fill="#69f0cb">x</tspan>us</text>
     <text x="80" y="270" font-size="68" font-weight="800" letter-spacing="-1.4">Find the cause of</text>
     <text x="80" y="348" font-size="68" font-weight="800" letter-spacing="-1.4">an incident, with every</text>
     <text x="80" y="426" font-size="68" font-weight="800" letter-spacing="-1.4" fill="#69f0cb">step on the record.</text>

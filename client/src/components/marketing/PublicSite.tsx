@@ -12,6 +12,7 @@ import {
 import {
   DEFAULT_KEYWORDS,
   SITE_NAME,
+  TAB_TITLE,
   upsertJsonLd,
   upsertLink,
   upsertMeta,
@@ -41,7 +42,7 @@ export function PageMeta({
     const imageUrl = new URL("/og-cover.png", window.location.origin).href;
 
     // The browser tab shows only the product name, as in the navbar.
-    document.title = "relyxus";
+    document.title = TAB_TITLE;
     document.documentElement.lang = "en";
 
     upsertMeta("name", "description", description);

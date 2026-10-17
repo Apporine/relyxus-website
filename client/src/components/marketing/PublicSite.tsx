@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Link, useLocation } from "wouter";
 import { ArrowRight, ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
 import {
@@ -324,13 +325,14 @@ function MobileMenu({
 export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const mobileTrigger = useRef<HTMLButtonElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
   const closeMobile = useCallback(() => {
     setMobileOpen(false);
     requestAnimationFrame(() => mobileTrigger.current?.focus());
   }, []);
   const navigateMobile = useCallback(() => setMobileOpen(false), []);
   return (
-    <header className="site-header">
+    <header className="site-header" ref={headerRef}>
       <div className="header-shell">
         <Wordmark />
         <NavLinks />
@@ -352,11 +354,14 @@ export function SiteHeader() {
           </button>
         </div>
       </div>
-      {mobileOpen && (
-        <div id="mobile-menu">
-          <MobileMenu onClose={closeMobile} onNavigate={navigateMobile} />
-        </div>
-      )}
+      {mobileOpen &&
+        createPortal(
+          <div id="mobile-menu">
+            <MobileMenu onClose={closeMobile} onNavigate={navigateMobile} />
+          </div>,
+          // The header's backdrop blur would otherwise trap this fixed overlay.
+          headerRef.current?.closest(".public-site") ?? document.body
+        )}
     </header>
   );
 }

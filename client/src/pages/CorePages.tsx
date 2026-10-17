@@ -4,40 +4,15 @@ import { Link } from "wouter";
 import {
   ActionBand,
   PageIntro,
-  FounderNote,
+  DataBand,
   PageMeta,
   PrimaryLink,
-  RegulatoryBand,
 } from "@/components/marketing/PublicSite";
-import {
-  IncidentWalkthrough,
-  ProductExplorer,
-} from "@/components/marketing/Explorers";
+import { IncidentWalkthrough } from "@/components/marketing/Explorers";
+import { ProductTour } from "@/components/marketing/ProductTour";
 import { track } from "@/lib/analytics";
+import { breachData, outageData, perspectiveFacts } from "@/content/site";
 import { pageMeta } from "@/content/meta";
-
-const productScreens = [
-  {
-    label: "Command Centre",
-    caption: "See what needs attention before the queue grows.",
-    src: "/product/overview-command-centre.png",
-  },
-  {
-    label: "Incidents",
-    caption: "Severity, impact and ownership in one list.",
-    src: "/product/overview-incidents.png",
-  },
-  {
-    label: "Approvals",
-    caption: "Every pending decision, with who still needs to sign.",
-    src: "/product/overview-approvals.png",
-  },
-  {
-    label: "Services",
-    caption: "Jump from an incident to the service it hit.",
-    src: "/product/overview-services.png",
-  },
-] as const;
 
 export function ProductPage() {
   return (
@@ -58,32 +33,19 @@ export function ProductPage() {
         </a>
       </PageIntro>
 
-      <section className="hx-section product-explorer-section">
-        <div className="container">
-          <h2 className="hx-h2">What your team gets</h2>
-          <ProductExplorer />
-        </div>
-      </section>
+      <DataBand
+        title="What a major outage costs"
+        items={outageData.items}
+        sources={outageData.sources}
+      />
 
       <section className="hx-section">
         <div className="container">
-          <h2 className="hx-h2">The product, with sample data</h2>
-          <div className="hx-screens">
-            {productScreens.map(screen => (
-              <figure key={screen.label} className="hx-screen">
-                <img
-                  src={screen.src}
-                  alt={`${screen.label} screen. ${screen.caption}`}
-                  loading="lazy"
-                  decoding="async"
-                />
-                <figcaption>
-                  <strong>{screen.label}</strong>
-                  <span>{screen.caption}</span>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
+          <h2 className="hx-h2">A tour of the product</h2>
+          <p className="hx-sub">
+            Sample data. Hover to pause, or pick a screen.
+          </p>
+          <ProductTour />
         </div>
       </section>
 
@@ -153,6 +115,12 @@ export function SecurityPage() {
           </div>
         </div>
       </section>
+
+      <DataBand
+        title="Why reviewers ask how fast you can contain"
+        items={breachData.items}
+        sources={breachData.sources}
+      />
 
       <section className="hx-section">
         <div className="container">
@@ -256,6 +224,17 @@ export function FinancialServicesPage() {
           <div className="hx-perspective" id="resilience">
             <h2 className="hx-h2">{current.title}</h2>
             <p>{current.text}</p>
+            <aside className="hx-fact-card">
+              <strong>{perspectiveFacts[active].value}</strong>
+              <p>{perspectiveFacts[active].label}</p>
+              <a
+                href={perspectiveFacts[active].source.href}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {perspectiveFacts[active].source.label}
+              </a>
+            </aside>
             <ul className="hx-trust-lines">
               {current.points.map(point => (
                 <li key={point}>
@@ -266,8 +245,6 @@ export function FinancialServicesPage() {
           </div>
         </div>
       </section>
-
-      <RegulatoryBand title="The reporting clocks your resilience team works to" />
 
       <ActionBand
         title="Start with your incident context"
@@ -344,8 +321,6 @@ export function CompanyPage() {
           </div>
         </div>
       </section>
-
-      <FounderNote />
 
       <ActionBand
         title="Say hello"

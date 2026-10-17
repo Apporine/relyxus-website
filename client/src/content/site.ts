@@ -181,6 +181,164 @@ export const regulatorySources = [
   },
 ] as const;
 
+export type DataPoint = { value: string; label: string };
+export type DataSource = { label: string; href: string };
+
+/** Uptime Institute, annual outage analysis (2025 survey, published 2026). */
+export const outageData = {
+  items: [
+    {
+      value: "57%",
+      label:
+        "of operators said their latest major outage cost more than $100,000",
+    },
+    { value: "1 in 5", label: "said it cost more than $1 million" },
+  ] as DataPoint[],
+  sources: [
+    {
+      label: "Uptime Institute annual outage analysis",
+      href: "https://www.businesswire.com/news/home/20260513289344/en",
+    },
+  ] as DataSource[],
+};
+
+/** IBM Cost of a Data Breach Report 2025: 600 organisations, 16 countries. */
+export const breachData = {
+  items: [
+    {
+      value: "241 days",
+      label: "on average to identify and contain a breach",
+    },
+    { value: "$4.44M", label: "global average cost of a breach" },
+  ] as DataPoint[],
+  sources: [
+    {
+      label: "IBM Cost of a Data Breach 2025",
+      href: "https://cyberscoop.com/ibm-cost-data-breach-2025/",
+    },
+  ] as DataSource[],
+};
+
+/** One public fact per audience, shown under the matching tab. */
+export const perspectiveFacts = {
+  engineering: {
+    value: "#1",
+    label:
+      "cause of operational incidents reported to the FCA in 2022 to 2023: third-party issues",
+    source: {
+      label: "FCA, as reported by Computing",
+      href: "https://www.computing.co.uk/news/2024/fca-warns-finance-companies-on-cyber-resilience",
+    },
+  },
+  resilience: {
+    value: "CP24/28",
+    label:
+      "the FCA’s December 2024 consultation on standard templates for incident and third-party reporting",
+    source: {
+      label: "Grant Thornton summary of CP24/28",
+      href: "https://www.grantthornton.co.uk/insights/fca-consults-on-operational-resilience-and-third-party-reporting/",
+    },
+  },
+} as const;
+
+/** The enquiry page changes its pitch to match what the visitor asked for. */
+export const demoVariants: Record<
+  string,
+  {
+    eyebrow: string;
+    title: string;
+    summary: string;
+    asideTitle: string;
+    asideText: string;
+    agenda: readonly { title: string; text: string }[];
+  }
+> = {
+  Demo: {
+    eyebrow: "Request a demo",
+    title: "See Relyxus on an incident like yours",
+    summary:
+      "Tell us which tools your team uses and we’ll walk through an incident from alert to record.",
+    asideTitle: "What the demo covers",
+    asideText: "About 30 minutes, with your questions first.",
+    agenda: [
+      {
+        title: "An incident, start to finish",
+        text: "Alert, cause, approval, record.",
+      },
+      { title: "Your tools", text: "Where your evidence lives today." },
+      {
+        title: "What a pilot would look like",
+        text: "Scope and who is involved.",
+      },
+    ],
+  },
+  "Replay pilot": {
+    eyebrow: "Replay pilot",
+    title: "Try Relyxus on incidents you already solved",
+    summary:
+      "Pick past incidents your team knows well and compare what Relyxus finds with what you know.",
+    asideTitle: "How a pilot starts",
+    asideText: "We agree the incidents first, then connect read-only sources.",
+    agenda: [
+      { title: "Choose the incidents", text: "Include a miss or two." },
+      { title: "Agree the sources", text: "Read-only access only." },
+      { title: "Review together", text: "What it found and what it missed." },
+    ],
+  },
+  "Security pack": {
+    eyebrow: "Security pack",
+    title: "Get the security pack for your reviewers",
+    summary:
+      "Tell us who is reviewing and what they need. We share the pack with teams in an evaluation.",
+    asideTitle: "What reviewers get",
+    asideText: "Written for security and architecture teams.",
+    agenda: [
+      { title: "Data flows and identity", text: "Who can see and do what." },
+      { title: "AI data handling", text: "What leaves, and what does not." },
+      { title: "Assurance status", text: "Current, with dates." },
+    ],
+  },
+  "Readiness checklist": {
+    eyebrow: "Readiness checklist",
+    title: "Get the incident-readiness checklist",
+    summary:
+      "A short checklist for regulated teams: evidence, ownership and record-keeping before the next incident.",
+    asideTitle: "What’s in it",
+    asideText: "Questions you can answer in an afternoon.",
+    agenda: [
+      { title: "Evidence", text: "Can you find it in one place?" },
+      { title: "Ownership", text: "Who decides, and who signs off?" },
+      { title: "Record", text: "Could you hand it to audit today?" },
+    ],
+  },
+  Deployment: {
+    eyebrow: "Deployment",
+    title: "Talk through how you would run Relyxus",
+    summary:
+      "Tell us about your environment and we’ll go through the options with you.",
+    asideTitle: "What we discuss",
+    asideText: "Your constraints first.",
+    agenda: [
+      { title: "Where it runs", text: "Dedicated, or self-hosted by you." },
+      { title: "Where data goes", text: "Before you decide." },
+      { title: "Who looks after it", text: "Updates and support." },
+    ],
+  },
+  Pricing: {
+    eyebrow: "Pricing",
+    title: "Talk to us about pricing",
+    summary:
+      "Pricing depends on your setup. Tell us a little and we’ll come back with a proposal.",
+    asideTitle: "What shapes a quote",
+    asideText: "We keep it simple and put it in writing.",
+    agenda: [
+      { title: "Your setup", text: "How you would run it." },
+      { title: "Your scale", text: "Teams and incidents." },
+      { title: "Your timeline", text: "Pilot first, or straight in." },
+    ],
+  },
+};
+
 /** A note in the team’s voice. Add name, role and photo when you want it signed. */
 export const founderNote: {
   heading: string;

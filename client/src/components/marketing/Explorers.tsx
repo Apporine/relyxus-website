@@ -1,17 +1,14 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import {
   ArrowRight,
   Check,
   ChevronDown,
   CircleAlert,
-  ExternalLink,
   FileText,
   GitBranch,
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
-import { Link } from "wouter";
-import { productOutcomes } from "@/content/site";
 
 const steps = [
   {
@@ -299,136 +296,6 @@ export function IncidentWalkthrough() {
           <span className="example-stamp">Sample data</span>
         </div>
         <StepIllustration kind={step.kind} />
-      </div>
-    </div>
-  );
-}
-
-function MiniVisual({ type }: { type: string }) {
-  return (
-    <div className={`outcome-visual outcome-${type}`} aria-hidden="true">
-      <div className="outcome-visual-top">
-        <span />
-        <span />
-        <span />
-      </div>
-      {type === "trace" && (
-        <>
-          <div className="trace-node">
-            <i /> Evidence source <b>01</b>
-          </div>
-          <div className="trace-path" />
-          <div className="trace-answer">
-            <Sparkles size={13} /> Likely cause
-          </div>
-          <div className="trace-path trace-short" />
-          <div className="trace-node">
-            <i /> Alternative kept <b>02</b>
-          </div>
-        </>
-      )}
-      {type === "gate" && (
-        <>
-          <div className="gate-proposal-mini">Proposed change</div>
-          <div className="mini-gate">
-            <ShieldCheck size={18} />
-          </div>
-          <div className="gate-approved-mini">
-            Approval
-            <br />
-            <b>Required</b>
-          </div>
-        </>
-      )}
-      {type === "record" && (
-        <>
-          <div className="mini-record-title">
-            Incident record <span>Draft</span>
-          </div>
-          <div className="record-bars">
-            <i />
-            <i />
-            <i />
-          </div>
-          <div className="mini-record-caption">Every source linked</div>
-        </>
-      )}
-    </div>
-  );
-}
-
-export function ProductExplorer() {
-  const [selectedKey, setSelectedKey] = useState<string>(
-    productOutcomes[0].key
-  );
-  const selected = useMemo(
-    () =>
-      productOutcomes.find(item => item.key === selectedKey) ??
-      productOutcomes[0],
-    [selectedKey]
-  );
-  const renderOutcome = (item: (typeof productOutcomes)[number]) => (
-    <>
-      <div className="preview-inner" aria-live="polite" aria-atomic="true">
-        <p className="preview-eyebrow">{item.eyebrow}</p>
-        <h3>{item.title}</h3>
-        <p>{item.summary}</p>
-        <div className="preview-detail">
-          <span className="detail-rule" />
-          <span>{item.detail}</span>
-        </div>
-        <Link className="text-link" href={item.href}>
-          See how it works <ArrowRight size={16} />
-        </Link>
-      </div>
-      <MiniVisual type={item.visual} />
-    </>
-  );
-  return (
-    <div className="product-explorer">
-      <div
-        className="product-choice-list"
-        role="group"
-        aria-label="Product outcomes"
-      >
-        {productOutcomes.map((item, index) => (
-          <div className="product-choice-row" key={item.key}>
-            <button
-              id={`product-choice-${item.key}`}
-              type="button"
-              data-index={index + 1}
-              aria-pressed={selectedKey === item.key}
-              aria-expanded={selectedKey === item.key}
-              aria-controls={`product-mobile-panel-${item.key} product-preview`}
-              className={`product-choice ${selectedKey === item.key ? "selected" : ""}`}
-              onClick={() => setSelectedKey(item.key)}
-            >
-              <span className="product-choice-index">0{index + 1}</span>
-              <span>
-                <strong>{item.label}</strong>
-                <small>{item.eyebrow}</small>
-              </span>
-              <ArrowRight size={16} />
-            </button>
-            <div
-              id={`product-mobile-panel-${item.key}`}
-              className="product-mobile-panel"
-              role="region"
-              aria-labelledby={`product-choice-${item.key}`}
-              hidden={selectedKey !== item.key}
-            >
-              <div className="product-preview">{renderOutcome(item)}</div>
-            </div>
-          </div>
-        ))}
-      </div>
-      <div
-        className="product-preview"
-        id="product-preview"
-        role="region"
-        aria-labelledby={`product-choice-${selected.key}`}
-      >
-        {renderOutcome(selected)}
       </div>
     </div>
   );

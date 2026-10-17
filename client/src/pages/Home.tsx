@@ -1,15 +1,27 @@
-import { useState } from "react";
-import { ArrowRight, ArrowUpRight, Check, ShieldCheck } from "lucide-react";
+import { useEffect, useState } from "react";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Check,
+  Pause,
+  Play,
+  ShieldCheck,
+} from "lucide-react";
 import { Link } from "wouter";
 import {
   FounderNote,
   PageMeta,
   PrimaryLink,
-  RegulatoryBand,
+  DataBand,
   TextLink,
 } from "@/components/marketing/PublicSite";
-import { ProductExplorer } from "@/components/marketing/Explorers";
-import { pathCards, proofPoints } from "@/content/site";
+import { OutcomeStage } from "@/components/marketing/OutcomeStage";
+import {
+  pathCards,
+  proofPoints,
+  regulatoryClocks,
+  regulatorySources,
+} from "@/content/site";
 import { track } from "@/lib/analytics";
 import { pageMeta } from "@/content/meta";
 
@@ -43,11 +55,27 @@ const hubSources = [
 
 function IncidentHub() {
   const [mode, setMode] = useState<HubMode>("investigate");
+  const [paused, setPaused] = useState(false);
   const active = hubModes.find(item => item.key === mode) ?? hubModes[0];
+
+  useEffect(() => {
+    if (paused) return;
+    const timer = window.setTimeout(() => {
+      const next =
+        (hubModes.findIndex(item => item.key === mode) + 1) % hubModes.length;
+      setMode(hubModes[next].key);
+    }, 4500);
+    return () => window.clearTimeout(timer);
+  }, [mode, paused]);
   return (
-    <div className="hx-hub" data-mode={mode}>
+    <div
+      className="hx-hub"
+      data-mode={mode}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
       <svg
-        viewBox="0 0 560 320"
+        viewBox="0 0 560 372"
         role="img"
         aria-label="Sources flow into one incident record. An approval gate and an audit trail flow out."
       >
@@ -121,22 +149,62 @@ function IncidentHub() {
             Every step logged
           </text>
         </g>
-      </svg>
-      <div className="hx-hub-controls">
-        <div role="group" aria-label="Show a stage" className="hx-toggle">
-          {hubModes.map(item => (
-            <button
+        <g className="hx-timeline">
+          <path className="hx-lane" d="M70 340 H490" />
+          <path
+            className="hx-timeline-fill"
+            d="M70 340 H490"
+            style={{
+              strokeDashoffset:
+                420 - 210 * hubModes.findIndex(i => i.key === mode),
+            }}
+          />
+          {hubModes.map((item, index) => (
+            <g
               key={item.key}
-              type="button"
+              role="button"
+              tabIndex={0}
+              aria-label={`Show ${item.label}`}
               aria-pressed={mode === item.key}
+              className={`hx-stage-node ${mode === item.key ? "is-on" : ""}`}
               onClick={() => setMode(item.key)}
+              onKeyDown={event => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  setMode(item.key);
+                }
+              }}
             >
-              {item.label}
-            </button>
+              <circle
+                cx={70 + index * 210}
+                cy="340"
+                r="18"
+                className="hx-stage-hit"
+              />
+              <circle
+                cx={70 + index * 210}
+                cy="340"
+                r="7"
+                className="hx-stage-dot"
+              />
+              <text x={70 + index * 210} y="368" textAnchor="middle">
+                {item.label}
+              </text>
+            </g>
           ))}
-        </div>
-        <p aria-live="polite">{active.caption}</p>
-      </div>
+        </g>
+      </svg>
+      <p className="hx-hub-caption" aria-live="polite">
+        {active.caption}
+      </p>
+      <button
+        type="button"
+        className="hx-pause"
+        aria-label={paused ? "Play the animation" : "Pause the animation"}
+        onClick={() => setPaused(value => !value)}
+      >
+        {paused ? <Play size={14} /> : <Pause size={14} />}
+      </button>
     </div>
   );
 }
@@ -232,8 +300,8 @@ function InAction() {
             <i />
           </div>
           <img
-            src="/product/overview-command-centre.png"
-            alt="The Relyxus command centre listing live incidents, owners and pending approvals"
+            src="/product/command-centre-attention.png"
+            alt="The Relyxus command centre with a SEV1 incident and a production approval waiting for review"
             loading="lazy"
             decoding="async"
           />
@@ -249,7 +317,7 @@ function Outcomes() {
     <section className="hx-section product-explorer-section">
       <div className="container">
         <h2 className="hx-h2">What your team gets</h2>
-        <ProductExplorer />
+        <OutcomeStage />
       </div>
     </section>
   );
@@ -388,7 +456,12 @@ export default function Home() {
       />
       <Hero />
       <PathCards />
-      <RegulatoryBand title="Regulators start the clock before you know the cause" />
+      <DataBand
+        title="Regulators start the clock before you know the cause"
+        items={regulatoryClocks}
+        sources={regulatorySources}
+        note="Which rules apply depends on your firm."
+      />
       <InAction />
       <Outcomes />
       <Proof />

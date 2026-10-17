@@ -11,11 +11,7 @@ import {
   PageMeta,
   TextLink,
 } from "@/components/marketing/PublicSite";
-import {
-  CONTACT_RECIPIENTS,
-  ENQUIRY_TYPES,
-  type EnquiryType,
-} from "@shared/contact";
+import { ENQUIRY_TYPES, type EnquiryType } from "@shared/contact";
 
 type FormValues = {
   name: string;
@@ -243,9 +239,8 @@ export function DemoPage() {
             <div className="demo-privacy-note">
               <LockKeyhole size={17} />
               <p>
-                <strong>Your enquiry is emailed to our team.</strong> Messages
-                go to {CONTACT_RECIPIENTS.join(" and ")}. Please do not include
-                credentials or sensitive incident data.
+                <strong>Your enquiry is emailed to our team.</strong> Please do
+                not include credentials or sensitive incident data.
               </p>
             </div>
             <TextLink href="/deployment">Read deployment guidance</TextLink>
@@ -318,17 +313,7 @@ export function DemoPage() {
               >
                 <strong>We couldn’t send that just now.</strong>
                 <p>{submitError}</p>
-                <p>
-                  You can also email{" "}
-                  <a href={`mailto:${CONTACT_RECIPIENTS[0]}`}>
-                    {CONTACT_RECIPIENTS[0]}
-                  </a>{" "}
-                  or{" "}
-                  <a href={`mailto:${CONTACT_RECIPIENTS[1]}`}>
-                    {CONTACT_RECIPIENTS[1]}
-                  </a>
-                  .
-                </p>
+                <p>Please try again in a moment, or use the contact page.</p>
               </div>
             )}
 
@@ -466,10 +451,8 @@ export function DemoPage() {
                     onChange={event => update("deployment", event.target.value)}
                   >
                     <option value="">Not sure yet</option>
-                    <option>SaaS</option>
                     <option>Dedicated</option>
                     <option>Self-hosted</option>
-                    <option>Air-gapped</option>
                   </select>
                 </label>
               </div>

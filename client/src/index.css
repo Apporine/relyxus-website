@@ -1859,6 +1859,7 @@
   .context-copy h2,
   .trust-intro h2,
   .replay-copy h2 {
+    max-width: none;
     font-size: 35px;
   }
   .context-copy .lead-copy {

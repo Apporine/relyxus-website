@@ -119,6 +119,9 @@ body {
 .public-site .wordmark:hover {
   color: var(--rx-web-action);
 }
+.public-site .wordmark-mark {
+  box-shadow: 0 0 0 1px rgba(126, 176, 255, 0.28);
+}
 .public-site .wordmark-glyph i {
   height: 2px;
   background: var(--rx-web-action);
@@ -1083,10 +1086,10 @@ body {
 .public-site .trust-intro p:not(.eyebrow) {
   color: #aeb9cb !important;
 }
-.public-site .trust-list > div {
+.public-site .trust-list > a {
   border-color: #323c52;
 }
-.public-site .trust-list > div > span:first-child {
+.public-site .trust-list > a > span:first-child {
   color: #6ce9cb;
 }
 .public-site .trust-list h3 {
@@ -1745,7 +1748,7 @@ body {
     .public-site .context-evidence,
     .public-site .walkthrough-intro,
     .public-site .product-explorer,
-    .public-site .trust-list > div,
+    .public-site .trust-list > a,
     .public-site .resource-row,
     .public-site .capability-detail-grid,
     .public-site .security-topic-list article,
@@ -2503,7 +2506,7 @@ body {
 .public-site .trust-section {
   padding-block: clamp(56px, 6vw, 80px) !important;
 }
-.public-site .trust-list > div {
+.public-site .trust-list > a {
   padding-block: 17px;
 }
 .public-site .trust-list p {

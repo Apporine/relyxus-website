@@ -461,38 +461,38 @@ export default function Home() {
             <TextLink href="/security">Explore security and trust</TextLink>
           </div>
           <div className="trust-list">
-            <div>
+            <Link href="/product/investigation">
               <span>01</span>
               <div>
                 <h3>Read-only investigation</h3>
                 <p>See what is gathered and what remains uncertain.</p>
               </div>
-              <ChevronRight size={17} />
-            </div>
-            <div>
+              <ChevronRight size={17} aria-hidden="true" />
+            </Link>
+            <Link href="/product/governed-actions">
               <span>02</span>
               <div>
                 <h3>Governed action</h3>
                 <p>Review scope, policy and approval before action.</p>
               </div>
-              <ChevronRight size={17} />
-            </div>
-            <div>
+              <ChevronRight size={17} aria-hidden="true" />
+            </Link>
+            <Link href="/product/reporting">
               <span>03</span>
               <div>
                 <h3>Evidence traceability</h3>
                 <p>Keep an ordered record of the decision and its sources.</p>
               </div>
-              <ChevronRight size={17} />
-            </div>
-            <div>
+              <ChevronRight size={17} aria-hidden="true" />
+            </Link>
+            <Link href="/deployment">
               <span>04</span>
               <div>
                 <h3>Deployment boundaries</h3>
                 <p>Ask where the platform and model run—and what may leave.</p>
               </div>
-              <ChevronRight size={17} />
-            </div>
+              <ChevronRight size={17} aria-hidden="true" />
+            </Link>
           </div>
         </div>
       </section>

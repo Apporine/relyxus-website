@@ -1915,24 +1915,6 @@ body {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  :root {
-    scroll-behavior: auto;
-  }
-  .public-site *,
-  .public-site *::before,
-  .public-site *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    animation-timeline: auto !important;
-    scroll-behavior: auto !important;
-    transition-duration: 0.01ms !important;
-  }
-  .public-site .hero-section::after {
-    animation: none !important;
-  }
-}
-
 /* Finish the theme pass on catalogue, resource and evaluation page modules. */
 .public-site .integrations-catalogue {
   color: var(--rx-text);

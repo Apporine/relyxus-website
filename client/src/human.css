@@ -2046,146 +2046,238 @@ html[data-motion="off"] .hx-scene-draw {
   stroke: #b6ffe8;
 }
 
-/* ---------- Brain map ---------- */
-.brain {
+/* ---------- Orbit map ---------- */
+.orb {
   width: 100%;
   max-width: 640px;
 }
-.brain svg {
+.orb-compact {
+  max-width: 540px;
+}
+.orb svg {
   display: block;
   width: 100%;
   height: auto;
   overflow: visible;
 }
-.brain-compact {
-  max-width: 520px;
-}
-.brain-line {
+.orb-ring {
   fill: none;
-  stroke: var(--c);
-  stroke-width: 3;
-  stroke-linejoin: round;
-  opacity: 0.55;
-  animation: brain-lane 9.6s ease-in-out infinite;
-  animation-delay: calc(var(--i) * 1.2s);
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-dasharray: 2 7;
 }
-.brain-tile {
+.orb-ring-2 {
+  stroke: rgba(105, 240, 203, 0.14);
+}
+.orb-spin {
+  transform-origin: 320px 260px;
+  animation: art-rotate 40s linear infinite;
+}
+.orb-diamond {
   fill: #05070d;
-  stroke: var(--c);
-  stroke-opacity: 0.45;
+  stroke: var(--hx-mint);
+  stroke-opacity: 0.6;
+}
+.orb-sweep {
+  transform-origin: 320px 260px;
+  animation: art-rotate 8s linear infinite;
+}
+.orb-sweep-edge {
+  stroke: var(--hx-mint);
+  stroke-opacity: 0.55;
   stroke-width: 1.5;
 }
-.brain-icon {
+.orb-source {
+  --c: var(--hx-mint);
+}
+.orb-coral {
+  --c: #ff826d;
+}
+.orb-cyan {
+  --c: #59d5ff;
+}
+.orb-mint {
+  --c: #69f0cb;
+}
+.orb-violet {
+  --c: #c27aff;
+}
+.orb-amber {
+  --c: #ff9f45;
+}
+.orb-blue {
+  --c: #5b8cff;
+}
+.orb-lime {
+  --c: #b6f23a;
+}
+.orb-pink {
+  --c: #ff5fc8;
+}
+.orb-beam {
+  fill: none;
+  stroke: var(--c);
+  stroke-width: 2;
+  stroke-opacity: 0.42;
+  stroke-linecap: round;
+}
+.orb-packet {
+  fill: var(--c);
+  filter: drop-shadow(0 0 5px var(--c));
+  offset-rotate: 0deg;
+  animation: art-travel 3.4s ease-in infinite;
+  animation-delay: calc(var(--i) * 0.42s);
+}
+.orb-node {
+  fill: #05070d;
+  stroke: var(--c);
+  stroke-width: 2;
+  stroke-opacity: 0.5;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: orb-hit 8s ease-out infinite;
+  animation-delay: var(--delay);
+}
+.orb-icon {
   color: var(--c);
   stroke: var(--c);
 }
-.brain-text {
-  fill: var(--hx-text);
+.orb-label {
+  fill: var(--hx-muted);
   font:
-    800 11px Inter,
+    800 10px Inter,
     system-ui,
     sans-serif;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
 }
-.brain-packet {
-  fill: #fff;
-  filter: drop-shadow(0 0 5px var(--c));
-  offset-rotate: 0deg;
-  animation: art-travel 3.2s linear infinite;
-  animation-delay: calc(var(--i) * 0.4s);
-}
-.brain-lane {
-  --c: var(--hx-mint);
-}
-.brain-coral {
-  --c: #ff826d;
-}
-.brain-cyan {
-  --c: #59d5ff;
-}
-.brain-mint {
-  --c: #69f0cb;
-}
-.brain-violet {
-  --c: #c27aff;
-}
-.brain-amber {
-  --c: #ff9f45;
-}
-.brain-blue {
-  --c: #5b8cff;
-}
-.brain-lime {
-  --c: #b6f23a;
-}
-.brain-pink {
-  --c: #ff5fc8;
-}
-.brain-tag rect {
-  fill: rgba(5, 7, 13, 0.9);
-  stroke: var(--c);
-  stroke-opacity: 0.6;
-}
-.brain-tag text {
-  fill: var(--c);
-  font:
-    700 9px Inter,
-    system-ui,
-    sans-serif;
-  letter-spacing: 0.04em;
-}
-.brain-halo {
+.orb-halo {
   fill: rgba(105, 240, 203, 0.1);
   transform-box: fill-box;
   transform-origin: center;
   animation: hx-pulse 3.4s ease-in-out infinite;
 }
-.brain-ring {
-  fill: #040a0c;
+.orb-progress {
+  fill: none;
+  stroke: var(--hx-mint);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 377;
+  stroke-dashoffset: 377;
+  filter: drop-shadow(0 0 6px var(--hx-mint));
+  animation: orb-progress 12s ease-in-out infinite;
+}
+.orb-hex {
+  fill: #05141a;
   stroke: #59d5ff;
   stroke-width: 2;
-  filter: drop-shadow(0 0 10px rgba(89, 213, 255, 0.7));
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 10px rgba(89, 213, 255, 0.6));
 }
-.brain-disc {
-  fill: #06141a;
-  stroke: var(--hx-mint);
-  stroke-width: 1.5;
-  stroke-dasharray: 5 6;
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: art-rotate 24s linear infinite;
-}
-.brain-glyph {
+.orb-brain {
   color: var(--hx-mint);
   stroke: var(--hx-mint);
 }
-.brain-core-text {
+.orb-core-text {
   fill: var(--hx-text);
+  font:
+    800 8px Inter,
+    system-ui,
+    sans-serif;
+  letter-spacing: 0.16em;
+}
+.orb-gate {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  animation: orb-gate 12s ease-in-out infinite;
+}
+.orb-gate circle {
+  fill: #07130f;
+  stroke: var(--hx-mint);
+  stroke-width: 2;
+}
+.orb-gate svg {
+  color: var(--hx-mint);
+  stroke: var(--hx-mint);
+}
+.orb-readout rect {
+  fill: rgba(5, 8, 14, 0.94);
+  stroke: var(--hx-mint);
+  stroke-opacity: 0.55;
+}
+.orb-phase {
+  fill: var(--hx-mint);
   font:
     800 10px Inter,
     system-ui,
     sans-serif;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
+  opacity: 0;
+  animation: orb-phase 12s ease-in-out infinite;
 }
-.brain-core-sub {
-  fill: var(--hx-mint);
-  font:
-    700 7px Inter,
-    system-ui,
-    sans-serif;
-  letter-spacing: 0.14em;
-}
-@keyframes brain-lane {
-  0%,
+@keyframes orb-hit {
+  0% {
+    stroke-opacity: 1;
+    transform: scale(1.22);
+    filter: drop-shadow(0 0 10px var(--c));
+  }
+  9% {
+    stroke-opacity: 0.5;
+    transform: scale(1);
+    filter: none;
+  }
   100% {
-    opacity: 0.4;
+    stroke-opacity: 0.5;
+    transform: scale(1);
+    filter: none;
   }
-  6%,
-  14% {
-    opacity: 1;
-    stroke-width: 4;
+}
+@keyframes orb-progress {
+  0% {
+    stroke-dashoffset: 377;
   }
+  22%,
+  25% {
+    stroke-dashoffset: 283;
+  }
+  47%,
+  50% {
+    stroke-dashoffset: 188;
+  }
+  72%,
+  75% {
+    stroke-dashoffset: 94;
+  }
+  97%,
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes orb-phase {
+  0% {
+    opacity: 0;
+  }
+  3%,
   22% {
-    opacity: 0.4;
+    opacity: 1;
+  }
+  25%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes orb-gate {
+  0%,
+  46% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  52%,
+  74% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  80%,
+  100% {
+    opacity: 0;
   }
 }

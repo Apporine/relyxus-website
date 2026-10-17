@@ -3098,19 +3098,6 @@ svg {
     left: 11px;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  :root {
-    scroll-behavior: auto;
-  }
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
 
 /* Deployment explorer: the outer frame is an illustrative scope, never an availability claim. */
 .deployment-section {

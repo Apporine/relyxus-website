@@ -355,13 +355,7 @@ body {
   );
   pointer-events: none;
 }
-.public-site .hero-art {
-  z-index: 0 !important;
-  opacity: 0.44;
-  mix-blend-mode: screen;
-  filter: saturate(1.16) contrast(1.13);
-}
-.public-site .hero-visual > :not(.hero-art) {
+.public-site .hero-visual > * {
   z-index: 2;
 }
 .public-site .hero-signal-network {

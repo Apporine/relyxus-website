@@ -24,9 +24,6 @@ import {
 } from "@/components/marketing/Explorers";
 import { resources } from "@/content/site";
 
-const heroArt =
-  "/manus-storage/async-images/NeZZUlgorDxr4dK1BVqfo0/image-1.webp";
-
 function HeroEvidence() {
   return (
     <div
@@ -34,7 +31,6 @@ function HeroEvidence() {
       role="group"
       aria-label="Example incident evidence panel; no production system is connected"
     >
-      <img className="hero-art" src={heroArt} alt="" aria-hidden="true" />
       <svg
         className="hero-signal-network"
         viewBox="0 0 640 540"

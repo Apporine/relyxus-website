@@ -234,7 +234,7 @@ function ControlSummary() {
       icon: <ShieldCheck size={18} />,
       title: "Policy-controlled action",
       text: "Keep a human decision between proposal and execution.",
-      href: "/product/governed-actions",
+      href: "/product/investigation#governed-actions",
     },
     {
       number: "03",
@@ -469,7 +469,7 @@ export default function Home() {
               </div>
               <ChevronRight size={17} aria-hidden="true" />
             </Link>
-            <Link href="/product/governed-actions">
+            <Link href="/product/investigation#governed-actions">
               <span>02</span>
               <div>
                 <h3>Governed action</h3>

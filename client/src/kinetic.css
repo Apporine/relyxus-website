@@ -1339,6 +1339,8 @@ body {
 .public-site .capability-detail-section,
 .public-site .capability-questions,
 .public-site .autonomy-section,
+.public-site .workflow-split,
+.public-site .workflow-strip,
 .public-site .security-intro,
 .public-site .security-topics,
 .public-site .financial-story,
@@ -1358,6 +1360,7 @@ body {
 .public-site .product-overview-callout h2,
 .public-site .capability-detail-copy h2,
 .public-site .security-lead h2,
+.public-site .workflow-split-grid h2,
 .public-site .financial-story h2,
 .public-site .autonomy-layout h2 {
   color: #f1f4fb !important;
@@ -1365,6 +1368,7 @@ body {
 .public-site .product-overview-callout p,
 .public-site .capability-detail-copy p,
 .public-site .security-lead p,
+.public-site .workflow-split-grid p,
 .public-site .financial-story p,
 .public-site .autonomy-layout p {
   color: #b0bbce !important;
@@ -1373,6 +1377,9 @@ body {
 .public-site .security-boundary-graphic,
 .public-site .question-grid article,
 .public-site .security-topic-list article,
+.public-site .security-topic-grid > article,
+.public-site .workflow-split-grid > article,
+.public-site .workflow-steps,
 .public-site .finance-storyboard > div,
 .public-site .autonomy-list > div {
   color: #e9eef8;
@@ -1436,12 +1443,14 @@ body {
 }
 .public-site .question-grid article h3,
 .public-site .security-topic-list h3,
+.public-site .security-topic-grid h3,
 .public-site .finance-storyboard strong,
 .public-site .autonomy-list strong {
   color: #f0f4fb !important;
 }
 .public-site .question-grid article p,
 .public-site .security-topic-list p,
+.public-site .security-topic-grid p,
 .public-site .finance-storyboard small,
 .public-site .autonomy-list p {
   color: #aeb9cd !important;
@@ -1797,6 +1806,8 @@ body {
     .public-site .resource-row,
     .public-site .capability-detail-grid,
     .public-site .security-topic-list article,
+    .public-site .security-topic-grid > article,
+    .public-site .workflow-split-grid > article,
     .public-site .finance-storyboard > div {
       animation: rx-scroll-arrive 1s linear both;
       animation-timeline: view();

@@ -709,39 +709,23 @@ export function CompanyPage() {
             </ul>
           </div>
 
-          <div className="company-shot-stack" aria-hidden="false">
-            <p className="company-shot-kicker">
-              <span>ILLUSTRATIVE UI</span>
-              <span>NOT CONNECTED</span>
-            </p>
+          <div className="company-shot-stack">
             <div className="company-shot-stage">
               <figure className="company-shot company-shot-back">
-                <div className="company-shot-chrome">
-                  <i />
-                  <i />
-                  <i />
-                  <span>Command Centre</span>
-                </div>
                 <img
                   src="/product/command-centre.png"
                   alt="Relyxus Command Centre showing active incidents, approvals and service health"
-                  width={1600}
-                  height={1000}
+                  width={1894}
+                  height={712}
                   loading="lazy"
                 />
               </figure>
               <figure className="company-shot company-shot-front">
-                <div className="company-shot-chrome">
-                  <i />
-                  <i />
-                  <i />
-                  <span>Needs attention</span>
-                </div>
                 <img
                   src="/product/command-centre-attention.png"
                   alt="Relyxus Command Centre highlighting a SEV1 incident and a production approval waiting for review"
-                  width={1600}
-                  height={1000}
+                  width={1894}
+                  height={810}
                   loading="lazy"
                 />
                 <figcaption>

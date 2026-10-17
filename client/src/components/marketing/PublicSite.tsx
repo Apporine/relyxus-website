@@ -22,9 +22,13 @@ export function PageMeta({
   noindex?: boolean;
 }) {
   useEffect(() => {
-    const fullTitle = `${title} | ${SITE_NAME}`;
+    const normalized = title.trim();
+    const fullTitle =
+      !normalized || normalized.toLowerCase() === SITE_NAME.toLowerCase()
+        ? SITE_NAME
+        : `${normalized} | ${SITE_NAME}`;
     const canonicalUrl = new URL(window.location.pathname, window.location.origin).href;
-    const imageUrl = new URL("/og-cover.svg", window.location.origin).href;
+    const imageUrl = new URL("/Icon.jpg", window.location.origin).href;
 
     document.title = fullTitle;
     document.documentElement.lang = "en";
@@ -41,7 +45,7 @@ export function PageMeta({
     upsertMeta("property", "og:description", description);
     upsertMeta("property", "og:url", canonicalUrl);
     upsertMeta("property", "og:image", imageUrl);
-    upsertMeta("property", "og:image:alt", `${SITE_NAME} — incident response with control`);
+    upsertMeta("property", "og:image:alt", SITE_NAME);
     upsertMeta("name", "twitter:card", "summary_large_image");
     upsertMeta("name", "twitter:title", fullTitle);
     upsertMeta("name", "twitter:description", description);

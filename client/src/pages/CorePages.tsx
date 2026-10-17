@@ -136,9 +136,8 @@ export function SecurityPage() {
             <div>
               <h2 className="hx-h2">What’s in the security pack</h2>
               <p>
-                Data flows, identity and access, how AI data is handled, action
-                safety, assurance status and support arrangements. We share it
-                with teams in an evaluation, {packPromise}.
+                Written for security and architecture teams. We share it with
+                teams in an evaluation, {packPromise}.
               </p>
               <AssuranceList />
             </div>

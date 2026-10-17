@@ -666,7 +666,15 @@ export function ProofStrip() {
         {metric && (
           <p className="hx-metric">
             <strong>{metric.value}</strong> {metric.label}
-            <small>{metric.source}</small>
+            <small>
+              {metric.href ? (
+                <a href={metric.href} target="_blank" rel="noreferrer">
+                  {metric.source}
+                </a>
+              ) : (
+                metric.source
+              )}
+            </small>
           </p>
         )}
         {quote && (
@@ -692,7 +700,7 @@ export function ProofStrip() {
         )}
         {integrations.length > 0 && (
           <div className="hx-integrations">
-            <span>Works with</span>
+            <span>Reads evidence from</span>
             <ul>
               {integrations.map(name => (
                 <li key={name}>{name}</li>

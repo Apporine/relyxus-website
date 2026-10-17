@@ -215,14 +215,14 @@ export const perspectiveFacts = {
     },
   },
   resilience: {
-    value: "+20%",
+    value: "17 Jan 2025",
     label:
-      "rise in operational incident notifications to the FCA in 2023, ahead of its rules on standard incident reporting",
+      "DORA applies: major ICT-related incidents must be reported to your regulator in stages",
     payoff:
       "Relyxus logs the timeline as the incident runs, so the report starts as a draft.",
     source: {
-      label: "FCA, Consultation Paper CP24/28",
-      href: "https://www.fca.org.uk/publication/consultation/cp24-28.pdf",
+      label: "Regulation (EU) 2022/2554 (DORA)",
+      href: "https://eur-lex.europa.eu/eli/reg/2022/2554/oj",
     },
   },
 } as const;
@@ -572,14 +572,45 @@ export const packPromise = "typically within two business days";
 export const proofStrip: {
   logos: readonly { name: string; src?: string }[];
   quote: { text: string; name: string; role: string } | null;
-  metric: { value: string; label: string; source: string } | null;
-} = { logos: [], quote: null, metric: null };
+  metric: {
+    value: string;
+    label: string;
+    source: string;
+    href?: string;
+  } | null;
+} = {
+  logos: [],
+  quote: null,
+  // Public regulatory fact, not a Relyxus result. Replace with a pilot metric when you have one.
+  metric: {
+    value: "18 Mar 2027",
+    label:
+      "UK operational incident reporting rules apply, with one standard regime across the FCA, PRA and Bank of England",
+    source: "FCA Policy Statement PS26/2, published 18 March 2026",
+    href: "https://www.fca.org.uk/publication/policy/ps26-2.pdf",
+  },
+};
 
 /** Tools Relyxus really connects to today, by name. */
-export const integrations: readonly string[] = [];
+export const integrations: readonly string[] = [
+  "Alerts",
+  "Logs",
+  "Metrics",
+  "Traces",
+  "Changes",
+  "Deploys",
+  "Tickets",
+  "Identity",
+];
 
 /** Assurance status shown on the Security page, e.g. { label: "SOC 2 Type II", status: "In progress, target Q3 2027" }. */
-export const assurance: readonly { label: string; status: string }[] = [];
+export const assurance: readonly { label: string; status: string }[] = [
+  { label: "Data flows and identity", status: "Included" },
+  { label: "How AI data is handled", status: "Included" },
+  { label: "Action safety and approvals", status: "Included" },
+  { label: "Assurance status", status: "Included" },
+  { label: "Support and continuity", status: "Included" },
+];
 
 export const founders: readonly {
   name: string;

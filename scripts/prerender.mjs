@@ -52,7 +52,9 @@ const nav = [
 const template = await readFile(path.join(dist, "index.html"), "utf8");
 
 function setMeta(html, attr, key, content) {
-  const pattern = new RegExp(`(<meta ${attr}="${key}"\s+content=")[^"]*(")`);
+  const pattern = new RegExp(
+    String.raw`(<meta ${attr}="${key}"\s+content=")[^"]*(")`
+  );
   return pattern.test(html)
     ? html.replace(pattern, `$1${esc(content)}$2`)
     : html;
@@ -60,10 +62,7 @@ function setMeta(html, attr, key, content) {
 
 for (const page of pages) {
   let html = template;
-  html = html.replace(
-    /<title>[\s\S]*?<\/title>/,
-    `<title>${esc(page.title)}</title>`
-  );
+  html = html.replace(/<title>[\s\S]*?<\/title>/, "<title>relyxus</title>");
   html = setMeta(html, "name", "description", page.description);
   html = setMeta(html, "property", "og:title", page.title);
   html = setMeta(html, "property", "og:description", page.description);

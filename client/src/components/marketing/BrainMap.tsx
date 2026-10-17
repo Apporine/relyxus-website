@@ -84,8 +84,8 @@ export function BrainMap({ compact = false }: { compact?: boolean }) {
       >
         <defs>
           <linearGradient id="orb-sweep" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" stopColor="#69f0cb" stopOpacity="0" />
-            <stop offset="1" stopColor="#69f0cb" stopOpacity="0.28" />
+            <stop offset="0" stopColor="#05DCE8" stopOpacity="0" />
+            <stop offset="1" stopColor="#05DCE8" stopOpacity="0.28" />
           </linearGradient>
         </defs>
 

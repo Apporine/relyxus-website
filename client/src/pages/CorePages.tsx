@@ -93,6 +93,21 @@ const commitments = [
   },
 ] as const;
 
+const reviewerTests = [
+  {
+    title: "Read-only means read-only",
+    text: "Check the access Relyxus is given. Investigation needs read access only.",
+  },
+  {
+    title: "No action without an approver",
+    text: "Ask us to show a proposed change waiting at the approval gate.",
+  },
+  {
+    title: "Your data stays put",
+    text: "Ask where evidence is stored and which paths leave your environment.",
+  },
+] as const;
+
 export function SecurityPage() {
   return (
     <>
@@ -124,6 +139,23 @@ export function SecurityPage() {
                 <Check size={20} aria-hidden="true" />
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="hx-section">
+        <div className="container">
+          <h2 className="hx-h2 hx-lead-heading">
+            Three things to test in your review
+          </h2>
+          <div className="hx-commitments">
+            {reviewerTests.map((test, index) => (
+              <article key={test.title}>
+                <span className="hx-test-index">0{index + 1}</span>
+                <h3>{test.title}</h3>
+                <p>{test.text}</p>
               </article>
             ))}
           </div>
@@ -264,6 +296,13 @@ export function FinancialServicesPage() {
   );
 }
 
+const holdUs = [
+  "A person replies to every note within one business day.",
+  "The security pack reaches teams in an evaluation, typically within two business days.",
+  "Nothing changes in your systems without the approvers you name.",
+  "If we don’t know something, we say so and find out.",
+] as const;
+
 const principles = [
   {
     title: "A person decides",
@@ -350,6 +389,19 @@ export function CompanyPage() {
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="hx-section">
+        <div className="container">
+          <h2 className="hx-h2">What you can hold us to</h2>
+          <ul className="hx-trust-lines hx-holdus">
+            {holdUs.map(line => (
+              <li key={line}>
+                <Check size={18} aria-hidden="true" /> {line}
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

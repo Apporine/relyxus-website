@@ -9,6 +9,7 @@ import {
   founders,
   integrations,
   proofStrip,
+  standards,
   navGroups,
   type DataPoint,
   type DataSource,
@@ -57,7 +58,7 @@ export function PageMeta({
       "robots",
       noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large"
     );
-    upsertMeta("name", "theme-color", "#01030a");
+    upsertMeta("name", "theme-color", "#110A24");
     upsertMeta("property", "og:site_name", SITE_NAME);
     upsertMeta("property", "og:locale", "en_US");
     upsertMeta("property", "og:type", "website");
@@ -700,6 +701,16 @@ export function ProofStrip() {
               </li>
             ))}
           </ul>
+        )}
+        {standards.length > 0 && (
+          <div className="hx-integrations">
+            <span>The rules your team works to</span>
+            <ul>
+              {standards.map(name => (
+                <li key={name}>{name}</li>
+              ))}
+            </ul>
+          </div>
         )}
         {integrations.length > 0 && (
           <div className="hx-integrations">

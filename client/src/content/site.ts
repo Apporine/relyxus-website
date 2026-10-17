@@ -600,6 +600,13 @@ export const proofStrip: {
   },
 };
 
+/** Public rules and standards your buyers work to. Named, not claimed as certifications. */
+export const standards: readonly string[] = [
+  "DORA (EU 2022/2554)",
+  "FCA and PRA operational resilience (PS21/3, SS1/21)",
+  "FCA, PRA and Bank of England incident reporting (PS26/2)",
+];
+
 /** Tools Relyxus really connects to today, by name. */
 export const integrations: readonly string[] = [
   "Alerts",

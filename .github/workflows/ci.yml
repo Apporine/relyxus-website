@@ -54,3 +54,5 @@ jobs:
           test -f dist/public/Icon.jpg
           test -f dist/public/robots.txt
           test -f dist/public/sitemap.xml
+          test -f dist/public/product/index.html
+          test -f dist/public/og-cover.png

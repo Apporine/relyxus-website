@@ -1,16 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Relyxus">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0b0e18"/>
-      <stop offset="55%" stop-color="#141b29"/>
-      <stop offset="100%" stop-color="#1d2a44"/>
-    </linearGradient>
-  </defs>
-  <rect width="1200" height="630" fill="url(#bg)"/>
-  <circle cx="980" cy="120" r="180" fill="#2dd4bf" fill-opacity="0.12"/>
-  <circle cx="180" cy="520" r="220" fill="#60a5fa" fill-opacity="0.12"/>
-  <text x="96" y="250" fill="#f8fafc" font-family="Georgia, 'Times New Roman', serif" font-size="78" font-weight="700">relyxus</text>
-  <text x="96" y="330" fill="#dbe4f5" font-family="Arial, Helvetica, sans-serif" font-size="36">Understand the incident.</text>
-  <text x="96" y="382" fill="#9ae6d9" font-family="Arial, Helvetica, sans-serif" font-size="36">Control what happens next.</text>
-  <text x="96" y="500" fill="#94a3b8" font-family="Arial, Helvetica, sans-serif" font-size="22">AI incident response for regulated teams</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Relyxus: find the cause of an incident, with every step on the record">
+  <rect width="1200" height="630" fill="#01030a"/>
+  <circle cx="1010" cy="110" r="260" fill="#69f0cb" fill-opacity="0.08"/>
+  <g fill="none" stroke="#69f0cb" stroke-opacity="0.5" stroke-width="2">
+    <path d="M820 70 C900 70 900 170 990 170"/>
+    <path d="M820 170 C900 170 900 170 990 170"/>
+    <path d="M820 270 C900 270 900 170 990 170"/>
+  </g>
+  <g fill="#f4f6fb" font-family="Inter, Arial, sans-serif">
+    <text x="80" y="110" font-size="34" font-weight="800">relyxus</text>
+    <text x="80" y="270" font-size="68" font-weight="800" letter-spacing="-1.4">Find the cause of</text>
+    <text x="80" y="348" font-size="68" font-weight="800" letter-spacing="-1.4">an incident, with every</text>
+    <text x="80" y="426" font-size="68" font-weight="800" letter-spacing="-1.4" fill="#69f0cb">step on the record.</text>
+    <text x="80" y="520" font-size="26" fill="#a9b3c5">For incident, SRE and resilience teams at regulated firms</text>
+  </g>
+  <circle cx="1010" cy="170" r="30" fill="#07130f" stroke="#69f0cb" stroke-width="3"/>
 </svg>

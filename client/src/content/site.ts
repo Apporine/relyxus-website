@@ -142,19 +142,60 @@ export const pathCards = [
   },
 ] as const;
 
-/** Countable facts about the product as it is described today. */
-export const productFacts = [
+/**
+ * Clocks set by regulators. Public rules, not Relyxus performance claims.
+ * DORA: Regulation (EU) 2022/2554, applicable from 17 January 2025, incident
+ * reporting timelines per the adopted technical standards.
+ * UK: FCA PS21/3 and PRA SS1/21 operational resilience, transition ended
+ * 31 March 2025. Have compliance re-check wording before launch.
+ */
+export const regulatoryClocks = [
   {
-    value: "3",
-    label: "outcomes: faster cause, controlled action, audit-ready record",
+    value: "4 hours",
+    label:
+      "to send DORA’s first notice once an incident is classed as major, and 24 hours at most from first awareness",
   },
   {
-    value: "1",
-    label: "human approval gate between a proposal and any action",
+    value: "72 hours",
+    label: "after that first notice, to file the DORA intermediate report",
   },
-  { value: "2", label: "ways to run it: dedicated, or self-hosted by you" },
-  { value: "0", label: "changes made to your systems while investigating" },
+  {
+    value: "1 month",
+    label: "to file the final DORA report on a major ICT incident",
+  },
+  {
+    value: "31 Mar 2025",
+    label:
+      "when UK firms had to stay within impact tolerance for every important business service (FCA and PRA)",
+  },
 ] as const;
+
+export const regulatorySources = [
+  {
+    label: "DORA, Regulation (EU) 2022/2554",
+    href: "https://eur-lex.europa.eu/eli/reg/2022/2554/oj",
+  },
+  {
+    label: "FCA operational resilience",
+    href: "https://www.fca.org.uk/firms/operational-resilience",
+  },
+] as const;
+
+/** A note in the team’s voice. Add name, role and photo when you want it signed. */
+export const founderNote: {
+  heading: string;
+  paragraphs: readonly string[];
+  signature: string;
+  name?: string;
+  photo?: string;
+} = {
+  heading: "Why we built Relyxus",
+  paragraphs: [
+    "An incident gets decided in the first hour and explained for weeks afterwards. The people on call carry both jobs.",
+    "We built Relyxus so the explanation exists by the time the incident is over: what we saw, what we believed, who said yes. We keep a person in charge of every change, and we keep the record honest about what we didn’t know.",
+  ],
+  signature: "The Relyxus team at Apporine",
+};
 
 /**
  * Proof points. Add only items that are true and approved for publication.
@@ -170,6 +211,12 @@ export const proofPoints: readonly {
     detail:
       "Run Relyxus against incidents your team already solved and compare the result with what you know.",
     status: "Open to regulated teams",
+  },
+  {
+    title: "Where the product is",
+    detail:
+      "Relyxus is in development. Demos and screenshots use sample data, and we’re talking to regulated teams about pilots.",
+    status: "In development",
   },
   {
     title: "Built by Apporine",

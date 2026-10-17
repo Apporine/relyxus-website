@@ -1,7 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { ArrowRight, ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
-import { navGroups, type NavItem } from "@/content/site";
+import {
+  founderNote,
+  navGroups,
+  regulatoryClocks,
+  regulatorySources,
+  type NavItem,
+} from "@/content/site";
 import {
   DEFAULT_KEYWORDS,
   SITE_NAME,
@@ -523,6 +529,57 @@ export function TextLink({
       {children}
       <ArrowUpRight size={16} aria-hidden="true" />
     </Link>
+  );
+}
+
+export function RegulatoryBand({ title }: { title: string }) {
+  return (
+    <section className="hx-band" aria-label="Regulatory reporting clocks">
+      <div className="container">
+        <h2 className="hx-band-title">{title}</h2>
+        <dl className="hx-facts">
+          {regulatoryClocks.map(clock => (
+            <div key={clock.value}>
+              <dt>{clock.value}</dt>
+              <dd>{clock.label}</dd>
+            </div>
+          ))}
+        </dl>
+        <p className="hx-source-line">
+          Sources:{" "}
+          {regulatorySources.map((source, index) => (
+            <span key={source.href}>
+              {index > 0 && ", "}
+              <a href={source.href} target="_blank" rel="noreferrer">
+                {source.label}
+              </a>
+            </span>
+          ))}
+          . Which rules apply depends on your firm.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+export function FounderNote() {
+  return (
+    <section className="hx-section">
+      <div className="container">
+        <div className="hx-note">
+          <h2 className="hx-h2">{founderNote.heading}</h2>
+          <div className="hx-note-body">
+            {founderNote.paragraphs.map(text => (
+              <p key={text}>{text}</p>
+            ))}
+            <p className="hx-note-sign">
+              {founderNote.name ? `${founderNote.name}, ` : "— "}
+              {founderNote.signature}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 

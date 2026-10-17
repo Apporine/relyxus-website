@@ -369,47 +369,6 @@ const footerLegal = [
 ] as const;
 
 export function SiteFooter() {
-  const [preferencesOpen, setPreferencesOpen] = useState(false);
-  const preferenceTrigger = useRef<HTMLButtonElement>(null);
-  const preferenceDialog = useRef<HTMLElement>(null);
-  const preferenceClose = useRef<HTMLButtonElement>(null);
-  const closePreferences = useCallback(() => {
-    setPreferencesOpen(false);
-    requestAnimationFrame(() => preferenceTrigger.current?.focus());
-  }, []);
-  useEffect(() => {
-    if (!preferencesOpen) return;
-    preferenceClose.current?.focus();
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        event.preventDefault();
-        closePreferences();
-      }
-      if (event.key === "Tab" && preferenceDialog.current) {
-        const elements = Array.from(
-          preferenceDialog.current.querySelectorAll<HTMLElement>(
-            "button:not([disabled]), a[href]"
-          )
-        ).filter(element => element.getClientRects().length > 0);
-        if (elements.length === 0) return;
-        const first = elements[0];
-        const last = elements[elements.length - 1];
-        if (
-          event.shiftKey &&
-          (document.activeElement === first ||
-            !preferenceDialog.current.contains(document.activeElement))
-        ) {
-          event.preventDefault();
-          last.focus();
-        } else if (!event.shiftKey && document.activeElement === last) {
-          event.preventDefault();
-          first.focus();
-        }
-      }
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [preferencesOpen, closePreferences]);
   return (
     <footer className="site-footer">
       <div className="container footer-shell">
@@ -430,57 +389,13 @@ export function SiteFooter() {
                 {item.label}
               </Link>
             ))}
-            <button
-              ref={preferenceTrigger}
-              type="button"
-              onClick={() => setPreferencesOpen(true)}
-            >
-              Cookie preferences
-            </button>
           </nav>
+          <p className="footer-copy">
+            © {new Date().getFullYear()} Apporine. All rights reserved.
+          </p>
+          <span className="footer-legal-spacer" aria-hidden="true" />
         </div>
       </div>
-      {preferencesOpen && (
-        <div
-          className="dialog-scrim"
-          onMouseDown={event => {
-            if (event.target === event.currentTarget) closePreferences();
-          }}
-        >
-          <section
-            className="dialog-panel"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="preferences-title"
-            aria-describedby="preferences-description"
-            ref={preferenceDialog}
-          >
-            <button
-              ref={preferenceClose}
-              type="button"
-              className="dialog-close"
-              aria-label="Close preferences"
-              onClick={closePreferences}
-            >
-              <X size={20} />
-            </button>
-            <p className="eyebrow">SITE PREFERENCES</p>
-            <h2 id="preferences-title">A note on cookies</h2>
-            <p id="preferences-description">
-              This site does not load analytics or marketing cookies today.
-              There is nothing optional to accept here. If tracking is added
-              later, consent controls will appear in this dialog.
-            </p>
-            <button
-              type="button"
-              className="button button-primary"
-              onClick={closePreferences}
-            >
-              Close
-            </button>
-          </section>
-        </div>
-      )}
     </footer>
   );
 }

@@ -8,6 +8,7 @@ import {
   Rocket,
   Route,
   ScrollText,
+  ShieldCheck,
   Ticket,
 } from "lucide-react";
 
@@ -21,153 +22,191 @@ type Tone =
   | "lime"
   | "pink";
 
-/** Each lane: tile position, label, icon, and an orthogonal route into the core. */
-const lanes: {
+const CX = 320;
+const CY = 260;
+const RX = 240;
+const RY = 196;
+const SWEEP_SECONDS = 8;
+
+/** Clockwise from the top, so the radar sweep reaches them in this order. */
+const sources: {
   label: string;
   tone: Tone;
-  x: number;
-  y: number;
-  path: string;
+  deg: number;
   icon: typeof Bell;
 }[] = [
-  {
-    label: "Alerts",
-    tone: "coral",
-    x: 30,
-    y: 40,
-    path: "M130 66 H196 V140 L262 206",
-    icon: Bell,
-  },
-  {
-    label: "Logs",
-    tone: "cyan",
-    x: 270,
-    y: 14,
-    path: "M320 66 V198",
-    icon: ScrollText,
-  },
-  {
-    label: "Metrics",
-    tone: "mint",
-    x: 510,
-    y: 40,
-    path: "M510 66 H444 V140 L378 206",
-    icon: Activity,
-  },
-  {
-    label: "Changes",
-    tone: "violet",
-    x: 10,
-    y: 234,
-    path: "M110 260 H258",
-    icon: GitBranch,
-  },
-  {
-    label: "Tickets",
-    tone: "amber",
-    x: 530,
-    y: 234,
-    path: "M530 260 H382",
-    icon: Ticket,
-  },
-  {
-    label: "Traces",
-    tone: "blue",
-    x: 30,
-    y: 430,
-    path: "M130 456 H196 V380 L262 314",
-    icon: Route,
-  },
-  {
-    label: "Deploys",
-    tone: "lime",
-    x: 270,
-    y: 444,
-    path: "M320 444 V322",
-    icon: Rocket,
-  },
-  {
-    label: "Identity",
-    tone: "pink",
-    x: 510,
-    y: 430,
-    path: "M510 456 H444 V380 L378 314",
-    icon: Fingerprint,
-  },
+  { label: "Logs", tone: "cyan", deg: 0, icon: ScrollText },
+  { label: "Metrics", tone: "mint", deg: 45, icon: Activity },
+  { label: "Tickets", tone: "amber", deg: 90, icon: Ticket },
+  { label: "Identity", tone: "pink", deg: 135, icon: Fingerprint },
+  { label: "Deploys", tone: "lime", deg: 180, icon: Rocket },
+  { label: "Traces", tone: "blue", deg: 225, icon: Route },
+  { label: "Changes", tone: "violet", deg: 270, icon: GitBranch },
+  { label: "Alerts", tone: "coral", deg: 315, icon: Bell },
 ];
 
-const tags: { label: string; tone: Tone; x: number; y: number }[] = [
-  { label: "Evidence aware", tone: "mint", x: 250, y: 176 },
-  { label: "Change aware", tone: "violet", x: 252, y: 352 },
-  { label: "Policy aware", tone: "amber", x: 392, y: 176 },
-  { label: "Record aware", tone: "cyan", x: 394, y: 352 },
-];
+const phases = [
+  "Gathering evidence",
+  "Likely cause found",
+  "Waiting for approval",
+  "Recorded",
+] as const;
+
+function place(deg: number, rx = RX, ry = RY) {
+  const rad = ((deg - 90) * Math.PI) / 180;
+  return { x: CX + rx * Math.cos(rad), y: CY + ry * Math.sin(rad) };
+}
+
+/** A curved beam that swirls into the core. */
+function beam(from: { x: number; y: number }) {
+  const vx = CX - from.x;
+  const vy = CY - from.y;
+  const length = Math.hypot(vx, vy);
+  const mx = (from.x + CX) / 2 + (-vy / length) * 58;
+  const my = (from.y + CY) / 2 + (vx / length) * 58;
+  return `M${from.x.toFixed(1)} ${from.y.toFixed(1)} Q${mx.toFixed(1)} ${my.toFixed(1)} ${CX} ${CY}`;
+}
+
+const sweepStart = place(-50, 250, 250);
+const sweepEnd = place(0, 250, 250);
+const hexagon = Array.from({ length: 6 }, (_, index) => {
+  const rad = ((index * 60 - 90) * Math.PI) / 180;
+  return `${(CX + 44 * Math.cos(rad)).toFixed(1)},${(CY + 44 * Math.sin(rad)).toFixed(1)}`;
+}).join(" ");
 
 export function BrainMap({ compact = false }: { compact?: boolean }) {
   return (
-    <div className={`brain ${compact ? "brain-compact" : ""}`}>
+    <div className={`orb ${compact ? "orb-compact" : ""}`}>
       <svg
         viewBox="0 0 640 520"
         role="img"
-        aria-label="Relyxus core: alerts, logs, metrics, changes, tickets, traces, deploys and identity all feed one incident record."
+        aria-label="Relyxus core. Logs, metrics, tickets, identity, deploys, traces, changes and alerts feed one incident record, which moves from gathering evidence to a likely cause, an approval and a record."
       >
-        {lanes.map((lane, index) => (
-          <g
-            key={lane.label}
-            className={`brain-lane brain-${lane.tone}`}
-            style={{ "--i": index } as CSSProperties}
-          >
-            <path className="brain-line" d={lane.path} />
-            <circle
-              className="brain-packet"
-              r="4.5"
-              style={{ offsetPath: `path("${lane.path}")` } as CSSProperties}
-            />
-            <rect
-              className="brain-tile"
-              x={lane.x}
-              y={lane.y}
-              width="100"
-              height="52"
-              rx="10"
-            />
-            <lane.icon
-              className="brain-icon"
-              x={lane.x + 38}
-              y={lane.y + 7}
-              width={24}
-              height={24}
-            />
-            <text
-              className="brain-text"
-              x={lane.x + 50}
-              y={lane.y + 44}
-              textAnchor="middle"
+        <defs>
+          <linearGradient id="orb-sweep" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stopColor="#69f0cb" stopOpacity="0" />
+            <stop offset="1" stopColor="#69f0cb" stopOpacity="0.28" />
+          </linearGradient>
+        </defs>
+
+        <ellipse className="orb-ring" cx={CX} cy={CY} rx={RX} ry={RY} />
+        <ellipse
+          className="orb-ring orb-ring-2"
+          cx={CX}
+          cy={CY}
+          rx="170"
+          ry="140"
+        />
+        <g className="orb-spin">
+          <circle className="orb-ring" cx={CX} cy={CY} r="104" />
+          {[0, 90, 180, 270].map(deg => {
+            const point = place(deg, 104, 104);
+            return (
+              <rect
+                key={deg}
+                className="orb-diamond"
+                x={point.x - 5}
+                y={point.y - 5}
+                width="10"
+                height="10"
+                transform={`rotate(45 ${point.x} ${point.y})`}
+              />
+            );
+          })}
+        </g>
+
+        <g className="orb-sweep">
+          <path
+            d={`M${CX} ${CY} L${sweepStart.x.toFixed(1)} ${sweepStart.y.toFixed(1)} A250 250 0 0 1 ${sweepEnd.x.toFixed(1)} ${sweepEnd.y.toFixed(1)} Z`}
+            fill="url(#orb-sweep)"
+          />
+          <path
+            className="orb-sweep-edge"
+            d={`M${CX} ${CY} L${sweepEnd.x.toFixed(1)} ${sweepEnd.y.toFixed(1)}`}
+          />
+        </g>
+
+        {sources.map((source, index) => {
+          const point = place(source.deg);
+          const d = beam(point);
+          const below = source.deg > 90 && source.deg < 270;
+          return (
+            <g
+              key={source.label}
+              className={`orb-source orb-${source.tone}`}
+              style={
+                {
+                  "--i": index,
+                  "--delay": `${((source.deg / 360) * SWEEP_SECONDS).toFixed(2)}s`,
+                } as CSSProperties
+              }
             >
-              {lane.label.toUpperCase()}
-            </text>
-          </g>
-        ))}
+              <path className="orb-beam" d={d} />
+              <circle
+                className="orb-packet"
+                r="4"
+                style={{ offsetPath: `path("${d}")` } as CSSProperties}
+              />
+              <circle className="orb-node" cx={point.x} cy={point.y} r="25" />
+              <source.icon
+                className="orb-icon"
+                x={point.x - 11}
+                y={point.y - 11}
+                width={22}
+                height={22}
+              />
+              <text
+                className="orb-label"
+                x={point.x}
+                y={point.y + (below ? 45 : -35)}
+                textAnchor="middle"
+              >
+                {source.label.toUpperCase()}
+              </text>
+            </g>
+          );
+        })}
 
-        {tags.map(tag => (
-          <g key={tag.label} className={`brain-tag brain-${tag.tone}`}>
-            <rect x={tag.x - 6} y={tag.y - 11} width="96" height="18" rx="4" />
-            <text x={tag.x + 42} y={tag.y + 2} textAnchor="middle">
-              {tag.label.toUpperCase()}
-            </text>
-          </g>
-        ))}
+        <g className="orb-gate">
+          <circle cx={CX + 104} cy={CY} r="19" />
+          <ShieldCheck x={CX + 104 - 10} y={CY - 10} width={20} height={20} />
+        </g>
 
-        <circle className="brain-halo" cx="320" cy="260" r="74" />
-        <circle className="brain-ring" cx="320" cy="260" r="60" />
-        <circle className="brain-disc" cx="320" cy="260" r="50" />
-        <Brain className="brain-glyph" x={296} y={232} width={48} height={48} />
-        <text className="brain-core-text" x="320" y="296" textAnchor="middle">
+        <circle className="orb-halo" cx={CX} cy={CY} r="70" />
+        <circle
+          className="orb-progress"
+          cx={CX}
+          cy={CY}
+          r="60"
+          transform={`rotate(-90 ${CX} ${CY})`}
+        />
+        <polygon className="orb-hex" points={hexagon} />
+        <Brain
+          className="orb-brain"
+          x={CX - 20}
+          y={CY - 21}
+          width={40}
+          height={40}
+        />
+        <text className="orb-core-text" x={CX} y={CY + 33} textAnchor="middle">
           RELYXUS
         </text>
-        <text className="brain-core-sub" x="320" y="308" textAnchor="middle">
-          INCIDENT CORE
-        </text>
+
+        <g className="orb-readout">
+          <rect x={CX - 92} y="333" width="184" height="26" rx="13" />
+          {phases.map((phase, index) => (
+            <text
+              key={phase}
+              className="orb-phase"
+              x={CX}
+              y="350"
+              textAnchor="middle"
+              style={{ animationDelay: `${index * 3}s` }}
+            >
+              {phase.toUpperCase()}
+            </text>
+          ))}
+        </g>
       </svg>
     </div>
   );

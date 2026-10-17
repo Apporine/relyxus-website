@@ -117,23 +117,32 @@ export const pathCards = [
   {
     key: "engineering",
     label: "Engineering and SRE",
-    title: "Get to the cause without hunting through tabs.",
-    text: "One investigation per incident, with every source linked.",
+    question: "What changed, and is it the cause?",
+    answer:
+      "Alerts, changes and logs in one investigation, with every source linked.",
+    cta: "See the engineering view",
     href: "/solutions/financial-services#engineering",
+    glyph: "converge",
   },
   {
     key: "resilience",
     label: "Risk and resilience",
-    title: "Have the record ready before anyone asks.",
-    text: "A timeline you can hand to audit, built while the incident runs.",
+    question: "What do we tell the regulator, and by when?",
+    answer:
+      "A timeline built while the incident runs, ready for your 4-hour and 72-hour reports.",
+    cta: "See the resilience view",
     href: "/solutions/financial-services#resilience",
+    glyph: "clock",
   },
   {
     key: "security",
     label: "Security review",
-    title: "See what Relyxus can touch before you approve it.",
-    text: "Read-only by default. Your data stays in your environment.",
+    question: "What can this tool touch?",
+    answer:
+      "Read-only by default. A person approves every action. Your data stays in your environment.",
+    cta: "See the security summary",
     href: "/security",
+    glyph: "gate",
   },
 ] as const;
 

@@ -2932,3 +2932,45 @@ html[data-motion="off"] .hx-scene-draw {
 .hx-path {
   min-height: 340px;
 }
+
+/* ---------- Audit round 2 ---------- */
+.hx-band-foot {
+  max-width: 760px;
+  margin: 32px 0 0;
+  color: var(--hx-text) !important;
+  font-size: 17px !important;
+  font-weight: 600;
+}
+.hx-trustbar {
+  padding: 22px 0;
+  border-block: 1px solid var(--hx-border);
+}
+.hx-trustbar .container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 32px;
+}
+.hx-trustbar ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 32px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--hx-text);
+  font-weight: 600;
+}
+.hx-trustbar li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.hx-trustbar svg {
+  color: var(--hx-mint);
+}
+
+.hx-h2 + .hx-commitments {
+  margin-top: 28px;
+}

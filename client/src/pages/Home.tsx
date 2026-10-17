@@ -1,4 +1,4 @@
-import { ArrowRight, ArrowUpRight, Check, ShieldCheck } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
 import { Link } from "wouter";
 import {
   FounderNote,
@@ -110,8 +110,8 @@ function PathCards() {
           One incident. Three teams who have to answer for it.
         </h2>
         <p className="hx-sub">
-          Same alert, three different questions. Relyxus answers each one from
-          the same evidence.
+          Same alert, three questions. Relyxus answers all three from one set of
+          evidence.
         </p>
         <div className="hx-paths">
           {pathCards.map(card => (
@@ -138,17 +138,37 @@ function PathCards() {
   );
 }
 
+function ReplayBand() {
+  return (
+    <section className="hx-section">
+      <div className="container">
+        <div className="hx-magnet">
+          <div>
+            <span className="hx-pill">Replay pilot</span>
+            <h2 className="hx-h2">Try it on incidents you’ve already closed</h2>
+            <p>{replayExplainer}</p>
+          </div>
+          <PrimaryLink
+            href="/demo?type=Replay%20pilot"
+            className="hx-track-replay"
+          >
+            Start a Replay pilot
+          </PrimaryLink>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function InAction() {
   return (
     <section className="hx-action" id="in-action">
       <div className="container">
         <div className="hx-action-head">
-          <h2 className="hx-h2">
-            Everyone on the incident, looking at the same facts
-          </h2>
+          <h2 className="hx-h2">No more “any update?” in the channel</h2>
           <p>
-            Who owns it, what it costs, and what is waiting on a decision, on
-            one screen.
+            Owner, money at risk and the decision waiting on someone, on one
+            screen the whole incident team works from.
           </p>
         </div>
         <figure className="hx-shot">
@@ -207,10 +227,6 @@ function Proof() {
             </li>
           ))}
         </ul>
-        <p className="hx-replay-note">{replayExplainer}</p>
-        <TextLink href="/demo?type=Replay%20pilot">
-          Try it on incidents you’ve already closed
-        </TextLink>
       </div>
     </section>
   );
@@ -219,34 +235,22 @@ function Proof() {
 function TrustInBrief() {
   const lines = [
     "Read-only by default",
-    "Your data stays in your environment",
-    "A person approves before any action",
+    "Runs in your environment",
+    "A person approves every action",
   ];
   return (
-    <section className="hx-section hx-trust">
-      <div className="container hx-trust-grid">
-        <div>
-          <h2 className="hx-h2">Built for a security review</h2>
-          <ul className="hx-trust-lines">
-            {lines.map(line => (
-              <li key={line}>
-                <Check size={18} aria-hidden="true" /> {line}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="hx-trust-cta">
-          <p>
-            The full security pack covers data flows, identity and how we handle
-            AI data. We share it with teams in an evaluation.
-          </p>
-          <PrimaryLink
-            href="/demo?type=Security%20pack"
-            className="hx-track-security"
-          >
-            Request the security pack
-          </PrimaryLink>
-        </div>
+    <section className="hx-trustbar" aria-label="Security in brief">
+      <div className="container">
+        <ul>
+          {lines.map(line => (
+            <li key={line}>
+              <Check size={18} aria-hidden="true" /> {line}
+            </li>
+          ))}
+        </ul>
+        <TextLink href="/demo?type=Security%20pack">
+          Request the security pack
+        </TextLink>
       </div>
     </section>
   );
@@ -260,11 +264,12 @@ function LeadMagnet() {
           <div>
             <span className="hx-pill">Free checklist</span>
             <h2 className="hx-h2">
-              Incident-readiness checklist for regulated teams
+              Could you file a DORA first notice within 4 hours?
             </h2>
             <p>
-              Are you ready for your next major incident? Check your evidence,
-              ownership and record-keeping before it happens, not during it.
+              The incident-readiness checklist for UK and EU resilience teams.
+              Find the gaps in evidence, ownership and records before an auditor
+              or regulator does.
             </p>
           </div>
           <PrimaryLink href="/demo?type=Readiness%20checklist">
@@ -301,10 +306,6 @@ function ClosingBand() {
           >
             Book a 30-minute demo <ArrowRight size={16} aria-hidden="true" />
           </Link>
-          <Link href="/security" className="hx-quiet-link">
-            <ShieldCheck size={16} aria-hidden="true" /> Read the security
-            summary
-          </Link>
         </div>
       </div>
     </section>
@@ -322,11 +323,13 @@ export default function Home() {
       <Hero />
       <ProofStrip />
       <PathCards />
+      <ReplayBand />
       <DataBand
         title="Regulators start the clock before you know the cause"
         items={regulatoryClocks}
         sources={regulatorySources}
         note="Which rules apply depends on your firm."
+        footnote="Relyxus timestamps every fact from the first alert, so each deadline starts with a draft, not a blank page."
       />
       <InAction />
       <Outcomes />

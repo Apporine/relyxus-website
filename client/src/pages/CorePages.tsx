@@ -36,14 +36,14 @@ export function ProductPage() {
         summary="One investigation per incident. A person approves every change. The write-up is half done before the incident closes."
         tone="ink"
       >
-        <PrimaryLink href="/demo">Request a demo</PrimaryLink>
+        <PrimaryLink href="/demo">Book a 30-minute demo</PrimaryLink>
         <a className="button button-secondary" href="#walkthrough">
           Follow an incident <ArrowRight size={16} aria-hidden="true" />
         </a>
       </PageIntro>
 
       <DataBand
-        title="Every hour to cause is money"
+        title="Most major outages cost six figures. Every hour to cause adds to it."
         items={outageData.items}
         sources={outageData.sources}
       />
@@ -51,7 +51,7 @@ export function ProductPage() {
       <section className="hx-section">
         <div className="container">
           <h2 className="hx-h2">
-            Five screens your team will live in during an incident
+            Five screens. One source of truth for the whole incident.
           </h2>
           <ProductTour />
         </div>
@@ -69,10 +69,10 @@ export function ProductPage() {
       </section>
 
       <ActionBand
-        title="See it on an incident like yours"
-        summary="Tell us which tools your team uses and we’ll walk through an incident end to end."
+        title="Bring your stack. We’ll walk a real incident through it in 30 minutes."
+        summary="Tell us which tools your team uses and we’ll show you the incident from first alert to record."
         href="/demo?type=Demo"
-        label="Request a demo"
+        label="Book a 30-minute demo"
       />
     </>
   );
@@ -159,7 +159,7 @@ const perspectives = {
     points: [
       "One investigation per incident",
       "Read-only until someone approves",
-      "Sources open for your own check",
+      "Built around payment flows: authorisation, routing, ledger",
     ],
   },
   resilience: {
@@ -202,7 +202,7 @@ export function FinancialServicesPage() {
         summary="Engineering needs the cause. Resilience needs the record. Relyxus gives both the same evidence."
         tone="blue"
       >
-        <PrimaryLink href="/demo?type=Demo">Request a demo</PrimaryLink>
+        <PrimaryLink href="/demo?type=Demo">Book a 30-minute demo</PrimaryLink>
       </PageIntro>
 
       <section className="hx-section" id="engineering">
@@ -256,13 +256,28 @@ export function FinancialServicesPage() {
 
       <ActionBand
         title="Tell us the payments incident that hurt most"
-        summary="Tell us about the tools you run and the incidents that hurt most."
-        href="/demo?type=Demo"
-        label="Request a demo"
+        summary="We’ll replay it with read-only access and show you what Relyxus would have found."
+        href="/demo?type=Replay%20pilot"
+        label="Book a 30-minute demo"
       />
     </>
   );
 }
+
+const principles = [
+  {
+    title: "A person decides",
+    text: "Nothing changes in your systems until the approvers you name say yes.",
+  },
+  {
+    title: "Evidence on every claim",
+    text: "Every likely cause links to the sources behind it, so your team can check our work.",
+  },
+  {
+    title: "Honest about gaps",
+    text: "The record says what we didn’t know, because that is what an auditor asks about first.",
+  },
+] as const;
 
 export function CompanyPage() {
   return (
@@ -275,7 +290,7 @@ export function CompanyPage() {
         eyebrow="Built by Apporine"
         title={pageMeta["/company"].h1}
         art={<CompanyArt />}
-        summary="We make incident response easier to explain, for the teams who have to explain it."
+        summary="Relyxus is built by Apporine for the teams who answer for every incident."
         tone="ink"
       >
         <PrimaryLink href="/contact">Talk to the team</PrimaryLink>
@@ -323,11 +338,26 @@ export function CompanyPage() {
         </div>
       </section>
 
+      <section className="hx-section">
+        <div className="container">
+          <h2 className="hx-h2">How we work</h2>
+          <div className="hx-commitments">
+            {principles.map(item => (
+              <article key={item.title}>
+                <Check size={20} aria-hidden="true" />
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <FoundersGrid />
 
       <ActionBand
         title="Say hello"
-        summary="We’re happy to talk about incident response, whether or not Relyxus is the right fit."
+        summary="Talk incident response with us, even if Relyxus isn’t the right fit yet."
         href="/contact"
         label="Contact the team"
       />

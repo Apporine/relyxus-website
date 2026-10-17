@@ -120,10 +120,10 @@ export function ResourceArticle({ slug }: { slug: string }) {
         </div>
       </article>
       <ActionBand
-        title="See it on an incident like yours"
-        summary="Tell us which tools your team uses and we’ll walk through an incident end to end."
+        title="Bring your stack. We’ll walk a real incident through it in 30 minutes."
+        summary="Tell us which tools your team uses and we’ll show you the incident from first alert to record."
         href="/demo"
-        label="Request a demo"
+        label="Book a 30-minute demo"
       />
     </>
   );

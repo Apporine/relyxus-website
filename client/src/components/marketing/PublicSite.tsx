@@ -320,7 +320,7 @@ function MobileMenu({
           className="button button-primary mobile-demo"
           onClick={onNavigate}
         >
-          Request a demo <ArrowRight size={16} aria-hidden="true" />
+          Book a 30-minute demo <ArrowRight size={16} aria-hidden="true" />
         </Link>
       </div>
     </div>
@@ -343,7 +343,7 @@ export function SiteHeader() {
         <NavLinks />
         <div className="header-actions">
           <Link href="/demo" className="button button-small button-primary">
-            Request a demo <ArrowRight size={15} aria-hidden="true" />
+            Book a 30-minute demo <ArrowRight size={15} aria-hidden="true" />
           </Link>
           <button
             ref={mobileTrigger}
@@ -375,7 +375,7 @@ const footerNav = [
   { label: "Product", href: "/product" },
   { label: "Security", href: "/security" },
   { label: "Contact", href: "/contact" },
-  { label: "Request a demo", href: "/demo" },
+  { label: "Book a 30-minute demo", href: "/demo" },
 ] as const;
 
 const footerLegal = [
@@ -600,11 +600,13 @@ export function DataBand({
   items,
   sources,
   note = "",
+  footnote,
 }: {
   title: string;
   items: readonly DataPoint[];
   sources: readonly DataSource[];
   note?: string;
+  footnote?: string;
 }) {
   return (
     <section className="hx-band" aria-label={title}>
@@ -618,6 +620,7 @@ export function DataBand({
             </div>
           ))}
         </dl>
+        {footnote && <p className="hx-band-foot">{footnote}</p>}
         <p className="hx-source-line">
           Sources:{" "}
           {sources.map((source, index) => (
@@ -700,7 +703,7 @@ export function ProofStrip() {
         )}
         {integrations.length > 0 && (
           <div className="hx-integrations">
-            <span>Reads evidence from</span>
+            <span>Bring the tools you have. Relyxus reads evidence from</span>
             <ul>
               {integrations.map(name => (
                 <li key={name}>{name}</li>
@@ -767,7 +770,7 @@ export function ActionBand({
   title = "See how Relyxus would fit your team",
   summary = "Walk through an incident together and see what it would mean for your team.",
   href = "/demo",
-  label = "Request a demo",
+  label = "Book a 30-minute demo",
 }: {
   title?: string;
   summary?: string;

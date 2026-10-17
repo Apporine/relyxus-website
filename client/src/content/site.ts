@@ -205,23 +205,34 @@ export const proofPoints: readonly {
   title: string;
   detail: string;
   status: string;
+  image?: { src: string; alt: string };
 }[] = [
   {
-    title: "Replay pilots",
-    detail:
-      "Run Relyxus against incidents your team already solved and compare the result with what you know.",
-    status: "Open to regulated teams",
+    title: "Incidents",
+    detail: "Severity, impact and ownership in one list.",
+    status: "In development, sample data",
+    image: {
+      src: "/product/overview-incidents.png",
+      alt: "The Relyxus incidents list showing severity, status, owner and age",
+    },
   },
   {
-    title: "Where the product is",
-    detail:
-      "Relyxus is in development. Demos and screenshots use sample data, and we’re talking to regulated teams about pilots.",
-    status: "In development",
+    title: "Command centre",
+    detail: "What needs attention, and what is waiting on a decision.",
+    status: "In development, sample data",
+    image: {
+      src: "/product/overview-command-centre.png",
+      alt: "The Relyxus command centre with active incidents, approvals and service health",
+    },
   },
   {
-    title: "Built by Apporine",
-    detail: "Relyxus is built by the Apporine product and engineering team.",
-    status: "Apporine",
+    title: "Incident war room",
+    detail: "Timeline, ranked causes and the pending approval on one screen.",
+    status: "In development, sample data",
+    image: {
+      src: "/product/overview-investigation.png",
+      alt: "A Relyxus incident with its timeline, ranked hypotheses and a production approval waiting",
+    },
   },
 ];
 

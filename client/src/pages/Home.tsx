@@ -261,12 +261,27 @@ function Proof() {
     <section className="hx-section hx-proof">
       <div className="container">
         <h2 className="hx-h2">Where we are today</h2>
+        <p className="hx-sub">
+          Relyxus is built by Apporine and still in development. These screens
+          use sample data, and we’re talking to regulated teams about Replay
+          pilots.
+        </p>
         <ul className="hx-proof-list">
           {proofPoints.map(point => (
             <li key={point.title}>
-              <span className="hx-status">{point.status}</span>
-              <h3>{point.title}</h3>
-              <p>{point.detail}</p>
+              {point.image && (
+                <img
+                  src={point.image.src}
+                  alt={point.image.alt}
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
+              <div className="hx-proof-text">
+                <span className="hx-status">{point.status}</span>
+                <h3>{point.title}</h3>
+                <p>{point.detail}</p>
+              </div>
             </li>
           ))}
         </ul>

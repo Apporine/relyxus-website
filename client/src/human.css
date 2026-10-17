@@ -477,7 +477,8 @@ body,
   list-style: none;
 }
 .hx-proof-list li {
-  padding: 24px;
+  overflow: hidden;
+  padding: 0;
   border: 1px solid var(--hx-border);
   border-radius: var(--hx-radius);
   background: var(--hx-card);
@@ -755,4 +756,15 @@ body,
   .hx-note {
     grid-template-columns: 1fr;
   }
+}
+
+.hx-proof-list img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid var(--hx-border);
+  background: #05070f;
+}
+.hx-proof-text {
+  padding: 20px 24px 24px;
 }

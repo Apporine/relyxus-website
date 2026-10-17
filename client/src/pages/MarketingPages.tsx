@@ -8,7 +8,6 @@ import {
   ShieldCheck,
   UsersRound,
 } from "lucide-react";
-import { useEffect, useState } from "react";
 import { Link } from "wouter";
 import {
   PageMeta,
@@ -64,98 +63,32 @@ const productSurfaces = [
   },
 ] as const;
 
-function ProductSurfaceShowcase() {
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const current = productSurfaces[active];
-
-  useEffect(() => {
-    if (paused) return;
-    if (
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
-      return;
-    }
-    const timer = window.setInterval(() => {
-      setActive(index => (index + 1) % productSurfaces.length);
-    }, 4200);
-    return () => window.clearInterval(timer);
-  }, [paused]);
-
+function ProductFloatGallery() {
   return (
     <div
-      className="product-showcase"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocusCapture={() => setPaused(true)}
-      onBlurCapture={event => {
-        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
-          setPaused(false);
-        }
-      }}
+      className="product-float-gallery"
+      aria-label="Product screens. Hover or focus a screen to enlarge it."
     >
-      <div
-        className="product-showcase-tabs"
-        role="tablist"
-        aria-label="Product surfaces"
-      >
-        {productSurfaces.map((item, index) => (
-          <button
-            key={item.key}
-            type="button"
-            role="tab"
-            id={`product-surface-tab-${item.key}`}
-            aria-selected={active === index}
-            aria-controls="product-surface-panel"
-            className={active === index ? "is-active" : undefined}
-            onClick={() => setActive(index)}
-          >
-            <span>{String(index + 1).padStart(2, "0")}</span>
-            {item.label}
-          </button>
-        ))}
-      </div>
-
-      <div
-        className="product-showcase-stage"
-        id="product-surface-panel"
-        role="tabpanel"
-        aria-labelledby={`product-surface-tab-${current.key}`}
-      >
-        {productSurfaces.map((item, index) => {
-          const offset = index - active;
-          const wrapped =
-            ((offset % productSurfaces.length) + productSurfaces.length) %
-            productSurfaces.length;
-          const layer =
-            wrapped === 0 ? "is-front" : wrapped === 1 ? "is-mid" : "is-back";
-          const visible = wrapped <= 2;
-          return (
-            <figure
-              key={item.key}
-              className={`product-showcase-card ${layer}${
-                visible ? " is-visible" : ""
-              }`}
-              data-active={active === index ? "true" : "false"}
-              aria-hidden={active !== index}
-            >
-              <img
-                src={item.src}
-                alt={active === index ? `${item.label}: ${item.caption}` : ""}
-                width={item.width}
-                height={item.height}
-                loading={index === 0 ? "eager" : "lazy"}
-                decoding="async"
-              />
-            </figure>
-          );
-        })}
-        <p className="product-showcase-caption" aria-live="polite">
-          <strong>{current.label}</strong>
-          <span>{current.caption}</span>
-        </p>
-      </div>
+      {productSurfaces.map((item, index) => (
+        <figure
+          key={item.key}
+          className={`product-float-card product-float-card-${index + 1}`}
+          tabIndex={0}
+        >
+          <img
+            src={item.src}
+            alt={`${item.label}. ${item.caption}`}
+            width={item.width}
+            height={item.height}
+            loading={index < 2 ? "eager" : "lazy"}
+            decoding="async"
+          />
+          <figcaption>
+            <strong>{item.label}</strong>
+            <span>{item.caption}</span>
+          </figcaption>
+        </figure>
+      ))}
     </div>
   );
 }
@@ -431,20 +364,18 @@ export function ProductPage({ page }: { page: ProductRoute }) {
           Review deployment <ArrowRight size={16} aria-hidden="true" />
         </Link>
       </PageIntro>
-      {page === "overview" && (
-        <section className="product-showcase-section section-pad">
-          <div className="container">
-            <SectionTitle
-              eyebrow="INSIDE THE PRODUCT"
-              title="Follow an incident from attention to approval."
-              summary="These views show how responders move through evidence, hypotheses and governed action—without this website connecting to any live system."
-            />
-            <ProductSurfaceShowcase />
-          </div>
-        </section>
-      )}
-      <section className="capability-detail-section section-pad">
-        <div className="container capability-detail-grid">
+      <section
+        className={`capability-detail-section section-pad${
+          page === "overview" ? " capability-detail-overview" : ""
+        }`}
+      >
+        <div
+          className={`container ${
+            page === "overview"
+              ? "capability-overview-layout"
+              : "capability-detail-grid"
+          }`}
+        >
           <div className="capability-detail-copy">
             <p className="eyebrow">
               {page === "overview" ? "THE MECHANISM" : "THE QUESTION TO ASK"}
@@ -459,7 +390,11 @@ export function ProductPage({ page }: { page: ProductRoute }) {
             </div>
             <TextLink href={content.next.href}>{content.next.label}</TextLink>
           </div>
-          <CapabilityGraphic kind={page} />
+          {page === "overview" ? (
+            <ProductFloatGallery />
+          ) : (
+            <CapabilityGraphic kind={page} />
+          )}
         </div>
       </section>
       {page === "overview" && (

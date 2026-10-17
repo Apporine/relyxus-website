@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import { Redirect, Route, Switch } from "wouter";
 import { lazy, Suspense } from "react";
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -163,6 +164,7 @@ function App() {
       <ThemeProvider defaultTheme="light">
         <Router />
       </ThemeProvider>
+      <Analytics />
     </ErrorBoundary>
   );
 }

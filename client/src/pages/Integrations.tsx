@@ -51,7 +51,7 @@ export function IntegrationsPage() {
       {matching.length ? <div className="integration-grid">{matching.map((item, index) => <article className="integration-card" key={item.slug}><div className="integration-card-head"><span className="integration-card-index">0{index + 1}</span><span className="integration-card-symbol" aria-hidden="true">{item.group.slice(0, 1)}</span><span className="integration-status">Status to confirm</span></div><p className="integration-group">{item.group}</p><h2>{item.title}</h2><p>{item.summary}</p><Link href={`/integrations/${item.slug}`} className="text-link">Review scope questions <ArrowUpRight size={15} /></Link></article>)}</div> : <div className="empty-catalogue"><div><Search size={21} /></div><h2>No matching source categories</h2><p>Try another term or clear the filters. Asking about a source does not commit it to the roadmap.</p><button type="button" className="button button-outline" onClick={clear}><X size={15} />Clear filters</button><Link href="/demo?type=Demo" className="empty-ask">Ask about an integration <ArrowRight size={15} /></Link></div>}
       <p className="catalogue-footnote">The product release catalogue, connector permissions and setup documentation were not included in the supplied archive. Public availability must be confirmed before launch.</p>
     </div></section>
-    <ActionBand title="Have a source in mind?" summary="Discuss the evidence and permissions you would want to review. This preview will not send an enquiry." href="/demo?type=Demo" label="Ask about an integration" />
+    <ActionBand title="Have a source in mind?" summary="Tell us which evidence sources and permissions you need to review. We’ll follow up by email." href="/demo?type=Demo" label="Ask about an integration" />
   </>;
 }
 

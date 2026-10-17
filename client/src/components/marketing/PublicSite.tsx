@@ -27,8 +27,8 @@ export function PageMeta({ title, description }: { title: string; description: s
       document.head.appendChild(ogDescription);
     }
     ogDescription.content = description;
-    const canonicalUrl = new URL(window.location.pathname, window.location.origin).href;
-    const imageUrl = new URL("/manus-storage/async-images/NeZZUlgorDxr4dK1BVqfo0/image-1.webp", window.location.origin).href;
+    const canonicalUrl = new URL(window.location.pathname + window.location.search, window.location.origin).href;
+    const imageUrl = new URL("/og-cover.svg", window.location.origin).href;
     let canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     if (!canonical) {
       canonical = document.createElement("link");
@@ -254,7 +254,7 @@ export function SiteFooter() {
         <div className="footer-brand">
           <Wordmark />
           <p>Understand the incident.<br />Control what happens next.</p>
-          <span className="footer-footnote">Product availability and enquiry delivery require owner confirmation.</span>
+          <span className="footer-footnote">Questions? Email the team or request a demo.</span>
         </div>
         <div className="footer-groups-desktop">
           {footerGroups.map((group) => <div className="footer-group" key={group.title}><h2>{group.title}</h2>{group.links.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}</div>)}
@@ -266,9 +266,9 @@ export function SiteFooter() {
       <div className="container footer-bottom">
         <span>© Relyxus</span>
         <span className="footer-bottom-links"><Link href="/security">Security</Link><Link href="/accessibility">Accessibility</Link><button ref={preferenceTrigger} type="button" onClick={() => setPreferencesOpen(true)}>Cookie preferences</button></span>
-        <span className="footer-region">Product claims require release-owner review.</span>
+        <span className="footer-region">Built for teams that keep people in the loop.</span>
       </div>
-      {preferencesOpen && <div className="dialog-scrim" onMouseDown={(event) => { if (event.target === event.currentTarget) closePreferences(); }}><section className="dialog-panel" role="dialog" aria-modal="true" aria-labelledby="preferences-title" aria-describedby="preferences-description" ref={preferenceDialog}><button ref={preferenceClose} type="button" className="dialog-close" aria-label="Close preferences" onClick={closePreferences}><X size={20} /></button><p className="eyebrow">SITE PREFERENCES</p><h2 id="preferences-title">A note on cookies</h2><p id="preferences-description">This preview does not load analytics or marketing cookies. No optional tracking preference is being requested here. Production cookie controls must be connected to the approved consent setup before publication.</p><button type="button" className="button button-primary" onClick={closePreferences}>Close</button></section></div>}
+      {preferencesOpen && <div className="dialog-scrim" onMouseDown={(event) => { if (event.target === event.currentTarget) closePreferences(); }}><section className="dialog-panel" role="dialog" aria-modal="true" aria-labelledby="preferences-title" aria-describedby="preferences-description" ref={preferenceDialog}><button ref={preferenceClose} type="button" className="dialog-close" aria-label="Close preferences" onClick={closePreferences}><X size={20} /></button><p className="eyebrow">SITE PREFERENCES</p><h2 id="preferences-title">A note on cookies</h2><p id="preferences-description">This site does not load analytics or marketing cookies today. There is nothing optional to accept here. If tracking is added later, consent controls will appear in this dialog.</p><button type="button" className="button button-primary" onClick={closePreferences}>Close</button></section></div>}
     </footer>
   );
 }

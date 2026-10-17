@@ -370,7 +370,6 @@ const footerNav = [
 const footerLegal = [
   { label: "Privacy policy", href: "/privacy" },
   { label: "Terms", href: "/terms" },
-  { label: "Accessibility", href: "/accessibility" },
 ] as const;
 
 /** Animations default to on. Visitors can switch them off; the choice is remembered. */

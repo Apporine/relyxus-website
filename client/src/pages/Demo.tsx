@@ -13,7 +13,7 @@ import {
 } from "@/components/marketing/PublicSite";
 import { ENQUIRY_TYPES, type EnquiryType } from "@shared/contact";
 import { pageMeta } from "@/content/meta";
-import { ContactArt } from "@/components/marketing/HeroArt";
+import { EnquiryArt } from "@/components/marketing/EnquiryArt";
 import { demoVariants } from "@/content/site";
 
 type FormValues = {
@@ -206,7 +206,7 @@ export function DemoPage() {
       <PageIntro
         eyebrow={variant.eyebrow}
         title={variant.title}
-        art={<ContactArt />}
+        art={<EnquiryArt kind={values.enquiry} />}
         summary={variant.summary}
         tone="ivory"
       />

@@ -2,6 +2,7 @@ import { ArrowRight, CircleAlert } from "lucide-react";
 import { Link } from "wouter";
 import { pageMeta } from "@/content/meta";
 import { ContactArt, ResourcesArt } from "@/components/marketing/HeroArt";
+import { ContactRouter } from "@/components/marketing/ContactRouter";
 import {
   PageMeta,
   PageIntro,
@@ -18,98 +19,21 @@ export function ContactPage() {
       />
       <PageIntro
         eyebrow="Contact"
-        title="Talk to the people behind Relyxus"
+        title={pageMeta["/contact"].h1}
         art={<ContactArt />}
-        summary="Use the enquiry form to start a conversation with the team that looks after Relyxus."
+        summary={pageMeta["/contact"].body}
         tone="blue"
-      >
-        <PrimaryLink href="/demo">Send an enquiry</PrimaryLink>
-      </PageIntro>
-      <section className="contact-options section-pad">
-        <div className="container contact-option-grid">
-          <article>
-            <h2>Demo or Replay pilot</h2>
-            <p>
-              Tell us about the workflow or historical incidents you&apos;d like
-              to walk through together.
-            </p>
-            <Link href="/demo?type=Replay%20pilot">
-              Start a pilot enquiry <ArrowRight size={15} />
-            </Link>
-          </article>
-          <article>
-            <h2>Security pack or pricing</h2>
-            <p>
-              Ask for the security pack, or what shapes a commercial discussion.
-            </p>
-            <Link href="/demo?type=Security%20pack">
-              Start an enquiry <ArrowRight size={15} />
-            </Link>
-          </article>
-          <article>
-            <h2>Something else?</h2>
-            <p>
-              Use the enquiry form for other questions. We aim to reply as soon
-              as we can.
-            </p>
-            <Link href="/demo">
-              Open the enquiry form <ArrowRight size={15} />
-            </Link>
-          </article>
+      />
+      <section className="hx-section">
+        <div className="container">
+          <ContactRouter />
         </div>
-        <p className="container contact-caveat">
-          Please avoid sending credentials or sensitive incident data through
-          the form.
-        </p>
       </section>
     </>
   );
 }
 
-export function LegalPage({
-  page,
-}: {
-  page: "privacy" | "terms" | "accessibility";
-}) {
-  if (page === "accessibility") {
-    return (
-      <>
-        <PageMeta
-          title={pageMeta["/accessibility"].title}
-          description={pageMeta["/accessibility"].description}
-        />
-        <PageIntro
-          eyebrow="Accessibility"
-          title={pageMeta["/accessibility"].h1}
-          art={<ResourcesArt />}
-          summary={pageMeta["/accessibility"].body}
-          tone="blue"
-        />
-        <section className="legal-copy section-pad">
-          <div className="container legal-copy-inner">
-            <h2>How we build</h2>
-            <p>
-              We aim for WCAG 2.2 AA. Pages use semantic regions, visible focus,
-              text labels, reduced-motion rules and accessible form patterns.
-              The incident walkthrough works from the keyboard.
-            </p>
-            <h3>Still improving</h3>
-            <p>
-              We keep testing keyboard, screen-reader, zoom, contrast and touch
-              behaviour. We have not had a formal conformance audit.
-            </p>
-            <h3>Share an accessibility issue</h3>
-            <p>
-              If something is hard to use, tell us through the contact page or
-              enquiry form and we'll look into it.
-            </p>
-            <TextLink href="/contact">Contact the team</TextLink>
-          </div>
-        </section>
-      </>
-    );
-  }
-
+export function LegalPage({ page }: { page: "privacy" | "terms" }) {
   if (page === "privacy") {
     return (
       <>

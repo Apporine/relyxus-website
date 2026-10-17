@@ -70,11 +70,6 @@ export const navGroups: NavGroup[] = [
         href: "/contact",
         description: "Email the team or send an enquiry.",
       },
-      {
-        label: "Accessibility",
-        href: "/accessibility",
-        description: "Read the accessibility approach.",
-      },
     ],
   },
 ];
@@ -459,3 +454,43 @@ export const articleBodies: Record<
     ],
   },
 };
+
+/** Topics on the Contact page. Each links to the enquiry form with the type preselected. */
+export const contactTopics = [
+  {
+    key: "demo",
+    label: "See a demo",
+    type: "Demo",
+    title: "See Relyxus on an incident like yours",
+    text: "Tell us which tools your team uses and we’ll walk through an incident from alert to record.",
+    points: ["Your tools, your kind of incident", "Your questions come first"],
+    cta: "Request a demo",
+  },
+  {
+    key: "replay",
+    label: "Try a Replay pilot",
+    type: "Replay pilot",
+    title: "Replay incidents you already solved",
+    text: "Pick past incidents your team knows well and compare what Relyxus finds with what you know.",
+    points: ["You choose the incidents", "Read-only access only"],
+    cta: "Start a pilot enquiry",
+  },
+  {
+    key: "security",
+    label: "Get the security pack",
+    type: "Security pack",
+    title: "Get the pack your reviewers need",
+    text: "Written for security and architecture teams, and shared with teams in an evaluation.",
+    points: ["Data flows and identity", "Assurance status, with dates"],
+    cta: "Request the security pack",
+  },
+  {
+    key: "pricing",
+    label: "Talk pricing",
+    type: "Pricing",
+    title: "Talk to us about pricing",
+    text: "Pricing depends on how you would run Relyxus. Tell us a little and we’ll come back with a proposal.",
+    points: ["Shaped by your setup", "A proposal in writing"],
+    cta: "Ask about pricing",
+  },
+] as const;

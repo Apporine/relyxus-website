@@ -12,6 +12,7 @@ import {
   ProductExplorer,
 } from "@/components/marketing/Explorers";
 import { track } from "@/lib/analytics";
+import { pageMeta } from "@/content/meta";
 
 const productScreens = [
   {
@@ -40,8 +41,8 @@ export function ProductPage() {
   return (
     <>
       <PageMeta
-        title="Product"
-        description="Relyxus gives incident, SRE and resilience teams one investigation per incident, an approval step before any change, and a record ready for audit."
+        title={pageMeta["/product"].title}
+        description={pageMeta["/product"].description}
       />
       <PageIntro
         eyebrow="Product"
@@ -123,8 +124,8 @@ export function SecurityPage() {
   return (
     <>
       <PageMeta
-        title="Security"
-        description="Relyxus is read-only by default, keeps your data in your environment, and needs a person's approval before any action. Request the security pack for detail."
+        title={pageMeta["/security"].title}
+        description={pageMeta["/security"].description}
       />
       <PageIntro
         eyebrow="Security"
@@ -217,8 +218,8 @@ export function FinancialServicesPage() {
   return (
     <>
       <PageMeta
-        title="Financial services"
-        description="Relyxus helps engineering and resilience teams at regulated financial firms find the cause of a payments incident and keep every step on the record."
+        title={pageMeta["/solutions/financial-services"].title}
+        description={pageMeta["/solutions/financial-services"].description}
       />
       <PageIntro
         eyebrow="Financial services"
@@ -278,8 +279,8 @@ export function CompanyPage() {
   return (
     <>
       <PageMeta
-        title="Company"
-        description="Relyxus is built by Apporine for incident, SRE and resilience teams at regulated firms."
+        title={pageMeta["/company"].title}
+        description={pageMeta["/company"].description}
       />
       <PageIntro
         eyebrow="Company"

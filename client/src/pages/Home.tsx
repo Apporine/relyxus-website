@@ -9,6 +9,7 @@ import {
 import { ProductExplorer } from "@/components/marketing/Explorers";
 import { pathCards, productFacts, proofPoints } from "@/content/site";
 import { track } from "@/lib/analytics";
+import { pageMeta } from "@/content/meta";
 
 type HubMode = "investigate" | "approve" | "record";
 
@@ -384,8 +385,8 @@ export default function Home() {
   return (
     <>
       <PageMeta
-        title="Find the cause of an incident, with every step on the record"
-        description="Relyxus pulls evidence from your existing tools into one investigation for incident, SRE and resilience teams. Nothing runs until the right people approve it."
+        title={pageMeta["/"].title}
+        description={pageMeta["/"].description}
         keywords="Relyxus, incident investigation, payments incidents, operational resilience, SRE, regulated firms"
       />
       <Hero />

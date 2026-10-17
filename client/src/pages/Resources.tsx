@@ -1,5 +1,6 @@
 import { ArrowLeft, ArrowRight, ArrowUpRight, Clock3 } from "lucide-react";
 import { Link } from "wouter";
+import { pageMeta } from "@/content/meta";
 import { articleBodies, resources } from "@/content/site";
 import {
   ActionBand,
@@ -12,13 +13,13 @@ export function ResourcesPage() {
   return (
     <>
       <PageMeta
-        title="Resources"
-        description="Short reads for incident, SRE and resilience teams at regulated firms, plus guides we share in an evaluation."
+        title={pageMeta["/resources"].title}
+        description={pageMeta["/resources"].description}
       />
       <PageIntro
         eyebrow="Resources"
-        title="Short reads for teams who run incidents"
-        summary="One guide you can read now, and two we share when you start an evaluation."
+        title={pageMeta["/resources"].h1}
+        summary={pageMeta["/resources"].body}
         tone="ivory"
       />
       <section className="resources-index section-pad">

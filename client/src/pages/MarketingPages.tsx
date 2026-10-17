@@ -1,5 +1,6 @@
 import { ArrowRight, CircleAlert } from "lucide-react";
 import { Link } from "wouter";
+import { pageMeta } from "@/content/meta";
 import {
   PageMeta,
   PageIntro,
@@ -11,8 +12,8 @@ export function ContactPage() {
   return (
     <>
       <PageMeta
-        title="Contact"
-        description="Talk to the Relyxus team about a demo, a Replay pilot, the security pack or pricing."
+        title={pageMeta["/contact"].title}
+        description={pageMeta["/contact"].description}
       />
       <PageIntro
         eyebrow="Contact"
@@ -72,29 +73,27 @@ export function LegalPage({
     return (
       <>
         <PageMeta
-          title="Accessibility"
-          description="How the Relyxus website supports keyboard, touch, reduced motion and readable layouts."
+          title={pageMeta["/accessibility"].title}
+          description={pageMeta["/accessibility"].description}
         />
         <PageIntro
-          eyebrow="ACCESSIBILITY / SITE APPROACH"
-          title="Every decision should remain reachable."
-          summary="This site is built for keyboard, touch, reduced motion and narrow screens. We keep improving it as the product grows."
+          eyebrow="Accessibility"
+          title={pageMeta["/accessibility"].h1}
+          summary={pageMeta["/accessibility"].body}
           tone="blue"
         />
         <section className="legal-copy section-pad">
           <div className="container legal-copy-inner">
-            <p className="eyebrow">HOW WE BUILD</p>
-            <h2>Designed toward WCAG 2.2 AA, without over-claiming.</h2>
+            <h2>How we build</h2>
             <p>
-              Pages use semantic regions, visible focus, text labels,
-              reduced-motion rules and accessible form patterns. The incident
-              walkthrough is keyboard operable through its step list.
+              We aim for WCAG 2.2 AA. Pages use semantic regions, visible focus,
+              text labels, reduced-motion rules and accessible form patterns.
+              The incident walkthrough works from the keyboard.
             </p>
             <h3>Still improving</h3>
             <p>
-              We continue to review keyboard, screen-reader, zoom, contrast and
-              touch behaviour. This page is not a formal conformance
-              certificate.
+              We keep testing keyboard, screen-reader, zoom, contrast and touch
+              behaviour. We have not had a formal conformance audit.
             </p>
             <h3>Share an accessibility issue</h3>
             <p>
@@ -112,18 +111,17 @@ export function LegalPage({
     return (
       <>
         <PageMeta
-          title="Privacy policy"
-          description="Privacy policy for the Relyxus marketing website: what we collect from enquiries, how we use it, and what we do not track."
+          title={pageMeta["/privacy"].title}
+          description={pageMeta["/privacy"].description}
         />
         <PageIntro
-          eyebrow="COMPANY / PRIVACY POLICY"
-          title="We only ask for what we need to reply."
-          summary="This privacy policy covers the Relyxus marketing website and enquiry forms. It does not replace contract terms for a paid deployment."
+          eyebrow="Privacy policy"
+          title={pageMeta["/privacy"].h1}
+          summary="This policy covers the Relyxus website and enquiry forms. It does not replace contract terms for a paid deployment."
           tone="blue"
         />
         <section className="legal-copy section-pad">
           <div className="container legal-copy-inner">
-            <p className="eyebrow">SCOPE</p>
             <h2>Who this policy covers</h2>
             <p>
               This page applies to visitors of the Relyxus marketing website and
@@ -183,19 +181,18 @@ export function LegalPage({
   return (
     <>
       <PageMeta
-        title="Terms"
-        description="Terms for evaluating Relyxus and using this marketing website."
+        title={pageMeta["/terms"].title}
+        description={pageMeta["/terms"].description}
       />
       <PageIntro
-        eyebrow="COMPANY / TERMS"
-        title="A simple note while we publish full terms."
-        summary="This marketing site helps you evaluate Relyxus. Formal contract terms are agreed separately for paid engagements."
+        eyebrow="Terms"
+        title={pageMeta["/terms"].h1}
+        summary={pageMeta["/terms"].body}
         tone="blue"
       />
       <section className="legal-copy section-pad">
         <div className="container legal-copy-inner">
-          <p className="eyebrow">USING THIS SITE</p>
-          <h2>What this page covers</h2>
+          <h2>Using this site</h2>
           <p>
             Content on this website is for information and evaluation. It is not
             a quote, warranty or commitment about availability, certifications

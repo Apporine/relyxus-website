@@ -874,3 +874,71 @@ body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSyst
   .public-site .action-band-actions > .button { width: 100%; }
   .public-site .action-quiet { width: 100%; justify-content: flex-start; }
 }
+
+/* Alignment polish: status bands, hero actions, closing links, demo chip. */
+.public-site .assurance-status-inner {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(16px, 2.5vw, 28px);
+}
+.public-site .assurance-status-inner .button {
+  white-space: nowrap;
+}
+.public-site .page-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+.public-site .closing-quiet {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+.public-site .closing-quiet svg {
+  flex: none;
+  display: block;
+}
+.public-site .demo-form-heading {
+  align-items: center;
+}
+.public-site .local-preview-chip {
+  white-space: nowrap;
+}
+.public-site .error-summary a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.public-site .contact-option-grid article {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+.public-site .contact-option-grid article > a,
+.public-site .contact-option-grid .contact-email-list {
+  margin-top: auto;
+}
+
+@media (max-width: 900px) {
+  .public-site .assurance-status-inner {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .public-site .assurance-status-inner .button {
+    grid-column: 1 / -1;
+    width: fit-content;
+  }
+}
+@media (max-width: 560px) {
+  .public-site .assurance-status-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .public-site .assurance-status-inner .button {
+    width: 100%;
+  }
+  .public-site .closing-quiet {
+    white-space: normal;
+  }
+}

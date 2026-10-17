@@ -22,7 +22,7 @@ const steps = [
     short: "Understand impact",
     title: "What changed for the people relying on this service?",
     caption:
-      "An example payment journey is shown as affected. The responder can see the service signal and recent change in one place.",
+      "The payment journey is affected. The responder sees the alert and the recent change side by side.",
     kind: "context",
   },
   {
@@ -30,9 +30,9 @@ const steps = [
     label: "Evidence",
     number: "02",
     short: "Inspect evidence",
-    title: "A likely cause—not a confirmed one.",
+    title: "A likely cause, with the doubt left in.",
     caption:
-      "The timing makes a recent route change worth inspecting. A dependency timeout remains an alternative explanation.",
+      "The timing makes a recent route change the first thing to check. A dependency timeout stays on the list.",
     kind: "evidence",
   },
   {
@@ -42,7 +42,7 @@ const steps = [
     short: "Review the gate",
     title: "The proposal is waiting for the people policy requires.",
     caption:
-      "The rollback shown here is an example proposal. It is not executed from this website or connected to any production service.",
+      "A rollback is proposed. It waits for the two approvers your policy names.",
     kind: "review",
   },
   {
@@ -52,7 +52,7 @@ const steps = [
     short: "Inspect the record",
     title: "Preserve what was known, decided and checked.",
     caption:
-      "The example record keeps source links and a report draft that still needs human classification, review and submission.",
+      "The record keeps every source link and a report draft that people still classify, review and submit.",
     kind: "record",
   },
 ];
@@ -62,8 +62,8 @@ function StepIllustration({ kind }: { kind: string }) {
     return (
       <div className="step-visual step-context-visual">
         <div className="step-visual-title">
-          <span>ILLUSTRATIVE INCIDENT / RX-204</span>
-          <span>EXAMPLE</span>
+          <span>Incident RX-204</span>
+          <span>Sample data</span>
         </div>
         <div className="context-path">
           <span>PAYMENTS API</span>
@@ -90,14 +90,14 @@ function StepIllustration({ kind }: { kind: string }) {
     return (
       <div className="step-visual step-evidence-visual">
         <div className="step-visual-title">
-          <span>LIKELY CAUSE</span>
+          <span>Likely cause</span>
           <span className="ai-tag">
-            <Sparkles size={12} /> HYPOTHESIS
+            <Sparkles size={12} /> Hypothesis
           </span>
         </div>
-        <h3>Recent routing change may be relevant.</h3>
+        <h3>The routing change looks relevant.</h3>
         <p className="uncertainty-line">
-          Confidence is not confirmation. Review the source and alternative.
+          Check the source and the alternative before acting.
         </p>
         <div className="evidence-source-list">
           <div>
@@ -111,9 +111,7 @@ function StepIllustration({ kind }: { kind: string }) {
             <details className="source-detail">
               <summary>Details</summary>
               <p>
-                Illustrative change record: billing-router 2.8.1 adjusted
-                routing shortly before the signal. Timing supports
-                investigation, not causation.
+                billing-router 2.8.1 adjusted routing shortly before the signal.
               </p>
             </details>
           </div>
@@ -125,10 +123,7 @@ function StepIllustration({ kind }: { kind: string }) {
             </span>
             <details className="source-detail">
               <summary>Details</summary>
-              <p>
-                Illustrative dependency trace: intermittent ledger-adapter
-                timeouts remain an alternative that needs review.
-              </p>
+              <p>Intermittent ledger-adapter timeouts remain an alternative.</p>
             </details>
           </div>
         </div>
@@ -137,18 +132,16 @@ function StepIllustration({ kind }: { kind: string }) {
             What if evidence is incomplete? <ChevronDown size={15} />
           </summary>
           <p>
-            The example remains uncertain. An unavailable source is recorded as
-            unavailable; it is not silently treated as evidence for the leading
-            hypothesis.
+            An unavailable source is recorded as unavailable. It never counts as
+            support for the leading hypothesis.
           </p>
         </details>
         <details className="evidence-detail">
           <summary>
-            Why it is not confirmed <ChevronDown size={15} />
+            Why it is still a hypothesis <ChevronDown size={15} />
           </summary>
           <p>
-            Timing provides correlation, not proof. The example does not rule
-            out a dependency issue or another cause.
+            Timing points to the change but does not rule out the dependency.
           </p>
         </details>
       </div>
@@ -157,7 +150,7 @@ function StepIllustration({ kind }: { kind: string }) {
     return (
       <div className="step-visual step-review-visual">
         <div className="step-visual-title">
-          <span>PROPOSED ACTION / EXAMPLE</span>
+          <span>Proposed action</span>
           <span className="waiting-tag">WAITING</span>
         </div>
         <div className="proposal-box">
@@ -167,7 +160,7 @@ function StepIllustration({ kind }: { kind: string }) {
           <div>
             <small>Proposed change</small>
             <strong>Roll back billing-router 2.8.1</strong>
-            <span>Scope: example payment routing service</span>
+            <span>Scope: payment routing service</span>
           </div>
         </div>
         <div className="approval-gate">
@@ -193,18 +186,16 @@ function StepIllustration({ kind }: { kind: string }) {
         <div className="blocked-callout">
           <ShieldCheck size={14} />
           <span>
-            <strong>Blocked in this example.</strong> The proposal waits; no
-            action has been taken.
+            <strong>Waiting.</strong> Nothing has been changed.
           </span>
         </div>
         <details className="evidence-detail">
           <summary>
-            Show illustrative approval sequence <ChevronDown size={15} />
+            Show the approval order <ChevronDown size={15} />
           </summary>
           <p>
-            Service owner review → separate change-authority review → policy
-            re-check. This sequence is illustrative and cannot approve a
-            production change.
+            Service owner review, then change-authority review, then a policy
+            re-check.
           </p>
         </details>
       </div>
@@ -212,8 +203,8 @@ function StepIllustration({ kind }: { kind: string }) {
   return (
     <div className="step-visual step-record-visual">
       <div className="step-visual-title">
-        <span>INCIDENT RECORD / DRAFT</span>
-        <span className="draft-tag">NEEDS REVIEW</span>
+        <span>Incident record</span>
+        <span className="draft-tag">Draft</span>
       </div>
       <div className="record-timeline">
         <div>
@@ -221,7 +212,7 @@ function StepIllustration({ kind }: { kind: string }) {
           <span>
             <small>09:14 UTC</small>
             <strong>Service signal observed</strong>
-            <em>Source attached · illustrative</em>
+            <em>Source attached</em>
           </span>
         </div>
         <div>
@@ -229,7 +220,7 @@ function StepIllustration({ kind }: { kind: string }) {
           <span>
             <small>09:16 UTC</small>
             <strong>Hypothesis recorded</strong>
-            <em>Hypothesis · source-linked · uncertainty retained</em>
+            <em>Hypothesis, source-linked</em>
           </span>
         </div>
         <div>
@@ -237,7 +228,7 @@ function StepIllustration({ kind }: { kind: string }) {
           <span>
             <small>Pending</small>
             <strong>Human review required</strong>
-            <em>No action or report submission from this demo</em>
+            <em>Waiting for the incident commander</em>
           </span>
         </div>
       </div>
@@ -252,8 +243,7 @@ function StepIllustration({ kind }: { kind: string }) {
         <span className="draft-status">Draft</span>
       </div>
       <div className="verification-note">
-        <Check size={14} /> Illustrative check recorded; no external system is
-        connected.
+        <Check size={14} /> Verification check recorded
       </div>
     </div>
   );
@@ -263,7 +253,7 @@ export function IncidentWalkthrough() {
   const [active, setActive] = useState(0);
   const step = steps[active];
   return (
-    <div className="walkthrough" aria-label="Example incident walkthrough">
+    <div className="walkthrough" aria-label="Incident walkthrough">
       <div
         className="walkthrough-step-list"
         role="group"
@@ -307,7 +297,7 @@ export function IncidentWalkthrough() {
             <h3>{step.title}</h3>
             <p>{step.caption}</p>
           </div>
-          <span className="example-stamp">EXAMPLE</span>
+          <span className="example-stamp">Sample data</span>
         </div>
         <StepIllustration kind={step.kind} />
       </div>
@@ -330,11 +320,11 @@ function MiniVisual({ type }: { type: string }) {
           </div>
           <div className="trace-path" />
           <div className="trace-answer">
-            <Sparkles size={13} /> Likely explanation
+            <Sparkles size={13} /> Likely cause
           </div>
           <div className="trace-path trace-short" />
           <div className="trace-node">
-            <i /> Alternative retained <b>02</b>
+            <i /> Alternative kept <b>02</b>
           </div>
         </>
       )}
@@ -345,7 +335,7 @@ function MiniVisual({ type }: { type: string }) {
             <ShieldCheck size={18} />
           </div>
           <div className="gate-approved-mini">
-            Human review
+            Approval
             <br />
             <b>Required</b>
           </div>
@@ -361,20 +351,7 @@ function MiniVisual({ type }: { type: string }) {
             <i />
             <i />
           </div>
-          <div className="mini-record-caption">
-            Source-linked · needs review
-          </div>
-        </>
-      )}
-      {type === "replay" && (
-        <>
-          <div className="mini-replay-head">Evaluation scope</div>
-          <div className="mini-replay-flow">
-            <span>Known cause</span>
-            <i /> <span>Hypothesis</span>
-            <i /> <span>Review misses</span>
-          </div>
-          <div className="mini-replay-note">No guaranteed score</div>
+          <div className="mini-record-caption">Every source linked</div>
         </>
       )}
     </div>
@@ -402,7 +379,7 @@ export function ProductExplorer() {
           <span>{item.detail}</span>
         </div>
         <Link className="text-link" href={item.href}>
-          Explore {item.label.toLowerCase()} <ArrowRight size={16} />
+          See how it works <ArrowRight size={16} />
         </Link>
       </div>
       <MiniVisual type={item.visual} />

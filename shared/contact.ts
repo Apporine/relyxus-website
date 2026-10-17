@@ -6,6 +6,8 @@ export const CONTACT_RECIPIENTS = [
 export const ENQUIRY_TYPES = [
   "Demo",
   "Replay pilot",
+  "Security pack",
+  "Readiness checklist",
   "Deployment",
   "Pricing",
 ] as const;

@@ -31,7 +31,7 @@ export function PageMeta({
       window.location.pathname,
       window.location.origin
     ).href;
-    const imageUrl = new URL("/Icon.jpg", window.location.origin).href;
+    const imageUrl = new URL("/Icon.png", window.location.origin).href;
 
     document.title = fullTitle;
     document.documentElement.lang = "en";
@@ -103,10 +103,10 @@ export function Wordmark({ onClick }: { onClick?: () => void }) {
     >
       <img
         className="wordmark-mark"
-        src="/Icon.jpg"
+        src="/Icon.png"
         alt=""
-        width={22}
-        height={22}
+        width={24}
+        height={24}
         decoding="async"
       />
       <span>relyxus</span>
@@ -376,19 +376,8 @@ const footerGroups: {
       { label: "Financial services", href: "/solutions/financial-services" },
       { label: "Replay", href: "/replay" },
       { label: "Pricing", href: "/pricing" },
+      { label: "Resources", href: "/resources" },
       { label: "Request a demo", href: "/demo" },
-    ],
-  },
-  {
-    title: "Resources",
-    links: [
-      { label: "Resource library", href: "/resources" },
-      {
-        label: "Governed response",
-        href: "/resources/governed-incident-response",
-      },
-      { label: "Deployment choices", href: "/resources/deployment-choices" },
-      { label: "Replay methodology", href: "/resources/replay-methodology" },
     ],
   },
   {
@@ -396,7 +385,7 @@ const footerGroups: {
     links: [
       { label: "About", href: "/company" },
       { label: "Contact", href: "/contact" },
-      { label: "Privacy", href: "/privacy" },
+      { label: "Privacy policy", href: "/privacy" },
       { label: "Terms", href: "/terms" },
       { label: "Accessibility", href: "/accessibility" },
     ],
@@ -455,11 +444,11 @@ export function SiteFooter() {
             <br />
             Control what happens next.
           </p>
-          <span className="footer-footnote">
-            Questions? Email the team or request a demo.
-          </span>
+          <Link href="/demo" className="footer-cta">
+            Request a demo <ArrowRight size={15} aria-hidden="true" />
+          </Link>
         </div>
-        <div className="footer-groups-desktop">
+        <nav className="footer-groups-desktop" aria-label="Footer">
           {footerGroups.map(group => (
             <div className="footer-group" key={group.title}>
               <h2>{group.title}</h2>
@@ -470,7 +459,7 @@ export function SiteFooter() {
               ))}
             </div>
           ))}
-        </div>
+        </nav>
         <div className="footer-groups-mobile">
           {footerGroups.map(group => (
             <details className="footer-group-accordion" key={group.title}>
@@ -490,9 +479,10 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="container footer-bottom">
-        <span>© Relyxus</span>
+        <span>© {new Date().getFullYear()} Relyxus</span>
         <span className="footer-bottom-links">
-          <Link href="/security">Security</Link>
+          <Link href="/privacy">Privacy policy</Link>
+          <Link href="/terms">Terms</Link>
           <Link href="/accessibility">Accessibility</Link>
           <button
             ref={preferenceTrigger}

@@ -495,7 +495,7 @@ export function DemoPage() {
               <p className="form-policy-note">
                 By sending this form you agree that we may use your details to
                 respond to this enquiry. See our{" "}
-                <a href="/privacy">privacy notice</a> for more information.
+                <a href="/privacy">privacy policy</a> for more information.
               </p>
               <button
                 type="submit"

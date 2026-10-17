@@ -1417,52 +1417,73 @@
   margin-block: 24px;
 }
 .not-found-page {
-  min-height: 540px;
+  min-height: min(72vh, 720px);
   display: grid;
   place-items: center;
-  padding: 65px var(--rx-web-gutter);
-  background: #f5f1e9;
+  padding: clamp(56px, 8vw, 96px) var(--rx-web-gutter);
+  background: #090b13;
+  color: #e7eaf1;
 }
 .not-found-layout {
-  width: min(100%, 670px);
+  width: min(100%, 700px);
   text-align: center;
 }
 .not-found-layout .eyebrow {
   margin-bottom: 7px;
+  color: #6ce9cb;
 }
 .not-found-number {
-  color: #d9e2fb;
-  font-size: clamp(85px, 14vw, 160px);
+  display: block;
+  color: rgba(105, 240, 203, 0.16);
+  font-size: clamp(92px, 16vw, 168px);
   font-weight: 700;
-  line-height: 0.92;
+  line-height: 0.9;
   letter-spacing: -0.1em;
 }
 .not-found-layout h1 {
-  margin: 12px 0;
-  font-size: clamp(32px, 4vw, 49px);
+  margin: 8px 0 14px;
+  color: #f0f4fb;
+  font-size: clamp(32px, 4.2vw, 48px);
   line-height: 1.05;
   letter-spacing: -0.05em;
 }
 .not-found-layout > p:not(.eyebrow) {
-  max-width: 480px;
-  margin: 0 auto 20px;
-  color: #596475;
-  font-size: 14px;
+  max-width: 48ch;
+  margin: 0 auto 24px;
+  color: #aeb9cb;
+  font-size: 15px;
+  line-height: 1.6;
 }
-.not-found-layout > div {
+.not-found-actions {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   gap: 14px;
 }
-.not-found-back {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  margin-top: 22px;
-  color: #53617a;
-  font-size: 11px;
+.not-found-actions .button-outline {
+  color: #e7eaf1;
+  border-color: #4a5670;
+}
+.not-found-actions .text-link {
+  color: #8fd8ff;
+}
+.not-found-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 22px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.not-found-links a {
+  color: #929eb3;
+  font-size: 13px;
+  text-decoration: none;
+}
+.not-found-links a:hover {
+  color: #6ce9cb;
 }
 
 @media (max-width: 1100px) {
@@ -2665,7 +2686,7 @@
   .not-found-page {
     min-height: 470px;
   }
-  .not-found-layout > div {
+  .not-found-actions {
     flex-direction: column;
   }
 }

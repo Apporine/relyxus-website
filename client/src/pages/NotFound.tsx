@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, Home as HomeIcon } from "lucide-react";
+import { ArrowRight, Home as HomeIcon } from "lucide-react";
 import { Link } from "wouter";
 import { PageMeta } from "@/components/marketing/PublicSite";
 
@@ -13,25 +13,37 @@ export default function NotFound() {
       <section className="not-found-page">
         <div className="not-found-layout">
           <p className="eyebrow">404 / NOT FOUND</p>
-          <span className="not-found-number">404</span>
+          <span className="not-found-number" aria-hidden="true">
+            404
+          </span>
           <h1>That page isn’t part of this story.</h1>
           <p>
-            The link may be outdated, or the page may have moved. Try the home
-            page or product overview.
+            The link may be outdated, or the page may have moved. Start from
+            home, or jump into the product and deployment paths.
           </p>
-          <div>
+          <div className="not-found-actions">
             <Link className="button button-primary" href="/">
-              <HomeIcon size={16} />
+              <HomeIcon size={16} aria-hidden="true" />
               Go home
             </Link>
-            <Link className="text-link" href="/product">
-              Explore the product <ArrowRight size={16} />
+            <Link className="button button-outline" href="/product">
+              Explore product
+            </Link>
+            <Link className="text-link" href="/contact">
+              Contact the team <ArrowRight size={16} aria-hidden="true" />
             </Link>
           </div>
-          <Link className="not-found-back" href="/resources">
-            <ArrowLeft size={14} />
-            Browse resources
-          </Link>
+          <ul className="not-found-links">
+            <li>
+              <Link href="/deployment">Deployment</Link>
+            </li>
+            <li>
+              <Link href="/privacy">Privacy policy</Link>
+            </li>
+            <li>
+              <Link href="/demo">Request a demo</Link>
+            </li>
+          </ul>
         </div>
       </section>
     </>

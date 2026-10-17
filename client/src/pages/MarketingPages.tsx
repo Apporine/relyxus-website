@@ -71,10 +71,11 @@ export function LegalPage({ page }: { page: "privacy" | "terms" }) {
               exchange. We do not sell form submissions.
             </p>
 
-            <h3>What this site does not load</h3>
+            <h3>Website analytics</h3>
             <p>
-              This marketing site does not load analytics or marketing trackers
-              today. Cookie preference controls are available if that changes.
+              We use Vercel Web Analytics to count visits and page views. It
+              does not use cookies or follow you across other sites. This site
+              does not load marketing trackers.
             </p>
 
             <h3>What not to send</h3>

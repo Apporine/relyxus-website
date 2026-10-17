@@ -85,7 +85,7 @@ export default function Home() {
   return (
     <>
       <PageMeta
-        title="AI incident response, with control"
+        title="Relyxus"
         description="Relyxus brings evidence from your tools into one investigation, explains likely causes, and keeps proposed actions behind policy and human approval."
         keywords="Relyxus, AI incident response, governed actions, incident investigation, regulated teams, SRE, security"
       />

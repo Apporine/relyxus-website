@@ -111,54 +111,102 @@ export const navGroups: NavGroup[] = [
 
 export const productOutcomes = [
   {
-    key: "investigate",
-    label: "Investigate",
-    eyebrow: "01 / Evidence first",
-    title: "A likely cause, with its sources attached.",
+    key: "cause",
+    label: "Faster cause",
+    eyebrow: "Investigate",
+    title: "Start from a likely cause, with its sources attached.",
     summary:
-      "Bring approved evidence into one investigation, show what supports a hypothesis, and keep alternatives visible.",
+      "Alerts, changes and service context land in one investigation. Your team sees what points to a cause and what still doesn’t fit.",
     detail:
-      "Investigation stays read-only by default. A suggested explanation is still a hypothesis until someone reviews the evidence behind it.",
-    href: "/product/investigation",
+      "Investigation is read-only by default, so looking never changes anything.",
+    href: "/product",
     visual: "trace",
   },
   {
-    key: "govern",
-    label: "Govern actions",
-    eyebrow: "02 / Permission visible",
-    title: "A proposal is not an execution.",
+    key: "action",
+    label: "Controlled action",
+    eyebrow: "Act",
+    title: "Nothing runs until the right people say so.",
     summary:
-      "Policy limits, scope and the required human approvals stay in view before an action can proceed.",
+      "Every proposed fix names its target and waits for approval under your own policy.",
     detail:
-      "A proposed change waits at an explicit approval gate. Your policies decide who can move it forward.",
-    href: "/product/investigation#governed-actions",
+      "You decide who can approve what. Relyxus keeps the request and the decision together.",
+    href: "/product",
     visual: "gate",
   },
   {
-    key: "report",
-    label: "Prepare reporting",
-    eyebrow: "03 / Human reviewed",
-    title: "Keep the evidence with the draft.",
+    key: "record",
+    label: "Audit-ready record",
+    eyebrow: "Report",
+    title: "The write-up is half done before the incident closes.",
     summary:
-      "A source-linked timeline can help people prepare a report without taking over classification, review or submission.",
+      "Every step, source and decision is logged in order, ready for your report draft.",
     detail:
-      "Anything that might go to a regulator stays a draft until people classify, review and submit it.",
-    href: "/product/reporting",
+      "People still classify, review and submit anything that goes to a regulator.",
+    href: "/product",
     visual: "record",
   },
+] as const;
+
+export const pathCards = [
   {
-    key: "replay",
-    label: "Learn with Replay",
-    eyebrow: "04 / Evaluate honestly",
-    title: "Test the reasoning on incidents you know.",
-    summary:
-      "Agree an evaluation scope, review evidence quality, and include misses and exclusions in the discussion.",
-    detail:
-      "Replay scope is agreed with your team—what incidents, which sources, and how misses will be reviewed.",
-    href: "/replay",
-    visual: "replay",
+    key: "engineering",
+    label: "Engineering and SRE",
+    title: "Get to the cause without hunting through tabs.",
+    text: "One investigation per incident, with every source linked.",
+    href: "/solutions/financial-services#engineering",
+  },
+  {
+    key: "resilience",
+    label: "Risk and resilience",
+    title: "Have the record ready before anyone asks.",
+    text: "A timeline you can hand to audit, built while the incident runs.",
+    href: "/solutions/financial-services#resilience",
+  },
+  {
+    key: "security",
+    label: "Security review",
+    title: "See what Relyxus can touch before you approve it.",
+    text: "Read-only by default. Your data stays in your environment.",
+    href: "/security",
   },
 ] as const;
+
+/** Countable facts about the product as it is described today. */
+export const productFacts = [
+  {
+    value: "3",
+    label: "outcomes: faster cause, controlled action, audit-ready record",
+  },
+  {
+    value: "1",
+    label: "human approval gate between a proposal and any action",
+  },
+  { value: "2", label: "ways to run it: dedicated, or self-hosted by you" },
+  { value: "0", label: "changes made to your systems while investigating" },
+] as const;
+
+/**
+ * Proof points. Add only items that are true and approved for publication.
+ * Each needs a precise status and, where it exists, a date.
+ */
+export const proofPoints: readonly {
+  title: string;
+  detail: string;
+  status: string;
+}[] = [
+  {
+    title: "Replay pilots",
+    detail:
+      "Run Relyxus against incidents your team already solved and compare the result with what you know.",
+    status: "Open to regulated teams",
+  },
+  {
+    title: "Built by Apporine",
+    detail: "Relyxus is built by the Apporine product and engineering team.",
+    status: "Apporine",
+  },
+];
 
 export type DeploymentMode = {
   key: string;

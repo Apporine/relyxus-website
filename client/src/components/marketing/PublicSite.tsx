@@ -44,7 +44,7 @@ export function PageMeta({
       "robots",
       noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large"
     );
-    upsertMeta("name", "theme-color", "#0b0e18");
+    upsertMeta("name", "theme-color", "#01030a");
     upsertMeta("property", "og:site_name", SITE_NAME);
     upsertMeta("property", "og:locale", "en_US");
     upsertMeta("property", "og:type", "website");
@@ -391,7 +391,8 @@ export function SiteFooter() {
             ))}
           </nav>
           <p className="footer-copy">
-            © {new Date().getFullYear()} Apporine. All rights reserved.
+            © {new Date().getFullYear()} Apporine. All rights reserved. Product
+            images show sample data.
           </p>
           <span className="footer-legal-spacer" aria-hidden="true" />
         </div>

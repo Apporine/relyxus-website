@@ -131,8 +131,104 @@ export function ContactPage() {
 }
 
 export function LegalPage({ page }: { page: "privacy" | "terms" | "accessibility" }) {
-  if (page === "accessibility") return <><PageMeta title="Accessibility" description="Accessibility approach and implementation notes for the Relyxus website preview." /><PageIntro eyebrow="ACCESSIBILITY / SITE APPROACH" title="Every decision should remain reachable." summary="This site is designed for keyboard, touch, reduced motion and narrow screens. An accessibility statement and conformance review still require an appointed owner." tone="blue" /><section className="legal-copy section-pad"><div className="container legal-copy-inner"><p className="eyebrow">IMPLEMENTATION INTENT</p><h2>Designed toward WCAG 2.2 AA, not a claim of certification.</h2><p>The site uses semantic page regions, visible keyboard focus, text labels, reduced-motion rules, responsive layout and accessible interaction patterns. The product walkthrough uses an example incident and has a readable transcript.</p><h3>Review still needed</h3><p>Manual keyboard, screen-reader, zoom, contrast and touch review is required before an accessibility statement is published. No conformance claim is made by this site.</p><h3>Share an accessibility issue</h3><p>A public feedback destination was not supplied. The contact page explains the current enquiry boundary; it does not forward a message.</p><TextLink href="/contact">Review contact options</TextLink></div></section></>;
-  const title = page === "privacy" ? "Privacy information has not been approved." : "Terms have not been provided.";
-  const description = page === "privacy" ? "The enquiry preview does not send form data. Approved production privacy wording remains a launch dependency." : "No approved legal terms were supplied for this website.";
-  return <><PageMeta title={page === "privacy" ? "Privacy" : "Terms"} description={description} /><PageIntro eyebrow={`COMPANY / ${page.toUpperCase()}`} title={title} summary={description} tone="blue" /><section className="legal-copy section-pad"><div className="container legal-copy-inner"><p className="eyebrow">PUBLICATION STATUS</p><h2>This page is a status notice, not legal advice or a legal policy.</h2><p>{page === "privacy" ? "The demonstration form in this preview does not send or store enquiry details. The site does not include analytics or marketing tools. A production privacy notice must describe the actual data controller, processing purposes, vendors, retention, rights and contact route after those choices are approved." : "This notice is not a substitute for approved terms governing the product or a commercial evaluation. No legal entity, jurisdiction, contractual terms, warranty or service commitment has been supplied."}</p><div className="limitation-box"><CircleAlert size={18} /><p><strong>Before production</strong>Replace this notice with reviewed wording that reflects the real website, organisation and configured services. Do not present this status notice as an official policy.</p></div><TextLink href="/contact">See contact routing status</TextLink></div></section></>;
+  if (page === "accessibility") {
+    return (
+      <>
+        <PageMeta title="Accessibility" description="How the Relyxus website supports keyboard, touch, reduced motion and readable layouts." />
+        <PageIntro
+          eyebrow="ACCESSIBILITY / SITE APPROACH"
+          title="Every decision should remain reachable."
+          summary="This site is built for keyboard, touch, reduced motion and narrow screens. We keep improving it as the product grows."
+          tone="blue"
+        />
+        <section className="legal-copy section-pad">
+          <div className="container legal-copy-inner">
+            <p className="eyebrow">HOW WE BUILD</p>
+            <h2>Designed toward WCAG 2.2 AA, without over-claiming.</h2>
+            <p>
+              Pages use semantic regions, visible focus, text labels, reduced-motion rules and accessible form patterns. The
+              incident walkthrough includes a readable transcript.
+            </p>
+            <h3>Still improving</h3>
+            <p>
+              We continue to review keyboard, screen-reader, zoom, contrast and touch behaviour. This page is not a formal
+              conformance certificate.
+            </p>
+            <h3>Share an accessibility issue</h3>
+            <p>If something is hard to use, tell us through the contact page or enquiry form and we’ll look into it.</p>
+            <TextLink href="/contact">Contact the team</TextLink>
+          </div>
+        </section>
+      </>
+    );
+  }
+
+  if (page === "privacy") {
+    return (
+      <>
+        <PageMeta
+          title="Privacy"
+          description="How Relyxus handles website enquiry details and what we do not collect on this marketing site."
+        />
+        <PageIntro
+          eyebrow="COMPANY / PRIVACY"
+          title="We only ask for what we need to reply."
+          summary="Enquiry details are used to respond to your message. This marketing site does not load analytics or marketing trackers."
+          tone="blue"
+        />
+        <section className="legal-copy section-pad">
+          <div className="container legal-copy-inner">
+            <p className="eyebrow">WEBSITE ENQUIRIES</p>
+            <h2>What happens when you contact us</h2>
+            <p>
+              When you submit the demo or contact form, your name, work email, company and message details are emailed to
+              the Apporine team at aoon.syed@apporine.com and bisma.idrees@apporine.com so we can respond.
+            </p>
+            <p>
+              Optional marketing preference is recorded with the enquiry if you choose it. Please do not send passwords,
+              secrets or sensitive incident data through the form.
+            </p>
+            <div className="limitation-box">
+              <CircleAlert size={18} />
+              <p>
+                <strong>Need a fuller privacy notice?</strong> Ask us via the contact page and we can share the latest
+                organisational wording for your review.
+              </p>
+            </div>
+            <TextLink href="/contact">Contact the team</TextLink>
+          </div>
+        </section>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <PageMeta title="Terms" description="Terms for evaluating Relyxus and using this marketing website." />
+      <PageIntro
+        eyebrow="COMPANY / TERMS"
+        title="A simple note while we publish full terms."
+        summary="This marketing site helps you evaluate Relyxus. Formal contract terms are agreed separately for paid engagements."
+        tone="blue"
+      />
+      <section className="legal-copy section-pad">
+        <div className="container legal-copy-inner">
+          <p className="eyebrow">USING THIS SITE</p>
+          <h2>What this page covers</h2>
+          <p>
+            Content on this website is for information and evaluation. It is not a quote, warranty or commitment about
+            availability, certifications or regulatory outcomes. Commercial terms are confirmed in writing with your team.
+          </p>
+          <div className="limitation-box">
+            <CircleAlert size={18} />
+            <p>
+              <strong>Questions about contracts?</strong> Use the enquiry form or email the team and we will point you to
+              the right conversation.
+            </p>
+          </div>
+          <TextLink href="/contact">Talk to us</TextLink>
+        </div>
+      </section>
+    </>
+  );
 }

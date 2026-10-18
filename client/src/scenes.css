@@ -1,0 +1,877 @@
+/* =========================================================
+   The homepage stage and its scenes
+   ========================================================= */
+
+/* Lenis: the library drives scrolling, so native smooth scrolling is off. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+/* ---------------------------------------------------------
+   The stage: a pinned 100vh frame inside a long scroll wrapper
+   --------------------------------------------------------- */
+.public-site main .rx-stage {
+  position: relative;
+  background: var(--ink);
+}
+.rx-stage-anchor {
+  position: absolute;
+  left: 0;
+  width: 1px;
+  height: 1px;
+}
+.rx-stage-pin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  background: var(--ink);
+}
+.rx-stage-core,
+.rx-core-move,
+.rx-core-fade,
+.rx-stage-signal {
+  position: absolute;
+  inset: 0;
+}
+.rx-core-move {
+  will-change: transform, opacity;
+}
+.rx-stage-pin .rx-grain {
+  z-index: 2;
+}
+.rx-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 75% 70% at 50% 50%,
+    transparent 55%,
+    rgba(18, 10, 24, 0.85) 100%
+  );
+}
+.rx-stage-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+}
+.rx-stage-paper {
+  position: absolute;
+  inset: 0;
+  z-index: 25;
+  opacity: 0;
+  pointer-events: none;
+  background: var(--paper);
+}
+
+/* Scenes swap on the stage: one is active, the rest wait in reading order. */
+.rx-scene {
+  position: absolute;
+  inset: 0;
+  padding: calc(81px + 4vh) var(--rx-web-gutter, 5vw) 9vh;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--reveal) var(--ease);
+}
+.rx-scene[data-active="true"] {
+  opacity: 1;
+  pointer-events: auto;
+}
+.rx-scene[data-active="true"] .rx-reveal {
+  opacity: 1;
+  filter: blur(0);
+  transform: none;
+}
+.public-site main .rx-scene :is(h1, h2) {
+  margin: 0;
+  color: var(--paper);
+  text-shadow: 0 2px 30px rgba(18, 10, 24, 0.6);
+}
+.public-site main .rx-scene-line {
+  margin: 18px 0 0;
+  color: var(--paper);
+  opacity: 0.82;
+  font-size: 17px;
+  line-height: 28px;
+}
+.rx-scene-head {
+  position: absolute;
+  max-width: 760px;
+}
+.rx-scene-head-center {
+  left: 50%;
+  width: calc(100% - 2 * var(--rx-web-gutter, 5vw));
+  max-width: 900px;
+  text-align: center;
+  transform: translateX(-50%);
+}
+.public-site main .rx-scene-head-center .rx-scene-line {
+  margin-inline: auto;
+}
+
+/* 1 · Hero */
+.rx-hero-copy {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  justify-items: center;
+  width: min(1180px, calc(100% - 2 * var(--rx-web-gutter, 5vw)));
+  text-align: center;
+  transform: translate(-50%, -46%);
+}
+.public-site main .rx-hero-copy .rx-eyebrow {
+  margin: 0 0 22px;
+}
+.public-site main .rx-hero-copy .rx-scene-line {
+  max-width: 624px;
+  margin-top: 24px;
+}
+.rx-hero-copy .hx-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 36px;
+}
+.rx-scroll-cue {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font: 500 11px/1 var(--font-mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+}
+.rx-scroll-cue span {
+  width: 1px;
+  height: 36px;
+  background: var(--paper);
+  transform-origin: top;
+  animation: rx-scroll-cue 1.8s var(--ease) infinite;
+}
+
+/* 2 · Signals: four ink glass cards wired into the core */
+.rx-scene-signals .rx-scene-head {
+  top: calc(81px + 5vh);
+}
+.rx-signal-wires {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.rx-wire,
+.rx-wire-flow {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+}
+.rx-wire {
+  stroke: rgba(198, 244, 50, 0.35);
+  stroke-width: 1;
+}
+.rx-wire-flow {
+  stroke: var(--signal);
+  stroke-width: 1.5;
+  opacity: 0;
+  transition: opacity 400ms var(--ease) 900ms;
+}
+.rx-scene-signals[data-active="true"] .rx-draw {
+  stroke-dashoffset: 0;
+}
+.rx-scene-signals[data-active="true"] .rx-wire-flow {
+  opacity: 1;
+}
+.rx-signal-cards {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.rx-signal-card {
+  position: absolute;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-content: center;
+  gap: 10px 12px;
+  width: 230px;
+  height: 152px;
+  padding: 20px;
+  animation: rx-orbit-drift 6s var(--ease) infinite;
+}
+.rx-signal-card-0 {
+  top: 28vh;
+  left: 8vw;
+}
+.rx-signal-card-1 {
+  top: 28vh;
+  right: 8vw;
+}
+.rx-signal-card-2 {
+  bottom: max(12vh, 108px);
+  left: 8vw;
+  animation-delay: -2s;
+}
+.rx-signal-card-3 {
+  right: 8vw;
+  bottom: max(12vh, 108px);
+  animation-delay: -4s;
+}
+.rx-signal-icon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--signal);
+}
+.public-site main .rx-signal-card .rx-label {
+  align-self: center;
+  color: var(--paper);
+}
+.rx-signal-card code {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font: 500 12px/1.5 var(--font-mono);
+}
+.rx-signal-dot {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--signal);
+  animation: rx-breathe 2.4s var(--ease) infinite;
+}
+
+/* 3 · Incident chain: six nodes, lit by scroll */
+.rx-chain-head {
+  top: 44vh;
+  left: var(--rx-web-gutter, 5vw);
+}
+.rx-chain {
+  position: absolute;
+  right: var(--rx-web-gutter, 5vw);
+  bottom: max(13vh, 112px);
+  left: var(--rx-web-gutter, 5vw);
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.rx-chain::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  right: 8%;
+  left: 18px;
+  height: 1px;
+  background: var(--line);
+}
+.rx-chain-step {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  opacity: 0.45;
+  transition: opacity var(--reveal) var(--ease);
+}
+.rx-chain-step.is-lit {
+  opacity: 1;
+}
+.rx-chain-node {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(244, 239, 230, 0.24);
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--muted);
+  font: 500 12px/1 var(--font-mono);
+  transition:
+    background-color 600ms var(--ease),
+    color 600ms var(--ease),
+    border-color 600ms var(--ease);
+}
+.rx-chain-step.is-lit .rx-chain-node {
+  border-color: var(--signal);
+  background: var(--signal);
+  color: var(--ink);
+}
+.rx-chain-step.is-current .rx-chain-node {
+  animation: rx-node-pulse 600ms var(--ease);
+  filter: drop-shadow(0 0 4px rgba(198, 244, 50, 0.85))
+    drop-shadow(0 0 12px rgba(198, 244, 50, 0.5));
+}
+.public-site main .rx-chain-step strong {
+  color: var(--paper);
+  font: 700 20px/1.15 var(--font-display);
+  font-stretch: 85%;
+}
+.rx-chain-line {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 20px;
+}
+.rx-chain-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.rx-chip {
+  padding: 3px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(244, 239, 230, 0.04);
+  color: var(--paper);
+  font: 500 10px/1.4 var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition:
+    opacity 500ms var(--ease) 200ms,
+    transform 500ms var(--ease) 200ms;
+}
+.rx-chain-step.is-lit .rx-chip {
+  opacity: 1;
+  transform: none;
+}
+
+/* 4 · Cause: three ranked hypotheses fan out; the top one locks */
+.rx-cause-head {
+  top: 44vh;
+}
+.rx-hypotheses {
+  position: absolute;
+  bottom: max(13vh, 112px);
+  left: 50%;
+  display: grid;
+  grid-template-columns: repeat(3, 280px);
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transform: translateX(-50%);
+}
+.rx-hypothesis {
+  display: grid;
+  gap: 8px;
+  padding: 18px 20px;
+  opacity: 0;
+  transform: translateX(var(--fan, 0)) scale(0.9);
+  transition:
+    opacity var(--reveal) var(--ease),
+    transform var(--swap) var(--ease),
+    border-color 600ms var(--ease);
+}
+.rx-hypothesis-0 {
+  --fan: 296px;
+}
+.rx-hypothesis-2 {
+  --fan: -296px;
+}
+.rx-scene-cause[data-active="true"] .rx-hypothesis {
+  opacity: 0.55;
+  transform: none;
+}
+.rx-scene-cause[data-active="true"] .rx-hypothesis.is-top {
+  opacity: 1;
+  border-color: var(--signal);
+  transition-delay: 0ms, 0ms, 900ms;
+}
+.public-site main .rx-hypothesis strong {
+  color: var(--paper);
+  font: 700 18px/1.2 var(--font-display);
+  font-stretch: 85%;
+}
+.rx-bar {
+  height: 4px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(244, 239, 230, 0.1);
+}
+.rx-bar span {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--paper);
+  transition: width var(--swap) var(--ease) 300ms;
+}
+.rx-scene-cause[data-active="true"] .rx-bar span {
+  width: calc(var(--score) * 100%);
+}
+.rx-hypothesis.is-top .rx-bar span {
+  background: var(--signal);
+}
+.rx-score {
+  color: var(--muted);
+  font: 500 12px/1 var(--font-mono);
+}
+
+/* 5 · Approval: the change stops at a gate on the ring */
+.rx-approval-head {
+  top: calc(81px + 6vh);
+  left: var(--rx-web-gutter, 5vw);
+}
+/* The gate sits on the ring, left of the core (core centre is 50vw + 63px,
+   its ring about 34vh across at this scale). */
+.rx-scene-approval {
+  --gate: calc(50vw + 63px - 33vh);
+}
+.rx-gate-track {
+  position: absolute;
+  top: 54vh;
+  left: 6vw;
+  width: calc(var(--gate) - 6vw);
+}
+.rx-gate-line {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: rgba(244, 239, 230, 0.2);
+}
+.rx-gate-bar {
+  position: absolute;
+  top: -40px;
+  right: -2px;
+  width: 4px;
+  height: 80px;
+  border-radius: 4px;
+  background: var(--signal);
+  filter: drop-shadow(0 0 4px rgba(198, 244, 50, 0.85))
+    drop-shadow(0 0 12px rgba(198, 244, 50, 0.5));
+  transform-origin: bottom;
+  transition: transform 450ms var(--ease);
+}
+.rx-scene-approval:is([data-phase="4"], [data-phase="5"]) .rx-gate-bar {
+  transform: scaleY(0);
+}
+.rx-change-card {
+  position: absolute;
+  top: calc(54vh - 44px);
+  left: 6vw;
+  display: grid;
+  gap: 6px;
+  width: 260px;
+  padding: 16px 18px;
+  opacity: 0;
+  transition:
+    transform var(--swap) var(--ease),
+    opacity var(--reveal) var(--ease);
+}
+.public-site main .rx-change-card strong {
+  color: var(--paper);
+  font: 500 14px/1.4 var(--font-mono);
+}
+/* Arrives and stops just short of the gate. */
+.rx-scene-approval:not([data-phase="0"]) .rx-change-card {
+  opacity: 1;
+  transform: translateX(calc(var(--gate) - 6vw - 284px));
+}
+/* Gate open: it passes through into the core. */
+.rx-scene-approval:is([data-phase="4"], [data-phase="5"]) .rx-change-card {
+  opacity: 0;
+  transform: translateX(calc(var(--gate) - 6vw + 120px)) scale(0.8);
+}
+.rx-approvers {
+  position: absolute;
+  top: calc(54vh + 56px);
+  left: calc(var(--gate) - 268px);
+  display: flex;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.rx-approvers li {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  width: 110px;
+  text-align: center;
+}
+.rx-avatar {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(244, 239, 230, 0.24);
+  border-radius: 50%;
+  background: var(--raised);
+  color: var(--paper);
+  font: 600 12px/1 var(--font-mono);
+  transition:
+    background-color 400ms var(--ease),
+    color 400ms var(--ease),
+    border-color 400ms var(--ease);
+}
+.rx-approvers .is-approved .rx-avatar {
+  border-color: var(--signal);
+  background: var(--signal);
+  color: var(--ink);
+  animation: rx-node-pulse 600ms var(--ease);
+}
+.public-site main .rx-approvers .rx-label {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
+.public-site main .rx-audit-line {
+  position: absolute;
+  bottom: max(13vh, 112px);
+  left: 50%;
+  max-width: none;
+  margin: 0;
+  color: var(--paper);
+  font: 500 13px/1.5 var(--font-mono);
+  white-space: nowrap;
+  transform: translateX(-50%);
+}
+
+/* 6 · Record: the core sits left, the record panel slides in right */
+.rx-record-panel {
+  position: absolute;
+  top: 50%;
+  right: var(--rx-web-gutter, 5vw);
+  display: grid;
+  gap: 24px;
+  width: min(560px, 46vw);
+  opacity: 0;
+  transform: translate(40px, -46%);
+  transition:
+    transform var(--swap) var(--ease),
+    opacity var(--reveal) var(--ease);
+}
+.rx-scene-record[data-active="true"] .rx-record-panel {
+  opacity: 1;
+  transform: translate(0, -46%);
+}
+.rx-record {
+  position: relative;
+  padding: 22px 24px;
+  box-shadow: 0 8px 30px -6px rgba(0, 0, 0, 0.5);
+}
+.rx-record ol {
+  display: grid;
+  gap: 10px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.public-site main .rx-record li {
+  display: grid;
+  grid-template-columns: 76px 1fr;
+  gap: 10px;
+  color: var(--paper);
+  font: 500 13px/1.5 var(--font-mono);
+  opacity: 0;
+  transition: opacity 300ms var(--ease);
+}
+.public-site main .rx-record li.is-shown {
+  opacity: 1;
+}
+.rx-record time {
+  color: var(--muted);
+}
+.rx-stamp {
+  position: absolute;
+  right: 18px;
+  bottom: -18px;
+  padding: 8px 12px;
+  border: 2px solid var(--signal);
+  border-radius: 8px;
+  background: var(--ink);
+  color: var(--signal);
+  font: 600 11px/1.2 var(--font-mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: rotate(-6deg) scale(1.6);
+  transition:
+    opacity 300ms var(--ease),
+    transform 500ms var(--ease);
+}
+.rx-stamp.is-landed {
+  opacity: 1;
+  transform: rotate(-6deg) scale(1);
+}
+
+/* 7 · Explore: solutions and pages orbit the core as links */
+.rx-explore-head {
+  top: 30vh;
+  left: 58vw;
+  max-width: 36vw;
+}
+.rx-orbit {
+  position: absolute;
+  top: 56%;
+  left: 36%;
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.rx-orbit-item {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+.rx-orbit-item > a {
+  animation: rx-orbit-drift 6s var(--ease) infinite;
+}
+.rx-orbit-0 {
+  top: -24vh;
+  left: -13vw;
+}
+.rx-orbit-1 {
+  top: -22vh;
+  left: 12vw;
+}
+.rx-orbit-2 {
+  top: 6vh;
+  left: 19vw;
+}
+.rx-orbit-3 {
+  top: 27vh;
+  left: 2vw;
+}
+.rx-orbit-4 {
+  top: 12vh;
+  left: -18vw;
+}
+.public-site main .rx-orbit-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  color: var(--paper);
+  font: 500 12px/1 var(--font-mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition:
+    border-color 300ms var(--ease),
+    color 300ms var(--ease);
+}
+.public-site main .rx-orbit-link:hover,
+.public-site main .rx-orbit-link:focus-visible {
+  border-color: var(--signal);
+  color: var(--signal);
+}
+
+/* ---------------------------------------------------------
+   Phone: every stage restacks inside one screen
+   --------------------------------------------------------- */
+@media (max-width: 760px) {
+  .rx-scene {
+    padding: calc(81px + 2vh) 20px 64px;
+  }
+  .rx-scene-head,
+  .rx-scene-head-center,
+  .rx-chain-head,
+  .rx-cause-head,
+  .rx-approval-head,
+  .rx-explore-head {
+    top: calc(81px + 3vh);
+    right: 20px;
+    left: 20px;
+    width: auto;
+    max-width: none;
+    text-align: left;
+    transform: none;
+  }
+  .public-site main .rx-scene-head-center .rx-scene-line {
+    margin-inline: 0;
+  }
+  .public-site main .rx-scene .rx-scene-line {
+    font-size: 15px;
+    line-height: 24px;
+  }
+  .rx-signal-wires {
+    display: none;
+  }
+  .rx-signal-cards {
+    position: absolute;
+    right: 20px;
+    bottom: 72px;
+    left: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .rx-signal-card {
+    position: relative;
+    inset: auto;
+    width: auto;
+    height: auto;
+    padding: 14px;
+  }
+  .rx-chain {
+    right: 20px;
+    bottom: 72px;
+    left: 20px;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 14px;
+  }
+  .rx-chain::before,
+  .rx-chain-tools,
+  .rx-chain-line {
+    display: none;
+  }
+  .rx-chain-step {
+    grid-template-columns: auto 1fr;
+    align-items: center;
+  }
+  .rx-chain-node {
+    width: 30px;
+    height: 30px;
+  }
+  .public-site main .rx-chain-step strong {
+    font-size: 17px;
+  }
+  .rx-hypotheses {
+    right: 20px;
+    bottom: 72px;
+    left: 20px;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    transform: none;
+  }
+  .rx-hypothesis {
+    --fan: 0px;
+    padding: 12px 14px;
+  }
+  .rx-hypothesis-0,
+  .rx-hypothesis-2 {
+    --fan: 0px;
+  }
+  .rx-gate-track {
+    top: 52vh;
+    left: 20px;
+    width: calc(100% - 40px);
+  }
+  .rx-gate-bar {
+    right: 30%;
+  }
+  .rx-change-card {
+    top: calc(52vh - 120px);
+    left: 20px;
+    width: calc(100% - 40px);
+  }
+  .rx-scene-approval:not([data-phase="0"]) .rx-change-card,
+  .rx-scene-approval:is([data-phase="4"], [data-phase="5"]) .rx-change-card {
+    transform: none;
+  }
+  .rx-approvers {
+    top: calc(52vh + 28px);
+    left: 20px;
+  }
+  .public-site main .rx-audit-line {
+    right: 20px;
+    bottom: 72px;
+    left: 20px;
+    font-size: 12px;
+    white-space: normal;
+    transform: none;
+  }
+  .rx-record-panel {
+    top: auto;
+    right: 20px;
+    bottom: 72px;
+    left: 20px;
+    width: auto;
+    transform: translateY(20px);
+  }
+  .rx-scene-record[data-active="true"] .rx-record-panel {
+    transform: none;
+  }
+  .public-site main .rx-record li {
+    grid-template-columns: 64px 1fr;
+    font-size: 12px;
+  }
+  .rx-orbit {
+    top: auto;
+    right: 20px;
+    bottom: 72px;
+    left: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: auto;
+    height: auto;
+  }
+  .rx-orbit-item {
+    position: static;
+    transform: none;
+  }
+}
+
+/* Reduced motion: static frames, 300 ms crossfades, no drift. */
+@media (prefers-reduced-motion: reduce) {
+  .rx-scene,
+  .rx-record-panel,
+  .rx-hypothesis,
+  .rx-change-card {
+    transition-duration: 300ms;
+  }
+  .rx-signal-card,
+  .rx-orbit-item > a,
+  .rx-scroll-cue span,
+  .rx-signal-dot {
+    animation: none;
+  }
+}
+html[data-motion="off"]
+  :is(
+    .rx-signal-card,
+    .rx-orbit-item > a,
+    .rx-scroll-cue span,
+    .rx-signal-dot
+  ) {
+  animation: none;
+}
+
+/* Phone: a tighter hero, and the header keeps only the menu. */
+@media (max-width: 560px) {
+  .public-site .header-actions .button-small {
+    display: none;
+  }
+  .rx-hero-copy {
+    transform: translate(-50%, -50%);
+  }
+  .public-site main .rx-hero-copy .rx-eyebrow {
+    margin-bottom: 14px;
+    font-size: 10px;
+  }
+  .public-site main .rx-hero-copy .rx-scene-line {
+    margin-top: 16px;
+  }
+  .rx-hero-copy .hx-actions {
+    margin-top: 22px;
+    gap: 8px;
+  }
+  .rx-scroll-cue {
+    display: none;
+  }
+}

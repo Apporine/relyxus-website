@@ -24,11 +24,9 @@ import {
   upsertLink,
   upsertMeta,
 } from "@/lib/seo";
-import {
-  EvidenceLine,
-  prefersLessMotion,
-  Stamp,
-} from "@/components/marketing/Ledger";
+import { prefersLessMotion } from "@/lib/motion";
+import { useSmoothScroll } from "@/lib/smoothScroll";
+import { Readout } from "@/components/marketing/Readout";
 
 export function PageMeta({
   title,
@@ -575,6 +573,7 @@ export function PublicLayout({
   tone?: "ivory" | "white";
 }) {
   const [location] = useLocation();
+  useSmoothScroll();
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
       if (window.location.hash) {
@@ -600,11 +599,11 @@ export function PublicLayout({
         Skip to content
       </a>
       <SiteHeader />
-      <EvidenceLine />
       <main id="main" tabIndex={-1}>
         {children}
       </main>
       <SiteFooter />
+      <Readout />
     </div>
   );
 }
@@ -762,8 +761,12 @@ export function DataBand({
   stamp?: string;
 }) {
   return (
-    <section className={`hx-band rx-${ground}`} aria-labelledby="hx-band-title">
-      {stamp && <Stamp at={stamp} />}
+    <section
+      className={`hx-band rx-${ground}`}
+      aria-labelledby="hx-band-title"
+      data-readout={stamp ? "" : undefined}
+      data-readout-clock={stamp}
+    >
       <div className="container">
         <h2 className="hx-band-title" id="hx-band-title">
           {title}
@@ -804,8 +807,11 @@ export function FounderNote({
   stamp?: string;
 }) {
   return (
-    <section className={`hx-section rx-${ground}`}>
-      {stamp && <Stamp at={stamp} />}
+    <section
+      className={`hx-section rx-${ground}`}
+      data-readout={stamp ? "" : undefined}
+      data-readout-clock={stamp}
+    >
       <div className="container">
         <div className="hx-note">
           <h2 className="hx-h2">{founderNote.heading}</h2>

@@ -12,6 +12,8 @@ import "./kinetic.css";
 import "./human.css";
 import "./system.css";
 import "./stage.css";
+import "./scenes.css";
+import "./resolved.css";
 import "./solutions.css";
 import "./trust.css";
 

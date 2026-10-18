@@ -18,6 +18,7 @@ export default function NotFound() {
         clock="T+00:00"
         status="Signal lost"
         tint="paper"
+        visual="mark"
       >
         <PrimaryLink href="/">Go home</PrimaryLink>
         <Link className="button button-secondary" href="/product">

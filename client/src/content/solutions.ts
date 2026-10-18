@@ -32,6 +32,12 @@ export type Team = {
   title: string;
   lede: string;
   cta: { label: string; href: string };
+  /** Closing panel copy — unique per team, not the homepage close. */
+  close: {
+    title: string;
+    line: string;
+    cta: { label: string; href: string };
+  };
   /** Chain steps this team owns; the rest are dimmed. */
   lit: readonly number[];
   view: TeamView;
@@ -119,6 +125,14 @@ export const teams: readonly Team[] = [
     title: "From alert to cause, *without the tab hunt.*",
     lede: "The alert, the last two hours of changes and the affected service, in one investigation ranked by evidence.",
     cta: { label: "Replay your last SEV1", href: "/demo?type=Replay%20pilot" },
+    close: {
+      title: "Replay the SEV1 *that still bothers you.*",
+      line: "Bring one closed incident. We’ll show causes ranked by evidence, with an approver before every change.",
+      cta: {
+        label: "Start a Replay pilot",
+        href: "/demo?type=Replay%20pilot",
+      },
+    },
     lit: [0, 1, 2],
     view: "evidence",
     viewTitle: "Causes, *ranked by evidence.*",
@@ -141,6 +155,14 @@ export const teams: readonly Team[] = [
       label: "Get the readiness checklist",
       href: "/demo?type=Readiness%20checklist",
     },
+    close: {
+      title: "See the draft *your next deadline needs.*",
+      line: "We’ll walk the 4-hour and 72-hour notices from a live record, not a blank page.",
+      cta: {
+        label: "Get the readiness checklist",
+        href: "/demo?type=Readiness%20checklist",
+      },
+    },
     lit: [0, 3, 5],
     view: "timeline",
     viewTitle: "Every deadline, *already drafting.*",
@@ -160,6 +182,11 @@ export const teams: readonly Team[] = [
     title: "Know what it cost, *and who decided.*",
     lede: "Money at risk while it runs, every decision with a name and a time, and a summary the board can read.",
     cta: { label: "Book a 30 minute demo", href: "/demo?type=Demo" },
+    close: {
+      title: "Walk through *what the last outage cost.*",
+      line: "Money at risk, named decisions, and a board summary — from one closed incident.",
+      cta: { label: "Book a 30 minute demo", href: "/demo?type=Demo" },
+    },
     lit: [2, 3, 4],
     view: "exposure",
     viewTitle: "Exposure, *in money and minutes.*",

@@ -1,0 +1,821 @@
+/* =========================================================
+   Stage visuals: per-page motifs (not the homepage SignalCore)
+   ========================================================= */
+
+.rx-stage-visual {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  color: var(--signal);
+}
+.rx-stage-visual--paper {
+  color: var(--paper);
+  opacity: 0.72;
+}
+.rx-stage-visual--dense {
+  color: var(--signal);
+  opacity: 0.55;
+  filter: saturate(0.7);
+}
+
+/* Shared placement when used as mini-stage / screens / closing backdrop */
+.rx-mini-core.rx-stage-visual,
+.rx-screens-core.rx-stage-visual {
+  inset: auto;
+}
+.rx-closing-core.rx-stage-visual {
+  position: relative;
+  inset: auto;
+}
+
+/* ---------------------------------------------------------
+   screens · product frame + scan
+   --------------------------------------------------------- */
+.rx-stage-visual--screens {
+  display: grid;
+  place-items: center;
+}
+.rx-stage-visual--screens .rx-sv-frame {
+  position: absolute;
+  width: 72%;
+  height: 58%;
+  border: 1px solid color-mix(in srgb, currentColor 28%, transparent);
+  border-radius: 18px;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, currentColor 8%, transparent),
+    inset 0 0 80px color-mix(in srgb, currentColor 6%, transparent);
+}
+.rx-stage-visual--screens .rx-sv-grid {
+  position: absolute;
+  width: 68%;
+  height: 52%;
+  border-radius: 12px;
+  background-image:
+    linear-gradient(
+      color-mix(in srgb, currentColor 12%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, currentColor 12%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 48px 48px;
+  opacity: 0.55;
+  mask-image: linear-gradient(
+    180deg,
+    transparent,
+    #000 18%,
+    #000 82%,
+    transparent
+  );
+}
+.rx-stage-visual--screens .rx-sv-scan {
+  position: absolute;
+  width: 68%;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, currentColor, transparent);
+  box-shadow: 0 0 24px var(--signal-glow);
+  animation: rx-sv-scan 4.8s var(--ease-2) infinite;
+}
+
+/* ---------------------------------------------------------
+   gate · security approval rail
+   --------------------------------------------------------- */
+.rx-stage-visual--gate {
+  display: grid;
+  place-items: center;
+}
+.rx-stage-visual--gate .rx-sv-rail {
+  position: absolute;
+  width: 78%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, currentColor 55%, transparent),
+    transparent
+  );
+}
+.rx-stage-visual--gate .rx-sv-gate {
+  position: absolute;
+  width: 22%;
+  height: 56px;
+  border: 1px solid color-mix(in srgb, currentColor 45%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--ink) 70%, transparent);
+  box-shadow: 0 0 40px color-mix(in srgb, currentColor 18%, transparent);
+  animation: rx-sv-breathe 3.2s var(--ease-2) infinite;
+}
+.rx-stage-visual--gate .rx-sv-lock {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 18px var(--signal-glow);
+  animation: rx-sv-blink 2.4s steps(1) infinite;
+}
+
+/* ---------------------------------------------------------
+   ledger · drafting rules
+   --------------------------------------------------------- */
+.rx-stage-visual--ledger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14%;
+  padding: 18% 12%;
+}
+.rx-stage-visual--ledger .rx-sv-rule {
+  display: block;
+  height: 1px;
+  width: 100%;
+  transform-origin: left center;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, currentColor 50%, transparent),
+    color-mix(in srgb, currentColor 8%, transparent)
+  );
+  animation: rx-sv-draw 5.5s var(--ease) infinite;
+}
+.rx-stage-visual--ledger .rx-sv-rule:nth-child(2) {
+  width: 86%;
+  animation-delay: 0.35s;
+}
+.rx-stage-visual--ledger .rx-sv-rule:nth-child(3) {
+  width: 94%;
+  animation-delay: 0.7s;
+}
+.rx-stage-visual--ledger .rx-sv-rule:nth-child(4) {
+  width: 72%;
+  animation-delay: 1.05s;
+}
+.rx-stage-visual--ledger .rx-sv-rule:nth-child(5) {
+  width: 80%;
+  animation-delay: 1.4s;
+}
+.rx-stage-visual--ledger .rx-sv-cursor {
+  position: absolute;
+  right: 14%;
+  top: 42%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 16px var(--signal-glow);
+  animation: rx-sv-cursor 5.5s var(--ease-2) infinite;
+}
+
+/* ---------------------------------------------------------
+   radar · concentric sweep (no sphere)
+   --------------------------------------------------------- */
+.rx-stage-visual--radar {
+  display: grid;
+  place-items: center;
+}
+.rx-stage-visual--radar .rx-sv-ring {
+  position: absolute;
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, currentColor 28%, transparent);
+  border-radius: 50%;
+}
+.rx-stage-visual--radar .rx-sv-ring:nth-child(1) {
+  width: 34%;
+}
+.rx-stage-visual--radar .rx-sv-ring:nth-child(2) {
+  width: 54%;
+}
+.rx-stage-visual--radar .rx-sv-ring:nth-child(3) {
+  width: 74%;
+}
+.rx-stage-visual--radar .rx-sv-sweep {
+  position: absolute;
+  width: 74%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    color-mix(in srgb, currentColor 35%, transparent),
+    transparent 28%
+  );
+  mask-image: radial-gradient(circle, transparent 42%, #000 43%);
+  animation: rx-sv-spin 8s linear infinite;
+}
+.rx-stage-visual--radar .rx-sv-blip {
+  position: absolute;
+  top: 28%;
+  right: 30%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 16px var(--signal-glow);
+  animation: rx-sv-blink 2.8s ease-in-out infinite;
+}
+
+/* ---------------------------------------------------------
+   meter · exposure bars
+   --------------------------------------------------------- */
+.rx-stage-visual--meter {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4.5%;
+  padding: 22% 16% 24%;
+}
+.rx-stage-visual--meter .rx-sv-bar {
+  flex: 1 1 0;
+  height: var(--h, 50%);
+  max-width: 48px;
+  border-radius: 6px 6px 2px 2px;
+  background: linear-gradient(
+    180deg,
+    currentColor,
+    color-mix(in srgb, currentColor 18%, transparent)
+  );
+  transform-origin: bottom center;
+  animation: rx-sv-meter 3.6s var(--ease-2) infinite;
+  opacity: 0.7;
+}
+.rx-stage-visual--meter .rx-sv-bar:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.rx-stage-visual--meter .rx-sv-bar:nth-child(3) {
+  animation-delay: 0.4s;
+}
+.rx-stage-visual--meter .rx-sv-bar:nth-child(4) {
+  animation-delay: 0.55s;
+}
+.rx-stage-visual--meter .rx-sv-bar:nth-child(5) {
+  animation-delay: 0.7s;
+}
+
+/* ---------------------------------------------------------
+   mesh · drifting grid
+   --------------------------------------------------------- */
+.rx-stage-visual--mesh .rx-sv-mesh,
+.rx-stage-visual--mesh .rx-sv-drift {
+  position: absolute;
+  inset: -20%;
+  background-image:
+    linear-gradient(
+      115deg,
+      transparent 48%,
+      color-mix(in srgb, currentColor 14%, transparent) 49%,
+      color-mix(in srgb, currentColor 14%, transparent) 50%,
+      transparent 51%
+    ),
+    linear-gradient(
+      25deg,
+      transparent 48%,
+      color-mix(in srgb, currentColor 10%, transparent) 49%,
+      color-mix(in srgb, currentColor 10%, transparent) 50%,
+      transparent 51%
+    );
+  background-size: 72px 72px;
+  opacity: 0.55;
+  mask-image: radial-gradient(ellipse at 70% 40%, #000 0%, transparent 72%);
+}
+.rx-stage-visual--mesh .rx-sv-drift {
+  opacity: 0.35;
+  animation: rx-sv-drift 18s linear infinite;
+}
+
+/* ---------------------------------------------------------
+   mark · quiet crosshair (legal / 404)
+   --------------------------------------------------------- */
+.rx-stage-visual--mark {
+  display: grid;
+  place-items: center;
+}
+.rx-stage-visual--mark .rx-sv-cross-h,
+.rx-stage-visual--mark .rx-sv-cross-v {
+  position: absolute;
+  background: color-mix(in srgb, currentColor 35%, transparent);
+}
+.rx-stage-visual--mark .rx-sv-cross-h {
+  width: 42%;
+  height: 1px;
+}
+.rx-stage-visual--mark .rx-sv-cross-v {
+  width: 1px;
+  height: 42%;
+}
+.rx-stage-visual--mark .rx-sv-dot {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  box-shadow: 0 0 20px color-mix(in srgb, currentColor 30%, transparent);
+}
+
+/* ---------------------------------------------------------
+   pulse · closing / demo signal (not a globe)
+   --------------------------------------------------------- */
+.rx-stage-visual--pulse {
+  display: grid;
+  place-items: center;
+}
+.rx-stage-visual--pulse .rx-sv-pulse {
+  position: absolute;
+  width: 42%;
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, currentColor 40%, transparent);
+  border-radius: 50%;
+  animation: rx-sv-pulse 3.4s var(--ease-2) infinite;
+}
+.rx-stage-visual--pulse .rx-sv-pulse:nth-child(2) {
+  animation-delay: 1.1s;
+}
+.rx-stage-visual--pulse .rx-sv-pulse-core {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 28px var(--signal-glow);
+}
+
+/* ---------------------------------------------------------
+   Keyframes
+   --------------------------------------------------------- */
+@keyframes rx-sv-scan {
+  0%,
+  100% {
+    transform: translateY(-140px);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(140px);
+    opacity: 0;
+  }
+}
+@keyframes rx-sv-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+}
+@keyframes rx-sv-blink {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  40%,
+  60% {
+    opacity: 1;
+  }
+}
+@keyframes rx-sv-draw {
+  0% {
+    transform: scaleX(0.15);
+    opacity: 0.25;
+  }
+  35%,
+  70% {
+    transform: scaleX(1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scaleX(0.4);
+    opacity: 0.35;
+  }
+}
+@keyframes rx-sv-cursor {
+  0%,
+  100% {
+    transform: translate(0, 0);
+    opacity: 0.3;
+  }
+  40% {
+    transform: translate(-120%, 40%);
+    opacity: 1;
+  }
+  70% {
+    transform: translate(-40%, -30%);
+    opacity: 0.7;
+  }
+}
+@keyframes rx-sv-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rx-sv-meter {
+  0%,
+  100% {
+    transform: scaleY(0.72);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+@keyframes rx-sv-drift {
+  to {
+    transform: translate3d(-36px, 24px, 0);
+  }
+}
+@keyframes rx-sv-pulse {
+  0% {
+    transform: scale(0.55);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+}
+
+html[data-motion="off"]
+  .rx-stage-visual
+  :is(
+    .rx-sv-scan,
+    .rx-sv-gate,
+    .rx-sv-lock,
+    .rx-sv-rule,
+    .rx-sv-cursor,
+    .rx-sv-sweep,
+    .rx-sv-blip,
+    .rx-sv-bar,
+    .rx-sv-drift,
+    .rx-sv-pulse
+  ) {
+  animation: none;
+}
+html[data-motion="off"] .rx-stage-visual--ledger .rx-sv-rule {
+  transform: none;
+  opacity: 0.55;
+}
+html[data-motion="off"] .rx-stage-visual--meter .rx-sv-bar {
+  transform: none;
+}
+html[data-motion="off"] .rx-stage-visual--pulse .rx-sv-pulse {
+  opacity: 0.35;
+  transform: scale(1);
+}
+
+/* =========================================================
+   Solutions motions — three distinct panels (not one card ×3)
+   ========================================================= */
+.rx-sol-motion {
+  display: grid;
+  gap: 20px;
+  padding: 22px 24px 24px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--signal) 18%, var(--line));
+  border-radius: 18px;
+  background: var(--raised);
+  box-shadow:
+    0 28px 90px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 color-mix(in srgb, var(--paper) 6%, transparent);
+  color: var(--paper);
+}
+.rx-sol-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  font: 500 11px/1 var(--font-mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.rx-sol-head span:first-child {
+  color: var(--signal);
+}
+.rx-sol-head span:last-child {
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: none;
+  font-size: 12px;
+}
+
+/* --- evidence: ranked cause nodes --- */
+.rx-sol-motion--evidence .rx-sol-nodes {
+  position: relative;
+  display: grid;
+  gap: 14px;
+  min-height: 280px;
+}
+.rx-sol-spark {
+  position: absolute;
+  top: 18%;
+  left: 8%;
+  width: 84%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--signal) 45%, transparent),
+    transparent
+  );
+  animation: rx-sol-spark 3.2s var(--ease-2) infinite;
+  pointer-events: none;
+}
+.rx-sol-spark-2 {
+  top: 52%;
+  animation-delay: 1.1s;
+  opacity: 0.6;
+}
+.rx-sol-node {
+  position: relative;
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
+  grid-template-areas:
+    "rank name score"
+    "rank src src";
+  gap: 4px 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--ink) 55%, transparent);
+  opacity: 0.55;
+  transform: translateX(-8px);
+  transition:
+    opacity 400ms var(--ease),
+    transform 400ms var(--ease),
+    border-color 400ms var(--ease);
+}
+.rx-sol-node.is-active,
+.rx-sol-node.is-top {
+  opacity: 1;
+  transform: none;
+}
+.rx-sol-node.is-active {
+  border-color: color-mix(in srgb, var(--signal) 55%, var(--line));
+}
+.rx-sol-node.is-top {
+  border-color: color-mix(in srgb, var(--signal) 40%, var(--line));
+}
+.rx-sol-rank {
+  grid-area: rank;
+  align-self: center;
+  color: var(--muted);
+  font: 500 12px/1 var(--font-mono);
+}
+.rx-sol-node.is-top .rx-sol-rank {
+  color: var(--signal);
+}
+.rx-sol-node strong {
+  grid-area: name;
+  font: 700 16px/1.2 var(--font-display);
+  font-stretch: 85%;
+}
+.rx-sol-score {
+  grid-area: score;
+  color: var(--muted);
+  font: 500 13px/1 var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+.rx-sol-node.is-top .rx-sol-score {
+  color: var(--signal);
+}
+.rx-sol-src {
+  grid-area: src;
+  color: var(--muted);
+  font: 500 11px/1.4 var(--font-mono);
+  letter-spacing: 0.06em;
+}
+.rx-sol-ring {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--signal) 20%, transparent);
+  border-top-color: var(--signal);
+  opacity: 0;
+  transform: translateY(-50%) rotate(0deg);
+  pointer-events: none;
+}
+.rx-sol-node.is-active .rx-sol-ring {
+  opacity: 0.85;
+  animation: rx-sv-spin 2.4s linear infinite;
+}
+
+/* --- timeline: deadline arc --- */
+.rx-sol-motion--timeline .rx-sol-arc-wrap {
+  display: grid;
+  gap: 16px;
+}
+.rx-sol-arc {
+  width: 100%;
+  max-height: 160px;
+  overflow: visible;
+}
+.rx-sol-arc-track {
+  stroke: var(--line);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.rx-sol-arc-fill {
+  stroke: var(--signal);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 314;
+  transition: stroke-dashoffset 700ms var(--ease);
+  filter: drop-shadow(0 0 8px var(--signal-glow));
+}
+.rx-sol-hand {
+  stroke: var(--signal);
+  stroke-width: 2;
+  stroke-linecap: round;
+  transform-origin: 120px 120px;
+  transition: transform 700ms var(--ease);
+}
+.rx-sol-hub {
+  fill: var(--signal);
+}
+.rx-sol-deadlines {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.rx-sol-deadlines li {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+  opacity: 0.35;
+  transition:
+    opacity 400ms var(--ease),
+    color 400ms var(--ease);
+}
+.rx-sol-deadlines li:first-child {
+  border-top: 0;
+}
+.rx-sol-deadlines li.is-lit {
+  opacity: 1;
+}
+.rx-sol-deadlines time {
+  color: var(--muted);
+  font: 500 12px/1.4 var(--font-mono);
+  letter-spacing: 0.04em;
+}
+.rx-sol-deadlines span {
+  color: var(--paper);
+  font-size: 14px;
+}
+.rx-sol-deadlines li.is-due.is-lit time,
+.rx-sol-deadlines li.is-due.is-lit span {
+  color: var(--signal);
+}
+
+/* --- exposure: money ticker --- */
+.rx-sol-motion--exposure .rx-sol-money {
+  display: grid;
+  gap: 10px;
+}
+.rx-sol-currency {
+  color: var(--muted);
+  font: 500 11px/1 var(--font-mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.rx-sol-figure {
+  color: var(--signal);
+  font: 800 clamp(40px, 5vw, 56px) / 1 var(--font-display);
+  font-stretch: 75%;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  transition: opacity 300ms var(--ease);
+}
+.rx-sol-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  height: 72px;
+  margin-top: 8px;
+}
+.rx-sol-bars span {
+  flex: 1;
+  height: var(--h, 40%);
+  border-radius: 4px 4px 1px 1px;
+  background: color-mix(in srgb, var(--signal) 18%, transparent);
+  transform: scaleY(0.35);
+  transform-origin: bottom;
+  transition:
+    transform 500ms var(--ease),
+    background 400ms var(--ease);
+}
+.rx-sol-bars span.is-on {
+  background: linear-gradient(
+    180deg,
+    var(--signal),
+    color-mix(in srgb, var(--signal) 35%, transparent)
+  );
+  transform: scaleY(1);
+}
+.rx-sol-stamps {
+  display: grid;
+  gap: 8px;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.rx-sol-stamps li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "who at"
+    "what at";
+  gap: 2px 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--ink) 45%, transparent);
+  animation: rx-log-in 420ms var(--ease) both;
+  animation-delay: calc(var(--i, 0) * 60ms);
+}
+.rx-sol-stamps strong {
+  grid-area: who;
+  font: 700 14px/1.2 var(--font-display);
+  font-stretch: 85%;
+}
+.rx-sol-stamps span {
+  grid-area: what;
+  color: var(--muted);
+  font-size: 13px;
+}
+.rx-sol-stamps time {
+  grid-area: at;
+  align-self: center;
+  color: var(--signal);
+  font: 500 11px/1 var(--font-mono);
+  letter-spacing: 0.06em;
+}
+
+/* Compact variant inside the team data glass */
+.rx-sol-motion.is-compact,
+.rx-team-feed.rx-sol-motion {
+  padding: 16px 16px 18px;
+  box-shadow: none;
+  background: color-mix(in srgb, var(--ink) 40%, transparent);
+}
+.rx-sol-motion.is-compact .rx-sol-nodes,
+.rx-team-feed .rx-sol-nodes {
+  min-height: 0;
+  gap: 10px;
+}
+.rx-sol-motion.is-compact .rx-sol-node {
+  padding: 10px 12px;
+}
+.rx-sol-motion.is-compact .rx-sol-figure {
+  font-size: clamp(32px, 4vw, 44px);
+}
+.rx-sol-motion.is-compact .rx-sol-bars {
+  height: 48px;
+}
+
+@keyframes rx-sol-spark {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scaleX(0.6);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+@keyframes rx-log-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+html[data-motion="off"] .rx-sol-spark,
+html[data-motion="off"] .rx-sol-ring,
+html[data-motion="off"] .rx-sol-stamps li {
+  animation: none;
+}
+html[data-motion="off"] .rx-sol-node {
+  opacity: 1;
+  transform: none;
+}
+html[data-motion="off"] .rx-sol-bars span {
+  transform: none;
+}

@@ -68,8 +68,8 @@ export function createRadarRenderer(canvas: HTMLCanvasElement): RadarRenderer {
       ctx.stroke();
     }
 
-    // The sweep: one turn every 20 s, in step with the core loop.
-    const angle = ((seconds % 20) / 20) * Math.PI * 2 - Math.PI / 2;
+    // The sweep: one turn every 8 s so the radar reads as live, not frozen.
+    const angle = ((seconds % 8) / 8) * Math.PI * 2 - Math.PI / 2;
     const reach = base * 2.7 * grow;
     const steps = 18;
     for (let i = 0; i < steps; i += 1) {

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Pause, Play } from "lucide-react";
+import { prefersLessMotion } from "@/lib/motion";
 
 type Callout = { x: number; y: number; w: number; h: number; text: string };
 
@@ -176,7 +177,7 @@ export function ProductTour() {
   );
 
   const tilt = (event: React.MouseEvent) => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (prefersLessMotion()) return;
     const box = event.currentTarget.getBoundingClientRect();
     const px = (event.clientX - box.left) / box.width - 0.5;
     const py = (event.clientY - box.top) / box.height - 0.5;

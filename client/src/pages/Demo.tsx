@@ -218,6 +218,7 @@ export function DemoPage() {
         eyebrow={variant.eyebrow}
         title={variant.title}
         summary={variant.summary}
+        visual="pulse"
       />
       <section className="demo-section section-pad">
         <div className="container demo-layout">

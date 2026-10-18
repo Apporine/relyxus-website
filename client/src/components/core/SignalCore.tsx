@@ -73,6 +73,8 @@ export const SignalCore = forwardRef<
 
     let frame = 0;
     let last = 0;
+    // Eager cores stay drawn even before the first IntersectionObserver tick,
+    // so the hero never sits on a blank canvas for a frame.
     let visible = eager;
     const start = performance.now();
     const paint = (seconds: number) => {
@@ -102,9 +104,14 @@ export const SignalCore = forwardRef<
     paint(0);
     frame = requestAnimationFrame(tick);
 
-    const io = new IntersectionObserver(([entry]) => {
-      visible = entry.isIntersecting;
-    });
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.isIntersecting;
+        // Coming back on screen: paint immediately so there is no blank frame.
+        if (visible) paint((performance.now() - start) / 1000);
+      },
+      { threshold: 0 }
+    );
     io.observe(wrap);
 
     return () => {

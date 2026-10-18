@@ -16,6 +16,7 @@ import "./scenes.css";
 import "./resolved.css";
 import "./trust.css";
 import "./pages.css";
+import "./stage-visual.css";
 
 const queryClient = new QueryClient();
 

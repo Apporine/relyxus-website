@@ -243,6 +243,6 @@ export const prove = {
 
 export const closing = {
   title: "Show us *the incident that hurt most.*",
-  line: "We’ll show you how Relyxus would have handled it.",
+  line: "Bring one closed case. We’ll replay it read only and show the record it would have left.",
   cta: { label: "Book a 30 minute demo", href: "/demo" },
 } as const;

@@ -40,7 +40,8 @@ const hold = (state: CoreState): Range => ({ from: state, to: state });
 
 /** The core's path through the stages (Redesign Strategy, transitions table). */
 const corePath: Record<StageId, Range> = {
-  hero: hold({ s: 1.42, r: 0, o: 1, x: 0, y: 0 }),
+  /* Sit below the headline so strands do not cut the type. */
+  hero: hold({ s: 1.12, r: 0, o: 0.7, x: 0, y: 34 }),
   signals: hold({ s: 0.94, r: 0, o: 1, x: 0, y: 2 }),
   chain: {
     from: { s: 0.88, r: 0, o: 1, x: 0, y: 0 },
@@ -61,7 +62,7 @@ const corePath: Record<StageId, Range> = {
 
 /** The rings layer follows on its own: scale and offset (px at 1137 wide). */
 const ringPath: Record<StageId, { from: number[]; to: number[] }> = {
-  hero: { from: [1.27, 0, -9], to: [1.27, 0, -9] },
+  hero: { from: [1.08, 0, 120], to: [1.08, 0, 120] },
   signals: { from: [1.49, 0, -21], to: [1.49, 0, -21] },
   chain: { from: [1.54, 0, -447], to: [1.86, 0, -603] },
   cause: { from: [1.86, 0, -603], to: [1.86, 0, -603] },
@@ -254,7 +255,12 @@ export function HomeStage() {
           style={{ top: `${anchor.top}vh` }}
         />
       ))}
-      <div className="rx-stage-pin" ref={pinRef} data-readout>
+      <div
+        className="rx-stage-pin"
+        ref={pinRef}
+        data-readout
+        data-stage={stages[active]?.id}
+      >
         <div className="rx-stage-core" aria-hidden="true">
           <div className="rx-core-move" ref={moveRef}>
             <div className="rx-core-fade" ref={fadeRef}>

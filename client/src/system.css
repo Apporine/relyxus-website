@@ -592,28 +592,11 @@ textarea,
 /* ---------------------------------------------------------
    Reduced motion: static frames with 300 ms crossfades
    --------------------------------------------------------- */
-@media (prefers-reduced-motion: reduce) {
-  .rx-headline .rx-line,
-  .rx-reveal {
-    filter: none;
-    transform: none;
-    transition: opacity 300ms linear;
-    transition-delay: 0ms;
-  }
-  .rx-draw {
-    transition: none;
-    stroke-dashoffset: 0;
-  }
-  .public-site .rx-headline .rx-underlined {
-    transition: none;
-    background-size: 100% 0.16em;
-  }
-  .rx-flow,
-  .rx-grain,
-  .rx-readout-clock .rx-colon {
-    animation: none;
-  }
-}
+/*
+ * The footer Animations switch owns motion. When html[data-motion="on"], CSS
+ * keeps animating even if the OS prefers reduced motion. When "off" (from the
+ * switch or from the OS with no saved choice), everything freezes.
+ */
 html[data-motion="off"] .rx-headline .rx-line,
 html[data-motion="off"] .rx-reveal {
   filter: none;

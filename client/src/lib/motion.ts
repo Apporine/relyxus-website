@@ -6,41 +6,30 @@ export const EASE_GSAP = "expo.out";
 export const REVEAL_MS = 600;
 export const STAGE_MS = 900;
 
-/** True when the visitor asked for less motion, in the OS or with the footer switch. */
+/**
+ * Marketing site keeps motion on. (No footer switch; OS reduce is ignored
+ * so animations do not silently die on Windows “Animation effects” off.)
+ */
 export function prefersLessMotion() {
-  if (typeof window === "undefined") return false;
-  let saved: string | null = null;
+  return false;
+}
+
+/** Always on — CSS reads html[data-motion]. */
+export function syncMotionAttr() {
+  document.documentElement.dataset.motion = "on";
   try {
-    // Read the saved choice directly: the footer switch may not have mounted yet.
-    saved = localStorage.getItem("rx-motion");
+    localStorage.removeItem("rx-motion");
   } catch {
     /* storage unavailable */
   }
-  return (
-    saved === "off" ||
-    document.documentElement.dataset.motion === "off" ||
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  );
 }
 
-/** Re-renders when the motion preference changes (OS setting or footer switch). */
+/** Always false; kept so call sites do not need to change. */
 export function useLessMotion() {
-  const [less, setLess] = useState(prefersLessMotion);
   useEffect(() => {
-    const update = () => setLess(prefersLessMotion());
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    media.addEventListener("change", update);
-    const observer = new MutationObserver(update);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["data-motion"],
-    });
-    return () => {
-      media.removeEventListener("change", update);
-      observer.disconnect();
-    };
+    syncMotionAttr();
   }, []);
-  return less;
+  return false;
 }
 
 /**

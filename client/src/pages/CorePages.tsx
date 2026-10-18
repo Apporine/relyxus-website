@@ -12,7 +12,7 @@ import {
 } from "@/components/marketing/PublicSite";
 import { MiniStage } from "@/components/marketing/MiniStage";
 import { Section } from "@/components/marketing/Section";
-import { SignalCore } from "@/components/core/SignalCore";
+import { StageVisual } from "@/components/marketing/StageVisual";
 import { Headline } from "@/components/marketing/Headline";
 import { CtaPanel } from "@/components/home/Resolved";
 import { ProductTour } from "@/components/marketing/ProductTour";
@@ -20,7 +20,7 @@ import { outageData, packPromise } from "@/content/site";
 import { pageMeta } from "@/content/meta";
 import { useReveal } from "@/lib/motion";
 
-/** Product screenshots, framed inside the same stage as the homepage. */
+/** Product screenshots on a frame motif — not the homepage globe. */
 function ScreensStage() {
   const [ref, inView] = useReveal<HTMLElement>(0.15);
   return (
@@ -32,7 +32,7 @@ function ScreensStage() {
       data-readout-clock="T+00:04"
       data-readout-status="The war room"
     >
-      <SignalCore className="rx-screens-core" />
+      <StageVisual motif="screens" className="rx-screens-core" />
       <div className="container">
         <Headline text="Five screens. *One source of truth.*" in={inView} />
         <div
@@ -58,6 +58,7 @@ export function ProductPage() {
         title="From first alert *to a record you can hand to audit.*"
         lede="One investigation per incident. A person approves every change. The write up is half done before the incident closes."
         status="Product"
+        visual="screens"
       >
         <PrimaryLink href="/demo">Book a 30 minute demo</PrimaryLink>
         <a className="button button-secondary" href="#screens">
@@ -125,6 +126,7 @@ export function SecurityPage() {
         lede={pageMeta["/security"].body}
         status="Security review"
         tint="paper"
+        visual="gate"
       >
         <PrimaryLink href="/demo?type=Security%20pack">
           Request the security pack
@@ -216,6 +218,7 @@ export function CompanyPage() {
         lede="Relyxus is built by Apporine for the teams who answer for every incident."
         status="Company"
         tint="dense"
+        visual="ledger"
       >
         <PrimaryLink href="/contact">Talk to the team</PrimaryLink>
         <Link className="button button-secondary" href="/product">

@@ -12,6 +12,7 @@ export type NavGroup = {
 export const navGroups: NavGroup[] = [
   {
     label: "Product",
+    orbit: true,
     items: [
       {
         label: "Product overview",
@@ -36,6 +37,7 @@ export const navGroups: NavGroup[] = [
   },
   {
     label: "Resources",
+    orbit: true,
     items: [
       {
         label: "Resource library",
@@ -56,6 +58,7 @@ export const navGroups: NavGroup[] = [
   },
   {
     label: "Company",
+    orbit: true,
     items: [
       {
         label: "About Relyxus",

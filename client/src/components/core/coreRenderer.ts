@@ -6,7 +6,7 @@
  *
  * Every frame is a pure function of time inside a 20 second loop, so frame
  * 600 is frame 0 and a recording of it loops seamlessly. Storyboard:
- *   0–4 s    strands drift in from the lower left; the ring turns (40 s a turn)
+ *   0–4 s    strands drift in from the lower left; the ring turns (10 s a turn)
  *   4 s      pulse 1: the centre brightens for 600 ms, the ring flares 15%
  *   4–8 s    a second stream joins from the upper right
  *   8/12/16  pulses 2–4
@@ -235,10 +235,10 @@ export function createCoreRenderer(
       }
     };
 
-    // The ring: two bright arcs opposite each other turn once every 40 s,
-    // which repeats every 20 s, so the loop stays seamless.
+    // The ring: two bright arcs opposite each other turn once every 10 s
+    // (two full turns per 20 s loop), so motion reads at a glance.
     const ringAt = (back: boolean) => {
-      const turn = (t / 40) * Math.PI * 2;
+      const turn = (t / 10) * Math.PI * 2;
       const segments = 96;
       for (let i = 0; i < segments; i += 1) {
         const a0 = (i / segments) * Math.PI * 2;
@@ -252,9 +252,9 @@ export function createCoreRenderer(
         const p1 = project(cx, cy, ring, a1);
         ctx.strokeStyle = rgba(
           SIGNAL,
-          clamp((back ? 0.35 : 0.85) * glow * flare)
+          clamp((back ? 0.45 : 0.95) * glow * flare)
         );
-        ctx.lineWidth = (back ? 1.2 : 2) * flare;
+        ctx.lineWidth = (back ? 1.6 : 2.6) * flare;
         ctx.beginPath();
         ctx.moveTo(p0.x, p0.y);
         ctx.lineTo(p1.x, p1.y);

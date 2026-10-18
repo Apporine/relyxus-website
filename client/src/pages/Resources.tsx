@@ -30,6 +30,7 @@ export function ResourcesPage() {
         eyebrow="Resources"
         title={pageMeta["/resources"].h1}
         summary={pageMeta["/resources"].body}
+        visual="mesh"
       />
       <section
         className="resources-index section-pad"
@@ -64,10 +65,10 @@ export function ResourcesPage() {
         </div>
       </section>
       <ActionBand
-        title="Bring a question *to the team.*"
-        summary="Ask about a demo or a Replay pilot and we’ll reply by email."
-        href="/demo"
-        label="Open the enquiry form"
+        title="Bring a question *from your last incident.*"
+        summary="Ask about DORA drafts, Replay pilots, or how the record is built — we reply by email."
+        href="/contact"
+        label="Contact the team"
       />
     </>
   );
@@ -86,6 +87,7 @@ export function ResourceArticle({ slug }: { slug: string }) {
           eyebrow="Resources"
           title="That guide *isn’t here.*"
           summary="Browse the current explainers or return to the home page."
+          visual="mark"
         />
         <section className="section-pad">
           <div className="container">

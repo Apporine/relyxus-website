@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "wouter";
 import { ArrowRight, Check } from "lucide-react";
 import { Headline } from "@/components/marketing/Headline";
-import { SignalCore } from "@/components/core/SignalCore";
+import { StageVisual } from "@/components/marketing/StageVisual";
 import { closing, compare, deadline, prove } from "@/content/home";
 import { regulatorySources, proofStrip } from "@/content/site";
 import { useLessMotion, useReveal } from "@/lib/motion";
@@ -263,7 +263,7 @@ export function CtaPanel({
     >
       <div className="container">
         <div className="rx-closing-panel">
-          <SignalCore className="rx-closing-core" />
+          <StageVisual motif="pulse" className="rx-closing-core" />
           <div className="rx-closing-copy">
             <Headline id={`rx-${place}-title`} text={title} in={inView} />
             <p

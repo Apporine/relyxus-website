@@ -20,6 +20,7 @@ export function ContactPage() {
         eyebrow="Contact"
         title={pageMeta["/contact"].h1}
         summary={pageMeta["/contact"].body}
+        visual="mesh"
       />
       <section className="hx-section">
         <div className="container">
@@ -42,6 +43,7 @@ export function LegalPage({ page }: { page: "privacy" | "terms" }) {
           eyebrow="Privacy policy"
           title={pageMeta["/privacy"].h1}
           summary="This policy covers the Relyxus website and enquiry forms. It does not replace contract terms for a paid deployment."
+          visual="mark"
         />
         <section className="legal-copy section-pad">
           <div className="container legal-copy-inner">
@@ -112,6 +114,7 @@ export function LegalPage({ page }: { page: "privacy" | "terms" }) {
         eyebrow="Terms"
         title={pageMeta["/terms"].h1}
         summary={pageMeta["/terms"].body}
+        visual="mark"
       />
       <section className="legal-copy section-pad">
         <div className="container legal-copy-inner">

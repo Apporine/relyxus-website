@@ -4,7 +4,11 @@ import { Link, useLocation } from "wouter";
 import { PageMeta } from "@/components/marketing/PublicSite";
 import { MiniStage } from "@/components/marketing/MiniStage";
 import { Headline } from "@/components/marketing/Headline";
-import { Closing } from "@/components/home/Resolved";
+import { CtaPanel } from "@/components/home/Resolved";
+import {
+  SolutionMotion,
+  type SolutionMotionKind,
+} from "@/components/marketing/SolutionMotion";
 import {
   caseByKey,
   chainSteps,
@@ -154,6 +158,7 @@ function TeamView({ team, initialCase }: { team: Team; initialCase: UseCase }) {
             {team.view === "evidence" && <EvidenceView useCase={active} />}
             {team.view === "timeline" && <TimelineView useCase={active} />}
             {team.view === "exposure" && <ExposureView useCase={active} />}
+            <SolutionMotion kind={team.view} compact className="rx-team-feed" />
           </div>
         </div>
       </div>
@@ -190,6 +195,12 @@ function Outcomes({ team }: { team: Team }) {
   );
 }
 
+const teamMotion: Record<Team["slug"], SolutionMotionKind> = {
+  engineering: "evidence",
+  resilience: "timeline",
+  leadership: "exposure",
+};
+
 export function SolutionPage({ slug }: { slug: string }) {
   const team = teamBySlug(slug);
   if (!team) return <NotFound />;
@@ -210,6 +221,7 @@ export function SolutionPage({ slug }: { slug: string }) {
         clock={team.clock}
         status={team.status}
         tint={team.tint}
+        solutionMotion={teamMotion[team.slug]}
       >
         <Link
           href={team.cta.href}
@@ -223,7 +235,12 @@ export function SolutionPage({ slug }: { slug: string }) {
       </MiniStage>
       <TeamView team={team} initialCase={initial} />
       <Outcomes team={team} />
-      <Closing place={`solution-${team.slug}`} />
+      <CtaPanel
+        title={team.close.title}
+        line={team.close.line}
+        cta={team.close.cta}
+        place={`solution-${team.slug}`}
+      />
     </div>
   );
 }

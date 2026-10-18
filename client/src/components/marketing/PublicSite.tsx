@@ -21,10 +21,11 @@ import {
   upsertLink,
   upsertMeta,
 } from "@/lib/seo";
-import { prefersLessMotion } from "@/lib/motion";
+import { prefersLessMotion, syncMotionAttr, useLessMotion } from "@/lib/motion";
 import { useSmoothScroll } from "@/lib/smoothScroll";
 import { Readout } from "@/components/marketing/Readout";
 import { MiniStage } from "@/components/marketing/MiniStage";
+import type { StageMotif } from "@/components/marketing/StageVisual";
 import { Accent } from "@/components/marketing/Headline";
 import { CtaPanel } from "@/components/home/Resolved";
 
@@ -218,7 +219,7 @@ function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
                   </span>
                 </div>
                 {group.orbit ? (
-                  <div className="nav-orbit">
+                  <div className="nav-orbit" data-count={group.items.length}>
                     <span className="nav-orbit-ring" aria-hidden="true">
                       <span />
                     </span>
@@ -446,40 +447,12 @@ const footerLegal = [
   { label: "Terms", href: "/terms" },
 ] as const;
 
-/** Animations default to on. Visitors can switch them off; the choice is remembered. */
-function MotionToggle() {
-  const [off, setOff] = useState(false);
-  useEffect(() => {
-    try {
-      setOff(localStorage.getItem("rx-motion") === "off");
-    } catch {
-      /* storage unavailable */
-    }
-  }, []);
-  useEffect(() => {
-    document.documentElement.dataset.motion = off ? "off" : "on";
-  }, [off]);
-  return (
-    <button
-      type="button"
-      className="motion-toggle"
-      aria-pressed={off}
-      onClick={() => {
-        const next = !off;
-        setOff(next);
-        try {
-          localStorage.setItem("rx-motion", next ? "off" : "on");
-        } catch {
-          /* storage unavailable */
-        }
-      }}
-    >
-      Animations: {off ? "off" : "on"}
-    </button>
-  );
-}
-
 export function SiteFooter() {
+  // Keep html[data-motion] in sync with the OS; no manual footer switch.
+  useLessMotion();
+  useEffect(() => {
+    syncMotionAttr();
+  }, []);
   return (
     <footer className="site-footer">
       <div className="container footer-shell">
@@ -526,7 +499,6 @@ export function SiteFooter() {
             {companyDetails.registration && ` ${companyDetails.registration}.`}
             {companyDetails.location && ` ${companyDetails.location}.`}
           </p>
-          <MotionToggle />
         </div>
       </div>
     </footer>
@@ -576,20 +548,28 @@ export function PublicLayout({
   );
 }
 
-/** Inner page hero: the mini stage, with the signal core beside the headline. */
+/** Inner page hero: mini stage with a page-specific motif (not the globe). */
 export function PageHero({
   eyebrow,
   title,
   summary,
+  visual = "mesh",
   children,
 }: {
   eyebrow: string;
   title: string;
   summary: string;
+  visual?: StageMotif;
   children?: React.ReactNode;
 }) {
   return (
-    <MiniStage eyebrow={eyebrow} title={title} lede={summary} status={eyebrow}>
+    <MiniStage
+      eyebrow={eyebrow}
+      title={title}
+      lede={summary}
+      status={eyebrow}
+      visual={visual}
+    >
       {children}
     </MiniStage>
   );

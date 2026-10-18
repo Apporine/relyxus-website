@@ -1,21 +1,21 @@
 /*
  * Human layer. Loads last. Moves the site onto one calmer design system:
- * near-black base, translucent borders, 14px cards, pill buttons and Inter at
+ * near-black base, translucent borders, 14px cards, pill buttons and The Three Voices at
  * weight 800 with -0.02em tracking. One accent: mint.
  */
 :root {
-  --hx-bg: #160f29;
-  --hx-card: rgba(252, 250, 255, 0.04);
-  --hx-border: rgba(252, 250, 255, 0.1);
-  --hx-border-strong: rgba(252, 250, 255, 0.18);
-  --hx-text: #fcfaff;
+  --hx-bg: var(--rx-ink);
+  --hx-card: rgba(244, 240, 232, 0.04);
+  --hx-border: rgba(244, 240, 232, 0.1);
+  --hx-border-strong: rgba(244, 240, 232, 0.18);
+  --hx-text: var(--rx-ivory);
   --hx-muted: #a8a4b1;
-  --hx-mint: #05dce8;
+  --hx-mint: var(--rx-aqua);
   --hx-radius: 14px;
-  --hx-coral: #ff694d;
-  --hx-cyan: #05dce8;
-  --hx-violet: #c4b0ff;
-  --hx-amber: #ff694d;
+  --hx-coral: var(--rx-aqua);
+  --hx-cyan: var(--rx-aqua);
+  --hx-violet: var(--rx-mist);
+  --hx-amber: var(--rx-aqua);
   --rx-web-bg: var(--hx-bg);
 }
 
@@ -33,7 +33,7 @@ body,
   line-height: 1.6;
 }
 
-/* Type: Inter, heavy and tight, at a sane scale. */
+/* Type: Bricolage, heavy and tight, at a sane scale. */
 .public-site main :is(h1, h2, h3) {
   font-weight: 800;
   letter-spacing: -0.02em;
@@ -128,7 +128,7 @@ body,
   background:
     radial-gradient(
       ellipse 60% 50% at 78% 20%,
-      rgba(5, 220, 232, 0.09),
+      rgba(25, 211, 197, 0.09),
       transparent 70%
     ),
     var(--hx-bg);
@@ -176,13 +176,13 @@ body,
   height: auto;
 }
 .hx-chip {
-  fill: rgba(252, 250, 255, 0.06);
+  fill: rgba(244, 240, 232, 0.06);
   stroke: var(--hx-border-strong);
 }
 .hx-chip-text {
   fill: var(--hx-text);
   font:
-    600 12px Inter,
+    600 12px "IBM Plex Mono",
     system-ui,
     sans-serif;
 }
@@ -228,37 +228,37 @@ body,
   stroke: none !important;
 }
 .hx-core-halo {
-  fill: rgba(5, 220, 232, 0.1);
+  fill: rgba(25, 211, 197, 0.1);
   animation: hx-pulse 3s ease-in-out infinite;
   transform-origin: 290px 160px;
 }
 .hx-core-disc {
-  fill: #1e1830;
+  fill: var(--rx-ink-800);
   stroke: var(--hx-mint);
   stroke-width: 1.5;
 }
 .hx-core-text {
   fill: var(--hx-text);
   font:
-    700 11px Inter,
+    700 11px "IBM Plex Mono",
     system-ui,
     sans-serif;
 }
 .hx-card {
-  fill: rgba(252, 250, 255, 0.05);
+  fill: rgba(244, 240, 232, 0.05);
   stroke: var(--hx-border-strong);
 }
 .hx-card-title {
   fill: var(--hx-text);
   font:
-    700 12px Inter,
+    700 12px "IBM Plex Mono",
     system-ui,
     sans-serif;
 }
 .hx-card-sub {
   fill: var(--hx-muted);
   font:
-    500 11px Inter,
+    500 11px "IBM Plex Mono",
     system-ui,
     sans-serif;
 }
@@ -316,7 +316,7 @@ body,
 }
 .hx-toggle button[aria-pressed="true"] {
   background: var(--hx-mint);
-  color: #1e1730;
+  color: var(--rx-ink-800);
 }
 @keyframes hx-flow {
   to {
@@ -392,7 +392,7 @@ body,
 .hx-band {
   padding: clamp(48px, 6vw, 80px) 0;
   border-block: 1px solid var(--hx-border);
-  background: rgba(252, 250, 255, 0.02);
+  background: rgba(244, 240, 232, 0.02);
 }
 .hx-band-title {
   max-width: 640px;
@@ -438,8 +438,8 @@ body,
   overflow: hidden;
   border: 1px solid var(--hx-border-strong);
   border-radius: 18px;
-  background: #19122c;
-  box-shadow: 0 40px 120px rgba(5, 220, 232, 0.08);
+  background: var(--rx-ink-800);
+  box-shadow: 0 40px 120px rgba(25, 211, 197, 0.08);
 }
 .hx-shot-bar {
   display: flex;
@@ -451,7 +451,7 @@ body,
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: rgba(252, 250, 255, 0.18);
+  background: rgba(244, 240, 232, 0.18);
 }
 .hx-shot img {
   display: block;
@@ -495,7 +495,7 @@ body,
   display: inline-block;
   padding: 3px 10px;
   border-radius: 999px;
-  background: rgba(5, 220, 232, 0.12);
+  background: rgba(25, 211, 197, 0.12);
   color: var(--hx-mint);
   font-size: 12px;
   font-weight: 700;
@@ -546,9 +546,9 @@ body,
   justify-content: space-between;
   gap: 24px;
   padding: clamp(28px, 4vw, 44px);
-  border: 1px solid rgba(5, 220, 232, 0.35);
+  border: 1px solid rgba(25, 211, 197, 0.35);
   border-radius: 20px;
-  background: rgba(5, 220, 232, 0.05);
+  background: rgba(25, 211, 197, 0.05);
 }
 .hx-magnet > div {
   display: grid;
@@ -602,7 +602,7 @@ body,
   overflow: hidden;
   border: 1px solid var(--hx-border);
   border-radius: var(--hx-radius);
-  background: #19122c;
+  background: var(--rx-ink-800);
 }
 .hx-screen img {
   display: block;
@@ -666,7 +666,7 @@ body,
 }
 .hx-tabs button[aria-pressed="true"] {
   background: var(--hx-mint);
-  color: #1e1730;
+  color: var(--rx-ink-800);
 }
 .hx-perspective {
   display: grid;
@@ -756,7 +756,7 @@ body,
   width: 100%;
   height: auto;
   border-bottom: 1px solid var(--hx-border);
-  background: #19122c;
+  background: var(--rx-ink-800);
 }
 .hx-proof-text {
   padding: 20px 24px 24px;
@@ -801,7 +801,7 @@ body,
   font-size: 13px;
 }
 .hx-stage-tab[aria-pressed="true"] {
-  background: rgba(5, 220, 232, 0.06);
+  background: rgba(25, 211, 197, 0.06);
 }
 .hx-stage-index {
   color: var(--hx-mint);
@@ -832,7 +832,7 @@ body,
   padding: clamp(24px, 3vw, 40px);
   background: radial-gradient(
     ellipse 70% 70% at 80% 40%,
-    rgba(5, 220, 232, 0.07),
+    rgba(25, 211, 197, 0.07),
     transparent 70%
   );
 }
@@ -899,19 +899,19 @@ body,
   opacity: 0.6;
 }
 .hx-gate-bar {
-  fill: rgba(252, 250, 255, 0.14);
+  fill: rgba(244, 240, 232, 0.14);
 }
 .hx-scene-card-move {
   animation: hx-card-move 4.6s ease-in-out forwards;
 }
 .hx-scene-approver circle {
-  fill: rgba(252, 250, 255, 0.08);
+  fill: rgba(244, 240, 232, 0.08);
   stroke: var(--hx-border-strong);
 }
 .hx-scene-approver text {
   fill: var(--hx-text);
   font:
-    700 11px Inter,
+    700 11px "IBM Plex Mono",
     system-ui,
     sans-serif;
 }
@@ -919,7 +919,7 @@ body,
   animation: hx-approve 0.5s ease forwards;
 }
 .hx-done {
-  fill: rgba(5, 220, 232, 0.12);
+  fill: rgba(25, 211, 197, 0.12);
   stroke: var(--hx-mint);
   stroke-width: 2;
 }
@@ -931,7 +931,7 @@ body,
   stroke-linejoin: round;
 }
 .hx-bar {
-  fill: rgba(252, 250, 255, 0.14);
+  fill: rgba(244, 240, 232, 0.14);
 }
 @keyframes hx-reveal {
   from {
@@ -1055,7 +1055,7 @@ body,
 .hx-stage-node text {
   fill: var(--hx-muted);
   font:
-    600 12px Inter,
+    600 12px "IBM Plex Mono",
     system-ui,
     sans-serif;
   transition: fill 0.3s ease;
@@ -1098,7 +1098,7 @@ body,
   fill: transparent;
 }
 .hx-pipe-ring {
-  fill: #1a132d;
+  fill: var(--rx-ink);
   stroke: var(--hx-border-strong);
   stroke-width: 2;
   transition: stroke 0.4s ease;
@@ -1110,7 +1110,7 @@ body,
 .hx-pipe-node text {
   fill: var(--hx-muted);
   font:
-    600 13px Inter,
+    600 13px "IBM Plex Mono",
     system-ui,
     sans-serif;
   transition: fill 0.4s ease;
@@ -1134,7 +1134,7 @@ body,
   pointer-events: none;
 }
 .hx-token-halo {
-  fill: rgba(5, 220, 232, 0.22);
+  fill: rgba(25, 211, 197, 0.22);
   transform-box: fill-box;
   transform-origin: center;
   animation: hx-pulse 1.6s ease-in-out infinite;
@@ -1176,10 +1176,10 @@ body,
   overflow: hidden;
   border: 1px solid var(--hx-border-strong);
   border-radius: 18px;
-  background: #19122c;
+  background: var(--rx-ink-800);
   box-shadow:
-    0 50px 120px rgba(5, 220, 232, 0.1),
-    0 0 0 1px rgba(252, 250, 255, 0.02);
+    0 50px 120px rgba(25, 211, 197, 0.1),
+    0 0 0 1px rgba(244, 240, 232, 0.02);
   transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
   transition: transform 0.25s ease-out;
   will-change: transform;
@@ -1217,8 +1217,8 @@ body,
   position: absolute;
   border: 2px solid var(--hx-mint);
   border-radius: 10px;
-  background: rgba(5, 220, 232, 0.07);
-  box-shadow: 0 0 22px rgba(5, 220, 232, 0.4);
+  background: rgba(25, 211, 197, 0.07);
+  box-shadow: 0 0 22px rgba(25, 211, 197, 0.4);
   opacity: 0;
   transform: scale(1.06);
   transition:
@@ -1239,7 +1239,7 @@ body,
   padding: 10px 16px;
   border: 1px solid var(--hx-mint);
   border-radius: 999px;
-  background: rgba(27, 20, 45, 0.92);
+  background: rgba(23, 19, 31, 0.92);
   color: var(--hx-text) !important;
   font-size: 15px !important;
   font-weight: 700;
@@ -1286,7 +1286,7 @@ body,
   height: 18px;
   border: 2px solid var(--hx-border-strong);
   border-radius: 50%;
-  background: #1a132d;
+  background: var(--rx-ink);
   transition:
     border-color 0.4s ease,
     background 0.4s ease,
@@ -1411,7 +1411,7 @@ html[data-motion="off"] .hx-scene-draw {
 .art-label {
   fill: var(--hx-muted);
   font:
-    600 12px Inter,
+    600 12px "IBM Plex Mono",
     system-ui,
     sans-serif;
 }
@@ -1419,7 +1419,7 @@ html[data-motion="off"] .hx-scene-draw {
   display: inline-block;
   padding: 3px 10px;
   border-radius: 999px;
-  background: rgba(255, 105, 77, 0.18);
+  background: rgba(25, 211, 197, 0.18);
   color: var(--hx-coral);
   font-size: 12px;
   font-weight: 700;
@@ -1429,7 +1429,7 @@ html[data-motion="off"] .hx-scene-draw {
   height: 7px;
   margin-top: 10px;
   border-radius: 4px;
-  background: rgba(252, 250, 255, 0.12);
+  background: rgba(244, 240, 232, 0.12);
 }
 .art-card,
 .art-doc,
@@ -1494,7 +1494,7 @@ html[data-motion="off"] .hx-scene-draw {
   height: 8px;
   overflow: hidden;
   border-radius: 4px;
-  background: rgba(252, 250, 255, 0.1);
+  background: rgba(244, 240, 232, 0.1);
 }
 .art-meter i {
   display: block;
@@ -1528,7 +1528,7 @@ html[data-motion="off"] .hx-scene-draw {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(5, 220, 232, 0.25),
+    rgba(25, 211, 197, 0.25),
     transparent
   );
   animation: art-scan 3.6s linear infinite;
@@ -1567,13 +1567,13 @@ html[data-motion="off"] .hx-scene-draw {
   fill: var(--hx-mint);
 }
 .art-core-glow {
-  fill: rgba(5, 220, 232, 0.12);
+  fill: rgba(25, 211, 197, 0.12);
   transform-box: fill-box;
   transform-origin: center;
   animation: hx-pulse 3s ease-in-out infinite;
 }
 .art-shield {
-  fill: #1e1830;
+  fill: var(--rx-ink-800);
   stroke: var(--hx-mint);
   stroke-width: 2.5;
 }
@@ -1592,7 +1592,7 @@ html[data-motion="off"] .hx-scene-draw {
   aspect-ratio: 460 / 300;
 }
 .art-station-ring {
-  fill: #1a132d;
+  fill: var(--rx-ink);
   stroke: var(--hx-border-strong);
   stroke-width: 2;
 }
@@ -1606,13 +1606,13 @@ html[data-motion="off"] .hx-scene-draw {
   animation: art-fault-core 8s ease-in-out infinite;
 }
 .art-alert-tag rect {
-  fill: rgba(5, 220, 232, 0.14);
+  fill: rgba(25, 211, 197, 0.14);
   stroke: var(--hx-mint);
 }
 .art-alert-tag text {
   fill: var(--hx-mint);
   font:
-    700 13px Inter,
+    700 13px "IBM Plex Mono",
     system-ui,
     sans-serif;
 }
@@ -1641,7 +1641,7 @@ html[data-motion="off"] .hx-scene-draw {
   fill: var(--hx-mint);
 }
 .art-star-halo {
-  fill: rgba(5, 220, 232, 0.14);
+  fill: rgba(25, 211, 197, 0.14);
   transform-box: fill-box;
   transform-origin: center;
   animation: hx-pulse 3.6s ease-in-out infinite;
@@ -1659,7 +1659,7 @@ html[data-motion="off"] .hx-scene-draw {
   padding: 18px;
 }
 .art-doc .art-pill {
-  background: rgba(5, 220, 232, 0.14);
+  background: rgba(25, 211, 197, 0.14);
   color: var(--hx-mint);
 }
 .art-doc-0 {
@@ -1953,14 +1953,14 @@ html[data-motion="off"] .hx-scene-draw {
   animation-delay: 1.2s;
 }
 .tl-gate {
-  fill: rgba(252, 250, 255, 0.16);
+  fill: rgba(244, 240, 232, 0.16);
 }
 .tl-card {
   fill: var(--hx-mint);
   animation: tl-card 4s ease-in-out infinite;
 }
 .tl-bar {
-  fill: rgba(5, 220, 232, 0.55);
+  fill: rgba(25, 211, 197, 0.55);
   transform-box: fill-box;
   transform-origin: left;
   animation: tl-bar 3.6s ease-in-out infinite;
@@ -2022,7 +2022,7 @@ html[data-motion="off"] .hx-scene-draw {
 .wm {
   display: inline-flex;
   align-items: baseline;
-  color: #fcfaff;
+  color: var(--rx-ivory);
 }
 .wm-x {
   align-self: center;
@@ -2037,7 +2037,7 @@ html[data-motion="off"] .hx-scene-draw {
   stroke-linecap: round;
 }
 .wm-x1 {
-  stroke: #fcfaff;
+  stroke: var(--rx-ivory);
 }
 .wm-x2 {
   stroke: var(--hx-mint);
@@ -2062,18 +2062,18 @@ html[data-motion="off"] .hx-scene-draw {
 }
 .orb-ring {
   fill: none;
-  stroke: rgba(252, 250, 255, 0.1);
+  stroke: rgba(244, 240, 232, 0.1);
   stroke-dasharray: 2 7;
 }
 .orb-ring-2 {
-  stroke: rgba(5, 220, 232, 0.14);
+  stroke: rgba(25, 211, 197, 0.14);
 }
 .orb-spin {
   transform-origin: 320px 260px;
   animation: art-rotate 40s linear infinite;
 }
 .orb-diamond {
-  fill: #19122b;
+  fill: var(--rx-ink);
   stroke: var(--hx-mint);
   stroke-opacity: 0.6;
 }
@@ -2090,28 +2090,28 @@ html[data-motion="off"] .hx-scene-draw {
   --c: var(--hx-mint);
 }
 .orb-coral {
-  --c: #ff694d;
+  --c: var(--rx-aqua);
 }
 .orb-cyan {
-  --c: #05dce8;
+  --c: var(--rx-aqua);
 }
 .orb-mint {
-  --c: #05dce8;
+  --c: var(--rx-aqua);
 }
 .orb-violet {
-  --c: #c4b0ff;
+  --c: var(--rx-mist);
 }
 .orb-amber {
-  --c: #ff694d;
+  --c: var(--rx-aqua);
 }
 .orb-blue {
-  --c: #9a78ff;
+  --c: var(--rx-aqua);
 }
 .orb-lime {
-  --c: #05dce8;
+  --c: var(--rx-aqua);
 }
 .orb-pink {
-  --c: #ff694d;
+  --c: var(--rx-aqua);
 }
 .orb-beam {
   fill: none;
@@ -2128,7 +2128,7 @@ html[data-motion="off"] .hx-scene-draw {
   animation-delay: calc(var(--i) * 0.42s);
 }
 .orb-node {
-  fill: #19122b;
+  fill: var(--rx-ink);
   stroke: var(--c);
   stroke-width: 2;
   stroke-opacity: 0.5;
@@ -2144,13 +2144,13 @@ html[data-motion="off"] .hx-scene-draw {
 .orb-label {
   fill: var(--hx-muted);
   font:
-    800 10px Inter,
+    800 10px "IBM Plex Mono",
     system-ui,
     sans-serif;
   letter-spacing: 0.08em;
 }
 .orb-halo {
-  fill: rgba(5, 220, 232, 0.1);
+  fill: rgba(25, 211, 197, 0.1);
   transform-box: fill-box;
   transform-origin: center;
   animation: hx-pulse 3.4s ease-in-out infinite;
@@ -2166,11 +2166,11 @@ html[data-motion="off"] .hx-scene-draw {
   animation: orb-progress 12s ease-in-out infinite;
 }
 .orb-hex {
-  fill: #1f1831;
-  stroke: #05dce8;
+  fill: var(--rx-ink-800);
+  stroke: var(--rx-aqua);
   stroke-width: 2;
   stroke-linejoin: round;
-  filter: drop-shadow(0 0 10px rgba(5, 220, 232, 0.6));
+  filter: drop-shadow(0 0 10px rgba(25, 211, 197, 0.6));
 }
 .orb-brain {
   color: var(--hx-mint);
@@ -2179,7 +2179,7 @@ html[data-motion="off"] .hx-scene-draw {
 .orb-core-text {
   fill: var(--hx-text);
   font:
-    800 8px Inter,
+    800 8px "IBM Plex Mono",
     system-ui,
     sans-serif;
   letter-spacing: 0.16em;
@@ -2191,7 +2191,7 @@ html[data-motion="off"] .hx-scene-draw {
   animation: orb-gate 12s ease-in-out infinite;
 }
 .orb-gate circle {
-  fill: #1e1830;
+  fill: var(--rx-ink-800);
   stroke: var(--hx-mint);
   stroke-width: 2;
 }
@@ -2207,7 +2207,7 @@ html[data-motion="off"] .hx-scene-draw {
 .orb-phase {
   fill: var(--hx-mint);
   font:
-    800 10px Inter,
+    800 10px "IBM Plex Mono",
     system-ui,
     sans-serif;
   letter-spacing: 0.1em;
@@ -2290,7 +2290,7 @@ html[data-motion="off"] .hx-scene-draw {
 .ea text {
   fill: var(--hx-text);
   font:
-    600 14px Inter,
+    600 14px "IBM Plex Mono",
     system-ui,
     sans-serif;
 }
@@ -2312,20 +2312,20 @@ html[data-motion="off"] .hx-scene-draw {
   fill: var(--c, var(--hx-mint));
 }
 .ea-coral {
-  --c: #ff694d;
+  --c: var(--rx-aqua);
 }
 .ea-mint {
-  --c: #05dce8;
+  --c: var(--rx-aqua);
 }
 .ea-amber {
-  --c: #ff694d;
+  --c: var(--rx-aqua);
 }
 .ea-reveal {
   opacity: 0;
   animation: ea-cycle 7s ease-in-out infinite;
 }
 .ea-bar {
-  fill: rgba(252, 250, 255, 0.14);
+  fill: rgba(244, 240, 232, 0.14);
 }
 .ea-type {
   transform-box: fill-box;
@@ -2339,7 +2339,7 @@ html[data-motion="off"] .hx-scene-draw {
   stroke-dasharray: 3 7;
 }
 .ea-ring-in {
-  stroke: rgba(5, 220, 232, 0.3);
+  stroke: rgba(25, 211, 197, 0.3);
 }
 .ea-rewind {
   transform-origin: 200px 140px;
@@ -2351,7 +2351,7 @@ html[data-motion="off"] .hx-scene-draw {
   stroke-linecap: round;
 }
 .ea-core {
-  fill: #1e1830;
+  fill: var(--rx-ink-800);
   stroke: var(--hx-mint);
   stroke-width: 2.5;
 }
@@ -2361,7 +2361,7 @@ html[data-motion="off"] .hx-scene-draw {
   stroke-width: 2;
 }
 .ea-tick {
-  fill: rgba(252, 250, 255, 0.14);
+  fill: rgba(244, 240, 232, 0.14);
   animation: ea-tick 3.5s ease-in-out infinite;
 }
 .ea-box {
@@ -2398,7 +2398,7 @@ html[data-motion="off"] .hx-scene-draw {
   animation-delay: -1.5s;
 }
 .ea-grow {
-  fill: rgba(5, 220, 232, 0.55);
+  fill: rgba(25, 211, 197, 0.55);
   transform-box: fill-box;
   transform-origin: bottom;
   animation: ea-grow 4.2s ease-in-out infinite;
@@ -2431,7 +2431,7 @@ html[data-motion="off"] .hx-scene-draw {
 @keyframes ea-tick {
   0%,
   100% {
-    fill: rgba(252, 250, 255, 0.14);
+    fill: rgba(244, 240, 232, 0.14);
   }
   30%,
   60% {
@@ -2501,7 +2501,7 @@ html[data-motion="off"] .hx-scene-draw {
   outline: none;
 }
 .cr-topic rect {
-  fill: #19122b;
+  fill: var(--rx-ink);
   stroke: var(--hx-border-strong);
   stroke-width: 1.5;
   transition:
@@ -2515,14 +2515,14 @@ html[data-motion="off"] .hx-scene-draw {
 .cr-topic text {
   fill: var(--hx-muted);
   font:
-    700 15px Inter,
+    700 15px "IBM Plex Mono",
     system-ui,
     sans-serif;
   transition: fill 0.3s ease;
 }
 .cr-topic.is-on rect {
   stroke: var(--hx-mint);
-  fill: rgba(5, 220, 232, 0.07);
+  fill: rgba(25, 211, 197, 0.07);
 }
 .cr-topic.is-on circle {
   fill: var(--hx-mint);
@@ -2540,7 +2540,7 @@ html[data-motion="off"] .hx-scene-draw {
   stroke-width: 2;
 }
 .cr-topic.is-on .cr-beam {
-  stroke: rgba(5, 220, 232, 0.35);
+  stroke: rgba(25, 211, 197, 0.35);
 }
 .cr-flow {
   stroke: var(--hx-mint);
@@ -2559,34 +2559,34 @@ html[data-motion="off"] .hx-scene-draw {
   animation: cr-out 6s ease-in-out infinite;
 }
 .cr-halo {
-  fill: rgba(5, 220, 232, 0.1);
+  fill: rgba(25, 211, 197, 0.1);
   transform-box: fill-box;
   transform-origin: center;
   animation: hx-pulse 3s ease-in-out infinite;
 }
 .cr-team {
-  fill: #1f1931;
+  fill: var(--rx-ink-800);
   stroke: var(--hx-mint);
   stroke-width: 2;
-  filter: drop-shadow(0 0 12px rgba(5, 220, 232, 0.45));
+  filter: drop-shadow(0 0 12px rgba(25, 211, 197, 0.45));
 }
 .cr-team-text {
   fill: var(--hx-text);
   font:
-    800 17px Inter,
+    800 17px "IBM Plex Mono",
     system-ui,
     sans-serif;
 }
 .cr-team-sub {
   fill: var(--hx-mint);
   font:
-    800 11px Inter,
+    800 11px "IBM Plex Mono",
     system-ui,
     sans-serif;
   letter-spacing: 0.18em;
 }
 .cr-reply circle {
-  fill: #1f1931;
+  fill: var(--rx-ink-800);
   stroke: var(--hx-cyan);
   stroke-width: 2;
   animation: cr-reply 6s ease-in-out infinite;
@@ -2598,7 +2598,7 @@ html[data-motion="off"] .hx-scene-draw {
 .cr-reply text {
   fill: var(--hx-muted);
   font:
-    700 13px Inter,
+    700 13px "IBM Plex Mono",
     system-ui,
     sans-serif;
 }
@@ -2727,7 +2727,7 @@ html[data-motion="off"] .hx-scene-draw {
 .hx-proofstrip {
   padding: 28px 0;
   border-block: 1px solid var(--hx-border);
-  background: rgba(252, 250, 255, 0.02);
+  background: rgba(244, 240, 232, 0.02);
 }
 .hx-proofstrip .container {
   display: grid;
@@ -2906,7 +2906,7 @@ html[data-motion="off"] .hx-scene-draw {
 .rg-text {
   fill: var(--hx-text);
   font:
-    800 22px Inter,
+    800 22px "IBM Plex Mono",
     system-ui,
     sans-serif;
 }
@@ -2976,24 +2976,24 @@ html[data-motion="off"] .hx-scene-draw {
 }
 
 /* =========================================================
-   Palette (exact): Base #110A24, Canvas #FCFAFF,
-   Primary #7040FF, Accent #05DCE8, Support #FF694D.
-   Everything else is a mix of these five.
+   Palette: Ledger and Signal (see ledger.css for the --rx tokens).
+   Base is Night Ink, Canvas is Ledger Ivory, Accent is Evidence Aqua.
+   Coral is gone; Support now resolves to aqua as well.
    ========================================================= */
 :root {
-  --hx-base: #110a24;
-  --hx-canvas: #fcfaff;
-  --hx-primary: #7040ff;
-  --hx-accent: #05dce8;
-  --hx-support: #ff694d;
+  --hx-base: var(--rx-ink);
+  --hx-canvas: var(--rx-ivory);
+  --hx-primary: var(--rx-aqua);
+  --hx-accent: var(--rx-aqua);
+  --hx-support: var(--rx-aqua);
   --hx-bg: var(--hx-base);
   --hx-text: var(--hx-canvas);
-  --hx-muted: color-mix(in srgb, var(--hx-canvas) 72%, var(--hx-base));
+  --hx-muted: var(--rx-mist);
   --hx-mint: var(--hx-accent);
   --hx-cyan: var(--hx-accent);
   --hx-coral: var(--hx-support);
   --hx-amber: var(--hx-support);
-  --hx-violet: color-mix(in srgb, var(--hx-primary) 62%, var(--hx-canvas));
+  --hx-violet: var(--rx-state-cause);
   --rx-web-bg: var(--hx-base);
   --rx-web-action: var(--hx-accent);
   --rx-web-action-dark: color-mix(
@@ -3002,7 +3002,7 @@ html[data-motion="off"] .hx-scene-draw {
     var(--hx-base)
   );
   --rx-web-focus: var(--hx-accent);
-  --rx-surface-1: color-mix(in srgb, var(--hx-base) 95%, var(--hx-canvas));
+  --rx-surface-1: var(--rx-ink-800);
   --rx-surface-2: color-mix(in srgb, var(--hx-base) 91%, var(--hx-canvas));
   --rx-surface-3: color-mix(in srgb, var(--hx-base) 86%, var(--hx-canvas));
   --rx-text: var(--hx-canvas);
@@ -3015,7 +3015,7 @@ body {
   color: var(--hx-canvas);
 }
 
-/* Support orange drives every call to action; accent cyan marks evidence and links. */
+/* Evidence Aqua drives every call to action and marks evidence and links. */
 .public-site .button-primary {
   color: var(--hx-base) !important;
   border-color: var(--hx-support) !important;
@@ -3034,18 +3034,18 @@ body {
     var(--hx-support) 82%,
     var(--hx-canvas)
   ) !important;
-  box-shadow: 0 10px 32px rgba(255, 105, 77, 0.45);
+  box-shadow: 0 10px 32px rgba(25, 211, 197, 0.45);
 }
 .public-site .button-secondary,
 .public-site .button-outline {
   color: var(--hx-canvas) !important;
-  border-color: rgba(252, 250, 255, 0.28) !important;
-  background: rgba(252, 250, 255, 0.04) !important;
+  border-color: rgba(244, 240, 232, 0.28) !important;
+  background: rgba(244, 240, 232, 0.04) !important;
 }
 .public-site .button-secondary:hover,
 .public-site .button-outline:hover {
   border-color: var(--hx-accent) !important;
-  background: rgba(5, 220, 232, 0.1) !important;
+  background: rgba(25, 211, 197, 0.1) !important;
 }
 .hx-toggle button[aria-pressed="true"],
 .hx-tabs button[aria-pressed="true"] {
@@ -3053,19 +3053,13 @@ body {
   color: var(--hx-base);
 }
 .hx-stage-tab[aria-pressed="true"] {
-  background: rgba(112, 64, 255, 0.18);
+  background: rgba(25, 211, 197, 0.18);
 }
 .hx-hero {
-  background:
-    radial-gradient(
-      ellipse 60% 50% at 78% 20%,
-      rgba(112, 64, 255, 0.28),
-      transparent 70%
-    ),
-    var(--hx-base);
+  background: var(--hx-base);
 }
 
-/* Support coral is for urgency: the regulator clocks and approvals waiting. */
+/* Aqua marks the regulator clocks; citrine is kept for the human approval. */
 .hx-facts dt {
   color: var(--hx-support);
 }
@@ -3108,14 +3102,14 @@ body {
   }
   9%,
   100% {
-    stroke: rgba(252, 250, 255, 0.78);
+    stroke: rgba(244, 240, 232, 0.78);
     stroke-opacity: 0.5;
     transform: scale(1);
     filter: none;
   }
 }
 .orb-node {
-  stroke: rgba(252, 250, 255, 0.78);
+  stroke: rgba(244, 240, 232, 0.78);
 }
 
 /* Legacy tinted notes: dark cards with a violet edge. */
@@ -3123,8 +3117,8 @@ body {
 .public-site .consent-option,
 .public-site .form-policy-note,
 .public-site .limitation-box {
-  border: 1px solid rgba(112, 64, 255, 0.5);
-  background: rgba(112, 64, 255, 0.12) !important;
+  border: 1px solid rgba(25, 211, 197, 0.5);
+  background: rgba(25, 211, 197, 0.12) !important;
   color: var(--hx-text);
 }
 .public-site .demo-privacy-note p,
@@ -3153,7 +3147,7 @@ body {
   font-size: 18px;
 }
 
-/* Navbar: hover and selected states use Support orange. */
+/* Navbar: hover and selected states use Evidence Aqua. */
 .public-site .nav-trigger:hover,
 .public-site .nav-trigger:focus-visible,
 .public-site .nav-trigger[aria-expanded="true"],
@@ -3173,7 +3167,7 @@ body {
 }
 .public-site .nav-popover-link:hover,
 .public-site .nav-popover-link:focus-visible {
-  background: rgba(255, 105, 77, 0.12) !important;
+  background: rgba(25, 211, 197, 0.12) !important;
   border-color: var(--hx-support) !important;
   color: var(--hx-text) !important;
 }

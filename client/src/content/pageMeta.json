@@ -13,7 +13,7 @@
   },
   "/security": {
     "title": "Security",
-    "description": "Read-only by default, your data stays in your environment, and a person approves every action. Request the security pack for detail.",
+    "description": "Read only by default, your data stays in your environment, and a person approves every action. Request the security pack for detail.",
     "h1": "Made for your security review",
     "body": "Three commitments your reviewers can test. The full detail is in the security pack."
   },

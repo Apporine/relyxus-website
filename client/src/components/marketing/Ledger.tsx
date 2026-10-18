@@ -1,0 +1,325 @@
+import { useEffect, useRef, useState } from "react";
+import {
+  Activity,
+  Bell,
+  GitCommitHorizontal,
+  KeyRound,
+  Rocket,
+  ScrollText,
+  Ticket,
+  Waypoints,
+  type LucideIcon,
+} from "lucide-react";
+import { integrations } from "@/content/site";
+
+/** True when the visitor asked for less motion, in the OS or with the footer switch. */
+export function prefersLessMotion() {
+  if (typeof window === "undefined") return false;
+  return (
+    document.documentElement.dataset.motion === "off" ||
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+}
+
+/** A mono timestamp pinned to the Evidence Line at the top of a section. */
+export function Stamp({ at }: { at: string }) {
+  return (
+    <span
+      className={`rx-stamp ${at === "Closed" ? "rx-stamp-closed" : ""}`}
+      aria-hidden="true"
+    >
+      {at}
+    </span>
+  );
+}
+
+/**
+ * The Evidence Line: a 1px aqua line in the left margin, drawn by scroll
+ * progress. Each Stamp ticks in as its section arrives. Desktop only (CSS).
+ */
+export function EvidenceLine() {
+  const lineRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let frame = 0;
+    const draw = () => {
+      frame = 0;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = max > 0 ? Math.min(1, window.scrollY / max) : 1;
+      lineRef.current?.style.setProperty("--rx-progress", progress.toFixed(4));
+    };
+    const onScroll = () => {
+      if (!frame) frame = window.requestAnimationFrame(draw);
+    };
+    draw();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+
+    const stamps = Array.from(document.querySelectorAll(".rx-stamp"));
+    let observer: IntersectionObserver | null = null;
+    if (prefersLessMotion() || !("IntersectionObserver" in window)) {
+      stamps.forEach(stamp => stamp.classList.add("is-stamped"));
+    } else {
+      observer = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-stamped");
+            observer?.unobserve(entry.target);
+          });
+        },
+        { rootMargin: "0px 0px -25% 0px" }
+      );
+      stamps.forEach(stamp => observer?.observe(stamp));
+    }
+
+    return () => {
+      if (frame) window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      observer?.disconnect();
+    };
+  }, []);
+
+  return (
+    <div className="rx-line" ref={lineRef} aria-hidden="true">
+      <div className="rx-line-fill" />
+    </div>
+  );
+}
+
+const sourceIcons: Record<string, LucideIcon> = {
+  Alerts: Bell,
+  Logs: ScrollText,
+  Metrics: Activity,
+  Traces: Waypoints,
+  Changes: GitCommitHorizontal,
+  Deploys: Rocket,
+  Tickets: Ticket,
+  Identity: KeyRound,
+};
+
+/** Eight tool categories stream along aqua lines into one investigation. */
+export function SourceStream() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section || !("IntersectionObserver" in window)) return;
+    // The only loop on the page, and it stops whenever it is off screen.
+    const observer = new IntersectionObserver(([entry]) =>
+      section.classList.toggle("is-live", entry.isIntersecting)
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  const columns = integrations.length || 1;
+  return (
+    <section
+      className="rx-sources rx-ivory"
+      aria-labelledby="rx-sources-title"
+      ref={sectionRef}
+    >
+      <Stamp at="T+00:04" />
+      <div className="container">
+        <h2 id="rx-sources-title" className="hx-h2">
+          Keep your tools. Relyxus reads them.
+        </h2>
+        <p className="hx-sub">
+          Bring the tools you have. Relyxus reads evidence from
+        </p>
+        <ul className="rx-source-tiles">
+          {integrations.map(name => {
+            const Icon = sourceIcons[name] ?? Activity;
+            return (
+              <li key={name}>
+                <Icon size={22} strokeWidth={1.5} aria-hidden="true" />
+                {name}
+              </li>
+            );
+          })}
+        </ul>
+        <svg
+          className="rx-stream"
+          viewBox="0 0 800 120"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          {integrations.map((name, index) => {
+            const x = ((index + 0.5) / columns) * 800;
+            const d = `M${x} 0 C${x} 64, 400 56, 400 120`;
+            return (
+              <g key={name}>
+                <path className="rx-stream-lane" d={d} />
+                <path
+                  className="rx-stream-pulse"
+                  d={d}
+                  pathLength={100}
+                  style={{ animationDelay: `${index * 0.2}s` }}
+                />
+              </g>
+            );
+          })}
+        </svg>
+        <div className="rx-investigation">
+          <strong>One investigation</strong>
+          <span>{integrations.length} sources · every claim linked</span>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+type Step = "idle" | "signed" | "gate" | "fixing" | "recorded";
+
+const timeNow = (offset = 0) =>
+  new Date(Date.now() + offset * 1000).toLocaleTimeString("en-GB", {
+    hour12: false,
+  });
+
+/**
+ * Be the second approver: the visitor approves a fix, a citrine signature
+ * line draws, the gate opens, the fix runs and the record entry writes itself.
+ */
+export function SecondApprover() {
+  const [step, setStep] = useState<Step>("idle");
+  const [typed, setTyped] = useState("");
+  const [record, setRecord] = useState("");
+  const timers = useRef<number[]>([]);
+
+  const clear = () => {
+    timers.current.forEach(id => window.clearTimeout(id));
+    timers.current = [];
+  };
+  useEffect(() => clear, []);
+
+  const later = (ms: number, run: () => void) => {
+    timers.current.push(window.setTimeout(run, ms));
+  };
+
+  const approve = () => {
+    if (step !== "idle") return;
+    const entry = [
+      `${timeNow()}  Approved by you, second approver`,
+      `${timeNow(1)}  Rollback api-gw v3.2 to v3.1 ran under policy PAY-2`,
+      `${timeNow(3)}  Error rate back to baseline. Recorded.`,
+    ].join("\n");
+    setRecord(entry);
+
+    if (prefersLessMotion()) {
+      setTyped(entry);
+      setStep("recorded");
+      return;
+    }
+
+    // 2.4s in all: sign 600ms, gate 450ms, fix 700ms, then the entry types out.
+    setStep("signed");
+    later(600, () => setStep("gate"));
+    later(1050, () => setStep("fixing"));
+    later(1750, () => {
+      setStep("recorded");
+      const perChar = Math.min(30, 650 / entry.length);
+      let shown = 0;
+      const tick = () => {
+        shown += 1;
+        setTyped(entry.slice(0, shown));
+        if (shown < entry.length) later(perChar, tick);
+      };
+      tick();
+    });
+  };
+
+  const reset = () => {
+    clear();
+    setStep("idle");
+    setTyped("");
+    setRecord("");
+  };
+
+  return (
+    <section className="rx-approver rx-ink" aria-labelledby="rx-approver-title">
+      <Stamp at="T+00:26" />
+      <div className="container rx-approver-grid">
+        <div className="rx-approver-copy">
+          <span className="rx-eyebrow">Waiting for approval</span>
+          <h2 id="rx-approver-title" className="hx-h2">
+            Nothing runs until someone like you says{" "}
+            <em className="is-decision">yes.</em>
+          </h2>
+          <p>
+            The fix is ready and the first approver has signed. Policy asks for
+            two. Press approve and watch what gets written down.
+          </p>
+        </div>
+        <div className="rx-approval" data-step={step}>
+          <div className="rx-approval-head">
+            <span>
+              INC-2207 · <span className="rx-sev">SEV1</span> · payments-api
+            </span>
+            <span>Example incident</span>
+          </div>
+          <p className="rx-approval-action">
+            Proposed fix: rollback api-gw v3.2 → v3.1
+          </p>
+          <p className="rx-approval-cause">
+            <b>Likely cause:</b> 14:02:11 deploy api-gw v3.2 rolled out
+          </p>
+          <ul className="rx-approvers">
+            <li>
+              <span>Approver 1 · Head of Payments Ops</span>
+              <span className="rx-approver-name">Approved by Sara Khan</span>
+            </li>
+            <li>
+              <span>Approver 2 · Incident lead</span>
+              {step === "idle" ? (
+                <span className="rx-approver-pending">Waiting for you</span>
+              ) : (
+                <span className="rx-approver-name">Approved by you</span>
+              )}
+            </li>
+          </ul>
+          <div className="rx-approve-row">
+            <button
+              type="button"
+              className="button button-primary"
+              onClick={approve}
+              disabled={step !== "idle"}
+              aria-describedby="rx-approval-status"
+            >
+              {step === "idle" ? "Approve the fix" : "Approved"}
+            </button>
+            <svg className="rx-sign" viewBox="0 0 220 14" aria-hidden="true">
+              <path d="M2 9 C 40 3, 70 12, 110 7 S 180 4, 218 8" />
+            </svg>
+          </div>
+          <div className="rx-gate" aria-hidden="true">
+            <span className="rx-gate-lane" />
+            <span className="rx-gate-run" />
+            <span className="rx-gate-bar" />
+          </div>
+          <p className="rx-record" aria-hidden="true">
+            {typed.split("\n").map((line, index) => {
+              const [time, ...rest] = line.split("  ");
+              return (
+                <span key={index}>
+                  {index > 0 && "\n"}
+                  <span className="rx-record-time">{time}</span>
+                  {rest.length > 0 && `  ${rest.join("  ")}`}
+                </span>
+              );
+            })}
+          </p>
+          <p id="rx-approval-status" className="sr-only" aria-live="polite">
+            {step === "recorded" ? record : ""}
+          </p>
+          {step === "recorded" && (
+            <button type="button" className="rx-replay" onClick={reset}>
+              Run it again
+            </button>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}

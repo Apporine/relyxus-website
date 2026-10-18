@@ -1,5 +1,5 @@
 export type NavItem = { label: string; href: string; description?: string };
-export type NavGroup = { label: string; items: NavItem[] };
+export type NavGroup = { label: string; items: NavItem[]; note?: string };
 
 export const navGroups: NavGroup[] = [
   {
@@ -13,7 +13,7 @@ export const navGroups: NavGroup[] = [
       {
         label: "Security",
         href: "/security",
-        description: "Read-only by default. Request the security pack.",
+        description: "Read only by default. Request the security pack.",
       },
     ],
   },
@@ -71,6 +71,7 @@ export const navGroups: NavGroup[] = [
         description: "Email the team or send an enquiry.",
       },
     ],
+    note: "An Apporine product",
   },
 ];
 
@@ -139,7 +140,7 @@ export const pathCards = [
     label: "Security review",
     question: "What can this tool touch?",
     answer:
-      "Read-only by default. A person approves every action. Your data stays in your environment.",
+      "Read only by default. A person approves every action. Your data stays in your environment.",
     cta: "See the security summary",
     href: "/security",
     glyph: "gate",
@@ -248,7 +249,7 @@ export const demoVariants: Record<
   }
 > = {
   Demo: {
-    eyebrow: "Book a 30-minute demo",
+    eyebrow: "Book a demo, 30 minutes",
     title: "See Relyxus on an incident like yours",
     summary:
       "Tell us which tools your team uses and we’ll walk through an incident from alert to record.",
@@ -536,7 +537,7 @@ export const contactTopics = [
     title: "See Relyxus on an incident like yours",
     text: "Tell us which tools your team uses and we’ll walk through an incident from alert to record.",
     points: ["Your tools, your kind of incident", "Your questions come first"],
-    cta: "Book a 30-minute demo",
+    cta: "Book a demo, 30 minutes",
   },
   {
     key: "replay",

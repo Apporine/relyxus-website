@@ -11,6 +11,12 @@ import {
 import { BrainMap } from "@/components/marketing/BrainMap";
 import { OutcomeStage } from "@/components/marketing/OutcomeStage";
 import {
+  EvidenceLine,
+  SecondApprover,
+  SourceStream,
+  Stamp,
+} from "@/components/marketing/Ledger";
+import {
   pathCards,
   proofPoints,
   regulatoryClocks,
@@ -22,14 +28,15 @@ import { pageMeta } from "@/content/meta";
 
 function Hero() {
   return (
-    <section className="hx-hero">
+    <section className="hx-hero rx-ink">
+      <Stamp at="T+00:00" />
       <div className="container hx-hero-grid">
         <div className="hx-hero-copy">
           <span className="hx-pill">
             For incident, SRE and resilience teams at regulated firms
           </span>
           <h1>
-            Know why payments failed <em>before the regulator asks.</em>
+            Know why payments failed before the <em>regulator</em> asks.
           </h1>
           <p className="hx-lede">{pageMeta["/"].body}</p>
           <div className="hx-actions">
@@ -38,7 +45,8 @@ function Hero() {
               className="button button-primary"
               onClick={() => track("cta_click", { place: "hero", cta: "demo" })}
             >
-              Book a 30-minute demo <ArrowRight size={16} aria-hidden="true" />
+              Book a demo, 30 minutes{" "}
+              <ArrowRight size={16} aria-hidden="true" />
             </Link>
             <a
               href="#in-action"
@@ -104,10 +112,11 @@ function RoleGlyph({ kind }: { kind: "converge" | "clock" | "gate" }) {
 
 function PathCards() {
   return (
-    <section className="hx-section" aria-labelledby="hx-path-title">
+    <section className="hx-section rx-ivory" aria-labelledby="hx-path-title">
+      <Stamp at="T+00:11" />
       <div className="container">
         <h2 id="hx-path-title" className="hx-h2">
-          One incident. Three teams who have to answer for it.
+          One incident. Three <em>teams</em> who have to answer for it.
         </h2>
         <p className="hx-sub">
           Same alert, three questions. Relyxus answers all three from one set of
@@ -155,10 +164,11 @@ const tests = [
 
 function ReplayBand() {
   return (
-    <section className="hx-section" id="test-us">
+    <section className="hx-section rx-ivory" id="test-us">
+      <Stamp at="T+72:00" />
       <div className="container">
         <h2 className="hx-h2 hx-lead-heading">
-          Don’t take our word for it. Test three things.
+          Don’t take <em>our</em> word for it. Test three things.
         </h2>
         <p className="hx-sub">
           In a demo or a Replay pilot, ask us to prove each one on an incident
@@ -176,7 +186,9 @@ function ReplayBand() {
         <div className="hx-magnet hx-test-offer">
           <div>
             <span className="hx-pill">Replay pilot</span>
-            <h2 className="hx-h2">Try it on incidents you’ve already closed</h2>
+            <h2 className="hx-h2">
+              Prove it on incidents you’ve already closed.
+            </h2>
             <p>{replayExplainer}</p>
           </div>
           <PrimaryLink
@@ -193,7 +205,8 @@ function ReplayBand() {
 
 function InAction() {
   return (
-    <section className="hx-action" id="in-action">
+    <section className="hx-action hx-section rx-ivory" id="in-action">
+      <Stamp at="T+00:31" />
       <div className="container">
         <div className="hx-action-head">
           <h2 className="hx-h2">No more “any update?” in the channel</h2>
@@ -208,12 +221,19 @@ function InAction() {
             <i />
             <i />
           </div>
-          <img
-            src="/product/command-centre-attention.png"
-            alt="The Relyxus command centre with a SEV1 incident and a production approval waiting for review"
-            loading="lazy"
-            decoding="async"
-          />
+          {/* The poster sits behind the image, so the frame is never empty while it loads. */}
+          <div className="hx-shot-media">
+            <img
+              src="/product/command-centre-attention.png"
+              alt="The Relyxus command centre with a SEV1 incident and a production approval waiting for review"
+              width={1894}
+              height={810}
+              decoding="async"
+            />
+          </div>
+          <figcaption className="rx-caption">
+            Command centre · SEV1 open · approval waiting
+          </figcaption>
         </figure>
       </div>
     </section>
@@ -222,9 +242,12 @@ function InAction() {
 
 function Outcomes() {
   return (
-    <section className="hx-section product-explorer-section">
+    <section className="hx-section product-explorer-section rx-ink">
+      <Stamp at="T+00:19" />
       <div className="container">
-        <h2 className="hx-h2">What changes in your next incident</h2>
+        <h2 className="hx-h2">
+          What changes in <em>your</em> next incident
+        </h2>
         <OutcomeStage />
       </div>
     </section>
@@ -234,9 +257,11 @@ function Outcomes() {
 function Proof() {
   if (proofPoints.length === 0) return null;
   return (
-    <section className="hx-section hx-proof">
+    <section className="hx-section hx-proof rx-ivory">
       <div className="container">
-        <h2 className="hx-h2">What your team sees at 3am</h2>
+        <h2 className="hx-h2">
+          What your <em>team</em> sees at 3am
+        </h2>
         <p className="hx-sub">
           The three screens the whole team works from during an incident.
         </p>
@@ -252,6 +277,9 @@ function Proof() {
                 />
               )}
               <div className="hx-proof-text">
+                <span className="rx-caption">
+                  {point.title.toLowerCase().replaceAll(" ", "-")}
+                </span>
                 <h3>{point.title}</h3>
                 <p>{point.detail}</p>
               </div>
@@ -263,39 +291,33 @@ function Proof() {
   );
 }
 
-function TrustInBrief() {
+/** Trust ticks, then the readiness checklist as a document cover. */
+function TrustAndChecklist() {
   const lines = [
-    "Read-only by default",
+    "Read only by default",
     "Runs in your environment",
     "A person approves every action",
   ];
   return (
-    <section className="hx-trustbar" aria-label="Security in brief">
+    <section className="rx-trust rx-ink" aria-label="Security in brief">
       <div className="container">
-        <ul>
-          {lines.map(line => (
-            <li key={line}>
-              <Check size={18} aria-hidden="true" /> {line}
-            </li>
-          ))}
-        </ul>
-        <TextLink href="/demo?type=Security%20pack">
-          Request the security pack
-        </TextLink>
-      </div>
-    </section>
-  );
-}
-
-function LeadMagnet() {
-  return (
-    <section className="hx-section">
-      <div className="container">
+        <div className="hx-trustbar-inner">
+          <ul>
+            {lines.map(line => (
+              <li key={line}>
+                <Check size={18} aria-hidden="true" /> {line}
+              </li>
+            ))}
+          </ul>
+          <TextLink href="/demo?type=Security%20pack">
+            Request the security pack
+          </TextLink>
+        </div>
         <div className="hx-magnet">
           <div>
             <span className="hx-pill">Free checklist</span>
             <h2 className="hx-h2">
-              Could you file a DORA first notice within 4 hours?
+              Could <em>you</em> file a DORA first notice within 4 hours?
             </h2>
             <p>
               The incident-readiness checklist for UK and EU resilience teams.
@@ -314,12 +336,13 @@ function LeadMagnet() {
 
 function ClosingBand() {
   return (
-    <section className="hx-closing">
+    <section className="hx-closing rx-ink">
+      <Stamp at="Closed" />
       <div className="container hx-closing-grid">
         <div>
           <h2 className="hx-h2">
-            Show us the incident that hurt most. We’ll show you how Relyxus
-            would have handled it.
+            Show <em>us</em> the incident that hurt most. We’ll show you how
+            Relyxus would have handled it.
           </h2>
           <p className="hx-closing-note">
             Prefer to test it yourself?{" "}
@@ -335,7 +358,7 @@ function ClosingBand() {
               track("cta_click", { place: "closing", cta: "demo" })
             }
           >
-            Book a 30-minute demo <ArrowRight size={16} aria-hidden="true" />
+            Book a demo, 30 minutes <ArrowRight size={16} aria-hidden="true" />
           </Link>
         </div>
       </div>
@@ -351,23 +374,31 @@ export default function Home() {
         description={pageMeta["/"].description}
         keywords="Relyxus, incident investigation, payments incidents, operational resilience, SRE, regulated firms"
       />
+      <EvidenceLine />
+      {/* Dark and ivory chapters alternate, never more than two dark in a row. */}
       <Hero />
-      <ProofStrip />
+      <ProofStrip ground="ink" withSources={false} rulesAsCitations />
+      <SourceStream />
       <PathCards />
-      <ReplayBand />
+      <Outcomes />
+      <SecondApprover />
+      <InAction />
+      <Proof />
       <DataBand
-        title="Regulators start the clock before you know the cause"
+        title={
+          <>
+            <em>Regulators</em> start the clock before you know the cause
+          </>
+        }
         items={regulatoryClocks}
         sources={regulatorySources}
         note="Which rules apply depends on your firm."
         footnote="Relyxus timestamps every fact from the first alert, so each deadline starts with a draft, not a blank page."
+        stamp="T+04:00"
       />
-      <InAction />
-      <Outcomes />
-      <Proof />
-      <FounderNote />
-      <TrustInBrief />
-      <LeadMagnet />
+      <ReplayBand />
+      <FounderNote ground="ivory" stamp="T+1 month" />
+      <TrustAndChecklist />
       <ClosingBand />
     </>
   );

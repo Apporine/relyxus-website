@@ -22,6 +22,7 @@ import {
   upsertLink,
   upsertMeta,
 } from "@/lib/seo";
+import { prefersLessMotion, Stamp } from "@/components/marketing/Ledger";
 
 export function PageMeta({
   title,
@@ -58,7 +59,7 @@ export function PageMeta({
       "robots",
       noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large"
     );
-    upsertMeta("name", "theme-color", "#110A24");
+    upsertMeta("name", "theme-color", "#0E0B14");
     upsertMeta("property", "og:site_name", SITE_NAME);
     upsertMeta("property", "og:locale", "en_US");
     upsertMeta("property", "og:type", "website");
@@ -209,6 +210,9 @@ function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
                     </Link>
                   ))}
                 </div>
+                {group.note && (
+                  <p className="nav-popover-note rx-endorse">{group.note}</p>
+                )}
               </div>
             </li>
           );
@@ -321,7 +325,7 @@ function MobileMenu({
           className="button button-primary mobile-demo"
           onClick={onNavigate}
         >
-          Book a 30-minute demo <ArrowRight size={16} aria-hidden="true" />
+          Book a demo, 30 minutes <ArrowRight size={16} aria-hidden="true" />
         </Link>
       </div>
     </div>
@@ -344,7 +348,7 @@ export function SiteHeader() {
         <NavLinks />
         <div className="header-actions">
           <Link href="/demo" className="button button-small button-primary">
-            Book a 30-minute demo <ArrowRight size={15} aria-hidden="true" />
+            Book a demo, 30 minutes <ArrowRight size={15} aria-hidden="true" />
           </Link>
           <button
             ref={mobileTrigger}
@@ -376,7 +380,7 @@ const footerNav = [
   { label: "Product", href: "/product" },
   { label: "Security", href: "/security" },
   { label: "Contact", href: "/contact" },
-  { label: "Book a 30-minute demo", href: "/demo" },
+  { label: "Book a demo, 30 minutes", href: "/demo" },
 ] as const;
 
 const footerLegal = [
@@ -422,7 +426,10 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="container footer-shell">
         <div className="footer-row">
-          <Wordmark />
+          <div className="footer-brand">
+            <Wordmark />
+            <span className="rx-endorse">An Apporine product</span>
+          </div>
           <nav className="footer-nav" aria-label="Footer">
             {footerNav.map(item => (
               <Link key={item.href} href={item.href}>
@@ -596,27 +603,81 @@ export function TextLink({
   );
 }
 
+/** "72 hours" counts up from 0 to 72 once it scrolls into view. */
+function ClockValue({ value }: { value: string }) {
+  const match = value.match(/^(\d+)\s*(.*)$/);
+  const target = match ? Number(match[1]) : 0;
+  const ref = useRef<HTMLElement>(null);
+  const [shown, setShown] = useState(target);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!match || !node || prefersLessMotion()) return;
+    if (!("IntersectionObserver" in window)) return;
+    setShown(0);
+    let frame = 0;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      observer.disconnect();
+      const start = performance.now();
+      const step = (now: number) => {
+        const t = Math.min(1, (now - start) / 1200);
+        setShown(Math.round(target * (1 - Math.pow(1 - t, 3))));
+        if (t < 1) frame = requestAnimationFrame(step);
+      };
+      frame = requestAnimationFrame(step);
+    });
+    observer.observe(node);
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(frame);
+    };
+  }, [target]);
+
+  if (!match) return <span className="rx-clock-num">{value}</span>;
+  return (
+    <>
+      <span className="rx-clock-num" ref={ref} aria-hidden="true">
+        {shown}
+      </span>
+      <span className="rx-clock-unit" aria-hidden="true">
+        {match[2]}
+      </span>
+      <span className="sr-only">{value}</span>
+    </>
+  );
+}
+
 export function DataBand({
   title,
   items,
   sources,
   note = "",
   footnote,
+  ground = "ink",
+  stamp,
 }: {
-  title: string;
+  title: React.ReactNode;
   items: readonly DataPoint[];
   sources: readonly DataSource[];
   note?: string;
   footnote?: string;
+  ground?: "ink" | "ivory";
+  stamp?: string;
 }) {
   return (
-    <section className="hx-band" aria-label={title}>
+    <section className={`hx-band rx-${ground}`} aria-labelledby="hx-band-title">
+      {stamp && <Stamp at={stamp} />}
       <div className="container">
-        <h2 className="hx-band-title">{title}</h2>
+        <h2 className="hx-band-title" id="hx-band-title">
+          {title}
+        </h2>
         <dl className="hx-facts">
           {items.map(clock => (
             <div key={clock.value}>
-              <dt>{clock.value}</dt>
+              <dt>
+                <ClockValue value={clock.value} />
+              </dt>
               <dd>{clock.label}</dd>
             </div>
           ))}
@@ -639,12 +700,31 @@ export function DataBand({
   );
 }
 
-export function FounderNote() {
+export function FounderNote({
+  ground = "ink",
+  stamp,
+}: {
+  ground?: "ink" | "ivory";
+  stamp?: string;
+}) {
+  // "Why we built Relyxus": the people word goes into the human voice.
+  const [before, after] = founderNote.heading.split(/\bwe\b/);
   return (
-    <section className="hx-section">
+    <section className={`hx-section rx-${ground}`}>
+      {stamp && <Stamp at={stamp} />}
       <div className="container">
         <div className="hx-note">
-          <h2 className="hx-h2">{founderNote.heading}</h2>
+          <h2 className="hx-h2">
+            {after === undefined ? (
+              founderNote.heading
+            ) : (
+              <>
+                {before}
+                <em>we</em>
+                {after}
+              </>
+            )}
+          </h2>
           <div className="hx-note-body">
             {founderNote.paragraphs.map(text => (
               <p key={text}>{text}</p>
@@ -661,11 +741,23 @@ export function FounderNote() {
 }
 
 /** Logos, a pilot quote, one metric and named integrations. Renders nothing until filled. */
-export function ProofStrip() {
+export function ProofStrip({
+  ground,
+  withSources = true,
+  rulesAsCitations = false,
+}: {
+  ground?: "ink" | "ivory";
+  withSources?: boolean;
+  rulesAsCitations?: boolean;
+} = {}) {
   const { logos, quote, metric } = proofStrip;
-  if (!logos.length && !quote && !metric && !integrations.length) return null;
+  const sources = withSources ? integrations : [];
+  if (!logos.length && !quote && !metric && !sources.length) return null;
   return (
-    <section className="hx-proofstrip" aria-label="Proof">
+    <section
+      className={`hx-proofstrip ${ground ? `rx-${ground}` : ""}`}
+      aria-label="Proof"
+    >
       <div className="container">
         {metric && (
           <p className="hx-metric">
@@ -702,7 +794,19 @@ export function ProofStrip() {
             ))}
           </ul>
         )}
-        {standards.length > 0 && (
+        {standards.length > 0 && rulesAsCitations && (
+          <div>
+            <span className="rx-citations-label">
+              The rules your team works to
+            </span>
+            <ol className="rx-citations">
+              {standards.map(name => (
+                <li key={name}>{name}</li>
+              ))}
+            </ol>
+          </div>
+        )}
+        {standards.length > 0 && !rulesAsCitations && (
           <div className="hx-integrations">
             <span>The rules your team works to</span>
             <ul>
@@ -712,11 +816,11 @@ export function ProofStrip() {
             </ul>
           </div>
         )}
-        {integrations.length > 0 && (
+        {sources.length > 0 && (
           <div className="hx-integrations">
             <span>Bring the tools you have. Relyxus reads evidence from</span>
             <ul>
-              {integrations.map(name => (
+              {sources.map(name => (
                 <li key={name}>{name}</li>
               ))}
             </ul>
@@ -781,7 +885,7 @@ export function ActionBand({
   title = "See how Relyxus would fit your team",
   summary = "Walk through an incident together and see what it would mean for your team.",
   href = "/demo",
-  label = "Book a 30-minute demo",
+  label = "Book a demo, 30 minutes",
 }: {
   title?: string;
   summary?: string;

@@ -123,7 +123,7 @@ export function ResourceArticle({ slug }: { slug: string }) {
         title="Bring your stack. We’ll walk a real incident through it in 30 minutes."
         summary="Tell us which tools your team uses and we’ll show you the incident from first alert to record."
         href="/demo"
-        label="Book a 30-minute demo"
+        label="Book a demo, 30 minutes"
       />
     </>
   );

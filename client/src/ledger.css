@@ -1,0 +1,959 @@
+/*
+ * Ledger and Signal. Loads last, after human.css.
+ * Night ink and ledger ivory are the two grounds, Evidence Aqua is the brand,
+ * citrine appears only when a person approves something. The Three Voices:
+ * the system speaks in mono, people in serif italic, the story in sans.
+ */
+:root {
+  /* Grounds */
+  --rx-ink: #0e0b14;
+  --rx-ink-800: #17131f;
+  --rx-ink-600: #2c2636;
+  --rx-ivory: #f4f0e8;
+  --rx-ivory-50: #fbf9f4;
+  --rx-rule: #ddd5c6;
+  /* Brand */
+  --rx-aqua: #19d3c5;
+  --rx-aqua-deep: #0a6e67;
+  --rx-citrine: #f5e663; /* human approval only */
+  /* Text */
+  --rx-mist: #a39db0;
+  --rx-graphite: #4a4552;
+  /* Incident states, product visuals only */
+  --rx-state-evidence: #19d3c5;
+  --rx-state-cause: #a98bff;
+  --rx-state-waiting: #f5e663;
+  --rx-state-recorded: #f4f0e8;
+  --rx-severity: #f0524f;
+  /* Type */
+  --rx-font-display:
+    "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --rx-font-body: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --rx-font-human: "Instrument Serif", Georgia, serif;
+  --rx-font-system: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+  /* Shape and motion */
+  --rx-radius-card: 14px;
+  --rx-radius-button: 999px;
+  --rx-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Where the Evidence Line runs */
+  --rx-line-x: 28px;
+
+  --hx-radius: var(--rx-radius-card);
+  --hx-card: var(--rx-ink-800);
+  --hx-border: var(--rx-ink-600);
+  --hx-border-strong: color-mix(in srgb, var(--rx-ink-600) 60%, var(--rx-mist));
+}
+
+html,
+body {
+  background: var(--rx-ink);
+  color: var(--rx-ivory);
+}
+body,
+button,
+input,
+select,
+textarea,
+.public-site {
+  font-family: var(--rx-font-body);
+}
+
+/* ---------------------------------------------------------
+   The story voice: Bricolage headlines in sentence case
+   --------------------------------------------------------- */
+.public-site :is(h1, h2, h3, h4),
+.public-site .hx-h2,
+.public-site .hx-band-title {
+  font-family: var(--rx-font-display);
+  text-transform: none;
+}
+.public-site main h1 {
+  font-size: clamp(42px, 5.6vw, 76px);
+  font-weight: 800;
+  font-stretch: 85%;
+  font-variation-settings: "opsz" 96;
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+}
+.public-site main :is(h2, .hx-h2, .hx-band-title) {
+  font-size: clamp(32px, 3.9vw, 52px);
+  font-weight: 750;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+.public-site main h3 {
+  font-size: clamp(20px, 1.8vw, 24px);
+  font-weight: 650;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.public-site main .hx-lede,
+.public-site main .hx-sub,
+.public-site main .hx-action-head p {
+  font-size: clamp(18px, 1.5vw, 21px);
+  line-height: 1.55;
+}
+
+/* The person voice: one human word per headline, in serif italic. */
+.public-site :is(h1, h2, h3) em,
+.rx-human {
+  font-family: var(--rx-font-human);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.06em;
+  letter-spacing: 0;
+  color: var(--rx-aqua);
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+.public-site :is(h1, h2, h3) em.is-decision {
+  color: var(--rx-citrine);
+}
+
+/* The system voice: timestamps, sources, eyebrows. */
+.rx-eyebrow,
+.public-site .hx-hero .hx-pill {
+  display: inline-block;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--rx-aqua);
+  font: 500 12px/1 var(--rx-font-system);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.rx-mono,
+.public-site .hx-pill,
+.public-site .hx-test-index,
+.public-site .eyebrow {
+  font-family: var(--rx-font-system);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* ---------------------------------------------------------
+   Buttons: aqua with ink text, 16px, 52px, pill
+   --------------------------------------------------------- */
+.public-site .button {
+  min-height: 52px;
+  padding-inline: 24px;
+  border-radius: var(--rx-radius-button);
+  font: 600 16px/1 var(--rx-font-body);
+  letter-spacing: 0.01em;
+  text-transform: none;
+  transition:
+    background-color 200ms var(--rx-ease),
+    border-color 200ms var(--rx-ease),
+    transform 200ms var(--rx-ease);
+}
+.public-site .button-small {
+  min-height: 44px;
+  padding-inline: 18px;
+  font-size: 15px;
+}
+.public-site .button-primary,
+.public-site .button-primary:visited {
+  color: var(--rx-ink) !important;
+  border-color: var(--rx-aqua) !important;
+  background: var(--rx-aqua) !important;
+  box-shadow: none !important;
+}
+.public-site .button-primary:hover,
+.public-site .button-primary:focus-visible {
+  color: var(--rx-ink) !important;
+  border-color: color-mix(
+    in srgb,
+    var(--rx-aqua) 82%,
+    var(--rx-ivory)
+  ) !important;
+  background: color-mix(
+    in srgb,
+    var(--rx-aqua) 82%,
+    var(--rx-ivory)
+  ) !important;
+  box-shadow: none !important;
+}
+.public-site .button-secondary,
+.public-site .button-outline {
+  color: var(--rx-ivory) !important;
+  border-color: color-mix(in srgb, var(--rx-ivory) 30%, transparent) !important;
+  background: transparent !important;
+}
+.public-site .button-secondary:hover,
+.public-site .button-outline:hover {
+  border-color: var(--rx-aqua) !important;
+  background: color-mix(in srgb, var(--rx-aqua) 10%, transparent) !important;
+}
+.public-site :focus-visible {
+  outline: 2px solid var(--rx-aqua);
+  outline-offset: 3px;
+}
+
+/* Wordmark: lowercase Bricolage 700, the X as two crossing evidence lines. */
+.public-site .wm {
+  font-family: var(--rx-font-display);
+  font-weight: 700;
+  text-transform: lowercase;
+  letter-spacing: -0.01em;
+  color: var(--rx-ivory);
+}
+.public-site .wm-x1,
+.public-site .wm-x2,
+.public-site .wordmark:hover .wm-x2 {
+  stroke: var(--rx-aqua);
+}
+.rx-endorse {
+  color: var(--rx-mist);
+  font: 500 12px/1.3 var(--rx-font-system);
+  letter-spacing: 0.04em;
+}
+
+/* Nav popovers and the header sit on ink. */
+.public-site .site-header,
+.public-site .nav-popover,
+.public-site .mobile-nav-panel {
+  background-color: color-mix(in srgb, var(--rx-ink) 94%, transparent);
+}
+.public-site .nav-popover-link:hover,
+.public-site .nav-popover-link:focus-visible {
+  background: color-mix(in srgb, var(--rx-aqua) 10%, transparent) !important;
+}
+.public-site .nav-popover-note {
+  margin: 4px 0 0;
+  padding: 10px 12px 2px;
+  border-top: 1px solid var(--rx-ink-600);
+}
+
+/* ---------------------------------------------------------
+   Grounds: dark and ivory chapters, never a gradient across
+   --------------------------------------------------------- */
+.public-site main section.rx-ink,
+.public-site main section.rx-ivory {
+  position: relative;
+  background-image: none !important;
+}
+.public-site main section.rx-ink {
+  background-color: var(--rx-ink) !important;
+}
+.public-site main section.rx-ivory {
+  --hx-text: var(--rx-ink);
+  --hx-muted: var(--rx-graphite);
+  --hx-card: var(--rx-ivory-50);
+  --hx-border: var(--rx-rule);
+  --hx-border-strong: color-mix(
+    in srgb,
+    var(--rx-rule) 60%,
+    var(--rx-graphite)
+  );
+  --hx-accent: var(--rx-aqua-deep);
+  --hx-mint: var(--rx-aqua-deep);
+  --hx-cyan: var(--rx-aqua-deep);
+  --rx-text: var(--rx-ink);
+  --rx-muted: var(--rx-graphite);
+  background-color: var(--rx-ivory) !important;
+  color: var(--rx-graphite);
+  color-scheme: light;
+}
+.public-site main section.rx-ivory :is(h2, h3, h4, .hx-h2, strong) {
+  color: var(--rx-ink) !important;
+}
+.public-site main section.rx-ivory :is(p, li, dd, small) {
+  color: var(--rx-graphite);
+}
+.public-site main section.rx-ivory :is(h1, h2, h3) em {
+  color: var(--rx-aqua-deep);
+}
+.public-site main section.rx-ivory a:not(.button) {
+  color: var(--rx-aqua-deep);
+}
+.public-site main section.rx-ivory .rx-eyebrow,
+.public-site main section.rx-ivory .hx-pill,
+.public-site main section.rx-ivory .hx-test-index {
+  color: var(--rx-aqua-deep) !important;
+}
+.public-site main section.rx-ivory .hx-pill {
+  border-color: var(--rx-rule);
+  background: var(--rx-ivory-50);
+}
+/* On ivory the primary action keeps aqua with ink text (10.4:1). */
+.public-site main section.rx-ivory .button-outline,
+.public-site main section.rx-ivory .button-secondary {
+  color: var(--rx-ink) !important;
+  border-color: var(--rx-ink) !important;
+}
+
+/* Cards on ivory: ruled ledger cards that lift and turn aqua on hover. */
+.public-site
+  main
+  section.rx-ivory
+  :is(.hx-path, .hx-commitments article, .hx-proof-list li, .hx-note) {
+  border-color: var(--rx-rule) !important;
+  background: var(--rx-ivory-50) !important;
+  box-shadow: none !important;
+}
+.public-site main :is(.hx-path, .hx-commitments article, .hx-proof-list li) {
+  transition:
+    transform 200ms var(--rx-ease),
+    border-color 200ms var(--rx-ease);
+}
+.public-site
+  main
+  :is(.hx-path, .hx-commitments article, .hx-proof-list li):hover {
+  transform: translateY(-4px);
+  border-color: var(--rx-aqua) !important;
+}
+
+/* ---------------------------------------------------------
+   The Evidence Line and its timestamps (desktop only)
+   --------------------------------------------------------- */
+.rx-line {
+  display: none;
+}
+.rx-stamp {
+  display: none;
+}
+@media (min-width: 1100px) {
+  .rx-line {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: var(--rx-line-x);
+    z-index: 30;
+    display: block;
+    width: 1px;
+    pointer-events: none;
+    background: color-mix(in srgb, var(--rx-aqua) 18%, transparent);
+  }
+  .rx-line-fill {
+    position: absolute;
+    inset: 0;
+    background: var(--rx-aqua);
+    transform: scaleY(var(--rx-progress, 0));
+    transform-origin: top;
+  }
+  .rx-stamp {
+    position: absolute;
+    top: 30px;
+    left: calc(var(--rx-line-x) - 4px);
+    z-index: 31;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--rx-aqua);
+    font: 500 13px/1.5 var(--rx-font-system);
+    letter-spacing: 0.02em;
+    opacity: 0;
+    transform: translateY(6px);
+    transition:
+      opacity 500ms var(--rx-ease),
+      transform 500ms var(--rx-ease);
+  }
+  .rx-stamp::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    border: 1px solid var(--rx-aqua);
+    border-radius: 50%;
+    background: var(--rx-ink);
+  }
+  .rx-stamp.is-stamped {
+    opacity: 1;
+    transform: none;
+  }
+  .rx-stamp.is-stamped::before {
+    background: var(--rx-aqua);
+  }
+  .rx-ivory .rx-stamp {
+    color: var(--rx-aqua-deep);
+  }
+  .rx-ivory .rx-stamp::before {
+    border-color: var(--rx-aqua-deep);
+    background: var(--rx-ivory);
+  }
+  .rx-ivory .rx-stamp.is-stamped::before {
+    background: var(--rx-aqua-deep);
+  }
+  .rx-stamp-closed {
+    padding: 2px 8px 2px 0;
+  }
+  .rx-stamp-closed::before {
+    border-radius: 2px;
+  }
+}
+
+/* ---------------------------------------------------------
+   Section by section
+   --------------------------------------------------------- */
+
+/* 1 Hero */
+.public-site .hx-hero .hx-pill {
+  margin-bottom: 22px;
+}
+
+/* 2 Regime date plus rules: the date monumental, rules as citations. */
+.public-site .hx-proofstrip.rx-ink .hx-metric {
+  display: grid;
+  gap: 14px;
+  max-width: 880px;
+  color: var(--rx-mist);
+  font-size: clamp(18px, 1.5vw, 21px);
+  line-height: 1.55;
+}
+.public-site .hx-proofstrip.rx-ink .hx-metric strong {
+  display: block;
+  color: var(--rx-ivory);
+  font: 800 clamp(64px, 9vw, 128px) / 0.9 var(--rx-font-display);
+  font-stretch: 75%;
+  letter-spacing: -0.03em;
+}
+.public-site .hx-proofstrip.rx-ink .hx-metric small,
+.public-site .hx-proofstrip.rx-ink .hx-metric small a {
+  color: var(--rx-mist);
+  font: 500 13px/1.5 var(--rx-font-system);
+}
+.rx-citations {
+  display: grid;
+  gap: 10px;
+  margin: 36px 0 0;
+  padding: 20px 0 0;
+  border-top: 1px solid var(--rx-ink-600);
+  list-style: none;
+  counter-reset: cite;
+}
+.rx-citations-label {
+  color: var(--rx-mist);
+  font: 500 12px/1 var(--rx-font-system);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.rx-citations li {
+  counter-increment: cite;
+  color: var(--rx-ivory);
+  font: 500 13px/1.5 var(--rx-font-system);
+  letter-spacing: 0.02em;
+}
+.rx-citations li::before {
+  content: "[" counter(cite) "] ";
+  color: var(--rx-aqua);
+}
+
+/* 3 Tool sources: eight tiles stream into one investigation. */
+.rx-sources {
+  padding: clamp(64px, 8vw, 112px) 0;
+}
+.rx-source-tiles {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 10px;
+  margin: 40px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.rx-source-tiles li {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: 16px 8px;
+  border: 1px solid var(--rx-rule);
+  border-radius: var(--rx-radius-card);
+  background: var(--rx-ivory-50);
+  color: var(--rx-ink) !important;
+  font: 500 13px/1.2 var(--rx-font-system);
+  letter-spacing: 0.02em;
+}
+.rx-source-tiles svg {
+  color: var(--rx-aqua-deep);
+}
+.rx-stream {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 150px;
+}
+.rx-stream path {
+  fill: none;
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+.rx-stream .rx-stream-lane {
+  stroke: var(--rx-rule);
+}
+.rx-stream .rx-stream-pulse {
+  stroke: var(--rx-aqua-deep);
+  stroke-width: 2.5;
+  stroke-dasharray: 8 92;
+  stroke-dashoffset: 100;
+  animation: rx-stream 1.6s linear infinite;
+  animation-play-state: paused;
+}
+.rx-sources.is-live .rx-stream-pulse {
+  animation-play-state: running;
+}
+@keyframes rx-stream {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.rx-investigation {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 18px 22px;
+  border: 1px solid var(--rx-aqua-deep);
+  border-radius: var(--rx-radius-card);
+  background: var(--rx-ink);
+  color: var(--rx-ivory);
+}
+.public-site main section.rx-ivory .rx-investigation strong {
+  color: var(--rx-ivory) !important;
+  font: 650 20px/1.2 var(--rx-font-display);
+}
+.rx-investigation span {
+  color: var(--rx-aqua);
+  font: 500 13px/1.5 var(--rx-font-system);
+}
+@media (max-width: 860px) {
+  .rx-source-tiles {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .rx-stream {
+    display: none;
+  }
+  .rx-investigation {
+    margin-top: 16px;
+  }
+}
+
+/* 4 Three teams: each team's question in the person voice. */
+.public-site main .hx-path h3 {
+  font-family: var(--rx-font-human);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(24px, 2.2vw, 30px);
+  letter-spacing: 0;
+}
+.public-site main .hx-path-label {
+  font-family: var(--rx-font-system);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* 6 Be the second approver */
+.rx-approver {
+  padding: clamp(64px, 8vw, 112px) 0;
+}
+.rx-approver-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+}
+.rx-approver-copy h2 {
+  margin: 18px 0 20px;
+}
+.public-site .rx-approval .button-primary:disabled {
+  opacity: 1;
+  cursor: default;
+}
+.rx-approver-copy p {
+  max-width: 460px;
+  color: var(--rx-mist);
+  font-size: clamp(18px, 1.5vw, 21px);
+  line-height: 1.55;
+}
+.rx-approval {
+  position: relative;
+  overflow: hidden;
+  padding: 24px;
+  border: 1px solid var(--rx-ink-600);
+  border-radius: 18px;
+  background: var(--rx-ink-800);
+  color: var(--rx-ivory);
+}
+.rx-approval-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--rx-ink-600);
+  color: var(--rx-mist);
+  font: 500 12px/1.5 var(--rx-font-system);
+  letter-spacing: 0.02em;
+}
+.rx-sev {
+  color: var(--rx-severity);
+}
+.rx-approval-action {
+  margin: 18px 0 6px;
+  color: var(--rx-ivory);
+  font: 500 15px/1.5 var(--rx-font-system);
+}
+.rx-approval-cause {
+  margin: 0 0 18px;
+  color: var(--rx-mist);
+  font-size: 15px;
+}
+.rx-approval-cause b {
+  color: var(--rx-state-cause);
+  font-weight: 600;
+}
+.rx-approvers {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 20px;
+  padding: 0;
+  list-style: none;
+}
+.rx-approvers li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--rx-ink-600);
+  border-radius: 12px;
+}
+.rx-approvers li > span:first-child {
+  color: var(--rx-mist);
+  font: 500 12px/1.5 var(--rx-font-system);
+}
+.rx-approver-name {
+  color: var(--rx-citrine);
+  font: italic 400 19px/1.2 var(--rx-font-human);
+}
+.rx-approver-pending {
+  color: var(--rx-mist);
+  font: italic 400 19px/1.2 var(--rx-font-human);
+}
+.rx-approve-row {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+}
+.rx-sign {
+  display: block;
+  width: 220px;
+  max-width: 100%;
+  height: 14px;
+  overflow: visible;
+}
+.rx-sign path {
+  fill: none;
+  stroke: var(--rx-citrine);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 240;
+  stroke-dashoffset: 240;
+}
+.rx-approval[data-step="signed"] .rx-sign path,
+.rx-approval[data-step="gate"] .rx-sign path,
+.rx-approval[data-step="fixing"] .rx-sign path,
+.rx-approval[data-step="recorded"] .rx-sign path {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 600ms var(--rx-ease);
+}
+.rx-gate {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 36px;
+  margin: 20px 0 14px;
+}
+.rx-gate-lane {
+  flex: 1;
+  height: 1px;
+  background: var(--rx-ink-600);
+}
+.rx-gate-bar {
+  position: absolute;
+  left: 50%;
+  width: 6px;
+  height: 36px;
+  margin-left: -3px;
+  border-radius: 3px;
+  background: var(--rx-citrine);
+  transform-origin: bottom;
+  transition: transform 450ms var(--rx-ease);
+}
+.rx-gate-run {
+  position: absolute;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--rx-aqua);
+}
+.rx-approval[data-step="gate"] .rx-gate-bar,
+.rx-approval[data-step="fixing"] .rx-gate-bar,
+.rx-approval[data-step="recorded"] .rx-gate-bar {
+  transform: scaleY(0);
+}
+.rx-approval[data-step="fixing"] .rx-gate-run {
+  width: 100%;
+  transition: width 700ms linear;
+}
+.rx-approval[data-step="recorded"] .rx-gate-run {
+  width: 100%;
+}
+.rx-record {
+  min-height: 3em;
+  margin: 0;
+  color: var(--rx-ivory);
+  font: 500 13px/1.5 var(--rx-font-system);
+  letter-spacing: 0.02em;
+  white-space: pre-wrap;
+}
+.rx-record-time {
+  color: var(--rx-aqua);
+}
+.rx-replay {
+  margin-top: 12px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--rx-mist);
+  font: 500 13px/1.5 var(--rx-font-system);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.rx-replay:hover {
+  color: var(--rx-aqua);
+}
+@media (max-width: 860px) {
+  .rx-approver-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 7 The "any update?" frame: never an empty box. */
+.public-site .hx-shot {
+  border-color: var(--rx-rule);
+  background: var(--rx-ink-800);
+  box-shadow: none;
+}
+.public-site .hx-shot-media {
+  aspect-ratio: 1894 / 810;
+  background: var(--rx-ink-800) url("/product/command-centre-attention.png")
+    center / cover no-repeat;
+}
+.public-site .hx-shot-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.public-site main .hx-shot figcaption,
+.public-site main .rx-caption {
+  color: var(--rx-mist) !important;
+  font: 500 13px/1.5 var(--rx-font-system);
+  letter-spacing: 0.02em;
+}
+.public-site main section.rx-ivory .rx-caption {
+  color: var(--rx-graphite) !important;
+}
+.public-site main section.rx-ivory .hx-proof-list img {
+  border-bottom: 1px solid var(--rx-rule);
+}
+
+/* 8 Regulator clock: monumental numerals. */
+.public-site main .hx-band.rx-ink .hx-facts dt {
+  display: grid;
+  gap: 4px;
+  color: var(--rx-ivory) !important;
+  font-family: var(--rx-font-display);
+}
+.rx-clock-num {
+  font-size: clamp(88px, 10vw, 160px);
+  font-weight: 800;
+  font-stretch: 75%;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+.rx-clock-unit {
+  color: var(--rx-aqua);
+  font: 500 13px/1.5 var(--rx-font-system);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.public-site main .hx-band.rx-ink .hx-facts dd {
+  color: var(--rx-mist);
+}
+.public-site main .hx-band .hx-source-line {
+  font-family: var(--rx-font-system);
+  font-size: 13px;
+}
+
+/* 9 Tests on ruled lines; the pilot as a framed offer. */
+.public-site main section.rx-ivory .hx-commitments article {
+  border-width: 1px 0 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+.public-site main section.rx-ivory .hx-commitments article:hover {
+  transform: none;
+}
+.public-site main section.rx-ivory .hx-magnet {
+  border: 1px solid var(--rx-ink) !important;
+  border-radius: var(--rx-radius-card);
+  background: var(--rx-ivory-50) !important;
+  box-shadow: 8px 8px 0 var(--rx-rule) !important;
+}
+
+/* 10 Why we built it: a letter on paper with a citrine signature line. */
+.public-site main section.rx-ivory .hx-note {
+  border: 0 !important;
+  background: transparent !important;
+}
+.public-site main section.rx-ivory .hx-note-body p {
+  color: var(--rx-ink);
+  font-size: clamp(17px, 1.4vw, 19px);
+  line-height: 1.7;
+}
+.public-site main .hx-note-sign {
+  display: inline-block;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--rx-citrine);
+  font: italic 400 24px/1.3 var(--rx-font-human) !important;
+  color: var(--rx-ink) !important;
+}
+.public-site main section.rx-ink .hx-note-sign {
+  color: var(--rx-ivory) !important;
+}
+
+/* 11 Trust ticks, then the checklist as an ivory document cover on ink. */
+.public-site main section.rx-ink.rx-trust {
+  padding: clamp(56px, 7vw, 96px) 0;
+}
+.rx-trust .hx-trustbar-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 32px;
+  margin-bottom: 40px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--rx-ink-600);
+}
+.rx-trust .hx-trustbar-inner ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.rx-trust .hx-trustbar-inner li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--rx-ivory);
+  font-weight: 600;
+}
+.rx-trust .hx-trustbar-inner li svg {
+  color: var(--rx-aqua);
+}
+.rx-trust .hx-magnet {
+  --hx-text: var(--rx-ink);
+  --hx-muted: var(--rx-graphite);
+  border: 0 !important;
+  border-radius: 4px 18px 18px 4px;
+  background: var(--rx-ivory) !important;
+  box-shadow: inset 10px 0 0 var(--rx-rule) !important;
+  color: var(--rx-graphite);
+}
+.rx-trust .hx-magnet :is(h2, .hx-h2) {
+  color: var(--rx-ink) !important;
+}
+.rx-trust .hx-magnet p {
+  color: var(--rx-graphite) !important;
+}
+.rx-trust .hx-magnet .hx-pill {
+  border-color: var(--rx-rule);
+  background: var(--rx-ivory-50);
+  color: var(--rx-aqua-deep) !important;
+}
+
+/* 12 The record closes. */
+.public-site main section.rx-ink.hx-closing a:not(.button) {
+  color: var(--rx-aqua);
+}
+
+/* ---------------------------------------------------------
+   Reduced motion and the Animations switch
+   --------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .rx-stream .rx-stream-pulse {
+    animation: none;
+    stroke-dasharray: none;
+    stroke-opacity: 0.6;
+  }
+  .rx-stamp,
+  .rx-sign path,
+  .rx-gate-bar,
+  .rx-gate-run,
+  .public-site main :is(.hx-path, .hx-commitments article, .hx-proof-list li) {
+    transition: none !important;
+  }
+}
+html[data-motion="off"] .rx-stream .rx-stream-pulse {
+  animation: none;
+  stroke-dasharray: none;
+  stroke-opacity: 0.6;
+}
+
+/* Footer: the endorsement sits beside the logo. */
+.public-site .footer-brand {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+}
+
+/* The checklist cover is ivory, so its human word takes Deep Aqua (5.4:1). */
+.public-site main .rx-trust .hx-magnet :is(h2, .hx-h2) em {
+  color: var(--rx-aqua-deep);
+}
+.public-site .site-footer {
+  background: var(--rx-ink);
+  border-top-color: var(--rx-ink-600);
+}
+.public-site .site-footer a {
+  color: var(--rx-mist);
+}
+.public-site .site-footer a:hover {
+  color: var(--rx-aqua);
+}
+
+/* No gradients across sections; glows stay inside product visuals only. */
+.public-site
+  :is(
+    .page-hero,
+    .page-hero-blue,
+    .page-hero-ink,
+    .hero-section,
+    .action-band,
+    .closing-band,
+    .assurance-status-band,
+    .integrations-catalogue,
+    .deployment-content
+  ) {
+  background-image: none !important;
+  background-color: var(--rx-ink) !important;
+}
+.public-site .hero-section::before {
+  background-image: none !important;
+}
+@media (max-width: 520px) {
+  .rx-approvers li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}

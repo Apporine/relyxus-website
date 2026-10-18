@@ -10,6 +10,7 @@ import "./index.css";
 import "./marketing.css";
 import "./kinetic.css";
 import "./human.css";
+import "./ledger.css";
 
 const queryClient = new QueryClient();
 

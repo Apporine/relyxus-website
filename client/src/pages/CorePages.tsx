@@ -36,7 +36,7 @@ export function ProductPage() {
         summary="One investigation per incident. A person approves every change. The write-up is half done before the incident closes."
         tone="ink"
       >
-        <PrimaryLink href="/demo">Book a 30-minute demo</PrimaryLink>
+        <PrimaryLink href="/demo">Book a demo, 30 minutes</PrimaryLink>
         <a className="button button-secondary" href="#walkthrough">
           Follow an incident <ArrowRight size={16} aria-hidden="true" />
         </a>
@@ -72,7 +72,7 @@ export function ProductPage() {
         title="Bring your stack. We’ll walk a real incident through it in 30 minutes."
         summary="Tell us which tools your team uses and we’ll show you the incident from first alert to record."
         href="/demo?type=Demo"
-        label="Book a 30-minute demo"
+        label="Book a demo, 30 minutes"
       />
     </>
   );
@@ -80,7 +80,7 @@ export function ProductPage() {
 
 const commitments = [
   {
-    title: "Read-only by default",
+    title: "Read only by default",
     text: "Looking at an incident never changes anything in your systems.",
   },
   {
@@ -234,7 +234,9 @@ export function FinancialServicesPage() {
         summary="Engineering needs the cause. Resilience needs the record. Relyxus gives both the same evidence."
         tone="blue"
       >
-        <PrimaryLink href="/demo?type=Demo">Book a 30-minute demo</PrimaryLink>
+        <PrimaryLink href="/demo?type=Demo">
+          Book a demo, 30 minutes
+        </PrimaryLink>
       </PageIntro>
 
       <section className="hx-section" id="engineering">
@@ -290,7 +292,7 @@ export function FinancialServicesPage() {
         title="Tell us the payments incident that hurt most"
         summary="We’ll replay it with read-only access and show you what Relyxus would have found."
         href="/demo?type=Replay%20pilot"
-        label="Book a 30-minute demo"
+        label="Book a demo, 30 minutes"
       />
     </>
   );

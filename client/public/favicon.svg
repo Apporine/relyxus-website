@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="relyxus">
-  <rect width="64" height="64" rx="14" fill="#110A24"/>
-  <path d="M19 17 L45 47" stroke="#FCFAFF" stroke-width="7" stroke-linecap="round" fill="none"/>
-  <path d="M45 17 L19 47" stroke="#05DCE8" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <rect width="64" height="64" rx="14" fill="#0E0B14"/>
+  <path d="M19 17 L45 47" stroke="#19D3C5" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <path d="M45 17 L19 47" stroke="#19D3C5" stroke-width="7" stroke-linecap="round" fill="none"/>
 </svg>

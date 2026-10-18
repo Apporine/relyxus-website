@@ -2375,7 +2375,7 @@ body {
   color: #9f9ba9;
   stroke-width: 1.8;
   transition:
-    transform 180ms var(--rx-web-var(--ease)),
+    transform 180ms var(--ease),
     color 180ms var(--ease);
 }
 .public-site .nav-item.is-open .nav-chevron {
@@ -2392,7 +2392,7 @@ body {
   flex: none;
   color: #aca8b4;
   transition:
-    transform 180ms var(--rx-web-var(--ease)),
+    transform 180ms var(--ease),
     color 180ms var(--ease);
 }
 .public-site .mobile-nav-group[open] summary > svg {

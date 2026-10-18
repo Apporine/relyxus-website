@@ -7,9 +7,6 @@ import {
   companyDetails,
   founderNote,
   founders,
-  integrations,
-  proofStrip,
-  standards,
   navGroups,
   pilotResult,
   pricingTerms,
@@ -27,6 +24,9 @@ import {
 import { prefersLessMotion } from "@/lib/motion";
 import { useSmoothScroll } from "@/lib/smoothScroll";
 import { Readout } from "@/components/marketing/Readout";
+import { MiniStage } from "@/components/marketing/MiniStage";
+import { Accent } from "@/components/marketing/Headline";
+import { CtaPanel } from "@/components/home/Resolved";
 
 export function PageMeta({
   title,
@@ -207,7 +207,7 @@ function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
                 <ChevronDown className="nav-chevron" aria-hidden="true" />
               </button>
               <div
-                className={`nav-popover ${group.columns ? "nav-popover-mega" : ""}`}
+                className={`nav-popover ${group.orbit ? "nav-popover-orbit" : ""}`}
                 id={id}
                 hidden={!isOpen}
               >
@@ -217,21 +217,21 @@ function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
                     RELYXUS / {group.label.toUpperCase()}
                   </span>
                 </div>
-                {group.columns ? (
-                  <div className="nav-mega-columns">
-                    {group.columns.map(column => (
-                      <div className="nav-mega-column" key={column.label}>
-                        <p className="nav-mega-label">{column.label}</p>
-                        <div className="nav-popover-links">
-                          {column.items.map(item => (
-                            <PopoverLink
-                              key={item.href}
-                              item={item}
-                              onNavigate={handleNavigate}
-                            />
-                          ))}
-                        </div>
-                      </div>
+                {group.orbit ? (
+                  <div className="nav-orbit">
+                    <span className="nav-orbit-ring" aria-hidden="true">
+                      <span />
+                    </span>
+                    {group.items.map((item, index) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className={`nav-orbit-link nav-orbit-${index}`}
+                        onClick={handleNavigate}
+                      >
+                        <strong>{item.label}</strong>
+                        {item.description && <small>{item.description}</small>}
+                      </Link>
                     ))}
                   </div>
                 ) : (
@@ -244,16 +244,6 @@ function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
                       />
                     ))}
                   </div>
-                )}
-                {group.footer && (
-                  <Link
-                    href={group.footer.href}
-                    className="nav-mega-footer"
-                    onClick={handleNavigate}
-                  >
-                    {group.footer.label}
-                    <ArrowRight size={15} aria-hidden="true" />
-                  </Link>
                 )}
                 {group.note && (
                   <a
@@ -361,31 +351,12 @@ function MobileMenu({
                 <ChevronDown aria-hidden="true" />
               </summary>
               <div className="mobile-nav-group-links">
-                {(group.columns ?? [{ label: "", items: group.items }]).map(
-                  column => (
-                    <div key={column.label || group.label}>
-                      {column.label && (
-                        <p className="nav-mega-label">{column.label}</p>
-                      )}
-                      {column.items.map(item => (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          onClick={onNavigate}
-                        >
-                          {item.label}
-                          <ArrowUpRight size={15} aria-hidden="true" />
-                        </Link>
-                      ))}
-                    </div>
-                  )
-                )}
-                {group.footer && (
-                  <Link href={group.footer.href} onClick={onNavigate}>
-                    {group.footer.label}
-                    <ArrowRight size={15} aria-hidden="true" />
+                {group.items.map(item => (
+                  <Link key={item.href} href={item.href} onClick={onNavigate}>
+                    {item.label}
+                    <ArrowUpRight size={15} aria-hidden="true" />
                   </Link>
-                )}
+                ))}
               </div>
             </details>
           ))}
@@ -449,10 +420,7 @@ export function SiteHeader() {
 /** Footer columns follow the main navigation, so the two never drift apart. */
 const footerColumns = navGroups.map(group => ({
   label: group.label,
-  items: [
-    ...(group.columns?.flatMap(column => column.items) ?? group.items),
-    ...(group.footer ? [group.footer] : []),
-  ],
+  items: [...group.items],
 }));
 
 /** Contact links that render only once they exist. */
@@ -608,56 +576,22 @@ export function PublicLayout({
   );
 }
 
+/** Inner page hero: the mini stage, with the signal core beside the headline. */
 export function PageHero({
   eyebrow,
   title,
   summary,
-  tone = "ivory",
-  art,
   children,
 }: {
   eyebrow: string;
   title: string;
   summary: string;
-  tone?: "ivory" | "blue" | "ink";
-  art?: React.ReactNode;
   children?: React.ReactNode;
 }) {
   return (
-    <section className={`page-hero page-hero-${tone}`}>
-      <div className={`container page-hero-inner ${art ? "has-art" : ""}`}>
-        <div className="page-hero-text">
-          <p className="eyebrow page-hero-eyebrow">
-            <span className="eyebrow-line" aria-hidden="true" />
-            <span>{eyebrow}</span>
-          </p>
-          <h1>{title}</h1>
-          <p className="page-hero-summary">{summary}</p>
-          {children && <div className="page-hero-actions">{children}</div>}
-        </div>
-        {art && <div className="page-hero-art">{art}</div>}
-      </div>
-    </section>
-  );
-}
-
-export function SectionTitle({
-  eyebrow,
-  title,
-  summary,
-  light = false,
-}: {
-  eyebrow: string;
-  title: string;
-  summary?: string;
-  light?: boolean;
-}) {
-  return (
-    <div className={`section-title ${light ? "section-title-light" : ""}`}>
-      <p className="eyebrow">{eyebrow}</p>
-      <h2>{title}</h2>
-      {summary && <p>{summary}</p>}
-    </div>
+    <MiniStage eyebrow={eyebrow} title={title} lede={summary} status={eyebrow}>
+      {children}
+    </MiniStage>
   );
 }
 
@@ -769,7 +703,7 @@ export function DataBand({
     >
       <div className="container">
         <h2 className="hx-band-title" id="hx-band-title">
-          {title}
+          {typeof title === "string" ? <Accent text={title} /> : title}
         </h2>
         <dl className="hx-facts">
           {items.map(clock => (
@@ -814,7 +748,9 @@ export function FounderNote({
     >
       <div className="container">
         <div className="hx-note">
-          <h2 className="hx-h2">{founderNote.heading}</h2>
+          <h2 className="hx-h2">
+            <Accent text={founderNote.heading} />
+          </h2>
           <div className="hx-note-body">
             {founderNote.paragraphs.map(text => (
               <p key={text}>{text}</p>
@@ -825,105 +761,6 @@ export function FounderNote({
             </p>
           </div>
         </div>
-      </div>
-    </section>
-  );
-}
-
-/** Logos, a pilot quote, one metric and named integrations. Renders nothing until filled. */
-export function ProofStrip({
-  ground,
-  withSources = true,
-  rulesAsCitations = false,
-}: {
-  ground?: "ink" | "ivory";
-  withSources?: boolean;
-  rulesAsCitations?: boolean;
-} = {}) {
-  const { logos, quote, metric } = proofStrip;
-  const sources = withSources ? integrations : [];
-  if (!logos.length && !quote && !metric && !sources.length) return null;
-  return (
-    <section
-      className={`hx-proofstrip ${ground ? `rx-${ground}` : ""}`}
-      aria-label="Proof"
-    >
-      <div className="container">
-        {metric && (
-          <p className="hx-metric">
-            <strong>{metric.value}</strong> {metric.label}
-            <small>
-              {metric.href ? (
-                <a href={metric.href} target="_blank" rel="noreferrer">
-                  {metric.source}
-                </a>
-              ) : (
-                metric.source
-              )}
-            </small>
-          </p>
-        )}
-        {quote && (
-          <blockquote className="hx-quote">
-            <p>{quote.text}</p>
-            <footer>
-              {quote.name}, {quote.role}
-            </footer>
-          </blockquote>
-        )}
-        {logos.length > 0 && (
-          <ul className="hx-logos" aria-label="Customers and partners">
-            {logos.map(logo => (
-              <li key={logo.name}>
-                {logo.src ? (
-                  <img src={logo.src} alt={logo.name} loading="lazy" />
-                ) : (
-                  logo.name
-                )}
-              </li>
-            ))}
-          </ul>
-        )}
-        {standards.length > 0 && rulesAsCitations && (
-          <div>
-            <span className="rx-citations-label">
-              The rules your team works to
-            </span>
-            <ol className="rx-citations">
-              {standards.map(rule => (
-                <li key={rule.href}>
-                  <a href={rule.href} target="_blank" rel="noreferrer">
-                    {rule.label}
-                  </a>
-                </li>
-              ))}
-            </ol>
-          </div>
-        )}
-        {standards.length > 0 && !rulesAsCitations && (
-          <div className="hx-integrations">
-            <span>The rules your team works to</span>
-            <ul>
-              {standards.map(rule => (
-                <li key={rule.href}>
-                  <a href={rule.href} target="_blank" rel="noreferrer">
-                    {rule.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-        {sources.length > 0 && (
-          <div className="hx-integrations">
-            <span>Bring the tools you have. Relyxus reads evidence from</span>
-            <ul>
-              {sources.map(name => (
-                <li key={name}>{name}</li>
-              ))}
-            </ul>
-          </div>
-        )}
       </div>
     </section>
   );
@@ -952,7 +789,9 @@ export function FoundersGrid({
   return (
     <section className={`hx-section rx-founders rx-${ground}`}>
       <div className="container">
-        <h2 className="hx-h2">The people building Relyxus</h2>
+        <h2 className="hx-h2">
+          <Accent text="The people *building Relyxus.*" />
+        </h2>
         <ul className="hx-founders">
           {founders.map(person => (
             <li key={person.name}>
@@ -983,8 +822,9 @@ export function InlineAvailability({
   );
 }
 
+/** The call to action at the foot of a page, as the shared ink panel. */
 export function ActionBand({
-  title = "See how Relyxus would fit your team",
+  title = "See how Relyxus *would fit your team.*",
   summary = "Walk through an incident together and see what it would mean for your team.",
   href = "/demo",
   label = "Book a 30 minute demo",
@@ -995,51 +835,12 @@ export function ActionBand({
   label?: string;
 }) {
   return (
-    <section className="action-band">
-      <div className="container action-band-inner">
-        <div>
-          <h2>{title}</h2>
-          <p>{summary}</p>
-        </div>
-        <div className="action-band-actions">
-          <PrimaryLink href={href}>{label}</PrimaryLink>
-          <Link href="/security" className="action-quiet">
-            Read the security summary{" "}
-            <ArrowRight size={16} aria-hidden="true" />
-          </Link>
-        </div>
-      </div>
-    </section>
+    <CtaPanel title={title} line={summary} cta={{ label, href }} place="page" />
   );
 }
 
-export function PageIntro({
-  eyebrow,
-  title,
-  summary,
-  tone = "ivory",
-  art,
-  children,
-}: {
-  eyebrow: string;
-  title: string;
-  summary: string;
-  tone?: "ivory" | "blue" | "ink";
-  art?: React.ReactNode;
-  children?: React.ReactNode;
-}) {
-  return (
-    <PageHero
-      eyebrow={eyebrow}
-      title={title}
-      summary={summary}
-      tone={tone}
-      art={art}
-    >
-      {children}
-    </PageHero>
-  );
-}
+/** Kept for the pages that still call it by this name. */
+export const PageIntro = PageHero;
 
 /** How pricing works: annual licence, pilot credited, no per seat fees. */
 export function PricingBlock({
@@ -1055,7 +856,7 @@ export function PricingBlock({
       <div className="container">
         <span className="rx-eyebrow">Pricing</span>
         <h2 id="rx-pricing-title" className="hx-h2">
-          How pricing works
+          <Accent text="How *pricing works.*" />
         </h2>
         <ul className="rx-pricing-terms">
           {pricingTerms.map(term => (

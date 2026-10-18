@@ -29,8 +29,8 @@ const pages = Object.entries(meta).map(([route, copy]) => ({
     ? copy.title
     : `${copy.title} | Relyxus`,
   description: copy.description,
-  h1: copy.h1,
-  body: copy.body,
+  h1: copy.h1.replaceAll("*", ""),
+  body: copy.body.replaceAll("*", ""),
 }));
 
 const esc = value =>
@@ -43,10 +43,10 @@ const esc = value =>
 const nav = [
   ["/product", "Product"],
   ["/security", "Security"],
-  ["/solutions/financial-services", "Solutions"],
+  ["/solutions/engineering", "Solutions"],
   ["/resources", "Resources"],
   ["/company", "Company"],
-  ["/demo", "Request a demo"],
+  ["/demo", "Book a 30 minute demo"],
 ]
   .map(([href, label]) => `<a href="${href}">${label}</a>`)
   .join(" ");

@@ -1,24 +1,13 @@
-import { solutions } from "./solutions";
+import { teams } from "./solutions";
 
 export type NavItem = { label: string; href: string; description?: string };
-export type NavColumn = { label: string; items: NavItem[] };
 export type NavGroup = {
   label: string;
   items: NavItem[];
-  /** A mega menu: columns of links, with an optional link along the foot. */
-  columns?: NavColumn[];
-  footer?: NavItem;
+  /** Laid out as an orbit around a small core rather than a list. */
+  orbit?: boolean;
   note?: string;
 };
-
-const solutionLinks = (column: "team" | "incident"): NavItem[] =>
-  solutions
-    .filter(solution => solution.column === column)
-    .map(solution => ({
-      label: solution.label,
-      href: `/solutions/${solution.slug}`,
-      description: solution.line,
-    }));
 
 export const navGroups: NavGroup[] = [
   {
@@ -38,15 +27,12 @@ export const navGroups: NavGroup[] = [
   },
   {
     label: "Solutions",
-    items: [],
-    columns: [
-      { label: "By team", items: solutionLinks("team") },
-      { label: "By incident", items: solutionLinks("incident") },
-    ],
-    footer: {
-      label: "Built for banks, payments and fintech",
-      href: "/solutions/financial-services",
-    },
+    orbit: true,
+    items: teams.map(team => ({
+      label: team.label,
+      href: `/solutions/${team.slug}`,
+      description: team.line,
+    })),
   },
   {
     label: "Resources",
@@ -267,10 +253,10 @@ export const demoVariants: Record<
 > = {
   Demo: {
     eyebrow: "Book a 30 minute demo",
-    title: "See Relyxus on an incident like yours",
+    title: "See Relyxus *on an incident like yours.*",
     summary:
       "Tell us which tools your team uses and we’ll walk through an incident from alert to record.",
-    asideTitle: "What the demo covers",
+    asideTitle: "What the demo *covers*",
     asideText: "About 30 minutes, with your questions first.",
     agenda: [
       {
@@ -286,10 +272,10 @@ export const demoVariants: Record<
   },
   "Replay pilot": {
     eyebrow: "Replay pilot",
-    title: "Try Relyxus on incidents you already solved",
+    title: "Try Relyxus *on incidents you already solved.*",
     summary:
       "Pick past incidents your team knows well and compare what Relyxus finds with what you know.",
-    asideTitle: "How a pilot starts",
+    asideTitle: "How a pilot *starts*",
     asideText: "We agree the incidents first, then connect read only sources.",
     agenda: [
       { title: "Choose the incidents", text: "Include a miss or two." },
@@ -299,10 +285,10 @@ export const demoVariants: Record<
   },
   "Security pack": {
     eyebrow: "Security pack",
-    title: "Get the security pack for your reviewers",
+    title: "Get the security pack *for your reviewers.*",
     summary:
       "Tell us who is reviewing and what they need. We share the pack with teams in an evaluation.",
-    asideTitle: "What reviewers get",
+    asideTitle: "What reviewers *get*",
     asideText: "Written for security and architecture teams.",
     agenda: [
       { title: "Data flows and identity", text: "Who can see and do what." },
@@ -312,10 +298,10 @@ export const demoVariants: Record<
   },
   "Readiness checklist": {
     eyebrow: "Readiness checklist",
-    title: "Get the incident readiness checklist",
+    title: "Get the incident *readiness checklist.*",
     summary:
       "A short checklist for regulated teams: evidence, ownership and record keeping before the next incident.",
-    asideTitle: "What’s in it",
+    asideTitle: "What’s *in it*",
     asideText: "Questions you can answer in an afternoon.",
     agenda: [
       { title: "Evidence", text: "Can you find it in one place?" },
@@ -325,10 +311,10 @@ export const demoVariants: Record<
   },
   Deployment: {
     eyebrow: "Deployment",
-    title: "Talk through how you would run Relyxus",
+    title: "Talk through *how you would run Relyxus.*",
     summary:
       "Tell us about your environment and we’ll go through the options with you.",
-    asideTitle: "What we discuss",
+    asideTitle: "What we *discuss*",
     asideText: "Your constraints first.",
     agenda: [
       { title: "Where it runs", text: "Dedicated, or self hosted by you." },
@@ -338,10 +324,10 @@ export const demoVariants: Record<
   },
   Pricing: {
     eyebrow: "Pricing",
-    title: "Talk to us about pricing",
+    title: "Talk to us *about pricing.*",
     summary:
       "Pricing depends on your setup. Tell us a little and we’ll come back with a proposal.",
-    asideTitle: "What shapes a quote",
+    asideTitle: "What shapes *a quote*",
     asideText: "We keep it simple and put it in writing.",
     agenda: [
       { title: "Your setup", text: "How you would run it." },
@@ -359,7 +345,7 @@ export const founderNote: {
   name?: string;
   photo?: string;
 } = {
-  heading: "Why we built Relyxus",
+  heading: "Why we *built Relyxus.*",
   paragraphs: [
     "An incident gets decided in the first hour and explained for weeks afterwards. The people on call carry both jobs.",
     "We built Relyxus so the explanation exists by the time the incident is over: what we saw, what we believed, who said yes.",
@@ -551,7 +537,7 @@ export const contactTopics = [
     label: "See a demo",
     hint: "On an incident like yours",
     type: "Demo",
-    title: "See Relyxus on an incident like yours",
+    title: "See Relyxus *on an incident like yours.*",
     text: "Tell us which tools your team uses and we’ll walk through an incident from alert to record.",
     points: ["Your tools, your kind of incident", "Your questions come first"],
     cta: "Book a 30 minute demo",
@@ -561,7 +547,7 @@ export const contactTopics = [
     label: "Try a Replay pilot",
     hint: "On incidents you already solved",
     type: "Replay pilot",
-    title: "Replay incidents you already solved",
+    title: "Replay incidents *you already solved.*",
     text: "We replay a few past incidents with read only access, so you can compare what Relyxus finds with what you know. No change to live systems.",
     points: ["You choose the incidents", "Read only access only"],
     cta: "Start a pilot enquiry",
@@ -571,7 +557,7 @@ export const contactTopics = [
     label: "Get the security pack",
     hint: "For your reviewers",
     type: "Security pack",
-    title: "Get the pack your reviewers need",
+    title: "Get the pack *your reviewers need.*",
     text: "Written for security and architecture teams, and shared with teams in an evaluation.",
     points: ["Data flows and identity", "Assurance status, with dates"],
     cta: "Request the security pack",
@@ -581,7 +567,7 @@ export const contactTopics = [
     label: "Talk pricing",
     hint: "A proposal in writing",
     type: "Pricing",
-    title: "Talk to us about pricing",
+    title: "Talk to us *about pricing.*",
     text: "Pricing depends on how you would run Relyxus. Tell us a little and we’ll come back with a proposal.",
     points: ["Shaped by your setup", "A proposal in writing"],
     cta: "Ask about pricing",

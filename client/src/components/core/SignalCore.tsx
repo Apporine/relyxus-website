@@ -71,14 +71,6 @@ export const SignalCore = forwardRef<
       radar && radarRef.current ? createRadarRenderer(radarRef.current) : null;
     handle.current.kick = () => core?.kick();
 
-    const resize = () => {
-      core?.resize();
-      rings?.resize();
-    };
-    resize();
-    const observer = new ResizeObserver(resize);
-    observer.observe(wrap);
-
     let frame = 0;
     let last = 0;
     let visible = eager;
@@ -88,10 +80,17 @@ export const SignalCore = forwardRef<
       rings?.draw(seconds, handle.current.radar);
     };
 
-    if (less) {
-      paint(POSTER_SECONDS);
-      return () => observer.disconnect();
-    }
+    // Resizing a canvas clears it, so the still frame has to be redrawn.
+    const resize = () => {
+      core?.resize();
+      rings?.resize();
+      if (less) paint(POSTER_SECONDS);
+    };
+    resize();
+    const observer = new ResizeObserver(resize);
+    observer.observe(wrap);
+
+    if (less) return () => observer.disconnect();
 
     const tick = (now: number) => {
       frame = requestAnimationFrame(tick);

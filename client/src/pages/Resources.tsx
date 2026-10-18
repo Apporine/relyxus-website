@@ -1,7 +1,16 @@
 import { ArrowLeft, ArrowRight, ArrowUpRight, Clock3 } from "lucide-react";
 import { Link } from "wouter";
 import { pageMeta } from "@/content/meta";
-import { ResourcesArt } from "@/components/marketing/HeroArt";
+import { Accent } from "@/components/marketing/Headline";
+
+/** Guide titles carry their accent after the colon, or on the last four words. */
+const accentTitle = (title: string) => {
+  const colon = title.indexOf(": ");
+  if (colon > 0)
+    return `${title.slice(0, colon + 1)} *${title.slice(colon + 2)}*`;
+  const words = title.split(" ");
+  return `${words.slice(0, -4).join(" ")} *${words.slice(-4).join(" ")}*`;
+};
 import { articleBodies, resources } from "@/content/site";
 import {
   ActionBand,
@@ -20,11 +29,15 @@ export function ResourcesPage() {
       <PageIntro
         eyebrow="Resources"
         title={pageMeta["/resources"].h1}
-        art={<ResourcesArt />}
         summary={pageMeta["/resources"].body}
-        tone="ivory"
       />
-      <section className="resources-index section-pad">
+      <section
+        className="resources-index section-pad"
+        aria-labelledby="rx-guides-title"
+      >
+        <h2 id="rx-guides-title" className="sr-only">
+          Guides
+        </h2>
         <div className="container resources-card-list hx-resource-grid">
           {resources.map(item => {
             const href = item.gatedType
@@ -51,7 +64,7 @@ export function ResourcesPage() {
         </div>
       </section>
       <ActionBand
-        title="Bring a question to the team"
+        title="Bring a question *to the team.*"
         summary="Ask about a demo or a Replay pilot and we’ll reply by email."
         href="/demo"
         label="Open the enquiry form"
@@ -71,7 +84,7 @@ export function ResourceArticle({ slug }: { slug: string }) {
         />
         <PageIntro
           eyebrow="Resources"
-          title="That guide isn’t here"
+          title="That guide *isn’t here.*"
           summary="Browse the current explainers or return to the home page."
         />
         <section className="section-pad">
@@ -93,7 +106,9 @@ export function ResourceArticle({ slug }: { slug: string }) {
           <span>Field guide</span>
         </div>
         <header className="article-header container">
-          <h1>{article.title}</h1>
+          <h1 className="rx-display rx-article-title">
+            <Accent text={accentTitle(article.title)} />
+          </h1>
           <p className="article-deck">{article.intro}</p>
         </header>
         <div className="article-layout container">
@@ -120,7 +135,7 @@ export function ResourceArticle({ slug }: { slug: string }) {
         </div>
       </article>
       <ActionBand
-        title="Bring your stack. We’ll walk a real incident through it in 30 minutes."
+        title="Bring your stack. *We’ll walk a real incident through it.*"
         summary="Tell us which tools your team uses and we’ll show you the incident from first alert to record."
         href="/demo"
         label="Book a 30 minute demo"

@@ -1,22 +1,50 @@
-import { ArrowRight, Check, ShieldCheck } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { Link } from "wouter";
 import {
-  ActionBand,
   APPORINE_URL,
   AssuranceList,
-  FoundersGrid,
-  PageIntro,
   DataBand,
+  FounderNote,
+  FoundersGrid,
   PageMeta,
   PricingBlock,
   PrimaryLink,
 } from "@/components/marketing/PublicSite";
-import { BrainMap } from "@/components/marketing/BrainMap";
-import { IncidentTimeline } from "@/components/marketing/IncidentTimeline";
-import { CompanyArt, SecurityArt } from "@/components/marketing/HeroArt";
+import { MiniStage } from "@/components/marketing/MiniStage";
+import { Section } from "@/components/marketing/Section";
+import { SignalCore } from "@/components/core/SignalCore";
+import { Headline } from "@/components/marketing/Headline";
+import { CtaPanel } from "@/components/home/Resolved";
 import { ProductTour } from "@/components/marketing/ProductTour";
 import { outageData, packPromise } from "@/content/site";
 import { pageMeta } from "@/content/meta";
+import { useReveal } from "@/lib/motion";
+
+/** Product screenshots, framed inside the same stage as the homepage. */
+function ScreensStage() {
+  const [ref, inView] = useReveal<HTMLElement>(0.15);
+  return (
+    <section
+      ref={ref}
+      id="screens"
+      className={`rx-ink rx-screens-stage ${inView ? "is-in" : ""}`}
+      data-readout
+      data-readout-clock="T+00:04"
+      data-readout-status="The war room"
+    >
+      <SignalCore className="rx-screens-core" />
+      <div className="container">
+        <Headline text="Five screens. *One source of truth.*" in={inView} />
+        <div
+          className="rx-glass rx-screens-frame rx-reveal"
+          style={{ "--i": 2 } as React.CSSProperties}
+        >
+          <ProductTour />
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export function ProductPage() {
   return (
@@ -25,52 +53,30 @@ export function ProductPage() {
         title={pageMeta["/product"].title}
         description={pageMeta["/product"].description}
       />
-      <PageIntro
+      <MiniStage
         eyebrow="Product"
-        title="From first alert to a record you can hand to audit"
-        art={<BrainMap compact />}
-        summary="One investigation per incident. A person approves every change. The write up is half done before the incident closes."
-        tone="ink"
+        title="From first alert *to a record you can hand to audit.*"
+        lede="One investigation per incident. A person approves every change. The write up is half done before the incident closes."
+        status="Product"
       >
         <PrimaryLink href="/demo">Book a 30 minute demo</PrimaryLink>
-        <a className="button button-secondary" href="#walkthrough">
-          Follow an incident <ArrowRight size={16} aria-hidden="true" />
+        <a className="button button-secondary" href="#screens">
+          See the screens <ArrowRight size={16} aria-hidden="true" />
         </a>
-      </PageIntro>
-
+      </MiniStage>
+      <ScreensStage />
       <DataBand
-        title="Most major outages cost six figures. Every hour to cause adds to it."
+        title="Most major outages cost six figures. *Every hour to cause adds to it.*"
         items={outageData.items}
         sources={outageData.sources}
+        ground="ivory"
       />
-
-      <section className="hx-section">
-        <div className="container">
-          <h2 className="hx-h2">
-            Five screens. One source of truth for the whole incident.
-          </h2>
-          <ProductTour />
-        </div>
-      </section>
-
-      <section className="hx-section" id="walkthrough">
-        <div className="container">
-          <h2 className="hx-h2">Follow one incident</h2>
-          <p className="hx-sub">
-            A payments authorisation failure, from first alert to a reviewed
-            decision.
-          </p>
-          <IncidentTimeline />
-        </div>
-      </section>
-
       <PricingBlock />
-
-      <ActionBand
-        title="Bring your stack. We’ll walk a real incident through it in 30 minutes."
-        summary="Tell us which tools your team uses and we’ll show you the incident from first alert to record."
-        href="/demo?type=Demo"
-        label="Book a 30 minute demo"
+      <CtaPanel
+        title="Bring your stack. *We’ll walk an incident through it.*"
+        line="Tell us which tools your team uses and we’ll show you the incident from first alert to record."
+        cta={{ label: "Book a 30 minute demo", href: "/demo?type=Demo" }}
+        place="product"
       />
     </>
   );
@@ -113,70 +119,64 @@ export function SecurityPage() {
         title={pageMeta["/security"].title}
         description={pageMeta["/security"].description}
       />
-      <PageIntro
+      <MiniStage
         eyebrow="Security"
-        title="Made for your security review"
-        art={<SecurityArt />}
-        summary={pageMeta["/security"].body}
-        tone="blue"
+        title="Made for *your security review.*"
+        lede={pageMeta["/security"].body}
+        status="Security review"
+        tint="paper"
       >
         <PrimaryLink href="/demo?type=Security%20pack">
           Request the security pack
         </PrimaryLink>
-      </PageIntro>
+      </MiniStage>
 
-      <section className="hx-section" id="data-boundaries">
-        <div className="container">
-          <h2 className="hx-h2 hx-lead-heading">
-            Every tool you add is a new risk. Here is how we keep Relyxus from
-            being one.
-          </h2>
-          <div className="hx-commitments">
-            {commitments.map(item => (
-              <article key={item.title}>
-                <Check size={20} aria-hidden="true" />
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </article>
-            ))}
-          </div>
+      <Section
+        id="data-boundaries"
+        title="Every tool is a new risk. *Here is how we keep Relyxus from being one.*"
+      >
+        <div className="hx-commitments">
+          {commitments.map(item => (
+            <article key={item.title}>
+              <Check size={20} aria-hidden="true" />
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))}
         </div>
-      </section>
+      </Section>
 
-      <section className="hx-section">
-        <div className="container">
-          <h2 className="hx-h2 hx-lead-heading">
-            Three things to test in your review
-          </h2>
-          <div className="hx-commitments">
-            {reviewerTests.map((test, index) => (
-              <article key={test.title}>
-                <span className="hx-test-index">0{index + 1}</span>
-                <h3>{test.title}</h3>
-                <p>{test.text}</p>
-              </article>
-            ))}
-          </div>
+      <Section title="Three things *to test in your review.*">
+        <div className="hx-commitments">
+          {reviewerTests.map((test, index) => (
+            <article key={test.title}>
+              <span className="hx-test-index">0{index + 1}</span>
+              <h3>{test.title}</h3>
+              <p>{test.text}</p>
+            </article>
+          ))}
         </div>
-      </section>
+      </Section>
 
-      <section className="hx-section">
-        <div className="container">
-          <div className="hx-magnet">
-            <div>
-              <h2 className="hx-h2">What’s in the security pack</h2>
-              <p>
-                Written for security and architecture teams. We share it with
-                teams in an evaluation, {packPromise}.
-              </p>
-              <AssuranceList />
-            </div>
-            <PrimaryLink href="/demo?type=Security%20pack">
-              Request the security pack
-            </PrimaryLink>
-          </div>
-        </div>
-      </section>
+      <Section
+        title="What’s in *the security pack.*"
+        sub={`Written for security and architecture teams. We share it with teams in an evaluation, ${packPromise}.`}
+      >
+        <AssuranceList />
+        <PrimaryLink href="/demo?type=Security%20pack">
+          Request the security pack
+        </PrimaryLink>
+      </Section>
+
+      <CtaPanel
+        title="Bring your reviewers. *We’ll answer every question.*"
+        line="Tell us who is reviewing and what they need, and we’ll share the pack."
+        cta={{
+          label: "Request the security pack",
+          href: "/demo?type=Security%20pack",
+        }}
+        place="security"
+      />
     </>
   );
 }
@@ -210,96 +210,81 @@ export function CompanyPage() {
         title={pageMeta["/company"].title}
         description={pageMeta["/company"].description}
       />
-      <PageIntro
+      <MiniStage
         eyebrow="Built by Apporine"
-        title={pageMeta["/company"].h1}
-        art={<CompanyArt />}
-        summary="Relyxus is built by Apporine for the teams who answer for every incident."
-        tone="ink"
+        title="Incident response *you can explain to anyone.*"
+        lede="Relyxus is built by Apporine for the teams who answer for every incident."
+        status="Company"
+        tint="dense"
       >
         <PrimaryLink href="/contact">Talk to the team</PrimaryLink>
-        <a className="rx-apporine rx-apporine-hero" href={APPORINE_URL}>
-          An Apporine product
-        </a>
         <Link className="button button-secondary" href="/product">
           See the product <ArrowRight size={16} aria-hidden="true" />
         </Link>
-      </PageIntro>
+        <a className="rx-apporine rx-apporine-hero" href={APPORINE_URL}>
+          An Apporine product
+        </a>
+      </MiniStage>
 
-      <section className="company-page section-pad">
-        <div className="container company-grid">
-          <div className="company-copy">
-            <h2>Why we’re building it</h2>
-            <p className="lead-copy">
-              We start from the incident a responder has to understand at 3am,
-              and from the report someone has to write the week after. Relyxus
-              is built for both.
-            </p>
-            <p>
-              For introductions, commercial details or support, send us an
-              enquiry and we’ll put you in touch with the right person.
-            </p>
-          </div>
-          <div className="company-shot-stack">
-            <div className="company-shot-stage">
-              <figure className="company-shot company-shot-back">
-                <img
-                  src="/product/command-centre.png"
-                  alt="Relyxus Command Centre showing active incidents, approvals and service health"
-                  width={1894}
-                  height={712}
-                  loading="lazy"
-                />
-              </figure>
-              <figure className="company-shot company-shot-front">
-                <img
-                  src="/product/command-centre-attention.png"
-                  alt="Relyxus Command Centre highlighting a SEV1 incident and a production approval waiting for review"
-                  width={1894}
-                  height={810}
-                  loading="lazy"
-                />
-              </figure>
-            </div>
+      <Section
+        title="Why we’re *building it.*"
+        sub="We start from the incident a responder has to understand at 3am, and from the report someone has to write the week after. Relyxus is built for both."
+      >
+        <div className="company-shot-stack">
+          <div className="company-shot-stage">
+            <figure className="company-shot company-shot-back">
+              <img
+                src="/product/command-centre.png"
+                alt="Relyxus Command Centre showing active incidents, approvals and service health"
+                width={1894}
+                height={712}
+                loading="lazy"
+              />
+            </figure>
+            <figure className="company-shot company-shot-front">
+              <img
+                src="/product/command-centre-attention.png"
+                alt="Relyxus Command Centre highlighting a SEV1 incident and a production approval waiting for review"
+                width={1894}
+                height={810}
+                loading="lazy"
+              />
+            </figure>
           </div>
         </div>
-      </section>
+      </Section>
 
-      <section className="hx-section">
-        <div className="container">
-          <h2 className="hx-h2">How we work</h2>
-          <div className="hx-commitments">
-            {principles.map(item => (
-              <article key={item.title}>
-                <Check size={20} aria-hidden="true" />
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FounderNote ground="ivory" />
 
-      <section className="hx-section">
-        <div className="container">
-          <h2 className="hx-h2">What you can hold us to</h2>
-          <ul className="hx-trust-lines hx-holdus">
-            {holdUs.map(line => (
-              <li key={line}>
-                <Check size={18} aria-hidden="true" /> {line}
-              </li>
-            ))}
-          </ul>
+      <Section title="How *we work.*">
+        <div className="hx-commitments">
+          {principles.map(item => (
+            <article key={item.title}>
+              <Check size={20} aria-hidden="true" />
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))}
         </div>
-      </section>
+      </Section>
+
+      <Section title="What you can *hold us to.*">
+        <ul className="hx-trust-lines hx-holdus">
+          {holdUs.map(line => (
+            <li key={line}>
+              <Check size={18} aria-hidden="true" /> {line}
+            </li>
+          ))}
+        </ul>
+      </Section>
 
       <FoundersGrid />
 
-      <ActionBand
-        title="Say hello"
-        summary="Talk incident response with us, even if Relyxus isn’t the right fit yet."
-        href="/contact"
-        label="Contact the team"
+      <CtaPanel
+        title="Say *hello.*"
+        line="Talk incident response with us, even if Relyxus isn’t the right fit yet."
+        cta={{ label: "Contact the team", href: "/contact" }}
+        place="company"
       />
     </>
   );

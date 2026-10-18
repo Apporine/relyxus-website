@@ -1,199 +1,261 @@
-import { useEffect, useRef } from "react";
-import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
+import { useEffect, useId, useState } from "react";
+import { ArrowRight } from "lucide-react";
 import { Link, useLocation } from "wouter";
-import { PageMeta, PrimaryLink } from "@/components/marketing/PublicSite";
-import { Stamp } from "@/components/marketing/Ledger";
-import { SolutionProofBlock } from "@/components/marketing/SolutionProofs";
-import { solutionBySlug, solutions, type Solution } from "@/content/solutions";
+import { PageMeta } from "@/components/marketing/PublicSite";
+import { MiniStage } from "@/components/marketing/MiniStage";
+import { Headline } from "@/components/marketing/Headline";
+import { Closing } from "@/components/home/Resolved";
+import {
+  caseByKey,
+  chainSteps,
+  teamBySlug,
+  useCases,
+  type Team,
+  type UseCase,
+} from "@/content/solutions";
 import { pageMeta } from "@/content/meta";
+import { useReveal } from "@/lib/motion";
 import { track } from "@/lib/analytics";
 import NotFound from "@/pages/NotFound";
 
-/** Steps reveal one by one once the flow scrolls into view. */
-function Flow({ steps }: { steps: readonly string[] }) {
-  const ref = useRef<HTMLOListElement>(null);
-  useEffect(() => {
-    const list = ref.current;
-    if (!list) return;
-    if (!("IntersectionObserver" in window)) {
-      list.classList.add("is-in");
-      return;
-    }
-    const observer = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting) return;
-      list.classList.add("is-in");
-      observer.disconnect();
-    });
-    observer.observe(list);
-    return () => observer.disconnect();
-  }, []);
+const gbp = (value: number) =>
+  value.toLocaleString("en-GB", {
+    style: "currency",
+    currency: "GBP",
+    maximumFractionDigits: 0,
+  });
+const clock = (minutes: number) =>
+  `${String(14 + Math.floor((5 + minutes) / 60)).padStart(2, "0")}:${String((5 + minutes) % 60).padStart(2, "0")}`;
+
+/** Engineering: the likely causes, ranked by evidence. */
+function EvidenceView({ useCase }: { useCase: UseCase }) {
   return (
-    <ol className="rx-flow" ref={ref}>
-      {steps.map((step, index) => (
-        <li key={step} style={{ transitionDelay: `${index * 140}ms` }}>
-          <span className="rx-flow-index">
-            {String(index + 1).padStart(2, "0")}
+    <ol className="rx-team-causes">
+      {useCase.causes.map((c, i) => (
+        <li
+          key={c.name}
+          className={i === 0 ? "is-top" : ""}
+          style={{ "--score": c.score } as React.CSSProperties}
+        >
+          <span className="rx-label">#{i + 1}</span>
+          <strong>{c.name}</strong>
+          <span className="rx-bar" aria-hidden="true">
+            <span />
           </span>
-          <span>{step}</span>
+          <span className="rx-score">{c.score.toFixed(2)}</span>
         </li>
       ))}
     </ol>
   );
 }
 
-/** The shared six block template: hero, question, flow, proof, checklist, close. */
-function SolutionTemplate({ solution }: { solution: Solution }) {
-  const meta = pageMeta[`/solutions/${solution.slug}`];
-  const ctaClick = (place: string) =>
-    track("cta_click", { place, cta: solution.slug });
+/** Resilience: the regulator timeline, drafted from the record. */
+function TimelineView({ useCase }: { useCase: UseCase }) {
+  const classified = useCase.classifiedAfter;
+  const notice = Math.min(classified + 240, 24 * 60);
+  const rows = [
+    { at: "14:05", what: "Alert, the clock starts" },
+    { at: clock(classified), what: "Classified as major" },
+    { at: clock(notice), what: "First notice due · draft ready" },
+    { at: "+72h", what: "Intermediate report due" },
+    { at: "+1 month", what: "Final report due" },
+  ];
   return (
-    <>
-      <PageMeta
-        title={meta?.title ?? solution.label}
-        description={meta?.description ?? solution.paragraph}
-      />
-      <section className="rx-sol-hero rx-ink">
-        <Stamp at="T+00:00" />
-        <div className="container">
-          <span className="rx-eyebrow">{solution.eyebrow}</span>
-          <h1>{solution.title}</h1>
-          <p className="rx-sol-lede">{solution.paragraph}</p>
-          <div className="hx-actions">
-            <Link
-              href={solution.cta.href}
-              className="button button-primary"
-              onClick={() => ctaClick("solution-hero")}
+    <ol className="rx-team-timeline">
+      {rows.map((row, i) => (
+        <li key={row.what} className={i === 2 ? "is-due" : ""}>
+          <time>{row.at}</time>
+          <span>{row.what}</span>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+/** Leadership: exposure in money and minutes. */
+function ExposureView({ useCase }: { useCase: UseCase }) {
+  const { atRisk, minutes, failed } = useCase.exposure;
+  return (
+    <dl className="rx-team-exposure">
+      <div>
+        <dt>At risk</dt>
+        <dd className="is-lead">{gbp(atRisk)}</dd>
+      </div>
+      <div>
+        <dt>Minutes to cause</dt>
+        <dd>{minutes}</dd>
+      </div>
+      <div>
+        <dt>Failed payments</dt>
+        <dd>{failed.toLocaleString("en-GB")}</dd>
+      </div>
+      <div>
+        <dt>Per minute</dt>
+        <dd>{gbp(Math.round(atRisk / minutes))}</dd>
+      </div>
+    </dl>
+  );
+}
+
+/** The team's view: the incident chain with this team's steps lit, plus its data. */
+function TeamView({ team, initialCase }: { team: Team; initialCase: UseCase }) {
+  const [active, setActive] = useState(initialCase);
+  const [ref, inView] = useReveal<HTMLElement>();
+  const id = useId();
+  return (
+    <section
+      ref={ref}
+      className={`rx-ink rx-team-view ${inView ? "is-in" : ""}`}
+      aria-labelledby={`${id}-title`}
+      data-readout
+      data-readout-clock={team.clock}
+      data-readout-status={active.label}
+    >
+      <div className="container">
+        <Headline id={`${id}-title`} text={team.viewTitle} in={inView} />
+        <div className="rx-team-tabs" role="tablist" aria-label="Incident type">
+          {useCases.map(useCase => (
+            <button
+              key={useCase.key}
+              type="button"
+              role="tab"
+              id={`${id}-${useCase.key}`}
+              aria-selected={active.key === useCase.key}
+              aria-controls={`${id}-panel`}
+              onClick={() => {
+                setActive(useCase);
+                track("solution_tab", { team: team.slug, case: useCase.key });
+              }}
             >
-              {solution.cta.label} <ArrowRight size={16} aria-hidden="true" />
-            </Link>
-          </div>
+              {useCase.label}
+            </button>
+          ))}
         </div>
-      </section>
-
-      <section className="rx-sol-question rx-ivory">
-        <Stamp at="T+00:04" />
-        <div className="container">
-          <span className="rx-eyebrow">The question this team asks</span>
-          <h2 className="hx-h2">{solution.question}</h2>
-          <p>{solution.questionNote}</p>
-        </div>
-      </section>
-
-      <section className="rx-sol-flow rx-ivory" aria-label="How it runs">
-        <div className="container">
-          <span className="rx-eyebrow">How it runs in Relyxus</span>
-          <Flow steps={solution.flow} />
-        </div>
-      </section>
-
-      <section className="rx-sol-proof rx-ink">
-        <Stamp at="T+00:19" />
-        <div className="container">
-          <h2 className="hx-h2">{solution.proofTitle}</h2>
-          <p className="rx-sol-note">{solution.proofNote}</p>
-          <SolutionProofBlock kind={solution.proof} />
-        </div>
-      </section>
-
-      <section className="rx-sol-checklist rx-ivory">
-        <Stamp at="T+00:31" />
-        <div className="container">
-          <h2 className="hx-h2">Three things to test in your demo</h2>
-          <ol>
-            {solution.checklist.map(item => (
-              <li key={item}>
-                <Check size={18} aria-hidden="true" />
-                <span>{item}</span>
+        <div
+          className="rx-team-panel"
+          role="tabpanel"
+          id={`${id}-panel`}
+          aria-labelledby={`${id}-${active.key}`}
+          key={active.key}
+        >
+          <ol className="rx-team-chain">
+            {chainSteps.map((step, i) => (
+              <li key={step} className={team.lit.includes(i) ? "is-lit" : ""}>
+                <span className="rx-chain-node" aria-hidden="true">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <strong>{step}</strong>
+                <span>{active.steps[i]}</span>
               </li>
             ))}
           </ol>
+          <div className="rx-glass rx-team-data">
+            <span className="rx-label">Example · {active.label}</span>
+            {team.view === "evidence" && <EvidenceView useCase={active} />}
+            {team.view === "timeline" && <TimelineView useCase={active} />}
+            {team.view === "exposure" && <ExposureView useCase={active} />}
+          </div>
         </div>
-      </section>
+      </div>
+    </section>
+  );
+}
 
-      <section className="rx-sol-close rx-ink">
-        <Stamp at="Closed" />
-        <div className="container rx-sol-close-grid">
-          <h2 className="hx-h2">{solution.closing}</h2>
-          <Link
-            href={solution.cta.href}
-            className="button button-primary"
-            onClick={() => ctaClick("solution-close")}
-          >
-            {solution.cta.label} <ArrowRight size={16} aria-hidden="true" />
-          </Link>
-        </div>
-      </section>
-    </>
+function Outcomes({ team }: { team: Team }) {
+  const [ref, inView] = useReveal<HTMLElement>();
+  return (
+    <section
+      ref={ref}
+      className={`rx-paper rx-team-outcomes ${inView ? "is-in" : ""}`}
+      aria-label="Three outcomes"
+      data-readout
+      data-readout-clock={team.clock}
+      data-readout-status="Outcomes"
+    >
+      <div className="container">
+        <ul>
+          {team.outcomes.map((o, i) => (
+            <li
+              key={o.line}
+              className="rx-reveal"
+              style={{ "--i": i } as React.CSSProperties}
+            >
+              <strong>{o.value}</strong>
+              <span>{o.line}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
   );
 }
 
 export function SolutionPage({ slug }: { slug: string }) {
-  const solution = solutionBySlug(slug);
-  if (!solution) return <NotFound />;
-  return <SolutionTemplate key={solution.slug} solution={solution} />;
+  const team = teamBySlug(slug);
+  if (!team) return <NotFound />;
+  const meta = pageMeta[`/solutions/${team.slug}`];
+  const initial = caseByKey(
+    new URLSearchParams(window.location.search).get("case")
+  );
+  return (
+    <div key={team.slug}>
+      <PageMeta
+        title={meta?.title ?? team.label}
+        description={meta?.description ?? team.lede}
+      />
+      <MiniStage
+        eyebrow={team.label}
+        title={team.title}
+        lede={team.lede}
+        clock={team.clock}
+        status={team.status}
+        tint={team.tint}
+      >
+        <Link
+          href={team.cta.href}
+          className="button button-primary"
+          onClick={() =>
+            track("cta_click", { place: "solution", cta: team.slug })
+          }
+        >
+          {team.cta.label} <ArrowRight aria-hidden="true" />
+        </Link>
+      </MiniStage>
+      <TeamView team={team} initialCase={initial} />
+      <Outcomes team={team} />
+      <Closing place={`solution-${team.slug}`} />
+    </div>
+  );
 }
 
-/** Old tab anchors now have their own pages. Fragments never reach the
- * server, so this has to be a client side replace rather than a 308. */
-const legacyAnchors: Record<string, string> = {
-  "#engineering": "/solutions/engineering",
-  "#resilience": "/solutions/resilience",
+/**
+ * Retired Solutions routes. The incident pages are tabs on the team pages
+ * now, and the old #engineering / #resilience anchors never reach the
+ * server, so this has to be a client side replace.
+ */
+const retired: Record<string, string> = {
+  "payment-failures": "/solutions/engineering?case=payment-failures",
+  "third-party-outages": "/solutions/resilience?case=third-party-outages",
+  "change-incidents": "/solutions/engineering?case=change-incidents",
 };
 
-/** Industry overview: the six pages, by team and by incident. */
-export function FinancialServicesPage() {
+export function RetiredSolution({ slug }: { slug?: string }) {
   const [, setLocation] = useLocation();
   useEffect(() => {
-    const target = legacyAnchors[window.location.hash];
-    if (target) setLocation(target, { replace: true });
-  }, [setLocation]);
+    const hash = window.location.hash;
+    const target =
+      (slug && retired[slug]) ||
+      (hash === "#resilience"
+        ? "/solutions/resilience"
+        : "/solutions/engineering");
+    setLocation(target, { replace: true });
+  }, [slug, setLocation]);
+  return null;
+}
 
-  const meta = pageMeta["/solutions/financial-services"];
-  const columns = [
-    { label: "By team", items: solutions.filter(s => s.column === "team") },
-    {
-      label: "By incident",
-      items: solutions.filter(s => s.column === "incident"),
-    },
-  ];
-  return (
-    <>
-      <PageMeta title={meta.title} description={meta.description} />
-      <section className="rx-sol-hero rx-ink">
-        <Stamp at="T+00:00" />
-        <div className="container">
-          <span className="rx-eyebrow">
-            Built for banks, payments and fintech
-          </span>
-          <h1>{meta.h1}</h1>
-          <p className="rx-sol-lede">{meta.body}</p>
-          <div className="hx-actions">
-            <PrimaryLink href="/demo?type=Demo">
-              Book a 30 minute demo
-            </PrimaryLink>
-          </div>
-        </div>
-      </section>
-      <section className="rx-sol-index rx-ivory" aria-label="Solutions">
-        <div className="container rx-sol-index-grid">
-          {columns.map(column => (
-            <div key={column.label}>
-              <span className="rx-eyebrow">{column.label}</span>
-              <ul>
-                {column.items.map(item => (
-                  <li key={item.slug}>
-                    <Link href={`/solutions/${item.slug}`}>
-                      <strong>{item.label}</strong>
-                      <span>{item.line}</span>
-                      <ArrowUpRight size={16} aria-hidden="true" />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </section>
-    </>
-  );
+/** /solutions/:slug — a team page, or a redirect from a retired page. */
+export function SolutionRoute({ slug }: { slug: string }) {
+  if (slug in retired || slug === "financial-services")
+    return <RetiredSolution slug={slug} />;
+  return <SolutionPage slug={slug} />;
 }

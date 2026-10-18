@@ -2,67 +2,43 @@
   "/": {
     "title": "Relyxus: find the cause of payments incidents, with an audit ready record",
     "description": "Relyxus pulls logs, changes and alerts from the tools you already run, points to the likely cause, and writes the audit record as you work. Nothing changes in your systems until your approvers say yes.",
-    "h1": "Know why payments failed before the regulator asks.",
+    "h1": "Know why payments failed *before the regulator asks.*",
     "body": "Relyxus pulls logs, changes and alerts from your existing tools, points to the likely cause, and writes the audit record while you work. Nothing changes until your approvers say yes."
   },
   "/product": {
     "title": "Product",
     "description": "One investigation per incident, an approval step before any change, and a record ready for audit.",
-    "h1": "From first alert to a record you can hand to audit",
+    "h1": "From first alert *to a record you can hand to audit.*",
     "body": "One investigation per incident. A person approves every change. The write up is half done before the incident closes."
   },
   "/security": {
     "title": "Security",
     "description": "Read only by default, your data stays in your environment, and a person approves every action. Request the security pack for detail.",
-    "h1": "Made for your security review",
+    "h1": "Made for *your security review.*",
     "body": "Three commitments your reviewers can test. The full detail is in the security pack."
-  },
-  "/solutions/financial-services": {
-    "title": "Financial services",
-    "description": "Help engineering and resilience teams at regulated financial firms find the cause of a payments incident and keep every step on the record.",
-    "h1": "Built for banks, payments and fintech",
-    "body": "Six ways in: by the team that answers for the incident, or by the kind of incident it is."
   },
   "/solutions/engineering": {
     "title": "Engineering and SRE",
     "description": "For engineering and SRE teams: the alert, recent changes and the affected service in one investigation, ranked by evidence.",
-    "h1": "From alert to cause, without the tab hunt.",
-    "body": "The alert, the last two hours of changes and the affected service land in one investigation, ranked by evidence."
+    "h1": "From alert to cause, *without the tab hunt.*",
+    "body": "The alert, the last two hours of changes and the affected service, in one investigation ranked by evidence."
   },
   "/solutions/resilience": {
     "title": "Risk and resilience",
     "description": "For risk and resilience teams: timeline, owners and decisions logged from the first alert, so each regulatory deadline starts with a draft.",
-    "h1": "The report starts writing itself while the incident runs.",
-    "body": "Timeline, owners and decisions are logged from the first alert, so each regulatory deadline starts with a draft."
+    "h1": "The report starts *while the incident runs.*",
+    "body": "Timeline, owners and decisions are logged from the first alert, so each deadline starts with a draft."
   },
   "/solutions/leadership": {
     "title": "Technology leadership",
     "description": "For technology leaders: money at risk while the incident runs, every decision with a name and a time, and a summary the board can read.",
-    "h1": "Know what an outage costs, and who decided what.",
-    "body": "Money at risk, live. Every decision with a name and a time. A summary the board can read the next morning."
-  },
-  "/solutions/payment-failures": {
-    "title": "Card authorisation failures",
-    "description": "Relyxus follows the authorisation path through router and ledger to the point a payment broke.",
-    "h1": "Every failed payment is a customer you might not get back.",
-    "body": "Relyxus follows the authorisation path through router and ledger to the point it broke."
-  },
-  "/solutions/third-party-outages": {
-    "title": "Third party outages",
-    "description": "Relyxus separates what failed at the supplier from what failed in your own systems, with sources for both.",
-    "h1": "Your vendor went down. Your regulator still asks you.",
-    "body": "Relyxus separates what failed at the supplier from what failed in your own systems, with sources for both."
-  },
-  "/solutions/change-incidents": {
-    "title": "Bad changes and deployments",
-    "description": "Every deploy and config change sits on the incident timeline, so the cause is a click, not a meeting.",
-    "h1": "Most incidents start with a change. Find which one.",
-    "body": "Every deploy and config change sits on the incident timeline, so the cause is a click, not a meeting."
+    "h1": "Know what it cost, *and who decided.*",
+    "body": "Money at risk while it runs, every decision with a name and a time, and a summary the board can read."
   },
   "/resources": {
     "title": "Resources",
     "description": "Practical guides for regulated incident teams: DORA reporting, post incident reports and controlled incident response.",
-    "h1": "Guides for the incident you’ll have to explain",
+    "h1": "Guides for the incident *you’ll have to explain.*",
     "body": "Start with the free guides. Two deeper guides are shared during an evaluation."
   },
   "/resources/what-makes-incident-response-controlled": {
@@ -74,31 +50,31 @@
   "/demo": {
     "title": "Request a demo",
     "description": "Request a Relyxus demo, Replay pilot, security pack, readiness checklist or pricing conversation. Your enquiry is emailed to the Apporine team.",
-    "h1": "Tell us what you want to explore",
+    "h1": "Tell us *what you want to explore.*",
     "body": "Share a little context about your team and we will follow up."
   },
   "/company": {
     "title": "Company",
     "description": "Relyxus is built by Apporine for incident, SRE and resilience teams at regulated firms.",
-    "h1": "Incident response you can explain to anyone",
+    "h1": "Incident response *you can explain to anyone.*",
     "body": "We make incident response easier to explain, for the teams who have to explain it."
   },
   "/contact": {
     "title": "Contact",
     "description": "Talk to the Relyxus team about a demo, a Replay pilot, the security pack or pricing.",
-    "h1": "Talk to the team behind Relyxus",
+    "h1": "Talk to the team *behind Relyxus.*",
     "body": "Choose what you want to talk about. A person reads every note and replies within one business day."
   },
   "/privacy": {
     "title": "Privacy policy",
     "description": "What the Relyxus website collects from enquiries, how we use it, and what we don't track.",
-    "h1": "We only ask for what we need to reply",
+    "h1": "We only ask for *what we need to reply.*",
     "body": "This privacy policy covers the Relyxus marketing website and enquiry forms."
   },
   "/terms": {
     "title": "Terms",
     "description": "Terms for evaluating Relyxus and using this website.",
-    "h1": "Terms for this website",
+    "h1": "Terms *for this website.*",
     "body": "This site helps you evaluate Relyxus. Formal contract terms are agreed separately for paid engagements."
   },
   "/resources/dora-major-incident-reports": {

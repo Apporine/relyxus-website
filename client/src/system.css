@@ -527,6 +527,9 @@ textarea,
   gap: 4px;
   color: var(--paper) !important;
 }
+.public-site main .hx-band:is(.rx-ivory, .rx-paper) .hx-facts dt {
+  color: var(--ink) !important;
+}
 .public-site main .hx-band .hx-source-line {
   font-family: var(--font-mono);
   font-size: 12px;

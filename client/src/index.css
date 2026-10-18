@@ -502,7 +502,7 @@
   border-bottom: 1px solid #bfbcc6;
   text-decoration: none;
   transition:
-    padding 180ms var(--rx-web-var(--ease)),
+    padding 180ms var(--ease),
     background-color 160ms var(--ease);
 }
 .resource-card-large:hover {

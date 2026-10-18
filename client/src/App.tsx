@@ -8,7 +8,7 @@ import { CompanyPage, ProductPage, SecurityPage } from "@/pages/CorePages";
 import { ContactPage, LegalPage } from "@/pages/MarketingPages";
 import { ResourceArticle, ResourcesPage } from "@/pages/Resources";
 import { DemoPage } from "@/pages/Demo";
-import { FinancialServicesPage, SolutionPage } from "@/pages/Solutions";
+import { SolutionRoute } from "@/pages/Solutions";
 import NotFound from "@/pages/NotFound";
 import { SpecimenPage } from "@/pages/Specimen";
 // Pages are imported directly, not lazily: the site is small, and a lazy
@@ -48,15 +48,10 @@ function Router() {
           <SecurityPage />
         </WithLayout>
       </Route>
-      <Route path="/solutions/financial-services">
-        <WithLayout>
-          <FinancialServicesPage />
-        </WithLayout>
-      </Route>
       <Route path="/solutions/:slug">
         {params => (
           <WithLayout>
-            <SolutionPage slug={params.slug} />
+            <SolutionRoute slug={params.slug} />
           </WithLayout>
         )}
       </Route>

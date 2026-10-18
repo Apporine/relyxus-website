@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Check, Mail, Pause, Play, Users } from "lucide-react";
 import { PrimaryLink } from "@/components/marketing/PublicSite";
 import { contactTopics, replyPromise } from "@/content/site";
+import { Accent } from "@/components/marketing/Headline";
 
 const TEAM = { x: 470, y: 180 };
 
@@ -48,7 +49,6 @@ export function ContactRouter() {
                 role="button"
                 tabIndex={0}
                 aria-pressed={on}
-                aria-label={item.label}
                 onClick={() => setActive(index)}
                 onKeyDown={event => {
                   if (event.key === "Enter" || event.key === " ") {
@@ -112,7 +112,9 @@ export function ContactRouter() {
 
       <div className="cr-panel" key={topic.key} aria-live="polite">
         <div>
-          <h2 className="hx-h2">{topic.title}</h2>
+          <h2 className="hx-h2">
+            <Accent text={topic.title} />
+          </h2>
           <p>{topic.text}</p>
           <ul className="hx-trust-lines">
             {topic.points.map(point => (

@@ -19,7 +19,7 @@ import {
 } from "@/components/marketing/PublicSite";
 import { ENQUIRY_TYPES, type EnquiryType } from "@shared/contact";
 import { pageMeta } from "@/content/meta";
-import { EnquiryArt } from "@/components/marketing/EnquiryArt";
+import { Accent } from "@/components/marketing/Headline";
 import { demoVariants, replyPromise } from "@/content/site";
 import { track } from "@/lib/analytics";
 import { PricingBlock } from "@/components/marketing/PublicSite";
@@ -217,14 +217,14 @@ export function DemoPage() {
       <PageIntro
         eyebrow={variant.eyebrow}
         title={variant.title}
-        art={<EnquiryArt kind={values.enquiry} />}
         summary={variant.summary}
-        tone="ivory"
       />
       <section className="demo-section section-pad">
         <div className="container demo-layout">
           <aside className="demo-aside">
-            <h2>{variant.asideTitle}</h2>
+            <h2>
+              <Accent text={variant.asideTitle} />
+            </h2>
             <p>{variant.asideText}</p>
             <div className="demo-agenda">
               {variant.agenda.map((item, index) => (
@@ -308,7 +308,9 @@ export function DemoPage() {
             {submitted && bookingUrl && (
               <div className="rx-booking" aria-labelledby="rx-booking-title">
                 <span className="rx-eyebrow">Step 2 of 2</span>
-                <h2 id="rx-booking-title">Pick a time now</h2>
+                <h2 id="rx-booking-title">
+                  <Accent text="Pick a time *now.*" />
+                </h2>
                 <p>
                   Skip the email back and forth. Choose a 30 minute slot that
                   suits your team.

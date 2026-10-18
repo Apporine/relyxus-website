@@ -130,7 +130,12 @@ export function Compare() {
     >
       <div className="container">
         <Headline id="rx-compare-title" text={compare.title} in={inView} />
-        <div className="rx-compare-scroll">
+        <div
+          className="rx-compare-scroll"
+          role="region"
+          aria-label="Comparison table"
+          tabIndex={0}
+        >
           <table className="rx-compare-table">
             <thead>
               <tr>
@@ -230,8 +235,21 @@ export function Prove() {
   );
 }
 
-/** 10 · Closing call to action, with the small core idling beside the button. */
-export function Closing({ place = "closing" }: { place?: string }) {
+/**
+ * The call to action panel: ink inside paper, with the small core idling
+ * beside the button. Every page closes on it.
+ */
+export function CtaPanel({
+  title,
+  line,
+  cta,
+  place,
+}: {
+  title: string;
+  line: string;
+  cta: { label: string; href: string };
+  place: string;
+}) {
   const [ref, inView] = useReveal<HTMLElement>();
   return (
     <section
@@ -247,28 +265,36 @@ export function Closing({ place = "closing" }: { place?: string }) {
         <div className="rx-closing-panel">
           <SignalCore className="rx-closing-core" />
           <div className="rx-closing-copy">
-            <Headline
-              id={`rx-${place}-title`}
-              text={closing.title}
-              in={inView}
-            />
+            <Headline id={`rx-${place}-title`} text={title} in={inView} />
             <p
               className="rx-reveal"
               style={{ "--i": 2 } as React.CSSProperties}
             >
-              {closing.line}
+              {line}
             </p>
             <Link
-              href={closing.cta.href}
+              href={cta.href}
               className="button button-primary rx-reveal"
               style={{ "--i": 3 } as React.CSSProperties}
-              onClick={() => track("cta_click", { place, cta: "demo" })}
+              onClick={() => track("cta_click", { place, cta: cta.label })}
             >
-              {closing.cta.label} <ArrowRight aria-hidden="true" />
+              {cta.label} <ArrowRight aria-hidden="true" />
             </Link>
           </div>
         </div>
       </div>
     </section>
+  );
+}
+
+/** 10 · The shared closing: "Show us the incident that hurt most." */
+export function Closing({ place = "closing" }: { place?: string }) {
+  return (
+    <CtaPanel
+      title={closing.title}
+      line={closing.line}
+      cta={closing.cta}
+      place={place}
+    />
   );
 }

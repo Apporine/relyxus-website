@@ -1,74 +1,19 @@
 import { Analytics } from "@vercel/analytics/react";
 import { Redirect, Route, Switch } from "wouter";
-import { lazy, Suspense } from "react";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { PublicLayout } from "@/components/marketing/PublicSite";
-const Home = lazy(() => import("@/pages/Home"));
-const ProductPage = lazy(() =>
-  import("@/pages/CorePages").then(module => ({
-    default: module.ProductPage,
-  }))
-);
-const SecurityPage = lazy(() =>
-  import("@/pages/CorePages").then(module => ({
-    default: module.SecurityPage,
-  }))
-);
-const CompanyPage = lazy(() =>
-  import("@/pages/CorePages").then(module => ({
-    default: module.CompanyPage,
-  }))
-);
-const FinancialServicesPage = lazy(() =>
-  import("@/pages/Solutions").then(module => ({
-    default: module.FinancialServicesPage,
-  }))
-);
-const SolutionPage = lazy(() =>
-  import("@/pages/Solutions").then(module => ({
-    default: module.SolutionPage,
-  }))
-);
-const LegalPage = lazy(() =>
-  import("@/pages/MarketingPages").then(module => ({
-    default: module.LegalPage,
-  }))
-);
-const ContactPage = lazy(() =>
-  import("@/pages/MarketingPages").then(module => ({
-    default: module.ContactPage,
-  }))
-);
-const ResourceArticle = lazy(() =>
-  import("@/pages/Resources").then(module => ({
-    default: module.ResourceArticle,
-  }))
-);
-const ResourcesPage = lazy(() =>
-  import("@/pages/Resources").then(module => ({
-    default: module.ResourcesPage,
-  }))
-);
-const DemoPage = lazy(() =>
-  import("@/pages/Demo").then(module => ({ default: module.DemoPage }))
-);
-const NotFound = lazy(() => import("@/pages/NotFound"));
-
+import Home from "@/pages/Home";
+import { CompanyPage, ProductPage, SecurityPage } from "@/pages/CorePages";
+import { ContactPage, LegalPage } from "@/pages/MarketingPages";
+import { ResourceArticle, ResourcesPage } from "@/pages/Resources";
+import { DemoPage } from "@/pages/Demo";
+import { FinancialServicesPage, SolutionPage } from "@/pages/Solutions";
+import NotFound from "@/pages/NotFound";
+// Pages are imported directly, not lazily: the site is small, and a lazy
+// route showed a loading message before any copy on first load.
 function WithLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <PublicLayout>
-      <Suspense
-        fallback={
-          <div className="container route-loading" role="status">
-            Loading page content…
-          </div>
-        }
-      >
-        {children}
-      </Suspense>
-    </PublicLayout>
-  );
+  return <PublicLayout>{children}</PublicLayout>;
 }
 
 /** Pages folded into /product, /security or the demo form. */

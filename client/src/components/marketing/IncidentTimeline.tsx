@@ -21,7 +21,7 @@ const steps = [
   },
   {
     label: "Record",
-    title: "The write-up builds itself",
+    title: "The write up builds itself",
     text: "Every source, decision and check is logged in order, ready for a report that people review and submit.",
     glyph: "lines",
   },

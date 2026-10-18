@@ -10,12 +10,12 @@
   --hx-border-strong: rgba(244, 239, 230, 0.18);
   --hx-text: var(--rx-ivory);
   --hx-muted: #a8a4b1;
-  --hx-mint: var(--rx-volt);
+  --hx-mint: var(--rx-accent);
   --hx-radius: 14px;
-  --hx-coral: var(--rx-volt);
-  --hx-cyan: var(--rx-volt);
+  --hx-coral: var(--rx-accent);
+  --hx-cyan: var(--rx-accent);
   --hx-violet: var(--rx-mist);
-  --hx-amber: var(--rx-volt);
+  --hx-amber: var(--rx-accent);
   --rx-web-bg: var(--hx-bg);
 }
 
@@ -33,7 +33,7 @@ body,
   line-height: 1.6;
 }
 
-/* Type: Bricolage, heavy and tight, at a sane scale. */
+/* Type: heavy and tight, at a sane scale (ledger.css sets the families). */
 .public-site main :is(h1, h2, h3) {
   font-weight: 800;
   letter-spacing: -0.02em;
@@ -128,7 +128,7 @@ body,
   background:
     radial-gradient(
       ellipse 60% 50% at 78% 20%,
-      rgba(198, 244, 50, 0.09),
+      rgba(180, 134, 247, 0.09),
       transparent 70%
     ),
     var(--hx-bg);
@@ -182,7 +182,7 @@ body,
 .hx-chip-text {
   fill: var(--hx-text);
   font:
-    600 12px "IBM Plex Mono",
+    600 12px "Martian Mono",
     system-ui,
     sans-serif;
 }
@@ -228,7 +228,7 @@ body,
   stroke: none !important;
 }
 .hx-core-halo {
-  fill: rgba(198, 244, 50, 0.1);
+  fill: rgba(180, 134, 247, 0.1);
   animation: hx-pulse 3s ease-in-out infinite;
   transform-origin: 290px 160px;
 }
@@ -240,7 +240,7 @@ body,
 .hx-core-text {
   fill: var(--hx-text);
   font:
-    700 11px "IBM Plex Mono",
+    700 11px "Martian Mono",
     system-ui,
     sans-serif;
 }
@@ -251,14 +251,14 @@ body,
 .hx-card-title {
   fill: var(--hx-text);
   font:
-    700 12px "IBM Plex Mono",
+    700 12px "Martian Mono",
     system-ui,
     sans-serif;
 }
 .hx-card-sub {
   fill: var(--hx-muted);
   font:
-    500 11px "IBM Plex Mono",
+    500 11px "Martian Mono",
     system-ui,
     sans-serif;
 }
@@ -439,7 +439,7 @@ body,
   border: 1px solid var(--hx-border-strong);
   border-radius: 18px;
   background: var(--rx-ink-900);
-  box-shadow: 0 40px 120px rgba(198, 244, 50, 0.08);
+  box-shadow: 0 40px 120px rgba(180, 134, 247, 0.08);
 }
 .hx-shot-bar {
   display: flex;
@@ -495,7 +495,7 @@ body,
   display: inline-block;
   padding: 3px 10px;
   border-radius: 999px;
-  background: rgba(198, 244, 50, 0.12);
+  background: rgba(180, 134, 247, 0.12);
   color: var(--hx-mint);
   font-size: 12px;
   font-weight: 700;
@@ -546,9 +546,9 @@ body,
   justify-content: space-between;
   gap: 24px;
   padding: clamp(28px, 4vw, 44px);
-  border: 1px solid rgba(198, 244, 50, 0.35);
+  border: 1px solid rgba(180, 134, 247, 0.35);
   border-radius: 20px;
-  background: rgba(198, 244, 50, 0.05);
+  background: rgba(180, 134, 247, 0.05);
 }
 .hx-magnet > div {
   display: grid;
@@ -801,7 +801,7 @@ body,
   font-size: 13px;
 }
 .hx-stage-tab[aria-pressed="true"] {
-  background: rgba(198, 244, 50, 0.06);
+  background: rgba(180, 134, 247, 0.06);
 }
 .hx-stage-index {
   color: var(--hx-mint);
@@ -832,7 +832,7 @@ body,
   padding: clamp(24px, 3vw, 40px);
   background: radial-gradient(
     ellipse 70% 70% at 80% 40%,
-    rgba(198, 244, 50, 0.07),
+    rgba(180, 134, 247, 0.07),
     transparent 70%
   );
 }
@@ -911,7 +911,7 @@ body,
 .hx-scene-approver text {
   fill: var(--hx-text);
   font:
-    700 11px "IBM Plex Mono",
+    700 11px "Martian Mono",
     system-ui,
     sans-serif;
 }
@@ -919,7 +919,7 @@ body,
   animation: hx-approve 0.5s ease forwards;
 }
 .hx-done {
-  fill: rgba(198, 244, 50, 0.12);
+  fill: rgba(180, 134, 247, 0.12);
   stroke: var(--hx-mint);
   stroke-width: 2;
 }
@@ -1055,7 +1055,7 @@ body,
 .hx-stage-node text {
   fill: var(--hx-muted);
   font:
-    600 12px "IBM Plex Mono",
+    600 12px "Martian Mono",
     system-ui,
     sans-serif;
   transition: fill 0.3s ease;
@@ -1110,7 +1110,7 @@ body,
 .hx-pipe-node text {
   fill: var(--hx-muted);
   font:
-    600 13px "IBM Plex Mono",
+    600 13px "Martian Mono",
     system-ui,
     sans-serif;
   transition: fill 0.4s ease;
@@ -1134,7 +1134,7 @@ body,
   pointer-events: none;
 }
 .hx-token-halo {
-  fill: rgba(198, 244, 50, 0.22);
+  fill: rgba(180, 134, 247, 0.22);
   transform-box: fill-box;
   transform-origin: center;
   animation: hx-pulse 1.6s ease-in-out infinite;
@@ -1178,7 +1178,7 @@ body,
   border-radius: 18px;
   background: var(--rx-ink-900);
   box-shadow:
-    0 50px 120px rgba(198, 244, 50, 0.1),
+    0 50px 120px rgba(180, 134, 247, 0.1),
     0 0 0 1px rgba(244, 239, 230, 0.02);
   transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
   transition: transform 0.25s ease-out;
@@ -1217,8 +1217,8 @@ body,
   position: absolute;
   border: 2px solid var(--hx-mint);
   border-radius: 10px;
-  background: rgba(198, 244, 50, 0.07);
-  box-shadow: 0 0 22px rgba(198, 244, 50, 0.4);
+  background: rgba(180, 134, 247, 0.07);
+  box-shadow: 0 0 22px rgba(180, 134, 247, 0.4);
   opacity: 0;
   transform: scale(1.06);
   transition:
@@ -1411,7 +1411,7 @@ html[data-motion="off"] .hx-scene-draw {
 .art-label {
   fill: var(--hx-muted);
   font:
-    600 12px "IBM Plex Mono",
+    600 12px "Martian Mono",
     system-ui,
     sans-serif;
 }
@@ -1419,7 +1419,7 @@ html[data-motion="off"] .hx-scene-draw {
   display: inline-block;
   padding: 3px 10px;
   border-radius: 999px;
-  background: rgba(198, 244, 50, 0.18);
+  background: rgba(180, 134, 247, 0.18);
   color: var(--hx-coral);
   font-size: 12px;
   font-weight: 700;
@@ -1528,7 +1528,7 @@ html[data-motion="off"] .hx-scene-draw {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(198, 244, 50, 0.25),
+    rgba(180, 134, 247, 0.25),
     transparent
   );
   animation: art-scan 3.6s linear infinite;
@@ -1567,7 +1567,7 @@ html[data-motion="off"] .hx-scene-draw {
   fill: var(--hx-mint);
 }
 .art-core-glow {
-  fill: rgba(198, 244, 50, 0.12);
+  fill: rgba(180, 134, 247, 0.12);
   transform-box: fill-box;
   transform-origin: center;
   animation: hx-pulse 3s ease-in-out infinite;
@@ -1606,13 +1606,13 @@ html[data-motion="off"] .hx-scene-draw {
   animation: art-fault-core 8s ease-in-out infinite;
 }
 .art-alert-tag rect {
-  fill: rgba(198, 244, 50, 0.14);
+  fill: rgba(180, 134, 247, 0.14);
   stroke: var(--hx-mint);
 }
 .art-alert-tag text {
   fill: var(--hx-mint);
   font:
-    700 13px "IBM Plex Mono",
+    700 13px "Martian Mono",
     system-ui,
     sans-serif;
 }
@@ -1641,7 +1641,7 @@ html[data-motion="off"] .hx-scene-draw {
   fill: var(--hx-mint);
 }
 .art-star-halo {
-  fill: rgba(198, 244, 50, 0.14);
+  fill: rgba(180, 134, 247, 0.14);
   transform-box: fill-box;
   transform-origin: center;
   animation: hx-pulse 3.6s ease-in-out infinite;
@@ -1659,7 +1659,7 @@ html[data-motion="off"] .hx-scene-draw {
   padding: 18px;
 }
 .art-doc .art-pill {
-  background: rgba(198, 244, 50, 0.14);
+  background: rgba(180, 134, 247, 0.14);
   color: var(--hx-mint);
 }
 .art-doc-0 {
@@ -1960,7 +1960,7 @@ html[data-motion="off"] .hx-scene-draw {
   animation: tl-card 4s ease-in-out infinite;
 }
 .tl-bar {
-  fill: rgba(198, 244, 50, 0.55);
+  fill: rgba(180, 134, 247, 0.55);
   transform-box: fill-box;
   transform-origin: left;
   animation: tl-bar 3.6s ease-in-out infinite;
@@ -2043,7 +2043,7 @@ html[data-motion="off"] .hx-scene-draw {
   stroke: var(--hx-mint);
 }
 .public-site .wordmark:hover .wm-x2 {
-  stroke: var(--rx-volt-hover);
+  stroke: var(--rx-accent);
 }
 
 /* ---------- Orbit map ---------- */
@@ -2066,7 +2066,7 @@ html[data-motion="off"] .hx-scene-draw {
   stroke-dasharray: 2 7;
 }
 .orb-ring-2 {
-  stroke: rgba(198, 244, 50, 0.14);
+  stroke: rgba(180, 134, 247, 0.14);
 }
 .orb-spin {
   transform-origin: 320px 260px;
@@ -2090,28 +2090,28 @@ html[data-motion="off"] .hx-scene-draw {
   --c: var(--hx-mint);
 }
 .orb-coral {
-  --c: var(--rx-volt);
+  --c: var(--rx-accent);
 }
 .orb-cyan {
-  --c: var(--rx-volt);
+  --c: var(--rx-accent);
 }
 .orb-mint {
-  --c: var(--rx-volt);
+  --c: var(--rx-accent);
 }
 .orb-violet {
   --c: var(--rx-mist);
 }
 .orb-amber {
-  --c: var(--rx-volt);
+  --c: var(--rx-accent);
 }
 .orb-blue {
-  --c: var(--rx-volt);
+  --c: var(--rx-accent);
 }
 .orb-lime {
-  --c: var(--rx-volt);
+  --c: var(--rx-accent);
 }
 .orb-pink {
-  --c: var(--rx-volt);
+  --c: var(--rx-accent);
 }
 .orb-beam {
   fill: none;
@@ -2144,13 +2144,13 @@ html[data-motion="off"] .hx-scene-draw {
 .orb-label {
   fill: var(--hx-muted);
   font:
-    800 10px "IBM Plex Mono",
+    800 10px "Martian Mono",
     system-ui,
     sans-serif;
   letter-spacing: 0.08em;
 }
 .orb-halo {
-  fill: rgba(198, 244, 50, 0.1);
+  fill: rgba(180, 134, 247, 0.1);
   transform-box: fill-box;
   transform-origin: center;
   animation: hx-pulse 3.4s ease-in-out infinite;
@@ -2167,10 +2167,10 @@ html[data-motion="off"] .hx-scene-draw {
 }
 .orb-hex {
   fill: var(--rx-ink-900);
-  stroke: var(--rx-volt);
+  stroke: var(--rx-accent);
   stroke-width: 2;
   stroke-linejoin: round;
-  filter: drop-shadow(0 0 10px rgba(198, 244, 50, 0.6));
+  filter: drop-shadow(0 0 10px rgba(180, 134, 247, 0.6));
 }
 .orb-brain {
   color: var(--hx-mint);
@@ -2179,7 +2179,7 @@ html[data-motion="off"] .hx-scene-draw {
 .orb-core-text {
   fill: var(--hx-text);
   font:
-    800 8px "IBM Plex Mono",
+    800 8px "Martian Mono",
     system-ui,
     sans-serif;
   letter-spacing: 0.16em;
@@ -2207,7 +2207,7 @@ html[data-motion="off"] .hx-scene-draw {
 .orb-phase {
   fill: var(--hx-mint);
   font:
-    800 10px "IBM Plex Mono",
+    800 10px "Martian Mono",
     system-ui,
     sans-serif;
   letter-spacing: 0.1em;
@@ -2290,7 +2290,7 @@ html[data-motion="off"] .hx-scene-draw {
 .ea text {
   fill: var(--hx-text);
   font:
-    600 14px "IBM Plex Mono",
+    600 14px "Martian Mono",
     system-ui,
     sans-serif;
 }
@@ -2312,13 +2312,13 @@ html[data-motion="off"] .hx-scene-draw {
   fill: var(--c, var(--hx-mint));
 }
 .ea-coral {
-  --c: var(--rx-volt);
+  --c: var(--rx-accent);
 }
 .ea-mint {
-  --c: var(--rx-volt);
+  --c: var(--rx-accent);
 }
 .ea-amber {
-  --c: var(--rx-volt);
+  --c: var(--rx-accent);
 }
 .ea-reveal {
   opacity: 0;
@@ -2339,7 +2339,7 @@ html[data-motion="off"] .hx-scene-draw {
   stroke-dasharray: 3 7;
 }
 .ea-ring-in {
-  stroke: rgba(198, 244, 50, 0.3);
+  stroke: rgba(180, 134, 247, 0.3);
 }
 .ea-rewind {
   transform-origin: 200px 140px;
@@ -2398,7 +2398,7 @@ html[data-motion="off"] .hx-scene-draw {
   animation-delay: -1.5s;
 }
 .ea-grow {
-  fill: rgba(198, 244, 50, 0.55);
+  fill: rgba(180, 134, 247, 0.55);
   transform-box: fill-box;
   transform-origin: bottom;
   animation: ea-grow 4.2s ease-in-out infinite;
@@ -2515,14 +2515,14 @@ html[data-motion="off"] .hx-scene-draw {
 .cr-topic text {
   fill: var(--hx-muted);
   font:
-    700 15px "IBM Plex Mono",
+    700 15px "Martian Mono",
     system-ui,
     sans-serif;
   transition: fill 0.3s ease;
 }
 .cr-topic.is-on rect {
   stroke: var(--hx-mint);
-  fill: rgba(198, 244, 50, 0.07);
+  fill: rgba(180, 134, 247, 0.07);
 }
 .cr-topic.is-on circle {
   fill: var(--hx-mint);
@@ -2540,7 +2540,7 @@ html[data-motion="off"] .hx-scene-draw {
   stroke-width: 2;
 }
 .cr-topic.is-on .cr-beam {
-  stroke: rgba(198, 244, 50, 0.35);
+  stroke: rgba(180, 134, 247, 0.35);
 }
 .cr-flow {
   stroke: var(--hx-mint);
@@ -2559,7 +2559,7 @@ html[data-motion="off"] .hx-scene-draw {
   animation: cr-out 6s ease-in-out infinite;
 }
 .cr-halo {
-  fill: rgba(198, 244, 50, 0.1);
+  fill: rgba(180, 134, 247, 0.1);
   transform-box: fill-box;
   transform-origin: center;
   animation: hx-pulse 3s ease-in-out infinite;
@@ -2568,19 +2568,19 @@ html[data-motion="off"] .hx-scene-draw {
   fill: var(--rx-ink-900);
   stroke: var(--hx-mint);
   stroke-width: 2;
-  filter: drop-shadow(0 0 12px rgba(198, 244, 50, 0.45));
+  filter: drop-shadow(0 0 12px rgba(180, 134, 247, 0.45));
 }
 .cr-team-text {
   fill: var(--hx-text);
   font:
-    800 17px "IBM Plex Mono",
+    800 17px "Martian Mono",
     system-ui,
     sans-serif;
 }
 .cr-team-sub {
   fill: var(--hx-mint);
   font:
-    800 11px "IBM Plex Mono",
+    800 11px "Martian Mono",
     system-ui,
     sans-serif;
   letter-spacing: 0.18em;
@@ -2598,7 +2598,7 @@ html[data-motion="off"] .hx-scene-draw {
 .cr-reply text {
   fill: var(--hx-muted);
   font:
-    700 13px "IBM Plex Mono",
+    700 13px "Martian Mono",
     system-ui,
     sans-serif;
 }
@@ -2906,7 +2906,7 @@ html[data-motion="off"] .hx-scene-draw {
 .rg-text {
   fill: var(--hx-text);
   font:
-    800 22px "IBM Plex Mono",
+    800 22px "Martian Mono",
     system-ui,
     sans-serif;
 }
@@ -2983,9 +2983,9 @@ html[data-motion="off"] .hx-scene-draw {
 :root {
   --hx-base: var(--rx-ink-950);
   --hx-canvas: var(--rx-ivory);
-  --hx-primary: var(--rx-volt);
-  --hx-accent: var(--rx-volt);
-  --hx-support: var(--rx-volt);
+  --hx-primary: var(--rx-accent);
+  --hx-accent: var(--rx-accent);
+  --hx-support: var(--rx-accent);
   --hx-bg: var(--hx-base);
   --hx-text: var(--hx-canvas);
   --hx-muted: var(--rx-mist);
@@ -3034,7 +3034,7 @@ body {
     var(--hx-support) 82%,
     var(--hx-canvas)
   ) !important;
-  box-shadow: 0 10px 32px rgba(198, 244, 50, 0.45);
+  box-shadow: 0 10px 32px rgba(180, 134, 247, 0.45);
 }
 .public-site .button-secondary,
 .public-site .button-outline {
@@ -3045,7 +3045,7 @@ body {
 .public-site .button-secondary:hover,
 .public-site .button-outline:hover {
   border-color: var(--hx-accent) !important;
-  background: rgba(198, 244, 50, 0.1) !important;
+  background: rgba(180, 134, 247, 0.1) !important;
 }
 .hx-toggle button[aria-pressed="true"],
 .hx-tabs button[aria-pressed="true"] {
@@ -3053,7 +3053,7 @@ body {
   color: var(--hx-base);
 }
 .hx-stage-tab[aria-pressed="true"] {
-  background: rgba(198, 244, 50, 0.18);
+  background: rgba(180, 134, 247, 0.18);
 }
 .hx-hero {
   background: var(--hx-base);
@@ -3117,8 +3117,8 @@ body {
 .public-site .consent-option,
 .public-site .form-policy-note,
 .public-site .limitation-box {
-  border: 1px solid rgba(198, 244, 50, 0.5);
-  background: rgba(198, 244, 50, 0.12) !important;
+  border: 1px solid rgba(180, 134, 247, 0.5);
+  background: rgba(180, 134, 247, 0.12) !important;
   color: var(--hx-text);
 }
 .public-site .demo-privacy-note p,
@@ -3167,7 +3167,7 @@ body {
 }
 .public-site .nav-popover-link:hover,
 .public-site .nav-popover-link:focus-visible {
-  background: rgba(198, 244, 50, 0.12) !important;
+  background: rgba(180, 134, 247, 0.12) !important;
   border-color: var(--hx-support) !important;
   color: var(--hx-text) !important;
 }

@@ -33,6 +33,9 @@
   --rx-radius-card: 14px;
   --rx-radius-button: 999px;
   --rx-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Accent for the older layers: Soft Orchid on dark, Deep Volt on Ivory.
+     Volt itself stays for buttons, the T+ clock and live states. */
+  --rx-accent: var(--rx-orchid-soft);
   /* Where the T+ clock line runs */
   --rx-line-x: 28px;
 
@@ -230,6 +233,7 @@ textarea,
   --hx-cyan: var(--rx-volt-deep);
   --rx-text: var(--rx-ink-950);
   --rx-muted: var(--rx-graphite);
+  --rx-accent: var(--rx-volt-deep);
   background-color: var(--rx-ivory) !important;
   color: var(--rx-graphite);
   color-scheme: light;
@@ -1031,4 +1035,9 @@ html[data-motion="off"] .rx-stream .rx-stream-pulse {
   .rx-hero-tilt {
     transform: none;
   }
+}
+
+/* Team labels on Ivory cards take Deep Volt for contrast (6.6:1). */
+.public-site main section.rx-ivory .hx-path-label {
+  color: var(--rx-volt-deep) !important;
 }

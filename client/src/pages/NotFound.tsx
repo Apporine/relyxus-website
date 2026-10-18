@@ -41,7 +41,7 @@ export default function NotFound() {
               <Link href="/privacy">Privacy policy</Link>
             </li>
             <li>
-              <Link href="/demo">Book a demo, 30 minutes</Link>
+              <Link href="/demo">Book a 30 minute demo</Link>
             </li>
           </ul>
         </div>

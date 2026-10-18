@@ -70,17 +70,17 @@ function EvidenceBoard() {
         aria-labelledby={`${id}-tab-${active}`}
       >
         <section>
-          <h4>Logs</h4>
+          <h3>Logs</h3>
           {cause.logs.map(line => (
             <p key={line}>{line}</p>
           ))}
         </section>
         <section>
-          <h4>Change</h4>
+          <h3>Change</h3>
           <p>{cause.change}</p>
         </section>
         <section>
-          <h4>Ticket</h4>
+          <h3>Ticket</h3>
           <p>{cause.ticket}</p>
         </section>
       </div>
@@ -357,7 +357,7 @@ function SplitTimeline() {
           { title: "Your incident", items: ownLane },
         ].map(lane => (
           <section key={lane.title}>
-            <h4>{lane.title}</h4>
+            <h3>{lane.title}</h3>
             <ol>
               {lane.items.map(item => (
                 <li key={item.at + item.text}>

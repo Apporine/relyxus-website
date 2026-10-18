@@ -44,8 +44,7 @@ function Hero() {
               className="button button-primary"
               onClick={() => track("cta_click", { place: "hero", cta: "demo" })}
             >
-              Book a demo, 30 minutes{" "}
-              <ArrowRight size={16} aria-hidden="true" />
+              Book a 30 minute demo <ArrowRight size={16} aria-hidden="true" />
             </Link>
             <a
               href="#in-action"
@@ -283,7 +282,7 @@ function TrustAndChecklist() {
               Could you file a DORA first notice within 4 hours?
             </h2>
             <p>
-              The incident-readiness checklist for UK and EU resilience teams.
+              The incident readiness checklist for UK and EU resilience teams.
               Find the gaps in evidence, ownership and records before an auditor
               or regulator does.
             </p>
@@ -310,7 +309,7 @@ function ClosingBand() {
           <p className="hx-closing-note">
             Prefer to test it yourself?{" "}
             <Link href="/demo?type=Replay%20pilot">Start a Replay pilot</Link>.
-            We replay a few past incidents with read-only access.
+            We replay a few past incidents with read only access.
           </p>
         </div>
         <div className="hx-actions">
@@ -321,7 +320,7 @@ function ClosingBand() {
               track("cta_click", { place: "closing", cta: "demo" })
             }
           >
-            Book a demo, 30 minutes <ArrowRight size={16} aria-hidden="true" />
+            Book a 30 minute demo <ArrowRight size={16} aria-hidden="true" />
           </Link>
         </div>
       </div>

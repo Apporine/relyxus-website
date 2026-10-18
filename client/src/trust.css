@@ -193,3 +193,7 @@
   color: var(--rx-volt) !important;
   background: transparent !important;
 }
+
+.public-site .footer-top + .footer-legal-row {
+  border-top: 0;
+}

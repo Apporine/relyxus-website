@@ -24,7 +24,7 @@ export function SecurityArt() {
         />
         <path className="art-tick" d="M189 170 l8 8 l16 -17" />
         <text className="art-label" x="200" y="22" textAnchor="middle">
-          Read-only
+          Read only
         </text>
         <text className="art-label" x="200" y="326" textAnchor="middle">
           A person approves

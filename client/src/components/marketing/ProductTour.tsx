@@ -56,7 +56,7 @@ const screens: {
     ],
   },
   {
-    key: "war-room",
+    key: "war room",
     label: "War room",
     src: "/product/overview-investigation.png",
     alt: "A Relyxus incident with its timeline and ranked causes",

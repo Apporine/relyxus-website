@@ -1,6 +1,6 @@
 {
   "/": {
-    "title": "Relyxus — Find the cause of payments incidents, with an audit-ready record",
+    "title": "Relyxus: find the cause of payments incidents, with an audit ready record",
     "description": "Relyxus pulls logs, changes and alerts from the tools you already run, points to the likely cause, and writes the audit record as you work. Nothing changes in your systems until your approvers say yes.",
     "h1": "Know why payments failed before the regulator asks.",
     "body": "Relyxus pulls logs, changes and alerts from your existing tools, points to the likely cause, and writes the audit record while you work. Nothing changes until your approvers say yes."
@@ -9,7 +9,7 @@
     "title": "Product",
     "description": "One investigation per incident, an approval step before any change, and a record ready for audit.",
     "h1": "From first alert to a record you can hand to audit",
-    "body": "One investigation per incident. A person approves every change. The write-up is half done before the incident closes."
+    "body": "One investigation per incident. A person approves every change. The write up is half done before the incident closes."
   },
   "/security": {
     "title": "Security",
@@ -61,7 +61,7 @@
   },
   "/resources": {
     "title": "Resources",
-    "description": "Practical guides for regulated incident teams: DORA reporting, post-incident reports and controlled incident response.",
+    "description": "Practical guides for regulated incident teams: DORA reporting, post incident reports and controlled incident response.",
     "h1": "Guides for the incident you’ll have to explain",
     "body": "Start with the free guides. Two deeper guides are shared during an evaluation."
   },
@@ -105,12 +105,12 @@
     "title": "DORA major incident reports: what to have ready for each deadline",
     "description": "The three DORA reporting stages, and what to capture while a major incident is still running.",
     "h1": "DORA major incident reports: what to have ready for each deadline",
-    "body": "Under DORA, a major ICT-related incident is reported in stages. Knowing what each stage needs before an incident starts makes the clock far easier to live with."
+    "body": "Under DORA, a major ICT related incident is reported in stages. Knowing what each stage needs before an incident starts makes the clock far easier to live with."
   },
   "/resources/post-incident-report-audit": {
-    "title": "A post-incident report that stands up to audit",
-    "description": "Five sections every post-incident report needs, and the evidence that belongs behind each one.",
-    "h1": "A post-incident report that stands up to audit",
+    "title": "A post incident report that stands up to audit",
+    "description": "Five sections every post incident report needs, and the evidence that belongs behind each one.",
+    "h1": "A post incident report that stands up to audit",
     "body": "A report is useful when someone who wasn’t there can follow what happened, what was decided and why."
   }
 }

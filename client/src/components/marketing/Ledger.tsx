@@ -15,7 +15,15 @@ import { integrations } from "@/content/site";
 /** True when the visitor asked for less motion, in the OS or with the footer switch. */
 export function prefersLessMotion() {
   if (typeof window === "undefined") return false;
+  let saved: string | null = null;
+  try {
+    // Read the saved choice directly: the footer switch may not have mounted yet.
+    saved = localStorage.getItem("rx-motion");
+  } catch {
+    /* storage unavailable */
+  }
   return (
+    saved === "off" ||
     document.documentElement.dataset.motion === "off" ||
     window.matchMedia("(prefers-reduced-motion: reduce)").matches
   );
@@ -354,8 +362,9 @@ export function HeroScreen() {
 
   useEffect(() => {
     const frame = frameRef.current;
-    if (!frame || prefersLessMotion()) return;
+    if (!frame) return;
     let timer = 0;
+    let visible = true;
     const start = () => {
       if (!timer)
         timer = window.setInterval(
@@ -368,15 +377,29 @@ export function HeroScreen() {
       timer = 0;
     };
     if (!("IntersectionObserver" in window)) {
-      start();
+      if (!prefersLessMotion()) start();
       return stop;
     }
-    const observer = new IntersectionObserver(([entry]) =>
-      entry.isIntersecting ? start() : stop()
-    );
+    const observer = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      if (visible && !prefersLessMotion()) start();
+      else stop();
+    });
     observer.observe(frame);
+    // The footer switch can turn animations off (or back on) mid visit.
+    const motion = new MutationObserver(() => {
+      if (prefersLessMotion()) {
+        stop();
+        setSeconds(0);
+      } else if (visible) start();
+    });
+    motion.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-motion"],
+    });
     return () => {
       observer.disconnect();
+      motion.disconnect();
       stop();
     };
   }, []);

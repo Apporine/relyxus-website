@@ -64,7 +64,7 @@ export const navGroups: NavGroup[] = [
       {
         label: "Replay pilot",
         href: "/demo?type=Replay%20pilot",
-        description: "Try Relyxus on past incidents, read-only.",
+        description: "Try Relyxus on past incidents, read only.",
       },
     ],
   },
@@ -115,7 +115,7 @@ export const productOutcomes = [
     key: "record",
     label: "Report on time",
     eyebrow: "Report",
-    title: "The write-up is half done before the incident closes.",
+    title: "The write up is half done before the incident closes.",
     summary:
       "Every step, source and decision is logged in order, ready for your report draft.",
     detail:
@@ -165,7 +165,7 @@ export const pathCards = [
  * checked 18 October 2026: initial notification within 4 hours of
  * classification and no later than 24 hours from awareness; intermediate
  * within 72 hours of the initial notification; final within 1 month of the
- * latest intermediate report. Have compliance re-check wording before launch.
+ * latest intermediate report. Have compliance re check wording before launch.
  */
 export const regulatoryClocks = [
   {
@@ -204,7 +204,7 @@ export const regulatorySources = [
 
 /** One line wherever a Replay pilot is offered. */
 export const replayExplainer =
-  "Replay pilot: we replay a few past incidents with read-only access, so you can compare what Relyxus finds with what you know. No change to live systems.";
+  "Replay pilot: we replay a few past incidents with read only access, so you can compare what Relyxus finds with what you know. No change to live systems.";
 
 export type DataPoint = { value: string; label: string };
 export type DataSource = { label: string; href: string };
@@ -232,7 +232,7 @@ export const perspectiveFacts = {
   engineering: {
     value: "#1",
     label:
-      "cause of operational incidents reported to the FCA in 2022 to 2023: third-party issues",
+      "cause of operational incidents reported to the FCA in 2022 to 2023: third party issues",
     payoff:
       "Whoever caused it, Relyxus puts the recent changes and your own alerts on one timeline.",
     source: {
@@ -243,7 +243,7 @@ export const perspectiveFacts = {
   resilience: {
     value: "17 Jan 2025",
     label:
-      "DORA applies: major ICT-related incidents must be reported to your regulator in stages",
+      "DORA applies: major ICT related incidents must be reported to your regulator in stages",
     payoff:
       "Relyxus logs the timeline as the incident runs, so the report starts as a draft.",
     source: {
@@ -266,7 +266,7 @@ export const demoVariants: Record<
   }
 > = {
   Demo: {
-    eyebrow: "Book a demo, 30 minutes",
+    eyebrow: "Book a 30 minute demo",
     title: "See Relyxus on an incident like yours",
     summary:
       "Tell us which tools your team uses and we’ll walk through an incident from alert to record.",
@@ -290,10 +290,10 @@ export const demoVariants: Record<
     summary:
       "Pick past incidents your team knows well and compare what Relyxus finds with what you know.",
     asideTitle: "How a pilot starts",
-    asideText: "We agree the incidents first, then connect read-only sources.",
+    asideText: "We agree the incidents first, then connect read only sources.",
     agenda: [
       { title: "Choose the incidents", text: "Include a miss or two." },
-      { title: "Agree the sources", text: "Read-only access only." },
+      { title: "Agree the sources", text: "Read only access only." },
       { title: "Review together", text: "What it found and what it missed." },
     ],
   },
@@ -312,9 +312,9 @@ export const demoVariants: Record<
   },
   "Readiness checklist": {
     eyebrow: "Readiness checklist",
-    title: "Get the incident-readiness checklist",
+    title: "Get the incident readiness checklist",
     summary:
-      "A short checklist for regulated teams: evidence, ownership and record-keeping before the next incident.",
+      "A short checklist for regulated teams: evidence, ownership and record keeping before the next incident.",
     asideTitle: "What’s in it",
     asideText: "Questions you can answer in an afternoon.",
     agenda: [
@@ -331,7 +331,7 @@ export const demoVariants: Record<
     asideTitle: "What we discuss",
     asideText: "Your constraints first.",
     agenda: [
-      { title: "Where it runs", text: "Dedicated, or self-hosted by you." },
+      { title: "Where it runs", text: "Dedicated, or self hosted by you." },
       { title: "Where data goes", text: "Before you decide." },
       { title: "Who looks after it", text: "Updates and support." },
     ],
@@ -434,7 +434,7 @@ export const resources: readonly {
   },
   {
     slug: "post-incident-report-audit",
-    title: "A post-incident report that stands up to audit",
+    title: "A post incident report that stands up to audit",
     category: "Free",
     description:
       "Five sections every report needs, and the evidence that belongs behind each one.",
@@ -442,7 +442,7 @@ export const resources: readonly {
   },
   {
     slug: "deployment-guide",
-    title: "Self-hosted vs dedicated: a checklist for your architecture review",
+    title: "Self hosted vs dedicated: a checklist for your architecture review",
     category: "For evaluations",
     description:
       "Who operates what, where data goes and what to ask before you decide. Shared with teams in an evaluation.",
@@ -495,7 +495,7 @@ export const articleBodies: Record<
   "dora-major-incident-reports": {
     title: "DORA major incident reports: what to have ready for each deadline",
     intro:
-      "Under DORA, a major ICT-related incident is reported in stages. Knowing what each stage needs before an incident starts makes the clock far easier to live with.",
+      "Under DORA, a major ICT related incident is reported in stages. Knowing what each stage needs before an incident starts makes the clock far easier to live with.",
     sections: [
       {
         heading: "The three deadlines",
@@ -503,7 +503,7 @@ export const articleBodies: Record<
       },
       {
         heading: "Classify early, and write down when",
-        body: "The 4-hour clock starts at classification, but the 24-hour limit runs from awareness, so waiting does not buy time. Record the time of detection and the time of classification, and who made the call.",
+        body: "The 4 hour clock starts at classification, but the 24 hour limit runs from awareness, so waiting does not buy time. Record the time of detection and the time of classification, and who made the call.",
       },
       {
         heading: "Capture as you go",
@@ -516,7 +516,7 @@ export const articleBodies: Record<
     ],
   },
   "post-incident-report-audit": {
-    title: "A post-incident report that stands up to audit",
+    title: "A post incident report that stands up to audit",
     intro:
       "A report is useful when someone who wasn’t there can follow what happened, what was decided and why.",
     sections: [
@@ -537,7 +537,7 @@ export const articleBodies: Record<
         body: "Record each change that was proposed, who approved it, under which policy, and how the result was verified. A change with no named approver is a finding waiting to happen.",
       },
       {
-        heading: "Follow-ups with owners and dates",
+        heading: "Follow ups with owners and dates",
         body: "Every action gets a named owner and a date. Review them at the next incident review so the list does not go stale.",
       },
     ],
@@ -554,7 +554,7 @@ export const contactTopics = [
     title: "See Relyxus on an incident like yours",
     text: "Tell us which tools your team uses and we’ll walk through an incident from alert to record.",
     points: ["Your tools, your kind of incident", "Your questions come first"],
-    cta: "Book a demo, 30 minutes",
+    cta: "Book a 30 minute demo",
   },
   {
     key: "replay",
@@ -562,8 +562,8 @@ export const contactTopics = [
     hint: "On incidents you already solved",
     type: "Replay pilot",
     title: "Replay incidents you already solved",
-    text: "We replay a few past incidents with read-only access, so you can compare what Relyxus finds with what you know. No change to live systems.",
-    points: ["You choose the incidents", "Read-only access only"],
+    text: "We replay a few past incidents with read only access, so you can compare what Relyxus finds with what you know. No change to live systems.",
+    points: ["You choose the incidents", "Read only access only"],
     cta: "Start a pilot enquiry",
   },
   {

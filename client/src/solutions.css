@@ -199,11 +199,11 @@
   background: var(--rx-ink-900);
   color: var(--rx-ivory);
 }
-.rx-proof :is(h4, small, time, label span, dt) {
+.rx-proof :is(h3, small, time, label span, dt) {
   font-family: var(--font-mono);
   letter-spacing: 0.04em;
 }
-.public-site main .rx-proof h4 {
+.public-site main .rx-proof h3 {
   margin: 0 0 10px;
   color: var(--rx-orchid-soft);
   font-size: 12px;
@@ -659,7 +659,9 @@ html[data-motion="off"] .rx-path-packet {
   font-size: 14px;
 }
 .public-site main .rx-clocksim-source a {
-  color: var(--rx-volt);
+  color: var(--rx-ivory);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 @media (min-width: 861px) {
   .rx-clocksim-rows {

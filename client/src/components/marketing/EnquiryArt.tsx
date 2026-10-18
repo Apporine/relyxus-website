@@ -150,7 +150,7 @@ function DeploymentScene() {
         Dedicated
       </text>
       <text className="ea-cap" x="300" y="84" textAnchor="middle">
-        Self-hosted
+        Self hosted
       </text>
       <circle className="ea-core" cx="200" cy="150" r="18" />
       <path className="hx-lane" d="M182 150 H110" />

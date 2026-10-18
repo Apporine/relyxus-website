@@ -29,10 +29,10 @@ export function ProductPage() {
         eyebrow="Product"
         title="From first alert to a record you can hand to audit"
         art={<BrainMap compact />}
-        summary="One investigation per incident. A person approves every change. The write-up is half done before the incident closes."
+        summary="One investigation per incident. A person approves every change. The write up is half done before the incident closes."
         tone="ink"
       >
-        <PrimaryLink href="/demo">Book a demo, 30 minutes</PrimaryLink>
+        <PrimaryLink href="/demo">Book a 30 minute demo</PrimaryLink>
         <a className="button button-secondary" href="#walkthrough">
           Follow an incident <ArrowRight size={16} aria-hidden="true" />
         </a>
@@ -70,7 +70,7 @@ export function ProductPage() {
         title="Bring your stack. We’ll walk a real incident through it in 30 minutes."
         summary="Tell us which tools your team uses and we’ll show you the incident from first alert to record."
         href="/demo?type=Demo"
-        label="Book a demo, 30 minutes"
+        label="Book a 30 minute demo"
       />
     </>
   );
@@ -83,7 +83,7 @@ const commitments = [
   },
   {
     title: "Your data stays in your environment",
-    text: "Run Relyxus as a dedicated environment or self-hosted by you.",
+    text: "Run Relyxus as a dedicated environment or self hosted by you.",
   },
   {
     title: "A person approves every action",
@@ -93,7 +93,7 @@ const commitments = [
 
 const reviewerTests = [
   {
-    title: "Read-only means read-only",
+    title: "Read only means read only",
     text: "Check the access Relyxus is given. Investigation needs read access only.",
   },
   {

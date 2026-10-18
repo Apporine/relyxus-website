@@ -116,12 +116,9 @@ export function PageMeta({
 
 export function Wordmark({ onClick }: { onClick?: () => void }) {
   return (
-    <Link
-      href="/"
-      className="wordmark"
-      aria-label="Relyxus home"
-      onClick={onClick}
-    >
+    <Link href="/" className="wordmark" onClick={onClick}>
+      {/* Read as "Relyxus", not the split letters, which stay aria-hidden. */}
+      <span className="sr-only">Relyxus</span>
       <span className="wm" aria-hidden="true">
         <span>rel</span>
         <span>y</span>
@@ -400,7 +397,7 @@ function MobileMenu({
           className="button button-primary mobile-demo"
           onClick={onNavigate}
         >
-          Book a demo, 30 minutes <ArrowRight size={16} aria-hidden="true" />
+          Book a 30 minute demo <ArrowRight size={16} aria-hidden="true" />
         </Link>
       </div>
     </div>
@@ -423,7 +420,7 @@ export function SiteHeader() {
         <NavLinks />
         <div className="header-actions">
           <Link href="/demo" className="button button-small button-primary">
-            Book a demo, 30 minutes <ArrowRight size={15} aria-hidden="true" />
+            Book a 30 minute demo <ArrowRight size={15} aria-hidden="true" />
           </Link>
           <button
             ref={mobileTrigger}
@@ -817,7 +814,7 @@ export function FounderNote({
               <p key={text}>{text}</p>
             ))}
             <p className="hx-note-sign">
-              {founderNote.name ? `${founderNote.name}, ` : "— "}
+              {founderNote.name ? `${founderNote.name}, ` : ""}
               {founderNote.signature}
             </p>
           </div>
@@ -984,7 +981,7 @@ export function ActionBand({
   title = "See how Relyxus would fit your team",
   summary = "Walk through an incident together and see what it would mean for your team.",
   href = "/demo",
-  label = "Book a demo, 30 minutes",
+  label = "Book a 30 minute demo",
 }: {
   title?: string;
   summary?: string;

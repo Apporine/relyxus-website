@@ -473,7 +473,7 @@ export function DemoPage() {
                   >
                     <option value="">Not sure yet</option>
                     <option>Dedicated</option>
-                    <option>Self-hosted</option>
+                    <option>Self hosted</option>
                   </select>
                 </label>
               </div>

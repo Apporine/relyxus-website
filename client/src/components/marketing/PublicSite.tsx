@@ -10,6 +10,7 @@ import {
   navGroups,
   pilotResult,
   pricingTerms,
+  proofStrip,
   type DataPoint,
   type DataSource,
   type NavItem,
@@ -852,16 +853,85 @@ export function PricingBlock({
   );
 }
 
-/** A real pilot result. Renders nothing until one is filled in. */
-export function PilotResult() {
+/** Pilot outcome. Always labelled when illustrative. */
+export function PilotResult({
+  ground = "paper",
+}: {
+  ground?: "ink" | "paper" | "ivory";
+}) {
   if (!pilotResult) return null;
   return (
-    <figure className="rx-pilot-result">
-      <strong>{pilotResult.value}</strong>
-      <figcaption>
-        {pilotResult.label}
-        <span>{pilotResult.attribution}</span>
-      </figcaption>
-    </figure>
+    <section
+      className={`rx-proof-block rx-${ground === "ivory" ? "paper" : ground}`}
+      aria-labelledby="rx-pilot-title"
+    >
+      <div className="container">
+        {pilotResult.illustrative && (
+          <span className="rx-eyebrow">Illustrative evaluation outcome</span>
+        )}
+        <h2 id="rx-pilot-title" className="hx-h2 sr-only">
+          Replay evaluation outcome
+        </h2>
+        <figure className="rx-pilot-result">
+          <strong>{pilotResult.value}</strong>
+          <figcaption>
+            {pilotResult.label}
+            <span>{pilotResult.attribution}</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+  );
+}
+
+/**
+ * Early-access proof: sector partners + anonymised quote.
+ * Replace with named logos when customers approve publication.
+ */
+export function EarlyAccessProof({
+  ground = "ink",
+}: {
+  ground?: "ink" | "paper";
+}) {
+  const { partnersLabel, logos, quote } = proofStrip;
+  if (!logos.length && !quote) return null;
+  return (
+    <section
+      className={`rx-${ground} rx-section rx-early-proof`}
+      aria-labelledby="rx-early-proof-title"
+    >
+      <div className="container">
+        <span className="rx-eyebrow">{partnersLabel}</span>
+        <h2 id="rx-early-proof-title" className="hx-h2">
+          <Accent text="Built with *teams who live the incident.*" />
+        </h2>
+        <p className="rx-section-sub">
+          Sector partners in early access — named when they approve. Not a
+          customer logo wall of invented brands.
+        </p>
+        {logos.length > 0 && (
+          <ul className="rx-partner-list">
+            {logos.map(logo => (
+              <li key={logo.name}>
+                {logo.src ? (
+                  <img src={logo.src} alt={logo.name} loading="lazy" />
+                ) : (
+                  logo.name
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
+        {quote && (
+          <blockquote className="rx-early-quote">
+            <p>“{quote.text}”</p>
+            <footer>
+              <strong>{quote.name}</strong>
+              <span>{quote.role}</span>
+            </footer>
+          </blockquote>
+        )}
+      </div>
+    </section>
   );
 }

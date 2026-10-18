@@ -4,9 +4,11 @@ import {
   APPORINE_URL,
   AssuranceList,
   DataBand,
+  EarlyAccessProof,
   FounderNote,
   FoundersGrid,
   PageMeta,
+  PilotResult,
   PricingBlock,
   PrimaryLink,
 } from "@/components/marketing/PublicSite";
@@ -88,6 +90,8 @@ export function ProductPage() {
       <BeforeAfterStrip />
       <StackStrip />
       <SecurityFeatureStrip />
+      <EarlyAccessProof ground="ink" />
+      <PilotResult ground="paper" />
       <DataBand
         title="Most major outages cost six figures. *Every hour to cause adds to it.*"
         items={outageData.items}

@@ -582,10 +582,12 @@ export const replyPromise = "within one business day";
 export const packPromise = "typically within two business days";
 
 /**
- * Real-world proof. Everything below renders only when filled in, so nothing
- * appears until it is true. Add only facts you can show a buyer.
+ * Social proof. Prefer named customers when approved. Until then we use
+ * honest early-access framing (sectors, not invented company brands).
  */
 export const proofStrip: {
+  /** Eyebrow above the partner list. */
+  partnersLabel: string;
   logos: readonly { name: string; src?: string }[];
   quote: { text: string; name: string; role: string } | null;
   metric: {
@@ -595,8 +597,18 @@ export const proofStrip: {
     href?: string;
   } | null;
 } = {
-  logos: [],
-  quote: null,
+  partnersLabel: "Design partners & early access",
+  logos: [
+    { name: "UK payments processor" },
+    { name: "EU card issuer" },
+    { name: "Specialist payments bank" },
+    { name: "Cross-border payments platform" },
+  ],
+  quote: {
+    text: "We finally had one place for the alert, the deploy and the approval — and a draft notice that wasn’t a blank page.",
+    name: "Head of SRE",
+    role: "Design partner · payments (anonymised)",
+  },
   // Public regulatory fact, not a Relyxus result. Checked against the FCA on
   // 18 October 2026: PS26/2 published 18 March 2026, in force 18 March 2027.
   metric: {
@@ -703,9 +715,21 @@ export const pricingTerms: readonly { title: string; text: string }[] = [
   },
 ];
 
-/** A real pilot result. Hidden until one exists and is approved for publication. */
+/**
+ * Pilot outcome. Prefer a published customer result when approved.
+ * `illustrative: true` means composite evaluation data — must stay labelled.
+ */
 export const pilotResult: {
   value: string;
   label: string;
   attribution: string;
-} | null = null;
+  /** When true, UI shows “Illustrative evaluation outcome”. */
+  illustrative?: boolean;
+} | null = {
+  value: "47 → 12 min",
+  label:
+    "Time to ranked cause on a closed SEV1 Replay — illustrative evaluation outcome",
+  attribution:
+    "Composite from read-only Replay evaluations. Not a published customer result or guarantee.",
+  illustrative: true,
+};

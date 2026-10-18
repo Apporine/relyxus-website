@@ -1,4 +1,8 @@
-import { PageMeta } from "@/components/marketing/PublicSite";
+import {
+  EarlyAccessProof,
+  PageMeta,
+  PilotResult,
+} from "@/components/marketing/PublicSite";
 import { HomeStage } from "@/components/home/HomeStage";
 import { Closing, Compare, Deadline, Prove } from "@/components/home/Resolved";
 import {
@@ -9,7 +13,7 @@ import { pageMeta } from "@/content/meta";
 
 /**
  * The homepage: six pinned stages and Explore around the signal core, then
- * the page resolves to paper — feature inventory, before/after, deadline,
+ * the page resolves to paper — features, early-access proof, deadline,
  * comparison, proof offer and CTA.
  */
 export default function Home() {
@@ -23,6 +27,8 @@ export default function Home() {
       <HomeStage />
       <FeatureMap ground="paper" />
       <BeforeAfterStrip />
+      <EarlyAccessProof ground="ink" />
+      <PilotResult ground="paper" />
       <Deadline />
       <Compare />
       <Prove />

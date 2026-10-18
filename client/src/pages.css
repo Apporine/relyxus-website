@@ -1010,6 +1010,73 @@ html[data-motion="off"] .rx-team-chain::before {
   color: var(--muted);
 }
 
+/* ---------------------------------------------------------
+   Early-access proof (honest, not invented logos)
+   --------------------------------------------------------- */
+.rx-early-proof .rx-eyebrow {
+  margin-bottom: 16px;
+}
+.rx-partner-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  margin: 40px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.rx-partner-list li {
+  padding: 12px 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--paper);
+  font: 500 14px/1.3 var(--font-body);
+}
+.rx-paper .rx-partner-list li {
+  color: var(--ink);
+  background: var(--paper-card);
+}
+.rx-early-quote {
+  margin: 48px 0 0;
+  padding: 32px 0 0;
+  border-top: 1px solid var(--line);
+  max-width: 42rem;
+}
+.rx-early-quote p {
+  margin: 0 0 20px;
+  color: inherit;
+  font: italic 400 clamp(22px, 2.4vw, 28px) / 1.35 var(--font-accent);
+}
+.rx-early-quote footer {
+  display: grid;
+  gap: 4px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.public-site main .rx-early-quote footer strong {
+  color: inherit;
+  font: 700 15px/1.3 var(--font-display);
+  font-stretch: 85%;
+}
+
+.rx-proof-block {
+  padding: clamp(64px, 8vw, 96px) 0;
+}
+.public-site main .rx-proof-block .rx-pilot-result {
+  border-color: var(--line);
+}
+.public-site main .rx-ink .rx-pilot-result strong,
+.public-site main section.rx-ink .rx-pilot-result strong {
+  color: var(--signal);
+}
+.public-site main .rx-ink .rx-pilot-result figcaption,
+.public-site main section.rx-ink .rx-pilot-result figcaption {
+  color: var(--muted);
+}
+.public-site main .rx-paper .rx-pilot-result strong,
+.public-site main .rx-proof-block.rx-paper .rx-pilot-result strong {
+  color: var(--ink);
+}
+
 @media (max-width: 980px) {
   .rx-how-steps {
     grid-template-columns: 1fr;

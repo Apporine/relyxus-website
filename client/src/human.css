@@ -3059,7 +3059,7 @@ body {
   background: var(--hx-base);
 }
 
-/* Aqua marks the regulator clocks; citrine is kept for the human approval. */
+/* Regulator clock numerals; ledger.css sets their final colour. */
 .hx-facts dt {
   color: var(--hx-support);
 }

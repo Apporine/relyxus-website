@@ -109,11 +109,14 @@ function RegulatorClock() {
     const awareAt = new Date(BASE);
     awareAt.setHours(h || 0, m || 0);
     const classifiedAt = new Date(awareAt.getTime() + classifyAfter * 3.6e6);
+    // RTS 2025/301 Art. 5: 4 hours from classification, capped at 24 hours
+    // from awareness, unless classification itself comes after 24 hours.
+    const fourAfterClass = classifiedAt.getTime() + 4 * 3.6e6;
+    const dayAfterAware = awareAt.getTime() + 24 * 3.6e6;
     const firstNotice = new Date(
-      Math.min(
-        classifiedAt.getTime() + 4 * 3.6e6,
-        awareAt.getTime() + 24 * 3.6e6
-      )
+      classifiedAt.getTime() > dayAfterAware
+        ? fourAfterClass
+        : Math.min(fourAfterClass, dayAfterAware)
     );
     const intermediate = new Date(firstNotice.getTime() + 72 * 3.6e6);
     const final = new Date(intermediate);
@@ -160,7 +163,7 @@ function RegulatorClock() {
             id={`${id}-classify`}
             type="range"
             min={1}
-            max={24}
+            max={36}
             step={1}
             value={classifyAfter}
             onChange={event => setClassifyAfter(Number(event.target.value))}
@@ -179,6 +182,17 @@ function RegulatorClock() {
           </li>
         ))}
       </ol>
+      <p className="rx-clocksim-source">
+        Time limits from{" "}
+        <a
+          href="https://eur-lex.europa.eu/eli/reg_del/2025/301/oj"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Delegated Regulation (EU) 2025/301
+        </a>
+        , under DORA.
+      </p>
       <article className="rx-draft" aria-label="Sample first notice draft">
         <header>
           <span>First notice · draft</span>

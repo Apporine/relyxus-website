@@ -652,3 +652,25 @@ html[data-motion="off"] .rx-path-packet {
 .public-site main section .rx-flow li {
   color: var(--rx-ink-950);
 }
+.public-site main .rx-clocksim-source {
+  grid-column: 1;
+  margin: 0;
+  color: var(--rx-mist);
+  font-size: 14px;
+}
+.public-site main .rx-clocksim-source a {
+  color: var(--rx-volt);
+}
+@media (min-width: 861px) {
+  .rx-clocksim-rows {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .rx-clocksim .rx-draft {
+    grid-column: 2;
+    grid-row: 2 / span 2;
+  }
+  .public-site main .rx-clocksim-source {
+    grid-row: 3;
+  }
+}

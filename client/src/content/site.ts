@@ -95,7 +95,7 @@ export const productOutcomes = [
     summary:
       "Alerts, changes and service context land in one investigation. Your team sees what points to a cause and what still doesn’t fit.",
     detail:
-      "Investigation is read-only by default, so looking never changes anything.",
+      "Every source stays linked, so anyone can check how the cause was reached.",
     href: "/product",
     visual: "trace",
   },
@@ -141,7 +141,7 @@ export const pathCards = [
     label: "Risk and resilience",
     question: "What do we tell the regulator, and by when?",
     answer:
-      "A timeline built while the incident runs, ready for your 4-hour and 72-hour reports.",
+      "Your 4 hour and 72 hour reports, drafted from what already happened.",
     cta: "See the resilience view",
     href: "/solutions/resilience",
     glyph: "clock",
@@ -151,7 +151,7 @@ export const pathCards = [
     label: "Security review",
     question: "What can this tool touch?",
     answer:
-      "Read only by default. A person approves every action. Your data stays in your environment.",
+      "Your data stays in your environment, and you can see exactly what Relyxus can reach.",
     cta: "See the security summary",
     href: "/security",
     glyph: "gate",
@@ -160,10 +160,12 @@ export const pathCards = [
 
 /**
  * Clocks set by regulators. Public rules, not Relyxus performance claims.
- * DORA: Regulation (EU) 2022/2554, applicable from 17 January 2025, incident
- * reporting timelines per the adopted technical standards.
- * UK: FCA PS21/3 and PRA SS1/21 operational resilience, transition ended
- * 31 March 2025. Have compliance re-check wording before launch.
+ * DORA: Regulation (EU) 2022/2554, applicable from 17 January 2025. Time
+ * limits from Commission Delegated Regulation (EU) 2025/301, Article 5,
+ * checked 18 October 2026: initial notification within 4 hours of
+ * classification and no later than 24 hours from awareness; intermediate
+ * within 72 hours of the initial notification; final within 1 month of the
+ * latest intermediate report. Have compliance re-check wording before launch.
  */
 export const regulatoryClocks = [
   {
@@ -191,6 +193,10 @@ export const regulatorySources = [
     href: "https://eur-lex.europa.eu/eli/reg/2022/2554/oj",
   },
   {
+    label: "Delegated Regulation (EU) 2025/301, reporting time limits",
+    href: "https://eur-lex.europa.eu/eli/reg_del/2025/301/oj",
+  },
+  {
     label: "FCA operational resilience",
     href: "https://www.fca.org.uk/firms/operational-resilience",
   },
@@ -203,7 +209,7 @@ export const replayExplainer =
 export type DataPoint = { value: string; label: string };
 export type DataSource = { label: string; href: string };
 
-/** Uptime Institute, annual outage analysis (2025 survey, published 2026). */
+/** Uptime Institute, Annual Outage Analysis 2026 (2025 survey), checked 18 October 2026. */
 export const outageData = {
   items: [
     {
@@ -216,12 +222,12 @@ export const outageData = {
   sources: [
     {
       label: "Uptime Institute, Annual Outage Analysis 2026",
-      href: "https://www.itweb.co.za/article/uptime-announces-annual-outage-analysis-report-2026/o1Jr5MxPNOwMKdWL",
+      href: "https://uptimeinstitute.com/about-ui/press-releases/uptime-announces-annual-outage-analysis-report-2026",
     },
   ] as DataSource[],
 };
 
-/** One public fact per audience, shown under the matching tab. */
+/** Public facts, each checked against its source on 18 October 2026. */
 export const perspectiveFacts = {
   engineering: {
     value: "#1",
@@ -357,7 +363,7 @@ export const founderNote: {
   paragraphs: [
     "An incident gets decided in the first hour and explained for weeks afterwards. The people on call carry both jobs.",
     "We built Relyxus so the explanation exists by the time the incident is over: what we saw, what we believed, who said yes.",
-    "Three rules shape it. Nothing changes without a person’s approval. Every claim links to the evidence behind it. And the record is honest about what we didn’t know, because that is what a regulator, an auditor and your own team will ask about first.",
+    "One rule shapes it most: the record is honest about what we didn’t know, because that is what a regulator, an auditor and your own team will ask about first.",
   ],
   signature: "The Relyxus team",
 };
@@ -602,21 +608,31 @@ export const proofStrip: {
 } = {
   logos: [],
   quote: null,
-  // Public regulatory fact, not a Relyxus result. Replace with a pilot metric when you have one.
+  // Public regulatory fact, not a Relyxus result. Checked against the FCA on
+  // 18 October 2026: PS26/2 published 18 March 2026, in force 18 March 2027.
   metric: {
     value: "18 Mar 2027",
     label:
       "UK firms report incidents under one FCA, PRA and Bank of England regime. Relyxus keeps the record as the incident runs, so your report starts as a draft.",
     source: "FCA Policy Statement PS26/2, published 18 March 2026",
-    href: "https://www.fca.org.uk/publication/policy/ps26-2.pdf",
+    href: "https://www.fca.org.uk/publications/policy-statements/ps26-2-operational-incident-third-party-reporting",
   },
 };
 
 /** Public rules and standards your buyers work to. Named, not claimed as certifications. */
-export const standards: readonly string[] = [
-  "DORA (EU 2022/2554)",
-  "FCA and PRA operational resilience (PS21/3, SS1/21)",
-  "FCA, PRA and Bank of England incident reporting (PS26/2)",
+export const standards: readonly DataSource[] = [
+  {
+    label: "DORA (EU 2022/2554)",
+    href: "https://eur-lex.europa.eu/eli/reg/2022/2554/oj",
+  },
+  {
+    label: "FCA and PRA operational resilience (PS21/3, SS1/21)",
+    href: "https://www.fca.org.uk/publications/policy-statements/ps21-3-building-operational-resilience",
+  },
+  {
+    label: "FCA, PRA and Bank of England incident reporting (PS26/2)",
+    href: "https://www.fca.org.uk/publications/policy-statements/ps26-2-operational-incident-third-party-reporting",
+  },
 ];
 
 /** Tools Relyxus really connects to today, by name. */

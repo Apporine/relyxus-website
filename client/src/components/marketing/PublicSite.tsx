@@ -856,8 +856,12 @@ export function ProofStrip({
               The rules your team works to
             </span>
             <ol className="rx-citations">
-              {standards.map(name => (
-                <li key={name}>{name}</li>
+              {standards.map(rule => (
+                <li key={rule.href}>
+                  <a href={rule.href} target="_blank" rel="noreferrer">
+                    {rule.label}
+                  </a>
+                </li>
               ))}
             </ol>
           </div>
@@ -866,8 +870,12 @@ export function ProofStrip({
           <div className="hx-integrations">
             <span>The rules your team works to</span>
             <ul>
-              {standards.map(name => (
-                <li key={name}>{name}</li>
+              {standards.map(rule => (
+                <li key={rule.href}>
+                  <a href={rule.href} target="_blank" rel="noreferrer">
+                    {rule.label}
+                  </a>
+                </li>
               ))}
             </ul>
           </div>

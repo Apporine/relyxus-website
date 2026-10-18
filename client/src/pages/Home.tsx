@@ -8,9 +8,9 @@ import {
   DataBand,
   TextLink,
 } from "@/components/marketing/PublicSite";
-import { BrainMap } from "@/components/marketing/BrainMap";
 import { OutcomeStage } from "@/components/marketing/OutcomeStage";
 import {
+  HeroScreen,
   SecondApprover,
   SourceStream,
   Stamp,
@@ -56,7 +56,7 @@ function Hero() {
             </a>
           </div>
         </div>
-        <BrainMap />
+        <HeroScreen />
       </div>
     </section>
   );
@@ -144,18 +144,19 @@ function PathCards() {
   );
 }
 
+/** The three promises, stated in full once on the page and nowhere else. */
 const tests = [
   {
-    title: "Every cause has its evidence",
-    text: "Pick any likely cause. Open the sources behind it and check them yourself.",
+    title: "Read only by default",
+    text: "Check the access Relyxus asks for. Investigating needs read access only, so looking never changes anything.",
   },
   {
     title: "Nothing runs without an approver",
-    text: "Try to push a change through. It waits for the people your policy names.",
+    text: "Try to push a change through. It waits for the people your policy names, and records who said yes.",
   },
   {
     title: "The record builds as you go",
-    text: "Ask for the timeline mid-incident. It already exists, in order, with sources.",
+    text: "Ask for the timeline mid incident. It already exists, in order, with every source behind it.",
   },
 ] as const;
 
@@ -200,46 +201,12 @@ function ReplayBand() {
   );
 }
 
-function InAction() {
-  return (
-    <section className="hx-action hx-section rx-ivory" id="in-action">
-      <Stamp at="T+00:31" />
-      <div className="container">
-        <div className="hx-action-head">
-          <h2 className="hx-h2">No more “any update?” in the channel</h2>
-          <p>
-            Owner, money at risk and the decision waiting on someone, on one
-            screen the whole incident team works from.
-          </p>
-        </div>
-        <figure className="hx-shot">
-          <div className="hx-shot-bar" aria-hidden="true">
-            <i />
-            <i />
-            <i />
-          </div>
-          {/* The poster sits behind the image, so the frame is never empty while it loads. */}
-          <div className="hx-shot-media">
-            <img
-              src="/product/command-centre-attention.png"
-              alt="The Relyxus command centre with a SEV1 incident and a production approval waiting for review"
-              width={1894}
-              height={810}
-              decoding="async"
-            />
-          </div>
-          <figcaption className="rx-caption">
-            Command centre · SEV1 open · approval waiting
-          </figcaption>
-        </figure>
-      </div>
-    </section>
-  );
-}
-
 function Outcomes() {
   return (
-    <section className="hx-section product-explorer-section rx-ink">
+    <section
+      className="hx-section product-explorer-section rx-ink"
+      id="in-action"
+    >
       <Stamp at="T+00:19" />
       <div className="container">
         <h2 className="hx-h2">What changes in your next incident</h2>
@@ -253,6 +220,7 @@ function Proof() {
   if (proofPoints.length === 0) return null;
   return (
     <section className="hx-section hx-proof rx-ivory">
+      <Stamp at="T+00:31" />
       <div className="container">
         <h2 className="hx-h2">What your team sees at 3am</h2>
         <p className="hx-sub">
@@ -287,9 +255,8 @@ function Proof() {
 /** Trust ticks, then the readiness checklist as a document cover. */
 function TrustAndChecklist() {
   const lines = [
-    "Read only by default",
     "Runs in your environment",
-    "A person approves every action",
+    "Security pack for your reviewers",
   ];
   return (
     <section className="rx-trust rx-ink" aria-label="Security in brief">
@@ -374,7 +341,6 @@ export default function Home() {
       <PathCards />
       <Outcomes />
       <SecondApprover />
-      <InAction />
       <Proof />
       <DataBand
         title={<>Regulators start the clock before you know the cause</>}

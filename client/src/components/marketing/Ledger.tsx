@@ -336,3 +336,76 @@ export function SecondApprover() {
     </section>
   );
 }
+
+const clockLabel = (seconds: number) => {
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return `T+${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+};
+
+/**
+ * The home hero: the real Command Centre screen in a tilted frame. The T+
+ * clock counts on the SEV1 row while the hero is on screen; with reduced
+ * motion it holds at T+00:00.
+ */
+export function HeroScreen() {
+  const frameRef = useRef<HTMLElement>(null);
+  const [seconds, setSeconds] = useState(0);
+
+  useEffect(() => {
+    const frame = frameRef.current;
+    if (!frame || prefersLessMotion()) return;
+    let timer = 0;
+    const start = () => {
+      if (!timer)
+        timer = window.setInterval(
+          () => setSeconds(value => Math.min(value + 1, 59 * 60 + 59)),
+          1000
+        );
+    };
+    const stop = () => {
+      window.clearInterval(timer);
+      timer = 0;
+    };
+    if (!("IntersectionObserver" in window)) {
+      start();
+      return stop;
+    }
+    const observer = new IntersectionObserver(([entry]) =>
+      entry.isIntersecting ? start() : stop()
+    );
+    observer.observe(frame);
+    return () => {
+      observer.disconnect();
+      stop();
+    };
+  }, []);
+
+  return (
+    <figure className="rx-hero-screen" ref={frameRef}>
+      <div className="rx-hero-tilt">
+        <div className="hx-shot-bar" aria-hidden="true">
+          <i />
+          <i />
+          <i />
+        </div>
+        <div className="rx-hero-media">
+          <img
+            src="/product/command-centre-attention.png"
+            alt="The Relyxus Command Centre with a SEV1 card authorisation incident and a production approval waiting for review"
+            width={1894}
+            height={810}
+            fetchPriority="high"
+            decoding="async"
+          />
+          <span className="rx-hero-sev1" aria-hidden="true">
+            <span className="rx-hero-clock">{clockLabel(seconds)}</span>
+          </span>
+        </div>
+      </div>
+      <figcaption className="rx-caption">
+        Command Centre · SEV1 open · approval waiting
+      </figcaption>
+    </figure>
+  );
+}

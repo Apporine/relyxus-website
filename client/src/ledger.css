@@ -952,3 +952,83 @@ html[data-motion="off"] .rx-stream .rx-stream-pulse {
     gap: 4px;
   }
 }
+
+/* =========================================================
+   Home hero: the Command Centre in a tilted frame (fix 4)
+   ========================================================= */
+.public-site .hx-hero-grid {
+  grid-template-columns: 1fr;
+  gap: clamp(40px, 5vw, 64px);
+}
+.public-site .hx-hero-copy {
+  max-width: 1040px;
+}
+.public-site .hx-hero h1 {
+  max-width: 17ch;
+}
+.public-site .hx-hero .hx-lede {
+  max-width: 640px;
+}
+.rx-hero-screen {
+  margin: 0;
+  perspective: 2200px;
+}
+.rx-hero-tilt {
+  overflow: hidden;
+  border: 1px solid var(--rx-ink-700);
+  border-radius: 16px;
+  background: var(--rx-ink-900);
+  transform: rotateX(10deg) rotateY(-4deg);
+  transform-origin: center top;
+  box-shadow: 30px 40px 80px rgba(0, 0, 0, 0.45);
+}
+.rx-hero-media {
+  position: relative;
+  aspect-ratio: 1894 / 810;
+  background: var(--rx-ink-900) url("/product/command-centre-attention.png")
+    center / cover no-repeat;
+}
+.rx-hero-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Sits over the "Needs your attention" SEV1 row in the screenshot. */
+.rx-hero-sev1 {
+  position: absolute;
+  top: 21.5%;
+  left: 17%;
+  width: 81.5%;
+  height: 14.5%;
+  border: 2px solid var(--rx-volt);
+  border-radius: 8px;
+}
+.rx-hero-clock {
+  position: absolute;
+  top: -14px;
+  right: 10px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: var(--rx-volt);
+  color: var(--rx-ink-950);
+  font: 600 12px/1.2 var(--font-mono);
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+.rx-hero-screen figcaption {
+  margin-top: 14px;
+}
+@media (max-width: 980px) {
+  .public-site .hx-hero-grid {
+    grid-template-columns: 1fr;
+  }
+  .rx-hero-tilt {
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rx-hero-tilt {
+    transform: none;
+  }
+}

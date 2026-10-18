@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { ArrowRight, Check, ShieldCheck } from "lucide-react";
 import { Link } from "wouter";
 import {
@@ -12,14 +11,9 @@ import {
 } from "@/components/marketing/PublicSite";
 import { BrainMap } from "@/components/marketing/BrainMap";
 import { IncidentTimeline } from "@/components/marketing/IncidentTimeline";
-import {
-  CompanyArt,
-  FinanceArt,
-  SecurityArt,
-} from "@/components/marketing/HeroArt";
+import { CompanyArt, SecurityArt } from "@/components/marketing/HeroArt";
 import { ProductTour } from "@/components/marketing/ProductTour";
-import { track } from "@/lib/analytics";
-import { outageData, packPromise, perspectiveFacts } from "@/content/site";
+import { outageData, packPromise } from "@/content/site";
 import { pageMeta } from "@/content/meta";
 
 export function ProductPage() {
@@ -179,121 +173,6 @@ export function SecurityPage() {
           </div>
         </div>
       </section>
-    </>
-  );
-}
-
-const perspectives = {
-  engineering: {
-    label: "For engineering",
-    title: "Get to the cause with every source in one view",
-    text: "The alert, the recent change and the affected service sit side by side, so the on-call engineer starts from evidence instead of a search.",
-    points: [
-      "One investigation per incident",
-      "Read-only until someone approves",
-      "Built around payment flows: authorisation, routing, ledger",
-    ],
-  },
-  resilience: {
-    label: "For resilience",
-    title: "Have the record ready before anyone asks",
-    text: "Timeline, owners and decisions are logged while the incident runs, so the report starts as a draft instead of a blank page.",
-    points: [
-      "Ordered timeline with sources attached",
-      "Approvals recorded with who and when",
-      "People classify, review and submit",
-    ],
-  },
-} as const;
-
-type PerspectiveKey = keyof typeof perspectives;
-
-function hashPerspective(): PerspectiveKey {
-  if (typeof window === "undefined") return "engineering";
-  return window.location.hash === "#resilience" ? "resilience" : "engineering";
-}
-
-export function FinancialServicesPage() {
-  const [active, setActive] = useState<PerspectiveKey>(hashPerspective);
-  useEffect(() => {
-    const onHash = () => setActive(hashPerspective());
-    window.addEventListener("hashchange", onHash);
-    return () => window.removeEventListener("hashchange", onHash);
-  }, []);
-  const current = perspectives[active];
-  return (
-    <>
-      <PageMeta
-        title={pageMeta["/solutions/financial-services"].title}
-        description={pageMeta["/solutions/financial-services"].description}
-      />
-      <PageIntro
-        eyebrow="Financial services"
-        title="When a payment fails, the whole firm is asking why"
-        art={<FinanceArt />}
-        summary="Engineering needs the cause. Resilience needs the record. Relyxus gives both the same evidence."
-        tone="blue"
-      >
-        <PrimaryLink href="/demo?type=Demo">
-          Book a demo, 30 minutes
-        </PrimaryLink>
-      </PageIntro>
-
-      <section className="hx-section" id="engineering">
-        <div className="container">
-          <div
-            className="hx-tabs"
-            role="group"
-            aria-label="Choose a perspective"
-          >
-            {(Object.keys(perspectives) as PerspectiveKey[]).map(key => (
-              <button
-                key={key}
-                type="button"
-                aria-pressed={active === key}
-                onClick={() => {
-                  setActive(key);
-                  track("perspective_tab", { perspective: key });
-                }}
-              >
-                {perspectives[key].label}
-              </button>
-            ))}
-          </div>
-          <div className="hx-perspective" id="resilience">
-            <h2 className="hx-h2">{current.title}</h2>
-            <p>{current.text}</p>
-            <aside className="hx-fact-card">
-              <strong>{perspectiveFacts[active].value}</strong>
-              <p>{perspectiveFacts[active].label}</p>
-              <span className="hx-fact-payoff">
-                {perspectiveFacts[active].payoff}
-              </span>
-              <a
-                href={perspectiveFacts[active].source.href}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {perspectiveFacts[active].source.label}
-              </a>
-            </aside>
-            <ul className="hx-trust-lines">
-              {current.points.map(point => (
-                <li key={point}>
-                  <Check size={18} aria-hidden="true" /> {point}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <ActionBand
-        title="Tell us the payments incident that hurt most"
-        summary="We’ll replay it with read-only access and show you what Relyxus would have found."
-        href="/demo?type=Replay%20pilot"
-        label="Book a demo, 30 minutes"
-      />
     </>
   );
 }

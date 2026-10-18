@@ -1,5 +1,24 @@
+import { solutions } from "./solutions";
+
 export type NavItem = { label: string; href: string; description?: string };
-export type NavGroup = { label: string; items: NavItem[]; note?: string };
+export type NavColumn = { label: string; items: NavItem[] };
+export type NavGroup = {
+  label: string;
+  items: NavItem[];
+  /** A mega menu: columns of links, with an optional link along the foot. */
+  columns?: NavColumn[];
+  footer?: NavItem;
+  note?: string;
+};
+
+const solutionLinks = (column: "team" | "incident"): NavItem[] =>
+  solutions
+    .filter(solution => solution.column === column)
+    .map(solution => ({
+      label: solution.label,
+      href: `/solutions/${solution.slug}`,
+      description: solution.line,
+    }));
 
 export const navGroups: NavGroup[] = [
   {
@@ -19,23 +38,15 @@ export const navGroups: NavGroup[] = [
   },
   {
     label: "Solutions",
-    items: [
-      {
-        label: "Financial services",
-        href: "/solutions/financial-services",
-        description: "Payments incidents, from alert to audit.",
-      },
-      {
-        label: "For engineering",
-        href: "/solutions/financial-services#engineering",
-        description: "Get to the cause with every source in one view.",
-      },
-      {
-        label: "For resilience",
-        href: "/solutions/financial-services#resilience",
-        description: "Have the record ready before anyone asks.",
-      },
+    items: [],
+    columns: [
+      { label: "By team", items: solutionLinks("team") },
+      { label: "By incident", items: solutionLinks("incident") },
     ],
+    footer: {
+      label: "Built for banks, payments and fintech",
+      href: "/solutions/financial-services",
+    },
   },
   {
     label: "Resources",
@@ -122,7 +133,7 @@ export const pathCards = [
     answer:
       "Alerts, changes and logs in one investigation, with every source linked.",
     cta: "See the engineering view",
-    href: "/solutions/financial-services#engineering",
+    href: "/solutions/engineering",
     glyph: "converge",
   },
   {
@@ -132,7 +143,7 @@ export const pathCards = [
     answer:
       "A timeline built while the incident runs, ready for your 4-hour and 72-hour reports.",
     cta: "See the resilience view",
-    href: "/solutions/financial-services#resilience",
+    href: "/solutions/resilience",
     glyph: "clock",
   },
   {

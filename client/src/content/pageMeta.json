@@ -20,8 +20,44 @@
   "/solutions/financial-services": {
     "title": "Financial services",
     "description": "Help engineering and resilience teams at regulated financial firms find the cause of a payments incident and keep every step on the record.",
-    "h1": "When a payment fails, the whole firm is asking why",
-    "body": "Engineering needs the cause. Resilience needs the record. Relyxus gives both the same evidence."
+    "h1": "Built for banks, payments and fintech",
+    "body": "Six ways in: by the team that answers for the incident, or by the kind of incident it is."
+  },
+  "/solutions/engineering": {
+    "title": "Engineering and SRE",
+    "description": "For engineering and SRE teams: the alert, recent changes and the affected service in one investigation, ranked by evidence.",
+    "h1": "From alert to cause, without the tab hunt.",
+    "body": "The alert, the last two hours of changes and the affected service land in one investigation, ranked by evidence."
+  },
+  "/solutions/resilience": {
+    "title": "Risk and resilience",
+    "description": "For risk and resilience teams: timeline, owners and decisions logged from the first alert, so each regulatory deadline starts with a draft.",
+    "h1": "The report starts writing itself while the incident runs.",
+    "body": "Timeline, owners and decisions are logged from the first alert, so each regulatory deadline starts with a draft."
+  },
+  "/solutions/leadership": {
+    "title": "Technology leadership",
+    "description": "For technology leaders: money at risk while the incident runs, every decision with a name and a time, and a summary the board can read.",
+    "h1": "Know what an outage costs, and who decided what.",
+    "body": "Money at risk, live. Every decision with a name and a time. A summary the board can read the next morning."
+  },
+  "/solutions/payment-failures": {
+    "title": "Card authorisation failures",
+    "description": "Relyxus follows the authorisation path through router and ledger to the point a payment broke.",
+    "h1": "Every failed payment is a customer you might not get back.",
+    "body": "Relyxus follows the authorisation path through router and ledger to the point it broke."
+  },
+  "/solutions/third-party-outages": {
+    "title": "Third party outages",
+    "description": "Relyxus separates what failed at the supplier from what failed in your own systems, with sources for both.",
+    "h1": "Your vendor went down. Your regulator still asks you.",
+    "body": "Relyxus separates what failed at the supplier from what failed in your own systems, with sources for both."
+  },
+  "/solutions/change-incidents": {
+    "title": "Bad changes and deployments",
+    "description": "Every deploy and config change sits on the incident timeline, so the cause is a click, not a meeting.",
+    "h1": "Most incidents start with a change. Find which one.",
+    "body": "Every deploy and config change sits on the incident timeline, so the cause is a click, not a meeting."
   },
   "/resources": {
     "title": "Resources",

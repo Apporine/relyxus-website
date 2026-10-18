@@ -21,8 +21,13 @@ const CompanyPage = lazy(() =>
   }))
 );
 const FinancialServicesPage = lazy(() =>
-  import("@/pages/CorePages").then(module => ({
+  import("@/pages/Solutions").then(module => ({
     default: module.FinancialServicesPage,
+  }))
+);
+const SolutionPage = lazy(() =>
+  import("@/pages/Solutions").then(module => ({
+    default: module.SolutionPage,
   }))
 );
 const LegalPage = lazy(() =>
@@ -101,6 +106,13 @@ function Router() {
         <WithLayout>
           <FinancialServicesPage />
         </WithLayout>
+      </Route>
+      <Route path="/solutions/:slug">
+        {params => (
+          <WithLayout>
+            <SolutionPage slug={params.slug} />
+          </WithLayout>
+        )}
       </Route>
       {retired.map(([from, to]) => (
         <Route path={from} key={from}>

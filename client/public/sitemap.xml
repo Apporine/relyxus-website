@@ -4,6 +4,12 @@
   <url><loc>/product</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>/security</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>/solutions/financial-services</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>/solutions/engineering</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>/solutions/resilience</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>/solutions/leadership</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>/solutions/payment-failures</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>/solutions/third-party-outages</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>/solutions/change-incidents</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>/demo</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>/resources</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>/resources/what-makes-incident-response-controlled</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>

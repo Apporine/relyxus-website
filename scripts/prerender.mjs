@@ -43,7 +43,7 @@ const esc = value =>
 const nav = [
   ["/product", "Product"],
   ["/security", "Security"],
-  ["/solutions/financial-services", "Financial services"],
+  ["/solutions/financial-services", "Solutions"],
   ["/resources", "Resources"],
   ["/company", "Company"],
   ["/demo", "Request a demo"],

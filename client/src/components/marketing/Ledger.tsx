@@ -34,8 +34,9 @@ export function Stamp({ at }: { at: string }) {
 }
 
 /**
- * The Evidence Line: a 1px aqua line in the left margin, drawn by scroll
- * progress. Each Stamp ticks in as its section arrives. Desktop only (CSS).
+ * The T+ clock line: a 1px Volt line in the left margin, drawn by scroll
+ * progress, on every page. Each Stamp ticks in as its section arrives.
+ * Desktop only (CSS).
  */
 export function EvidenceLine() {
   const lineRef = useRef<HTMLDivElement>(null);
@@ -55,29 +56,42 @@ export function EvidenceLine() {
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
 
-    const stamps = Array.from(document.querySelectorAll(".rx-stamp"));
-    let observer: IntersectionObserver | null = null;
-    if (prefersLessMotion() || !("IntersectionObserver" in window)) {
-      stamps.forEach(stamp => stamp.classList.add("is-stamped"));
-    } else {
-      observer = new IntersectionObserver(
-        entries => {
-          entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
-            entry.target.classList.add("is-stamped");
-            observer?.unobserve(entry.target);
-          });
-        },
-        { rootMargin: "0px 0px -25% 0px" }
-      );
-      stamps.forEach(stamp => observer?.observe(stamp));
-    }
+    // Pages load lazily and change on navigation, so pick up stamps as they
+    // appear rather than only the ones present on mount.
+    const instant = prefersLessMotion() || !("IntersectionObserver" in window);
+    const observer = instant
+      ? null
+      : new IntersectionObserver(
+          entries => {
+            entries.forEach(entry => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add("is-stamped");
+              observer?.unobserve(entry.target);
+            });
+          },
+          { rootMargin: "0px 0px -25% 0px" }
+        );
+    const watch = () => {
+      document
+        .querySelectorAll(".rx-stamp:not([data-watched])")
+        .forEach(stamp => {
+          stamp.setAttribute("data-watched", "");
+          if (observer) observer.observe(stamp);
+          else stamp.classList.add("is-stamped");
+        });
+      onScroll();
+    };
+    watch();
+    const mutations = new MutationObserver(watch);
+    const main = document.getElementById("main");
+    if (main) mutations.observe(main, { childList: true, subtree: true });
 
     return () => {
       if (frame) window.cancelAnimationFrame(frame);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
       observer?.disconnect();
+      mutations.disconnect();
     };
   }, []);
 

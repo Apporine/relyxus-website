@@ -22,7 +22,11 @@ import {
   upsertLink,
   upsertMeta,
 } from "@/lib/seo";
-import { prefersLessMotion, Stamp } from "@/components/marketing/Ledger";
+import {
+  EvidenceLine,
+  prefersLessMotion,
+  Stamp,
+} from "@/components/marketing/Ledger";
 
 export function PageMeta({
   title,
@@ -129,6 +133,24 @@ export function Wordmark({ onClick }: { onClick?: () => void }) {
   );
 }
 
+function PopoverLink({
+  item,
+  onNavigate,
+}: {
+  item: NavItem;
+  onNavigate: () => void;
+}) {
+  return (
+    <Link href={item.href} className="nav-popover-link" onClick={onNavigate}>
+      <span>
+        <strong>{item.label}</strong>
+        {item.description && <small>{item.description}</small>}
+      </span>
+      <ArrowUpRight size={15} aria-hidden="true" />
+    </Link>
+  );
+}
+
 function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const headerRef = useRef<HTMLElement>(null);
@@ -187,29 +209,55 @@ function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
                 {group.label}
                 <ChevronDown className="nav-chevron" aria-hidden="true" />
               </button>
-              <div className="nav-popover" id={id} hidden={!isOpen}>
+              <div
+                className={`nav-popover ${group.columns ? "nav-popover-mega" : ""}`}
+                id={id}
+                hidden={!isOpen}
+              >
                 <div className="nav-popover-head">
                   <span>Explore {group.label.toLowerCase()}</span>
                   <span className="nav-index">
                     RELYXUS / {group.label.toUpperCase()}
                   </span>
                 </div>
-                <div className="nav-popover-links">
-                  {group.items.map((item: NavItem) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className="nav-popover-link"
-                      onClick={handleNavigate}
-                    >
-                      <span>
-                        <strong>{item.label}</strong>
-                        {item.description && <small>{item.description}</small>}
-                      </span>
-                      <ArrowUpRight size={15} aria-hidden="true" />
-                    </Link>
-                  ))}
-                </div>
+                {group.columns ? (
+                  <div className="nav-mega-columns">
+                    {group.columns.map(column => (
+                      <div className="nav-mega-column" key={column.label}>
+                        <p className="nav-mega-label">{column.label}</p>
+                        <div className="nav-popover-links">
+                          {column.items.map(item => (
+                            <PopoverLink
+                              key={item.href}
+                              item={item}
+                              onNavigate={handleNavigate}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="nav-popover-links">
+                    {group.items.map(item => (
+                      <PopoverLink
+                        key={item.href}
+                        item={item}
+                        onNavigate={handleNavigate}
+                      />
+                    ))}
+                  </div>
+                )}
+                {group.footer && (
+                  <Link
+                    href={group.footer.href}
+                    className="nav-mega-footer"
+                    onClick={handleNavigate}
+                  >
+                    {group.footer.label}
+                    <ArrowRight size={15} aria-hidden="true" />
+                  </Link>
+                )}
                 {group.note && (
                   <p className="nav-popover-note rx-endorse">{group.note}</p>
                 )}
@@ -310,12 +358,31 @@ function MobileMenu({
                 <ChevronDown aria-hidden="true" />
               </summary>
               <div className="mobile-nav-group-links">
-                {group.items.map(item => (
-                  <Link key={item.href} href={item.href} onClick={onNavigate}>
-                    {item.label}
-                    <ArrowUpRight size={15} aria-hidden="true" />
+                {(group.columns ?? [{ label: "", items: group.items }]).map(
+                  column => (
+                    <div key={column.label || group.label}>
+                      {column.label && (
+                        <p className="nav-mega-label">{column.label}</p>
+                      )}
+                      {column.items.map(item => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          onClick={onNavigate}
+                        >
+                          {item.label}
+                          <ArrowUpRight size={15} aria-hidden="true" />
+                        </Link>
+                      ))}
+                    </div>
+                  )
+                )}
+                {group.footer && (
+                  <Link href={group.footer.href} onClick={onNavigate}>
+                    {group.footer.label}
+                    <ArrowRight size={15} aria-hidden="true" />
                   </Link>
-                ))}
+                )}
               </div>
             </details>
           ))}
@@ -505,6 +572,7 @@ export function PublicLayout({
         Skip to content
       </a>
       <SiteHeader />
+      <EvidenceLine />
       <main id="main" tabIndex={-1}>
         {children}
       </main>

@@ -11,6 +11,7 @@ import "./marketing.css";
 import "./kinetic.css";
 import "./human.css";
 import "./ledger.css";
+import "./solutions.css";
 
 const queryClient = new QueryClient();
 

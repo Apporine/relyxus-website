@@ -11,7 +11,6 @@ import {
 import { BrainMap } from "@/components/marketing/BrainMap";
 import { OutcomeStage } from "@/components/marketing/OutcomeStage";
 import {
-  EvidenceLine,
   SecondApprover,
   SourceStream,
   Stamp,
@@ -368,7 +367,6 @@ export default function Home() {
         description={pageMeta["/"].description}
         keywords="Relyxus, incident investigation, payments incidents, operational resilience, SRE, regulated firms"
       />
-      <EvidenceLine />
       {/* Dark and ivory chapters alternate, never more than two dark in a row. */}
       <Hero />
       <ProofStrip ground="ink" withSources={false} rulesAsCitations />

@@ -1,0 +1,195 @@
+/* =========================================================
+   Trust and conversion: pricing, booking step, pilot result,
+   founders, the Apporine link and the four column footer.
+   ========================================================= */
+
+/* Apporine link: Soft Orchid on dark, the family thread. */
+.public-site .rx-apporine {
+  color: var(--rx-orchid-soft);
+  font: 500 12px/1.4 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.public-site .rx-apporine:hover,
+.public-site .rx-apporine:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.public-site .nav-popover-note.rx-apporine {
+  display: block;
+}
+.public-site .rx-apporine-hero {
+  align-self: center;
+  margin-left: 8px;
+}
+
+/* Pricing */
+.public-site main .rx-pricing {
+  padding: clamp(64px, 8vw, 104px) 0;
+}
+.public-site main .rx-pricing h2 {
+  margin: 16px 0 28px;
+}
+.rx-pricing-terms {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 24px;
+  margin: 0 0 28px;
+  padding: 0;
+  list-style: none;
+}
+.public-site main .rx-pricing-terms li {
+  padding-top: 18px;
+  border-top: 2px solid var(--rx-ink-950);
+}
+.public-site main .rx-pricing.rx-ink .rx-pricing-terms li {
+  border-top-color: var(--rx-ink-700);
+}
+.public-site main .rx-pricing-terms h3 {
+  margin: 0 0 8px;
+}
+.public-site main .rx-pricing-terms p {
+  margin: 0;
+}
+
+/* Booking step after the demo form */
+.public-site .rx-booking {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+  margin: 16px 0 24px;
+  padding: 24px;
+  border: 1px solid var(--rx-volt);
+  border-radius: var(--rx-radius-card);
+  background: var(--rx-ink-900);
+}
+.public-site .rx-booking h2 {
+  margin: 0;
+  color: var(--rx-ivory);
+  font: 800 clamp(24px, 2.4vw, 32px) / 1.1 var(--font-display);
+}
+.public-site .rx-booking p {
+  margin: 0;
+  color: var(--rx-mist);
+}
+
+/* Pilot result: hidden until real, then one big sourced number. */
+.public-site main .rx-pilot-result {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 20px;
+  margin: 28px 0 0;
+  padding: 24px 0;
+  border-top: 1px solid var(--rx-stone);
+  border-bottom: 1px solid var(--rx-stone);
+}
+.public-site main .rx-pilot-result strong {
+  color: var(--rx-ink-950);
+  font: 600 clamp(48px, 6vw, 88px) / 1 var(--font-mono);
+  letter-spacing: -0.02em;
+}
+.public-site main .rx-pilot-result figcaption {
+  display: grid;
+  gap: 4px;
+  max-width: 520px;
+  color: var(--rx-graphite);
+}
+.public-site main .rx-pilot-result figcaption span {
+  font: 500 12px/1.4 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Footer: brand, then four columns */
+.public-site .footer-top {
+  display: grid;
+  grid-template-columns: minmax(200px, 1fr) 3fr;
+  gap: 32px 48px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--rx-ink-700);
+}
+.public-site .footer-brand {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+}
+.public-site .footer-columns {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+.public-site .footer-column-label {
+  margin: 0 0 12px;
+  color: var(--rx-ivory);
+  font: 500 12px/1.4 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.public-site .footer-columns ul {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.public-site .footer-columns a {
+  color: var(--rx-mist);
+  font-size: 14px;
+  line-height: 1.4;
+  text-decoration: none;
+}
+.public-site .footer-columns a:hover,
+.public-site .footer-columns a:focus-visible {
+  color: var(--rx-ivory);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.public-site .footer-legal-row {
+  padding-top: 20px;
+}
+
+@media (max-width: 900px) {
+  .public-site .footer-top {
+    grid-template-columns: 1fr;
+  }
+  .public-site .footer-columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .rx-pricing-terms {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* Volt never sets text on Ivory: links there use Deep Volt. */
+.public-site main section.rx-ivory .text-link,
+.public-site main section.rx-ivory .text-link svg {
+  color: var(--rx-volt-deep) !important;
+}
+.public-site .page-hero-actions {
+  flex-wrap: wrap;
+}
+.public-site .rx-apporine-hero {
+  order: -1;
+  flex-basis: 100%;
+  margin: 0 0 4px;
+}
+
+/* Form success: a Plum Ink note with a Volt edge, never a Volt fill. */
+.public-site .preview-boundary {
+  border: 1px solid var(--rx-volt) !important;
+  background: var(--rx-ink-900) !important;
+  color: var(--rx-ivory) !important;
+}
+.public-site .preview-boundary :is(p, strong) {
+  color: var(--rx-ivory) !important;
+}
+.public-site .preview-boundary span:not(.preview-boundary-icon) {
+  color: var(--rx-mist) !important;
+}
+.public-site .preview-boundary-icon {
+  color: var(--rx-volt) !important;
+  background: transparent !important;
+}

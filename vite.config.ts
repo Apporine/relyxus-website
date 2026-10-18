@@ -94,6 +94,8 @@ export default defineConfig({
     },
   },
   envDir: path.resolve(import.meta.dirname),
+  // NEXT_PUBLIC_ keeps the variable names the spec uses (e.g. the booking URL).
+  envPrefix: ["VITE_", "NEXT_PUBLIC_"],
   root: path.resolve(import.meta.dirname, "client"),
   publicDir: path.resolve(import.meta.dirname, "client", "public"),
   build: {

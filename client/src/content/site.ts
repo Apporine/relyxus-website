@@ -671,16 +671,50 @@ export const assurance: readonly { label: string; status: string }[] = [
   },
 ];
 
+/**
+ * The people building Relyxus: photo, name, role and one line each. Shown on
+ * Home and Company once filled in; nothing renders while this is empty.
+ */
 export const founders: readonly {
   name: string;
   role: string;
+  /** One line about them. */
   background: string;
   photo?: string;
 }[] = [];
 
+/** Fill these in to show them in the footer; empty values stay hidden. */
 export const companyDetails: {
   registration?: string;
   location?: string;
   email?: string;
   linkedin?: string;
+  securityEmail?: string;
+  statusUrl?: string;
 } = {};
+
+/**
+ * How pricing works. Terms from the Website Improvement Spec v1; confirm each
+ * line with the client before launch.
+ */
+export const pricingTerms: readonly { title: string; text: string }[] = [
+  {
+    title: "One annual licence",
+    text: "Priced on how you run Relyxus, agreed in writing before you start.",
+  },
+  {
+    title: "Replay pilot credited",
+    text: "What you pay for a Replay pilot comes off the licence if you go ahead.",
+  },
+  {
+    title: "No per seat fees",
+    text: "Bring everyone who works the incident, from on call to the board.",
+  },
+];
+
+/** A real pilot result. Hidden until one exists and is approved for publication. */
+export const pilotResult: {
+  value: string;
+  label: string;
+  attribution: string;
+} | null = null;

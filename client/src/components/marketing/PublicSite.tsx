@@ -11,6 +11,8 @@ import {
   proofStrip,
   standards,
   navGroups,
+  pilotResult,
+  pricingTerms,
   type DataPoint,
   type DataSource,
   type NavItem,
@@ -259,7 +261,13 @@ function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
                   </Link>
                 )}
                 {group.note && (
-                  <p className="nav-popover-note rx-endorse">{group.note}</p>
+                  <a
+                    className="nav-popover-note rx-apporine"
+                    href={APPORINE_URL}
+                    rel="noreferrer"
+                  >
+                    {group.note}
+                  </a>
                 )}
               </div>
             </li>
@@ -443,12 +451,32 @@ export function SiteHeader() {
   );
 }
 
-const footerNav = [
-  { label: "Product", href: "/product" },
-  { label: "Security", href: "/security" },
-  { label: "Contact", href: "/contact" },
-  { label: "Book a demo, 30 minutes", href: "/demo" },
-] as const;
+/** Footer columns follow the main navigation, so the two never drift apart. */
+const footerColumns = navGroups.map(group => ({
+  label: group.label,
+  items: [
+    ...(group.columns?.flatMap(column => column.items) ?? group.items),
+    ...(group.footer ? [group.footer] : []),
+  ],
+}));
+
+/** Contact links that render only once they exist. */
+const companyLinks = [
+  companyDetails.linkedin && {
+    label: "LinkedIn",
+    href: companyDetails.linkedin,
+  },
+  companyDetails.securityEmail && {
+    label: "Security contact",
+    href: `mailto:${companyDetails.securityEmail}`,
+  },
+  companyDetails.statusUrl && {
+    label: "Status page",
+    href: companyDetails.statusUrl,
+  },
+].filter((link): link is { label: string; href: string } => Boolean(link));
+
+export const APPORINE_URL = "https://apporine.com";
 
 const footerLegal = [
   { label: "Privacy policy", href: "/privacy" },
@@ -492,16 +520,33 @@ export function SiteFooter() {
   return (
     <footer className="site-footer">
       <div className="container footer-shell">
-        <div className="footer-row">
+        <div className="footer-top">
           <div className="footer-brand">
             <Wordmark />
-            <span className="rx-endorse">An Apporine product</span>
+            <a className="rx-apporine" href={APPORINE_URL} rel="noreferrer">
+              An Apporine product
+            </a>
           </div>
-          <nav className="footer-nav" aria-label="Footer">
-            {footerNav.map(item => (
-              <Link key={item.href} href={item.href}>
-                {item.label}
-              </Link>
+          <nav className="footer-columns" aria-label="Footer">
+            {footerColumns.map(column => (
+              <div key={column.label}>
+                <p className="footer-column-label">{column.label}</p>
+                <ul>
+                  {column.items.map(item => (
+                    <li key={item.href}>
+                      <Link href={item.href}>{item.label}</Link>
+                    </li>
+                  ))}
+                  {column.label === "Company" &&
+                    companyLinks.map(item => (
+                      <li key={item.href}>
+                        <a href={item.href} rel="noreferrer">
+                          {item.label}
+                        </a>
+                      </li>
+                    ))}
+                </ul>
+              </div>
             ))}
           </nav>
         </div>
@@ -518,20 +563,6 @@ export function SiteFooter() {
             {companyDetails.registration && ` ${companyDetails.registration}.`}
             {companyDetails.location && ` ${companyDetails.location}.`}
           </p>
-          {(companyDetails.email || companyDetails.linkedin) && (
-            <p className="footer-contact">
-              {companyDetails.email && (
-                <a href={`mailto:${companyDetails.email}`}>
-                  {companyDetails.email}
-                </a>
-              )}
-              {companyDetails.linkedin && (
-                <a href={companyDetails.linkedin} rel="noreferrer">
-                  LinkedIn
-                </a>
-              )}
-            </p>
-          )}
           <MotionToggle />
         </div>
       </div>
@@ -909,10 +940,14 @@ export function AssuranceList() {
   );
 }
 
-export function FoundersGrid() {
+export function FoundersGrid({
+  ground = "ivory",
+}: {
+  ground?: "ink" | "ivory";
+}) {
   if (!founders.length) return null;
   return (
-    <section className="hx-section">
+    <section className={`hx-section rx-founders rx-${ground}`}>
       <div className="container">
         <h2 className="hx-h2">The people building Relyxus</h2>
         <ul className="hx-founders">
@@ -1000,5 +1035,49 @@ export function PageIntro({
     >
       {children}
     </PageHero>
+  );
+}
+
+/** How pricing works: annual licence, pilot credited, no per seat fees. */
+export function PricingBlock({
+  ground = "ivory",
+}: {
+  ground?: "ink" | "ivory";
+}) {
+  return (
+    <section
+      className={`rx-pricing rx-${ground}`}
+      aria-labelledby="rx-pricing-title"
+    >
+      <div className="container">
+        <span className="rx-eyebrow">Pricing</span>
+        <h2 id="rx-pricing-title" className="hx-h2">
+          How pricing works
+        </h2>
+        <ul className="rx-pricing-terms">
+          {pricingTerms.map(term => (
+            <li key={term.title}>
+              <h3>{term.title}</h3>
+              <p>{term.text}</p>
+            </li>
+          ))}
+        </ul>
+        <TextLink href="/demo?type=Pricing">Ask for a proposal</TextLink>
+      </div>
+    </section>
+  );
+}
+
+/** A real pilot result. Renders nothing until one is filled in. */
+export function PilotResult() {
+  if (!pilotResult) return null;
+  return (
+    <figure className="rx-pilot-result">
+      <strong>{pilotResult.value}</strong>
+      <figcaption>
+        {pilotResult.label}
+        <span>{pilotResult.attribution}</span>
+      </figcaption>
+    </figure>
   );
 }

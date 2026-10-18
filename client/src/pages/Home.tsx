@@ -2,7 +2,9 @@ import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
 import { Link } from "wouter";
 import {
   FounderNote,
+  FoundersGrid,
   PageMeta,
+  PilotResult,
   ProofStrip,
   PrimaryLink,
   DataBand,
@@ -181,6 +183,7 @@ function ReplayBand() {
             </article>
           ))}
         </div>
+        <PilotResult />
         <div className="hx-magnet hx-test-offer">
           <div>
             <span className="hx-pill">Replay pilot</span>
@@ -352,6 +355,7 @@ export default function Home() {
       />
       <ReplayBand />
       <FounderNote ground="ivory" stamp="T+1 month" />
+      <FoundersGrid />
       <TrustAndChecklist />
       <ClosingBand />
     </>

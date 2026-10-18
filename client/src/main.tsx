@@ -12,6 +12,7 @@ import "./kinetic.css";
 import "./human.css";
 import "./ledger.css";
 import "./solutions.css";
+import "./trust.css";
 
 const queryClient = new QueryClient();
 

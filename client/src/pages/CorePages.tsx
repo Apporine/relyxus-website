@@ -2,11 +2,13 @@ import { ArrowRight, Check, ShieldCheck } from "lucide-react";
 import { Link } from "wouter";
 import {
   ActionBand,
+  APPORINE_URL,
   AssuranceList,
   FoundersGrid,
   PageIntro,
   DataBand,
   PageMeta,
+  PricingBlock,
   PrimaryLink,
 } from "@/components/marketing/PublicSite";
 import { BrainMap } from "@/components/marketing/BrainMap";
@@ -61,6 +63,8 @@ export function ProductPage() {
           <IncidentTimeline />
         </div>
       </section>
+
+      <PricingBlock />
 
       <ActionBand
         title="Bring your stack. We’ll walk a real incident through it in 30 minutes."
@@ -214,6 +218,9 @@ export function CompanyPage() {
         tone="ink"
       >
         <PrimaryLink href="/contact">Talk to the team</PrimaryLink>
+        <a className="rx-apporine rx-apporine-hero" href={APPORINE_URL}>
+          An Apporine product
+        </a>
         <Link className="button button-secondary" href="/product">
           See the product <ArrowRight size={16} aria-hidden="true" />
         </Link>

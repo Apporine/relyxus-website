@@ -5,7 +5,13 @@ import {
   type FormEvent,
   type FocusEvent,
 } from "react";
-import { ArrowRight, Check, CircleAlert, LockKeyhole } from "lucide-react";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Check,
+  CircleAlert,
+  LockKeyhole,
+} from "lucide-react";
 import {
   PageIntro,
   PageMeta,
@@ -15,6 +21,11 @@ import { ENQUIRY_TYPES, type EnquiryType } from "@shared/contact";
 import { pageMeta } from "@/content/meta";
 import { EnquiryArt } from "@/components/marketing/EnquiryArt";
 import { demoVariants, replyPromise } from "@/content/site";
+import { track } from "@/lib/analytics";
+import { PricingBlock } from "@/components/marketing/PublicSite";
+
+/** Set NEXT_PUBLIC_BOOKING_URL to offer a booking step after the form. */
+const bookingUrl = (import.meta.env.NEXT_PUBLIC_BOOKING_URL ?? "").trim();
 
 type FormValues = {
   name: string;
@@ -285,12 +296,32 @@ export function DemoPage() {
                   <Check size={16} />
                 </span>
                 <p>
-                  <strong>Thanks — your enquiry is on its way.</strong>
+                  <strong>Thanks, your enquiry is on its way.</strong>
                   <span>
                     We’ve emailed the Relyxus team and will follow up from
                     there.
                   </span>
                 </p>
+              </div>
+            )}
+
+            {submitted && bookingUrl && (
+              <div className="rx-booking" aria-labelledby="rx-booking-title">
+                <span className="rx-eyebrow">Step 2 of 2</span>
+                <h2 id="rx-booking-title">Pick a time now</h2>
+                <p>
+                  Skip the email back and forth. Choose a 30 minute slot that
+                  suits your team.
+                </p>
+                <a
+                  className="button button-primary"
+                  href={bookingUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => track("booking_click", { place: "demo" })}
+                >
+                  Choose a time <ArrowUpRight size={16} aria-hidden="true" />
+                </a>
               </div>
             )}
 
@@ -503,6 +534,7 @@ export function DemoPage() {
           </div>
         </div>
       </section>
+      <PricingBlock />
     </>
   );
 }

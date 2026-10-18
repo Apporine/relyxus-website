@@ -35,9 +35,7 @@ function Hero() {
           <span className="hx-pill">
             For incident, SRE and resilience teams at regulated firms
           </span>
-          <h1>
-            Know why payments failed before the <em>regulator</em> asks.
-          </h1>
+          <h1>Know why payments failed before the regulator asks.</h1>
           <p className="hx-lede">{pageMeta["/"].body}</p>
           <div className="hx-actions">
             <Link
@@ -116,7 +114,7 @@ function PathCards() {
       <Stamp at="T+00:11" />
       <div className="container">
         <h2 id="hx-path-title" className="hx-h2">
-          One incident. Three <em>teams</em> who have to answer for it.
+          One incident. Three teams who have to answer for it.
         </h2>
         <p className="hx-sub">
           Same alert, three questions. Relyxus answers all three from one set of
@@ -168,7 +166,7 @@ function ReplayBand() {
       <Stamp at="T+72:00" />
       <div className="container">
         <h2 className="hx-h2 hx-lead-heading">
-          Don’t take <em>our</em> word for it. Test three things.
+          Don’t take our word for it. Test three things.
         </h2>
         <p className="hx-sub">
           In a demo or a Replay pilot, ask us to prove each one on an incident
@@ -245,9 +243,7 @@ function Outcomes() {
     <section className="hx-section product-explorer-section rx-ink">
       <Stamp at="T+00:19" />
       <div className="container">
-        <h2 className="hx-h2">
-          What changes in <em>your</em> next incident
-        </h2>
+        <h2 className="hx-h2">What changes in your next incident</h2>
         <OutcomeStage />
       </div>
     </section>
@@ -259,9 +255,7 @@ function Proof() {
   return (
     <section className="hx-section hx-proof rx-ivory">
       <div className="container">
-        <h2 className="hx-h2">
-          What your <em>team</em> sees at 3am
-        </h2>
+        <h2 className="hx-h2">What your team sees at 3am</h2>
         <p className="hx-sub">
           The three screens the whole team works from during an incident.
         </p>
@@ -317,7 +311,7 @@ function TrustAndChecklist() {
           <div>
             <span className="hx-pill">Free checklist</span>
             <h2 className="hx-h2">
-              Could <em>you</em> file a DORA first notice within 4 hours?
+              Could you file a DORA first notice within 4 hours?
             </h2>
             <p>
               The incident-readiness checklist for UK and EU resilience teams.
@@ -341,8 +335,8 @@ function ClosingBand() {
       <div className="container hx-closing-grid">
         <div>
           <h2 className="hx-h2">
-            Show <em>us</em> the incident that hurt most. We’ll show you how
-            Relyxus would have handled it.
+            Show us the incident that hurt most. We’ll show you how Relyxus
+            would have handled it.
           </h2>
           <p className="hx-closing-note">
             Prefer to test it yourself?{" "}
@@ -385,11 +379,7 @@ export default function Home() {
       <InAction />
       <Proof />
       <DataBand
-        title={
-          <>
-            <em>Regulators</em> start the clock before you know the cause
-          </>
-        }
+        title={<>Regulators start the clock before you know the cause</>}
         items={regulatoryClocks}
         sources={regulatorySources}
         note="Which rules apply depends on your firm."

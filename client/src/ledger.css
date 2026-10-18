@@ -1,52 +1,50 @@
 /*
- * Ledger and Signal. Loads last, after human.css.
- * Night ink and ledger ivory are the two grounds, Evidence Aqua is the brand,
- * citrine appears only when a person approves something. The Three Voices:
- * the system speaks in mono, people in serif italic, the story in sans.
+ * Plum Ink and Volt. Loads last, after human.css.
+ * Plum Ink and Ivory are the two grounds. Volt means approved, go: primary
+ * buttons on dark, the T+ clock, live states, one highlight per screen.
+ * Orchid is the Apporine link, for large text and shapes only. No orange, no
+ * blue, no gradients. Schibsted Grotesk for display, Instrument Sans for
+ * paragraphs, Martian Mono for the clock, eyebrows and evidence.
  */
 :root {
   /* Grounds */
-  --rx-ink: #0e0b14;
-  --rx-ink-800: #17131f;
-  --rx-ink-600: #2c2636;
-  --rx-ivory: #f4f0e8;
-  --rx-ivory-50: #fbf9f4;
-  --rx-rule: #ddd5c6;
+  --rx-ink-950: #120a18;
+  --rx-ink-900: #1d1426;
+  --rx-ink-700: #2e2238;
+  --rx-ivory: #f4efe6;
+  --rx-ivory-card: #fbf8f2;
+  --rx-stone: #dcd3c4;
   /* Brand */
-  --rx-aqua: #19d3c5;
-  --rx-aqua-deep: #0a6e67;
-  --rx-citrine: #f5e663; /* human approval only */
+  --rx-volt: #c6f432;
+  --rx-volt-hover: #b5e21f;
+  --rx-volt-deep: #445c0e;
+  --rx-orchid: #a53bef;
+  --rx-orchid-soft: #b486f7;
   /* Text */
-  --rx-mist: #a39db0;
-  --rx-graphite: #4a4552;
-  /* Incident states, product visuals only */
-  --rx-state-evidence: #19d3c5;
-  --rx-state-cause: #a98bff;
-  --rx-state-waiting: #f5e663;
-  --rx-state-recorded: #f4f0e8;
+  --rx-mist: #a79fb5;
+  --rx-graphite: #4b4552;
+  /* Severity: inside product UI only, never in marketing chrome */
   --rx-severity: #f0524f;
   /* Type */
-  --rx-font-display:
-    "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
-  --rx-font-body: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
-  --rx-font-human: "Instrument Serif", Georgia, serif;
-  --rx-font-system: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+  --font-display: "Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Martian Mono", ui-monospace, "SFMono-Regular", monospace;
   /* Shape and motion */
   --rx-radius-card: 14px;
   --rx-radius-button: 999px;
   --rx-ease: cubic-bezier(0.22, 1, 0.36, 1);
-  /* Where the Evidence Line runs */
+  /* Where the T+ clock line runs */
   --rx-line-x: 28px;
 
   --hx-radius: var(--rx-radius-card);
-  --hx-card: var(--rx-ink-800);
-  --hx-border: var(--rx-ink-600);
-  --hx-border-strong: color-mix(in srgb, var(--rx-ink-600) 60%, var(--rx-mist));
+  --hx-card: var(--rx-ink-900);
+  --hx-border: var(--rx-ink-700);
+  --hx-border-strong: color-mix(in srgb, var(--rx-ink-700) 60%, var(--rx-mist));
 }
 
 html,
 body {
-  background: var(--rx-ink);
+  background: var(--rx-ink-950);
   color: var(--rx-ivory);
 }
 body,
@@ -55,90 +53,80 @@ input,
 select,
 textarea,
 .public-site {
-  font-family: var(--rx-font-body);
+  font-family: var(--font-body);
 }
 
 /* ---------------------------------------------------------
-   The story voice: Bricolage headlines in sentence case
+   Type: Schibsted Grotesk headlines in sentence case
    --------------------------------------------------------- */
 .public-site :is(h1, h2, h3, h4),
 .public-site .hx-h2,
 .public-site .hx-band-title {
-  font-family: var(--rx-font-display);
+  font-family: var(--font-display);
   text-transform: none;
 }
 .public-site main h1 {
-  font-size: clamp(42px, 5.6vw, 76px);
-  font-weight: 800;
-  font-stretch: 85%;
-  font-variation-settings: "opsz" 96;
-  line-height: 0.98;
-  letter-spacing: -0.025em;
+  font-size: clamp(44px, 6vw, 84px);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
 }
 .public-site main :is(h2, .hx-h2, .hx-band-title) {
-  font-size: clamp(32px, 3.9vw, 52px);
-  font-weight: 750;
-  line-height: 1.02;
-  letter-spacing: -0.02em;
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.015em;
 }
 .public-site main h3 {
   font-size: clamp(20px, 1.8vw, 24px);
-  font-weight: 650;
+  font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.01em;
 }
-.public-site main .hx-lede,
-.public-site main .hx-sub,
-.public-site main .hx-action-head p {
-  font-size: clamp(18px, 1.5vw, 21px);
-  line-height: 1.55;
+.public-site main :is(p, li, dd) {
+  font-size: clamp(16px, 1.3vw, 18px);
+  line-height: 1.6;
 }
 
-/* The person voice: one human word per headline, in serif italic. */
-.public-site :is(h1, h2, h3) em,
-.rx-human {
-  font-family: var(--rx-font-human);
-  font-style: italic;
-  font-weight: 400;
-  font-size: 1.06em;
-  letter-spacing: 0;
-  color: var(--rx-aqua);
+/* Headlines carry no accent word on Relyxus; an <em> reads as plain text. */
+.public-site :is(h1, h2, h3) em {
+  font: inherit;
+  font-style: normal;
+  color: inherit;
   background: none;
   -webkit-text-fill-color: currentColor;
 }
-.public-site :is(h1, h2, h3) em.is-decision {
-  color: var(--rx-citrine);
-}
 
-/* The system voice: timestamps, sources, eyebrows. */
+/* Mono: the T+ clock, eyebrows and evidence labels, in capitals. */
 .rx-eyebrow,
 .public-site .hx-hero .hx-pill {
   display: inline-block;
   padding: 0;
   border: 0;
   background: none;
-  color: var(--rx-aqua);
-  font: 500 12px/1 var(--rx-font-system);
-  letter-spacing: 0.16em;
+  color: var(--rx-orchid-soft);
+  font: 500 clamp(12px, 1vw, 13px) / 1.4 var(--font-mono);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 .rx-mono,
 .public-site .hx-pill,
 .public-site .hx-test-index,
 .public-site .eyebrow {
-  font-family: var(--rx-font-system);
+  font-family: var(--font-mono);
   font-weight: 500;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 /* ---------------------------------------------------------
-   Buttons: aqua with ink text, 16px, 52px, pill
+   Buttons: Volt with Plum Ink text on dark, Plum Ink with Volt text on Ivory
    --------------------------------------------------------- */
 .public-site .button {
   min-height: 52px;
   padding-inline: 24px;
   border-radius: var(--rx-radius-button);
-  font: 600 16px/1 var(--rx-font-body);
+  font: 600 15px/1 var(--font-body);
   letter-spacing: 0.01em;
   text-transform: none;
   transition:
@@ -153,24 +141,16 @@ textarea,
 }
 .public-site .button-primary,
 .public-site .button-primary:visited {
-  color: var(--rx-ink) !important;
-  border-color: var(--rx-aqua) !important;
-  background: var(--rx-aqua) !important;
+  color: var(--rx-ink-950) !important;
+  border-color: var(--rx-volt) !important;
+  background: var(--rx-volt) !important;
   box-shadow: none !important;
 }
 .public-site .button-primary:hover,
 .public-site .button-primary:focus-visible {
-  color: var(--rx-ink) !important;
-  border-color: color-mix(
-    in srgb,
-    var(--rx-aqua) 82%,
-    var(--rx-ivory)
-  ) !important;
-  background: color-mix(
-    in srgb,
-    var(--rx-aqua) 82%,
-    var(--rx-ivory)
-  ) !important;
+  color: var(--rx-ink-950) !important;
+  border-color: var(--rx-volt-hover) !important;
+  background: var(--rx-volt-hover) !important;
   box-shadow: none !important;
 }
 .public-site .button-secondary,
@@ -181,17 +161,17 @@ textarea,
 }
 .public-site .button-secondary:hover,
 .public-site .button-outline:hover {
-  border-color: var(--rx-aqua) !important;
-  background: color-mix(in srgb, var(--rx-aqua) 10%, transparent) !important;
+  border-color: var(--rx-ivory) !important;
+  background: color-mix(in srgb, var(--rx-ivory) 8%, transparent) !important;
 }
 .public-site :focus-visible {
-  outline: 2px solid var(--rx-aqua);
+  outline: 2px solid var(--rx-volt);
   outline-offset: 3px;
 }
 
-/* Wordmark: lowercase Bricolage 700, the X as two crossing evidence lines. */
+/* Wordmark: the X in Volt on dark, Deep Volt on Ivory. */
 .public-site .wm {
-  font-family: var(--rx-font-display);
+  font-family: var(--font-display);
   font-weight: 700;
   text-transform: lowercase;
   letter-spacing: -0.01em;
@@ -200,11 +180,11 @@ textarea,
 .public-site .wm-x1,
 .public-site .wm-x2,
 .public-site .wordmark:hover .wm-x2 {
-  stroke: var(--rx-aqua);
+  stroke: var(--rx-volt);
 }
 .rx-endorse {
   color: var(--rx-mist);
-  font: 500 12px/1.3 var(--rx-font-system);
+  font: 500 12px/1.3 var(--font-mono);
   letter-spacing: 0.04em;
 }
 
@@ -212,16 +192,16 @@ textarea,
 .public-site .site-header,
 .public-site .nav-popover,
 .public-site .mobile-nav-panel {
-  background-color: color-mix(in srgb, var(--rx-ink) 94%, transparent);
+  background-color: color-mix(in srgb, var(--rx-ink-950) 94%, transparent);
 }
 .public-site .nav-popover-link:hover,
 .public-site .nav-popover-link:focus-visible {
-  background: color-mix(in srgb, var(--rx-aqua) 10%, transparent) !important;
+  background: color-mix(in srgb, var(--rx-ivory) 6%, transparent) !important;
 }
 .public-site .nav-popover-note {
   margin: 4px 0 0;
   padding: 10px 12px 2px;
-  border-top: 1px solid var(--rx-ink-600);
+  border-top: 1px solid var(--rx-ink-700);
 }
 
 /* ---------------------------------------------------------
@@ -233,62 +213,78 @@ textarea,
   background-image: none !important;
 }
 .public-site main section.rx-ink {
-  background-color: var(--rx-ink) !important;
+  background-color: var(--rx-ink-950) !important;
 }
 .public-site main section.rx-ivory {
-  --hx-text: var(--rx-ink);
+  --hx-text: var(--rx-ink-950);
   --hx-muted: var(--rx-graphite);
-  --hx-card: var(--rx-ivory-50);
-  --hx-border: var(--rx-rule);
+  --hx-card: var(--rx-ivory-card);
+  --hx-border: var(--rx-stone);
   --hx-border-strong: color-mix(
     in srgb,
-    var(--rx-rule) 60%,
+    var(--rx-stone) 60%,
     var(--rx-graphite)
   );
-  --hx-accent: var(--rx-aqua-deep);
-  --hx-mint: var(--rx-aqua-deep);
-  --hx-cyan: var(--rx-aqua-deep);
-  --rx-text: var(--rx-ink);
+  --hx-accent: var(--rx-volt-deep);
+  --hx-mint: var(--rx-volt-deep);
+  --hx-cyan: var(--rx-volt-deep);
+  --rx-text: var(--rx-ink-950);
   --rx-muted: var(--rx-graphite);
   background-color: var(--rx-ivory) !important;
   color: var(--rx-graphite);
   color-scheme: light;
 }
 .public-site main section.rx-ivory :is(h2, h3, h4, .hx-h2, strong) {
-  color: var(--rx-ink) !important;
+  color: var(--rx-ink-950) !important;
 }
 .public-site main section.rx-ivory :is(p, li, dd, small) {
   color: var(--rx-graphite);
 }
 .public-site main section.rx-ivory :is(h1, h2, h3) em {
-  color: var(--rx-aqua-deep);
+  color: var(--rx-volt-deep);
 }
 .public-site main section.rx-ivory a:not(.button) {
-  color: var(--rx-aqua-deep);
+  color: var(--rx-volt-deep);
 }
 .public-site main section.rx-ivory .rx-eyebrow,
 .public-site main section.rx-ivory .hx-pill,
 .public-site main section.rx-ivory .hx-test-index {
-  color: var(--rx-aqua-deep) !important;
+  color: var(--rx-volt-deep) !important;
 }
 .public-site main section.rx-ivory .hx-pill {
-  border-color: var(--rx-rule);
-  background: var(--rx-ivory-50);
+  border-color: var(--rx-stone);
+  background: var(--rx-ivory-card);
 }
-/* On ivory the primary action keeps aqua with ink text (10.4:1). */
+/* On Ivory: Plum Ink fill with Volt text; outlines in Plum Ink. */
+.public-site main section.rx-ivory .button-primary,
+.public-site main .rx-on-ivory .button-primary {
+  color: var(--rx-volt) !important;
+  border-color: var(--rx-ink-950) !important;
+  background: var(--rx-ink-950) !important;
+}
+.public-site main section.rx-ivory .button-primary:hover,
+.public-site main .rx-on-ivory .button-primary:hover {
+  color: var(--rx-volt) !important;
+  border-color: var(--rx-ink-700) !important;
+  background: var(--rx-ink-700) !important;
+}
+.public-site main section.rx-ivory .wm-x1,
+.public-site main section.rx-ivory .wm-x2 {
+  stroke: var(--rx-volt-deep);
+}
 .public-site main section.rx-ivory .button-outline,
 .public-site main section.rx-ivory .button-secondary {
-  color: var(--rx-ink) !important;
-  border-color: var(--rx-ink) !important;
+  color: var(--rx-ink-950) !important;
+  border-color: var(--rx-ink-950) !important;
 }
 
-/* Cards on ivory: ruled ledger cards that lift and turn aqua on hover. */
+/* Cards on ivory: ruled cards that lift on hover. */
 .public-site
   main
   section.rx-ivory
   :is(.hx-path, .hx-commitments article, .hx-proof-list li, .hx-note) {
-  border-color: var(--rx-rule) !important;
-  background: var(--rx-ivory-50) !important;
+  border-color: var(--rx-stone) !important;
+  background: var(--rx-ivory-card) !important;
   box-shadow: none !important;
 }
 .public-site main :is(.hx-path, .hx-commitments article, .hx-proof-list li) {
@@ -300,7 +296,7 @@ textarea,
   main
   :is(.hx-path, .hx-commitments article, .hx-proof-list li):hover {
   transform: translateY(-4px);
-  border-color: var(--rx-aqua) !important;
+  border-color: var(--hx-text) !important;
 }
 
 /* ---------------------------------------------------------
@@ -322,12 +318,12 @@ textarea,
     display: block;
     width: 1px;
     pointer-events: none;
-    background: color-mix(in srgb, var(--rx-aqua) 18%, transparent);
+    background: color-mix(in srgb, var(--rx-volt) 18%, transparent);
   }
   .rx-line-fill {
     position: absolute;
     inset: 0;
-    background: var(--rx-aqua);
+    background: var(--rx-volt);
     transform: scaleY(var(--rx-progress, 0));
     transform-origin: top;
   }
@@ -339,9 +335,9 @@ textarea,
     display: flex;
     align-items: center;
     gap: 10px;
-    color: var(--rx-aqua);
-    font: 500 13px/1.5 var(--rx-font-system);
-    letter-spacing: 0.02em;
+    color: var(--rx-volt);
+    font: 500 13px/1.5 var(--font-mono);
+    letter-spacing: 0.08em;
     opacity: 0;
     transform: translateY(6px);
     transition:
@@ -352,26 +348,26 @@ textarea,
     content: "";
     width: 9px;
     height: 9px;
-    border: 1px solid var(--rx-aqua);
+    border: 1px solid var(--rx-volt);
     border-radius: 50%;
-    background: var(--rx-ink);
+    background: var(--rx-ink-950);
   }
   .rx-stamp.is-stamped {
     opacity: 1;
     transform: none;
   }
   .rx-stamp.is-stamped::before {
-    background: var(--rx-aqua);
+    background: var(--rx-volt);
   }
   .rx-ivory .rx-stamp {
-    color: var(--rx-aqua-deep);
+    color: var(--rx-volt-deep);
   }
   .rx-ivory .rx-stamp::before {
-    border-color: var(--rx-aqua-deep);
+    border-color: var(--rx-volt-deep);
     background: var(--rx-ivory);
   }
   .rx-ivory .rx-stamp.is-stamped::before {
-    background: var(--rx-aqua-deep);
+    background: var(--rx-volt-deep);
   }
   .rx-stamp-closed {
     padding: 2px 8px 2px 0;
@@ -402,39 +398,38 @@ textarea,
 .public-site .hx-proofstrip.rx-ink .hx-metric strong {
   display: block;
   color: var(--rx-ivory);
-  font: 800 clamp(64px, 9vw, 128px) / 0.9 var(--rx-font-display);
-  font-stretch: 75%;
-  letter-spacing: -0.03em;
+  font: 600 clamp(48px, 6vw, 88px) / 1 var(--font-mono);
+  letter-spacing: -0.02em;
 }
 .public-site .hx-proofstrip.rx-ink .hx-metric small,
 .public-site .hx-proofstrip.rx-ink .hx-metric small a {
   color: var(--rx-mist);
-  font: 500 13px/1.5 var(--rx-font-system);
+  font: 500 13px/1.5 var(--font-mono);
 }
 .rx-citations {
   display: grid;
   gap: 10px;
   margin: 36px 0 0;
   padding: 20px 0 0;
-  border-top: 1px solid var(--rx-ink-600);
+  border-top: 1px solid var(--rx-ink-700);
   list-style: none;
   counter-reset: cite;
 }
 .rx-citations-label {
   color: var(--rx-mist);
-  font: 500 12px/1 var(--rx-font-system);
-  letter-spacing: 0.16em;
+  font: 500 12px/1 var(--font-mono);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 .rx-citations li {
   counter-increment: cite;
   color: var(--rx-ivory);
-  font: 500 13px/1.5 var(--rx-font-system);
+  font: 500 13px/1.5 var(--font-mono);
   letter-spacing: 0.02em;
 }
 .rx-citations li::before {
   content: "[" counter(cite) "] ";
-  color: var(--rx-aqua);
+  color: var(--rx-orchid-soft);
 }
 
 /* 3 Tool sources: eight tiles stream into one investigation. */
@@ -454,15 +449,15 @@ textarea,
   justify-items: center;
   gap: 10px;
   padding: 16px 8px;
-  border: 1px solid var(--rx-rule);
+  border: 1px solid var(--rx-stone);
   border-radius: var(--rx-radius-card);
-  background: var(--rx-ivory-50);
-  color: var(--rx-ink) !important;
-  font: 500 13px/1.2 var(--rx-font-system);
+  background: var(--rx-ivory-card);
+  color: var(--rx-ink-950) !important;
+  font: 500 13px/1.2 var(--font-mono);
   letter-spacing: 0.02em;
 }
 .rx-source-tiles svg {
-  color: var(--rx-aqua-deep);
+  color: var(--rx-volt-deep);
 }
 .rx-stream {
   display: block;
@@ -476,10 +471,10 @@ textarea,
   vector-effect: non-scaling-stroke;
 }
 .rx-stream .rx-stream-lane {
-  stroke: var(--rx-rule);
+  stroke: var(--rx-stone);
 }
 .rx-stream .rx-stream-pulse {
-  stroke: var(--rx-aqua-deep);
+  stroke: var(--rx-volt-deep);
   stroke-width: 2.5;
   stroke-dasharray: 8 92;
   stroke-dashoffset: 100;
@@ -503,18 +498,18 @@ textarea,
   max-width: 560px;
   margin: 0 auto;
   padding: 18px 22px;
-  border: 1px solid var(--rx-aqua-deep);
+  border: 1px solid var(--rx-volt-deep);
   border-radius: var(--rx-radius-card);
-  background: var(--rx-ink);
+  background: var(--rx-ink-950);
   color: var(--rx-ivory);
 }
 .public-site main section.rx-ivory .rx-investigation strong {
   color: var(--rx-ivory) !important;
-  font: 650 20px/1.2 var(--rx-font-display);
+  font: 650 20px/1.2 var(--font-display);
 }
 .rx-investigation span {
-  color: var(--rx-aqua);
-  font: 500 13px/1.5 var(--rx-font-system);
+  color: var(--rx-volt);
+  font: 500 13px/1.5 var(--font-mono);
 }
 @media (max-width: 860px) {
   .rx-source-tiles {
@@ -530,17 +525,17 @@ textarea,
 
 /* 4 Three teams: each team's question in the person voice. */
 .public-site main .hx-path h3 {
-  font-family: var(--rx-font-human);
+  font-family: var(--font-display);
   font-style: italic;
   font-weight: 400;
   font-size: clamp(24px, 2.2vw, 30px);
   letter-spacing: 0;
 }
 .public-site main .hx-path-label {
-  font-family: var(--rx-font-system);
+  font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 500;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -571,9 +566,9 @@ textarea,
   position: relative;
   overflow: hidden;
   padding: 24px;
-  border: 1px solid var(--rx-ink-600);
+  border: 1px solid var(--rx-ink-700);
   border-radius: 18px;
-  background: var(--rx-ink-800);
+  background: var(--rx-ink-900);
   color: var(--rx-ivory);
 }
 .rx-approval-head {
@@ -582,9 +577,9 @@ textarea,
   justify-content: space-between;
   gap: 8px;
   padding-bottom: 14px;
-  border-bottom: 1px solid var(--rx-ink-600);
+  border-bottom: 1px solid var(--rx-ink-700);
   color: var(--rx-mist);
-  font: 500 12px/1.5 var(--rx-font-system);
+  font: 500 12px/1.5 var(--font-mono);
   letter-spacing: 0.02em;
 }
 .rx-sev {
@@ -593,7 +588,7 @@ textarea,
 .rx-approval-action {
   margin: 18px 0 6px;
   color: var(--rx-ivory);
-  font: 500 15px/1.5 var(--rx-font-system);
+  font: 500 15px/1.5 var(--font-mono);
 }
 .rx-approval-cause {
   margin: 0 0 18px;
@@ -601,7 +596,7 @@ textarea,
   font-size: 15px;
 }
 .rx-approval-cause b {
-  color: var(--rx-state-cause);
+  color: var(--rx-orchid-soft);
   font-weight: 600;
 }
 .rx-approvers {
@@ -617,20 +612,20 @@ textarea,
   justify-content: space-between;
   gap: 12px;
   padding: 12px 14px;
-  border: 1px solid var(--rx-ink-600);
+  border: 1px solid var(--rx-ink-700);
   border-radius: 12px;
 }
 .rx-approvers li > span:first-child {
   color: var(--rx-mist);
-  font: 500 12px/1.5 var(--rx-font-system);
+  font: 500 12px/1.5 var(--font-mono);
 }
 .rx-approver-name {
-  color: var(--rx-citrine);
-  font: italic 400 19px/1.2 var(--rx-font-human);
+  color: var(--rx-ivory);
+  font: 700 16px/1.2 var(--font-display);
 }
 .rx-approver-pending {
   color: var(--rx-mist);
-  font: italic 400 19px/1.2 var(--rx-font-human);
+  font: 500 16px/1.2 var(--font-body);
 }
 .rx-approve-row {
   display: grid;
@@ -646,7 +641,7 @@ textarea,
 }
 .rx-sign path {
   fill: none;
-  stroke: var(--rx-citrine);
+  stroke: var(--rx-volt);
   stroke-width: 1.5;
   stroke-linecap: round;
   stroke-dasharray: 240;
@@ -669,7 +664,7 @@ textarea,
 .rx-gate-lane {
   flex: 1;
   height: 1px;
-  background: var(--rx-ink-600);
+  background: var(--rx-ink-700);
 }
 .rx-gate-bar {
   position: absolute;
@@ -678,7 +673,7 @@ textarea,
   height: 36px;
   margin-left: -3px;
   border-radius: 3px;
-  background: var(--rx-citrine);
+  background: var(--rx-volt);
   transform-origin: bottom;
   transition: transform 450ms var(--rx-ease);
 }
@@ -687,7 +682,7 @@ textarea,
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--rx-aqua);
+  background: var(--rx-ivory);
 }
 .rx-approval[data-step="gate"] .rx-gate-bar,
 .rx-approval[data-step="fixing"] .rx-gate-bar,
@@ -705,12 +700,12 @@ textarea,
   min-height: 3em;
   margin: 0;
   color: var(--rx-ivory);
-  font: 500 13px/1.5 var(--rx-font-system);
+  font: 500 13px/1.5 var(--font-mono);
   letter-spacing: 0.02em;
   white-space: pre-wrap;
 }
 .rx-record-time {
-  color: var(--rx-aqua);
+  color: var(--rx-orchid-soft);
 }
 .rx-replay {
   margin-top: 12px;
@@ -718,13 +713,13 @@ textarea,
   border: 0;
   background: none;
   color: var(--rx-mist);
-  font: 500 13px/1.5 var(--rx-font-system);
+  font: 500 13px/1.5 var(--font-mono);
   text-decoration: underline;
   text-underline-offset: 3px;
   cursor: pointer;
 }
 .rx-replay:hover {
-  color: var(--rx-aqua);
+  color: var(--rx-volt);
 }
 @media (max-width: 860px) {
   .rx-approver-grid {
@@ -734,13 +729,13 @@ textarea,
 
 /* 7 The "any update?" frame: never an empty box. */
 .public-site .hx-shot {
-  border-color: var(--rx-rule);
-  background: var(--rx-ink-800);
+  border-color: var(--rx-stone);
+  background: var(--rx-ink-900);
   box-shadow: none;
 }
 .public-site .hx-shot-media {
   aspect-ratio: 1894 / 810;
-  background: var(--rx-ink-800) url("/product/command-centre-attention.png")
+  background: var(--rx-ink-900) url("/product/command-centre-attention.png")
     center / cover no-repeat;
 }
 .public-site .hx-shot-media img {
@@ -751,14 +746,14 @@ textarea,
 .public-site main .hx-shot figcaption,
 .public-site main .rx-caption {
   color: var(--rx-mist) !important;
-  font: 500 13px/1.5 var(--rx-font-system);
+  font: 500 13px/1.5 var(--font-mono);
   letter-spacing: 0.02em;
 }
 .public-site main section.rx-ivory .rx-caption {
   color: var(--rx-graphite) !important;
 }
 .public-site main section.rx-ivory .hx-proof-list img {
-  border-bottom: 1px solid var(--rx-rule);
+  border-bottom: 1px solid var(--rx-stone);
 }
 
 /* 8 Regulator clock: monumental numerals. */
@@ -766,27 +761,27 @@ textarea,
   display: grid;
   gap: 4px;
   color: var(--rx-ivory) !important;
-  font-family: var(--rx-font-display);
+  font-family: var(--font-display);
 }
 .rx-clock-num {
-  font-size: clamp(88px, 10vw, 160px);
-  font-weight: 800;
-  font-stretch: 75%;
-  line-height: 0.9;
-  letter-spacing: -0.03em;
+  font-family: var(--font-mono);
+  font-size: clamp(48px, 6vw, 88px);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
 }
 .rx-clock-unit {
-  color: var(--rx-aqua);
-  font: 500 13px/1.5 var(--rx-font-system);
-  letter-spacing: 0.16em;
+  color: var(--rx-orchid-soft);
+  font: 500 13px/1.5 var(--font-mono);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 .public-site main .hx-band.rx-ink .hx-facts dd {
   color: var(--rx-mist);
 }
 .public-site main .hx-band .hx-source-line {
-  font-family: var(--rx-font-system);
+  font-family: var(--font-mono);
   font-size: 13px;
 }
 
@@ -800,28 +795,28 @@ textarea,
   transform: none;
 }
 .public-site main section.rx-ivory .hx-magnet {
-  border: 1px solid var(--rx-ink) !important;
+  border: 1px solid var(--rx-ink-950) !important;
   border-radius: var(--rx-radius-card);
-  background: var(--rx-ivory-50) !important;
-  box-shadow: 8px 8px 0 var(--rx-rule) !important;
+  background: var(--rx-ivory-card) !important;
+  box-shadow: 8px 8px 0 var(--rx-stone) !important;
 }
 
-/* 10 Why we built it: a letter on paper with a citrine signature line. */
+/* 10 Why we built it: a letter on paper with a signature line. */
 .public-site main section.rx-ivory .hx-note {
   border: 0 !important;
   background: transparent !important;
 }
 .public-site main section.rx-ivory .hx-note-body p {
-  color: var(--rx-ink);
+  color: var(--rx-ink-950);
   font-size: clamp(17px, 1.4vw, 19px);
   line-height: 1.7;
 }
 .public-site main .hx-note-sign {
   display: inline-block;
   padding-bottom: 6px;
-  border-bottom: 1px solid var(--rx-citrine);
-  font: italic 400 24px/1.3 var(--rx-font-human) !important;
-  color: var(--rx-ink) !important;
+  border-bottom: 1px solid var(--rx-volt-deep);
+  font: 700 20px/1.3 var(--font-display) !important;
+  color: var(--rx-ink-950) !important;
 }
 .public-site main section.rx-ink .hx-note-sign {
   color: var(--rx-ivory) !important;
@@ -839,7 +834,7 @@ textarea,
   gap: 16px 32px;
   margin-bottom: 40px;
   padding-bottom: 28px;
-  border-bottom: 1px solid var(--rx-ink-600);
+  border-bottom: 1px solid var(--rx-ink-700);
 }
 .rx-trust .hx-trustbar-inner ul {
   display: flex;
@@ -857,32 +852,32 @@ textarea,
   font-weight: 600;
 }
 .rx-trust .hx-trustbar-inner li svg {
-  color: var(--rx-aqua);
+  color: var(--rx-mist);
 }
 .rx-trust .hx-magnet {
-  --hx-text: var(--rx-ink);
+  --hx-text: var(--rx-ink-950);
   --hx-muted: var(--rx-graphite);
   border: 0 !important;
   border-radius: 4px 18px 18px 4px;
   background: var(--rx-ivory) !important;
-  box-shadow: inset 10px 0 0 var(--rx-rule) !important;
+  box-shadow: inset 10px 0 0 var(--rx-stone) !important;
   color: var(--rx-graphite);
 }
 .rx-trust .hx-magnet :is(h2, .hx-h2) {
-  color: var(--rx-ink) !important;
+  color: var(--rx-ink-950) !important;
 }
 .rx-trust .hx-magnet p {
   color: var(--rx-graphite) !important;
 }
 .rx-trust .hx-magnet .hx-pill {
-  border-color: var(--rx-rule);
-  background: var(--rx-ivory-50);
-  color: var(--rx-aqua-deep) !important;
+  border-color: var(--rx-stone);
+  background: var(--rx-ivory-card);
+  color: var(--rx-volt-deep) !important;
 }
 
 /* 12 The record closes. */
 .public-site main section.rx-ink.hx-closing a:not(.button) {
-  color: var(--rx-aqua);
+  color: var(--rx-volt);
 }
 
 /* ---------------------------------------------------------
@@ -916,19 +911,19 @@ html[data-motion="off"] .rx-stream .rx-stream-pulse {
   gap: 8px 14px;
 }
 
-/* The checklist cover is ivory, so its human word takes Deep Aqua (5.4:1). */
+/* The checklist cover is ivory. */
 .public-site main .rx-trust .hx-magnet :is(h2, .hx-h2) em {
-  color: var(--rx-aqua-deep);
+  color: var(--rx-volt-deep);
 }
 .public-site .site-footer {
-  background: var(--rx-ink);
-  border-top-color: var(--rx-ink-600);
+  background: var(--rx-ink-950);
+  border-top-color: var(--rx-ink-700);
 }
 .public-site .site-footer a {
   color: var(--rx-mist);
 }
 .public-site .site-footer a:hover {
-  color: var(--rx-aqua);
+  color: var(--rx-volt);
 }
 
 /* No gradients across sections; glows stay inside product visuals only. */
@@ -945,7 +940,7 @@ html[data-motion="off"] .rx-stream .rx-stream-pulse {
     .deployment-content
   ) {
   background-image: none !important;
-  background-color: var(--rx-ink) !important;
+  background-color: var(--rx-ink-950) !important;
 }
 .public-site .hero-section::before {
   background-image: none !important;

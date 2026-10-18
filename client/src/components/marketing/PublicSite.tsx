@@ -59,7 +59,7 @@ export function PageMeta({
       "robots",
       noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large"
     );
-    upsertMeta("name", "theme-color", "#0E0B14");
+    upsertMeta("name", "theme-color", "#120A18");
     upsertMeta("property", "og:site_name", SITE_NAME);
     upsertMeta("property", "og:locale", "en_US");
     upsertMeta("property", "og:type", "website");
@@ -707,24 +707,12 @@ export function FounderNote({
   ground?: "ink" | "ivory";
   stamp?: string;
 }) {
-  // "Why we built Relyxus": the people word goes into the human voice.
-  const [before, after] = founderNote.heading.split(/\bwe\b/);
   return (
     <section className={`hx-section rx-${ground}`}>
       {stamp && <Stamp at={stamp} />}
       <div className="container">
         <div className="hx-note">
-          <h2 className="hx-h2">
-            {after === undefined ? (
-              founderNote.heading
-            ) : (
-              <>
-                {before}
-                <em>we</em>
-                {after}
-              </>
-            )}
-          </h2>
+          <h2 className="hx-h2">{founderNote.heading}</h2>
           <div className="hx-note-body">
             {founderNote.paragraphs.map(text => (
               <p key={text}>{text}</p>

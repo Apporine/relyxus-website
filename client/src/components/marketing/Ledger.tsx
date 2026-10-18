@@ -244,8 +244,7 @@ export function SecondApprover() {
         <div className="rx-approver-copy">
           <span className="rx-eyebrow">Waiting for approval</span>
           <h2 id="rx-approver-title" className="hx-h2">
-            Nothing runs until someone like you says{" "}
-            <em className="is-decision">yes.</em>
+            Nothing runs until someone like you says yes.
           </h2>
           <p>
             The fix is ready and the first approver has signed. Policy asks for

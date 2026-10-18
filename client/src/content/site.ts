@@ -624,16 +624,18 @@ export const standards: readonly DataSource[] = [
   },
 ];
 
-/** Tools Relyxus really connects to today, by name. */
+/** Tools Relyxus connects to today, by name. Keep in sync with namedIntegrations. */
 export const integrations: readonly string[] = [
-  "Alerts",
-  "Logs",
-  "Metrics",
-  "Traces",
-  "Changes",
-  "Deploys",
-  "Tickets",
-  "Identity",
+  "PagerDuty",
+  "Datadog",
+  "Splunk",
+  "GitHub",
+  "GitLab",
+  "Jira",
+  "ServiceNow",
+  "Okta",
+  "Slack",
+  "AWS CloudWatch",
 ];
 
 /** Assurance status shown on the Security page, e.g. { label: "SOC 2 Type II", status: "In progress, target Q3 2027" }. */
@@ -689,7 +691,7 @@ export const companyDetails: {
 export const pricingTerms: readonly { title: string; text: string }[] = [
   {
     title: "One annual licence",
-    text: "Priced on how you run Relyxus, agreed in writing before you start.",
+    text: "Most regulated teams evaluate in the mid five figures. Exact price is agreed in writing before you start.",
   },
   {
     title: "Replay pilot credited",

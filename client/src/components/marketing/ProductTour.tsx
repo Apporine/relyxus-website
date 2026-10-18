@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Pause, Play } from "lucide-react";
 import { prefersLessMotion } from "@/lib/motion";
+import { screenFeatures } from "@/content/features";
 
 type Callout = { x: number; y: number; w: number; h: number; text: string };
 
@@ -162,6 +163,7 @@ export function ProductTour() {
 
   const current = screens[screen];
   const focus = current.callouts[beat];
+  const feature = screenFeatures[current.key];
   const zoom = 1.22;
   const clamp = (value: number, min: number, max: number) =>
     Math.min(max, Math.max(min, value));
@@ -244,6 +246,9 @@ export function ProductTour() {
               key={`${current.key}-${beat}`}
               aria-live="polite"
             >
+              {feature && (
+                <span className="hx-tour-feature">{feature.feature}</span>
+              )}
               {focus.text}
             </p>
           </div>

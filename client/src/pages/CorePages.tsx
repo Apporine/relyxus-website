@@ -16,6 +16,13 @@ import { StageVisual } from "@/components/marketing/StageVisual";
 import { Headline } from "@/components/marketing/Headline";
 import { CtaPanel } from "@/components/home/Resolved";
 import { ProductTour } from "@/components/marketing/ProductTour";
+import {
+  BeforeAfterStrip,
+  FeatureMap,
+  HowItWorksStrip,
+  SecurityFeatureStrip,
+  StackStrip,
+} from "@/components/marketing/ProductClarity";
 import { outageData, packPromise } from "@/content/site";
 import { pageMeta } from "@/content/meta";
 import { useReveal } from "@/lib/motion";
@@ -35,6 +42,13 @@ function ScreensStage() {
       <StageVisual motif="screens" className="rx-screens-core" />
       <div className="container">
         <Headline text="Five screens. *One source of truth.*" in={inView} />
+        <p
+          className="rx-section-sub rx-reveal"
+          style={{ "--i": 1 } as React.CSSProperties}
+        >
+          Each screen owns a feature: exposure, investigation, ranked causes,
+          approvals, or service impact.
+        </p>
         <div
           className="rx-glass rx-screens-frame rx-reveal"
           style={{ "--i": 2 } as React.CSSProperties}
@@ -61,11 +75,19 @@ export function ProductPage() {
         visual="screens"
       >
         <PrimaryLink href="/demo">Book a 30 minute demo</PrimaryLink>
+        <a className="button button-secondary" href="#what-you-get">
+          What you get <ArrowRight size={16} aria-hidden="true" />
+        </a>
         <a className="button button-secondary" href="#screens">
           See the screens <ArrowRight size={16} aria-hidden="true" />
         </a>
       </MiniStage>
+      <HowItWorksStrip />
+      <FeatureMap ground="ink" />
       <ScreensStage />
+      <BeforeAfterStrip />
+      <StackStrip />
+      <SecurityFeatureStrip />
       <DataBand
         title="Most major outages cost six figures. *Every hour to cause adds to it.*"
         items={outageData.items}

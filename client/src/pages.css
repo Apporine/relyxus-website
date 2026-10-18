@@ -804,3 +804,234 @@ html[data-motion="off"] .rx-team-chain::before {
   transform: none;
   transition: none;
 }
+
+/* ---------------------------------------------------------
+   Product clarity: how it works, features, before/after, stack
+   --------------------------------------------------------- */
+.rx-how-steps {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0;
+  margin: 56px 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+.rx-how-steps li {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  padding: 28px 20px 0 0;
+  border-right: 1px solid var(--line);
+}
+.rx-how-steps li:last-child {
+  border-right: 0;
+  padding-right: 0;
+}
+.public-site main .rx-how-steps strong {
+  color: inherit;
+  font: 700 22px/1.15 var(--font-display);
+  font-stretch: 85%;
+}
+.rx-how-steps li > span:last-child {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 22px;
+}
+
+.rx-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin: 56px 0 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--line);
+}
+.rx-feature-grid li {
+  display: grid;
+  gap: 12px;
+  padding: clamp(24px, 3vw, 36px);
+  background: var(--raised);
+}
+.rx-paper .rx-feature-grid li {
+  background: var(--paper-card);
+}
+.rx-feature-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+.public-site main .rx-feature-head strong {
+  color: inherit;
+  font: 700 22px/1.2 var(--font-display);
+  font-stretch: 85%;
+}
+.public-site .rx-feature-screen {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--signal);
+  font: 500 12px/1 var(--font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.public-site .rx-feature-screen:hover,
+.public-site .rx-feature-screen:focus-visible {
+  text-decoration: underline;
+}
+.rx-feature-grid p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 26px;
+}
+.rx-paper .rx-feature-grid p {
+  color: var(--graphite);
+}
+
+.rx-before-table {
+  display: grid;
+  gap: 0;
+  margin-top: 48px;
+  border-top: 1px solid var(--line);
+}
+.rx-before-head,
+.rx-before-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr) minmax(0, 0.8fr);
+  gap: 24px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+}
+.rx-before-head {
+  color: var(--muted);
+  font: 500 11px/1 var(--font-mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.rx-before-row p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 26px;
+}
+.rx-before-row .is-without {
+  color: var(--muted);
+}
+.rx-before-row .is-with {
+  color: inherit;
+  font-weight: 600;
+}
+.rx-before-row .is-feature {
+  color: var(--signal);
+  font: 500 13px/1.4 var(--font-mono);
+  letter-spacing: 0.04em;
+}
+
+.rx-stack-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 48px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.rx-stack-list li {
+  padding: 12px 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--paper);
+  font: 500 14px/1 var(--font-body);
+}
+
+.rx-control-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  margin: 48px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.rx-control-list li {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+.rx-control-list svg {
+  margin-top: 4px;
+  color: var(--signal);
+}
+.public-site main .rx-control-list strong {
+  display: block;
+  margin-bottom: 8px;
+  color: inherit;
+  font: 700 18px/1.25 var(--font-display);
+  font-stretch: 85%;
+}
+.rx-control-list p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 24px;
+}
+.rx-control-more {
+  margin: 40px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+.public-site main .rx-control-more a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.public-site main .rx-control-more a:hover {
+  color: var(--signal);
+}
+
+.hx-tour-feature {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--signal);
+  font: 500 11px/1 var(--font-mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.rx-screens-stage .rx-section-sub {
+  max-width: 40rem;
+  margin: 20px 0 40px;
+  color: var(--muted);
+}
+
+@media (max-width: 980px) {
+  .rx-how-steps {
+    grid-template-columns: 1fr;
+  }
+  .rx-how-steps li {
+    padding: 20px 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .rx-feature-grid,
+  .rx-control-list {
+    grid-template-columns: 1fr;
+  }
+  .rx-before-head {
+    display: none;
+  }
+  .rx-before-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 20px 0;
+  }
+  .rx-before-row .is-feature {
+    order: -1;
+  }
+}

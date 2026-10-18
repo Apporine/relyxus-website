@@ -154,7 +154,7 @@ function TeamView({ team, initialCase }: { team: Team; initialCase: UseCase }) {
             ))}
           </ol>
           <div className="rx-glass rx-team-data">
-            <span className="rx-label">Example · {active.label}</span>
+            <span className="rx-label">Sample incident · {active.label}</span>
             {team.view === "evidence" && <EvidenceView useCase={active} />}
             {team.view === "timeline" && <TimelineView useCase={active} />}
             {team.view === "exposure" && <ExposureView useCase={active} />}

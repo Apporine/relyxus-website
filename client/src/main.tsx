@@ -10,7 +10,8 @@ import "./index.css";
 import "./marketing.css";
 import "./kinetic.css";
 import "./human.css";
-import "./ledger.css";
+import "./system.css";
+import "./stage.css";
 import "./solutions.css";
 import "./trust.css";
 

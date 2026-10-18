@@ -1,0 +1,631 @@
+/*
+ * Relyxus design system (Website Redesign Strategy). Loads after the legacy
+ * layers and sets the tokens, the Apporine four font system, the one motion
+ * curve and the shared primitives: blur to focus reveals, line draws, ink
+ * glass, the signal glow and the incident clock readout.
+ *
+ *   Display  Bricolage Grotesque, condensed caps 800
+ *   Accent   Instrument Serif italic, one phrase per headline
+ *   Body     Instrument Sans 17/28
+ *   Label    IBM Plex Mono, 11 to 12 px caps, +18% tracking
+ */
+:root {
+  /* Colour */
+  --ink: #120a18;
+  --paper: #f4efe6;
+  --signal: #c6f432;
+  --signal-glow: rgba(198, 244, 50, 0.5);
+  /* Paper at 55% on ink, as a solid colour so it can sit on any layer. */
+  --muted: #8e8889;
+  --alert: #f0524f;
+  --raised: #1d1426;
+  --line: rgba(244, 239, 230, 0.1);
+  --glass: rgba(18, 10, 24, 0.6);
+  --paper-card: #fbf8f2;
+  --stone: #dcd3c4;
+  --graphite: #4b4552;
+  /* Type */
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-accent: "Instrument Serif", Georgia, serif;
+  --font-body: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+  /* Motion: one curve everywhere, two secondaries */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-2: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-3: cubic-bezier(0.2, 0, 0, 1);
+  --reveal: 600ms;
+  --swap: 900ms;
+  /* Grid */
+  --container: 1280px;
+  --unit: 8px;
+
+  /* Older layers read these names; they now point at the system above. */
+  --rx-ink-950: var(--ink);
+  --rx-ink-900: var(--raised);
+  --rx-ink-700: #2e2238;
+  --rx-ivory: var(--paper);
+  --rx-ivory-card: var(--paper-card);
+  --rx-stone: var(--stone);
+  --rx-volt: var(--signal);
+  --rx-volt-hover: #b5e21f;
+  --rx-volt-deep: #445c0e;
+  --rx-orchid: var(--muted);
+  --rx-orchid-soft: var(--muted);
+  --rx-accent: var(--muted);
+  --rx-mist: var(--muted);
+  --rx-graphite: var(--graphite);
+  --rx-severity: var(--alert);
+  --rx-ease: var(--ease);
+  --rx-web-ease: var(--ease);
+  --rx-radius-card: 16px;
+  --rx-radius-button: 999px;
+  --hx-radius: 16px;
+  --hx-card: var(--raised);
+  --hx-border: var(--line);
+  --hx-border-strong: rgba(244, 239, 230, 0.24);
+  --hx-text: var(--paper);
+  --hx-muted: var(--muted);
+}
+
+html,
+body {
+  background: var(--ink);
+  color: var(--paper);
+}
+body,
+button,
+input,
+select,
+textarea,
+.public-site {
+  font-family: var(--font-body);
+}
+.public-site {
+  font-size: 17px;
+  line-height: 28px;
+}
+.public-site main p {
+  max-width: 60ch;
+}
+
+/* ---------------------------------------------------------
+   Display: Bricolage, condensed caps 800, tracking -2%
+   --------------------------------------------------------- */
+.public-site :is(h1, h2),
+.public-site :is(.hx-h2, .hx-band-title) {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 75%;
+  font-variation-settings:
+    "wdth" 75,
+    "opsz" 96;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+.public-site main h1 {
+  font-size: clamp(48px, 7.2vw, 120px);
+  line-height: 0.9;
+}
+.public-site main :is(h2, .hx-h2, .hx-band-title) {
+  font-size: clamp(40px, 5.2vw, 84px);
+  line-height: 0.92;
+}
+.public-site main h3 {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 1.7vw, 24px);
+  font-weight: 700;
+  font-stretch: 85%;
+  font-variation-settings: "wdth" 85;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+
+/* Accent: Instrument Serif italic, lowercase, same size, lime on ink. */
+.public-site .rx-accent,
+.public-site :is(h1, h2) em {
+  position: relative;
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 400;
+  font-stretch: normal;
+  font-variation-settings: normal;
+  text-transform: none;
+  letter-spacing: -0.01em;
+  color: var(--signal);
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+
+/* Label / HUD: IBM Plex Mono caps. */
+.rx-label,
+.rx-eyebrow,
+.public-site .eyebrow,
+.public-site .hx-pill,
+.public-site .hx-test-index,
+.public-site .rx-caption {
+  font-family: var(--font-mono);
+  font-size: clamp(11px, 0.85vw, 12px);
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.rx-eyebrow,
+.public-site .eyebrow {
+  color: var(--muted);
+}
+
+/* ---------------------------------------------------------
+   Motion primitives
+   --------------------------------------------------------- */
+.rx-headline .rx-line {
+  display: block;
+}
+.rx-headline .rx-line,
+.rx-reveal {
+  opacity: 0;
+  filter: blur(6px);
+  transform: translateY(12px);
+  transition:
+    opacity var(--reveal) var(--ease),
+    filter var(--reveal) var(--ease),
+    transform var(--reveal) var(--ease);
+  transition-delay: calc(var(--i, 0) * 80ms);
+}
+.rx-headline.is-in .rx-line,
+.is-in .rx-reveal,
+.rx-reveal.is-in {
+  opacity: 1;
+  filter: blur(0);
+  transform: none;
+}
+/* The accent underline: a hand drawn stroke that draws in left to right. */
+.public-site .rx-headline .rx-underlined {
+  padding-bottom: 0.06em;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 12' preserveAspectRatio='none'%3E%3Cpath d='M2 8 C 60 3, 120 10, 180 6 S 260 3, 298 7' fill='none' stroke='%23C6F432' stroke-width='3' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 0.16em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  transition: background-size var(--swap) var(--ease) 500ms;
+}
+.public-site .rx-headline.is-in .rx-underlined {
+  background-size: 100% 0.16em;
+}
+/* Lines draw, they don't appear: give paths pathLength="1". */
+.rx-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset var(--swap) var(--ease);
+  transition-delay: calc(var(--i, 0) * 120ms);
+}
+.is-in .rx-draw {
+  stroke-dashoffset: 0;
+}
+/* Connector flow: a dash travelling from source to core. */
+.rx-flow {
+  stroke-dasharray: 0.04 0.08;
+  animation: rx-flow 1.6s linear infinite;
+}
+@keyframes rx-flow {
+  to {
+    stroke-dashoffset: -1.2;
+  }
+}
+@keyframes rx-node-pulse {
+  0% {
+    transform: scale(0.92);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes rx-service-pulse {
+  0%,
+  100% {
+    transform: scale(0.98);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+@keyframes rx-orbit-drift {
+  0%,
+  100% {
+    transform: translateY(-1px);
+  }
+  50% {
+    transform: translateY(1px);
+  }
+}
+@keyframes rx-breathe {
+  0%,
+  100% {
+    opacity: 0.82;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes rx-grain {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-6%, 3%);
+  }
+  50% {
+    transform: translate(4%, -6%);
+  }
+  75% {
+    transform: translate(6%, 5%);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+@keyframes rx-scroll-cue {
+  0%,
+  100% {
+    transform: scaleY(0.7);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+/* Glow, on live parts only: the core, the active connector, the clock. */
+.rx-live {
+  filter: drop-shadow(0 0 4px rgba(198, 244, 50, 0.85))
+    drop-shadow(0 0 12px rgba(198, 244, 50, 0.5));
+}
+
+/* Ink glass: cards and panels over the stage. */
+.rx-glass {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  backdrop-filter: blur(16px) saturate(1.5);
+}
+
+/* Film grain, drifting. */
+.rx-grain {
+  position: absolute;
+  inset: -10%;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+  animation: rx-grain 8s steps(8) infinite;
+}
+
+/* ---------------------------------------------------------
+   Buttons: 240 × 48 pills with mono caps labels
+   --------------------------------------------------------- */
+.public-site .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 240px;
+  min-height: 48px;
+  padding: 0 25.6px;
+  border-radius: 999px;
+  font: 500 11.52px/1 var(--font-mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition:
+    background-color 300ms var(--ease),
+    border-color 300ms var(--ease),
+    box-shadow 300ms var(--ease),
+    transform 300ms var(--ease);
+}
+.public-site .button svg {
+  width: 14px;
+  height: 14px;
+}
+.public-site .button-small {
+  min-width: 0;
+  min-height: 40px;
+  padding: 0 18px;
+}
+.public-site .button-primary,
+.public-site .button-primary:visited {
+  color: var(--ink) !important;
+  border: 1px solid var(--signal) !important;
+  background: var(--signal) !important;
+  box-shadow:
+    0 6px 22px -6px rgba(198, 244, 50, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+}
+.public-site .button-primary:hover,
+.public-site .button-primary:focus-visible {
+  color: var(--ink) !important;
+  background: #d4f85c !important;
+  box-shadow:
+    0 8px 28px -6px rgba(198, 244, 50, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+  transform: translateY(-1px);
+}
+.public-site .button-secondary,
+.public-site .button-outline {
+  color: var(--paper) !important;
+  border: 1px solid rgba(244, 239, 230, 0.24) !important;
+  background: rgba(244, 239, 230, 0.04) !important;
+  box-shadow: none !important;
+}
+.public-site .button-secondary:hover,
+.public-site .button-outline:hover {
+  border-color: rgba(244, 239, 230, 0.5) !important;
+  background: rgba(244, 239, 230, 0.08) !important;
+}
+.public-site :focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+}
+@media (max-width: 560px) {
+  .public-site .button:not(.button-small) {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+/* ---------------------------------------------------------
+   Header: 81 px, ink, one hairline
+   --------------------------------------------------------- */
+.public-site .site-header {
+  height: 81px;
+  border-bottom: 1px solid var(--line) !important;
+  background-color: rgba(18, 10, 24, 0.92) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  backdrop-filter: blur(16px) saturate(1.5);
+}
+.public-site .header-shell {
+  height: 80px;
+}
+.public-site .nav-trigger {
+  font: 500 14px/1 var(--font-body) !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+.public-site .nav-popover,
+.public-site .mobile-nav-panel {
+  border: 1px solid var(--line) !important;
+  background: rgba(18, 10, 24, 0.94) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  backdrop-filter: blur(16px) saturate(1.5);
+}
+.public-site .nav-popover-link:hover,
+.public-site .nav-popover-link:focus-visible {
+  background: rgba(244, 239, 230, 0.06) !important;
+}
+.public-site .wm {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: 85%;
+  text-transform: lowercase;
+  letter-spacing: -0.01em;
+  color: var(--paper);
+}
+.public-site .wm-x1,
+.public-site .wm-x2,
+.public-site .wordmark:hover .wm-x2 {
+  stroke: var(--signal);
+}
+
+/* ---------------------------------------------------------
+   Grounds: ink for the cinematic half, paper once it resolves
+   --------------------------------------------------------- */
+.public-site main section.rx-ink,
+.public-site main section.rx-ivory,
+.public-site main section.rx-paper {
+  position: relative;
+  background-image: none !important;
+}
+.public-site main section.rx-ink {
+  background-color: var(--ink) !important;
+}
+.public-site main :is(section.rx-ivory, section.rx-paper, .rx-on-paper) {
+  --hx-text: var(--ink);
+  --hx-muted: var(--graphite);
+  --hx-card: var(--paper-card);
+  --hx-border: var(--stone);
+  --hx-border-strong: rgba(18, 10, 24, 0.24);
+  --hx-accent: var(--rx-volt-deep);
+  --hx-mint: var(--rx-volt-deep);
+  --hx-cyan: var(--rx-volt-deep);
+  --rx-text: var(--ink);
+  --rx-muted: var(--graphite);
+  --rx-accent: var(--rx-volt-deep);
+  --muted: #6c6670;
+  --line: rgba(18, 10, 24, 0.12);
+  color: var(--graphite);
+  color-scheme: light;
+}
+.public-site main :is(section.rx-ivory, section.rx-paper) {
+  background-color: var(--paper) !important;
+}
+.public-site
+  main
+  :is(section.rx-ivory, section.rx-paper, .rx-on-paper)
+  :is(h1, h2, h3, h4, .hx-h2, strong) {
+  color: var(--ink) !important;
+}
+.public-site
+  main
+  :is(section.rx-ivory, section.rx-paper, .rx-on-paper)
+  :is(p, li, dd, small) {
+  color: var(--graphite);
+}
+/* Lime text fails on paper, so the accent phrase turns ink and keeps its line. */
+.public-site
+  main
+  :is(section.rx-ivory, section.rx-paper, .rx-on-paper)
+  .rx-accent,
+.public-site
+  main
+  :is(section.rx-ivory, section.rx-paper, .rx-on-paper)
+  :is(h1, h2)
+  em {
+  color: var(--ink);
+}
+.public-site
+  main
+  :is(section.rx-ivory, section.rx-paper, .rx-on-paper)
+  a:not(.button) {
+  color: var(--ink);
+  text-decoration-color: var(--rx-volt-deep);
+}
+.public-site
+  main
+  :is(section.rx-ivory, section.rx-paper, .rx-on-paper)
+  :is(.rx-eyebrow, .eyebrow, .hx-pill, .hx-test-index) {
+  color: var(--graphite) !important;
+}
+.public-site
+  main
+  :is(section.rx-ivory, section.rx-paper, .rx-on-paper)
+  :is(.button-secondary, .button-outline) {
+  color: var(--ink) !important;
+  border-color: rgba(18, 10, 24, 0.24) !important;
+  background: rgba(18, 10, 24, 0.04) !important;
+}
+.public-site
+  main
+  :is(section.rx-ivory, section.rx-paper)
+  :is(.hx-path, .hx-commitments article, .hx-proof-list li, .hx-note) {
+  border-color: var(--stone) !important;
+  background: var(--paper-card) !important;
+  box-shadow: none !important;
+}
+
+/* Big figures in display caps. */
+.rx-clock-num {
+  font-family: var(--font-display);
+  font-size: clamp(56px, 7vw, 112px);
+  font-weight: 800;
+  font-stretch: 75%;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.rx-clock-unit {
+  color: var(--muted);
+  font: 500 12px/1.5 var(--font-mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.public-site main .hx-band .hx-facts dt {
+  display: grid;
+  gap: 4px;
+  color: var(--paper) !important;
+}
+.public-site main .hx-band .hx-source-line {
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+/* ---------------------------------------------------------
+   The incident clock readout, bottom left on every page
+   --------------------------------------------------------- */
+.rx-readout {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  z-index: 21;
+  display: grid;
+  gap: 2px;
+  padding: 10px 14px;
+  border: 1px solid rgba(244, 239, 230, 0.1);
+  border-radius: 12px;
+  background: rgba(18, 10, 24, 0.72);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  backdrop-filter: blur(16px) saturate(1.5);
+  color: #8e8889;
+  font: 500 11px/1.5 var(--font-mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  pointer-events: none;
+  font-variant-numeric: tabular-nums;
+}
+.rx-readout strong {
+  color: var(--paper);
+  font-weight: 500;
+}
+.rx-readout-clock {
+  color: var(--signal);
+}
+.rx-readout-clock.is-live .rx-colon {
+  animation: rx-breathe 1s steps(2) infinite;
+}
+@media (max-width: 640px) {
+  .rx-readout {
+    left: 12px;
+    bottom: 12px;
+    padding: 8px 10px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+  }
+  .rx-readout-stage {
+    display: none;
+  }
+}
+
+/* Endorsement */
+.rx-endorse {
+  color: var(--muted);
+  font: 500 12px/1.3 var(--font-mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* ---------------------------------------------------------
+   Reduced motion: static frames with 300 ms crossfades
+   --------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .rx-headline .rx-line,
+  .rx-reveal {
+    filter: none;
+    transform: none;
+    transition: opacity 300ms linear;
+    transition-delay: 0ms;
+  }
+  .rx-draw {
+    transition: none;
+    stroke-dashoffset: 0;
+  }
+  .public-site .rx-headline .rx-underlined {
+    transition: none;
+    background-size: 100% 0.16em;
+  }
+  .rx-flow,
+  .rx-grain,
+  .rx-readout-clock .rx-colon {
+    animation: none;
+  }
+}
+html[data-motion="off"] .rx-headline .rx-line,
+html[data-motion="off"] .rx-reveal {
+  filter: none;
+  transform: none;
+  transition: opacity 300ms linear;
+  transition-delay: 0ms;
+}
+html[data-motion="off"] .rx-draw {
+  transition: none;
+  stroke-dashoffset: 0;
+}
+html[data-motion="off"] .public-site .rx-headline .rx-underlined {
+  transition: none;
+  background-size: 100% 0.16em;
+}
+html[data-motion="off"] :is(.rx-flow, .rx-grain, .rx-readout-clock .rx-colon) {
+  animation: none;
+}

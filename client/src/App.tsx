@@ -10,6 +10,7 @@ import { ResourceArticle, ResourcesPage } from "@/pages/Resources";
 import { DemoPage } from "@/pages/Demo";
 import { FinancialServicesPage, SolutionPage } from "@/pages/Solutions";
 import NotFound from "@/pages/NotFound";
+import { SpecimenPage } from "@/pages/Specimen";
 // Pages are imported directly, not lazily: the site is small, and a lazy
 // route showed a loading message before any copy on first load.
 function WithLayout({ children }: { children: React.ReactNode }) {
@@ -64,6 +65,11 @@ function Router() {
           <Redirect to={to} replace />
         </Route>
       ))}
+      <Route path="/specimen">
+        <WithLayout>
+          <SpecimenPage />
+        </WithLayout>
+      </Route>
       <Route path="/demo">
         <WithLayout>
           <DemoPage />

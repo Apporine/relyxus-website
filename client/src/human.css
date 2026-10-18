@@ -182,7 +182,7 @@ body,
 .hx-chip-text {
   fill: var(--hx-text);
   font:
-    600 12px "Martian Mono",
+    600 12px "IBM Plex Mono",
     system-ui,
     sans-serif;
 }
@@ -229,7 +229,7 @@ body,
 }
 .hx-core-halo {
   fill: rgba(180, 134, 247, 0.1);
-  animation: hx-pulse 3s ease-in-out infinite;
+  animation: hx-pulse 3s var(--ease) infinite;
   transform-origin: 290px 160px;
 }
 .hx-core-disc {
@@ -240,7 +240,7 @@ body,
 .hx-core-text {
   fill: var(--hx-text);
   font:
-    700 11px "Martian Mono",
+    700 11px "IBM Plex Mono",
     system-ui,
     sans-serif;
 }
@@ -251,14 +251,14 @@ body,
 .hx-card-title {
   fill: var(--hx-text);
   font:
-    700 12px "Martian Mono",
+    700 12px "IBM Plex Mono",
     system-ui,
     sans-serif;
 }
 .hx-card-sub {
   fill: var(--hx-muted);
   font:
-    500 11px "Martian Mono",
+    500 11px "IBM Plex Mono",
     system-ui,
     sans-serif;
 }
@@ -270,7 +270,7 @@ body,
 .hx-hub .hx-source,
 .hx-hub .hx-out,
 .hx-hub .hx-core {
-  transition: opacity 240ms ease;
+  transition: opacity 240ms var(--ease);
 }
 .hx-hub[data-mode="investigate"] .hx-out {
   opacity: 0.3;
@@ -352,8 +352,8 @@ body,
   background: var(--hx-card);
   text-decoration: none;
   transition:
-    border-color 180ms ease,
-    transform 180ms ease;
+    border-color 180ms var(--ease),
+    transform 180ms var(--ease);
 }
 .hx-path:hover {
   border-color: var(--hx-mint);
@@ -875,22 +875,22 @@ body,
 .hx-scene-pulse {
   transform-box: fill-box;
   transform-origin: center;
-  animation: hx-dot-pulse 1.8s ease-in-out infinite;
+  animation: hx-dot-pulse 1.8s var(--ease) infinite;
 }
 .hx-scene-ring {
   transform-box: fill-box;
   transform-origin: center;
-  animation: hx-pulse 3s ease-in-out infinite;
+  animation: hx-pulse 3s var(--ease) infinite;
 }
 .hx-scene-reveal {
   opacity: 0;
-  animation: hx-reveal 0.7s ease forwards;
+  animation: hx-reveal 0.7s var(--ease) forwards;
 }
 .hx-scene-draw {
   stroke-dasharray: 260;
   stroke-dashoffset: 260;
   stroke: var(--hx-mint);
-  animation: hx-draw 3.4s ease forwards;
+  animation: hx-draw 3.4s var(--ease) forwards;
 }
 .hx-card-hot {
   stroke: var(--hx-mint);
@@ -902,7 +902,7 @@ body,
   fill: rgba(244, 239, 230, 0.14);
 }
 .hx-scene-card-move {
-  animation: hx-card-move 4.6s ease-in-out forwards;
+  animation: hx-card-move 4.6s var(--ease) forwards;
 }
 .hx-scene-approver circle {
   fill: rgba(244, 239, 230, 0.08);
@@ -911,12 +911,12 @@ body,
 .hx-scene-approver text {
   fill: var(--hx-text);
   font:
-    700 11px "Martian Mono",
+    700 11px "IBM Plex Mono",
     system-ui,
     sans-serif;
 }
 .hx-scene-approver {
-  animation: hx-approve 0.5s ease forwards;
+  animation: hx-approve 0.5s var(--ease) forwards;
 }
 .hx-done {
   fill: rgba(180, 134, 247, 0.12);
@@ -975,7 +975,7 @@ body,
 }
 .hx-scene-approver {
   opacity: 0.4;
-  animation: hx-approve-on 0.5s ease forwards;
+  animation: hx-approve-on 0.5s var(--ease) forwards;
 }
 @keyframes hx-approve-on {
   to {
@@ -1039,7 +1039,7 @@ body,
   stroke: var(--hx-mint);
   stroke-width: 2;
   stroke-dasharray: 420;
-  transition: stroke-dashoffset 0.8s ease;
+  transition: stroke-dashoffset 0.8s var(--ease);
 }
 .hx-stage-node {
   cursor: pointer;
@@ -1050,15 +1050,15 @@ body,
 }
 .hx-stage-dot {
   fill: var(--hx-border-strong);
-  transition: fill 0.3s ease;
+  transition: fill 0.3s var(--ease);
 }
 .hx-stage-node text {
   fill: var(--hx-muted);
   font:
-    600 12px "Martian Mono",
+    600 12px "IBM Plex Mono",
     system-ui,
     sans-serif;
-  transition: fill 0.3s ease;
+  transition: fill 0.3s var(--ease);
 }
 .hx-stage-node.is-on .hx-stage-dot {
   fill: var(--hx-mint);
@@ -1086,7 +1086,7 @@ body,
   stroke: var(--hx-mint);
   stroke-width: 3;
   stroke-dasharray: 660;
-  transition: stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: stroke-dashoffset 1s var(--ease);
 }
 .hx-pipe-node {
   outline: none;
@@ -1101,19 +1101,19 @@ body,
   fill: var(--rx-ink-950);
   stroke: var(--hx-border-strong);
   stroke-width: 2;
-  transition: stroke 0.4s ease;
+  transition: stroke 0.4s var(--ease);
 }
 .hx-pipe-core {
   fill: var(--hx-border-strong);
-  transition: fill 0.4s ease;
+  transition: fill 0.4s var(--ease);
 }
 .hx-pipe-node text {
   fill: var(--hx-muted);
   font:
-    600 13px "Martian Mono",
+    600 13px "IBM Plex Mono",
     system-ui,
     sans-serif;
-  transition: fill 0.4s ease;
+  transition: fill 0.4s var(--ease);
 }
 .hx-pipe-node.is-done .hx-pipe-ring,
 .hx-pipe-node.is-on .hx-pipe-ring {
@@ -1130,14 +1130,14 @@ body,
   stroke: var(--hx-mint);
 }
 .hx-token {
-  transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 1s var(--ease);
   pointer-events: none;
 }
 .hx-token-halo {
   fill: rgba(180, 134, 247, 0.22);
   transform-box: fill-box;
   transform-origin: center;
-  animation: hx-pulse 1.6s ease-in-out infinite;
+  animation: hx-pulse 1.6s var(--ease) infinite;
 }
 .hx-token-core {
   fill: var(--hx-mint);
@@ -1148,7 +1148,7 @@ body,
   background: none;
 }
 .hx-stage-copy {
-  animation: hx-reveal 0.6s ease both;
+  animation: hx-reveal 0.6s var(--ease) both;
 }
 @media (max-width: 900px) {
   .hx-pipe-node text {
@@ -1181,7 +1181,7 @@ body,
     0 50px 120px rgba(180, 134, 247, 0.1),
     0 0 0 1px rgba(244, 239, 230, 0.02);
   transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
-  transition: transform 0.25s ease-out;
+  transition: transform 0.25s var(--ease);
   will-change: transform;
 }
 .hx-tour-frame .hx-shot-bar span {
@@ -1200,7 +1200,7 @@ body,
   inset: 0;
   transform-origin: 0 0;
   will-change: transform;
-  transition: transform 2s cubic-bezier(0.45, 0, 0.2, 1);
+  transition: transform 2s var(--ease);
 }
 .hx-tour-zoom img {
   position: absolute;
@@ -1208,7 +1208,7 @@ body,
   width: 100%;
   height: 100%;
   opacity: 0;
-  transition: opacity 0.7s ease;
+  transition: opacity 0.7s var(--ease);
 }
 .hx-tour-zoom img.is-on {
   opacity: 1;
@@ -1222,8 +1222,8 @@ body,
   opacity: 0;
   transform: scale(1.06);
   transition:
-    opacity 0.5s ease,
-    transform 0.5s ease;
+    opacity 0.5s var(--ease),
+    transform 0.5s var(--ease);
   pointer-events: none;
 }
 .hx-spot.is-on {
@@ -1243,7 +1243,7 @@ body,
   color: var(--hx-text) !important;
   font-size: 15px !important;
   font-weight: 700;
-  animation: hx-reveal 0.5s ease both;
+  animation: hx-reveal 0.5s var(--ease) both;
 }
 .hx-tour-rail {
   position: relative;
@@ -1288,9 +1288,9 @@ body,
   border-radius: 50%;
   background: var(--rx-ink-950);
   transition:
-    border-color 0.4s ease,
-    background 0.4s ease,
-    box-shadow 0.4s ease;
+    border-color 0.4s var(--ease),
+    background 0.4s var(--ease),
+    box-shadow 0.4s var(--ease);
 }
 .hx-tour-node.is-done i {
   border-color: var(--hx-mint);
@@ -1411,7 +1411,7 @@ html[data-motion="off"] .hx-scene-draw {
 .art-label {
   fill: var(--hx-muted);
   font:
-    600 12px "Martian Mono",
+    600 12px "IBM Plex Mono",
     system-ui,
     sans-serif;
 }
@@ -1473,7 +1473,7 @@ html[data-motion="off"] .hx-scene-draw {
   left: 0;
   top: 8%;
   width: 40%;
-  animation: art-bob 6s ease-in-out infinite;
+  animation: art-bob 6s var(--ease) infinite;
 }
 .art-card-b {
   left: 32%;
@@ -1481,14 +1481,14 @@ html[data-motion="off"] .hx-scene-draw {
   width: 56%;
   display: grid;
   gap: 8px;
-  animation: art-bob 6s ease-in-out -2s infinite;
+  animation: art-bob 6s var(--ease) -2s infinite;
 }
 .art-card-c {
   left: 22%;
   top: 74%;
   width: 62%;
   overflow: hidden;
-  animation: art-bob 6s ease-in-out -4s infinite;
+  animation: art-bob 6s var(--ease) -4s infinite;
 }
 .art-meter {
   height: 8px;
@@ -1501,7 +1501,7 @@ html[data-motion="off"] .hx-scene-draw {
   height: 100%;
   border-radius: 4px;
   background: var(--hx-mint);
-  animation: art-fill 5s ease-in-out infinite;
+  animation: art-fill 5s var(--ease) infinite;
 }
 .art-meter.warn i {
   background: var(--hx-coral);
@@ -1516,7 +1516,7 @@ html[data-motion="off"] .hx-scene-draw {
   height: 22px;
   border: 2px solid var(--hx-border-strong);
   border-radius: 50%;
-  animation: art-approve 4s ease-in-out infinite;
+  animation: art-approve 4s var(--ease) infinite;
 }
 .art-approvers i:nth-child(2) {
   animation-delay: 1.4s;
@@ -1570,7 +1570,7 @@ html[data-motion="off"] .hx-scene-draw {
   fill: rgba(180, 134, 247, 0.12);
   transform-box: fill-box;
   transform-origin: center;
-  animation: hx-pulse 3s ease-in-out infinite;
+  animation: hx-pulse 3s var(--ease) infinite;
 }
 .art-shield {
   fill: var(--rx-ink-900);
@@ -1584,7 +1584,7 @@ html[data-motion="off"] .hx-scene-draw {
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-dasharray: 40;
-  animation: art-tick 4s ease-in-out infinite;
+  animation: art-tick 4s var(--ease) infinite;
 }
 
 /* finance */
@@ -1600,10 +1600,10 @@ html[data-motion="off"] .hx-scene-draw {
   fill: var(--hx-mint);
 }
 .art-station-1 .art-station-ring {
-  animation: art-fault 8s ease-in-out infinite;
+  animation: art-fault 8s var(--ease) infinite;
 }
 .art-station-1 .art-station-core {
-  animation: art-fault-core 8s ease-in-out infinite;
+  animation: art-fault-core 8s var(--ease) infinite;
 }
 .art-alert-tag rect {
   fill: rgba(180, 134, 247, 0.14);
@@ -1612,13 +1612,13 @@ html[data-motion="off"] .hx-scene-draw {
 .art-alert-tag text {
   fill: var(--hx-mint);
   font:
-    700 13px "Martian Mono",
+    700 13px "IBM Plex Mono",
     system-ui,
     sans-serif;
 }
 .art-alert-tag {
   opacity: 0;
-  animation: art-tag 8s ease-in-out infinite;
+  animation: art-tag 8s var(--ease) infinite;
 }
 .art-txn {
   fill: var(--hx-cyan);
@@ -1644,7 +1644,7 @@ html[data-motion="off"] .hx-scene-draw {
   fill: rgba(180, 134, 247, 0.14);
   transform-box: fill-box;
   transform-origin: center;
-  animation: hx-pulse 3.6s ease-in-out infinite;
+  animation: hx-pulse 3.6s var(--ease) infinite;
 }
 
 /* resources */
@@ -1664,15 +1664,15 @@ html[data-motion="off"] .hx-scene-draw {
 }
 .art-doc-0 {
   top: 6%;
-  animation: art-shuffle 9s ease-in-out infinite;
+  animation: art-shuffle 9s var(--ease) infinite;
 }
 .art-doc-1 {
   top: 28%;
-  animation: art-shuffle 9s ease-in-out -3s infinite;
+  animation: art-shuffle 9s var(--ease) -3s infinite;
 }
 .art-doc-2 {
   top: 50%;
-  animation: art-shuffle 9s ease-in-out -6s infinite;
+  animation: art-shuffle 9s var(--ease) -6s infinite;
 }
 
 /* contact */
@@ -1688,7 +1688,7 @@ html[data-motion="off"] .hx-scene-draw {
   border: 2px solid var(--hx-mint);
   border-radius: 50%;
   opacity: 0;
-  animation: art-ripple 3.6s ease-out infinite;
+  animation: art-ripple 3.6s var(--ease) infinite;
 }
 .art-bubble {
   position: relative;
@@ -1710,7 +1710,7 @@ html[data-motion="off"] .hx-scene-draw {
   height: 9px;
   border-radius: 50%;
   background: var(--hx-mint);
-  animation: art-type 1.2s ease-in-out infinite;
+  animation: art-type 1.2s var(--ease) infinite;
 }
 .art-typing i:nth-child(2) {
   animation-delay: 0.2s;
@@ -1872,7 +1872,7 @@ html[data-motion="off"] .hx-scene-draw {
   height: 100%;
   background: var(--hx-mint);
   transform-origin: top;
-  transition: transform 0.9s ease;
+  transition: transform 0.9s var(--ease);
 }
 .tl li {
   position: relative;
@@ -1892,8 +1892,8 @@ html[data-motion="off"] .hx-scene-draw {
   border-radius: 50%;
   background: var(--hx-bg);
   transition:
-    border-color 0.5s ease,
-    box-shadow 0.5s ease;
+    border-color 0.5s var(--ease),
+    box-shadow 0.5s var(--ease);
 }
 .tl li.is-on .tl-node {
   border-color: var(--hx-mint);
@@ -1904,8 +1904,8 @@ html[data-motion="off"] .hx-scene-draw {
   opacity: 0;
   transform: translateY(18px);
   transition:
-    opacity 0.7s ease,
-    transform 0.7s ease;
+    opacity 0.7s var(--ease),
+    transform 0.7s var(--ease);
 }
 .tl li.is-on .tl-copy,
 .tl li.is-on .tl-art {
@@ -1947,7 +1947,7 @@ html[data-motion="off"] .hx-scene-draw {
   stroke-width: 2;
   transform-box: fill-box;
   transform-origin: center;
-  animation: art-ripple 2.4s ease-out infinite;
+  animation: art-ripple 2.4s var(--ease) infinite;
 }
 .tl-r2 {
   animation-delay: 1.2s;
@@ -1957,13 +1957,13 @@ html[data-motion="off"] .hx-scene-draw {
 }
 .tl-card {
   fill: var(--hx-mint);
-  animation: tl-card 4s ease-in-out infinite;
+  animation: tl-card 4s var(--ease) infinite;
 }
 .tl-bar {
   fill: rgba(180, 134, 247, 0.55);
   transform-box: fill-box;
   transform-origin: left;
-  animation: tl-bar 3.6s ease-in-out infinite;
+  animation: tl-bar 3.6s var(--ease) infinite;
 }
 @keyframes tl-card {
   0%,
@@ -2124,7 +2124,7 @@ html[data-motion="off"] .hx-scene-draw {
   fill: var(--c);
   filter: drop-shadow(0 0 5px var(--c));
   offset-rotate: 0deg;
-  animation: art-travel 3.4s ease-in infinite;
+  animation: art-travel 3.4s var(--ease) infinite;
   animation-delay: calc(var(--i) * 0.42s);
 }
 .orb-node {
@@ -2134,7 +2134,7 @@ html[data-motion="off"] .hx-scene-draw {
   stroke-opacity: 0.5;
   transform-box: fill-box;
   transform-origin: center;
-  animation: orb-hit 8s ease-out infinite;
+  animation: orb-hit 8s var(--ease) infinite;
   animation-delay: var(--delay);
 }
 .orb-icon {
@@ -2144,7 +2144,7 @@ html[data-motion="off"] .hx-scene-draw {
 .orb-label {
   fill: var(--hx-muted);
   font:
-    800 10px "Martian Mono",
+    800 10px "IBM Plex Mono",
     system-ui,
     sans-serif;
   letter-spacing: 0.08em;
@@ -2153,7 +2153,7 @@ html[data-motion="off"] .hx-scene-draw {
   fill: rgba(180, 134, 247, 0.1);
   transform-box: fill-box;
   transform-origin: center;
-  animation: hx-pulse 3.4s ease-in-out infinite;
+  animation: hx-pulse 3.4s var(--ease) infinite;
 }
 .orb-progress {
   fill: none;
@@ -2163,7 +2163,7 @@ html[data-motion="off"] .hx-scene-draw {
   stroke-dasharray: 377;
   stroke-dashoffset: 377;
   filter: drop-shadow(0 0 6px var(--hx-mint));
-  animation: orb-progress 12s ease-in-out infinite;
+  animation: orb-progress 12s var(--ease) infinite;
 }
 .orb-hex {
   fill: var(--rx-ink-900);
@@ -2179,7 +2179,7 @@ html[data-motion="off"] .hx-scene-draw {
 .orb-core-text {
   fill: var(--hx-text);
   font:
-    800 8px "Martian Mono",
+    800 8px "IBM Plex Mono",
     system-ui,
     sans-serif;
   letter-spacing: 0.16em;
@@ -2188,7 +2188,7 @@ html[data-motion="off"] .hx-scene-draw {
   transform-box: fill-box;
   transform-origin: center;
   opacity: 0;
-  animation: orb-gate 12s ease-in-out infinite;
+  animation: orb-gate 12s var(--ease) infinite;
 }
 .orb-gate circle {
   fill: var(--rx-ink-900);
@@ -2207,12 +2207,12 @@ html[data-motion="off"] .hx-scene-draw {
 .orb-phase {
   fill: var(--hx-mint);
   font:
-    800 10px "Martian Mono",
+    800 10px "IBM Plex Mono",
     system-ui,
     sans-serif;
   letter-spacing: 0.1em;
   opacity: 0;
-  animation: orb-phase 12s ease-in-out infinite;
+  animation: orb-phase 12s var(--ease) infinite;
 }
 @keyframes orb-hit {
   0% {
@@ -2290,7 +2290,7 @@ html[data-motion="off"] .hx-scene-draw {
 .ea text {
   fill: var(--hx-text);
   font:
-    600 14px "Martian Mono",
+    600 14px "IBM Plex Mono",
     system-ui,
     sans-serif;
 }
@@ -2322,7 +2322,7 @@ html[data-motion="off"] .hx-scene-draw {
 }
 .ea-reveal {
   opacity: 0;
-  animation: ea-cycle 7s ease-in-out infinite;
+  animation: ea-cycle 7s var(--ease) infinite;
 }
 .ea-bar {
   fill: rgba(244, 239, 230, 0.14);
@@ -2331,7 +2331,7 @@ html[data-motion="off"] .hx-scene-draw {
   transform-box: fill-box;
   transform-origin: left;
   fill: var(--hx-mint);
-  animation: tl-bar 3.4s ease-in-out infinite;
+  animation: tl-bar 3.4s var(--ease) infinite;
 }
 .ea-ringline {
   fill: none;
@@ -2362,7 +2362,7 @@ html[data-motion="off"] .hx-scene-draw {
 }
 .ea-tick {
   fill: rgba(244, 239, 230, 0.14);
-  animation: ea-tick 3.5s ease-in-out infinite;
+  animation: ea-tick 3.5s var(--ease) infinite;
 }
 .ea-box {
   fill: none;
@@ -2377,22 +2377,22 @@ html[data-motion="off"] .hx-scene-draw {
   stroke-linejoin: round;
   stroke-dasharray: 24;
   stroke-dashoffset: 24;
-  animation: ea-check 5.2s ease-in-out infinite;
+  animation: ea-check 5.2s var(--ease) infinite;
 }
 .ea-zone {
   stroke-dasharray: 6 8;
 }
 .ea-zone-a {
-  animation: ea-zone 6s ease-in-out infinite;
+  animation: ea-zone 6s var(--ease) infinite;
 }
 .ea-zone-b {
-  animation: ea-zone 6s ease-in-out -3s infinite;
+  animation: ea-zone 6s var(--ease) -3s infinite;
 }
 .ea-packet {
   fill: var(--hx-cyan);
   filter: drop-shadow(0 0 6px var(--hx-cyan));
   offset-rotate: 0deg;
-  animation: art-travel 3s ease-in-out infinite;
+  animation: art-travel 3s var(--ease) infinite;
 }
 .ea-packet-b {
   animation-delay: -1.5s;
@@ -2401,7 +2401,7 @@ html[data-motion="off"] .hx-scene-draw {
   fill: rgba(180, 134, 247, 0.55);
   transform-box: fill-box;
   transform-origin: bottom;
-  animation: ea-grow 4.2s ease-in-out infinite;
+  animation: ea-grow 4.2s var(--ease) infinite;
 }
 .ea-baseline {
   stroke: var(--hx-border-strong);
@@ -2410,7 +2410,7 @@ html[data-motion="off"] .hx-scene-draw {
 }
 .ea-handle {
   fill: var(--hx-mint);
-  animation: ea-slide 4.2s ease-in-out infinite;
+  animation: ea-slide 4.2s var(--ease) infinite;
 }
 @keyframes ea-cycle {
   0%,
@@ -2505,20 +2505,20 @@ html[data-motion="off"] .hx-scene-draw {
   stroke: var(--hx-border-strong);
   stroke-width: 1.5;
   transition:
-    stroke 0.3s ease,
-    fill 0.3s ease;
+    stroke 0.3s var(--ease),
+    fill 0.3s var(--ease);
 }
 .cr-topic circle {
   fill: var(--hx-border-strong);
-  transition: fill 0.3s ease;
+  transition: fill 0.3s var(--ease);
 }
 .cr-topic text {
   fill: var(--hx-muted);
   font:
-    700 15px "Martian Mono",
+    700 15px "IBM Plex Mono",
     system-ui,
     sans-serif;
-  transition: fill 0.3s ease;
+  transition: fill 0.3s var(--ease);
 }
 .cr-topic.is-on rect {
   stroke: var(--hx-mint);
@@ -2550,19 +2550,19 @@ html[data-motion="off"] .hx-scene-draw {
   fill: var(--hx-mint);
   filter: drop-shadow(0 0 8px var(--hx-mint));
   offset-rotate: 0deg;
-  animation: cr-in 6s ease-in-out infinite;
+  animation: cr-in 6s var(--ease) infinite;
 }
 .cr-packet-out {
   fill: var(--hx-cyan);
   filter: drop-shadow(0 0 8px var(--hx-cyan));
   opacity: 0;
-  animation: cr-out 6s ease-in-out infinite;
+  animation: cr-out 6s var(--ease) infinite;
 }
 .cr-halo {
   fill: rgba(180, 134, 247, 0.1);
   transform-box: fill-box;
   transform-origin: center;
-  animation: hx-pulse 3s ease-in-out infinite;
+  animation: hx-pulse 3s var(--ease) infinite;
 }
 .cr-team {
   fill: var(--rx-ink-900);
@@ -2573,14 +2573,14 @@ html[data-motion="off"] .hx-scene-draw {
 .cr-team-text {
   fill: var(--hx-text);
   font:
-    800 17px "Martian Mono",
+    800 17px "IBM Plex Mono",
     system-ui,
     sans-serif;
 }
 .cr-team-sub {
   fill: var(--hx-mint);
   font:
-    800 11px "Martian Mono",
+    800 11px "IBM Plex Mono",
     system-ui,
     sans-serif;
   letter-spacing: 0.18em;
@@ -2589,7 +2589,7 @@ html[data-motion="off"] .hx-scene-draw {
   fill: var(--rx-ink-900);
   stroke: var(--hx-cyan);
   stroke-width: 2;
-  animation: cr-reply 6s ease-in-out infinite;
+  animation: cr-reply 6s var(--ease) infinite;
 }
 .cr-reply svg {
   color: var(--hx-cyan);
@@ -2598,7 +2598,7 @@ html[data-motion="off"] .hx-scene-draw {
 .cr-reply text {
   fill: var(--hx-muted);
   font:
-    700 13px "Martian Mono",
+    700 13px "IBM Plex Mono",
     system-ui,
     sans-serif;
 }
@@ -2607,7 +2607,7 @@ html[data-motion="off"] .hx-scene-draw {
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
   gap: clamp(24px, 4vw, 56px);
   align-items: start;
-  animation: hx-reveal 0.6s ease both;
+  animation: hx-reveal 0.6s var(--ease) both;
 }
 .cr-panel p {
   margin: 12px 0 0;
@@ -2858,7 +2858,7 @@ html[data-motion="off"] .hx-scene-draw {
   width: 92px;
   height: 92px;
   opacity: 0.9;
-  transition: transform 0.4s ease;
+  transition: transform 0.4s var(--ease);
 }
 .hx-path:hover .rg {
   transform: scale(1.1);
@@ -2901,12 +2901,12 @@ html[data-motion="off"] .hx-scene-draw {
   stroke-dashoffset: 264;
   transform: rotate(-90deg);
   transform-origin: 60px 60px;
-  animation: rg-count 6s ease-in-out infinite;
+  animation: rg-count 6s var(--ease) infinite;
 }
 .rg-text {
   fill: var(--hx-text);
   font:
-    800 22px "Martian Mono",
+    800 22px "IBM Plex Mono",
     system-ui,
     sans-serif;
 }

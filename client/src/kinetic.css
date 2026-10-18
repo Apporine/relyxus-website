@@ -65,9 +65,9 @@ body {
 .public-site a {
   color: var(--rx-mist);
   transition:
-    color 180ms ease,
-    border-color 180ms ease,
-    background-color 180ms ease;
+    color 180ms var(--ease),
+    border-color 180ms var(--ease),
+    background-color 180ms var(--ease);
 }
 .public-site a:hover {
   color: var(--rx-web-action);
@@ -147,7 +147,7 @@ body {
   box-shadow:
     0 24px 64px rgba(18, 10, 24, 0.48),
     0 0 38px rgba(180, 134, 247, 0.09);
-  animation: rx-panel-in 180ms ease-out both;
+  animation: rx-panel-in 180ms var(--ease) both;
 }
 .public-site .nav-popover-head {
   color: var(--rx-ivory);
@@ -258,7 +258,7 @@ body {
     0 0 0 32px rgba(180, 134, 247, 0.025),
     0 0 0 74px rgba(167, 159, 181, 0.025),
     inset 0 0 90px rgba(180, 134, 247, 0.04);
-  animation: rx-orbit-breathe 7s ease-in-out infinite alternate;
+  animation: rx-orbit-breathe 7s var(--ease) infinite alternate;
   pointer-events: none;
 }
 .public-site .hero-layout {
@@ -287,7 +287,7 @@ body {
   font-weight: 760;
   letter-spacing: -0.085em;
   text-wrap: balance;
-  animation: rx-headline-arrive 760ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: rx-headline-arrive 760ms var(--ease) both;
 }
 .public-site .hero-copy h1 em {
   display: inline;
@@ -301,7 +301,7 @@ body {
   font-size: clamp(16px, 1.55vw, 19px);
 }
 .public-site .hero-actions {
-  animation: rx-headline-arrive 760ms 130ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: rx-headline-arrive 760ms 130ms var(--ease) both;
 }
 .public-site .hero-assurance {
   color: #aaa6b2;
@@ -387,7 +387,7 @@ body {
 .public-site .hero-signal-node {
   fill: var(--rx-accent);
   filter: drop-shadow(0 0 6px rgba(180, 134, 247, 0.9));
-  animation: rx-node-pulse 3.8s ease-in-out infinite;
+  animation: rx-node-pulse 3.8s var(--ease) infinite;
 }
 .public-site .hero-signal-node.node-violet {
   fill: var(--rx-mist);
@@ -457,8 +457,7 @@ body {
   border-inline-start-color: var(--rx-web-violet);
   background: rgba(180, 134, 247, 0.92);
   box-shadow: 0 0 35px rgba(167, 159, 181, 0.09);
-  animation: rx-hypothesis-arrive 850ms 270ms cubic-bezier(0.2, 0.8, 0.2, 1)
-    both;
+  animation: rx-hypothesis-arrive 850ms 270ms var(--ease) both;
 }
 .public-site .ai-label,
 .public-site .ai-tag {
@@ -480,7 +479,7 @@ body {
   box-shadow:
     0 0 0 1px rgba(180, 134, 247, 0.08),
     0 0 32px rgba(180, 134, 247, 0.14);
-  animation: rx-gate-hold 4.5s ease-in-out infinite;
+  animation: rx-gate-hold 4.5s var(--ease) infinite;
 }
 .public-site .gate-rule {
   border-color: rgba(180, 134, 247, 0.7);
@@ -564,9 +563,9 @@ body {
   background: rgba(29, 20, 38, 0.94);
   box-shadow: 0 14px 36px rgba(18, 10, 24, 0.24);
   transition:
-    transform 220ms ease,
-    border-color 220ms ease,
-    box-shadow 220ms ease;
+    transform 220ms var(--ease),
+    border-color 220ms var(--ease),
+    box-shadow 220ms var(--ease);
 }
 .public-site .evidence-fragment:hover {
   transform: translateY(-5px);
@@ -632,9 +631,9 @@ body {
   border-color: var(--rx-accent);
   background: var(--rx-ink-900);
   transition:
-    background 200ms ease,
-    border-color 200ms ease,
-    transform 200ms ease;
+    background 200ms var(--ease),
+    border-color 200ms var(--ease),
+    transform 200ms var(--ease);
 }
 .public-site .walkthrough-step:hover {
   transform: translateX(4px);
@@ -689,7 +688,7 @@ body {
     rgba(180, 134, 247, 0.97),
     rgba(31, 24, 49, 0.98)
   );
-  animation: rx-panel-in 420ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: rx-panel-in 420ms var(--ease) both;
 }
 .public-site .step-visual-title {
   color: var(--rx-mist);
@@ -806,9 +805,9 @@ body {
   border-color: var(--rx-accent);
   background: var(--rx-ink-900);
   transition:
-    transform 200ms ease,
-    border-color 200ms ease,
-    background 200ms ease;
+    transform 200ms var(--ease),
+    border-color 200ms var(--ease),
+    background 200ms var(--ease);
 }
 .public-site .product-choice:hover {
   transform: translateX(4px);
@@ -1025,7 +1024,7 @@ body {
 .public-site .diagram-flow span {
   background: var(--rx-web-cyan);
   box-shadow: 0 0 12px rgba(180, 134, 247, 0.5);
-  animation: rx-node-pulse 3.3s ease-in-out infinite;
+  animation: rx-node-pulse 3.3s var(--ease) infinite;
 }
 .public-site .airgap-edge {
   color: var(--rx-mist);
@@ -1262,11 +1261,11 @@ body {
   min-height: 48px;
   border-radius: 5px;
   transition:
-    transform 180ms ease,
-    color 180ms ease,
-    background 180ms ease,
-    border-color 180ms ease,
-    box-shadow 180ms ease;
+    transform 180ms var(--ease),
+    color 180ms var(--ease),
+    background 180ms var(--ease),
+    border-color 180ms var(--ease),
+    box-shadow 180ms var(--ease);
 }
 .public-site .button-primary {
   color: var(--rx-ink-900) !important;
@@ -2376,8 +2375,8 @@ body {
   color: #9f9ba9;
   stroke-width: 1.8;
   transition:
-    transform 180ms var(--rx-web-ease),
-    color 180ms ease;
+    transform 180ms var(--rx-web-var(--ease)),
+    color 180ms var(--ease);
 }
 .public-site .nav-item.is-open .nav-chevron {
   color: var(--rx-web-action);
@@ -2393,8 +2392,8 @@ body {
   flex: none;
   color: #aca8b4;
   transition:
-    transform 180ms var(--rx-web-ease),
-    color 180ms ease;
+    transform 180ms var(--rx-web-var(--ease)),
+    color 180ms var(--ease);
 }
 .public-site .mobile-nav-group[open] summary > svg {
   color: var(--rx-web-action);
@@ -2448,9 +2447,9 @@ body {
   background: transparent;
   text-align: start;
   transition:
-    background 200ms ease,
-    color 200ms ease,
-    box-shadow 200ms ease;
+    background 200ms var(--ease),
+    color 200ms var(--ease),
+    box-shadow 200ms var(--ease);
 }
 .public-site .product-choice:hover {
   transform: none;
@@ -2490,8 +2489,8 @@ body {
   height: 18px;
   color: var(--rx-mist);
   transition:
-    transform 180ms ease,
-    color 180ms ease;
+    transform 180ms var(--ease),
+    color 180ms var(--ease);
 }
 .public-site .product-choice.selected > svg {
   color: var(--rx-web-action);
@@ -3254,7 +3253,7 @@ body {
   flex: none;
   margin: 0;
   transform: none;
-  transition: transform 180ms ease;
+  transition: transform 180ms var(--ease);
 }
 .public-site .action-quiet:hover svg {
   transform: translateX(3px);

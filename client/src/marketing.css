@@ -11,7 +11,7 @@
   --rx-web-border: #bab7c1;
   --rx-web-container: 1280px;
   --rx-web-gutter: clamp(20px, 4.7vw, 66px);
-  --rx-web-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --rx-web-ease: cubic-bezier(0.16, 1, 0.3, 1);
   font-family:
     "Instrument Sans",
     ui-sans-serif,
@@ -110,7 +110,7 @@ svg {
 .public-site .eyebrow {
   color: #5f596d;
   font:
-    650 10px/1.4 "Martian Mono",
+    650 10px/1.4 "IBM Plex Mono",
     ui-sans-serif,
     system-ui,
     sans-serif;
@@ -167,10 +167,10 @@ svg {
   text-decoration: none;
   cursor: pointer;
   transition:
-    background-color 150ms ease,
-    border-color 150ms ease,
-    color 150ms ease,
-    transform 150ms ease;
+    background-color 150ms var(--ease),
+    border-color 150ms var(--ease),
+    color 150ms var(--ease),
+    transform 150ms var(--ease);
 }
 .button:hover {
   transform: translateY(-1px);
@@ -437,7 +437,7 @@ svg {
 .nav-chevron {
   font-size: 13px;
   line-height: 1;
-  transition: transform 140ms ease;
+  transition: transform 140ms var(--ease);
 }
 .nav-item.is-open .nav-chevron {
   transform: rotate(180deg);
@@ -763,7 +763,7 @@ svg {
   gap: 7px;
   color: var(--rx-accent);
   font:
-    600 10px/1.4 "Martian Mono",
+    600 10px/1.4 "IBM Plex Mono",
     sans-serif;
 }
 .visual-mark > span {
@@ -1007,7 +1007,7 @@ svg {
   color: var(--rx-accent);
   border-inline: 1px solid #b7b3bf;
   text-decoration: none;
-  transition: background-color 140ms ease;
+  transition: background-color 140ms var(--ease);
 }
 .control-principle + .control-principle {
   border-inline-start: 0;
@@ -2153,8 +2153,8 @@ svg {
   border-bottom: 1px solid var(--rx-graphite);
   text-decoration: none;
   transition:
-    background-color 140ms ease,
-    padding 140ms ease;
+    background-color 140ms var(--ease),
+    padding 140ms var(--ease);
 }
 .trust-list > a:hover {
   padding-inline: 12px;
@@ -2307,8 +2307,8 @@ svg {
   border-bottom: 1px solid #ccc9d2;
   text-decoration: none;
   transition:
-    background-color 140ms ease,
-    padding 140ms ease;
+    background-color 140ms var(--ease),
+    padding 140ms var(--ease);
 }
 .resource-row:hover {
   padding-inline: 12px;
@@ -2961,7 +2961,7 @@ svg {
   }
   .product-mobile-panel:not([hidden]) {
     display: block;
-    animation: rx-panel-in 260ms ease both;
+    animation: rx-panel-in 260ms var(--ease) both;
   }
   .product-mobile-panel[hidden] {
     display: none !important;
@@ -4087,11 +4087,11 @@ svg {
   outline: none;
   transform-origin: center center;
   transition:
-    transform 320ms var(--rx-web-ease),
-    box-shadow 320ms ease,
-    border-color 240ms ease,
-    opacity 240ms ease,
-    filter 240ms ease;
+    transform 320ms var(--rx-web-var(--ease)),
+    box-shadow 320ms var(--ease),
+    border-color 240ms var(--ease),
+    opacity 240ms var(--ease),
+    filter 240ms var(--ease);
   will-change: transform;
 }
 .product-float-card img {
@@ -4115,8 +4115,8 @@ svg {
   opacity: 0;
   transform: translateY(8px);
   transition:
-    opacity 240ms ease,
-    transform 240ms ease;
+    opacity 240ms var(--ease),
+    transform 240ms var(--ease);
 }
 .product-float-card figcaption strong {
   color: var(--rx-accent);
@@ -5052,8 +5052,8 @@ svg {
 .company-shot-back,
 .company-shot-front {
   transition:
-    transform 320ms var(--rx-web-ease),
-    opacity 320ms ease;
+    transform 320ms var(--rx-web-var(--ease)),
+    opacity 320ms var(--ease);
 }
 @media (prefers-reduced-motion: reduce) {
   .company-shot-back,

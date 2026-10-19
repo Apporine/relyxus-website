@@ -11,7 +11,9 @@ export function IncidentCard({ file }: { file: IncidentFile }) {
         <IncidentMark file={file} />
         <div className="incident-card-meta">
           <p className="incident-card-firm">{file.firm}</p>
-          <p className="incident-card-date">{file.date}</p>
+          <p className="incident-card-date">
+            {file.region} · {file.date}
+          </p>
         </div>
       </header>
       <h3 className="incident-card-title">

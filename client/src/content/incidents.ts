@@ -11,11 +11,23 @@ import type { SourceLink } from "@/components/ui/Sources";
 
 export type EvidenceTier = "A+" | "B";
 
+export type IncidentKind =
+  | "bank"
+  | "cloud"
+  | "cloud-platform"
+  | "edge"
+  | "market"
+  | "clearing"
+  | "airline"
+  | "air-traffic";
+
 export type IncidentFile = {
   slug: string;
   firm: string;
   date: string;
   region: "UK" | "US" | "Global";
+  /** What kind of organisation it is; picks the card icon (never a logo). */
+  kind: IncidentKind;
   sector: string;
   /** A+ = first-party, regulator or securities filing. B = credible relay only. */
   tier: EvidenceTier;
@@ -44,6 +56,7 @@ export type IncidentFile = {
 export const incidentFiles: readonly IncidentFile[] = [
   {
     slug: "barclays-31-january-2025",
+    kind: "bank",
     firm: "Barclays UK",
     date: "31 Jan to 2 Feb 2025",
     region: "UK",
@@ -108,6 +121,7 @@ export const incidentFiles: readonly IncidentFile[] = [
   },
   {
     slug: "lloyds-12-march-2026",
+    kind: "bank",
     firm: "Lloyds Banking Group",
     date: "12 March 2026",
     region: "UK",
@@ -165,6 +179,7 @@ export const incidentFiles: readonly IncidentFile[] = [
   },
   {
     slug: "aws-us-east-1-october-2025",
+    kind: "cloud",
     firm: "Amazon Web Services",
     date: "19 to 20 October 2025",
     region: "US",
@@ -219,6 +234,7 @@ export const incidentFiles: readonly IncidentFile[] = [
   },
   {
     slug: "cloudflare-18-november-2025",
+    kind: "edge",
     firm: "Cloudflare",
     date: "18 November 2025",
     region: "Global",
@@ -270,6 +286,7 @@ export const incidentFiles: readonly IncidentFile[] = [
   },
   {
     slug: "cme-27-november-2025",
+    kind: "market",
     firm: "CME Group / CyrusOne",
     date: "27 to 28 November 2025",
     region: "US",
@@ -325,6 +342,7 @@ export const incidentFiles: readonly IncidentFile[] = [
   },
   {
     slug: "google-cloud-12-june-2025",
+    kind: "cloud-platform",
     firm: "Google Cloud",
     date: "12 June 2025",
     region: "Global",
@@ -380,6 +398,7 @@ export const incidentFiles: readonly IncidentFile[] = [
   },
   {
     slug: "tsb-april-2018",
+    kind: "bank",
     firm: "TSB Bank",
     date: "April 2018",
     region: "UK",
@@ -439,6 +458,7 @@ export const incidentFiles: readonly IncidentFile[] = [
   },
   {
     slug: "fedach-3-march-2026",
+    kind: "clearing",
     firm: "Federal Reserve FedACH",
     date: "3 March 2026",
     region: "US",
@@ -495,6 +515,7 @@ export const incidentFiles: readonly IncidentFile[] = [
   },
   {
     slug: "delta-19-july-2024",
+    kind: "airline",
     firm: "Delta Air Lines",
     date: "19 to 24 July 2024",
     region: "US",
@@ -554,6 +575,7 @@ export const incidentFiles: readonly IncidentFile[] = [
   },
   {
     slug: "nats-28-august-2023",
+    kind: "air-traffic",
     firm: "NATS (UK air traffic)",
     date: "28 August 2023",
     region: "UK",

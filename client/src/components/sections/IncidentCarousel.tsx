@@ -51,7 +51,9 @@ export function IncidentCarousel() {
                 <IncidentMark file={file} />
                 <div className="carousel-card-ids">
                   <span className="carousel-firm">{file.firm}</span>
-                  <span className="carousel-date">{file.date}</span>
+                  <span className="carousel-date">
+                    {file.region} · {file.date}
+                  </span>
                 </div>
               </div>
               <div className="carousel-card-body">

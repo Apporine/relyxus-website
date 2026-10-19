@@ -1,17 +1,40 @@
-import type { IncidentFile } from "@/content/incidents";
+import {
+  ArrowLeftRight,
+  CandlestickChart,
+  Cloud,
+  CloudCog,
+  Globe,
+  Landmark,
+  Plane,
+  TowerControl,
+  type LucideIcon,
+} from "lucide-react";
+import type { IncidentFile, IncidentKind } from "@/content/incidents";
+
+/** An icon for the kind of organisation. Firm logos are never used. */
+const icons: Record<IncidentKind, LucideIcon> = {
+  bank: Landmark,
+  cloud: Cloud,
+  "cloud-platform": CloudCog,
+  edge: Globe,
+  market: CandlestickChart,
+  clearing: ArrowLeftRight,
+  airline: Plane,
+  "air-traffic": TowerControl,
+};
 
 /**
- * Stands in for a logo, which we never use for these firms: the region, and
- * how strong the evidence is. A+ is first-party, regulator or securities
- * filing; B is a credible relay without a full primary report.
+ * Sector icon with the evidence tier on its corner. A+ is a first-party
+ * report, regulator publication or securities filing; B is a relay.
  */
 export function IncidentMark({ file }: { file: IncidentFile }) {
+  const Icon = icons[file.kind];
   return (
     <span
-      className={`incident-mark tier-${file.tier === "A+" ? "a" : "b"}`}
-      title={`${file.region} · ${file.tier} evidence · ${file.sourceType}`}
+      className={`incident-mark kind-${file.kind} tier-${file.tier === "A+" ? "a" : "b"}`}
+      title={`${file.sector} · ${file.tier} evidence · ${file.sourceType}`}
     >
-      <span className="incident-mark-region">{file.region}</span>
+      <Icon size={22} strokeWidth={1.75} aria-hidden="true" />
       <span className="incident-mark-tier">{file.tier}</span>
     </span>
   );

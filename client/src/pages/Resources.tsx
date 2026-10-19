@@ -107,7 +107,8 @@ export function IncidentFilePage({ slug }: { slug: string }) {
           <div className="file-head">
             <IncidentMark file={file} />
             <p className="label">
-              {file.firm} · {file.date} · Public incident research
+              {file.firm} · {file.region} · {file.date} · Public incident
+              research
             </p>
           </div>
           <h1>{file.title}</h1>

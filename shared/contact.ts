@@ -10,9 +10,16 @@ export const ENQUIRY_TYPES = [
   "Readiness checklist",
   "Deployment",
   "Pricing",
+  "Newsletter",
 ] as const;
 
 export type EnquiryType = (typeof ENQUIRY_TYPES)[number];
+
+/** Downloads and the newsletter ask for an email address only. */
+export const EMAIL_ONLY_TYPES: readonly EnquiryType[] = [
+  "Readiness checklist",
+  "Newsletter",
+];
 
 export type ContactPayload = {
   name: string;
@@ -47,19 +54,21 @@ export function validateContactPayload(body: unknown): ContactValidationResult {
   const message = asString(input.message);
   const marketing = Boolean(input.marketing);
   const errors: Record<string, string> = {};
+  const emailOnly = EMAIL_ONLY_TYPES.includes(enquiry as EnquiryType);
 
-  if (name.length < 2) errors.name = "Enter your name (at least 2 characters).";
-  else if (name.length > 100)
-    errors.name = "Name must be 100 characters or fewer.";
+  if (name.length > 100) errors.name = "Name must be 100 characters or fewer.";
+  else if (!emailOnly && name.length < 2)
+    errors.name = "Enter your name (at least 2 characters).";
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
     errors.email = "Enter a valid work email address.";
   else if (email.length > 254)
     errors.email = "Email address must be 254 characters or fewer.";
 
-  if (company.length < 2) errors.company = "Enter your company name.";
-  else if (company.length > 160)
+  if (company.length > 160)
     errors.company = "Company must be 160 characters or fewer.";
+  else if (!emailOnly && company.length < 2)
+    errors.company = "Enter your company name.";
 
   if (!ENQUIRY_TYPES.includes(enquiry as EnquiryType))
     errors.enquiry = "Choose an enquiry type.";
@@ -84,14 +93,14 @@ export function validateContactPayload(body: unknown): ContactValidationResult {
 }
 
 export function buildContactEmail(data: ContactPayload) {
-  const subject = `Relyxus website enquiry: ${data.enquiry} — ${data.company}`;
+  const subject = `Relyxus website enquiry: ${data.enquiry} — ${data.company || data.email}`;
   const lines = [
     "New enquiry from the Relyxus website",
     "",
     `Enquiry type: ${data.enquiry}`,
-    `Name: ${data.name}`,
+    `Name: ${data.name || "Not provided"}`,
     `Email: ${data.email}`,
-    `Company: ${data.company}`,
+    `Company: ${data.company || "Not provided"}`,
     `Role: ${data.role || "Not provided"}`,
     `Deployment interest: ${data.deployment || "Not sure yet"}`,
     `Marketing updates: ${data.marketing ? "Yes" : "No"}`,
@@ -104,9 +113,9 @@ export function buildContactEmail(data: ContactPayload) {
     <div style="font-family:Arial,sans-serif;line-height:1.5;color:#111827">
       <h2 style="margin:0 0 12px">New Relyxus website enquiry</h2>
       <p><strong>Enquiry type:</strong> ${escapeHtml(data.enquiry)}</p>
-      <p><strong>Name:</strong> ${escapeHtml(data.name)}</p>
+      <p><strong>Name:</strong> ${escapeHtml(data.name || "Not provided")}</p>
       <p><strong>Email:</strong> ${escapeHtml(data.email)}</p>
-      <p><strong>Company:</strong> ${escapeHtml(data.company)}</p>
+      <p><strong>Company:</strong> ${escapeHtml(data.company || "Not provided")}</p>
       <p><strong>Role:</strong> ${escapeHtml(data.role || "Not provided")}</p>
       <p><strong>Deployment interest:</strong> ${escapeHtml(data.deployment || "Not sure yet")}</p>
       <p><strong>Marketing updates:</strong> ${data.marketing ? "Yes" : "No"}</p>

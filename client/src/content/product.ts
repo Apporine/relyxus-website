@@ -168,25 +168,31 @@ export const securityCommitments: readonly {
   title: string;
   text: string;
   status: "in-place" | "in-progress";
+  /** Which animated proof the Security page shows for this line. */
+  visual: "access" | "boundary" | "approval" | "assurance";
 }[] = [
   {
     title: "Read-only by default",
     text: "Investigating never changes anything in your systems.",
     status: "in-place",
+    visual: "access",
   },
   {
     title: "Your data stays in your environment",
     text: "Dedicated or self-hosted. Incident evidence does not leave for a shared tenancy.",
     status: "in-place",
+    visual: "boundary",
   },
   {
     title: "A named person approves every action",
     text: "No change runs until the approvers your policy names say yes.",
     status: "in-place",
+    visual: "approval",
   },
   {
     title: "Assurance certifications",
     text: "SOC 2 and similar certifications: status and target dates are in the security pack.",
     status: "in-progress",
+    visual: "assurance",
   },
 ];

@@ -1,0 +1,590 @@
+/*
+ * Security commitments: each card proves its claim with a small product
+ * moment. Base styles are the final state; motion runs only once the grid
+ * plays, so no-JS, reduced motion and screenshots all show the end state.
+ */
+.commit-grid {
+  display: grid;
+  gap: var(--space-3);
+}
+
+@media (min-width: 860px) {
+  .commit-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.commit-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  transition:
+    transform var(--hover) var(--ease),
+    box-shadow var(--hover) var(--ease);
+}
+
+.commit-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lift);
+}
+
+.commit-stage {
+  display: grid;
+  place-items: center;
+  min-height: 208px;
+  padding: var(--space-3);
+}
+
+.commit-stage-a {
+  background: var(--tint-1);
+}
+
+.commit-stage-b {
+  background: var(--tint-2);
+}
+
+.commit-copy {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-4) var(--space-4);
+}
+
+.commit-status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  justify-self: start;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.commit-status.is-in-place {
+  background: color-mix(in srgb, var(--ok) 14%, transparent);
+}
+
+.commit-status.is-in-progress {
+  background: color-mix(in srgb, var(--second) 30%, transparent);
+}
+
+.commit-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ok);
+}
+
+.is-in-progress .commit-status-dot {
+  background: var(--link);
+}
+
+/* Shared mini-visual frame */
+.cv {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  padding: var(--space-2);
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  font-size: var(--text-xs);
+  color: var(--ink);
+}
+
+/* 1 · Read-only access */
+.cv-access {
+  display: grid;
+  gap: var(--space-1);
+  overflow: hidden;
+}
+
+.cv-access-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: var(--space-1);
+  align-items: center;
+}
+
+.cv-tool {
+  font-weight: 500;
+}
+
+.cv-perm {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.cv-perm-read {
+  background: color-mix(in srgb, var(--ok) 14%, transparent);
+  color: var(--ok);
+}
+
+.cv-perm-write {
+  background: var(--ink-04);
+  color: var(--ink-muted);
+  text-decoration: line-through;
+}
+
+.cv-scan {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 32%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    color-mix(in srgb, var(--primary) 22%, transparent),
+    transparent
+  );
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 2 · Data boundary */
+.cv-boundary {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--space-2);
+  padding-top: var(--space-4);
+  border: 1.5px dashed var(--link);
+  box-shadow: none;
+}
+
+.cv-boundary-label {
+  position: absolute;
+  top: 8px;
+  left: var(--space-2);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--link);
+}
+
+.cv-boundary-lanes {
+  display: grid;
+  gap: 10px;
+}
+
+.cv-lane {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.cv-chip {
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--tint-1);
+  text-align: center;
+}
+
+.cv-track {
+  position: relative;
+  height: 2px;
+  background: var(--rule);
+}
+
+.cv-dot {
+  position: absolute;
+  top: 50%;
+  left: calc(100% - 8px);
+  width: 8px;
+  height: 8px;
+  margin-top: -4px;
+  border-radius: 50%;
+  background: var(--link);
+}
+
+.cv-node {
+  padding: var(--space-1) 12px;
+  border-radius: var(--radius-sm);
+  background: var(--canvas);
+  color: var(--white);
+  font-weight: 500;
+}
+
+.cv-escape {
+  position: absolute;
+  right: -30px;
+  bottom: 14px;
+  width: 56px;
+  height: 20px;
+}
+
+.cv-dot-out {
+  left: 14px;
+  background: var(--alert);
+}
+
+.cv-block {
+  position: absolute;
+  top: 0;
+  left: 30px;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--alert);
+  color: var(--white);
+}
+
+/* 3 · Named approval */
+.cv-approval {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.cv-change {
+  padding-bottom: var(--space-1);
+  border-bottom: 1px solid var(--rule);
+  font-size: 12px;
+}
+
+.cv-approver {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.cv-avatar {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--canvas);
+  color: var(--white);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.cv-state {
+  display: grid;
+}
+
+.cv-state > span {
+  grid-area: 1 / 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  justify-self: end;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+}
+
+.cv-pending {
+  background: var(--ink-04);
+  color: var(--ink-muted);
+  opacity: 0;
+}
+
+.cv-done {
+  background: color-mix(in srgb, var(--ok) 14%, transparent);
+  color: var(--ok);
+}
+
+.cv-runs {
+  justify-self: start;
+  margin-top: 4px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--primary);
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* 4 · Assurance, honestly in progress */
+.cv-assurance {
+  display: grid;
+  gap: 6px;
+}
+
+.cv-pack {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-bottom: 4px;
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.cv-pack-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ink-muted);
+}
+
+.cv-pack-item svg {
+  color: var(--ok);
+}
+
+.cv-progress {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  justify-self: start;
+  margin-top: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--second) 30%, transparent);
+  font-weight: 500;
+}
+
+.cv-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--link);
+}
+
+/* Motion: hidden until the grid enters, then each card plays its proof. */
+.commit-grid[data-reveal="ready"] .commit-card {
+  opacity: 0;
+}
+
+.commit-grid[data-reveal="play"] .commit-card {
+  animation: commit-rise 600ms var(--ease) both;
+  animation-delay: calc(var(--i) * 120ms);
+}
+
+.commit-grid[data-reveal="play"] .cv-perm-read {
+  animation: cv-tick 420ms var(--ease) both;
+  animation-delay: calc(700ms + var(--i) * 380ms);
+}
+
+.commit-grid[data-reveal="play"] .cv-scan {
+  animation: cv-scan 3.6s var(--ease) 1.8s infinite;
+}
+
+.commit-grid[data-reveal="play"] .cv-lane .cv-dot {
+  animation: cv-flow 2.4s var(--ease) infinite;
+  animation-delay: calc(var(--i) * 0.45s);
+}
+
+.commit-grid[data-reveal="play"] .cv-dot-out {
+  animation: cv-escape 3.2s var(--ease) 1s infinite;
+}
+
+.commit-grid[data-reveal="play"] .cv-block {
+  animation: cv-block 3.2s var(--ease) 1s infinite;
+}
+
+.commit-grid[data-reveal="play"] .cv-approver:nth-of-type(1) .cv-pending {
+  animation: cv-wait-1 7s linear infinite;
+}
+
+.commit-grid[data-reveal="play"] .cv-approver:nth-of-type(1) .cv-done {
+  animation: cv-sign-1 7s linear infinite;
+}
+
+.commit-grid[data-reveal="play"] .cv-approver:nth-of-type(2) .cv-pending {
+  animation: cv-wait-2 7s linear infinite;
+}
+
+.commit-grid[data-reveal="play"] .cv-approver:nth-of-type(2) .cv-done {
+  animation: cv-sign-2 7s linear infinite;
+}
+
+.commit-grid[data-reveal="play"] .cv-runs {
+  animation: cv-runs 7s linear infinite;
+}
+
+.commit-grid[data-reveal="play"] .cv-pack-item {
+  animation: commit-rise 500ms var(--ease) both;
+  animation-delay: calc(800ms + var(--i) * 300ms);
+}
+
+.commit-grid[data-reveal="play"] .cv-pulse {
+  animation: cv-pulse 2s ease-out infinite;
+}
+
+.commit-grid[data-reveal="play"] .is-in-progress .commit-status-dot {
+  animation: cv-pulse 2s ease-out infinite;
+}
+
+@keyframes commit-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes cv-tick {
+  from {
+    opacity: 0.35;
+    transform: scale(0.85);
+    filter: grayscale(1);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+@keyframes cv-scan {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  20% {
+    opacity: 1;
+  }
+  70%,
+  100% {
+    opacity: 0;
+    transform: translateY(320%);
+  }
+}
+
+@keyframes cv-flow {
+  0% {
+    left: 0;
+    opacity: 0;
+  }
+  15%,
+  85% {
+    opacity: 1;
+  }
+  100% {
+    left: calc(100% - 8px);
+    opacity: 1;
+  }
+}
+
+/* The outbound packet reaches the boundary and is stopped there. */
+@keyframes cv-escape {
+  0% {
+    left: -40px;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  45% {
+    left: 14px;
+  }
+  50% {
+    left: 10px;
+  }
+  55%,
+  100% {
+    left: 14px;
+    opacity: 1;
+  }
+}
+
+@keyframes cv-block {
+  0%,
+  42% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+  58%,
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Approver 1 signs at about 1.5 s, approver 2 at 3 s, the change runs at 3.6 s. */
+@keyframes cv-wait-1 {
+  0%,
+  20% {
+    opacity: 1;
+  }
+  23%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes cv-sign-1 {
+  0%,
+  20% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  23%,
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes cv-wait-2 {
+  0%,
+  42% {
+    opacity: 1;
+  }
+  45%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes cv-sign-2 {
+  0%,
+  42% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  45%,
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes cv-runs {
+  0%,
+  50% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  55%,
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes cv-pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--link) 45%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 8px transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .commit-card,
+  .commit-card:hover {
+    transform: none;
+  }
+}

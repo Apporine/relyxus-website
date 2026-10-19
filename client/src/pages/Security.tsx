@@ -1,29 +1,11 @@
 import { PageMeta } from "@/components/layout/PageMeta";
 import { PageHero } from "@/components/sections/PageHero";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { FlowDiagram } from "@/components/sections/FlowDiagram";
+import { DataBoundary } from "@/components/sections/DataBoundary";
 import { Section } from "@/components/ui/Section";
 import { ButtonLink } from "@/components/ui/Button";
-import { securityCommitments } from "@/content/product";
+import { Commitments } from "@/components/sections/Commitments";
 import { packPromise } from "@/content/site";
-
-const securityFlow = [
-  {
-    label: "Investigate read-only",
-    text: "Logs, deploys and alerts — nothing in production changes.",
-    tone: "ok" as const,
-  },
-  {
-    label: "Propose a fix",
-    text: "Exact command, blast radius and rollback, waiting for sign-off.",
-    tone: "wait" as const,
-  },
-  {
-    label: "Named people approve",
-    text: "Your policy names who must say yes. Then — and only then — it runs.",
-    tone: "signal" as const,
-  },
-] as const;
 
 /**
  * What is and isn't in place. Only the first three rows are product claims;
@@ -82,7 +64,7 @@ export function SecurityPage() {
         label="Security and data handling"
         title="How we handle *your data*"
         lead="Regulated buyers check this before they book a call, so here it is plainly: what is in place, and where the detail lives."
-        visual={<FlowDiagram title="Control path" steps={securityFlow} />}
+        visual={<DataBoundary />}
       >
         <ButtonLink href="/demo?type=Security%20pack">
           Request the security pack
@@ -92,17 +74,11 @@ export function SecurityPage() {
       <Section
         id="commitments"
         ground="white"
-        label="In place"
-        title="Three commitments"
+        label="In place and in progress"
+        title="What you can check *today*"
+        intro="Three commitments are in place now; certification is in progress. Each one is something your reviewers can test."
       >
-        <ul className="grid-3 commitments">
-          {securityCommitments.map(item => (
-            <li key={item.title}>
-              <h3>{item.title}</h3>
-              <p className="muted">{item.text}</p>
-            </li>
-          ))}
-        </ul>
+        <Commitments />
       </Section>
 
       <Section

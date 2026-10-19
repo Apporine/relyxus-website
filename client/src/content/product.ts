@@ -1,35 +1,39 @@
 /**
- * What Relyxus is and what we sell. This block is shown word for word on
- * the homepage, Product and About; reuse it in decks and on LinkedIn.
+ * What Relyxus is and what we sell. Shown word for word on the Product page
+ * only; reuse in decks and on LinkedIn.
  */
 export const whatWeSell = [
   {
     term: "What it is",
-    text: "Relyxus is incident-response software for payments firms in regulated markets.",
+    text: "Incident-response software for payments firms in regulated markets",
   },
   {
     term: "What it does",
-    text: "It pulls logs, deploys and alerts into one incident record, ranks the likely cause with the evidence attached, and holds every fix for a named approver.",
+    text: "Pulls logs, deploys and alerts into one incident record, ranks the likely cause with the evidence attached, and holds every fix for a named approver",
   },
   {
-    term: "What you get at the end",
-    text: "A timestamped audit record and a first draft of the regulator notice (DORA, UK FCA/PRA), ready within the 4-hour window.",
+    term: "What you get",
+    text: "A timestamped audit record and a first draft of the regulator notice (DORA, UK FCA/PRA), ready within the 4-hour window",
   },
   {
     term: "Who it’s for",
-    text: "Payments engineering, resilience and risk, and payments leadership at processors, issuers, payments banks and cross-border platforms.",
+    text: "Payments engineering, resilience and risk, and payments leadership at processors, issuers, payments banks and cross-border platforms",
   },
   {
     term: "What it replaces",
-    text: "Five browser tabs, a Slack thread of guesses, terminal rollbacks and a regulator report rebuilt from screenshots.",
+    text: "Five browser tabs, a chat thread of guesses, unrecorded rollbacks and a regulator report rebuilt from screenshots",
   },
   {
     term: "What it is not",
-    text: "An autonomous AI that changes production on its own, or another monitoring tool. It works with the monitoring you already have.",
+    text: "An autonomous AI that changes production, or another monitoring tool",
   },
   {
     term: "How you buy it",
-    text: "Start with a read-only replay pilot on a closed incident, then an annual subscription.",
+    text: "A read-only replay pilot on one closed incident, then an annual subscription",
+  },
+  {
+    term: "The modules",
+    text: "War Room (investigate and rank causes), Approvals (named sign-off), Command Centre (risk and status for leaders)",
   },
 ] as const;
 
@@ -90,12 +94,12 @@ export const modules: readonly {
   {
     key: "approvals",
     name: "Approvals",
-    job: "Named sign-off",
-    line: "Nothing changes in production until a named person approves it. Each request shows the exact action, the evidence behind it, the policy that applies and how the result will be checked.",
+    job: "Named sign-off before any change",
+    line: "Every proposed fix names its target, blast radius and rollback plan, then waits for the approvers your policy names. Nothing runs until they say yes.",
     points: [
-      "Approvers set by your policy, never by the tool",
-      "Blast radius, rollback and verification on every request",
-      "Requests expire; nothing waits forever or runs by default",
+      "The exact command and target, before anyone says yes",
+      "Your policy: who must approve, and who cannot",
+      "Consequence ladder: blast radius, rollback and verification",
     ],
     screen: {
       src: "/product/overview-approvals.png",
@@ -124,12 +128,12 @@ export const modules: readonly {
   {
     key: "command-centre",
     name: "Command Centre",
-    job: "Money at risk and status for leadership",
-    line: "What needs attention right now: money at risk, decisions waiting, and the clock on the first regulator notice. Readable without joining the incident call.",
+    job: "Risk and status for leaders",
+    line: "Every active incident with its money at risk, every decision waiting and the time left on the first notice — without joining the incident call.",
     points: [
-      "Money and transactions at risk, per incident",
-      "Pending decisions with time left",
-      "The DORA first-notice deadline and its owner",
+      "Money at risk while the incident runs",
+      "Decisions waiting, with time left",
+      "Regulator clock for the first notice",
     ],
     screen: {
       src: "/product/overview-command-centre.png",
@@ -158,19 +162,31 @@ export const modules: readonly {
 ];
 
 export const moduleByKey = (key: ModuleKey) =>
-  modules.find(module => module.key === key)!;
+  modules.find(module => module.key === key);
 
-export const securityCommitments = [
+export const securityCommitments: readonly {
+  title: string;
+  text: string;
+  status: "in-place" | "in-progress";
+}[] = [
   {
     title: "Read-only by default",
-    text: "Investigating an incident never changes anything in your systems.",
+    text: "Investigating never changes anything in your systems.",
+    status: "in-place",
   },
   {
     title: "Your data stays in your environment",
-    text: "Run Relyxus as a dedicated environment or self-hosted by you.",
+    text: "Dedicated or self-hosted. Incident evidence does not leave for a shared tenancy.",
+    status: "in-place",
   },
   {
     title: "A named person approves every action",
-    text: "Proposed changes wait for the approvers your policy names.",
+    text: "No change runs until the approvers your policy names say yes.",
+    status: "in-place",
   },
-] as const;
+  {
+    title: "Assurance certifications",
+    text: "SOC 2 and similar certifications: status and target dates are in the security pack.",
+    status: "in-progress",
+  },
+];

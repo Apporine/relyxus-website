@@ -117,6 +117,47 @@ export const incidentFiles: readonly IncidentFile[] = [
       "The RBA’s annual report refers to the outage as 26 January; the incident report says 27 January. Times are AEDT.",
   },
   {
+    slug: "lloyds-12-march-2026",
+    firm: "Lloyds Banking Group",
+    date: "12 March 2026",
+    title:
+      "An overnight change introduced a defect. Nearly half a million customers saw other people’s transactions.",
+    summary:
+      "An overnight mobile-app update introduced a software defect in an API. Between about 03:28 and 08:08, up to 447,936 Lloyds, Halifax and Bank of Scotland customers could see other customers’ transaction lists.",
+    timeline: [
+      {
+        at: "Overnight",
+        text: "IT change to the mobile apps for Lloyds, Halifax and Bank of Scotland.",
+      },
+      {
+        at: "03:28–08:08",
+        text: "Some customers viewing current-account transaction lists could momentarily see other customers’ transactions.",
+      },
+      {
+        at: "Same morning",
+        text: "Lloyds notified the FCA, PRA and ICO; formal ICO notification followed within 72 hours.",
+      },
+      {
+        at: "24 Mar",
+        text: "Treasury Committee publishes Lloyds’ letter: up to 447,936 customers affected; 114,182 may have viewed transaction details.",
+      },
+    ],
+    slowed:
+      "The cause was a software defect introduced during an overnight change. Internet banking was unaffected; balances were unchanged and no unauthorised payments occurred.",
+    gap: "Most causes in the public record start with a change. Linking deploys and changes to the incident record is the shortest path to the cause — the gap Relyxus is built for.",
+    sources: [
+      {
+        label:
+          "UK Parliament Treasury Committee, nearly half a million customers affected",
+        href: "https://committees.parliament.uk/committee/158/treasury-committee/news/212885/nearly-half-a-million-lloyds-banking-group-customers-affected-by-personal-data-glitch/",
+      },
+      {
+        label: "BBC News, Lloyds Banking Group IT glitch",
+        href: "https://www.bbc.co.uk/news/articles/c70dqk2vjv8o",
+      },
+    ],
+  },
+  {
     slug: "cme-27-november-2025",
     firm: "CME Group",
     date: "27–28 November 2025",

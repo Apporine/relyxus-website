@@ -2,12 +2,15 @@ import type { ReactNode } from "react";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 
-type Variant = "primary" | "secondary" | "text";
+/** primary = lime fill; ghost = lime outline on dark; dark = canvas on light; text = link style */
+type Variant = "primary" | "ghost" | "dark" | "secondary" | "text";
 
-const classes = (variant: Variant, className = "") =>
-  `btn btn-${variant} ${className}`.trim();
+const classes = (variant: Variant, className = "") => {
+  const mapped = variant === "secondary" ? "ghost" : variant;
+  return `btn btn-${mapped} ${className}`.trim();
+};
 
-/** A link styled as a button. External and hash links render a plain anchor. */
+/** A link styled as a pill button. External and hash links render a plain anchor. */
 export function ButtonLink({
   href,
   children,

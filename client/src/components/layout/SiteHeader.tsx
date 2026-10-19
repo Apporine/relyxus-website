@@ -183,9 +183,18 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
             )}
           </li>
         ))}
+        <li>
+          <Link
+            href="/contact"
+            onClick={onClose}
+            className="nav-mobile-top-link"
+          >
+            Contact
+          </Link>
+        </li>
       </ul>
       <ButtonLink href="/demo" onClick={onClose} className="nav-mobile-cta">
-        Book a demo
+        Talk to sales
       </ButtonLink>
     </div>
   );
@@ -212,18 +221,23 @@ export function SiteHeader() {
   }, []);
 
   return (
-    <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
+    <header
+      className={`site-header on-canvas ${scrolled ? "is-scrolled" : ""}`}
+    >
       <div className="container header-inner">
         <Wordmark />
         <DesktopNav />
         <div className="header-actions">
-          {companyDetails.loginUrl && (
-            <a href={companyDetails.loginUrl} className="nav-link nav-login">
+          <Link href="/contact" className="nav-link nav-utility">
+            Contact
+          </Link>
+          {companyDetails.loginUrl ? (
+            <a href={companyDetails.loginUrl} className="nav-link nav-utility">
               Log in
             </a>
-          )}
-          <ButtonLink href="/demo" className="header-cta">
-            Book a demo
+          ) : null}
+          <ButtonLink href="/demo" variant="ghost" className="header-cta">
+            Talk to sales
           </ButtonLink>
           <button
             ref={trigger}

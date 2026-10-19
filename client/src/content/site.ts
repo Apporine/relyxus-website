@@ -42,14 +42,14 @@ export const nav: NavEntry[] = [
         description: "Every deadline, with the rules behind it",
       },
       {
+        label: "Reporting checklist",
+        href: "/dora/checklist",
+        description: "One page for DORA and the UK regime",
+      },
+      {
         label: "Incident files",
         href: "/resources/incidents",
         description: "Public outages, and where the hours went",
-      },
-      {
-        label: "Guides",
-        href: "/resources",
-        description: "Short reads for incident and resilience teams",
       },
     ],
   },

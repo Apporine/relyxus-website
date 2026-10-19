@@ -1,6 +1,5 @@
 import { PageMeta } from "@/components/layout/PageMeta";
 import { PageHero } from "@/components/sections/PageHero";
-import { WhatWeSell } from "@/components/sections/WhatWeSell";
 import { FounderNote } from "@/components/sections/FounderNote";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { Section } from "@/components/ui/Section";
@@ -39,21 +38,12 @@ export function AboutPage() {
         lead="Relyxus is built by Apporine for the payments teams who answer for every incident: to customers, to the board and to the regulator."
       >
         <ButtonLink href="/contact">Talk to the team</ButtonLink>
-        <ButtonLink href={APPORINE_URL} variant="secondary">
+        <ButtonLink href={APPORINE_URL} variant="dark">
           About Apporine
         </ButtonLink>
       </PageHero>
 
       <FounderNote />
-
-      <Section
-        id="what"
-        ground="paper"
-        label="What we sell"
-        title="Relyxus, in one block"
-      >
-        <WhatWeSell />
-      </Section>
 
       <Section
         id="principles"

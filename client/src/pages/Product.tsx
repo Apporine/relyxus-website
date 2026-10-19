@@ -15,13 +15,20 @@ export function ProductPage() {
     <>
       <PageMeta route="/product" />
       <PageHero
+        ground="canvas"
         label="Product"
         title="One incident record, from first alert to regulator notice"
         lead="Relyxus is one product with three modules: the War Room for the investigation, Approvals for named sign-off, and the Command Centre for leadership."
+        visual={
+          <Screen
+            screen={modules[0].screen}
+            title={`Relyxus · ${modules[0].name}`}
+          />
+        }
       >
-        <ButtonLink href="/demo">Book a 30-minute demo</ButtonLink>
-        <ButtonLink href="/pilot" variant="secondary">
-          Start with a replay pilot
+        <ButtonLink href="/demo">Book Demo</ButtonLink>
+        <ButtonLink href="/pilot" variant="ghost">
+          Start a replay pilot
         </ButtonLink>
       </PageHero>
 

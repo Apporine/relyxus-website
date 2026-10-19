@@ -25,7 +25,7 @@ export function DoraPage() {
         lead="A plain guide to the DORA major-incident deadlines and the UK regime that starts on 18 March 2027, with the rules linked so you can check every line."
       >
         <ButtonLink href="#checklist">Get the reporting checklist</ButtonLink>
-        <ButtonLink href="/dora/checklist" variant="secondary">
+        <ButtonLink href="/dora/checklist" variant="dark">
           Open the printable version
         </ButtonLink>
       </PageHero>

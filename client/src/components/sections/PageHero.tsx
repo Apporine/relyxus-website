@@ -7,18 +7,24 @@ export function PageHero({
   lead,
   children,
   visual,
+  ground = "paper",
 }: {
   label: string;
   title: string;
   lead: string;
   children?: ReactNode;
   visual?: ReactNode;
+  ground?: "paper" | "white" | "canvas";
 }) {
+  const onCanvas = ground === "canvas";
   return (
-    <section className="page-hero" aria-labelledby="page-title">
+    <section
+      className={`page-hero ${onCanvas ? "page-hero-canvas on-canvas" : ""}`}
+      aria-labelledby="page-title"
+    >
       <div className={`container ${visual ? "hero-grid" : ""}`}>
         <div className="hero-copy">
-          <p className="label">{label}</p>
+          <p className={`label ${onCanvas ? "hero-tag" : ""}`}>{label}</p>
           <h1 id="page-title">{title}</h1>
           <p className="lead">{lead}</p>
           {children && <div className="actions">{children}</div>}

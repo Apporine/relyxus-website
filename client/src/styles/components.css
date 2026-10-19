@@ -56,44 +56,57 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-1);
-  min-height: var(--tap);
-  padding: 0 20px;
+  min-height: var(--btn-height);
+  padding: 16px 20px;
   border: 1px solid transparent;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-pill);
   font-size: var(--text-ui);
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1;
   text-decoration: none;
+  color: inherit;
   cursor: pointer;
   transition:
-    background-color var(--quick) var(--ease),
-    border-color var(--quick) var(--ease),
-    color var(--quick) var(--ease);
+    background-color var(--hover) var(--ease),
+    border-color var(--hover) var(--ease),
+    color var(--hover) var(--ease),
+    box-shadow var(--hover) var(--ease),
+    transform var(--hover) var(--ease);
 }
 
 .btn-primary {
-  background: var(--signal);
+  background: var(--primary);
   color: var(--ink);
 }
 
 .btn-primary:hover {
-  background: var(--signal-hover);
+  background: var(--primary-hover);
 }
 
-.btn-secondary {
+.btn-ghost {
   background: transparent;
-  border-color: var(--ink);
-  color: var(--ink);
+  border-color: var(--primary);
+  color: var(--white);
 }
 
-.btn-secondary:hover {
-  background: var(--ink-04);
+.btn-ghost:hover {
+  background: var(--ghost-hover);
+}
+
+.btn-dark {
+  background: var(--canvas);
+  color: var(--white);
+}
+
+.btn-dark:hover {
+  background: var(--raised);
 }
 
 .btn-text {
   min-height: var(--tap);
   padding: 0;
-  color: var(--ink);
+  border-radius: 0;
+  color: var(--link);
 }
 
 .btn-text:hover {

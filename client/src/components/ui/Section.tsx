@@ -1,6 +1,12 @@
 import type { ReactNode } from "react";
 
-export type Ground = "paper" | "white" | "console";
+export type Ground =
+  | "paper"
+  | "white"
+  | "console"
+  | "canvas"
+  | "tint-1"
+  | "tint-2";
 
 /** A page section with an optional header: label, H2, short intro. */
 export function Section({
@@ -23,10 +29,11 @@ export function Section({
   className?: string;
 }) {
   const headingId = id ? `${id}-title` : undefined;
+  const onDark = ground === "console" || ground === "canvas";
   return (
     <section
       id={id}
-      className={`section section-${ground} ${ground === "console" ? "on-console" : ""} ${className}`.trim()}
+      className={`section section-${ground} ${onDark ? "on-canvas on-console" : ""} ${className}`.trim()}
       aria-labelledby={title ? headingId : undefined}
     >
       <div className="container">

@@ -1,6 +1,8 @@
 import { useEffect, type ReactNode } from "react";
 import { useLocation } from "wouter";
+import { AnnouncementBar } from "./AnnouncementBar";
 import { SiteHeader } from "./SiteHeader";
+import { ProductBar } from "./ProductBar";
 import { SiteFooter } from "./SiteFooter";
 
 /** Scroll to the top (or the hash target) on every route change. */
@@ -26,7 +28,9 @@ export function Layout({ children }: { children: ReactNode }) {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
+      <AnnouncementBar />
       <SiteHeader />
+      <ProductBar />
       <main id="main" tabIndex={-1}>
         {children}
       </main>

@@ -8,7 +8,9 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  scroll-padding-top: calc(var(--nav-height) + var(--space-2));
+  scroll-padding-top: calc(
+    var(--announce-height) + var(--nav-height) + var(--space-2)
+  );
 }
 
 body {
@@ -67,19 +69,19 @@ a {
 h1,
 h2,
 h3 {
-  font-weight: 600;
+  font-weight: var(--weight-heading);
   letter-spacing: -0.02em;
   text-wrap: balance;
 }
 
 h1 {
   font-size: var(--text-h1);
-  line-height: 1.1;
+  line-height: 1.18;
 }
 
 h2 {
   font-size: var(--text-h2);
-  line-height: 1.15;
+  line-height: 1.2;
 }
 
 h3 {
@@ -100,14 +102,26 @@ samp,
 }
 
 :focus-visible {
-  outline: 2px solid var(--ink);
+  outline: 2px solid var(--link);
   outline-offset: 2px;
   border-radius: 2px;
 }
 
 .on-console :focus-visible,
-.on-console:focus-visible {
-  outline-color: var(--signal);
+.on-console:focus-visible,
+.on-canvas :focus-visible,
+.on-canvas:focus-visible {
+  outline-color: var(--primary);
+}
+
+a:not(.btn):not(.wordmark):not(.nav-link):not(.card) {
+  color: var(--link);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.on-canvas a:not(.btn):not(.wordmark):not(.nav-link) {
+  color: var(--primary);
 }
 
 main:focus {
@@ -134,9 +148,24 @@ main:focus {
   background: var(--white);
 }
 
-.section-console {
-  background: var(--console);
-  color: var(--console-text);
+.section-console,
+.section-canvas {
+  background: var(--canvas);
+  color: var(--white);
+}
+
+.section-canvas .muted,
+.section-console .muted,
+.on-canvas .muted {
+  color: var(--on-canvas);
+}
+
+.section-tint-1 {
+  background: var(--tint-1);
+}
+
+.section-tint-2 {
+  background: var(--tint-2);
 }
 
 .section + .section-tight {

@@ -22,5 +22,6 @@
   <url><loc>/resources/incidents/cloudflare-18-november-2025</loc><priority>0.7</priority></url>
   <url><loc>/resources/incidents/aws-us-east-1-october-2025</loc><priority>0.7</priority></url>
   <url><loc>/resources/incidents/rba-rits-27-january-2026</loc><priority>0.7</priority></url>
+  <url><loc>/resources/incidents/lloyds-12-march-2026</loc><priority>0.7</priority></url>
   <url><loc>/resources/incidents/cme-27-november-2025</loc><priority>0.7</priority></url>
 </urlset>

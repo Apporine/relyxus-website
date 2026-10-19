@@ -20,7 +20,7 @@ export default function NotFound() {
           </p>
           <div className="actions">
             <ButtonLink href="/">Go to the homepage</ButtonLink>
-            <ButtonLink href="/product" variant="secondary">
+            <ButtonLink href="/product" variant="dark">
               See the product
             </ButtonLink>
           </div>

@@ -192,7 +192,7 @@ export const roles: readonly Role[] = [
       },
     ],
     reassurance: "No change runs without a named approver your policy defines.",
-    incident: "cme-27-november-2025",
+    incident: "lloyds-12-march-2026",
     proof: "quote",
     faq: [
       {

@@ -1,27 +1,29 @@
 import { PageMeta } from "@/components/layout/PageMeta";
 import { Hero } from "@/components/sections/Hero";
-import { TrustStrip } from "@/components/sections/TrustStrip";
-import { Problem } from "@/components/sections/Problem";
-import { HowItWorks } from "@/components/sections/HowItWorks";
-import { ClockBand } from "@/components/sections/ClockBand";
-import { Audiences } from "@/components/sections/Audiences";
-import { Proof } from "@/components/sections/Proof";
-import { Compare } from "@/components/sections/Compare";
-import { Start } from "@/components/sections/Start";
+import { ModulesBand } from "@/components/sections/ModulesBand";
+import { Walkthrough } from "@/components/sections/Walkthrough";
+import { FeatureRows } from "@/components/sections/FeatureRows";
+import { Statement, Benefits } from "@/components/sections/Benefits";
+import { ReportBanner } from "@/components/sections/ReportBanner";
+import { IncidentCarousel } from "@/components/sections/IncidentCarousel";
+import { HomeDemo } from "@/components/sections/HomeDemo";
+import { Insights } from "@/components/sections/Insights";
 
+/** Homepage: EcoOnline structure, Plum and Lime. Composes sections only. */
 export default function Home() {
   return (
     <>
       <PageMeta route="/" />
       <Hero />
-      <TrustStrip />
-      <Problem />
-      <HowItWorks />
-      <ClockBand />
-      <Audiences />
-      <Proof />
-      <Compare />
-      <Start />
+      <ModulesBand />
+      <Walkthrough />
+      <FeatureRows />
+      <Statement />
+      <Benefits />
+      <ReportBanner />
+      <IncidentCarousel />
+      <HomeDemo />
+      <Insights />
     </>
   );
 }

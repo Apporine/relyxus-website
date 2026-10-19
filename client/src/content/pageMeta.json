@@ -136,5 +136,11 @@
     "description": "A cooling failure at a CyrusOne data centre halted CME’s markets for more than 10 hours after it chose not to fail over.",
     "h1": "CME Group, 27–28 November 2025: the outage that was meant to be brief",
     "body": "A cooling failure at a CyrusOne data centre halted CME’s markets for more than 10 hours after it chose not to fail over."
+  },
+  "/resources/incidents/lloyds-12-march-2026": {
+    "title": "Lloyds Banking Group, 12 March 2026: overnight change exposed other customers’ transactions",
+    "description": "An overnight mobile-app update introduced a software defect so up to 447,936 Lloyds, Halifax and Bank of Scotland customers could see other customers’ transaction lists.",
+    "h1": "Lloyds Banking Group, 12 March 2026: overnight change exposed other customers’ transactions",
+    "body": "An overnight mobile-app update introduced a software defect so up to 447,936 customers could see other customers’ transaction lists."
   }
 }

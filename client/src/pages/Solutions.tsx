@@ -56,6 +56,7 @@ export function SolutionRoute({ slug }: { slug: string }) {
   const role = roleBySlug(slug);
   if (!role) return <Redirect to="/" replace />;
   const module = moduleByKey(role.screen.module);
+  if (!module) return <Redirect to="/" replace />;
   return (
     <>
       <PageMeta route={`/solutions/${role.slug}`} />
@@ -65,7 +66,7 @@ export function SolutionRoute({ slug }: { slug: string }) {
         lead={role.lede}
       >
         <ButtonLink href={role.cta.href}>{role.cta.label}</ButtonLink>
-        <ButtonLink href="#screen" variant="secondary">
+        <ButtonLink href="#screen" variant="dark">
           See the screen
         </ButtonLink>
       </PageHero>

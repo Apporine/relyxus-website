@@ -19,7 +19,7 @@
   align-items: center;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 900px) {
   .hero-grid {
     grid-template-columns: 5fr 7fr;
     gap: var(--space-8);
@@ -529,6 +529,182 @@
   gap: var(--space-2);
 }
 
+/* Company ÃÂ¢ÃÂÃÂ founders + trust ledger */
+.founder-grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+@media (min-width: 800px) {
+  .founder-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+  }
+}
+
+.founder-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  background: var(--paper);
+  border-radius: var(--radius-lg);
+}
+
+.founder-card h3 {
+  margin-top: var(--space-1);
+}
+
+.founder-role {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: var(--text-xs);
+  font-weight: 600;
+}
+
+.founder-line {
+  max-width: 36em;
+  color: var(--body);
+}
+
+.founder-quote {
+  margin-top: auto;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--rule);
+}
+
+.founder-quote p {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-size: var(--text-quote);
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.founder-quote footer {
+  margin-top: var(--space-2);
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+
+.avatar-xl {
+  display: inline-grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--canvas);
+  color: var(--primary);
+  font-family: var(--font-mono);
+  font-size: var(--text-md);
+  font-weight: 500;
+}
+
+.parent-note {
+  margin-top: var(--space-5);
+}
+
+.trust-ledger {
+  overflow-x: auto;
+  border: 1px solid var(--white-12);
+  border-radius: var(--radius-lg);
+}
+
+.trust-ledger table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.trust-ledger th,
+.trust-ledger td {
+  padding: var(--space-2) var(--space-3);
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--white-08);
+}
+
+.trust-ledger thead th {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--on-canvas);
+}
+
+.trust-ledger tbody th {
+  font-weight: 600;
+  color: var(--white);
+  min-width: 12em;
+}
+
+.trust-ledger tbody td {
+  color: var(--on-canvas);
+}
+
+.trust-ledger tr:last-child th,
+.trust-ledger tr:last-child td {
+  border-bottom: none;
+}
+
+.status-pill {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.status-in-product {
+  background: var(--signal-tint);
+  color: var(--primary);
+}
+
+.status-in-progress {
+  background: var(--white-12);
+  color: var(--second);
+}
+
+.status-planned {
+  background: var(--white-06);
+  color: var(--on-canvas);
+}
+
+.evidence-grid {
+  display: grid;
+  gap: var(--space-3);
+}
+
+@media (min-width: 700px) {
+  .evidence-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.evidence-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  border-radius: var(--radius);
+  background: var(--paper);
+  text-decoration: none;
+  transition: background var(--quick) var(--ease);
+}
+
+.evidence-card:hover {
+  background: var(--tint-1);
+}
+
+.evidence-card strong {
+  font-size: var(--text-h3);
+  font-weight: 500;
+}
+
 /* Articles and incident files */
 .article h1 {
   margin-block: var(--space-3) var(--space-2);
@@ -651,10 +827,12 @@
   }
 }
 
-/* ÂÂ EcoOnline homepage: Plum and Lime ÂÂ */
+/* ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ EcoOnline homepage: Plum and Lime ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ */
 .accent {
   color: var(--primary);
 }
+
+/* Prefer .accent-phrase (serif italic); keep .accent for legacy lime spans */
 
 .hero {
   position: relative;
@@ -1439,6 +1617,93 @@
 .timeline-diagram-list time {
   color: var(--on-canvas);
   font-size: var(--text-xs);
+}
+
+/* Flow diagram â Security / Pilot / Company heroes */
+.flow-diagram {
+  background: var(--canvas-deep) !important;
+  color: var(--white);
+  border: 1px solid var(--console-rule);
+  padding: var(--space-3);
+}
+
+.flow-diagram-title {
+  margin-bottom: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--on-canvas);
+}
+
+.flow-diagram-list {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.flow-diagram-list li {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: var(--space-2);
+  align-items: start;
+  padding: var(--space-2);
+  border-radius: var(--radius);
+  background: var(--white-06);
+  border-left: 3px solid var(--console-rule);
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.flow-diagram-list[data-reveal="play"] li,
+.flow-diagram-list[data-reveal="static"] li {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.45s var(--ease),
+    transform 0.45s var(--ease);
+  transition-delay: calc(var(--i, 0) * 110ms);
+}
+
+.flow-diagram-list li.tone-ok {
+  border-left-color: var(--ok);
+}
+
+.flow-diagram-list li.tone-wait {
+  border-left-color: var(--second);
+}
+
+.flow-diagram-list li.tone-signal {
+  border-left-color: var(--primary);
+}
+
+.flow-num {
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--raised);
+  color: var(--primary);
+  font-size: var(--text-xs);
+  font-weight: 500;
+}
+
+.flow-diagram-list strong {
+  display: block;
+  font-weight: 500;
+  color: var(--white);
+}
+
+.flow-diagram-list p {
+  margin-top: 4px;
+  font-size: var(--text-sm);
+  color: var(--on-canvas);
+  line-height: 1.4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flow-diagram-list li {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 .resource-start-grid {

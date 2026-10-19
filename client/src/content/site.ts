@@ -3,13 +3,14 @@
  * what is true and approved for publication; empty values stay hidden.
  */
 import type { SourceLink } from "@/components/ui/Sources";
+import { founders } from "./company";
 
 export type NavItem = { label: string; href: string; description?: string };
 export type NavEntry = { label: string; href?: string; items?: NavItem[] };
 
 export const APPORINE_URL = "https://apporine.com";
 
-/** Five top-level entries. Dropdowns only where they hold three links. */
+/** Four top-level entries. Resources hub removed — evidence lives under Company. */
 export const nav: NavEntry[] = [
   { label: "Product", href: "/product" },
   {
@@ -34,37 +35,27 @@ export const nav: NavEntry[] = [
   },
   { label: "Pilot", href: "/pilot" },
   {
-    label: "Resources",
-    items: [
-      {
-        label: "DORA and UK reporting",
-        href: "/dora",
-        description: "Every deadline, with the rules behind it",
-      },
-      {
-        label: "Reporting checklist",
-        href: "/dora/checklist",
-        description: "One page for DORA and the UK regime",
-      },
-      {
-        label: "Incident files",
-        href: "/resources/incidents",
-        description: "Public outages, and where the hours went",
-      },
-    ],
-  },
-  {
     label: "Company",
     items: [
       {
         label: "About",
         href: "/about",
-        description: "Who builds Relyxus, and why",
+        description: "Founders, trust ledger, why we built it",
       },
       {
         label: "Security",
         href: "/security",
         description: "How we handle your data",
+      },
+      {
+        label: "Incident files",
+        href: "/resources/incidents",
+        description: "Public outages, where the hours went",
+      },
+      {
+        label: "DORA and UK reporting",
+        href: "/dora",
+        description: "Deadlines with the rules behind them",
       },
       {
         label: "Contact",
@@ -89,12 +80,11 @@ export const footerColumns: { label: string; items: NavItem[] }[] = [
     items: nav[1].items ?? [],
   },
   {
-    label: "Resources",
+    label: "Evidence",
     items: [
+      { label: "Incident files", href: "/resources/incidents" },
       { label: "DORA and UK reporting", href: "/dora" },
       { label: "Reporting checklist", href: "/dora/checklist" },
-      { label: "Incident files", href: "/resources/incidents" },
-      { label: "Guides", href: "/resources" },
     ],
   },
   {
@@ -205,22 +195,22 @@ export const founderNote = {
     "We built Relyxus so the explanation exists by the time the incident is over: what we saw, what we believed, and who said yes.",
     "One rule shapes it most. The record is honest about what we didn’t know, because that is what a regulator, an auditor and your own team will ask about first.",
   ],
-  /** Replace with a real name and role, and add a photo, when approved. */
-  signature: "The Relyxus team at Apporine",
+  signature: `${founders[0].name} & ${founders[1].name}`,
   photo: undefined as string | undefined,
 };
 
-/**
- * The people building Relyxus. Initials avatars until photos exist; nothing
- * renders while this is empty.
- */
+/** The people building Relyxus — from company.ts. */
 export const team: readonly {
   name: string;
   role: string;
   line: string;
   linkedin?: string;
   photo?: string;
-}[] = [];
+}[] = founders.map(person => ({
+  name: person.name,
+  role: person.role,
+  line: person.line,
+}));
 
 /** Public rules your buyers work to. Named, not claimed as certifications. */
 export const standards: readonly SourceLink[] = [

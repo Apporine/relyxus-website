@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" fill="none" role="img" aria-label="Relyxus">
+  <rect width="36" height="36" rx="9" fill="#2A2438"/>
+  <path d="M10 9.5 L26 26.5" stroke="#C8F03C" stroke-width="4.2" stroke-linecap="round"/>
+  <path d="M26 9.5 L10 26.5" stroke="#C8F03C" stroke-width="4.2" stroke-linecap="round"/>
+  <circle cx="18" cy="18" r="3.2" fill="#FAF8F3"/>
+</svg>

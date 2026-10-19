@@ -12,7 +12,7 @@ export function Hero() {
           <p className="hero-tag">{hero.tag}</p>
           <h1 id="hero-title">
             {hero.titleBefore}{" "}
-            <span className="accent">{hero.titleAccent}</span>
+            <em className="accent-phrase">{hero.titleAccent}</em>
           </h1>
           <p className="lead hero-lead">{hero.para1}</p>
           <p className="hero-lead muted">{hero.para2}</p>

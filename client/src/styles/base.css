@@ -74,6 +74,26 @@ h3 {
   text-wrap: balance;
 }
 
+/* One serif italic phrase inside a headline — Apporine-style mixed type */
+.accent-phrase {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--primary);
+}
+
+.on-canvas .accent-phrase,
+.hero .accent-phrase,
+.page-hero-canvas .accent-phrase {
+  color: var(--primary);
+}
+
+.section-paper .accent-phrase,
+.section-white .accent-phrase {
+  color: var(--second);
+}
+
 h1 {
   font-size: var(--text-h1);
   line-height: 1.18;

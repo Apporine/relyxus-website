@@ -11,7 +11,7 @@ export function Insights() {
       <div className="container">
         <header className="insights-header">
           <h2 id="insights-title">{insights.title}</h2>
-          <ButtonLink href="/resources" variant="dark">
+          <ButtonLink href="/resources/incidents" variant="dark">
             View all
           </ButtonLink>
         </header>

@@ -54,16 +54,10 @@
     "body": "Regulated buyers check this before they book a call, so here it is plainly: what is in place, and where the detail lives."
   },
   "/about": {
-    "title": "About",
-    "description": "Relyxus is built by Apporine for the payments teams who answer for every incident: to customers, to the board and to the regulator.",
-    "h1": "Incident response you can explain to anyone",
-    "body": "Relyxus is built by Apporine for the payments teams who answer for every incident."
-  },
-  "/resources": {
-    "title": "Resources",
-    "description": "Practical guides for payments incident and resilience teams: DORA and UK reporting, post-incident reports, and a library of public incidents.",
-    "h1": "Guides for the incident you’ll have to explain",
-    "body": "Short, practical reads for payments engineering and resilience teams, and a library of public incidents."
+    "title": "Company · About Relyxus",
+    "description": "Meet the founders behind Relyxus — Bisma Idrees and Syed Aoon — and the trust ledger we publish before you book a call.",
+    "h1": "Accountable people. Not a faceless vendor.",
+    "body": "Relyxus is built by Apporine. Two founders, a public trust ledger, and evidence you can check."
   },
   "/resources/incidents": {
     "title": "Incident files: where the hours went",

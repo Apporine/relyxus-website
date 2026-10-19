@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Accent } from "@/components/ui/Accent";
 
 /** Inner page hero: label, H1, lead, actions. Optional visual on the right. */
 export function PageHero({
@@ -25,7 +26,9 @@ export function PageHero({
       <div className={`container ${visual ? "hero-grid" : ""}`}>
         <div className="hero-copy">
           <p className={`label ${onCanvas ? "hero-tag" : ""}`}>{label}</p>
-          <h1 id="page-title">{title}</h1>
+          <h1 id="page-title">
+            <Accent text={title} />
+          </h1>
           <p className="lead">{lead}</p>
           {children && <div className="actions">{children}</div>}
         </div>

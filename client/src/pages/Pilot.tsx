@@ -1,12 +1,31 @@
 import { PageMeta } from "@/components/layout/PageMeta";
 import { PageHero } from "@/components/sections/PageHero";
 import { PilotSteps } from "@/components/sections/PilotSteps";
+import { FlowDiagram } from "@/components/sections/FlowDiagram";
 import { DemoForm } from "@/components/sections/DemoForm";
 import { ReplayResult } from "@/components/sections/Proof";
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { ButtonLink } from "@/components/ui/Button";
 import { Accordion } from "@/components/ui/Accordion";
 import { securityCommitments } from "@/content/product";
+
+const pilotFlow = [
+  {
+    label: "Bring a closed SEV1",
+    text: "One incident your team knows — ideally where the first theory was wrong.",
+    tone: "signal" as const,
+  },
+  {
+    label: "Replay read-only",
+    text: "We rebuild the record from alerts, deploys and logs. Nothing changes.",
+    tone: "ok" as const,
+  },
+  {
+    label: "Compare the result",
+    text: "Ranked causes, approvals it would have asked for, and a notice draft.",
+    tone: "wait" as const,
+  },
+] as const;
 
 const youBring = [
   "One closed SEV1 your team knows well, ideally one where the first theory was wrong.",
@@ -44,9 +63,11 @@ export function PilotPage() {
     <>
       <PageMeta route="/pilot" />
       <PageHero
+        ground="canvas"
         label="Replay pilot"
-        title="Start with an incident you’ve already closed"
+        title="Start with an incident you’ve *already closed*"
         lead="We replay one closed incident read-only and show you the record Relyxus would have left: the ranked cause, the approvals and the notice draft. Nothing in your systems changes."
+        visual={<FlowDiagram title="Pilot path" steps={pilotFlow} />}
       >
         <ButtonLink href="#pilot-form">Start a replay pilot</ButtonLink>
       </PageHero>

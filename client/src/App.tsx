@@ -14,7 +14,6 @@ import {
   IncidentFilePage,
   IncidentsPage,
   ResourceArticle,
-  ResourcesPage,
 } from "@/pages/Resources";
 import { DemoPage } from "@/pages/Demo";
 import { ContactPage } from "@/pages/Contact";
@@ -24,6 +23,7 @@ import NotFound from "@/pages/NotFound";
 /** Old URLs kept working after pages were merged or renamed. */
 const redirects: [string, string][] = [
   ["/company", "/about"],
+  ["/resources", "/about#evidence"],
   ["/replay", "/pilot"],
   ["/pricing", "/product#pricing"],
   ["/privacy-policy", "/privacy"],
@@ -50,7 +50,6 @@ function Router() {
       <Route path="/dora/checklist" component={ChecklistPage} />
       <Route path="/security" component={SecurityPage} />
       <Route path="/about" component={AboutPage} />
-      <Route path="/resources" component={ResourcesPage} />
       <Route path="/resources/incidents" component={IncidentsPage} />
       <Route path="/resources/incidents/:slug">
         {params => <IncidentFilePage slug={params.slug} />}

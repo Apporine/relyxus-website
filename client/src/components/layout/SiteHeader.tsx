@@ -7,7 +7,18 @@ import { ButtonLink } from "@/components/ui/Button";
 export function Wordmark({ onClick }: { onClick?: () => void }) {
   return (
     <Link href="/" className="wordmark" onClick={onClick}>
-      relyxus<span className="sr-only"> home</span>
+      <img
+        src="/logo.svg"
+        alt=""
+        width={28}
+        height={28}
+        className="wordmark-mark"
+        decoding="async"
+      />
+      <span className="wordmark-text">
+        rely<span className="wordmark-accent">x</span>us
+      </span>
+      <span className="sr-only"> home</span>
     </Link>
   );
 }
@@ -68,14 +79,16 @@ function DesktopNav() {
         )
         ?.focus();
     };
-    const onPointer = (event: PointerEvent) => {
+    // Use click (not pointerdown) so dropdown links navigate before the panel
+    // unmounts — pointerdown-outside was racing the Link click.
+    const onDocClick = (event: MouseEvent) => {
       if (!ref.current?.contains(event.target as Node)) setOpen(null);
     };
     window.addEventListener("keydown", onKey);
-    window.addEventListener("pointerdown", onPointer);
+    window.addEventListener("click", onDocClick);
     return () => {
       window.removeEventListener("keydown", onKey);
-      window.removeEventListener("pointerdown", onPointer);
+      window.removeEventListener("click", onDocClick);
     };
   }, [open]);
 

@@ -47,8 +47,9 @@
   --shadow-lift:
     0 4px 8px rgb(22 18 29 / 0.06), 0 12px 32px rgb(22 18 29 / 0.1);
 
-  /* Type — DM Sans everywhere; mono only in product UI */
+  /* Type — DM Sans body; Instrument Serif for one accent phrase per headline */
   --font-sans: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-accent: "Instrument Serif", Georgia, "Times New Roman", serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
   --text-xs: 13px;
   --text-sm: 14px;

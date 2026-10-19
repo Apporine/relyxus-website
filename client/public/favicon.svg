@@ -1,5 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="relyxus">
-  <rect width="64" height="64" rx="14" fill="#120A18"/>
-  <path d="M19 17 L45 47" stroke="#C6F432" stroke-width="7" stroke-linecap="round" fill="none"/>
-  <path d="M45 17 L19 47" stroke="#C6F432" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <rect width="64" height="64" rx="14" fill="#2A2438"/>
+  <path d="M18 16 L46 48" stroke="#C8F03C" stroke-width="7" stroke-linecap="round"/>
+  <path d="M46 16 L18 48" stroke="#C8F03C" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="32" cy="32" r="5.5" fill="#FAF8F3"/>
 </svg>

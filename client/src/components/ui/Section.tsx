@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Accent, stripAccent } from "@/components/ui/Accent";
 
 export type Ground =
   | "paper"
@@ -71,8 +72,14 @@ export function SectionHeader({
   return (
     <header className={`section-header section-header-${align}`}>
       {label && <p className="label">{label}</p>}
-      <Heading id={id}>{title}</Heading>
-      {intro && <p className="section-intro">{intro}</p>}
+      <Heading id={id}>
+        <Accent text={title} />
+      </Heading>
+      {intro && (
+        <p className="section-intro">
+          {typeof intro === "string" ? stripAccent(intro) : intro}
+        </p>
+      )}
     </header>
   );
 }

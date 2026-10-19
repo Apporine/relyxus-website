@@ -8,6 +8,8 @@ import { Section } from "@/components/ui/Section";
 import { ButtonLink } from "@/components/ui/Button";
 import { Accordion } from "@/components/ui/Accordion";
 import { Sources } from "@/components/ui/Sources";
+import { DrawBars } from "@/components/ui/DrawBars";
+import { Reveal } from "@/components/ui/Reveal";
 import { Screen } from "@/components/product/Screen";
 import { roleBySlug, type Role } from "@/content/solutions";
 import { moduleByKey } from "@/content/product";
@@ -51,7 +53,21 @@ function RoleProof({ role }: { role: Role }) {
   );
 }
 
-/** One template for the three Solutions pages; every block is role-specific. */
+function RoleVisual({ role }: { role: Role }) {
+  if (role.causeBars?.length) {
+    return (
+      <DrawBars
+        title="Likely causes · INC-2207 (example)"
+        bars={role.causeBars}
+      />
+    );
+  }
+  const module = moduleByKey(role.screen.module);
+  if (!module) return null;
+  return <Screen screen={module.screen} title={`Relyxus · ${module.name}`} />;
+}
+
+/** One template, role-specific copy and visuals — never identical section titles. */
 export function SolutionRoute({ slug }: { slug: string }) {
   const role = roleBySlug(slug);
   if (!role) return <Redirect to="/" replace />;
@@ -61,12 +77,14 @@ export function SolutionRoute({ slug }: { slug: string }) {
     <>
       <PageMeta route={`/solutions/${role.slug}`} />
       <PageHero
-        label={`For ${role.name.toLowerCase()}: ${role.who}`}
+        ground="canvas"
+        label={`For ${role.name}: ${role.who}`}
         title={role.title}
         lead={role.lede}
+        visual={<RoleVisual role={role} />}
       >
         <ButtonLink href={role.cta.href}>{role.cta.label}</ButtonLink>
-        <ButtonLink href="#screen" variant="dark">
+        <ButtonLink href="#screen" variant="ghost">
           See the screen
         </ButtonLink>
       </PageHero>
@@ -74,14 +92,16 @@ export function SolutionRoute({ slug }: { slug: string }) {
       <Section
         id="bad-night"
         ground="white"
-        label="Your bad night"
-        title="You’ve had this one"
+        label={role.sections.nightLabel}
+        title={role.sections.nightTitle}
       >
-        <div className="bad-night measure">
-          {role.badNight.map(line => (
-            <p key={line}>{line}</p>
-          ))}
-        </div>
+        <Reveal>
+          <div className="bad-night measure">
+            {role.badNight.map(line => (
+              <p key={line}>{line}</p>
+            ))}
+          </div>
+        </Reveal>
       </Section>
 
       <Section
@@ -91,21 +111,23 @@ export function SolutionRoute({ slug }: { slug: string }) {
         title={role.screen.title}
         intro={role.screen.intro}
       >
-        <Screen screen={module.screen} title={`Relyxus · ${module.name}`} />
+        <Reveal>
+          <Screen screen={module.screen} title={`Relyxus · ${module.name}`} />
+        </Reveal>
       </Section>
 
       <Section
         id="outcomes"
         ground="white"
-        label="What changes"
-        title="Three things you get"
+        label={role.sections.outcomesLabel}
+        title={role.sections.outcomesTitle}
       >
         <ul className="grid-3 terms">
-          {role.outcomes.map(outcome => (
-            <li key={outcome.title}>
+          {role.outcomes.map((outcome, i) => (
+            <Reveal as="li" key={outcome.title} delay={i * 80}>
               <h3>{outcome.title}</h3>
               <p className="muted">{outcome.text}</p>
-            </li>
+            </Reveal>
           ))}
         </ul>
         <p className="reassure">{role.reassurance}</p>
@@ -114,8 +136,8 @@ export function SolutionRoute({ slug }: { slug: string }) {
       <Section
         id="proof"
         ground="paper"
-        label="Proof"
-        title="The gap Relyxus is built for"
+        label={role.sections.proofLabel}
+        title={role.sections.proofTitle}
       >
         <RoleProof role={role} />
       </Section>
@@ -124,7 +146,7 @@ export function SolutionRoute({ slug }: { slug: string }) {
         id="faq"
         ground="white"
         label="Questions"
-        title={`What ${role.name.toLowerCase()} teams ask`}
+        title={role.sections.faqTitle}
       >
         <div className="measure-wide">
           <Accordion items={role.faq} />

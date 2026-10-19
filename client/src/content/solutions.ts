@@ -16,9 +16,21 @@ export type Role = {
   title: string;
   lede: string;
   badNight: readonly [string, string, string];
+  /** Unique section titles — never the same wording across roles. */
+  sections: {
+    nightLabel: string;
+    nightTitle: string;
+    outcomesLabel: string;
+    outcomesTitle: string;
+    proofLabel: string;
+    proofTitle: string;
+    faqTitle: string;
+  };
   screen: { module: ModuleKey; title: string; intro: string };
   outcomes: readonly { title: string; text: string }[];
   reassurance: string;
+  /** Bars for the hero diagram (engineering) or empty to skip. */
+  causeBars?: readonly { label: string; value: number; note?: string }[];
   /** Matching public incident, by slug. */
   incident: string;
   proof: "replay" | "regulation" | "quote";
@@ -42,6 +54,32 @@ export const roles: readonly Role[] = [
       "It’s 2 a.m. and card declines are climbing. You have the alerting tool, two dashboards, the deploy log and a Slack thread open.",
       "Three people have three theories. The loudest one wins the first 40 minutes.",
       "Someone eventually asks what shipped this afternoon. It was the deploy.",
+    ],
+    sections: {
+      nightLabel: "On-call reality",
+      nightTitle: "The night the tabs win",
+      outcomesLabel: "What changes for SRE",
+      outcomesTitle: "From guesswork to ranked evidence",
+      proofLabel: "Public evidence",
+      proofTitle: "Where the hours went on Cloudflare",
+      faqTitle: "What engineering teams ask",
+    },
+    causeBars: [
+      {
+        label: "Deploy api-gw v3.2",
+        value: 0.86,
+        note: "3 supporting sources",
+      },
+      {
+        label: "Card network latency",
+        value: 0.41,
+        note: "2 sources",
+      },
+      {
+        label: "Ledger write lag",
+        value: 0.08,
+        note: "1 source",
+      },
     ],
     screen: {
       module: "war-room",
@@ -107,6 +145,15 @@ export const roles: readonly Role[] = [
       "It lives in Slack, a bridge call nobody recorded and three engineers’ memories.",
       "The 4-hour first notice is already running, and you’re pasting screenshots into a template.",
     ],
+    sections: {
+      nightLabel: "Resilience reality",
+      nightTitle: "The blank page at T+2 hours",
+      outcomesLabel: "What changes for risk",
+      outcomesTitle: "The notice starts before the call ends",
+      proofLabel: "Mapped to the rules",
+      proofTitle: "DORA and UK clocks, with sources",
+      faqTitle: "What resilience teams ask",
+    },
     screen: {
       module: "approvals",
       title: "Every decision on the record, with its approver",
@@ -171,6 +218,15 @@ export const roles: readonly Role[] = [
       "You join the bridge to find out and become one more voice on it.",
       "At 8 a.m. the board asks who decided not to roll back sooner. Nobody wrote it down.",
     ],
+    sections: {
+      nightLabel: "Leadership reality",
+      nightTitle: "The board asks before breakfast",
+      outcomesLabel: "What changes for leadership",
+      outcomesTitle: "Exposure and decisions, without the bridge",
+      proofLabel: "Why decisions need a record",
+      proofTitle: "Lloyds: an overnight change, half a million customers",
+      faqTitle: "What CTOs and Heads of Payments ask",
+    },
     screen: {
       module: "command-centre",
       title: "The Command Centre: exposure and decisions",

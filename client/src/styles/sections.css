@@ -1316,3 +1316,207 @@
 .page-hero-canvas .lead {
   color: var(--on-canvas);
 }
+
+/* Reveal + draw-in motion (EcoOnline-style, reduced-motion safe) */
+.reveal[data-reveal="ready"] {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.reveal[data-reveal="play"] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.55s var(--ease),
+    transform 0.55s var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal[data-reveal="ready"],
+  .reveal[data-reveal="play"] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+.draw-bars-list {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.draw-bars-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-bottom: var(--space-1);
+  font-size: var(--text-sm);
+}
+
+.draw-bars-track {
+  height: 10px;
+  border-radius: var(--radius-pill);
+  background: var(--rule);
+  overflow: hidden;
+}
+
+.draw-bars-fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: var(--radius-pill);
+  background: var(--primary);
+  transition: width 0.9s var(--ease);
+}
+
+.draw-bars[data-reveal="play"] .draw-bars-fill,
+.draw-bars[data-reveal="static"] .draw-bars-fill {
+  width: var(--w);
+}
+
+.draw-bars[data-reveal="play"] .draw-bars-list li {
+  transition-delay: calc(var(--i, 0) * 80ms);
+}
+
+.draw-bars-list li:first-child .draw-bars-fill {
+  background: var(--canvas);
+}
+
+.timeline-diagram {
+  background: var(--canvas-deep) !important;
+  color: var(--white);
+  border: 1px solid var(--console-rule);
+  padding: var(--space-3);
+}
+
+.timeline-diagram-title {
+  margin-bottom: var(--space-1);
+  font-size: var(--text-sm);
+  color: var(--on-canvas);
+}
+
+.timeline-gap {
+  display: inline-block;
+  margin-bottom: var(--space-3);
+  padding: 4px 10px;
+  background: var(--primary);
+  color: var(--ink);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-xs);
+  font-weight: 500;
+}
+
+.timeline-diagram-list {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.timeline-diagram-list li {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: var(--space-2);
+  align-items: start;
+  opacity: 0;
+  transform: translateX(-8px);
+  font-size: var(--text-sm);
+}
+
+.timeline-diagram-list[data-reveal="play"] li,
+.timeline-diagram-list[data-reveal="static"] li {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.4s var(--ease),
+    transform 0.4s var(--ease);
+  transition-delay: calc(var(--i, 0) * 90ms);
+}
+
+.timeline-diagram-list li.is-gap time {
+  color: var(--primary);
+}
+
+.timeline-diagram-list time {
+  color: var(--on-canvas);
+  font-size: var(--text-xs);
+}
+
+.resource-start-grid {
+  display: grid;
+  gap: var(--space-3);
+}
+
+@media (min-width: 860px) {
+  .resource-start-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.resource-start {
+  display: grid;
+  gap: var(--space-2);
+  height: 100%;
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--ink) !important;
+  transition:
+    transform var(--hover) var(--ease),
+    box-shadow var(--hover) var(--ease);
+}
+
+.resource-start:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lift);
+}
+
+.resource-lavender {
+  background: var(--tint-1);
+}
+
+.resource-lime {
+  background: var(--tint-2);
+}
+
+.resource-start-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius);
+  background: var(--white);
+  color: var(--link);
+}
+
+.resource-lime .resource-start-icon {
+  color: var(--ink);
+  background: var(--primary);
+}
+
+.resource-start-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  font-weight: 500;
+  color: var(--link);
+}
+
+/* Soft grid on canvas heroes (EcoOnline pattern) */
+.hero,
+.page-hero-canvas {
+  background-image:
+    linear-gradient(var(--white-06) 1px, transparent 1px),
+    linear-gradient(90deg, var(--white-06) 1px, transparent 1px);
+  background-size: 56px 56px;
+  background-position: right top;
+  background-repeat: repeat;
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    background-size: 56px 56px;
+    background-position: calc(50% + 120px) top;
+  }
+}

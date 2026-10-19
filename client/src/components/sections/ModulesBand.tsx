@@ -1,6 +1,7 @@
 import { Radio, ShieldCheck, LayoutDashboard } from "lucide-react";
 import { modulesBand } from "@/content/home";
 import { ButtonLink } from "@/components/ui/Button";
+import { Reveal } from "@/components/ui/Reveal";
 
 const icons = {
   "war-room": Radio,
@@ -18,10 +19,15 @@ export function ModulesBand() {
           <p className="section-intro">{modulesBand.intro}</p>
         </header>
         <ul className="modules-grid">
-          {modulesBand.cards.map(card => {
+          {modulesBand.cards.map((card, i) => {
             const Icon = icons[card.key];
             return (
-              <li key={card.key} className="module-card">
+              <Reveal
+                as="li"
+                key={card.key}
+                delay={i * 80}
+                className="module-card"
+              >
                 <span className="module-icon" aria-hidden="true">
                   <Icon size={20} />
                 </span>
@@ -30,7 +36,7 @@ export function ModulesBand() {
                 <ButtonLink href={card.href} variant="primary">
                   See {card.title}
                 </ButtonLink>
-              </li>
+              </Reveal>
             );
           })}
         </ul>

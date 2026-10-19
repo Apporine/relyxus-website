@@ -2,35 +2,36 @@
  * Design tokens. The only file allowed to hold raw colours, font names and
  * the spacing scale; scripts/check-tokens.mjs fails the build otherwise.
  *
- * Final visual system (De-Vibe-Coding Plan): Plum and Lime, EcoOnline structure.
+ * Plum and Lime, softened: canvas is a quieter plum so lime and product
+ * visuals carry the energy (EcoOnline forest pattern, Relyxus colours).
  */
 :root {
-  /* Colour — Plum and Lime */
-  --canvas: #1b1130;
-  --canvas-deep: #130b24;
-  --raised: #2a1d45;
+  /* Colour — Plum and Lime (softened) */
+  --canvas: #2a2438;
+  --canvas-deep: #221c2e;
+  --raised: #3a3348;
   --paper: #faf8f3;
   --white: #ffffff;
   --ink: #16121d;
   --body: #4a4556;
   --ink-muted: #4a4556;
-  --on-canvas: #c9c0dc;
+  --on-canvas: #d8d2e6;
   --rule: #e8e4dc;
   --primary: #c8f03c;
   --signal: #c8f03c;
   --primary-hover: #d7f76b;
   --signal-hover: #d7f76b;
-  --second: #b9a7ff;
-  --link: #5b3fd0;
-  --tint-1: #f2eefc;
+  --second: #c4b6f0;
+  --link: #6b52d4;
+  --tint-1: #f3f0fa;
   --tint-2: #f4fae1;
   --alert: #e5484d;
   --ok: #1f8a5b;
-  --console: #1b1130;
-  --console-raised: #2a1d45;
+  --console: #2a2438;
+  --console-raised: #3a3348;
   --console-rule: rgb(255 255 255 / 0.1);
   --console-text: #efeae2;
-  --console-muted: #c9c0dc;
+  --console-muted: #d8d2e6;
   --signal-tint: rgb(200 240 60 / 0.14);
   --ink-20: rgb(22 18 29 / 0.2);
   --ink-04: rgb(22 18 29 / 0.04);
@@ -39,8 +40,8 @@
   --white-06: rgb(255 255 255 / 0.06);
   --white-08: rgb(255 255 255 / 0.08);
   --white-12: rgb(255 255 255 / 0.12);
-  --second-20: rgb(185 167 255 / 0.2);
-  --second-22: rgb(185 167 255 / 0.22);
+  --second-20: rgb(196 182 240 / 0.22);
+  --second-22: rgb(196 182 240 / 0.28);
   --shadow-soft:
     0 1px 2px rgb(22 18 29 / 0.05), 0 8px 24px rgb(22 18 29 / 0.08);
   --shadow-lift:

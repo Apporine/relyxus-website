@@ -35,6 +35,7 @@ const redirects: [string, string][] = [
   ["/integrations/:slug", "/product#fit"],
   ["/accessibility", "/"],
   ["/specimen", "/"],
+  ["/resources/incidents/rba-rits-27-january-2026", "/resources/incidents"],
 ];
 
 function Router() {

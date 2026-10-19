@@ -119,22 +119,28 @@
     "h1": "AWS, 19–20 October 2025: DNS was fixed, then recovery caused a second failure",
     "body": "An empty DNS record for DynamoDB’s regional endpoint broke services in us-east-1, and EC2’s lease manager collapsed during recovery."
   },
-  "/resources/incidents/rba-rits-27-january-2026": {
-    "title": "Reserve Bank of Australia, 27 January 2026: an expired certificate stopped low-value settlement",
-    "description": "An expired intermediate certificate disrupted the RBA’s Low Value Clearing and Settlement Services for 6 hours 49 minutes.",
-    "h1": "Reserve Bank of Australia, 27 January 2026: an expired certificate stopped low-value settlement",
-    "body": "An expired intermediate certificate disrupted the RBA’s Low Value Clearing and Settlement Services for 6 hours 49 minutes."
-  },
   "/resources/incidents/cme-27-november-2025": {
-    "title": "CME Group, 27–28 November 2025: the outage that was meant to be brief",
-    "description": "A cooling failure at a CyrusOne data centre halted CME’s markets for more than 10 hours after it chose not to fail over.",
-    "h1": "CME Group, 27–28 November 2025: the outage that was meant to be brief",
-    "body": "A cooling failure at a CyrusOne data centre halted CME’s markets for more than 10 hours after it chose not to fail over."
+    "title": "CME Group, 27–28 November 2025: cooling failure halted electronic markets",
+    "description": "A critical cooling failure at a CyrusOne data centre led CME to halt electronic markets temporarily; trading reopened the next day on a delayed basis.",
+    "h1": "CME Group, 27–28 November 2025: cooling failure halted electronic markets",
+    "body": "A critical cooling failure at a CyrusOne data centre led CME to halt electronic markets temporarily."
   },
   "/resources/incidents/lloyds-12-march-2026": {
     "title": "Lloyds Banking Group, 12 March 2026: overnight change exposed other customers’ transactions",
     "description": "An overnight mobile-app update introduced a software defect so up to 447,936 Lloyds, Halifax and Bank of Scotland customers could see other customers’ transaction lists.",
     "h1": "Lloyds Banking Group, 12 March 2026: overnight change exposed other customers’ transactions",
     "body": "An overnight mobile-app update introduced a software defect so up to 447,936 customers could see other customers’ transaction lists."
+  },
+  "/resources/incidents/barclays-31-january-2025": {
+    "title": "Barclays, 31 Jan–2 Feb 2025: mainframe software problem disrupted digital payments",
+    "description": "A critical mainframe module caused progressive degradation; 56% of attempted online payments failed among users who reached the payment step.",
+    "h1": "Barclays, 31 Jan–2 Feb 2025: mainframe software problem disrupted digital payments",
+    "body": "A critical mainframe module caused progressive degradation affecting payments and servicing."
+  },
+  "/resources/incidents/google-cloud-12-june-2025": {
+    "title": "Google Cloud, 12 June 2025: global Service Control error from policy metadata",
+    "description": "Malformed policy metadata replicated globally and caused null-pointer crashes; primary API outage about three hours, with longer product-level residual effects.",
+    "h1": "Google Cloud, 12 June 2025: global Service Control error from policy metadata",
+    "body": "Malformed policy metadata replicated globally and caused null-pointer crashes across Google Cloud APIs."
   }
 }

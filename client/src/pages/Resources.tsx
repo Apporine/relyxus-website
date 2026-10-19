@@ -100,11 +100,23 @@ export function IncidentFilePage({ slug }: { slug: string }) {
           <Link href="/resources/incidents" className="back-link">
             <ArrowLeft size={16} aria-hidden="true" /> All incident files
           </Link>
-          <p className="label">
-            {file.firm} · {file.date} · Public incident research
-          </p>
+          <div className="file-head">
+            <img
+              src={file.logo}
+              alt=""
+              width={48}
+              height={48}
+              className="file-logo"
+              decoding="async"
+            />
+            <p className="label">
+              {file.firm} · {file.date} · Public incident research
+            </p>
+          </div>
           <h1>{file.title}</h1>
+          <p className="file-highlight">{file.highlight}</p>
           <p className="lead">{file.summary}</p>
+          <p className="small muted">{file.sector}</p>
 
           <h2 className="subhead-lg">Timeline</h2>
           <TimelineDiagram

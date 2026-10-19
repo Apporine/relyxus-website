@@ -15,7 +15,7 @@ import { regulatorySources, ukRegime } from "@/content/regulation";
 const guide = articles["dora-major-incident-reports"];
 
 export function DoraPage() {
-  const rba = incidentBySlug("rba-rits-27-january-2026");
+  const example = incidentBySlug("barclays-31-january-2025");
   return (
     <>
       <PageMeta route="/dora" />
@@ -75,7 +75,7 @@ export function DoraPage() {
         </div>
       </Section>
 
-      {rba && (
+      {example && (
         <Section
           id="example"
           ground="white"
@@ -84,11 +84,11 @@ export function DoraPage() {
         >
           <div className="split split-even">
             <p className="lead">
-              When incidents overlap, each needs its own ordered, sourced
-              record. The RBA’s January 2026 settlement outage is a recent
-              example.
+              When payments and servicing degrade together, each channel still
+              needs one ordered, sourced record. Barclays’ January 2025
+              mainframe incident is a recent public example.
             </p>
-            <IncidentCard file={rba} />
+            <IncidentCard file={example} />
           </div>
         </Section>
       )}

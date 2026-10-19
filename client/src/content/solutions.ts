@@ -176,7 +176,7 @@ export const roles: readonly Role[] = [
     ],
     reassurance:
       "People still classify, review and submit anything that goes to a regulator.",
-    incident: "rba-rits-27-january-2026",
+    incident: "barclays-31-january-2025",
     proof: "regulation",
     faq: [
       {

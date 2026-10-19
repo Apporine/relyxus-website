@@ -4,7 +4,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { carouselNote } from "@/content/home";
 import { incidentFiles } from "@/content/incidents";
 
-const SLIDE = 324;
+const SLIDE = 340;
 
 export function IncidentCarousel() {
   const track = useRef<HTMLUListElement>(null);
@@ -20,7 +20,10 @@ export function IncidentCarousel() {
     >
       <div className="container">
         <header className="carousel-header">
-          <h2 id="carousel-title">Where the hours went</h2>
+          <div>
+            <h2 id="carousel-title">Where the hours went</h2>
+            <p className="carousel-note">{carouselNote}</p>
+          </div>
           <div className="carousel-controls">
             <button
               type="button"
@@ -40,20 +43,39 @@ export function IncidentCarousel() {
             </button>
           </div>
         </header>
-        <p className="small muted carousel-note">{carouselNote}</p>
         <ul className="carousel-track" ref={track}>
           {incidentFiles.map(file => (
             <li key={file.slug} className="carousel-card">
               <div className="carousel-card-top">
-                <span className="carousel-firm">{file.firm}</span>
-                <span className="carousel-date">{file.date}</span>
+                <img
+                  src={file.logo}
+                  alt=""
+                  width={36}
+                  height={36}
+                  className="carousel-logo"
+                  decoding="async"
+                />
+                <div className="carousel-card-ids">
+                  <span className="carousel-firm">{file.firm}</span>
+                  <span className="carousel-date">{file.date}</span>
+                </div>
               </div>
-              <h3>
-                <Link href={`/resources/incidents/${file.slug}`}>
-                  {file.title}
+              <div className="carousel-card-body">
+                <h3>
+                  <Link href={`/resources/incidents/${file.slug}`}>
+                    {file.title}
+                  </Link>
+                </h3>
+                <p className="carousel-highlight">{file.highlight}</p>
+                <p className="carousel-summary">{file.summary}</p>
+                <Link
+                  href={`/resources/incidents/${file.slug}`}
+                  className="carousel-cta"
+                >
+                  Read the file
+                  <ArrowRight size={14} aria-hidden="true" />
                 </Link>
-              </h3>
-              <p className="small muted">{file.summary}</p>
+              </div>
             </li>
           ))}
         </ul>

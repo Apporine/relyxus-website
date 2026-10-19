@@ -2,7 +2,7 @@
 
 Public marketing website for **Relyxus**, built and maintained by **Apporine**.
 
-Relyxus helps regulated teams investigate incidents with evidence in one place and keep proposed actions behind policy and human approval.
+Relyxus helps regulated payments teams investigate incidents with evidence in one place and keep proposed actions behind policy and human approval.
 
 This repository ships:
 
@@ -10,8 +10,8 @@ This repository ships:
 - Optional Express / tRPC / Drizzle backend (full-stack local mode)
 - A contact / demo enquiry API that emails the Apporine team
 
-**Default branch:** `main` (stub)  
-**Active development branch:** `develop` (full codebase)
+**Default branch:** `main`  
+**Active product branch:** `feat/spec-v1` (Plum & Lime site; merge to `develop` via PR)
 
 ---
 
@@ -19,16 +19,17 @@ This repository ships:
 
 1. [Quick start](#quick-start)
 2. [Repository layout](#repository-layout)
-3. [Architecture overview](#architecture-overview)
-4. [Local development flows](#local-development-flows)
-5. [Enquiry / contact email flow](#enquiry--contact-email-flow)
-6. [Vercel deployment flow](#vercel-deployment-flow)
-7. [Routing map](#routing-map)
-8. [Scripts](#scripts)
-9. [Environment variables](#environment-variables)
-10. [Quality checks](#quality-checks)
-11. [Git workflow](#git-workflow)
-12. [Tech stack](#tech-stack)
+3. [Site model](#site-model)
+4. [Architecture overview](#architecture-overview)
+5. [Local development flows](#local-development-flows)
+6. [Enquiry / contact email flow](#enquiry--contact-email-flow)
+7. [Vercel deployment flow](#vercel-deployment-flow)
+8. [Routing map](#routing-map)
+9. [Scripts](#scripts)
+10. [Environment variables](#environment-variables)
+11. [Quality checks](#quality-checks)
+12. [Git workflow](#git-workflow)
+13. [Tech stack](#tech-stack)
 
 ---
 
@@ -66,19 +67,72 @@ pnpm preview
 relyxus-website/
 ├── api/                  # Vercel serverless functions (contact email)
 ├── client/               # Vite React app (marketing site)
-│   ├── public/           # Static assets, robots.txt, sitemap.xml, OG cover
+│   ├── public/           # logo.svg, favicon, robots.txt, sitemap, OG cover
 │   └── src/
-│       ├── components/   # Marketing shell and explorers
-│       ├── content/      # Nav, product copy, resources, deployment modes
+│       ├── components/
+│       │   ├── layout/   # Header, product bar, footer, announcement
+│       │   ├── sections/ # Heroes, walkthrough, flow diagrams, forms
+│       │   ├── product/  # Incident record / screen previews
+│       │   └── ui/       # Button, Accent, Section, Reveal, DrawBars
+│       ├── content/      # Copy decks (home, company, product, incidents…)
 │       ├── pages/        # Route-level pages
-│       └── lib/          # Helpers (SEO, utils, tRPC client)
+│       ├── styles/       # tokens.css + layout/sections (no Tailwind)
+│       └── lib/          # SEO, scrollToHash, analytics, enquiry
 ├── server/               # Express app, tRPC, contact route, tests
 ├── shared/               # Shared contracts (contact validation, constants)
+├── scripts/              # prerender.mjs, check-tokens.mjs
 ├── drizzle/              # Schema + SQL migrations (optional DB path)
 ├── vercel.json           # Static output + SPA rewrites + API function
 ├── vite.config.ts        # Vite + local /api/contact middleware
 └── package.json
 ```
+
+---
+
+## Site model
+
+### Visual system
+
+**Plum & Lime** — EcoOnline-style marketing structure with Relyxus colours:
+
+| Token role              | Purpose                                                  |
+| ----------------------- | -------------------------------------------------------- |
+| Canvas (`--canvas`)     | Softened plum chrome (header, heroes, product bar)       |
+| Paper / white           | Light content bands                                      |
+| Lime (`--primary`)      | CTAs and accent phrases                                  |
+| DM Sans                 | Body and display                                         |
+| Instrument Serif italic | One accent phrase per headline (`*phrase*` via `Accent`) |
+| IBM Plex Mono           | Product UI / timestamps                                  |
+
+Raw colours live only in `client/src/styles/tokens.css`. `pnpm check` runs `scripts/check-tokens.mjs` so other files cannot introduce hex/rgb literals.
+
+### Information architecture
+
+| Nav           | What it is                                                               |
+| ------------- | ------------------------------------------------------------------------ |
+| **Product**   | One product, three modules: War Room, Approvals, Command Centre          |
+| **Solutions** | Engineering, resilience, leadership role pages                           |
+| **Pilot**     | Read-only replay pilot                                                   |
+| **Company**   | About (founders + trust ledger), Security, incident files, DORA, Contact |
+
+There is **no Resources hub**. Evidence lives under Company and deep links:
+
+- `/resources/incidents` — public incident files
+- `/dora` / `/dora/checklist` — regulatory deadlines
+- `/resources` redirects to `/about#evidence`
+
+### Founders (Company / About)
+
+Named on `/about`, matching Apporine:
+
+- **Bisma Idrees** — Founder (DevOps / AIOps)
+- **Syed Aoon** — Founder · AI & full-stack
+
+Copy and the trust ledger live in `client/src/content/company.ts`. Do not invent certifications; status rows stay honest (`In product` / `In progress` / `Planned`).
+
+### Product bar
+
+On Product, Solutions, and Pilot pages, a sticky bar links to `#war-room`, `#approvals`, and `#command-centre`. Same-page hashes scroll in-place; cross-page clicks park the target and land on `/product`.
 
 ---
 
@@ -135,13 +189,14 @@ flowchart TB
 flowchart LR
   A[client/index.html] --> B[main.tsx]
   B --> C[App.tsx routes]
-  C --> D[PublicLayout]
-  D --> E[SiteHeader / SiteFooter]
+  C --> D[Layout]
+  D --> E[Announcement + Header + ProductBar]
   D --> F[Page components]
-  F --> G[PageMeta SEO]
-  F --> H[content/site.ts]
-  F --> I[Demo / Contact forms]
-  I --> J[POST /api/contact]
+  D --> G[SiteFooter]
+  F --> H[PageMeta SEO]
+  F --> I[content/*.ts]
+  F --> J[Demo / Contact forms]
+  J --> K[POST /api/contact]
 ```
 
 ---
@@ -198,8 +253,6 @@ The demo form (`/demo`) and contact page (`/contact`) are live. Submissions are 
 - `aoon.syed@apporine.com`
 - `bisma.idrees@apporine.com`
 
-Both addresses are also shown as `mailto:` links on `/contact`.
-
 ```mermaid
 flowchart TD
   A[Visitor opens /demo or /contact] --> B[Fill enquiry form]
@@ -219,14 +272,14 @@ flowchart TD
 
 ### Implementation map
 
-| Layer                        | Path                                  | Role                                              |
-| ---------------------------- | ------------------------------------- | ------------------------------------------------- |
-| Shared validation + delivery | `shared/contact.ts`                   | Payload rules, email body, Resend/FormSubmit send |
-| Vercel function              | `api/contact.ts`                      | Production `POST /api/contact`                    |
-| Express route                | `server/contact.ts`                   | Local full-stack `POST /api/contact`              |
-| Vite middleware              | `vite.config.ts`                      | Local static-dev `POST /api/contact`              |
-| Form UI                      | `client/src/pages/Demo.tsx`           | Validation, submit, success/error states          |
-| Contact page                 | `client/src/pages/MarketingPages.tsx` | Routing cards + mailto list                       |
+| Layer                        | Path                                     | Role                                              |
+| ---------------------------- | ---------------------------------------- | ------------------------------------------------- |
+| Shared validation + delivery | `shared/contact.ts`                      | Payload rules, email body, Resend/FormSubmit send |
+| Vercel function              | `api/contact.ts`                         | Production `POST /api/contact`                    |
+| Express route                | `server/contact.ts`                      | Local full-stack `POST /api/contact`              |
+| Vite middleware              | `vite.config.ts`                         | Local static-dev `POST /api/contact`              |
+| Demo form                    | `client/src/pages/Demo.tsx` + `DemoForm` | Validation, submit, success/error                 |
+| Contact page                 | `client/src/pages/Contact.tsx`           | Enquiry topics + reply promise                    |
 
 ### First-time FormSubmit note
 
@@ -239,7 +292,7 @@ If `RESEND_API_KEY` is not set, the first FormSubmit delivery may send an activa
 Configured in `vercel.json`:
 
 - **Install:** `pnpm install`
-- **Build:** `pnpm build:static`
+- **Build:** `pnpm build:static` (Vite + prerender)
 - **Output:** `dist/public`
 - **SPA rewrite:** all non-`/api/*` routes → `index.html`
 - **Function:** `api/contact.ts`
@@ -270,7 +323,7 @@ flowchart LR
 
 Without Resend, FormSubmit fallback is used (see note above).
 
-Deploy from the **`develop`** branch (or connect Vercel to `develop`) so production tracks the full codebase. `main` remains the repository default but only holds the initial stub README unless you promote releases deliberately.
+Deploy from **`develop`** (or the branch Vercel tracks) once `feat/spec-v1` is merged. `main` remains the repository default.
 
 ---
 
@@ -281,58 +334,58 @@ Client routes live in `client/src/App.tsx`.
 ```mermaid
 flowchart TD
   Home["/"] --> Product["/product"]
+  Home --> Solutions["/solutions/:slug"]
+  Home --> Pilot["/pilot"]
   Home --> Demo["/demo"]
-  Home --> Deploy["/deployment"]
+  Home --> About["/about"]
 
-  Product --> Inv["/product/investigation"]
-  Product --> Gov["/product/governed-actions"]
-  Product --> Rep["/product/reporting"]
+  Product --> WR["#war-room"]
+  Product --> AP["#approvals"]
+  Product --> CC["#command-centre"]
   Product --> Sec["/security"]
-  Product --> Int["/integrations"]
 
-  Int --> IntDetail["/integrations/:slug"]
-
-  Deploy --> Replay["/replay"]
-  Deploy --> Pricing["/pricing"]
-
-  Home --> Resources["/resources"]
-  Resources --> Article["/resources/:slug"]
-
-  Home --> Company["/company"]
-  Company --> Contact["/contact"]
-  Company --> Privacy["/privacy"]
-  Company --> Terms["/terms"]
-  Company --> A11y["/accessibility"]
+  About --> Contact["/contact"]
+  About --> Incidents["/resources/incidents"]
+  About --> Dora["/dora"]
+  Dora --> Checklist["/dora/checklist"]
+  Incidents --> File["/resources/incidents/:slug"]
 
   Demo --> API["POST /api/contact"]
-  Contact --> Demo
-  Contact --> Mail["mailto: Apporine inboxes"]
+  Contact --> API
+
+  CompanyOld["/company"] -.->|redirect| About
+  ResourcesOld["/resources"] -.->|redirect| AboutEvidence["/about#evidence"]
+  ReplayOld["/replay"] -.->|redirect| Pilot
 ```
+
+Legacy redirects (also in `App.tsx`): `/pricing` → product pricing, `/product/investigation` → `#war-room`, `/deployment` → `/security`, `/integrations` → `#fit`, and related aliases.
 
 SEO helpers:
 
-- Per-page meta / Open Graph / Twitter / JSON-LD via `PageMeta`
+- Per-page meta via `PageMeta` + `content/pageMeta.json`
 - `client/public/robots.txt`
 - `client/public/sitemap.xml`
-- Social image: `client/public/og-cover.svg`
+- Brand mark: `client/public/logo.svg` / `favicon.svg`
+- Social image: `client/public/og-cover.png` (or SVG if present)
 
 ---
 
 ## Scripts
 
-| Command             | Description                                      |
-| ------------------- | ------------------------------------------------ |
-| `pnpm dev:static`   | Vite marketing site on port `3000`               |
-| `pnpm dev`          | Express + Vite full stack                        |
-| `pnpm build:static` | Production static build → `dist/public` (Vercel) |
-| `pnpm build`        | Static build + bundled Express server → `dist/`  |
-| `pnpm start`        | Run bundled Express server (`dist/index.js`)     |
-| `pnpm preview`      | Preview static production build                  |
-| `pnpm check`        | TypeScript (`tsc --noEmit`)                      |
-| `pnpm test`         | Vitest unit tests                                |
-| `pnpm format`       | Prettier write                                   |
-| `pnpm db:migrate`   | Apply Drizzle migrations                         |
-| `pnpm db:push`      | Generate + migrate schema changes                |
+| Command             | Description                                         |
+| ------------------- | --------------------------------------------------- |
+| `pnpm dev:static`   | Vite marketing site on port `3000`                  |
+| `pnpm dev`          | Express + Vite full stack                           |
+| `pnpm build:static` | Production static build + prerender → `dist/public` |
+| `pnpm build`        | Static build + bundled Express server → `dist/`     |
+| `pnpm start`        | Run bundled Express server (`dist/index.js`)        |
+| `pnpm preview`      | Preview static production build                     |
+| `pnpm check`        | TypeScript + token colour guard                     |
+| `pnpm test`         | Vitest unit tests                                   |
+| `pnpm format`       | Prettier write                                      |
+| `pnpm ci`           | format check → check → test → build:static          |
+| `pnpm db:migrate`   | Apply Drizzle migrations                            |
+| `pnpm db:push`      | Generate + migrate schema changes                   |
 
 ---
 
@@ -354,7 +407,7 @@ Never commit real secrets. Configure production values in the Vercel project set
 
 ## Quality checks
 
-Automated gates keep `develop` deployable:
+Automated gates keep the branch deployable:
 
 | Gate               | When                   | What runs                                                         |
 | ------------------ | ---------------------- | ----------------------------------------------------------------- |
@@ -362,7 +415,7 @@ Automated gates keep `develop` deployable:
 | Husky `pre-push`   | Every local push       | `pnpm build:static`                                               |
 | GitHub Actions CI  | Push / PR to `develop` | format check, typecheck, tests, static build, output verification |
 
-Before opening a PR (or run the same suite CI uses):
+Before opening a PR:
 
 ```bash
 pnpm ci
@@ -374,7 +427,7 @@ Contact smoke check (with local static server running):
 2. Submit a valid enquiry
 3. Confirm success UI
 4. Confirm inbox delivery (or FormSubmit activation on first use)
-5. Confirm `/contact` mailto links open correctly
+5. Confirm `/contact` works
 
 ---
 
@@ -382,27 +435,20 @@ Contact smoke check (with local static server running):
 
 ```mermaid
 gitGraph
-  commit id: "main stub"
+  commit id: "main"
   branch develop
-  commit id: "initial codebase"
-  branch feat_contact
-  commit id: "contact email"
+  commit id: "codebase"
+  branch feat_spec_v1
+  commit id: "plum-lime site"
+  commit id: "company founders"
   checkout develop
-  merge feat_contact
-  branch feat_seo
-  commit id: "seo + robots"
-  checkout develop
-  merge feat_seo
-  branch docs_readme
-  commit id: "readme diagrams"
-  checkout develop
-  merge docs_readme
+  merge feat_spec_v1
 ```
 
-Practical rules used in this repo:
+Practical rules:
 
 1. Keep **`main`** as the GitHub default branch.
-2. Land product work on **`develop`** via PRs.
+2. Land product work on **`develop`** via PRs (from `feat/spec-v1` or smaller feature branches).
 3. Prefer small, reviewable PRs (feature / fix / content / docs).
 4. Do not push application code only to `main` unless promoting a release.
 
@@ -410,20 +456,24 @@ Practical rules used in this repo:
 
 ## Tech stack
 
-| Area           | Choice                                                     |
-| -------------- | ---------------------------------------------------------- |
-| UI             | React 19, Wouter, Tailwind CSS 4, Radix UI, Framer Motion  |
-| Build          | Vite 7, TypeScript 5.9, pnpm                               |
-| API (optional) | Express, tRPC, Drizzle ORM, MySQL                          |
-| Contact        | Shared validator + Resend / FormSubmit                     |
-| Hosting        | Vercel static output + serverless `/api/contact`           |
-| SEO            | Meta tags, canonical, OG/Twitter, JSON-LD, robots, sitemap |
+| Area           | Choice                                                    |
+| -------------- | --------------------------------------------------------- |
+| UI             | React 19, Wouter, Lucide, custom CSS tokens (Plum & Lime) |
+| Type           | DM Sans + Instrument Serif (accent) + IBM Plex Mono       |
+| Build          | Vite 7, TypeScript 5.9, pnpm, prerender script            |
+| API (optional) | Express, tRPC, Drizzle ORM, MySQL                         |
+| Contact        | Shared validator + Resend / FormSubmit                    |
+| Hosting        | Vercel static output + serverless `/api/contact`          |
+| SEO            | Meta tags, canonical, OG/Twitter, robots, sitemap         |
+| Analytics      | Vercel Analytics                                          |
 
 ---
 
 ## Product note
 
 Marketing pages intentionally avoid invented certifications, customer logos, prices, or regulatory outcomes. Where availability depends on a customer environment or release, the site points visitors to an evaluation conversation instead of over-claiming.
+
+Public incident files cite third-party post-incident reports; those firms are not Relyxus customers and have not endorsed Relyxus.
 
 For enquiry follow-up, contact:
 

@@ -152,16 +152,19 @@ export const designPartners = {
   ],
 } as const;
 
-/** Replace with a named quote (name, role, company, logo) once approved. */
+/**
+ * Named founder quote for homepage / solutions proof slots.
+ * Swap to a customer quote (name, role, company, logo) only when approved.
+ */
 export const partnerQuote: {
   text: string;
   name: string;
   role: string;
   logo?: string;
 } = {
-  text: "We finally had one place for the alert, the deploy and the approval, and a draft notice that wasn’t a blank page.",
-  name: "Head of SRE",
-  role: "Design partner, UK payments processor (anonymised)",
+  text: founders[0].quote,
+  name: founders[0].name,
+  role: `${founders[0].role}, Apporine`,
 };
 
 /** Composite evaluation data. Must stay labelled as illustrative. */

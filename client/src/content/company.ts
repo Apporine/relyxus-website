@@ -1,6 +1,6 @@
 /**
  * Company / About page: people, trust ledger, evidence links.
- * Founders match Apporine (Bisma Idrees) plus Relyxus co-founder Syed Aoon.
+ * Founders: Bisma Idrees (Apporine) and Syed Aoon (Relyxus / Apporine).
  */
 
 export const companyHero = {

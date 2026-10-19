@@ -42,11 +42,14 @@ const esc = value =>
 
 const nav = [
   ["/product", "Product"],
-  ["/security", "Security"],
-  ["/solutions/engineering", "Solutions"],
+  ["/solutions/engineering", "Payments engineering"],
+  ["/solutions/resilience", "Resilience and risk"],
+  ["/solutions/leadership", "Leadership"],
+  ["/pilot", "Pilot"],
+  ["/dora", "DORA and UK reporting"],
   ["/resources", "Resources"],
-  ["/company", "Company"],
-  ["/demo", "Book a 30 minute demo"],
+  ["/about", "About"],
+  ["/demo", "Book a demo"],
 ]
   .map(([href, label]) => `<a href="${href}">${label}</a>`)
   .join(" ");
@@ -77,7 +80,7 @@ for (const page of pages) {
   html = setMeta(html, "name", "twitter:image", image);
   const canonical = `<link rel="canonical" href="${siteUrl}${page.path}" />`;
   html = html.replace("</head>", `    ${canonical}\n  </head>`);
-  const content = `<div id="root"><div style="max-width:720px;margin:0 auto;padding:96px 24px;color:#F4EFE6;font-family:Instrument Sans,system-ui,sans-serif"><p>${nav}</p><h1>${esc(page.h1)}</h1><p>${esc(page.body)}</p></div></div>`;
+  const content = `<div id="root"><div style="max-width:720px;margin:0 auto;padding:96px 24px;color:#16131A;font-family:Instrument Sans,system-ui,sans-serif"><p>${nav}</p><h1>${esc(page.h1)}</h1><p>${esc(page.body)}</p></div></div>`;
   html = html.replace('<div id="root"></div>', content);
   const dir = path.join(dist, page.path);
   if (page.path !== "/") await mkdir(dir, { recursive: true });

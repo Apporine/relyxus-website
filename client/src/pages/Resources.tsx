@@ -1,146 +1,206 @@
-import { ArrowLeft, ArrowRight, ArrowUpRight, Clock3 } from "lucide-react";
 import { Link } from "wouter";
-import { pageMeta } from "@/content/meta";
-import { Accent } from "@/components/marketing/Headline";
-
-/** Guide titles carry their accent after the colon, or on the last four words. */
-const accentTitle = (title: string) => {
-  const colon = title.indexOf(": ");
-  if (colon > 0)
-    return `${title.slice(0, colon + 1)} *${title.slice(colon + 2)}*`;
-  const words = title.split(" ");
-  return `${words.slice(0, -4).join(" ")} *${words.slice(-4).join(" ")}*`;
-};
-import { articleBodies, resources } from "@/content/site";
-import {
-  ActionBand,
-  PageIntro,
-  PageMeta,
-  TextLink,
-} from "@/components/marketing/PublicSite";
+import { ArrowLeft } from "lucide-react";
+import { PageMeta } from "@/components/layout/PageMeta";
+import { PageHero } from "@/components/sections/PageHero";
+import { CtaBand } from "@/components/sections/CtaBand";
+import { IncidentCard } from "@/components/sections/IncidentCard";
+import { Section } from "@/components/ui/Section";
+import { Card } from "@/components/ui/Card";
+import { Sources } from "@/components/ui/Sources";
+import { articles, guides } from "@/content/resources";
+import { incidentBySlug, incidentFiles } from "@/content/incidents";
+import NotFound from "./NotFound";
 
 export function ResourcesPage() {
   return (
     <>
-      <PageMeta
-        title={pageMeta["/resources"].title}
-        description={pageMeta["/resources"].description}
+      <PageMeta route="/resources" />
+      <PageHero
+        label="Resources"
+        title="Guides for the incident you’ll have to explain"
+        lead="Short, practical reads for payments engineering and resilience teams, and a library of public incidents."
       />
-      <PageIntro
-        eyebrow="Resources"
-        title={pageMeta["/resources"].h1}
-        summary={pageMeta["/resources"].body}
-        visual="mesh"
-      />
-      <section
-        className="resources-index section-pad"
-        aria-labelledby="rx-guides-title"
+      <Section
+        id="start-here"
+        ground="white"
+        label="Start here"
+        title="DORA and UK reporting"
       >
-        <h2 id="rx-guides-title" className="sr-only">
-          Guides
-        </h2>
-        <div className="container resources-card-list hx-resource-grid">
-          {resources.map(item => {
-            const href = item.gatedType
-              ? `/demo?type=${encodeURIComponent(item.gatedType)}`
-              : `/resources/${item.slug}`;
-            return (
-              <Link href={href} className="resource-card-large" key={item.slug}>
-                <div className="resource-card-meta">
-                  <span>{item.category}</span>
-                  <span>
-                    <Clock3 size={13} />
-                    {item.time}
-                  </span>
-                </div>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-                <span className="resource-card-link">
-                  {item.gatedType ? "Request the guide" : "Read the guide"}{" "}
-                  <ArrowUpRight size={16} />
-                </span>
-              </Link>
-            );
-          })}
+        <div className="grid-3">
+          <Card
+            title="The deadlines, explained"
+            href="/dora"
+            linkLabel="Read the explainer"
+          >
+            <p>
+              Every DORA reporting stage and the UK regime from 18 March 2027,
+              with the rules linked.
+            </p>
+          </Card>
+          <Card
+            title="Reporting checklist"
+            href="/dora/checklist"
+            linkLabel="Open the checklist"
+          >
+            <p>
+              One page: what to have ready before the incident, in the first
+              hour and before each deadline.
+            </p>
+          </Card>
+          <Card
+            title="Incident files"
+            href="/resources/incidents"
+            linkLabel="Browse the files"
+          >
+            <p>
+              Public outages from published post-incident reports, and where the
+              hours went.
+            </p>
+          </Card>
         </div>
-      </section>
-      <ActionBand
-        title="Bring a question *from your last incident.*"
-        summary="Ask about DORA drafts, Replay pilots, or how the record is built — we reply by email."
-        href="/contact"
+      </Section>
+      <Section id="guides" ground="paper" label="Guides" title="Field guides">
+        <ul className="grid-3">
+          {guides.map(guide => (
+            <Card
+              as="li"
+              key={guide.slug}
+              label={guide.time}
+              title={guide.title}
+              href={
+                guide.gatedType
+                  ? `/demo?type=${encodeURIComponent(guide.gatedType)}`
+                  : `/resources/${guide.slug}`
+              }
+              linkLabel={
+                guide.gatedType ? "Request the guide" : "Read the guide"
+              }
+            >
+              <p>{guide.description}</p>
+            </Card>
+          ))}
+        </ul>
+      </Section>
+      <CtaBand
+        title="Bring a question from your last incident"
+        text="Ask about DORA drafts, replay pilots or how the record is built. A person replies by email."
         label="Contact the team"
+        href="/contact"
       />
     </>
   );
 }
 
 export function ResourceArticle({ slug }: { slug: string }) {
-  const article = articleBodies[slug];
-  if (!article)
-    return (
-      <>
-        <PageMeta
-          title="Resource not found"
-          description="This public resource was not found."
-        />
-        <PageIntro
-          eyebrow="Resources"
-          title="That guide *isn’t here.*"
-          summary="Browse the current explainers or return to the home page."
-          visual="mark"
-        />
-        <section className="section-pad">
-          <div className="container">
-            <TextLink href="/resources">Browse resources</TextLink>
-          </div>
-        </section>
-      </>
-    );
+  const article = articles[slug];
+  if (!article) return <NotFound />;
   return (
     <>
       <PageMeta title={article.title} description={article.intro} />
-      <article className="resource-article">
-        <div className="article-topline container">
-          <Link href="/resources">
-            <ArrowLeft size={15} />
-            All resources
+      <article className="section section-white article">
+        <div className="container narrow">
+          <Link href="/resources" className="back-link">
+            <ArrowLeft size={16} aria-hidden="true" /> All resources
           </Link>
-          <span>Field guide</span>
-        </div>
-        <header className="article-header container">
-          <h1 className="rx-display rx-article-title">
-            <Accent text={accentTitle(article.title)} />
-          </h1>
-          <p className="article-deck">{article.intro}</p>
-        </header>
-        <div className="article-layout container">
-          <aside className="article-toc">
-            <span>In this guide</span>
-            {article.sections.map((section, index) => (
-              <a key={section.heading} href={`#section-${index + 1}`}>
-                {section.heading}
-              </a>
-            ))}
-          </aside>
-          <div className="article-body">
-            {article.sections.map((section, index) => (
-              <section id={`section-${index + 1}`} key={section.heading}>
-                <span className="article-section-index">0{index + 1}</span>
+          <h1>{article.title}</h1>
+          <p className="lead">{article.intro}</p>
+          <div className="prose">
+            {article.sections.map(section => (
+              <section key={section.heading}>
                 <h2>{section.heading}</h2>
                 <p>{section.body}</p>
               </section>
             ))}
-            <Link className="text-link" href="/demo">
-              Talk to us about these questions <ArrowRight size={16} />
-            </Link>
           </div>
         </div>
       </article>
-      <ActionBand
-        title="Bring your stack. *We’ll walk a real incident through it.*"
-        summary="Tell us which tools your team uses and we’ll show you the incident from first alert to record."
-        href="/demo"
-        label="Book a 30 minute demo"
+      <CtaBand
+        ground="paper"
+        title="See the record built while the incident runs"
+        text="Thirty minutes with an engineer: one incident, from first alert to the notice draft."
+      />
+    </>
+  );
+}
+
+export function IncidentsPage() {
+  return (
+    <>
+      <PageMeta route="/resources/incidents" />
+      <PageHero
+        label="Incident files"
+        title="Where the hours went"
+        lead="Public outages at payments and infrastructure firms, from their own post-incident reports. A plain timeline, what slowed the response, and the source."
+      />
+      <Section id="files" ground="white">
+        <p className="small muted files-note">
+          Public incident research. These firms are not Relyxus customers and
+          have not used, endorsed or been assessed by Relyxus.
+        </p>
+        <ul className="grid-3">
+          {incidentFiles.map(file => (
+            <li key={file.slug}>
+              <IncidentCard file={file} />
+            </li>
+          ))}
+        </ul>
+      </Section>
+    </>
+  );
+}
+
+export function IncidentFilePage({ slug }: { slug: string }) {
+  const file = incidentBySlug(slug);
+  if (!file) return <NotFound />;
+  return (
+    <>
+      <PageMeta route={`/resources/incidents/${file.slug}`} />
+      <article className="section section-white article">
+        <div className="container narrow">
+          <Link href="/resources/incidents" className="back-link">
+            <ArrowLeft size={16} aria-hidden="true" /> All incident files
+          </Link>
+          <p className="label">
+            {file.firm} · {file.date} · Public incident research
+          </p>
+          <h1>{file.title}</h1>
+          <p className="lead">{file.summary}</p>
+
+          <h2 className="subhead-lg">Timeline</h2>
+          <ol className="file-timeline">
+            {file.timeline.map(row => (
+              <li key={`${row.at}-${row.text}`}>
+                <time className="mono">{row.at}</time>
+                <span>{row.text}</span>
+              </li>
+            ))}
+          </ol>
+          {file.caveat && <p className="small muted">{file.caveat}</p>}
+
+          <div className="prose">
+            <section>
+              <h2>What slowed the response</h2>
+              <p>{file.slowed}</p>
+            </section>
+            <section>
+              <h2>The gap</h2>
+              <p>{file.gap}</p>
+            </section>
+          </div>
+          <Sources items={file.sources} />
+          <p className="small muted">
+            {file.firm} is not a Relyxus customer and has not used, endorsed or
+            been assessed by Relyxus. This summary is based on the sources
+            above.
+          </p>
+        </div>
+      </article>
+      <CtaBand
+        ground="paper"
+        title="Bring the incident that hurt most"
+        text="We’ll replay one of yours, read-only, and show you the record it would have left."
+        label="Start a replay pilot"
+        href="/pilot"
       />
     </>
   );

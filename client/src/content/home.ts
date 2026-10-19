@@ -1,204 +1,75 @@
 /**
- * Homepage copy deck (Website Redesign Strategy). Six pinned stages around
- * the signal core, an Explore stage, then four resolved sections. Budget:
- * 450 words for the whole homepage. Headlines use `*accent*` for the one
- * Instrument Serif phrase; display text is written in sentence case and set
- * in caps by CSS.
+ * Homepage copy: a hero and nine sections, each saying one thing. Voice: an
+ * experienced incident lead talking to a peer. Sentence case, no taglines.
  */
-
-export type StageId =
-  | "hero"
-  | "signals"
-  | "chain"
-  | "cause"
-  | "approval"
-  | "record"
-  | "explore"
-  | "exit";
-
-export type StageMeta = {
-  id: StageId;
-  number: string;
-  name: string;
-  clock: string;
-  status: string;
-  /** Scroll length of the stage, in viewport heights. */
-  length: number;
-};
-
-/** Stage order, clocks and scroll lengths (stage 3 is 123vh, the exit 55vh). */
-export const stages: readonly StageMeta[] = [
-  {
-    id: "hero",
-    number: "01",
-    name: "Hero",
-    clock: "T+00:00",
-    status: "First alert",
-    length: 100,
-  },
-  {
-    id: "signals",
-    number: "02",
-    name: "Signals",
-    clock: "T+00:01",
-    status: "Signals in",
-    length: 100,
-  },
-  {
-    id: "chain",
-    number: "03",
-    name: "Incident chain",
-    clock: "T+00:02",
-    status: "Correlating",
-    length: 123,
-  },
-  {
-    id: "cause",
-    number: "04",
-    name: "Cause",
-    clock: "T+00:04",
-    status: "Cause found",
-    length: 100,
-  },
-  {
-    id: "approval",
-    number: "05",
-    name: "Approval",
-    clock: "T+00:06",
-    status: "Awaiting approval",
-    length: 100,
-  },
-  {
-    id: "record",
-    number: "06",
-    name: "Record",
-    clock: "T+00:09",
-    status: "Recorded",
-    length: 100,
-  },
-  {
-    id: "explore",
-    number: "07",
-    name: "Explore",
-    clock: "T+00:09",
-    status: "Choose a view",
-    length: 100,
-  },
-  {
-    id: "exit",
-    number: "07",
-    name: "Explore",
-    clock: "T+00:09",
-    status: "Resolving",
-    length: 55,
-  },
-];
+import type { FaqItem } from "@/components/ui/Accordion";
+import type { CompareRow } from "@/components/ui/CompareTable";
 
 export const hero = {
-  eyebrow: "Incident response for regulated firms",
-  title: "Know why payments failed *before the regulator asks.*",
-  line: "Relyxus pulls your logs, changes and alerts into one record, ranks the likely cause and waits for a person’s yes.",
-  primary: { label: "Book a 30 minute demo", href: "/demo" },
-  secondary: { label: "Watch an incident unfold", href: "#stage-signals" },
+  label: "Incident response for regulated payments firms",
+  title: "Know why payments failed, before the regulator asks.",
+  sub: "Relyxus pulls logs, changes and alerts into one record, ranks the likely cause and waits for a named approver before anything changes.",
+  primary: { label: "Book a 30-minute demo", href: "/demo" },
+  secondary: { label: "See the product", href: "/product" },
+  frameNote:
+    "Product preview built from the Relyxus interface. INC-2207 is an example incident.",
 };
 
-export const signals = {
-  title: "Every signal, *one core.*",
-  line: "Every signal, pulled into one record.",
-  cards: [
-    { key: "logs", label: "Logs", sample: "api-gw 502 ×412" },
-    { key: "changes", label: "Changes", sample: "deploy api-gw v3.2" },
-    { key: "alerts", label: "Alerts", sample: "declines up 8×" },
-    { key: "approvals", label: "Approvals", sample: "2 of 2 required" },
-  ],
-} as const;
+export const problem = {
+  label: "The problem",
+  title: "The alert is fast. Finding the cause is not.",
+  text: "During a SEV1 the evidence is in five tabs, the cause is whatever the loudest voice says, and the regulator’s 4-hour clock is already running.",
+};
 
-/** The incident chain. Tool chips are categories, not vendor claims. */
-export const chain = {
-  title: "Six steps. *None of them guesswork.*",
+export const howItWorks = {
+  label: "How it works",
+  title: "How an incident runs with Relyxus",
+  intro:
+    "Four steps, one record. Your team does the deciding; Relyxus does the gathering and the writing down.",
   steps: [
     {
-      name: "Alert",
-      line: "The page fires. The clock starts.",
-      tools: ["Alerts"],
+      title: "Pull the evidence",
+      text: "Logs, deploys and alerts, in one record instead of five tabs.",
+      crop: "evidence",
     },
     {
-      name: "Correlate",
-      line: "Logs, metrics and traces line up.",
-      tools: ["Logs", "Metrics", "Traces"],
+      title: "Rank the likely cause",
+      text: "Each candidate cause carries its sources, with recent changes beside it.",
+      crop: "causes",
     },
     {
-      name: "Cause",
-      line: "Likely causes ranked by evidence.",
-      tools: ["Changes", "Deploys"],
+      title: "A named person approves",
+      text: "Nothing changes in production until a named person approves it.",
+      crop: "approval",
     },
-    { name: "Approve", line: "A named person says yes.", tools: ["Identity"] },
-    { name: "Fix", line: "The change runs and is verified.", tools: [] },
     {
-      name: "Record",
-      line: "Every step timestamped, ready to file.",
-      tools: ["Tickets"],
+      title: "The record writes itself",
+      text: "Your audit record is written while you work, not rebuilt the next morning.",
+      crop: "record",
     },
   ],
 } as const;
 
-export const cause = {
-  title: "The cause, *ranked by evidence.*",
-  line: "Each cause carries its sources. Open them and check.",
-  hypotheses: [
-    { name: "Deploy api-gw v3.2", score: 0.86, sources: "3 sources" },
-    { name: "Card network latency", score: 0.41, sources: "2 sources" },
-    { name: "Ledger write lag", score: 0.08, sources: "1 source" },
-  ],
-} as const;
+export const clockBand = {
+  label: "Built for the 4-hour clock",
+  title: "The draft starts at the first alert",
+  intro:
+    "Under DORA a major incident is reported in stages. Relyxus keeps the record from the first alert, so each notice starts as a draft.",
+};
 
-export const approval = {
-  title: "Nothing runs *until someone says yes.*",
-  change: "Rollback api-gw v3.2 → v3.1",
-  approvers: [
-    { initials: "PO", role: "Head of Payments Ops" },
-    { initials: "IL", role: "Incident lead" },
-  ],
-  audit: "14:26:08 Approved by 2 of 2. Rollback ran under policy PAY-2.",
-} as const;
+export const audiences = {
+  label: "Who it’s for",
+  title: "Built for the people in the incident call",
+};
 
-export const record = {
-  title: "The audit record *writes itself.*",
-  lines: [
-    { at: "14:02:11", text: "Deploy api-gw v3.2 rolled out" },
-    { at: "14:05:12", text: "Card declines up 8×, SEV1 opened" },
-    { at: "14:11:40", text: "Likely cause: api-gw v3.2, 3 sources" },
-    { at: "14:26:08", text: "Rollback approved by 2 of 2" },
-    { at: "14:31:02", text: "Error rate back to baseline" },
-  ],
-  stamp: "DORA first notice · draft ready",
-} as const;
-
-export const explore = {
-  title: "Find *your team’s view.*",
-  links: [
-    { label: "Engineering", href: "/solutions/engineering" },
-    { label: "Resilience", href: "/solutions/resilience" },
-    { label: "Leadership", href: "/solutions/leadership" },
-    { label: "Product", href: "/product" },
-    { label: "Company", href: "/company" },
-  ],
-} as const;
-
-/** Resolved half: paper sections. */
-export const deadline = {
-  title: "DORA gives you *4 hours.*",
-  line: "From classifying a major incident to the first notice. Relyxus starts the draft at the first alert.",
-  numbers: [
-    { value: 24, unit: "hours", label: "latest first notice, from awareness" },
-    { value: 72, unit: "hours", label: "to the intermediate report" },
-    { value: 1, unit: "month", label: "to the final report" },
-  ],
-  uk: "UK firms report under one FCA, PRA and Bank of England regime from 18 March 2027.",
-} as const;
+export const proof = {
+  label: "Proof",
+  title: "Early access, with payments teams",
+};
 
 export const compare = {
-  title: "Relyxus *against the usual way.*",
+  label: "What we sell",
+  title: "Relyxus vs. the usual way",
   columns: ["Relyxus", "Manual war room", "Generic AIOps"],
   rows: [
     {
@@ -207,7 +78,7 @@ export const compare = {
     },
     {
       label: "Likely cause",
-      cells: ["Ranked, with sources", "Loudest voice", "Score, no sources"],
+      cells: ["Ranked, with sources", "Loudest voice", "A score, no sources"],
     },
     {
       label: "Changes",
@@ -225,24 +96,58 @@ export const compare = {
       label: "Regulator draft",
       cells: ["Ready within 4 hours", "Blank page", "Not covered"],
     },
-  ],
-} as const;
+  ] satisfies CompareRow[],
+};
 
-export const prove = {
-  title: "Bring a *closed incident.*",
+export const pilot = {
+  label: "Start with a closed incident",
+  title: "Bring the incident that hurt most",
+  intro: "We’ll show you the record it would have left.",
   steps: [
-    { name: "Pick one you closed", line: "Include a miss or two." },
-    { name: "We replay it, read only", line: "No change to live systems." },
     {
-      name: "Test three things",
-      line: "Evidence behind each cause. An approver before each change. The record, in order.",
+      title: "Pick one you closed",
+      text: "A SEV1 your team knows well. Include one where the first theory was wrong.",
+    },
+    {
+      title: "We replay it, read-only",
+      text: "We connect read-only to the sources for that incident. Nothing in your systems changes.",
+    },
+    {
+      title: "Compare the record",
+      text: "The cause it ranked and the evidence for it, the approvals it would have asked for, and the notice draft.",
     },
   ],
-  cta: { label: "Start a Replay pilot", href: "/demo?type=Replay%20pilot" },
-} as const;
+};
 
-export const closing = {
-  title: "Show us *the incident that hurt most.*",
-  line: "Bring one closed case. We’ll replay it read only and show the record it would have left.",
-  cta: { label: "Book a 30 minute demo", href: "/demo" },
-} as const;
+export const faq: readonly FaqItem[] = [
+  {
+    question: "What does Relyxus need access to?",
+    answer:
+      "Read-only access. For a replay pilot, that means the sources for one closed incident: typically alerts, deploy history and logs. Investigating never changes anything in your systems, and any change Relyxus proposes in production waits for the approvers your policy names.",
+  },
+  {
+    question: "How long does setup take?",
+    answer:
+      "We agree the scope of a pilot on the first call. How long connecting takes depends on your tools and your security review, so we give you a written plan with dates before you start.",
+  },
+  {
+    question: "Which tools does it connect to?",
+    answer:
+      "PagerDuty, Datadog, Splunk, GitHub, GitLab, Jira, ServiceNow, Okta, Slack and AWS CloudWatch today. If yours isn’t listed, ask; we’ll tell you plainly whether it’s supported.",
+  },
+  {
+    question: "How is it priced?",
+    answer:
+      "A read-only replay pilot first, then an annual licence with no per-seat fees. What you pay for the pilot comes off the licence if you go ahead, and the price is agreed in writing before you start.",
+  },
+  {
+    question: "Where is our data hosted?",
+    answer:
+      "Relyxus runs as a dedicated environment or self-hosted by you, so incident evidence stays in your environment. Hosting regions and assurance status are in the security pack.",
+  },
+];
+
+export const demoForm = {
+  title: "Book a 30-minute demo",
+  text: "Tell us a little about your team. A named person from Relyxus replies, not a no-reply sequence.",
+};

@@ -1,38 +1,27 @@
-import {
-  EarlyAccessProof,
-  PageMeta,
-  PilotResult,
-} from "@/components/marketing/PublicSite";
-import { HomeStage } from "@/components/home/HomeStage";
-import { Closing, Compare, Deadline, Prove } from "@/components/home/Resolved";
-import {
-  BeforeAfterStrip,
-  FeatureMap,
-} from "@/components/marketing/ProductClarity";
-import { pageMeta } from "@/content/meta";
+import { PageMeta } from "@/components/layout/PageMeta";
+import { Hero } from "@/components/sections/Hero";
+import { TrustStrip } from "@/components/sections/TrustStrip";
+import { Problem } from "@/components/sections/Problem";
+import { HowItWorks } from "@/components/sections/HowItWorks";
+import { ClockBand } from "@/components/sections/ClockBand";
+import { Audiences } from "@/components/sections/Audiences";
+import { Proof } from "@/components/sections/Proof";
+import { Compare } from "@/components/sections/Compare";
+import { Start } from "@/components/sections/Start";
 
-/**
- * The homepage: six pinned stages and Explore around the signal core, then
- * the page resolves to paper — features, early-access proof, deadline,
- * comparison, proof offer and CTA.
- */
 export default function Home() {
   return (
     <>
-      <PageMeta
-        title={pageMeta["/"].title}
-        description={pageMeta["/"].description}
-        keywords="Relyxus, incident investigation, payments incidents, operational resilience, SRE, regulated firms"
-      />
-      <HomeStage />
-      <FeatureMap ground="paper" />
-      <BeforeAfterStrip />
-      <EarlyAccessProof ground="ink" />
-      <PilotResult ground="paper" />
-      <Deadline />
+      <PageMeta route="/" />
+      <Hero />
+      <TrustStrip />
+      <Problem />
+      <HowItWorks />
+      <ClockBand />
+      <Audiences />
+      <Proof />
       <Compare />
-      <Prove />
-      <Closing />
+      <Start />
     </>
   );
 }

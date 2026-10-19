@@ -1,4 +1,3 @@
-import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import path from "node:path";
 import { defineConfig, type Plugin } from "vite";
@@ -81,12 +80,7 @@ function vitePluginContactApi(): Plugin {
 }
 
 export default defineConfig({
-  plugins: [
-    vitePluginPublicPlatformConfig(),
-    vitePluginContactApi(),
-    react(),
-    tailwindcss(),
-  ],
+  plugins: [vitePluginPublicPlatformConfig(), vitePluginContactApi(), react()],
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),

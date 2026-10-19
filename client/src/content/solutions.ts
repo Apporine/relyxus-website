@@ -1,204 +1,224 @@
 /**
- * Solutions (Website Redesign Strategy): three team pages on one template.
- * The three incident types are tabs inside each page's diagram, not pages.
- * Budget: 200 words a page. Example figures are labelled as examples.
+ * The three Solutions pages. One template, different content: each has its
+ * own bad night, promise, screen, proof, FAQ and next step.
  */
-import type { CoreTint } from "@/components/core/coreRenderer";
+import type { FaqItem } from "@/components/ui/Accordion";
+import type { ModuleKey } from "./product";
 
-export type CaseKey =
-  | "payment-failures"
-  | "third-party-outages"
-  | "change-incidents";
-export type TeamView = "evidence" | "timeline" | "exposure";
+export type RoleSlug = "engineering" | "resilience" | "leadership";
 
-export type UseCase = {
-  key: CaseKey;
-  label: string;
-  /** One short caption per chain step: Alert, Correlate, Cause, Approve, Fix, Record. */
-  steps: readonly string[];
-  causes: readonly { name: string; score: number }[];
-  /** Minutes after the alert that the incident was classified as major. */
-  classifiedAfter: number;
-  exposure: { atRisk: number; minutes: number; failed: number };
-};
-
-export type Team = {
-  slug: "engineering" | "resilience" | "leadership";
-  label: string;
-  line: string;
-  clock: string;
-  status: string;
-  tint: CoreTint;
+export type Role = {
+  slug: RoleSlug;
+  name: string;
+  who: string;
+  /** Homepage audience card. */
+  card: { pain: string; outcome: string };
   title: string;
   lede: string;
-  cta: { label: string; href: string };
-  /** Closing panel copy — unique per team, not the homepage close. */
-  close: {
-    title: string;
-    line: string;
-    cta: { label: string; href: string };
-  };
-  /** Chain steps this team owns; the rest are dimmed. */
-  lit: readonly number[];
-  view: TeamView;
-  viewTitle: string;
-  outcomes: readonly { value: string; line: string }[];
+  badNight: readonly [string, string, string];
+  screen: { module: ModuleKey; title: string; intro: string };
+  outcomes: readonly { title: string; text: string }[];
+  reassurance: string;
+  /** Matching public incident, by slug. */
+  incident: string;
+  proof: "replay" | "regulation" | "quote";
+  faq: readonly FaqItem[];
+  cta: { title: string; text: string; label: string; href: string };
 };
 
-export const chainSteps = [
-  "Alert",
-  "Correlate",
-  "Cause",
-  "Approve",
-  "Fix",
-  "Record",
-] as const;
-
-export const useCases: readonly UseCase[] = [
-  {
-    key: "payment-failures",
-    label: "Payment failures",
-    steps: [
-      "Declines up 8× on UK cards",
-      "Router timeouts match the spike",
-      "api-gw v3.2 cut the pool",
-      "Payments Ops signs off",
-      "Rollback to v3.1",
-      "Draft first notice ready",
-    ],
-    causes: [
-      { name: "Deploy api-gw v3.2", score: 0.86 },
-      { name: "Card network latency", score: 0.41 },
-      { name: "Ledger write lag", score: 0.08 },
-    ],
-    classifiedAfter: 35,
-    exposure: { atRisk: 184000, minutes: 47, failed: 18400 },
-  },
-  {
-    key: "third-party-outages",
-    label: "Third party outages",
-    steps: [
-      "Processor status: degraded",
-      "Your declines track theirs",
-      "Your retries doubled load",
-      "Failover approved",
-      "Second processor live",
-      "Both timelines, sourced",
-    ],
-    causes: [
-      { name: "Card processor outage", score: 0.78 },
-      { name: "Retry policy amplifying load", score: 0.52 },
-      { name: "Network path loss", score: 0.12 },
-    ],
-    classifiedAfter: 50,
-    exposure: { atRisk: 96000, minutes: 38, failed: 9700 },
-  },
-  {
-    key: "change-incidents",
-    label: "Change incidents",
-    steps: [
-      "Errors jump to 6.1%",
-      "Spike starts after deploy",
-      "Config change in v3.2",
-      "Rollback waits at the gate",
-      "v3.1 restored",
-      "Change and approval, one line",
-    ],
-    causes: [
-      { name: "Deploy api-gw v3.2", score: 0.91 },
-      { name: "Upstream DNS change", score: 0.22 },
-      { name: "Traffic surge", score: 0.06 },
-    ],
-    classifiedAfter: 20,
-    exposure: { atRisk: 41000, minutes: 19, failed: 4100 },
-  },
-];
-
-export const teams: readonly Team[] = [
+export const roles: readonly Role[] = [
   {
     slug: "engineering",
-    label: "Engineering and SRE",
-    line: "From alert to cause, every source in one view",
-    clock: "T+00:02",
-    status: "Correlating",
-    tint: "signal",
-    title: "From alert to cause, *without the tab hunt.*",
-    lede: "The alert, the last two hours of changes and the affected service, in one investigation ranked by evidence.",
-    cta: { label: "Replay your last SEV1", href: "/demo?type=Replay%20pilot" },
-    close: {
-      title: "Replay the SEV1 *that still bothers you.*",
-      line: "Bring one closed incident. We’ll show causes ranked by evidence, with an approver before every change.",
-      cta: {
-        label: "Start a Replay pilot",
-        href: "/demo?type=Replay%20pilot",
-      },
+    name: "Payments engineering",
+    who: "SRE, on-call and platform teams",
+    card: {
+      pain: "Five tabs open, a Slack thread of guesses, and nobody sure which deploy did it.",
+      outcome:
+        "One record with the likely cause ranked and the evidence beside it.",
     },
-    lit: [0, 1, 2],
-    view: "evidence",
-    viewTitle: "Causes, *ranked by evidence.*",
-    outcomes: [
-      { value: "1", line: "investigation, every source linked to it" },
-      { value: "2h", line: "of changes lined up before alert" },
-      { value: "0", line: "changes run without a named approver" },
+    title: "Find the cause in minutes, with the evidence beside it",
+    lede: "Relyxus puts the alert, the last few hours of changes and the affected service in one record, and ranks the likely causes with their sources attached.",
+    badNight: [
+      "It’s 2 a.m. and card declines are climbing. You have the alerting tool, two dashboards, the deploy log and a Slack thread open.",
+      "Three people have three theories. The loudest one wins the first 40 minutes.",
+      "Someone eventually asks what shipped this afternoon. It was the deploy.",
     ],
+    screen: {
+      module: "war-room",
+      title: "The War Room: causes ranked, sources linked",
+      intro:
+        "Every candidate cause shows the evidence for it and against it. Open any source and check.",
+    },
+    outcomes: [
+      {
+        title: "One record instead of five tabs",
+        text: "Alerts, deploys, logs and the call itself on a single timeline.",
+      },
+      {
+        title: "Recent changes next to every cause",
+        text: "Cloudflare’s November 2025 outage began with a permissions change 23 minutes before impact. Relyxus lines up recent changes for you.",
+      },
+      {
+        title: "Fixes wait for a named approver",
+        text: "Propose the rollback in Relyxus; it runs only when the people your policy names say yes.",
+      },
+    ],
+    reassurance:
+      "Read-only by default, and it works with the tools you already run.",
+    incident: "cloudflare-18-november-2025",
+    proof: "replay",
+    faq: [
+      {
+        question: "Does Relyxus replace our monitoring or alerting?",
+        answer:
+          "No. It reads from the monitoring, alerting, deploy and ticketing tools you already have and builds the incident record from them.",
+      },
+      {
+        question: "Can it run a rollback on its own?",
+        answer:
+          "No. Relyxus can propose a change and show its evidence, blast radius and rollback plan. It runs only after the approvers named in your policy approve it.",
+      },
+      {
+        question: "How is a cause ranked?",
+        answer:
+          "By the evidence attached to it: matching changes, correlated errors and timing. Each cause lists its supporting and refuting evidence, so your team can check the ranking rather than trust it.",
+      },
+    ],
+    cta: {
+      title: "Bring a closed incident",
+      text: "Pick the SEV1 that still bothers you. We’ll replay it read-only and show you the record it would have left.",
+      label: "Start a replay pilot",
+      href: "/pilot",
+    },
   },
   {
     slug: "resilience",
-    label: "Risk and resilience",
-    line: "The regulator report starts as a draft",
-    clock: "T+00:09",
-    status: "Recorded",
-    tint: "paper",
-    title: "The report starts *while the incident runs.*",
-    lede: "Timeline, owners and decisions are logged from the first alert, so each deadline starts with a draft.",
-    cta: {
-      label: "Get the readiness checklist",
-      href: "/demo?type=Readiness%20checklist",
+    name: "Resilience and risk",
+    who: "Operational resilience and compliance",
+    card: {
+      pain: "Rebuilding the timeline from screenshots to meet a 4-hour first notice.",
+      outcome:
+        "A timestamped record and a first-notice draft that start at the first alert.",
     },
-    close: {
-      title: "See the draft *your next deadline needs.*",
-      line: "We’ll walk the 4-hour and 72-hour notices from a live record, not a blank page.",
-      cta: {
-        label: "Get the readiness checklist",
-        href: "/demo?type=Readiness%20checklist",
-      },
-    },
-    lit: [0, 3, 5],
-    view: "timeline",
-    viewTitle: "Every deadline, *already drafting.*",
-    outcomes: [
-      { value: "4h", line: "first notice, drafted from the record" },
-      { value: "72h", line: "intermediate report, built from what happened" },
-      { value: "1", line: "record per incident, ordered and sourced" },
+    title: "The regulator notice starts at the first alert",
+    lede: "Every step is timestamped and attributed while the incident runs, so the DORA or UK first notice begins as a draft, not a blank page.",
+    badNight: [
+      "Two hours into a SEV1, someone asks you for the timeline.",
+      "It lives in Slack, a bridge call nobody recorded and three engineers’ memories.",
+      "The 4-hour first notice is already running, and you’re pasting screenshots into a template.",
     ],
+    screen: {
+      module: "approvals",
+      title: "Every decision on the record, with its approver",
+      intro:
+        "Approvals, the DORA notice and policy changes sit in one queue, each with its deadline, evidence and named approvers.",
+    },
+    outcomes: [
+      {
+        title: "Every step timestamped and attributed",
+        text: "Who saw what, who decided what, and when. Written as it happens.",
+      },
+      {
+        title: "First-notice draft from the live record",
+        text: "Classification time, affected services, working cause and actions so far, ready for your review.",
+      },
+      {
+        title: "Export-ready for audit",
+        text: "The record is in event order with sources linked, the way an auditor will read it.",
+      },
+    ],
+    reassurance:
+      "People still classify, review and submit anything that goes to a regulator.",
+    incident: "rba-rits-27-january-2026",
+    proof: "regulation",
+    faq: [
+      {
+        question: "Does Relyxus submit notices to the regulator?",
+        answer:
+          "No. It drafts them from the record. Your team classifies the incident, reviews the draft and submits it through your usual channel.",
+      },
+      {
+        question: "Which regimes does the draft cover?",
+        answer:
+          "DORA’s initial, intermediate and final reports, and the UK FCA, PRA and Bank of England regime that applies from 18 March 2027.",
+      },
+      {
+        question: "Can we export the record?",
+        answer:
+          "Yes. The record exports in event order with every source linked, for your post-incident review and for audit.",
+      },
+    ],
+    cta: {
+      title: "Check your reporting before the next incident",
+      text: "A one-page checklist for DORA and the UK regime: what to have ready before the incident, in the first hour, and before each deadline.",
+      label: "Get the reporting checklist",
+      href: "/dora/checklist",
+    },
   },
   {
     slug: "leadership",
-    label: "Technology leadership",
-    line: "What it cost, and who decided what",
-    clock: "T+04:00",
-    status: "First notice due",
-    tint: "dense",
-    title: "Know what it cost, *and who decided.*",
-    lede: "Money at risk while it runs, every decision with a name and a time, and a summary the board can read.",
-    cta: { label: "Book a 30 minute demo", href: "/demo?type=Demo" },
-    close: {
-      title: "Walk through *what the last outage cost.*",
-      line: "Money at risk, named decisions, and a board summary — from one closed incident.",
-      cta: { label: "Book a 30 minute demo", href: "/demo?type=Demo" },
+    name: "Leadership",
+    who: "CTO, COO and Head of Payments",
+    card: {
+      pain: "Money at risk is unknown, and the board wants an answer by morning.",
+      outcome:
+        "Money at risk, minutes to cause and decisions pending, while it happens.",
     },
-    lit: [2, 3, 4],
-    view: "exposure",
-    viewTitle: "Exposure, *in money and minutes.*",
-    outcomes: [
-      { value: "£/min", line: "at risk, updated while it runs" },
-      { value: "1", line: "decision log, every call with a name" },
-      { value: "8am", line: "board summary ready the next morning" },
+    title: "Know what’s at risk, and who decided what, while it’s happening",
+    lede: "The Command Centre shows money at risk, the decisions waiting and the regulator clock, without you joining the incident call.",
+    badNight: [
+      "Your phone lights up at 11 p.m. Payments are failing, and nobody can tell you how many or how much.",
+      "You join the bridge to find out and become one more voice on it.",
+      "At 8 a.m. the board asks who decided not to roll back sooner. Nobody wrote it down.",
     ],
+    screen: {
+      module: "command-centre",
+      title: "The Command Centre: exposure and decisions",
+      intro:
+        "Every active incident with its money at risk, every decision waiting and the time left on the first notice.",
+    },
+    outcomes: [
+      {
+        title: "Money at risk while it runs",
+        text: "Failed transactions and value at risk per incident, updated as it develops.",
+      },
+      {
+        title: "Every decision with a name and a time",
+        text: "Including the decisions not to act, and what was known when they were made.",
+      },
+      {
+        title: "A summary the board can read",
+        text: "What happened, what it cost and who decided, in plain words the next morning.",
+      },
+    ],
+    reassurance: "No change runs without a named approver your policy defines.",
+    incident: "cme-27-november-2025",
+    proof: "quote",
+    faq: [
+      {
+        question: "Where does the money-at-risk figure come from?",
+        answer:
+          "From your own transaction and payments data, connected read-only. It is shown as an estimate while the incident runs and labelled as one.",
+      },
+      {
+        question: "Who decides who can approve a change?",
+        answer:
+          "You do. Approval policies are set by your organisation; Relyxus enforces them and records every decision against them.",
+      },
+      {
+        question: "How is Relyxus priced?",
+        answer:
+          "A read-only replay pilot first, then an annual licence with no per-seat fees. The price is agreed in writing before you start.",
+      },
+    ],
+    cta: {
+      title: "See it on an incident like yours",
+      text: "Thirty minutes with an engineer: one incident from first alert to board summary.",
+      label: "Book a 30-minute demo",
+      href: "/demo",
+    },
   },
 ];
 
-export const teamBySlug = (slug: string) =>
-  teams.find(team => team.slug === slug);
-export const caseByKey = (key: string | null) =>
-  useCases.find(useCase => useCase.key === key) ?? useCases[0];
+export const roleBySlug = (slug: string) =>
+  roles.find(role => role.slug === slug);

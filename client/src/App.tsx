@@ -1,130 +1,88 @@
 import { Analytics } from "@vercel/analytics/react";
 import { Redirect, Route, Switch } from "wouter";
-import ErrorBoundary from "./components/ErrorBoundary";
-import { ThemeProvider } from "./contexts/ThemeContext";
-import { PublicLayout } from "@/components/marketing/PublicSite";
+import ErrorBoundary from "@/components/ErrorBoundary";
+import { Layout } from "@/components/layout/Layout";
 import Home from "@/pages/Home";
-import { CompanyPage, ProductPage, SecurityPage } from "@/pages/CorePages";
-import { ContactPage, LegalPage } from "@/pages/MarketingPages";
-import { ResourceArticle, ResourcesPage } from "@/pages/Resources";
-import { DemoPage } from "@/pages/Demo";
+import { ProductPage } from "@/pages/Product";
 import { SolutionRoute } from "@/pages/Solutions";
+import { PilotPage } from "@/pages/Pilot";
+import { DoraPage } from "@/pages/Dora";
+import { ChecklistPage } from "@/pages/Checklist";
+import { SecurityPage } from "@/pages/Security";
+import { AboutPage } from "@/pages/About";
+import {
+  IncidentFilePage,
+  IncidentsPage,
+  ResourceArticle,
+  ResourcesPage,
+} from "@/pages/Resources";
+import { DemoPage } from "@/pages/Demo";
+import { ContactPage } from "@/pages/Contact";
+import { LegalPage } from "@/pages/Legal";
 import NotFound from "@/pages/NotFound";
-import { SpecimenPage } from "@/pages/Specimen";
-// Pages are imported directly, not lazily: the site is small, and a lazy
-// route showed a loading message before any copy on first load.
-function WithLayout({ children }: { children: React.ReactNode }) {
-  return <PublicLayout>{children}</PublicLayout>;
-}
 
-/** Pages folded into /product, /security or the demo form. */
-const retired: [string, string][] = [
-  ["/product/investigation", "/product"],
-  ["/product/governed-actions", "/product"],
-  ["/product/reporting", "/product"],
+/** Old URLs kept working after pages were merged or renamed. */
+const redirects: [string, string][] = [
+  ["/company", "/about"],
+  ["/replay", "/pilot"],
+  ["/pricing", "/product#pricing"],
+  ["/privacy-policy", "/privacy"],
+  ["/product/investigation", "/product#war-room"],
+  ["/product/governed-actions", "/product#approvals"],
+  ["/product/reporting", "/dora"],
   ["/deployment", "/security"],
-  ["/integrations", "/security"],
-  ["/integrations/:slug", "/security"],
-  ["/replay", "/demo?type=Replay%20pilot"],
-  ["/pricing", "/demo?type=Pricing"],
+  ["/integrations", "/product#fit"],
+  ["/integrations/:slug", "/product#fit"],
   ["/accessibility", "/"],
+  ["/specimen", "/"],
 ];
 
 function Router() {
   return (
     <Switch>
-      <Route path="/">
-        <WithLayout>
-          <Home />
-        </WithLayout>
-      </Route>
-      <Route path="/product">
-        <WithLayout>
-          <ProductPage />
-        </WithLayout>
-      </Route>
-      <Route path="/security">
-        <WithLayout>
-          <SecurityPage />
-        </WithLayout>
-      </Route>
+      <Route path="/" component={Home} />
+      <Route path="/product" component={ProductPage} />
       <Route path="/solutions/:slug">
-        {params => (
-          <WithLayout>
-            <SolutionRoute slug={params.slug} />
-          </WithLayout>
-        )}
+        {params => <SolutionRoute slug={params.slug} />}
       </Route>
-      {retired.map(([from, to]) => (
+      <Route path="/pilot" component={PilotPage} />
+      <Route path="/dora" component={DoraPage} />
+      <Route path="/dora/checklist" component={ChecklistPage} />
+      <Route path="/security" component={SecurityPage} />
+      <Route path="/about" component={AboutPage} />
+      <Route path="/resources" component={ResourcesPage} />
+      <Route path="/resources/incidents" component={IncidentsPage} />
+      <Route path="/resources/incidents/:slug">
+        {params => <IncidentFilePage slug={params.slug} />}
+      </Route>
+      <Route path="/resources/:slug">
+        {params => <ResourceArticle slug={params.slug} />}
+      </Route>
+      <Route path="/demo" component={DemoPage} />
+      <Route path="/contact" component={ContactPage} />
+      <Route path="/privacy">
+        <LegalPage page="privacy" />
+      </Route>
+      <Route path="/terms">
+        <LegalPage page="terms" />
+      </Route>
+      {redirects.map(([from, to]) => (
         <Route path={from} key={from}>
           <Redirect to={to} replace />
         </Route>
       ))}
-      <Route path="/specimen">
-        <WithLayout>
-          <SpecimenPage />
-        </WithLayout>
-      </Route>
-      <Route path="/demo">
-        <WithLayout>
-          <DemoPage />
-        </WithLayout>
-      </Route>
-      <Route path="/resources">
-        <WithLayout>
-          <ResourcesPage />
-        </WithLayout>
-      </Route>
-      <Route path="/resources/:slug">
-        {params => (
-          <WithLayout>
-            <ResourceArticle slug={params.slug} />
-          </WithLayout>
-        )}
-      </Route>
-      <Route path="/company">
-        <WithLayout>
-          <CompanyPage />
-        </WithLayout>
-      </Route>
-      <Route path="/contact">
-        <WithLayout>
-          <ContactPage />
-        </WithLayout>
-      </Route>
-      <Route path="/privacy">
-        <WithLayout>
-          <LegalPage page="privacy" />
-        </WithLayout>
-      </Route>
-      <Route path="/privacy-policy">
-        <WithLayout>
-          <LegalPage page="privacy" />
-        </WithLayout>
-      </Route>
-      <Route path="/terms">
-        <WithLayout>
-          <LegalPage page="terms" />
-        </WithLayout>
-      </Route>
-      <Route>
-        <WithLayout>
-          <NotFound />
-        </WithLayout>
-      </Route>
+      <Route component={NotFound} />
     </Switch>
   );
 }
 
-function App() {
+export default function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider defaultTheme="light">
+      <Layout>
         <Router />
-      </ThemeProvider>
+      </Layout>
       <Analytics />
     </ErrorBoundary>
   );
 }
-
-export default App;

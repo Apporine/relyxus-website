@@ -1,41 +1,35 @@
-import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
-import { PageMeta, PrimaryLink } from "@/components/marketing/PublicSite";
-import { MiniStage } from "@/components/marketing/MiniStage";
+import { PageMeta } from "@/components/layout/PageMeta";
+import { ButtonLink } from "@/components/ui/Button";
 
 export default function NotFound() {
   return (
     <>
       <PageMeta
         title="Page not found"
-        description="The requested Relyxus website page could not be found."
+        description="This page isn’t on the Relyxus website."
         noindex
       />
-      <MiniStage
-        eyebrow="404 · Not found"
-        title="That page isn’t part *of this story.*"
-        lede="The link may be outdated, or the page may have moved. Start from home, or go to the product and security pages."
-        clock="T+00:00"
-        status="Signal lost"
-        tint="paper"
-        visual="mark"
-      >
-        <PrimaryLink href="/">Go home</PrimaryLink>
-        <Link className="button button-secondary" href="/product">
-          See the product <ArrowRight size={16} aria-hidden="true" />
-        </Link>
-        <ul className="rx-not-found-links">
-          <li>
-            <Link href="/security">Security</Link>
-          </li>
-          <li>
-            <Link href="/contact">Contact the team</Link>
-          </li>
-          <li>
-            <Link href="/demo">Book a 30 minute demo</Link>
-          </li>
-        </ul>
-      </MiniStage>
+      <section className="section section-paper" aria-labelledby="page-title">
+        <div className="container narrow">
+          <p className="label">404</p>
+          <h1 id="page-title">We couldn’t find that page</h1>
+          <p className="lead">
+            The link may be old, or the page may have moved. No incident record
+            for this one, sadly.
+          </p>
+          <div className="actions">
+            <ButtonLink href="/">Go to the homepage</ButtonLink>
+            <ButtonLink href="/product" variant="secondary">
+              See the product
+            </ButtonLink>
+          </div>
+          <p className="small muted">
+            Looking for something specific?{" "}
+            <Link href="/contact">Ask the team</Link>.
+          </p>
+        </div>
+      </section>
     </>
   );
 }

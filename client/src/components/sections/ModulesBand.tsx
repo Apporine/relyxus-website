@@ -9,15 +9,18 @@ const icons = {
   "command-centre": LayoutDashboard,
 } as const;
 
-/** Three module cards straddling the dark hero into the white band below. */
+/** Heading on plum, then three module cards straddling the plum-to-white edge. */
 export function ModulesBand() {
   return (
     <section className="modules-band" aria-labelledby="modules-title">
-      <div className="container">
-        <header className="section-header section-header-center">
+      <div className="modules-head on-canvas">
+        <header className="container section-header section-header-center">
+          <p className="modules-label">{modulesBand.label}</p>
           <h2 id="modules-title">{modulesBand.title}</h2>
           <p className="section-intro">{modulesBand.intro}</p>
         </header>
+      </div>
+      <div className="container">
         <ul className="modules-grid">
           {modulesBand.cards.map((card, i) => {
             const Icon = icons[card.key];

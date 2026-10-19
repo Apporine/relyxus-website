@@ -80,7 +80,8 @@ h3 {
   font-style: italic;
   font-weight: 400;
   letter-spacing: 0;
-  color: var(--primary);
+  /* Purple on light grounds (lime fails contrast there); lime on plum below. */
+  color: var(--link);
 }
 
 .on-canvas .accent-phrase,
@@ -91,7 +92,7 @@ h3 {
 
 .section-paper .accent-phrase,
 .section-white .accent-phrase {
-  color: var(--second);
+  color: var(--link);
 }
 
 h1 {
@@ -177,6 +178,27 @@ main:focus {
 .section-canvas .muted,
 .section-console .muted,
 .on-canvas .muted {
+  color: var(--on-canvas);
+}
+
+/* White cards on plum keep light-surface text, or it vanishes into the card. */
+.on-canvas .card:not(.on-console),
+.on-canvas .form-card {
+  color: var(--ink);
+}
+
+.on-canvas .card:not(.on-console) .muted,
+.on-canvas .form-card .muted {
+  color: var(--ink-muted);
+}
+
+.on-canvas .card:not(.on-console) a:not(.btn):not(.wordmark):not(.nav-link),
+.on-canvas .form-card a:not(.btn):not(.wordmark):not(.nav-link) {
+  color: var(--link);
+}
+
+/* Accordion answers on plum (the home FAQ). */
+.on-canvas .accordion-item p {
   color: var(--on-canvas);
 }
 

@@ -32,7 +32,7 @@ export function DataBoundary() {
             className="data-boundary-flow"
             style={{ "--i": 4 } as CSSProperties}
           >
-            <span className="mono">read-only</span>
+            <span className="mono">read only</span>
           </p>
 
           <div
@@ -60,8 +60,8 @@ export function DataBoundary() {
         </div>
 
         <p className="data-boundary-out" style={{ "--i": 8 } as CSSProperties}>
-          <span aria-hidden="true">✕</span> Shared tenancy · model training —
-          not used for your incident data
+          <span aria-hidden="true">✕</span> Shared tenancy · model training: not
+          used for your incident data
         </p>
       </div>
     </div>

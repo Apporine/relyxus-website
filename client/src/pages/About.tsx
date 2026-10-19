@@ -21,7 +21,7 @@ import {
 const companyFlow = [
   {
     label: "Named founders",
-    text: "Bisma Idrees and Syed Aoon — accountable people, not a faceless vendor.",
+    text: "Bisma Idrees and Syed Aoon, accountable people, not a faceless vendor.",
     tone: "signal" as const,
   },
   {
@@ -31,7 +31,7 @@ const companyFlow = [
   },
   {
     label: "Honest gaps",
-    text: "Certifications stay planned until they are earned — no invented green ticks.",
+    text: "Certifications stay planned until they are earned, no invented green ticks.",
     tone: "wait" as const,
   },
 ] as const;

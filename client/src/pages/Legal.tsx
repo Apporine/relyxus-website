@@ -35,7 +35,7 @@ const terms = [
   },
   {
     heading: "Public incident research",
-    body: "Incident files summarise public post-incident reports and news coverage, with sources linked. The firms named are not Relyxus customers and have not used, endorsed or been assessed by Relyxus.",
+    body: "Incident files summarise public post incident reports and news coverage, with sources linked. The firms named are not Relyxus customers and have not used, endorsed or been assessed by Relyxus.",
   },
   {
     heading: "Regulatory summaries",

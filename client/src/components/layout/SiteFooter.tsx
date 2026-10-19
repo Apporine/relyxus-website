@@ -23,7 +23,7 @@ export function SiteFooter() {
             </p>
             <EmailCapture
               enquiry="Newsletter"
-              label="One useful email a month: regulatory updates and an incident write-up."
+              label="One useful email a month: regulatory updates and an incident write up."
               button="Subscribe"
               done={
                 <p className="small">

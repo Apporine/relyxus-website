@@ -3,9 +3,13 @@
  * Each section says one new thing — no restating the hero.
  */
 import type { FaqItem } from "@/components/ui/Accordion";
+import { incidentFiles } from "./incidents";
+
+/** Counts come from the files themselves, so the copy can never disagree. */
+const fileCount = incidentFiles.length;
 
 export const announcement = {
-  text: "New research: where the hours went in 12 public payment outages.",
+  text: `New research: ${fileCount} production incidents, from the operators’ and regulators’ own reports.`,
   href: "/resources/incidents",
   linkLabel: "Open the incident files",
 };
@@ -15,7 +19,7 @@ export const hero = {
   titleBefore: "Know why payments failed,",
   titleAccent: "before the regulator asks",
   para1:
-    "When card declines spike, Relyxus pulls logs, deploys and alerts into one live record and ranks the likely cause — with every source openable.",
+    "When card declines spike, Relyxus pulls logs, deploys and alerts into one live record and ranks the likely cause, with every source one click away.",
   para2:
     "Nothing changes in production until a named approver says yes. The DORA or UK first notice starts as a draft at the first alert.",
   primary: { label: "Book Demo", href: "/demo" },
@@ -23,12 +27,15 @@ export const hero = {
   badge: "Built for DORA and the UK regime from 18 March 2027",
   frameNote:
     "Product preview. INC-2207 is an example incident, not a customer case.",
+  /** Alert 14:05:12 → likely cause 14:11:40 in the example record. */
+  stat: { value: "6 min", label: "alert to likely cause", note: "Example" },
 };
 
 export const modulesBand = {
-  title: "Confidently meet the 4-hour clock",
+  label: "One product, three modules",
+  title: "Confidently meet the 4 hour clock",
   intro:
-    "Three modules, one incident. From the bridge call to the board summary — without rebuilding the timeline from Slack.",
+    "Three modules, one incident. From the bridge call to the board summary, without rebuilding the timeline from Slack.",
   cards: [
     {
       key: "war-room",
@@ -39,13 +46,13 @@ export const modulesBand = {
     {
       key: "approvals",
       title: "Approvals",
-      text: "Every proposed fix waits for the approvers your policy names — with blast radius and rollback visible.",
+      text: "Every proposed fix waits for the approvers your policy names, with blast radius and rollback visible.",
       href: "/product#approvals",
     },
     {
       key: "command-centre",
       title: "Command Centre",
-      text: "Money at risk, decisions pending and the regulator countdown — without joining the bridge.",
+      text: "Money at risk, decisions pending and the regulator countdown, without joining the bridge.",
       href: "/product#command-centre",
     },
   ],
@@ -56,7 +63,7 @@ export const walkthrough = {
   steps: [
     {
       title: "Pull the evidence",
-      text: "Four sources land on one timeline in the first minutes — not after the call ends.",
+      text: "Four sources land on one timeline in the first minutes, not after the call ends.",
       crop: "evidence" as const,
     },
     {
@@ -71,14 +78,14 @@ export const walkthrough = {
     },
     {
       title: "The record writes itself",
-      text: "Detection, decisions and recovery stay in order — ready for the first-notice draft.",
+      text: "Detection, decisions and recovery stay in order, ready for the first notice draft.",
       crop: "record" as const,
     },
   ],
   side: {
     title: "Prefer to see it live?",
-    text: "30 minutes with an engineer on an incident like yours — not a slide deck.",
-    cta: { label: "Book a 30-minute demo", href: "/demo" },
+    text: "30 minutes with an engineer on an incident like yours, not a slide deck.",
+    cta: { label: "Book a 30 minute demo", href: "/demo" },
   },
 };
 
@@ -94,7 +101,7 @@ export const featureRows = [
   {
     id: "cause",
     title: "Replace the loudest voice with ranked evidence",
-    text: "Each candidate cause carries supporting and refuting sources. Open any one and check — the score is a guide, never a black box.",
+    text: "Each candidate cause carries supporting and refuting sources. Open any one and check, the score is a guide, never a black box.",
     crop: "causes" as const,
     tint: "paper" as const,
     showQuote: false,
@@ -110,7 +117,7 @@ export const featureRows = [
   {
     id: "report",
     title: "Hand the regulator a draft, not a blank page",
-    text: "Classification time, affected services, working cause and actions so far — filled from the live record inside the 4-hour window.",
+    text: "Classification time, affected services, working cause and actions so far, filled from the live record inside the 4 hour window.",
     crop: "record" as const,
     tint: "paper" as const,
     showQuote: false,
@@ -125,7 +132,7 @@ export const benefits = {
   items: [
     "DORA initial, intermediate and final stages built in",
     "Ready for the UK FCA/PRA/BoE regime from 18 March 2027",
-    "Read-only by default — investigating never changes production",
+    "Read only by default, investigating never changes production",
     "A named approver on every proposed fix",
     "Every cause links to openable sources",
     "Incident data stays in your environment",
@@ -133,9 +140,9 @@ export const benefits = {
 };
 
 export const reportBanner = {
-  title: "12 payment incidents: where the hours went",
-  text: "Public outages across the UK, US and Australia — timelines from their own post-incident reports, not our marketing.",
-  cta: { label: "Get your copy", href: "/resources/incidents" },
+  title: `${fileCount} production incidents: where the hours went`,
+  text: "Banks, cloud providers and market infrastructure in the UK and US. Each timeline comes from a post incident report, regulator or securities filing, with the money stated exactly as disclosed.",
+  cta: { label: "Read the incident files", href: "/resources/incidents" },
 };
 
 export const carouselNote =
@@ -143,9 +150,8 @@ export const carouselNote =
 
 export const demoForm = {
   title: "Ready to see the record your last SEV1 would have left?",
-  text: "Bring one closed incident. We replay it read-only and show the ranked cause, the approvals it would have asked for, and the notice draft.",
-  submit: "Book a 30-minute demo",
-  under: "We reply within one working day — a person, not a sequence.",
+  text: "Bring one closed incident. We replay it read only and show the ranked cause, the approvals it would have asked for, and the notice draft.",
+  submit: "Book a 30 minute demo",
 };
 
 export const insights = {
@@ -182,8 +188,8 @@ export const pilot = {
       text: "A SEV1 your team knows well. Include one where the first theory was wrong.",
     },
     {
-      title: "We replay it, read-only",
-      text: "We connect read-only to the sources for that incident. Nothing in your systems changes.",
+      title: "We replay it, read only",
+      text: "We connect read only to the sources for that incident. Nothing in your systems changes.",
     },
     {
       title: "Compare the record",
@@ -201,7 +207,7 @@ export const faq: readonly FaqItem[] = [
   {
     question: "Does Relyxus change anything in our systems?",
     answer:
-      "Investigating is read-only. A fix only runs after the approvers your policy names have said yes, and every approval is timestamped.",
+      "Investigating is read only. A fix only runs after the approvers your policy names have said yes, and every approval is timestamped.",
   },
   {
     question: "Which tools does it connect to?",
@@ -211,7 +217,7 @@ export const faq: readonly FaqItem[] = [
   {
     question: "How long does setup take?",
     answer:
-      "A replay pilot needs read-only access to the sources for one closed incident. We give you a written plan with dates before you start.",
+      "A replay pilot needs read only access to the sources for one closed incident. We give you a written plan with dates before you start.",
   },
   {
     question: "Where is our data hosted?",
@@ -221,7 +227,7 @@ export const faq: readonly FaqItem[] = [
   {
     question: "How is it priced?",
     answer:
-      "Start with a read-only replay pilot, then an annual subscription. The price is agreed in writing before you start.",
+      "Start with a read only replay pilot, then an annual subscription. The price is agreed in writing before you start.",
   },
   {
     question: "Does Relyxus send the regulator notice for us?",
@@ -231,12 +237,12 @@ export const faq: readonly FaqItem[] = [
   {
     question: "Which regulations does it cover?",
     answer:
-      "EU DORA major-incident stages and the UK FCA, PRA and Bank of England regime from 18 March 2027.",
+      "EU DORA major incident stages and the UK FCA, PRA and Bank of England regime from 18 March 2027.",
   },
   {
-    question: "How is the likely-cause score worked out?",
+    question: "How is the likely cause score worked out?",
     answer:
-      "Each cause is ranked 0–1 by how strongly linked evidence supports it, including evidence against. Every source is openable. It is a guide, not a verdict.",
+      "Each cause is ranked 0 to 1 by how strongly linked evidence supports it, including evidence against. Every source is openable. It is a guide, not a verdict.",
   },
   {
     question: "Is Relyxus an autonomous AI?",
@@ -253,12 +259,12 @@ export const howItWorks = {
   label: "How it works",
   title: walkthrough.title,
   intro:
-    "Four steps, one record — your team decides; Relyxus gathers and writes down.",
+    "Four steps, one record, your team decides; Relyxus gathers and writes down.",
   steps: walkthrough.steps,
 };
 
 export const clockBand = {
-  label: "Built for the 4-hour clock",
+  label: "Built for the 4 hour clock",
   title: "The draft starts at the first alert",
   intro:
     "Under DORA a major incident is reported in stages. Relyxus keeps the record from the first alert, so each notice starts as a draft.",

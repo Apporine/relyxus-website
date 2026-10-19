@@ -26,7 +26,6 @@ export function HomeDemo() {
             submitLabel={demoForm.submit}
             messageLabel="Tell us about an incident you’d want to replay"
           />
-          <p className="small muted demo-under">{demoForm.under}</p>
         </div>
       </div>
     </section>

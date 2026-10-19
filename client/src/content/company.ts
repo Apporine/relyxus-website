@@ -6,7 +6,7 @@
 export const companyHero = {
   label: "Company",
   title: "Accountable people. *Not a faceless vendor.*",
-  lead: "Relyxus is built by Apporine. You will always know who is shipping the product, who answers for it, and what we will — and will not — claim.",
+  lead: "Relyxus is built by Apporine. You will always know who is shipping the product, who answers for it, and what we will and will not claim.",
 };
 
 export const founders = [
@@ -20,10 +20,10 @@ export const founders = [
   },
   {
     name: "Syed Aoon",
-    role: "Founder · AI & full-stack",
-    line: "AI engineer and full-stack developer building the models, product surfaces and evidence trails behind every ranked cause.",
+    role: "Founder · AI & full stack",
+    line: "AI engineer and full stack developer building the models, product surfaces and evidence trails behind every ranked cause.",
     quote:
-      "A model can propose a cause in seconds. A person still has to say yes — and the record has to prove why. That is the product I want to ship.",
+      "A model can propose a cause in seconds. A person still has to say yes, and the record has to prove why. That is the product I want to ship.",
     initials: "SA",
   },
 ] as const;
@@ -58,7 +58,7 @@ export const assurance = {
   label: "Trust ledger",
   title: "Built to be *examined.*",
   intro:
-    "Enterprises trust what they can verify. Here is what is in place today, and what is still on the roadmap — no green ticks we have not earned.",
+    "Enterprises trust what they can verify. Here is what is in place today, and what is still on the roadmap, no green ticks we have not earned.",
   rows: [
     {
       item: "Human approval on every action",
@@ -66,12 +66,12 @@ export const assurance = {
       status: "In product" as const,
     },
     {
-      item: "Evidence-linked causes",
+      item: "Evidence linked causes",
       meaning: "Every ranked cause opens its sources",
       status: "In product" as const,
     },
     {
-      item: "Read-only replay pilots",
+      item: "Read only replay pilots",
       meaning: "Evaluate on a closed SEV1 without write access",
       status: "In product" as const,
     },
@@ -82,7 +82,7 @@ export const assurance = {
     },
     {
       item: "Independent penetration testing",
-      meaning: "Third-party test of the product surface",
+      meaning: "Third party test of the product surface",
       status: "Planned" as const,
     },
     {
@@ -102,7 +102,7 @@ export const evidenceLinks = {
     {
       href: "/resources/incidents",
       title: "Incident files",
-      text: "Public outages and where the hours went — from their own reports.",
+      text: "Public outages and where the hours went, from their own reports.",
     },
     {
       href: "/dora",

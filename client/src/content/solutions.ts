@@ -42,7 +42,7 @@ export const roles: readonly Role[] = [
   {
     slug: "engineering",
     name: "Payments engineering",
-    who: "SRE, on-call and platform teams",
+    who: "SRE, on call and platform teams",
     card: {
       pain: "Five tabs open, a Slack thread of guesses, and nobody sure which deploy did it.",
       outcome:
@@ -56,7 +56,7 @@ export const roles: readonly Role[] = [
       "Someone eventually asks what shipped this afternoon. It was the deploy.",
     ],
     sections: {
-      nightLabel: "On-call reality",
+      nightLabel: "On call reality",
       nightTitle: "The night the tabs win",
       outcomesLabel: "What changes for SRE",
       outcomesTitle: "From guesswork to ranked evidence",
@@ -102,7 +102,7 @@ export const roles: readonly Role[] = [
       },
     ],
     reassurance:
-      "Read-only by default, and it works with the tools you already run.",
+      "Read only by default, and it works with the tools you already run.",
     incident: "cloudflare-18-november-2025",
     proof: "replay",
     faq: [
@@ -124,7 +124,7 @@ export const roles: readonly Role[] = [
     ],
     cta: {
       title: "Bring a closed incident",
-      text: "Pick the SEV1 that still bothers you. We’ll replay it read-only and show you the record it would have left.",
+      text: "Pick the SEV1 that still bothers you. We’ll replay it read only and show you the record it would have left.",
       label: "Start a replay pilot",
       href: "/pilot",
     },
@@ -134,16 +134,16 @@ export const roles: readonly Role[] = [
     name: "Resilience and risk",
     who: "Operational resilience and compliance",
     card: {
-      pain: "Rebuilding the timeline from screenshots to meet a 4-hour first notice.",
+      pain: "Rebuilding the timeline from screenshots to meet a 4 hour first notice.",
       outcome:
-        "A timestamped record and a first-notice draft that start at the first alert.",
+        "A timestamped record and a first notice draft that start at the first alert.",
     },
     title: "The regulator notice starts at the first alert",
     lede: "Every step is timestamped and attributed while the incident runs, so the DORA or UK first notice begins as a draft, not a blank page.",
     badNight: [
       "Two hours into a SEV1, someone asks you for the timeline.",
       "It lives in Slack, a bridge call nobody recorded and three engineers’ memories.",
-      "The 4-hour first notice is already running, and you’re pasting screenshots into a template.",
+      "The 4 hour first notice is already running, and you’re pasting screenshots into a template.",
     ],
     sections: {
       nightLabel: "Resilience reality",
@@ -166,11 +166,11 @@ export const roles: readonly Role[] = [
         text: "Who saw what, who decided what, and when. Written as it happens.",
       },
       {
-        title: "First-notice draft from the live record",
+        title: "First notice draft from the live record",
         text: "Classification time, affected services, working cause and actions so far, ready for your review.",
       },
       {
-        title: "Export-ready for audit",
+        title: "Export ready for audit",
         text: "The record is in event order with sources linked, the way an auditor will read it.",
       },
     ],
@@ -192,12 +192,12 @@ export const roles: readonly Role[] = [
       {
         question: "Can we export the record?",
         answer:
-          "Yes. The record exports in event order with every source linked, for your post-incident review and for audit.",
+          "Yes. The record exports in event order with every source linked, for your post incident review and for audit.",
       },
     ],
     cta: {
       title: "Check your reporting before the next incident",
-      text: "A one-page checklist for DORA and the UK regime: what to have ready before the incident, in the first hour, and before each deadline.",
+      text: "A one page checklist for DORA and the UK regime: what to have ready before the incident, in the first hour, and before each deadline.",
       label: "Get the reporting checklist",
       href: "/dora/checklist",
     },
@@ -252,9 +252,9 @@ export const roles: readonly Role[] = [
     proof: "quote",
     faq: [
       {
-        question: "Where does the money-at-risk figure come from?",
+        question: "Where does the money at risk figure come from?",
         answer:
-          "From your own transaction and payments data, connected read-only. It is shown as an estimate while the incident runs and labelled as one.",
+          "From your own transaction and payments data, connected read only. It is shown as an estimate while the incident runs and labelled as one.",
       },
       {
         question: "Who decides who can approve a change?",
@@ -264,13 +264,13 @@ export const roles: readonly Role[] = [
       {
         question: "How is Relyxus priced?",
         answer:
-          "A read-only replay pilot first, then an annual licence with no per-seat fees. The price is agreed in writing before you start.",
+          "A read only replay pilot first, then an annual licence with no per seat fees. The price is agreed in writing before you start.",
       },
     ],
     cta: {
       title: "See it on an incident like yours",
       text: "Thirty minutes with an engineer: one incident from first alert to board summary.",
-      label: "Book a 30-minute demo",
+      label: "Book a 30 minute demo",
       href: "/demo",
     },
   },

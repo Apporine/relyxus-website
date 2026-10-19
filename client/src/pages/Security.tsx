@@ -14,7 +14,7 @@ import { packPromise } from "@/content/site";
 const dataHandling = [
   {
     topic: "Access to your systems",
-    status: "Read-only by default. Investigating never changes anything.",
+    status: "Read only by default. Investigating never changes anything.",
   },
   {
     topic: "Changes in production",
@@ -22,7 +22,7 @@ const dataHandling = [
   },
   {
     topic: "Where it runs",
-    status: "A dedicated environment, or self-hosted by you.",
+    status: "A dedicated environment, or self hosted by you.",
   },
   {
     topic: "Hosting region and encryption",
@@ -42,7 +42,7 @@ const dataHandling = [
 
 const reviewerTests = [
   {
-    title: "Read-only means read-only",
+    title: "Read only means read only",
     text: "Check the access Relyxus is given. Investigation needs read access only.",
   },
   {

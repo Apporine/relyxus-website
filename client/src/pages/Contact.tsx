@@ -9,11 +9,11 @@ const topics = [
     title: "See a demo",
     text: "Thirty minutes on an incident like yours.",
     href: "/demo",
-    link: "Book a 30-minute demo",
+    link: "Book a 30 minute demo",
   },
   {
     title: "Try a replay pilot",
-    text: "One closed incident, replayed read-only.",
+    text: "One closed incident, replayed read only.",
     href: "/pilot",
     link: "Start a replay pilot",
   },

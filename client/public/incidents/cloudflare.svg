@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none" role="img" aria-label="Cloudflare">
-  <rect width="40" height="40" rx="8" fill="#F6821F"/>
-  <path d="M8 24.5c0-4.2 3.4-7.6 7.6-7.6 1.4 0 2.7.4 3.8 1 1.2-2.4 3.6-4 6.4-4 3.9 0 7 3.1 7 7 0 .3 0 .6-.1.9H31c1.8 0 3.2 1.5 3.2 3.3S32.8 28.4 31 28.4H11.2C9.4 28.4 8 27 8 25.2v-.7z" fill="#fff" fill-opacity=".95"/>
-  <path d="M14 25.2h15.5" stroke="#FAAD3F" stroke-width="2" stroke-linecap="round"/>
-</svg>

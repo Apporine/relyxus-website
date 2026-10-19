@@ -7,13 +7,13 @@
   },
   "/product": {
     "title": "Product",
-    "description": "One product, three modules: the War Room for investigation, Approvals for named sign-off, and the Command Centre for leadership.",
+    "description": "One product, three modules: the War Room for investigation, Approvals for named sign off, and the Command Centre for leadership.",
     "h1": "One incident record, from first alert to regulator notice",
-    "body": "Relyxus is one product with three modules: the War Room for the investigation, Approvals for named sign-off, and the Command Centre for leadership."
+    "body": "Relyxus is one product with three modules: the War Room for the investigation, Approvals for named sign off, and the Command Centre for leadership."
   },
   "/solutions/engineering": {
     "title": "For payments engineering",
-    "description": "For SRE, on-call and platform teams: the alert, recent changes and the affected service in one record, with likely causes ranked and their sources attached.",
+    "description": "For SRE, on call and platform teams: the alert, recent changes and the affected service in one record, with likely causes ranked and their sources attached.",
     "h1": "Find the cause in minutes, with the evidence beside it",
     "body": "Relyxus puts the alert, the last few hours of changes and the affected service in one record, and ranks the likely causes with their sources attached."
   },
@@ -31,39 +31,39 @@
   },
   "/pilot": {
     "title": "Replay pilot",
-    "description": "Start with an incident you have already closed. We replay it read-only and show you the record Relyxus would have left.",
+    "description": "Start with an incident you have already closed. We replay it read only and show you the record Relyxus would have left.",
     "h1": "Start with an incident you’ve already closed",
-    "body": "We replay one closed incident read-only and show you the record Relyxus would have left: the ranked cause, the approvals and the notice draft."
+    "body": "We replay one closed incident read only and show you the record Relyxus would have left: the ranked cause, the approvals and the notice draft."
   },
   "/dora": {
     "title": "DORA and UK incident reporting: every deadline explained",
-    "description": "The DORA major-incident reporting deadlines (4 hours, 72 hours, 1 month) and the UK FCA, PRA and Bank of England regime from 18 March 2027, with the rules linked.",
+    "description": "The DORA major incident reporting deadlines (4 hours, 72 hours, 1 month) and the UK FCA, PRA and Bank of England regime from 18 March 2027, with the rules linked.",
     "h1": "What the regulator needs from you, and by when",
-    "body": "A plain guide to the DORA major-incident deadlines and the UK regime that starts on 18 March 2027, with the rules linked so you can check every line."
+    "body": "A plain guide to the DORA major incident deadlines and the UK regime that starts on 18 March 2027, with the rules linked so you can check every line."
   },
   "/dora/checklist": {
     "title": "Payments incident reporting checklist (DORA and UK)",
-    "description": "A one-page checklist for DORA and UK incident reporting: what to have ready before the incident, in the first hour, and before each deadline.",
+    "description": "A one page checklist for DORA and UK incident reporting: what to have ready before the incident, in the first hour, and before each deadline.",
     "h1": "Payments incident reporting checklist (DORA and UK)",
     "body": "Tick what you could show an auditor today. Every unticked line is time you would spend during a real incident."
   },
   "/security": {
     "title": "Security and data handling",
-    "description": "Read-only by default, your data stays in your environment, and a named person approves every action. What is and isn’t in place yet.",
+    "description": "Read only by default, your data stays in your environment, and a named person approves every action. What is and isn’t in place yet.",
     "h1": "How we handle your data",
     "body": "Regulated buyers check this before they book a call, so here it is plainly: what is in place, and where the detail lives."
   },
   "/about": {
     "title": "Company · About Relyxus",
-    "description": "Meet the founders behind Relyxus — Bisma Idrees and Syed Aoon — and the trust ledger we publish before you book a call.",
+    "description": "Meet the founders behind Relyxus, Bisma Idrees and Syed Aoon, and the trust ledger we publish before you book a call.",
     "h1": "Accountable people. Not a faceless vendor.",
     "body": "Relyxus is built by Apporine. Two founders, a public trust ledger, and evidence you can check."
   },
   "/resources/incidents": {
     "title": "Incident files: where the hours went",
-    "description": "Public outages at payments and infrastructure firms, from their own post-incident reports: a plain timeline, what slowed the response, and the source.",
+    "description": "10 production incidents at banks, cloud providers and market infrastructure, from operator, regulator and securities filing sources.",
     "h1": "Where the hours went",
-    "body": "Public outages at payments and infrastructure firms, from their own post-incident reports."
+    "body": "Public outages at payments and infrastructure firms, from their own post incident reports."
   },
   "/resources/what-makes-incident-response-controlled": {
     "title": "Controlled incident response: 4 things to separate before you automate",
@@ -75,18 +75,18 @@
     "title": "DORA major incident reports: what to have ready for each deadline",
     "description": "The three DORA reporting stages, and what to capture while a major incident is still running.",
     "h1": "DORA major incident reports: what to have ready for each deadline",
-    "body": "Under DORA, a major ICT-related incident is reported in stages. Knowing what each stage needs before an incident starts makes the clock far easier to live with."
+    "body": "Under DORA, a major ICT related incident is reported in stages. Knowing what each stage needs before an incident starts makes the clock far easier to live with."
   },
   "/resources/post-incident-report-audit": {
-    "title": "A post-incident report that stands up to audit",
-    "description": "Five sections every post-incident report needs, and the evidence that belongs behind each one.",
-    "h1": "A post-incident report that stands up to audit",
+    "title": "A post incident report that stands up to audit",
+    "description": "Five sections every post incident report needs, and the evidence that belongs behind each one.",
+    "h1": "A post incident report that stands up to audit",
     "body": "A report is useful when someone who wasn’t there can follow what happened, what was decided and why."
   },
   "/demo": {
-    "title": "Book a 30-minute demo",
+    "title": "Book a 30 minute demo",
     "description": "Thirty minutes with an engineer, not a sales script: one incident from first alert to the notice draft, using the tools your team already runs.",
-    "h1": "Book a 30-minute demo",
+    "h1": "Book a 30 minute demo",
     "body": "We’ll walk one incident from first alert to the notice draft, using the tools your team already runs."
   },
   "/contact": {
@@ -107,40 +107,64 @@
     "h1": "Terms",
     "body": "Content on this website is for information and evaluation. Commercial terms are agreed in writing."
   },
-  "/resources/incidents/cloudflare-18-november-2025": {
-    "title": "Cloudflare, 18 November 2025: the alert fired in 3 minutes, the cause took over 2 hours",
-    "description": "A database permissions change doubled the size of a configuration file, and the proxy that read it started returning errors across Cloudflare’s network.",
-    "h1": "Cloudflare, 18 November 2025: the alert fired in 3 minutes, the cause took over 2 hours",
-    "body": "A database permissions change doubled the size of a configuration file, and the proxy that read it started returning errors across Cloudflare’s network."
-  },
-  "/resources/incidents/aws-us-east-1-october-2025": {
-    "title": "AWS, 19–20 October 2025: DNS was fixed, then recovery caused a second failure",
-    "description": "An empty DNS record for DynamoDB’s regional endpoint broke services in us-east-1, and EC2’s lease manager collapsed during recovery.",
-    "h1": "AWS, 19–20 October 2025: DNS was fixed, then recovery caused a second failure",
-    "body": "An empty DNS record for DynamoDB’s regional endpoint broke services in us-east-1, and EC2’s lease manager collapsed during recovery."
-  },
-  "/resources/incidents/cme-27-november-2025": {
-    "title": "CME Group, 27–28 November 2025: cooling failure halted electronic markets",
-    "description": "A critical cooling failure at a CyrusOne data centre led CME to halt electronic markets temporarily; trading reopened the next day on a delayed basis.",
-    "h1": "CME Group, 27–28 November 2025: cooling failure halted electronic markets",
-    "body": "A critical cooling failure at a CyrusOne data centre led CME to halt electronic markets temporarily."
+  "/resources/incidents/barclays-31-january-2025": {
+    "title": "Barclays UK, 31 Jan to 2 Feb 2025: A critical mainframe software problem disrupted digital payments and servicing",
+    "description": "56% of attempted online payments failed among users who reached the payment step. One mainframe defect showed up as separate login, app and payment failures on payday.",
+    "h1": "A critical mainframe software problem disrupted digital payments and servicing.",
+    "body": "In a written response to Parliament, Barclays identified a software problem in a critical module of its UK mainframe operating system, causing progressive processing degradation on 31 January. It hit several payment and servicing channels at a sensitive point for wages and self assessment tax payments."
   },
   "/resources/incidents/lloyds-12-march-2026": {
-    "title": "Lloyds Banking Group, 12 March 2026: overnight change exposed other customers’ transactions",
-    "description": "An overnight mobile-app update introduced a software defect so up to 447,936 Lloyds, Halifax and Bank of Scotland customers could see other customers’ transaction lists.",
-    "h1": "Lloyds Banking Group, 12 March 2026: overnight change exposed other customers’ transactions",
-    "body": "An overnight mobile-app update introduced a software defect so up to 447,936 customers could see other customers’ transaction lists."
+    "title": "Lloyds Banking Group, 12 March 2026: An overnight software change showed customers other people’s transactions",
+    "description": "Up to 447,936 customers implicated; £139,000 paid for distress and inconvenience. The app stayed up while confidentiality failed: a change defect that uptime checks would miss.",
+    "h1": "An overnight software change showed customers other people’s transactions.",
+    "body": "An overnight software update introduced a defect that displayed customer transaction data incorrectly in the Lloyds, Halifax and Bank of Scotland apps. Services stayed responsive while data integrity and confidentiality controls failed."
   },
-  "/resources/incidents/barclays-31-january-2025": {
-    "title": "Barclays, 31 Jan–2 Feb 2025: mainframe software problem disrupted digital payments",
-    "description": "A critical mainframe module caused progressive degradation; 56% of attempted online payments failed among users who reached the payment step.",
-    "h1": "Barclays, 31 Jan–2 Feb 2025: mainframe software problem disrupted digital payments",
-    "body": "A critical mainframe module caused progressive degradation affecting payments and servicing."
+  "/resources/incidents/aws-us-east-1-october-2025": {
+    "title": "Amazon Web Services, 19 to 20 October 2025: DNS was fixed. Then the recovery caused a second failure",
+    "description": "DynamoDB API errors for about 2h 52m; wider regional disruption ran into the next day. Restoring DNS did not restore the business: dependent services recovered on separate clocks.",
+    "h1": "DNS was fixed. Then the recovery caused a second failure.",
+    "body": "AWS documented a latent race condition between DNS management components that left the DynamoDB regional endpoint resolving to an empty record. Fixing DNS did not restore every dependent service: EC2 and load balancers had their own backlogs."
+  },
+  "/resources/incidents/cloudflare-18-november-2025": {
+    "title": "Cloudflare, 18 November 2025: The alert fired in 3 minutes. The right cause took over 2 hours",
+    "description": "Core traffic largely back by 14:30 UTC; all systems normal by 17:06 UTC. The team first suspected a DDoS attack. The cause was a permissions change 23 minutes before impact.",
+    "h1": "The alert fired in 3 minutes. The right cause took over 2 hours.",
+    "body": "A database permissions change altered a query that builds a Bot Management configuration file. Duplicate rows pushed the file past a hard limit and proxies began failing. Fluctuating errors first looked like a major DDoS attack; later evidence pointed at the change."
+  },
+  "/resources/incidents/cme-27-november-2025": {
+    "title": "CME Group / CyrusOne, 27 to 28 November 2025: A data centre cooling failure forced a temporary halt to electronic markets",
+    "description": "Global futures markets halted and reopened the next day on a delayed basis. Early information pointed to a brief outage, so CME did not fail over. The halt ran past 10 hours.",
+    "h1": "A data centre cooling failure forced a temporary halt to electronic markets.",
+    "body": "CME reported in its SEC annual filing that a critical cooling failure, caused by human error at CyrusOne’s data centre, led it to halt markets temporarily. Trading resumed the following day after a delayed opening."
   },
   "/resources/incidents/google-cloud-12-june-2025": {
-    "title": "Google Cloud, 12 June 2025: global Service Control error from policy metadata",
-    "description": "Malformed policy metadata replicated globally and caused null-pointer crashes; primary API outage about three hours, with longer product-level residual effects.",
-    "h1": "Google Cloud, 12 June 2025: global Service Control error from policy metadata",
-    "body": "Malformed policy metadata replicated globally and caused null-pointer crashes across Google Cloud APIs."
+    "title": "Google Cloud, 12 June 2025: Blank policy metadata crashed a global control service. Recovery created its own tail",
+    "description": "Primary API outage about 3 hours; some product level effects lasted longer. Code shipped in May without being exercised; a June metadata update set it off worldwide.",
+    "h1": "Blank policy metadata crashed a global control service. Recovery created its own tail.",
+    "body": "Google’s report: a new Service Control quota policy path shipped in May without being exercised. A June metadata update with blank fields replicated globally and caused null pointer crashes. A red button disable began recovery, but task restarts caused resource contention, and Google’s own monitoring and status paths were impaired."
+  },
+  "/resources/incidents/tsb-april-2018": {
+    "title": "TSB Bank, April 2018: A core banking migration led to weeks of disruption and itemised costs",
+    "description": "£330.2m in post migration costs and foregone income; £153m provisional recovery from the IT provider. The UK benchmark for itemised cost: remediation, fraud, extra staff and lost income, all reported by the bank.",
+    "h1": "A core banking migration led to weeks of disruption and itemised costs.",
+    "body": "After a major banking platform migration, TSB suffered prolonged service disruption and paid for remediation, extra staff, fraud and operational losses, and lost income. It is the one historical case here, included because TSB reported categorised costs."
+  },
+  "/resources/incidents/fedach-3-march-2026": {
+    "title": "Federal Reserve FedACH, 3 March 2026: ACH file delivery, settlement windows and acknowledgements were delayed",
+    "description": "Clients were told not to resend unacknowledged files, to avoid duplicates. The right move was to wait: resending files would have caused duplicate payments.",
+    "h1": "ACH file delivery, settlement windows and acknowledgements were delayed.",
+    "body": "A credit union technology provider archived a Federal Reserve message saying FedACH services were delayed by internal systems processing, affecting file distribution, settlement and acknowledgements. It is a relay, not a full root cause report."
+  },
+  "/resources/incidents/delta-19-july-2024": {
+    "title": "Delta Air Lines, 19 to 24 July 2024: A faulty third party update turned into five days of operational disruption",
+    "description": "About 7,000 cancelled flights; $380m revenue impact, $170m extra expense, $50m lower fuel cost. Restoring the computers did not restore the operation: crews and aircraft took days longer.",
+    "h1": "A faulty third party update turned into five days of operational disruption.",
+    "body": "A faulty CrowdStrike update disrupted Windows systems worldwide. In SEC filings, Delta reported about 7,000 cancellations over five days, lower revenue and higher costs. Restored IT did not instantly unwind crew, aircraft and customer backlogs."
+  },
+  "/resources/incidents/nats-28-august-2023": {
+    "title": "NATS (UK air traffic), 28 August 2023: One rare flight plan pushed primary and backup systems into fail safe",
+    "description": "More than 700,000 travellers affected; £75m to £100m estimated combined industry and passenger cost. A safety first failure: the system stopped rather than risk a wrong answer.",
+    "h1": "One rare flight plan pushed primary and backup systems into fail safe.",
+    "body": "NATS described a flight plan with two identically named waypoints that triggered a critical exception, sending both primary and backup systems into safe fail safe operation. The CAA commissioned an independent review."
   }
 }

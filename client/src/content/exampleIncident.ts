@@ -40,7 +40,7 @@ export const exampleIncident = {
     },
   ],
   notice: "DORA first notice: draft ready",
-  noticeCallout: "Draft ready at 14:33, inside the 4-hour window",
+  noticeCallout: "Draft ready at 14:33, inside the 4 hour window",
   evidence: [
     {
       source: "GitHub",

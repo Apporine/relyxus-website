@@ -5,7 +5,7 @@
 export const whatWeSell = [
   {
     term: "What it is",
-    text: "Incident-response software for payments firms in regulated markets",
+    text: "Incident response software for payments firms in regulated markets",
   },
   {
     term: "What it does",
@@ -13,11 +13,11 @@ export const whatWeSell = [
   },
   {
     term: "What you get",
-    text: "A timestamped audit record and a first draft of the regulator notice (DORA, UK FCA/PRA), ready within the 4-hour window",
+    text: "A timestamped audit record and a first draft of the regulator notice (DORA, UK FCA/PRA), ready within the 4 hour window",
   },
   {
     term: "Who it’s for",
-    text: "Payments engineering, resilience and risk, and payments leadership at processors, issuers, payments banks and cross-border platforms",
+    text: "Payments engineering, resilience and risk, and payments leadership at processors, issuers, payments banks and cross border platforms",
   },
   {
     term: "What it replaces",
@@ -29,11 +29,11 @@ export const whatWeSell = [
   },
   {
     term: "How you buy it",
-    text: "A read-only replay pilot on one closed incident, then an annual subscription",
+    text: "A read only replay pilot on one closed incident, then an annual subscription",
   },
   {
     term: "The modules",
-    text: "War Room (investigate and rank causes), Approvals (named sign-off), Command Centre (risk and status for leaders)",
+    text: "War Room (investigate and rank causes), Approvals (named sign off), Command Centre (risk and status for leaders)",
   },
 ] as const;
 
@@ -94,7 +94,7 @@ export const modules: readonly {
   {
     key: "approvals",
     name: "Approvals",
-    job: "Named sign-off before any change",
+    job: "Named sign off before any change",
     line: "Every proposed fix names its target, blast radius and rollback plan, then waits for the approvers your policy names. Nothing runs until they say yes.",
     points: [
       "The exact command and target, before anyone says yes",
@@ -129,7 +129,7 @@ export const modules: readonly {
     key: "command-centre",
     name: "Command Centre",
     job: "Risk and status for leaders",
-    line: "Every active incident with its money at risk, every decision waiting and the time left on the first notice — without joining the incident call.",
+    line: "Every active incident with its money at risk, every decision waiting and the time left on the first notice, without joining the incident call.",
     points: [
       "Money at risk while the incident runs",
       "Decisions waiting, with time left",
@@ -172,14 +172,14 @@ export const securityCommitments: readonly {
   visual: "access" | "boundary" | "approval" | "assurance";
 }[] = [
   {
-    title: "Read-only by default",
+    title: "Read only by default",
     text: "Investigating never changes anything in your systems.",
     status: "in-place",
     visual: "access",
   },
   {
     title: "Your data stays in your environment",
-    text: "Dedicated or self-hosted. Incident evidence does not leave for a shared tenancy.",
+    text: "Dedicated or self hosted. Incident evidence does not leave for a shared tenancy.",
     status: "in-place",
     visual: "boundary",
   },

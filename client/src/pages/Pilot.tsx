@@ -12,11 +12,11 @@ import { securityCommitments } from "@/content/product";
 const pilotFlow = [
   {
     label: "Bring a closed SEV1",
-    text: "One incident your team knows — ideally where the first theory was wrong.",
+    text: "One incident your team knows, ideally where the first theory was wrong.",
     tone: "signal" as const,
   },
   {
-    label: "Replay read-only",
+    label: "Replay read only",
     text: "We rebuild the record from alerts, deploys and logs. Nothing changes.",
     tone: "ok" as const,
   },
@@ -29,7 +29,7 @@ const pilotFlow = [
 
 const youBring = [
   "One closed SEV1 your team knows well, ideally one where the first theory was wrong.",
-  "Read-only access to the sources for that incident: alerts, deploy history and logs.",
+  "Read only access to the sources for that incident: alerts, deploy history and logs.",
   "An hour of the incident lead’s time to compare notes at the end.",
 ] as const;
 
@@ -37,14 +37,14 @@ const youGet = [
   "The record Relyxus would have built, in event order with every source linked.",
   "The causes it ranked, with the evidence for and against each.",
   "The approvals it would have asked for, and who would have been asked.",
-  "A first-notice draft for the incident, for your resilience team to judge.",
+  "A first notice draft for the incident, for your resilience team to judge.",
 ] as const;
 
 const pilotFaq = [
   {
     question: "Does a replay pilot touch our live systems?",
     answer:
-      "No. It uses read-only access to the sources for one closed incident. Nothing is changed, and nothing is proposed against production.",
+      "No. It uses read only access to the sources for one closed incident. Nothing is changed, and nothing is proposed against production.",
   },
   {
     question: "What if Relyxus gets the cause wrong?",
@@ -66,7 +66,7 @@ export function PilotPage() {
         ground="canvas"
         label="Replay pilot"
         title="Start with an incident you’ve *already closed*"
-        lead="We replay one closed incident read-only and show you the record Relyxus would have left: the ranked cause, the approvals and the notice draft. Nothing in your systems changes."
+        lead="We replay one closed incident read only and show you the record Relyxus would have left: the ranked cause, the approvals and the notice draft. Nothing in your systems changes."
         visual={<FlowDiagram title="Pilot path" steps={pilotFlow} />}
       >
         <ButtonLink href="#pilot-form">Start a replay pilot</ButtonLink>
@@ -76,7 +76,7 @@ export function PilotPage() {
         id="how"
         ground="white"
         label="How it works"
-        title="Three steps, read-only"
+        title="Three steps, read only"
       >
         <PilotSteps />
       </Section>

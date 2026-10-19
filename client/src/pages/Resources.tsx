@@ -5,6 +5,7 @@ import { PageHero } from "@/components/sections/PageHero";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { IncidentCard } from "@/components/sections/IncidentCard";
 import { TimelineDiagram } from "@/components/sections/TimelineDiagram";
+import { EvidenceLine, IncidentMark } from "@/components/sections/IncidentMark";
 import { Section } from "@/components/ui/Section";
 import { ButtonLink } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
@@ -53,7 +54,7 @@ export function IncidentsPage() {
         ground="canvas"
         label="Incident files"
         title="Where the hours *went*"
-        lead="Public outages at payments and infrastructure firms, from their own post-incident reports. A plain timeline, what slowed the response, and the source."
+        lead={`${incidentFiles.length} production incidents at banks, cloud providers and market infrastructure, each from an operator, regulator or securities filing. A plain timeline, what the money really was, and the source.`}
         visual={
           <TimelineDiagram
             title="Alert → cause gap"
@@ -75,7 +76,10 @@ export function IncidentsPage() {
       <Section id="files" ground="white">
         <p className="small muted files-note">
           Public incident research. These firms are not Relyxus customers and
-          have not used, endorsed or been assessed by Relyxus.
+          have not used, endorsed or been assessed by Relyxus. A+ evidence is a
+          first party report, regulator publication or securities filing;
+          conditional evidence is a credible relay without a full primary
+          report.
         </p>
         <ul className="grid-3">
           {incidentFiles.map((file, i) => (
@@ -101,14 +105,7 @@ export function IncidentFilePage({ slug }: { slug: string }) {
             <ArrowLeft size={16} aria-hidden="true" /> All incident files
           </Link>
           <div className="file-head">
-            <img
-              src={file.logo}
-              alt=""
-              width={48}
-              height={48}
-              className="file-logo"
-              decoding="async"
-            />
+            <IncidentMark file={file} />
             <p className="label">
               {file.firm} · {file.date} · Public incident research
             </p>
@@ -116,23 +113,37 @@ export function IncidentFilePage({ slug }: { slug: string }) {
           <h1>{file.title}</h1>
           <p className="file-highlight">{file.highlight}</p>
           <p className="lead">{file.summary}</p>
-          <p className="small muted">{file.sector}</p>
+          <EvidenceLine file={file} />
+
+          <h2 className="subhead-lg">What the sources establish</h2>
+          <ul className="bullets">
+            {file.established.map(line => (
+              <li key={line}>{line}</li>
+            ))}
+          </ul>
 
           <h2 className="subhead-lg">Timeline</h2>
           <TimelineDiagram
-            title={`${file.firm} timeline`}
+            title={`${file.firm} · published timeline`}
             rows={file.timeline}
           />
-          {file.caveat && <p className="small muted">{file.caveat}</p>}
 
           <div className="prose">
             <section>
-              <h2>What slowed the response</h2>
-              <p>{file.slowed}</p>
+              <h2>The money, stated precisely</h2>
+              <p>{file.financial}</p>
+              <p className="small muted">{file.caveat}</p>
+            </section>
+            <section className="file-fit">
+              <h2>Where Relyxus could fit</h2>
+              <p className="file-fit-label">
+                A hypothesis to test in a replay, not a proven outcome
+              </p>
+              <p>{file.approach}</p>
             </section>
             <section>
-              <h2>The gap</h2>
-              <p>{file.gap}</p>
+              <h2>What Relyxus can’t do here</h2>
+              <p>{file.boundary}</p>
             </section>
           </div>
           <Sources items={file.sources} />
@@ -146,7 +157,7 @@ export function IncidentFilePage({ slug }: { slug: string }) {
       <CtaBand
         ground="paper"
         title="Bring the incident that hurt most"
-        text="We’ll replay one of yours, read-only, and show you the record it would have left."
+        text="We’ll replay one of yours, read only, and show you the record it would have left."
         label="Start a replay pilot"
         href="/pilot"
       />

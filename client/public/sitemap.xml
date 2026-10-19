@@ -10,7 +10,6 @@
   <url><loc>/dora/checklist</loc><priority>0.7</priority></url>
   <url><loc>/security</loc><priority>0.7</priority></url>
   <url><loc>/about</loc><priority>0.7</priority></url>
-  <url><loc>/resources</loc><priority>0.7</priority></url>
   <url><loc>/resources/incidents</loc><priority>0.7</priority></url>
   <url><loc>/resources/what-makes-incident-response-controlled</loc><priority>0.7</priority></url>
   <url><loc>/resources/dora-major-incident-reports</loc><priority>0.7</priority></url>
@@ -19,9 +18,14 @@
   <url><loc>/contact</loc><priority>0.7</priority></url>
   <url><loc>/privacy</loc><priority>0.3</priority></url>
   <url><loc>/terms</loc><priority>0.3</priority></url>
-  <url><loc>/resources/incidents/cloudflare-18-november-2025</loc><priority>0.7</priority></url>
-  <url><loc>/resources/incidents/aws-us-east-1-october-2025</loc><priority>0.7</priority></url>
-  <url><loc>/resources/incidents/rba-rits-27-january-2026</loc><priority>0.7</priority></url>
+  <url><loc>/resources/incidents/barclays-31-january-2025</loc><priority>0.7</priority></url>
   <url><loc>/resources/incidents/lloyds-12-march-2026</loc><priority>0.7</priority></url>
+  <url><loc>/resources/incidents/aws-us-east-1-october-2025</loc><priority>0.7</priority></url>
+  <url><loc>/resources/incidents/cloudflare-18-november-2025</loc><priority>0.7</priority></url>
   <url><loc>/resources/incidents/cme-27-november-2025</loc><priority>0.7</priority></url>
+  <url><loc>/resources/incidents/google-cloud-12-june-2025</loc><priority>0.7</priority></url>
+  <url><loc>/resources/incidents/tsb-april-2018</loc><priority>0.7</priority></url>
+  <url><loc>/resources/incidents/fedach-3-march-2026</loc><priority>0.7</priority></url>
+  <url><loc>/resources/incidents/delta-19-july-2024</loc><priority>0.7</priority></url>
+  <url><loc>/resources/incidents/nats-28-august-2023</loc><priority>0.7</priority></url>
 </urlset>

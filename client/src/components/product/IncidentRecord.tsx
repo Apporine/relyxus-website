@@ -4,47 +4,36 @@ import { useRevealOnce } from "@/lib/useRevealOnce";
 import { Callout, ProductFrame } from "./ProductFrame";
 
 const ROW_MS = 1000;
-const LOOP_MS = 13000;
+const HOLD_MS = 5000;
 
 /**
- * The INC-2207 record. When `playing`, rows appear ~1 s apart, the cause
- * highlights, the notice chip slides in, then the loop restarts every 13 s.
- * Respects prefers-reduced-motion (final state only).
+ * The INC-2207 record. Every row is always visible at full contrast; when
+ * `playing`, a highlight walks the timeline about 1 s a row, the notice chip
+ * pops in at the end, then it holds and repeats. Reduced motion: no walk.
  */
 export function IncidentRecord({ playing = false }: { playing?: boolean }) {
   const [ref, reveal] = useRevealOnce<HTMLOListElement>();
   const total = incident.record.length + 1;
-  const [visible, setVisible] = useState(playing ? 0 : total);
-  const reduced =
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // Index of the highlighted row; -1 means none (the resting state).
+  const [current, setCurrent] = useState(-1);
 
   useEffect(() => {
-    if (!playing || reduced) {
-      setVisible(total);
-      return;
-    }
-    let step = 0;
-    setVisible(0);
-    const tick = () => {
-      step += 1;
-      if (step > total) {
-        step = 0;
-        setVisible(0);
-      } else {
-        setVisible(step);
-      }
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (!playing || reduced) return;
+    let timer = 0;
+    const step = (index: number) => {
+      setCurrent(index);
+      const last = index >= total - 1;
+      timer = window.setTimeout(
+        () => step(last ? 0 : index + 1),
+        last ? HOLD_MS : ROW_MS
+      );
     };
-    const interval = window.setInterval(tick, ROW_MS);
-    const loop = window.setInterval(() => {
-      step = 0;
-      setVisible(0);
-    }, LOOP_MS);
-    return () => {
-      window.clearInterval(interval);
-      window.clearInterval(loop);
-    };
-  }, [playing, reduced, total]);
+    timer = window.setTimeout(() => step(0), HOLD_MS);
+    return () => window.clearTimeout(timer);
+  }, [playing, total]);
 
   return (
     <ProductFrame
@@ -65,7 +54,7 @@ export function IncidentRecord({ playing = false }: { playing?: boolean }) {
             className={[
               "record-row",
               "highlight" in row ? "is-cause" : "",
-              visible > index ? "is-shown" : "",
+              current === index ? "is-current" : "",
             ]
               .filter(Boolean)
               .join(" ")}
@@ -83,7 +72,7 @@ export function IncidentRecord({ playing = false }: { playing?: boolean }) {
           className={[
             "record-row",
             "record-notice",
-            visible > incident.record.length ? "is-shown" : "",
+            current === incident.record.length ? "is-current" : "",
           ]
             .filter(Boolean)
             .join(" ")}

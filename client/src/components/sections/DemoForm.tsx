@@ -52,7 +52,7 @@ function validate(values: Values): Errors {
 export function DemoForm({
   enquiry = "Demo",
   messageLabel = "Tell us about an incident you’d want to replay",
-  submitLabel = "Book a 30-minute demo",
+  submitLabel = "Book a 30 minute demo",
 }: {
   enquiry?: EnquiryType;
   messageLabel?: string;
@@ -99,7 +99,7 @@ export function DemoForm({
         <h3>Thanks. Your note is with the team.</h3>
         {bookingUrl ? (
           <>
-            <p>Pick a 30-minute slot now and skip the email back and forth.</p>
+            <p>Pick a 30 minute slot now and skip the email back and forth.</p>
             <ButtonLink
               href={bookingUrl}
               onClick={() => track("booking_click", { place: enquiry })}

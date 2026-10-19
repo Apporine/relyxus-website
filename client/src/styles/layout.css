@@ -202,8 +202,9 @@
   color: var(--white);
 }
 
+/* Desktop shows the full nav, so the menu button only exists on small screens. */
 @media (min-width: 960px) {
-  .nav-toggle {
+  .icon-btn.nav-toggle {
     display: none;
   }
 }
@@ -364,6 +365,13 @@
   text-decoration: none;
 }
 
+/* Footer sits on plum: muted text and form labels use the on-plum colour. */
+.site-footer .muted,
+.site-footer label,
+.site-footer .small {
+  color: var(--on-canvas);
+}
+
 .site-footer a:hover {
   color: var(--primary) !important;
 }
@@ -436,7 +444,7 @@
   z-index: 100;
   padding: var(--space-1) var(--space-2);
   background: var(--primary);
-  color: var(--ink);
+  color: var(--ink) !important;
   border-radius: var(--radius-sm);
   text-decoration: none;
 }

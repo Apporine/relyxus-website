@@ -39,8 +39,9 @@ export function Hero() {
           <div className="hero-card">
             <IncidentRecord playing />
             <div className="stat-tile" aria-hidden="true">
-              <strong>12 min</strong>
-              <span>to ranked cause</span>
+              <span className="stat-note">{hero.stat.note}</span>
+              <strong>{hero.stat.value}</strong>
+              <span>{hero.stat.label}</span>
             </div>
           </div>
           <p className="hero-note small muted">{hero.frameNote}</p>

@@ -18,7 +18,7 @@ export function ProductPage() {
         ground="canvas"
         label="Product"
         title="One incident record, from first alert to regulator notice"
-        lead="Relyxus is one product with three modules: the War Room for the investigation, Approvals for named sign-off, and the Command Centre for leadership."
+        lead="Relyxus is one product with three modules: the War Room for the investigation, Approvals for named sign off, and the Command Centre for leadership."
         visual={
           <Screen
             screen={modules[0].screen}

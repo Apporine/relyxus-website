@@ -16,10 +16,10 @@ type Variant = {
 const variants: Partial<Record<EnquiryType, Variant>> = {
   Demo: {
     label: "Book a demo",
-    title: "Book a 30-minute demo",
+    title: "Book a 30 minute demo",
     lead: "We’ll walk one incident from first alert to the notice draft, using the tools your team already runs.",
     message: "Tell us about an incident you’d want to replay",
-    submit: "Book a 30-minute demo",
+    submit: "Book a 30 minute demo",
   },
   "Security pack": {
     label: "Security pack",
@@ -31,14 +31,14 @@ const variants: Partial<Record<EnquiryType, Variant>> = {
   Deployment: {
     label: "Deployment",
     title: "Talk through how you would run Relyxus",
-    lead: "Dedicated or self-hosted, where data goes, and who looks after updates. Your constraints first.",
+    lead: "Dedicated or self hosted, where data goes, and who looks after updates. Your constraints first.",
     message: "Tell us about your environment",
     submit: "Send",
   },
   Pricing: {
     label: "Pricing",
     title: "Ask for a proposal",
-    lead: "A replay pilot first, then an annual licence with no per-seat fees. Tell us a little and we’ll put a price in writing.",
+    lead: "A replay pilot first, then an annual licence with no per seat fees. Tell us a little and we’ll put a price in writing.",
     message: "Teams, incident volume, timeline: anything that helps",
     submit: "Ask for a proposal",
   },

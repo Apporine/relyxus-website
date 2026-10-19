@@ -27,7 +27,7 @@ export const howItWorks = [
   {
     step: "05",
     name: "Record",
-    line: "The audit write-up drafts while you work.",
+    line: "The audit write up drafts while you work.",
   },
 ] as const;
 

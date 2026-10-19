@@ -2,7 +2,8 @@ import { useRef } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { carouselNote } from "@/content/home";
-import { incidentFiles } from "@/content/incidents";
+import { featuredIncidents } from "@/content/incidents";
+import { EvidenceLine, IncidentMark } from "./IncidentMark";
 
 const SLIDE = 340;
 
@@ -44,17 +45,10 @@ export function IncidentCarousel() {
           </div>
         </header>
         <ul className="carousel-track" ref={track}>
-          {incidentFiles.map(file => (
+          {featuredIncidents.map(file => (
             <li key={file.slug} className="carousel-card">
               <div className="carousel-card-top">
-                <img
-                  src={file.logo}
-                  alt=""
-                  width={36}
-                  height={36}
-                  className="carousel-logo"
-                  decoding="async"
-                />
+                <IncidentMark file={file} />
                 <div className="carousel-card-ids">
                   <span className="carousel-firm">{file.firm}</span>
                   <span className="carousel-date">{file.date}</span>
@@ -67,7 +61,8 @@ export function IncidentCarousel() {
                   </Link>
                 </h3>
                 <p className="carousel-highlight">{file.highlight}</p>
-                <p className="carousel-summary">{file.summary}</p>
+                <p className="carousel-summary">{file.short}</p>
+                <EvidenceLine file={file} />
                 <Link
                   href={`/resources/incidents/${file.slug}`}
                   className="carousel-cta"

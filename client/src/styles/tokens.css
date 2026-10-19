@@ -26,6 +26,8 @@
   --tint-1: #f3f0fa;
   --tint-2: #f4fae1;
   --alert: #e5484d;
+  /* SEV chips with white text: 5.7:1. */
+  --alert-strong: #c4262e;
   --ok: #1f8a5b;
   --console: #2a2438;
   --console-raised: #3a3348;

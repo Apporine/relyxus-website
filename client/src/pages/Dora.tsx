@@ -22,7 +22,7 @@ export function DoraPage() {
       <PageHero
         label="DORA and UK incident reporting"
         title="What the regulator needs from you, and by when"
-        lead="A plain guide to the DORA major-incident deadlines and the UK regime that starts on 18 March 2027, with the rules linked so you can check every line."
+        lead="A plain guide to the DORA major incident deadlines and the UK regime that starts on 18 March 2027, with the rules linked so you can check every line."
       >
         <ButtonLink href="#checklist">Get the reporting checklist</ButtonLink>
         <ButtonLink href="/dora/checklist" variant="dark">
@@ -120,7 +120,7 @@ export function DoraPage() {
       </Section>
 
       <CtaBand
-        title="See a first-notice draft built from a live record"
+        title="See a first notice draft built from a live record"
         text="Thirty minutes with an engineer: one incident, from first alert to the notice your team would review."
       />
     </>

@@ -19,7 +19,7 @@ export const nav: NavEntry[] = [
       {
         label: "Payments engineering",
         href: "/solutions/engineering",
-        description: "SRE, on-call and platform teams",
+        description: "SRE, on call and platform teams",
       },
       {
         label: "Resilience and risk",
@@ -143,11 +143,11 @@ export const designPartners = {
     "UK payments processor",
     "EU card issuer",
     "Specialist payments bank",
-    "Cross-border payments platform",
+    "Cross border payments platform",
   ],
   note: "We’re working with a small group of payments firms in early access. We’ll name them when they say so.",
   badges: [
-    "Read-only replay pilots",
+    "Read only replay pilots",
     "Built for DORA and the UK FCA/PRA regime",
   ],
 } as const;
@@ -170,24 +170,24 @@ export const partnerQuote: {
 /** Composite evaluation data. Must stay labelled as illustrative. */
 export const replayResult = {
   value: "47 → 12 min",
-  label: "time to a ranked cause on a closed SEV1, replayed read-only",
+  label: "time to a ranked cause on a closed SEV1, replayed read only",
   disclaimer:
-    "Illustrative. A composite from read-only replay evaluations, not a published customer result or a guarantee.",
+    "Illustrative. A composite from read only replay evaluations, not a published customer result or a guarantee.",
 } as const;
 
 /** How pricing works. Confirm each line with the client before launch. */
 export const pricingTerms: readonly { title: string; text: string }[] = [
   {
     title: "Start with a replay pilot",
-    text: "Read-only, on one closed incident. What you pay for the pilot comes off the licence if you go ahead.",
+    text: "Read only, on one closed incident. What you pay for the pilot comes off the licence if you go ahead.",
   },
   {
     title: "Then an annual licence",
     text: "One price, agreed in writing before you start.",
   },
   {
-    title: "No per-seat fees",
-    text: "Bring everyone who works the incident, from on-call to the board.",
+    title: "No per seat fees",
+    text: "Bring everyone who works the incident, from on call to the board.",
   },
 ];
 

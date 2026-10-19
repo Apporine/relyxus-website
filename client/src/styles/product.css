@@ -60,9 +60,9 @@
 .sev {
   padding: 2px 8px;
   border-radius: 999px;
-  background: var(--alert);
-  color: var(--console);
-  font-weight: 500;
+  background: var(--alert-strong);
+  color: var(--white);
+  font-weight: 600;
 }
 
 .notice-chip {

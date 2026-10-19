@@ -70,7 +70,7 @@ export const checklist: readonly { stage: string; items: readonly string[] }[] =
     {
       stage: "Before the incident",
       items: [
-        "Your criteria for a major ICT-related incident are written down, with who applies them.",
+        "Your criteria for a major ICT related incident are written down, with who applies them.",
         "Each critical service has a named owner and a deputy.",
         "You know which regulator and which template each notice goes to.",
         "Alerts, deploy history and logs can be read from one place.",
@@ -86,7 +86,7 @@ export const checklist: readonly { stage: string; items: readonly string[] }[] =
       ],
     },
     {
-      stage: "Before the 4-hour notice",
+      stage: "Before the 4 hour notice",
       items: [
         "A working cause is stated, with the evidence for it and what was ruled out.",
         "Actions taken so far are listed with their time and approver.",
@@ -94,11 +94,11 @@ export const checklist: readonly { stage: string; items: readonly string[] }[] =
       ],
     },
     {
-      stage: "Before the 72-hour and final reports",
+      stage: "Before the 72 hour and final reports",
       items: [
         "The timeline is in event order, using the time each event happened.",
         "Impact figures are updated, with estimates still labelled.",
-        "Follow-up actions each have an owner and a date.",
+        "Follow up actions each have an owner and a date.",
         "The record shows what you didn’t know, and when you found out.",
       ],
     },

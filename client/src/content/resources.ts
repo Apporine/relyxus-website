@@ -18,7 +18,7 @@ export const guides: readonly Guide[] = [
   },
   {
     slug: "post-incident-report-audit",
-    title: "A post-incident report that stands up to audit",
+    title: "A post incident report that stands up to audit",
     description:
       "Five sections every report needs, and the evidence that belongs behind each one.",
     time: "4 minute read",
@@ -33,7 +33,7 @@ export const guides: readonly Guide[] = [
   },
   {
     slug: "deployment-guide",
-    title: "Self-hosted vs dedicated: a checklist for your architecture review",
+    title: "Self hosted vs dedicated: a checklist for your architecture review",
     description:
       "Who operates what, where data goes and what to ask before you decide. Shared with teams in an evaluation.",
     time: "On request",
@@ -76,7 +76,7 @@ export const articles: Record<
   "dora-major-incident-reports": {
     title: "DORA major incident reports: what to have ready for each deadline",
     intro:
-      "Under DORA, a major ICT-related incident is reported in stages. Knowing what each stage needs before an incident starts makes the clock far easier to live with.",
+      "Under DORA, a major ICT related incident is reported in stages. Knowing what each stage needs before an incident starts makes the clock far easier to live with.",
     sections: [
       {
         heading: "The three deadlines",
@@ -84,7 +84,7 @@ export const articles: Record<
       },
       {
         heading: "Classify early, and write down when",
-        body: "The 4-hour clock starts at classification, but the 24-hour limit runs from awareness, so waiting does not buy time. Record the time of detection and the time of classification, and who made the call.",
+        body: "The 4 hour clock starts at classification, but the 24 hour limit runs from awareness, so waiting does not buy time. Record the time of detection and the time of classification, and who made the call.",
       },
       {
         heading: "Capture as you go",
@@ -97,7 +97,7 @@ export const articles: Record<
     ],
   },
   "post-incident-report-audit": {
-    title: "A post-incident report that stands up to audit",
+    title: "A post incident report that stands up to audit",
     intro:
       "A report is useful when someone who wasn’t there can follow what happened, what was decided and why.",
     sections: [
@@ -118,7 +118,7 @@ export const articles: Record<
         body: "Record each change that was proposed, who approved it, under which policy, and how the result was verified. A change with no named approver is a finding waiting to happen.",
       },
       {
-        heading: "Follow-ups with owners and dates",
+        heading: "Follow ups with owners and dates",
         body: "Every action gets a named owner and a date. Review them at the next incident review so the list does not go stale.",
       },
     ],

@@ -1,20 +1,14 @@
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import type { IncidentFile } from "@/content/incidents";
+import { EvidenceLine, IncidentMark } from "./IncidentMark";
 
 /** A public incident file card — research, never a customer story. */
 export function IncidentCard({ file }: { file: IncidentFile }) {
   return (
     <article className="incident-card">
       <header className="incident-card-head">
-        <img
-          src={file.logo}
-          alt=""
-          width={40}
-          height={40}
-          className="incident-card-logo"
-          decoding="async"
-        />
+        <IncidentMark file={file} />
         <div className="incident-card-meta">
           <p className="incident-card-firm">{file.firm}</p>
           <p className="incident-card-date">{file.date}</p>
@@ -24,8 +18,8 @@ export function IncidentCard({ file }: { file: IncidentFile }) {
         <Link href={`/resources/incidents/${file.slug}`}>{file.title}</Link>
       </h3>
       <p className="incident-card-highlight">{file.highlight}</p>
-      <p className="incident-card-summary">{file.summary}</p>
-      <p className="incident-card-sector">{file.sector}</p>
+      <p className="incident-card-summary">{file.short}</p>
+      <EvidenceLine file={file} />
       <Link
         href={`/resources/incidents/${file.slug}`}
         className="incident-card-cta"

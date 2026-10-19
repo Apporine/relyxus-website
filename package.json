@@ -17,7 +17,8 @@
     "build:static": "vite build && node scripts/prerender.mjs",
     "preview": "vite preview --host 0.0.0.0 --port 4173 --strictPort",
     "prepare": "husky",
-    "ci": "pnpm format:check && pnpm check && pnpm test && pnpm build:static"
+    "ci": "pnpm format:check && pnpm check && pnpm test && pnpm build:static",
+    "meta:incidents": "tsx scripts/gen-incident-meta.ts"
   },
   "engines": {
     "node": "22.x"

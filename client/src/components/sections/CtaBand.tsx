@@ -5,7 +5,7 @@ import { demoMicrocopy } from "@/content/site";
 export function CtaBand({
   title,
   text,
-  label = "Book a 30-minute demo",
+  label = "Book a 30 minute demo",
   href = "/demo",
   ground = "white",
 }: {

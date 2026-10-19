@@ -1,17 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Relyxus: find the cause of an incident, with every step on the record">
-  <rect width="1200" height="630" fill="#110A24"/>
-  <circle cx="1010" cy="110" r="260" fill="#05DCE8" fill-opacity="0.08"/>
-  <g fill="none" stroke="#05DCE8" stroke-opacity="0.5" stroke-width="2">
+  <rect width="1200" height="630" fill="#120A18"/>
+  <circle cx="1010" cy="110" r="260" fill="#C6F432" fill-opacity="0.08"/>
+  <g fill="none" stroke="#C6F432" stroke-opacity="0.5" stroke-width="2">
     <path d="M820 70 C900 70 900 170 990 170"/>
     <path d="M820 170 C900 170 900 170 990 170"/>
     <path d="M820 270 C900 270 900 170 990 170"/>
   </g>
-  <g fill="#FCFAFF" font-family="Inter, Arial, sans-serif">
-    <text x="80" y="110" font-size="34" font-weight="500" letter-spacing="7">rely<tspan fill="#05DCE8">x</tspan>us</text>
+  <g fill="#F4EFE6" font-family="Schibsted Grotesk, Arial, sans-serif">
+    <text x="80" y="110" font-size="34" font-weight="500" letter-spacing="7">rely<tspan fill="#C6F432">x</tspan>us</text>
     <text x="80" y="270" font-size="68" font-weight="800" letter-spacing="-1.4">Find the cause of</text>
     <text x="80" y="348" font-size="68" font-weight="800" letter-spacing="-1.4">an incident, with every</text>
-    <text x="80" y="426" font-size="68" font-weight="800" letter-spacing="-1.4" fill="#05DCE8">step on the record.</text>
-    <text x="80" y="520" font-size="26" fill="#B9B4C9">For incident, SRE and resilience teams at regulated firms</text>
+    <text x="80" y="426" font-size="68" font-weight="800" letter-spacing="-1.4" fill="#C6F432">step on the record.</text>
+    <text x="80" y="520" font-size="26" fill="#A79FB5">For incident, SRE and resilience teams at regulated firms</text>
   </g>
-  <circle cx="1010" cy="170" r="30" fill="#07130f" stroke="#05DCE8" stroke-width="3"/>
+  <circle cx="1010" cy="170" r="30" fill="#1D1426" stroke="#C6F432" stroke-width="3"/>
 </svg>

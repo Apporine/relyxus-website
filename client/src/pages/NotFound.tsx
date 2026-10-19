@@ -1,49 +1,33 @@
-import { ArrowRight, Home as HomeIcon } from "lucide-react";
 import { Link } from "wouter";
-import { PageMeta } from "@/components/marketing/PublicSite";
+import { PageMeta } from "@/components/layout/PageMeta";
+import { ButtonLink } from "@/components/ui/Button";
 
 export default function NotFound() {
   return (
     <>
       <PageMeta
         title="Page not found"
-        description="The requested Relyxus website page could not be found."
+        description="This page isn’t on the Relyxus website."
         noindex
       />
-      <section className="not-found-page">
-        <div className="not-found-layout">
-          <p className="eyebrow">404 / NOT FOUND</p>
-          <span className="not-found-number" aria-hidden="true">
-            404
-          </span>
-          <h1>That page isn’t part of this story.</h1>
-          <p>
-            The link may be outdated, or the page may have moved. Start from
-            home, or jump into the product and security pages.
+      <section className="section section-paper" aria-labelledby="page-title">
+        <div className="container narrow">
+          <p className="label">404</p>
+          <h1 id="page-title">We couldn’t find that page</h1>
+          <p className="lead">
+            The link may be old, or the page may have moved. No incident record
+            for this one, sadly.
           </p>
-          <div className="not-found-actions">
-            <Link className="button button-primary" href="/">
-              <HomeIcon size={16} aria-hidden="true" />
-              Go home
-            </Link>
-            <Link className="button button-outline" href="/product">
-              Explore product
-            </Link>
-            <Link className="text-link" href="/contact">
-              Contact the team <ArrowRight size={16} aria-hidden="true" />
-            </Link>
+          <div className="actions">
+            <ButtonLink href="/">Go to the homepage</ButtonLink>
+            <ButtonLink href="/product" variant="dark">
+              See the product
+            </ButtonLink>
           </div>
-          <ul className="not-found-links">
-            <li>
-              <Link href="/security">Security</Link>
-            </li>
-            <li>
-              <Link href="/privacy">Privacy policy</Link>
-            </li>
-            <li>
-              <Link href="/demo">Book a 30-minute demo</Link>
-            </li>
-          </ul>
+          <p className="small muted">
+            Looking for something specific?{" "}
+            <Link href="/contact">Ask the team</Link>.
+          </p>
         </div>
       </section>
     </>

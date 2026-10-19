@@ -1,4 +1,3 @@
-import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import path from "node:path";
 import { defineConfig, type Plugin } from "vite";
@@ -81,12 +80,7 @@ function vitePluginContactApi(): Plugin {
 }
 
 export default defineConfig({
-  plugins: [
-    vitePluginPublicPlatformConfig(),
-    vitePluginContactApi(),
-    react(),
-    tailwindcss(),
-  ],
+  plugins: [vitePluginPublicPlatformConfig(), vitePluginContactApi(), react()],
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),
@@ -94,6 +88,8 @@ export default defineConfig({
     },
   },
   envDir: path.resolve(import.meta.dirname),
+  // NEXT_PUBLIC_ keeps the variable names the spec uses (e.g. the booking URL).
+  envPrefix: ["VITE_", "NEXT_PUBLIC_"],
   root: path.resolve(import.meta.dirname, "client"),
   publicDir: path.resolve(import.meta.dirname, "client", "public"),
   build: {

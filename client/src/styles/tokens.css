@@ -1,0 +1,112 @@
+/*
+ * Design tokens. The only file allowed to hold raw colours, font names and
+ * the spacing scale; scripts/check-tokens.mjs fails the build otherwise.
+ *
+ * Plum and Lime, softened: canvas is a quieter plum so lime and product
+ * visuals carry the energy (EcoOnline forest pattern, Relyxus colours).
+ */
+:root {
+  /* Colour — Plum and Lime (softened) */
+  --canvas: #2a2438;
+  --canvas-deep: #221c2e;
+  --raised: #3a3348;
+  --paper: #faf8f3;
+  --white: #ffffff;
+  --ink: #16121d;
+  --body: #4a4556;
+  --ink-muted: #4a4556;
+  --on-canvas: #d8d2e6;
+  --rule: #e8e4dc;
+  --primary: #c8f03c;
+  --signal: #c8f03c;
+  --primary-hover: #d7f76b;
+  --signal-hover: #d7f76b;
+  --second: #c4b6f0;
+  --link: #6b52d4;
+  --tint-1: #f3f0fa;
+  --tint-2: #f4fae1;
+  --alert: #e5484d;
+  --ok: #1f8a5b;
+  --console: #2a2438;
+  --console-raised: #3a3348;
+  --console-rule: rgb(255 255 255 / 0.1);
+  --console-text: #efeae2;
+  --console-muted: #d8d2e6;
+  --signal-tint: rgb(200 240 60 / 0.14);
+  --ink-20: rgb(22 18 29 / 0.2);
+  --ink-04: rgb(22 18 29 / 0.04);
+  --console-dot: rgb(255 255 255 / 0.18);
+  --ghost-hover: rgb(200 240 60 / 0.12);
+  --white-06: rgb(255 255 255 / 0.06);
+  --white-08: rgb(255 255 255 / 0.08);
+  --white-12: rgb(255 255 255 / 0.12);
+  --second-20: rgb(196 182 240 / 0.22);
+  --second-22: rgb(196 182 240 / 0.28);
+  --shadow-soft:
+    0 1px 2px rgb(22 18 29 / 0.05), 0 8px 24px rgb(22 18 29 / 0.08);
+  --shadow-lift:
+    0 4px 8px rgb(22 18 29 / 0.06), 0 12px 32px rgb(22 18 29 / 0.1);
+
+  /* Type — DM Sans body; Instrument Serif for one accent phrase per headline */
+  --font-sans: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-accent: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+  --text-xs: 13px;
+  --text-sm: 14px;
+  --text-ui: 16px;
+  --text-md: 16px;
+  --text-body: 17px;
+  --text-lead: 18px;
+  --text-h3: 22px;
+  --text-quote: 22px;
+  --text-h2: 40px;
+  --text-h1: 52px;
+  --weight-heading: 500;
+  --weight-body: 400;
+
+  /* Spacing: 8 px scale */
+  --space-half: 4px;
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+  --space-8: 64px;
+  --space-9: 72px;
+  --space-12: 96px;
+  --space-14: 112px;
+  --space-15: 120px;
+
+  /* Shape and layout */
+  --radius-sm: 4px;
+  --radius: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+  --content: 1180px;
+  --measure: 640px;
+  --gutter: 32px;
+  --nav-height: 76px;
+  --product-bar-height: 64px;
+  --announce-height: 44px;
+  --section-y: var(--space-14);
+  --tap: 44px;
+  --btn-height: 50px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --quick: 160ms;
+  --hover: 300ms;
+}
+
+@media (max-width: 859px) {
+  :root {
+    --text-h1: 38px;
+    --text-h2: 30px;
+    --text-quote: 20px;
+    --text-body: 16px;
+    --text-lead: 17px;
+    --gutter: 20px;
+    --section-y: var(--space-8);
+  }
+}

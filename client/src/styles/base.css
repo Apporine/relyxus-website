@@ -1,0 +1,294 @@
+/* Reset, type and layout primitives. Values come from tokens.css only. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: calc(
+    var(--announce-height) + var(--nav-height) + var(--space-2)
+  );
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd,
+ol,
+ul {
+  margin: 0;
+}
+
+ol,
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: var(--weight-heading);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+/* One serif italic phrase inside a headline — Apporine-style mixed type */
+.accent-phrase {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--primary);
+}
+
+.on-canvas .accent-phrase,
+.hero .accent-phrase,
+.page-hero-canvas .accent-phrase {
+  color: var(--primary);
+}
+
+.section-paper .accent-phrase,
+.section-white .accent-phrase {
+  color: var(--second);
+}
+
+h1 {
+  font-size: var(--text-h1);
+  line-height: 1.18;
+}
+
+h2 {
+  font-size: var(--text-h2);
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: var(--text-h3);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+code,
+kbd,
+samp,
+.mono {
+  font-family: var(--font-mono);
+}
+
+:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.on-console :focus-visible,
+.on-console:focus-visible,
+.on-canvas :focus-visible,
+.on-canvas:focus-visible {
+  outline-color: var(--primary);
+}
+
+a:not(.btn):not(.wordmark):not(.nav-link):not(.card) {
+  color: var(--link);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.on-canvas a:not(.btn):not(.wordmark):not(.nav-link) {
+  color: var(--primary);
+}
+
+main:focus {
+  outline: none;
+}
+
+/* Layout */
+.container {
+  width: 100%;
+  max-width: calc(var(--content) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: var(--section-y);
+}
+
+.section-paper {
+  background: var(--paper);
+}
+
+.section-white {
+  background: var(--white);
+}
+
+.section-console,
+.section-canvas {
+  background: var(--canvas);
+  color: var(--white);
+}
+
+.section-canvas .muted,
+.section-console .muted,
+.on-canvas .muted {
+  color: var(--on-canvas);
+}
+
+.section-tint-1 {
+  background: var(--tint-1);
+}
+
+.section-tint-2 {
+  background: var(--tint-2);
+}
+
+.section + .section-tight {
+  padding-top: 0;
+}
+
+.measure {
+  max-width: var(--measure);
+}
+
+.stack > * + * {
+  margin-top: var(--space-2);
+}
+
+.muted {
+  color: var(--ink-muted);
+}
+
+.small {
+  font-size: var(--text-sm);
+}
+
+.split {
+  display: grid;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+@media (min-width: 960px) {
+  .split {
+    grid-template-columns: 5fr 7fr;
+    gap: var(--space-8);
+  }
+
+  .split-even {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .split-reverse {
+    grid-template-columns: 7fr 5fr;
+  }
+}
+
+.grid-3,
+.grid-4 {
+  display: grid;
+  gap: var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1100px) {
+  .grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Accessibility helpers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--space-2);
+  top: -100px;
+  z-index: 100;
+  padding: var(--space-1) var(--space-2);
+  background: var(--ink);
+  color: var(--white);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-ui);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: var(--space-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

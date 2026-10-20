@@ -6,6 +6,8 @@ import { EmailCapture } from "@/components/sections/EmailCapture";
 import { IncidentCard } from "@/components/sections/IncidentCard";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { Section } from "@/components/ui/Section";
+import { DotGraph } from "@/components/ui/DotGraph";
+import { doraLogDiagram } from "@/content/diagrams";
 import { ButtonLink } from "@/components/ui/Button";
 import { Sources } from "@/components/ui/Sources";
 import { articles } from "@/content/resources";
@@ -41,14 +43,17 @@ export function DoraPage() {
         label="What to capture"
         title="Each report is a summary of the log"
       >
-        <div className="prose">
-          <p className="lead">{guide.intro}</p>
-          {guide.sections.slice(1).map(section => (
-            <section key={section.heading}>
-              <h3>{section.heading}</h3>
-              <p>{section.body}</p>
-            </section>
-          ))}
+        <div className="night-grid">
+          <div className="prose">
+            <p className="lead">{guide.intro}</p>
+            {guide.sections.slice(1).map(section => (
+              <section key={section.heading}>
+                <h3>{section.heading}</h3>
+                <p>{section.body}</p>
+              </section>
+            ))}
+          </div>
+          <DotGraph diagram={doraLogDiagram} />
         </div>
       </Section>
 

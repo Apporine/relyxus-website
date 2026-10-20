@@ -5,6 +5,8 @@ import { CtaBand } from "@/components/sections/CtaBand";
 import { IncidentCard } from "@/components/sections/IncidentCard";
 import { QuoteCard, ReplayResult } from "@/components/sections/Proof";
 import { Section } from "@/components/ui/Section";
+import { DotGraph } from "@/components/ui/DotGraph";
+import { nightDiagrams } from "@/content/diagrams";
 import { ButtonLink } from "@/components/ui/Button";
 import { Accordion } from "@/components/ui/Accordion";
 import { Sources } from "@/components/ui/Sources";
@@ -95,13 +97,16 @@ export function SolutionRoute({ slug }: { slug: string }) {
         label={role.sections.nightLabel}
         title={role.sections.nightTitle}
       >
-        <Reveal>
-          <div className="bad-night measure">
-            {role.badNight.map(line => (
-              <p key={line}>{line}</p>
-            ))}
-          </div>
-        </Reveal>
+        <div className="night-grid">
+          <Reveal>
+            <div className="bad-night measure">
+              {role.badNight.map(line => (
+                <p key={line}>{line}</p>
+              ))}
+            </div>
+          </Reveal>
+          <DotGraph diagram={nightDiagrams[role.slug]} />
+        </div>
       </Section>
 
       <Section

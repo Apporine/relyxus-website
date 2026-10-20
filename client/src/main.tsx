@@ -7,5 +7,6 @@ import "./styles/layout.css";
 import "./styles/product.css";
 import "./styles/sections.css";
 import "./styles/commitments.css";
+import "./styles/diagrams.css";
 
 createRoot(document.getElementById("root")!).render(<App />);

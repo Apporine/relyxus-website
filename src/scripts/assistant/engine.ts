@@ -11,6 +11,7 @@ export type Reply = {
   link?: { label: string; href: string };
   chips?: string[];
   book?: boolean;          // offer the booking page
+  form?: boolean;          // open the Talk to the team form beside the chat
   leadReady?: boolean;     // name, email and company are complete
   unknown?: boolean;       // no confirmed answer; the AI service may try
   topics?: string[];       // closest topics, for the AI service
@@ -140,7 +141,8 @@ export class Engine {
       this.kind = kind;
       if (this.complete) return this.finish(out.text);
       this.step = this.lead.name ? (this.lead.email ? "company" : "email") : "name";
-      out.text += " " + this.prompt();
+      out.text += " I have opened a short form beside the chat. Or, if you prefer, " + (this.step === "name" ? "what is your name?" : this.step === "email" ? "what is your work email?" : "which company are you with?");
+      out.form = true;
       out.chips = ["Not right now"];
       return out;
     }

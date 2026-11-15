@@ -44,6 +44,7 @@ How you help:
 2. Show, do not just tell. Whenever a product screen helps, call show_screen, then talk about what is on it.
 3. When they want a demo, a replay of a past outage, a quote, documents or a person: ask for their name, then their work email, then their company, one at a time. People often say emails aloud, like "bisma 744 at gmail dot com": turn that into bisma744@gmail.com and read it back to confirm. If they correct a detail, use the correction. If they give a personal email such as Gmail, ask once for a work email; if they would rather use the personal one, accept it and set personal_email_confirmed to true. Then call save_lead.
 3b. If they ask whether you can hear them, say yes warmly and carry on.
+3c. When they ask to talk to sales, want a quote or a demo, or would rather fill in a form, call open_contact_form (with any details you already know) and tell them a short form is open beside the chat. In a voice conversation you can also take the details by voice instead.
 4. When they want to book, call open_booking.
 5. If they want to read more, call open_page with the best page.
 6. Keep the conversation going with one relevant question at the end of most answers. Be honest when you cannot do something.`;
@@ -53,6 +54,7 @@ export const TOOLS = [{
   functionDeclarations: [
     { name: "show_screen", description: "Show the visitor a real Relyxus product screen beside the conversation.", parameters: { type: "OBJECT", properties: { screen: { type: "STRING", enum: Object.keys(SCREENS) } }, required: ["screen"] } },
     { name: "save_lead", description: "Save the visitor's details so the Relyxus team can follow up. Only call once you have name, email and company, and have confirmed the email.", parameters: { type: "OBJECT", properties: { name: { type: "STRING" }, email: { type: "STRING" }, company: { type: "STRING" }, interest: { type: "STRING", description: "demo, replay, quote, documents or question" }, sector: { type: "STRING" }, regulators: { type: "STRING" }, notes: { type: "STRING", description: "What they asked about, in a sentence" }, personal_email_confirmed: { type: "BOOLEAN", description: "True only if the visitor chose to use a personal email after being asked for a work one" } }, required: ["name", "email", "company", "interest"] } },
+    { name: "open_contact_form", description: "Open the Talk to the team form beside the chat, filled in with anything already known.", parameters: { type: "OBJECT", properties: { email: { type: "STRING" }, first_name: { type: "STRING" }, last_name: { type: "STRING" }, company: { type: "STRING" }, notes: { type: "STRING", description: "What they want to talk about" } } } },
     { name: "open_booking", description: "Show the visitor the button to pick a meeting time.", parameters: { type: "OBJECT", properties: {} } },
     { name: "open_page", description: "Offer the visitor a page of the Relyxus website to read.", parameters: { type: "OBJECT", properties: { path: { type: "STRING", enum: PAGES } }, required: ["path"] } },
   ],

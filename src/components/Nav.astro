@@ -11,25 +11,25 @@ type Group = { g: string; l: Link[] };
 type Menu = { k: string; label: string; cols: Group[][]; strip?: Link[] };
 
 const menus: Menu[] = [
-  { k: "platform", label: "Platform", strip: [{ t: "Deployment", h: "/deployment" }, { t: "Integrations", h: "/integrations" }, { t: "Product tour", h: "/product" }],
+  { k: "platform", label: "Platform", strip: [{ t: "Deployment", h: "/trust#your-data" }, { t: "Integrations", h: "/integrations" }, { t: "Product tour", h: "/product" }],
     cols: [
-      [{ g: "Respond", l: [{ t: "Command centre", h: "/product/respond" }, { t: "War room", h: "/product/respond#war-room" }, { t: "Paging and on call", h: "/product/respond#on-call" }] },
-       { g: "Understand", l: [{ t: "Vigil, AI with evidence", h: "/product/vigil" }, { t: "Evidence ledger", h: "/product/vigil#evidence" }] }],
-      [{ g: "Fix safely", l: [{ t: "Two person approval", h: "/product/approvals" }, { t: "Change preflight", h: "/product/approvals#preflight" }, { t: "Alert noise", h: "/product/respond#noise" }] },
-       { g: "Tell people", l: [{ t: "Status pages", h: "/product/customer-updates" }, { t: "Regulator reports", h: "/product/regulator-reporting" }, { t: "Board report", h: "/product/regulator-reporting#board" }] }],
-      [{ g: "Prove it", l: [{ t: "Replay", h: "/replay" }, { t: "Drills and tolerances", h: "/product/resilience" }, { t: "Auditor room", h: "/product/resilience#auditor" }] }],
+      [{ g: "Respond", l: [{ t: "Command centre", h: "/respond" }, { t: "War room", h: "/respond#war-room" }, { t: "Paging and on call", h: "/respond#on-call" }] },
+       { g: "Understand", l: [{ t: "Vigil, AI with evidence", h: "/vigil" }, { t: "Evidence ledger", h: "/vigil#evidence" }] }],
+      [{ g: "Fix safely", l: [{ t: "Two person approval", h: "/approvals" }, { t: "Change preflight", h: "/approvals#preflight" }, { t: "Alert noise", h: "/respond#noise" }] },
+       { g: "Tell people", l: [{ t: "Status pages", h: "/respond#customer-updates" }, { t: "Regulator reports", h: "/reporting" }, { t: "Board report", h: "/reporting#board" }] }],
+      [{ g: "Prove it", l: [{ t: "Replay", h: "/replay" }, { t: "Drills and tolerances", h: "/reporting#resilience" }, { t: "Auditor room", h: "/reporting#auditor" }] }],
     ] },
   { k: "solutions", label: "Solutions",
     cols: [
-      [{ g: "By industry", l: [{ t: "Banks and building societies", h: "/solutions/banks" }, { t: "Payment and electronic money firms", h: "/solutions/payments" }, { t: "SaaS that serves banks", h: "/solutions/saas" }] }],
-      [{ g: "By regulation", l: [{ t: "DORA guide", h: "/regulations/dora" }, { t: "UK incident reporting, FCA and PRA", h: "/regulations/uk" }, { t: "Deadline calculator", h: "/tools/deadline-calculator" }] }],
-      [{ g: "By role", l: [{ t: "Operations and SRE", h: "/product/respond" }, { t: "Risk and compliance", h: "/product/regulator-reporting" }, { t: "Engineering leaders", h: "/product/vigil" }, { t: "Security teams", h: "/trust" }] }],
+      [{ g: "By industry", l: [{ t: "Banks and building societies", h: "/banks" }, { t: "Payments and fintechs", h: "/payments-and-fintechs" }, { t: "SaaS that serves banks", h: "/saas" }] }],
+      [{ g: "By regulation", l: [{ t: "DORA guide", h: "/incident-reporting-rules#dora" }, { t: "UK incident reporting, FCA and PRA", h: "/incident-reporting-rules#uk" }, { t: "Deadline calculator", h: "/deadline-calculator" }] }],
+      [{ g: "By role", l: [{ t: "Operations and SRE", h: "/respond" }, { t: "Risk and compliance", h: "/reporting" }, { t: "Engineering leaders", h: "/vigil" }, { t: "Security teams", h: "/trust" }] }],
     ] },
   { k: "trust", label: "Trust Center",
     cols: [
-      [{ g: "Proof", l: [{ t: "Evidence and test results", h: "/trust#evidence" }, { t: "Five promises", h: "/trust#promises" }, { t: "Done and booked, with dates", h: "/trust#dates" }] }],
-      [{ g: "Security", l: [{ t: "Runs in your cloud", h: "/deployment" }, { t: "What leaves your network", h: "/trust#network" }, { t: "Responsible disclosure", h: "/trust#disclosure" }] }],
-      [{ g: "Documents", l: [{ t: "Security pack", h: "/trust#documents" }, { t: "Data Processing Agreement", h: "/legal#dpa" }, { t: "Software Licence Agreement", h: "/legal#licence" }, { t: "Vendor questionnaire", h: "/trust#questionnaire" }] }],
+      [{ g: "Proof", l: [{ t: "Evidence and test results", h: "/trust#compliance" }, { t: "Five promises", h: "/trust#promises" }, { t: "Done and booked, with dates", h: "/trust#compliance" }] }],
+      [{ g: "Security", l: [{ t: "Runs in your cloud", h: "/trust#your-data" }, { t: "What leaves your network", h: "/trust#your-data" }, { t: "Responsible disclosure", h: "/trust#disclosure" }] }],
+      [{ g: "Documents", l: [{ t: "Security pack", h: "/trust#documents" }, { t: "Data Processing Agreement", h: "/legal#dpa" }, { t: "Software Licence Agreement", h: "/legal#licence" }, { t: "Vendor questionnaire", h: "/trust#documents" }] }],
     ] },
   { k: "pricing", label: "Pricing",
     cols: [
@@ -40,8 +40,8 @@ const menus: Menu[] = [
   { k: "articles", label: "Articles",
     cols: [
       [{ g: "Latest", l: [{ t: "The first hour decides the fine", h: "/articles/the-first-hour-decides-the-fine" }, { t: "Should AI touch production?", soon: true }, { t: "What an auditor wants after an outage", soon: true }] }],
-      [{ g: "Guides", l: [{ t: "DORA incident reporting", h: "/regulations/dora" }, { t: "UK incident reporting", h: "/regulations/uk" }] }],
-      [{ g: "Free tools", l: [{ t: "Deadline calculator", h: "/tools/deadline-calculator" }, { t: "Replay my outage", h: "/replay" }] }],
+      [{ g: "Guides", l: [{ t: "DORA incident reporting", h: "/incident-reporting-rules#dora" }, { t: "UK incident reporting", h: "/incident-reporting-rules#uk" }] }],
+      [{ g: "Free tools", l: [{ t: "Deadline calculator", h: "/deadline-calculator" }, { t: "Replay my outage", h: "/replay" }] }],
     ] },
 ];
 const towers = [62, 98, 80, 118, 72, 90];
@@ -78,7 +78,7 @@ const checks = [["Alert received", "sha256 7c1e 09ab"], ["Fix approved by two pe
                 <div class="glow"></div>
                 <div class="sky">{towers.map((h, i) => <div class={`bd${i === 3 ? " out" : ""}`} style={`height:${h}px`}><div class="wn"></div></div>)}</div>
               </div>
-              <div class="tx"><p class="t1">Built for the night your bank goes down</p><p class="t2">One owner, the cause, an approved fix and the regulator report.</p><a class="go" href="/solutions/banks">Banks and building societies</a></div>
+              <div class="tx"><p class="t1">Built for the night your bank goes down</p><p class="t2">One owner, the cause, an approved fix and the regulator report.</p><a class="go" href="/banks">Banks and building societies</a></div>
             </>)}
             {m.k === "trust" && (<>
               <div class="win" aria-hidden="true">
@@ -93,11 +93,11 @@ const checks = [["Alert received", "sha256 7c1e 09ab"], ["Fix approved by two pe
                 <div class="sl">
                   <label for="nav-team">Engineers on call <b class="n">40</b></label>
                   <input id="nav-team" type="range" min="5" max="500" value="40" />
-                  <div class="pz">$25,000</div>
-                  <div class="ps">a year, at 5 engineers or 500</div>
+                  <div class="pz">One price</div>
+                  <div class="ps">the same at 5 engineers or 500</div>
                 </div>
               </div>
-              <div class="tx"><p class="t1">One price, however big your team</p><p class="t2">Every feature, every user, in your cloud. Excluding VAT.</p><a class="go" href="/pricing">See pricing</a></div>
+              <div class="tx"><p class="t1">One price, however big your team</p><p class="t2">Every feature and every user, in your cloud. No seat fees.</p><a class="go" href="/pricing">See pricing</a></div>
             </>)}
             {m.k === "articles" && (<>
               <div class="win" aria-hidden="true">

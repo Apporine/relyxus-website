@@ -4,6 +4,7 @@ import "@fontsource-variable/geist/index.css";
 import "@fontsource/ibm-plex-sans/600.css";
 import "@tabler/icons-webfont/dist/tabler-icons-outline.min.css";
 import "../styles/global.css";
+import Assistant from "../components/assistant/Assistant.astro";
 interface Props { title: string; description: string; path?: string }
 const { title, description, path = "/" } = Astro.props;
 const canonical = new URL(path, "https://relyxus.com").toString();
@@ -26,5 +27,6 @@ const canonical = new URL(path, "https://relyxus.com").toString();
   <body>
     <a class="skip" href="#main">Skip to content</a>
     <slot />
+    <Assistant />
   </body>
 </html>

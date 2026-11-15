@@ -15,14 +15,14 @@ const approve = `<div class="wc ap2"><div class="l">Rollback, card-auth</div><di
 <div class="who"><div><span class="a">EC</span><span>Emma Clarke<small>Duty manager</small></span><span class="k">Waiting</span></div><div><span class="a">DR</span><span>Daniel Reyes<small>CTO</small></span><span class="k">Waiting</span></div></div><div class="run">Needs 2 approvals</div></div>`;
 const priv = `<div class="wc pv"><div class="hd"><span>${LOCK}#inc-2051, restricted</span><span>02:47</span></div><div class="b"><span class="ap">R</span><div><div class="nm">Relyxus<small>App</small></div><div class="tx">A restricted Severity 2 incident needs you. Details are hidden here.</div><span class="op">Open in Relyxus</span></div></div>
 <div class="acc"><i>ST</i><i>EC</i><i>MW</i><span>Only these 3 named people can open it</span></div></div>`;
-const conn = `<div class="hl"></div><div class="shim"></div><h3 class="sw h4" style="--acc:#E8603C;--acc2:#3DAE80;animation-delay:-5.5s">Keep every tool you run</h3><p class="d" style="max-width:300px">36 ready made connectors for clouds, monitoring, logs, tickets and chat. Nothing to rip out, nothing to retrain.</p>
+const conn = `<div class="hl"></div><div class="shim"></div><h3 class="sw h4" style="--acc:#E8603C;--acc2:#3DAE80;animation-delay:-5.5s">Keep every tool you run</h3><p class="d" style="max-width:300px">36 ready made connectors, and a kit for any tool with an API. Nothing to rip out, nothing to retrain.</p>
 <div class="wc sig"><div class="l"><span>New signal</span><span class="sgt">03:12:02</span></div><div class="v sgv"></div><code class="sgc"></code><div class="g">Grouped into INC 2047</div></div>
 <div class="tbl"><div class="th"><span>Connector</span><span>Sends</span><span>Status</span><span style="text-align:right">Signals today</span></div>${TOOLS.map((t) => `<div class="tr2"><b><i style="background:${t[1]}">${t[0][0]}</i>${t[0]}</b><em>${t[2]}</em><span class="ok">Connected</span><span class="n">${t[3].toLocaleString("en-GB")}</span></div>`).join("")}</div>`;
 ---
 <section class="r-bento" id="platform" aria-labelledby="bento-title">
   <div class="inner">
   <div class="guides" aria-hidden="true"></div>
-  <h2 class="ttl" id="bento-title">One platform for the whole outage. <span>Every step from the first alert to the fix, built the way banks actually run.</span></h2>
+  <h2 class="ttl" id="bento-title">One platform for the whole outage. <span>Every step from the first alert to the fix, built the way <span class="rot" data-words="banks,payment firms,fintechs,SaaS platforms">banks</span> actually run.</span></h2>
   <div class="grid">
     <div class="c s7 c1"><div class="flare fco"></div><h3 class="sw h4" style="--acc:#FF5A36;--acc2:#FF8A66;animation-delay:0s">Wake one person. Let everyone else sleep.</h3><p class="d" style="max-width:min(350px,calc(100% - 260px))">Slack, text, email or a real phone call. The next person is only called if the first does not answer.</p><Fragment set:html={ladder + phone} /></div>
     <div class="c s5 c2"><canvas class="ring" aria-hidden="true"></canvas><h3 class="sw h4" style="--acc:#3F66B0;--acc2:#7FA0D6;animation-delay:-1.1s">Find the cause before the bridge call starts</h3><p class="d">Vigil reads your changes, alerts and metrics, then shows its evidence.</p><Fragment set:html={cause} /></div>

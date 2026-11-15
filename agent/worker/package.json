@@ -1,0 +1,6 @@
+{
+  "name": "vigil-ai",
+  "private": true,
+  "scripts": { "deploy": "wrangler deploy", "dev": "wrangler dev" },
+  "devDependencies": { "wrangler": "4.156.0", "@cloudflare/workers-types": "5.20261031.1" }
+}

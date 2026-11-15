@@ -9,7 +9,7 @@ export const leadsOn = !!URL;
 
 // Until the sheet is connected, the visitor sends their details by email.
 export function mailto(lead: Lead) {
-  const body = `Name: ${lead.name || ""}\nWork email: ${lead.email || ""}\nCompany: ${lead.company || ""}\nInterested in: ${lead.interest || ""}\n\nMy questions:\n${lead.questions.join("\n")}`;
+  const body = `Name: ${lead.name || ""}\nWork email: ${lead.email || ""}\nCompany: ${lead.company || ""}\n${lead.country ? `Country: ${lead.country}\n` : ""}${lead.phone ? `Phone: ${lead.phone}\n` : ""}Interested in: ${lead.interest || ""}\n\nMy questions:\n${lead.questions.join("\n")}`;
   return `mailto:support@relyxus.com?subject=${encodeURIComponent("Relyxus enquiry from " + (lead.company || lead.name || "the website"))}&body=${encodeURIComponent(body)}`;
 }
 export type Line = { who: "visitor" | "vigil"; text: string; at: string };
@@ -17,7 +17,7 @@ export type Line = { who: "visitor" | "vigil"; text: string; at: string };
 function payload(kind: "lead" | "transcript", lead: Lead, lines: Line[]) {
   return JSON.stringify({
     kind, lead, page: location.pathname, referrer: document.referrer || "",
-    transcript: lines.map((l) => `${l.at.slice(11, 16)} ${l.who === "vigil" ? "Vigil" : "Visitor"}: ${l.text}`).join("\n"),
+    transcript: lines.map((l) => `${l.at.slice(11, 16)} ${l.who === "vigil" ? "Assistant" : "Visitor"}: ${l.text}`).join("\n"),
     sentAt: new Date().toISOString(),
   });
 }

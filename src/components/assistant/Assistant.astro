@@ -265,7 +265,7 @@ leadForm.addEventListener("submit", async (e) => {
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { (leadForm.elements.namedItem("email") as HTMLElement).classList.add("bad"); leadErr.textContent = "Please enter a valid email, for example name@yourcompany.com."; return; }
   if (FREE.test(email)) { (leadForm.elements.namedItem("email") as HTMLElement).classList.add("bad"); leadErr.textContent = "Please use your business email, so the team can prepare for your company."; return; }
   leadErr.textContent = "";
-  Object.assign(engine.lead, { name: `${f("first")} ${f("last")}`, email, company: f("company"), interest: "Talk to the team" + (f("country") ? `, ${f("country")}` : "") + (f("phone") ? `, phone ${f("phone")}` : "") });
+  Object.assign(engine.lead, { name: `${f("first")} ${f("last")}`, email, company: f("company"), country: f("country"), phone: f("phone"), interest: "Talk to the team" });
   if (f("notes")) engine.lead.questions.push(f("notes"));
   let msg: string;
   if (leadsOn) { leadSent = true; await sendLead(engine.lead, lines); msg = `Thank you, ${f("first")}. Your details are with the team, and they will reply to ${email}.`; }

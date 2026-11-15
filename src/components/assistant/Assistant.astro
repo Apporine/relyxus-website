@@ -135,7 +135,7 @@ const engine = new Engine(location.pathname);
 const lines: Line[] = [];
 let speakerOn = false, micOn = false, busy = false, leadSent = false, listening = false;
 let brain: "unknown" | "gemini" | "backup" = "unknown";
-let liveOk: boolean | null = null;
+let liveOk: boolean | null = null, toldBackup = false;
 let call: LiveCall | null = null, youEl: HTMLElement | null = null, meEl: HTMLElement | null = null;
 const FREE = /@(gmail|googlemail|yahoo|hotmail|outlook|live|msn|icloud|me|aol|proton|protonmail|gmx|mail|yandex|zoho)\./i;
 
@@ -351,7 +351,9 @@ async function setSpeaker(on: boolean) {
       liveOk = false;
     }
   }
-  // Backup: read the last answer, or greet, with the browser's voice.
+  // Backup: read the last answer, or greet, with the browser's voice, and
+  // say so once, so it is clear which voice is speaking.
+  if (!toldBackup) { toldBackup = true; const n = bubble("p", "My natural voice is not connected right now, so you will hear your browser's voice."); n.setAttribute("role", "note"); }
   const lastV = [...lines].reverse().find((l) => l.who === "vigil");
   speakBackup(lines.length > 1 && lastV ? lastV.text : opener(location.pathname).text);
 }

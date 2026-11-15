@@ -29,6 +29,14 @@
         </div>
         <canvas class="va-halo" aria-hidden="true" data-va-halo></canvas>
         <p class="va-state" aria-live="polite" data-va-state>Vigil, the Relyxus assistant</p>
+        <div class="va-call" data-va-call>
+          <button type="button" class="va-talk" data-va-talk><i class="ti ti-phone" aria-hidden="true"></i>Talk live with Vigil</button>
+          <div class="va-live" hidden data-va-live>
+            <button type="button" class="va-ic va-mute" aria-pressed="false" aria-label="Mute your microphone" title="Mute" data-va-mute><i class="ti ti-microphone"></i></button>
+            <span class="va-timer" data-va-timer>0:00</span>
+            <button type="button" class="va-end" data-va-end><i class="ti ti-phone-off" aria-hidden="true"></i>End call</button>
+          </div>
+        </div>
       </header>
 
       <div class="va-log" role="log" aria-live="polite" data-va-log></div>
@@ -37,10 +45,10 @@
       <form class="va-in" data-va-form>
         <label class="sr-only" for="va-text">Message Vigil</label>
         <textarea id="va-text" rows="1" placeholder="Ask about Relyxus" maxlength="600" data-va-text></textarea>
-        <button type="button" class="va-mic" aria-label="Talk to Vigil" title="Talk to Vigil" data-va-mic><i class="ti ti-microphone"></i></button>
+        <button type="button" class="va-mic" aria-label="Talk live with Vigil" title="Talk live with Vigil" data-va-mic><i class="ti ti-microphone"></i></button>
         <button type="submit" class="va-send" aria-label="Send"><i class="ti ti-arrow-up"></i></button>
       </form>
-      <p class="va-legal">Vigil is an AI assistant and can make mistakes. If you share your name and email, we keep them with this chat so the team can reply. <a href="/privacy">Privacy notice</a></p>
+      <p class="va-legal">Vigil is an AI assistant and can make mistakes. Voice calls are processed by Google to run Vigil. If you share your name and email, we keep them with this chat so the team can reply. <a href="/privacy">Privacy notice</a></p>
     </section>
   </div>
 </div>
@@ -54,14 +62,23 @@ body.nav-open .va-launch{display:none}
 .va-shell{position:fixed;right:24px;bottom:24px;z-index:90;display:flex;gap:14px;align-items:flex-end;max-height:calc(100vh - 48px)}
 .va-shell[hidden],.va-stage[hidden]{display:none}
 .va-panel{width:404px;height:min(700px,calc(100vh - 48px));display:flex;flex-direction:column;border-radius:24px;background:var(--va-bg);border:1px solid var(--va-line);color:var(--va-tx);box-shadow:0 40px 110px rgba(5,7,12,.5);overflow:hidden}
-.va-top{position:relative;height:196px;padding:14px;border-bottom:1px solid var(--va-line);display:flex;flex-direction:column;justify-content:space-between}
+.va-top{position:relative;height:236px;padding:14px;border-bottom:1px solid var(--va-line);display:flex;flex-direction:column;justify-content:space-between}
 .va-bar{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2}
 .va-book{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;padding:8px 13px;border-radius:999px;background:#fff;color:#0A0C10}
 .va-ctl{display:flex;gap:6px}
 .va-ic{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;border:1px solid #2A3548;background:transparent;color:var(--va-tx);cursor:pointer;font-size:17px}
 .va-ic[aria-pressed="true"]{background:#1C2433;border-color:#9FB4D6}
 .va-halo{position:absolute;inset:0;width:100%;height:100%;display:block}
-.va-state{position:relative;z-index:2;margin:0;text-align:center;font-size:13px;color:var(--va-sub)}
+.va-call{position:relative;z-index:2;display:flex;justify-content:center;margin-top:8px}
+.va-talk{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;border:0;background:#FF6B4A;color:#0A0C10;font:inherit;font-size:14.5px;font-weight:600;cursor:pointer;box-shadow:0 10px 30px rgba(255,107,74,.35);transition:transform .2s}
+.va-talk:hover{transform:translateY(-2px)}
+.va-live{display:flex;align-items:center;gap:12px}
+.va-live[hidden],.va-talk[hidden]{display:none}
+.va-timer{font-variant-numeric:tabular-nums;font-size:13.5px;color:#E9EEF5;min-width:40px;text-align:center}
+.va-end{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:999px;border:0;background:#E5482A;color:#fff;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.va-mute[aria-pressed="true"]{background:#E5482A;border-color:#E5482A}
+.va-m.live{border-style:dashed}
+.va-state{position:relative;z-index:2;margin:auto 0 0;text-align:center;font-size:13px;color:var(--va-sub)}
 .va-log{flex:1;overflow-y:auto;padding:16px 16px 6px;display:flex;flex-direction:column;gap:12px;scrollbar-width:thin}
 .va-m{max-width:88%;font-size:14.5px;line-height:1.55;padding:11px 14px;border-radius:16px;white-space:pre-wrap}
 .va-m.v{align-self:flex-start;background:#0F141E;border:1px solid var(--va-line);border-radius:16px 16px 16px 4px}
@@ -100,6 +117,9 @@ import { Voice } from "../../scripts/assistant/voice";
 import { Halo } from "../../scripts/assistant/halo";
 import { sendLead, sendTranscript, leadsOn, mailto, type Line } from "../../scripts/assistant/leads";
 import { askRemote, remoteOn } from "../../scripts/assistant/remote";
+import { LiveCall, type CallState } from "../../scripts/assistant/live";
+import { fixNames } from "../../scripts/assistant/names";
+import { SCREENS } from "../../scripts/assistant/prompt";
 
 const BOOK = (import.meta.env.PUBLIC_VIGIL_BOOKING_URL as string | undefined) || "mailto:support@relyxus.com?subject=" + encodeURIComponent("Book a Relyxus demo");
 const KEY = "vigil.chat.v1";
@@ -124,12 +144,16 @@ function save(open = !shell.hidden) {
 
 // Halos: a small one in the launcher, a large one in the panel.
 const mini = new Halo(root.querySelector<HTMLCanvasElement>(".va-mini")!, 700, 0.34, "6,8,12");
-const big = new Halo($<HTMLCanvasElement>("[data-va-halo]"), 2600, 0.29, "6,8,12");
-big.dy = -6;
+const big = new Halo($<HTMLCanvasElement>("[data-va-halo]"), 2600, 0.235, "6,8,12");
+big.dy = -22;
 let last = performance.now();
 function loop(now: number) {
   const dt = Math.min(0.05, (now - last) / 1000); last = now;
-  const lv = voice.tick(now / 1000);
+  let lv = voice.tick(now / 1000);
+  if (call) {
+    const st = call.tick(); lv = call.level;
+    if (st !== "ended") { big.state = st; const sec = Math.floor((Date.now() - callStart) / 1000); timer.textContent = `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, "0")}`; stateEl.textContent = st === "speaking" ? "Vigil is speaking" : st === "thinking" ? "Thinking" : "Listening, go ahead"; }
+  }
   if (!document.hidden) { if (shell.hidden) mini.frame(dt, 0); else big.frame(dt, lv); }
   if (!reduce) requestAnimationFrame(loop);
 }
@@ -173,7 +197,8 @@ function vigilSays(r: Reply) {
 }
 
 async function send(raw: string) {
-  const q = raw.trim(); if (!q || busy) return;
+  const q = fixNames(raw.trim()); if (!q || busy) return;
+  if (call) { bubble("u", q); lines.push({ who: "visitor", text: q, at: new Date().toISOString() }); renderChips([]); call.say(q); return; }
   busy = true; voice.stopSpeaking();
   bubble("u", q); renderChips([]);
   lines.push({ who: "visitor", text: q, at: new Date().toISOString() });
@@ -211,7 +236,7 @@ async function listen() {
   setState("listening");
   const p = bubble("p", "Listening");
   try {
-    const said = await voice.listen((t) => (p.textContent = t || "Listening"));
+    const said = fixNames(await voice.listen((t) => (p.textContent = fixNames(t) || "Listening")));
     p.remove();
     if (said) send(said);
     else { talk = false; mic.classList.remove("on"); setState("idle"); }
@@ -228,8 +253,85 @@ function open(first = true) {
   setTimeout(() => text.focus(), 50); save(true);
 }
 function close() {
+  call?.end();
   voice.stopSpeaking(); voice.stopListening(); talk = false; mic.classList.remove("on");
   shell.hidden = true; launch.hidden = false; stage.hidden = true; save(false); launch.focus();
+}
+
+// Live voice calls (Gemini Live). Falls back to the browser's voice when the
+// live service is not switched on.
+const talkBtn = $("[data-va-talk]"), liveBar = $("[data-va-live]"), endBtn = $("[data-va-end]"), muteBtn = $("[data-va-mute]"), timer = $("[data-va-timer]");
+let call: LiveCall | null = null, callStart = 0, youEl: HTMLElement | null = null, meEl: HTMLElement | null = null;
+
+function liveBubble(who: "u" | "v", t: string, done: boolean) {
+  let el = who === "u" ? youEl : meEl;
+  if (!el) { el = bubble(who, t); el.classList.add("live"); if (who === "u") youEl = el; else meEl = el; }
+  el.textContent = t; log.scrollTop = log.scrollHeight;
+  if (done) { el.classList.remove("live"); lines.push({ who: who === "u" ? "visitor" : "vigil", text: t, at: new Date().toISOString() }); if (who === "u") youEl = null; else meEl = null; save(); }
+}
+function addTo(el: HTMLElement | null, node: HTMLElement) { const lastEl = log.lastElementChild as HTMLElement | null; const host = el || (lastEl && lastEl.classList.contains("v") ? lastEl : (meEl = bubble("v", ""), meEl.classList.add("live"), meEl)); host.appendChild(document.createElement("br")); host.appendChild(node); log.scrollTop = log.scrollHeight; }
+const FREE = /@(gmail|googlemail|yahoo|hotmail|outlook|live|msn|icloud|me|aol|proton|protonmail|gmx|mail|yandex|zoho)\./i;
+
+async function tool(name: string, a: Record<string, unknown>) {
+  if (name === "show_screen") {
+    const sc = SCREENS[String(a.screen)]; if (!sc) return { ok: false };
+    showStage(sc); const t = document.createElement("img"); t.className = "va-thumb"; t.src = sc.src; t.alt = sc.caption; addTo(meEl, t);
+    return { ok: true, shown: sc.caption };
+  }
+  if (name === "save_lead") {
+    const email = String(a.email || "").trim().toLowerCase();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return { ok: false, reason: "That email address is not valid. Ask again." };
+    if (FREE.test(email)) return { ok: false, reason: "That is a personal email. Ask once for a work email; if they insist, call save_lead again with the same address and interest set to the same value plus ' (personal email)'." , personal: true };
+    Object.assign(engine.lead, { name: String(a.name || ""), email, company: String(a.company || ""), interest: String(a.interest || ""), sector: String(a.sector || engine.lead.sector || ""), regulators: String(a.regulators || engine.lead.regulators || "") });
+    if (a.notes) engine.lead.questions.push(String(a.notes));
+    if (leadsOn) { leadSent = true; await sendLead(engine.lead, lines); return { ok: true, saved: true }; }
+    const l = document.createElement("a"); l.className = "va-cta"; l.href = mailto(engine.lead); l.textContent = "Send my details to the team"; addTo(meEl, l);
+    return { ok: true, saved: false, say: "Ask them to press the Send my details to the team button that just appeared in the chat, which opens an email." };
+  }
+  if (name === "open_booking") {
+    const l = document.createElement("a"); l.className = "va-cta"; l.href = BOOK; l.target = "_blank"; l.rel = "noopener"; l.textContent = "Pick a time"; addTo(meEl, l);
+    return { ok: true, say: "A Pick a time button is now in the chat." };
+  }
+  if (name === "open_page") {
+    const path = String(a.path || "/product"), l = document.createElement("a"); l.className = "va-lk"; l.href = path; l.textContent = "Open " + path.replace(/^\//, "").replace(/-/g, " "); addTo(meEl, l);
+    return { ok: true };
+  }
+  return { ok: false };
+}
+
+function callUi(on: boolean) {
+  talkBtn.hidden = on; liveBar.hidden = !on; mic.classList.toggle("on", on);
+  mic.setAttribute("aria-label", on ? "End the call" : "Talk live with Vigil");
+  if (!on) { setState("idle"); muteBtn.setAttribute("aria-pressed", "false"); muteBtn.innerHTML = '<i class="ti ti-microphone"></i>'; }
+}
+
+async function startCall() {
+  if (call) return;
+  if (shell.hidden) open(false);
+  voice.stopSpeaking(); renderChips([]);
+  const c = new LiveCall({
+    state: (s: CallState, why?: string) => {
+      if (s === "connecting") { stateEl.textContent = "Connecting"; big.state = "thinking"; }
+      if (s === "ended") {
+        call = null; callUi(false);
+        if (why === "time") bubble("v", "That is the end of our call time. You can start another call, or keep typing here.");
+        else if (why === "error") bubble("v", "The call dropped. You can start it again, or type here.");
+      }
+    },
+    user: (t, done) => liveBubble("u", t, done),
+    vigil: (t, done) => liveBubble("v", t, done),
+    tool,
+  });
+  call = c; callStart = Date.now(); callUi(true);
+  try { await c.start(location.pathname); }
+  catch (e) {
+    call = null; callUi(false);
+    const m = (e as Error).message || "";
+    if (/Permission|NotAllowed|denied/i.test(m) || (e as DOMException).name === "NotAllowedError") { bubble("v", "I can't hear you, as the microphone is blocked. Allow it in your browser and press Talk live again, or type here."); return; }
+    if (m === "busy") { bubble("v", "You have started a lot of calls in a short time. Please type here, or try again in a little while."); return; }
+    // Live voice is not switched on: use the browser's own voice instead.
+    talk = true; mic.classList.add("on"); listen();
+  }
 }
 
 launch.addEventListener("click", () => open());
@@ -240,8 +342,15 @@ form.addEventListener("submit", (e) => { e.preventDefault(); const v = text.valu
 text.addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); form.requestSubmit(); } });
 text.addEventListener("input", () => { text.style.height = ""; text.style.height = Math.min(110, text.scrollHeight) + "px"; });
 mic.addEventListener("click", () => {
+  if (call) { call.end(); return; }
   if (talk) { talk = false; mic.classList.remove("on"); voice.stopListening(); voice.stopSpeaking(); setState("idle"); return; }
-  talk = true; mic.classList.add("on"); listen();
+  startCall();
+});
+talkBtn.addEventListener("click", startCall);
+endBtn.addEventListener("click", () => call?.end());
+muteBtn.addEventListener("click", () => {
+  if (!call) return; call.muted = !call.muted;
+  muteBtn.setAttribute("aria-pressed", String(call.muted)); muteBtn.innerHTML = `<i class="ti ti-microphone${call.muted ? "-off" : ""}"></i>`;
 });
 speakerBtn.addEventListener("click", () => {
   speaker = !speaker; speakerBtn.setAttribute("aria-pressed", String(speaker));

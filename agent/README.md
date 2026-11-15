@@ -10,8 +10,8 @@ Everything runs free.
 | Part | Where it runs | Cost |
 |---|---|---|
 | Chat, answers, questions, lead capture | The visitor's browser (`src/scripts/assistant`) | Free |
-| Listening | The browser's own speech recognition (Chrome, Edge, Safari) | Free |
-| Speaking | The browser's own voices, the most natural British voice on the device | Free |
+| Live voice calls | Gemini Live through `api/vigil-token.ts` on Vercel: both sides talk at once, the visitor can interrupt, natural voice | Free tier, or about 2p a minute on the paid tier |
+| Backup voice | The browser's own speech recognition and voices, used only if Gemini Live is not set up | Free |
 | Saving leads and chats | A Google Sheet, through Google Apps Script (`agent/apps-script`) | Free |
 | Email alert for each lead | Apps Script MailApp, to support@relyxus.com | Free, up to 100 a day |
 | Answers to questions outside the published facts | Cloudflare Workers AI (`agent/worker`), optional | Free up to 10,000 Neurons a day, roughly 150 questions |
@@ -20,6 +20,26 @@ Everything runs free.
 
 With nothing set up, Vigil still works: it answers from its built in knowledge
 and keeps the conversation in the visitor's browser only.
+
+## Step 0. Live voice (Gemini Live)
+
+This is what makes Vigil talk like a person: a live call, not record and send.
+
+1. Go to aistudio.google.com and sign in with the Apporine Google account.
+2. Click Get API key, then Create API key. Choose or create a project called `Relyxus website`.
+3. Copy the key. It starts with `AIza`. Never put it in the code or send it in chat.
+4. In Vercel, open relyxus-website, then Settings, then Environment Variables.
+5. Add `GEMINI_API_KEY` with the key, for Production and Preview.
+6. Optional: add `VIGIL_VOICE` to change the voice (default `Sulafat`, warm), `VIGIL_LIVE_MODEL` to change the model (default `gemini-3.8-live`; if it is not available on your key, use `gemini-3.1-flash-live-preview`), and `VIGIL_CALL_MINUTES` for the longest call (default 10).
+7. Redeploy. Open the site, click Ask Vigil, then Talk live with Vigil, and allow the microphone.
+
+To hear the voices before choosing, open aistudio.google.com, choose Stream, and switch voices in the settings. Good matches for a warm, pleasant assistant: Sulafat (warm), Achird (friendly), Despina (smooth), Aoede (breezy).
+
+**Free or paid tier.** The free tier costs nothing, but Google may use free tier conversations to improve its products. For a website that talks to banks, turn on billing for the project in AI Studio: calls then cost about 2p a minute (audio in $0.005, audio out $0.018 per minute) and are not used for training. Set a monthly budget alert in Google Cloud billing.
+
+**Safety.** The browser never sees the real key. Each call gets a one use key that expires, with Vigil's instructions, tools and voice locked in. Only relyxus.com and the project's Vercel previews can ask for one, at most six calls per visitor every 30 minutes.
+
+**What Vigil knows on calls** is generated from `src/scripts/assistant/knowledge.ts` and `prompt.ts` into `api/_vigil-config.js` on every build (`npm run vigil:config`).
 
 ## Step 1. The Google Sheet for leads
 

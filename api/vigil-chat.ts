@@ -61,7 +61,7 @@ export async function POST(req: Request): Promise<Response> {
   while (history.length && history[0].role === "model") history.shift();
   if (!history.length) return json({ error: "bad_request" }, 400, origin);
 
-  const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+  const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY, httpOptions: { timeout: 15000, retryOptions: { attempts: 1 } } });
   const actions: Action[] = [];
   const contents: Content[] = [{ role: "user", parts: [{ text: `(The visitor is on the page ${page} of relyxus.com.)` }] }, { role: "model", parts: [{ text: "Understood." }] }, ...history];
   try {
@@ -78,7 +78,7 @@ export async function POST(req: Request): Promise<Response> {
     return json({ text: "", actions }, 200, origin);
   } catch (e) {
     console.error("vigil-chat", e);
-    return json({ error: "unavailable" }, 502, origin);
+    return json({ error: "unavailable", code: (e as { status?: number }).status || 0 }, 502, origin);
   }
 }
 

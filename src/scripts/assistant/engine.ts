@@ -18,7 +18,7 @@ export type Reply = {
 };
 
 export type Lead = {
-  name?: string; email?: string; company?: string;
+  name?: string; email?: string; company?: string; country?: string; phone?: string;
   sector?: string; regulators?: string; interest?: string;
   questions: string[]; page: string; startedAt: string;
 };

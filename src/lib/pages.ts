@@ -5,7 +5,7 @@
 
 const files = import.meta.glob("../pagedata/*.html", { query: "?raw", import: "default", eager: true }) as Record<string, string>;
 
-const LIVE_DEMO = (import.meta.env.PUBLIC_LIVE_DEMO_URL as string | undefined) || "/demo#live";
+const LIVE_DEMO = (import.meta.env.PUBLIC_LIVE_DEMO_URL as string | undefined) || "/demo#book";
 const mail = (subject: string) => `mailto:support@relyxus.com?subject=${encodeURIComponent(subject)}`;
 
 // Where each button goes. "ask:" opens Vigil with that question.
@@ -39,6 +39,7 @@ const IDS: Record<string, [string, string][]> = {
   saas: [['aria-label="Contract clocks"', "clocks"]],
   demo: [['aria-label="Live demo"', "live"]],
   replay: [['aria-label="What we need"', "send"]],
+  legal: [['<div class="lh-doc">', "licence"]],
   trust: [['aria-label="Security, privacy and AI"', "security"], ['aria-label="Responsible AI"', "ai"], ['aria-label="Controls"', "controls"], ['aria-label="Audit log"', "audit"], ['aria-label="Resilience"', "trust-resilience"]],
 };
 
@@ -93,7 +94,8 @@ export function page(slug: string): Page {
   const title = html.match(/<!--\s*title:\s*(.*?)\s*-->/)?.[1] ?? "Relyxus";
   html = html.replace(/<!--\s*title:.*?-->\s*/, "");
   html = html.replace(/src="media\//g, 'src="/media/');
-  for (const [marker, id] of IDS[slug] || []) html = html.replace(marker, `${marker} id="${id}"`);
+  html = html.replace(/<img (?![^>]*loading=)/g, '<img loading="lazy" decoding="async" ');
+  for (const [marker, id] of IDS[slug] || []) html = html.replace(marker, marker.endsWith(">") ? `${marker.slice(0, -1)} id="${id}">` : `${marker} id="${id}"`);
   html = html.replace(/<span class="(b1|b2|lk)"([^>]*)>([^<]+)<\/span>/g, (all, cls, attrs, text) => {
     const to = LINKS[text.trim()];
     if (!to) return all;

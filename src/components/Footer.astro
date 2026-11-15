@@ -7,7 +7,7 @@ const cols: [string, [string, string][]][] = [
   ["Start", [["Replay my outage", "/replay"], ["Live demo", "/demo"], ["Book a demo", "/demo#book"], ["Pricing", "/pricing"], ["Deployment", "/trust#your-data"]]],
   ["Trust and company", [["Trust Center", "/trust"], ["Responsible disclosure", "/trust#disclosure"], ["Articles", "/articles/the-first-hour-decides-the-fine"], ["About and contact", "/about"]]],
 ];
-const legal: [string, string][] = [["Privacy", "/privacy"], ["Cookies", "/privacy#cookies"], ["Website terms", "/legal#website-terms"], ["Accessibility", "/legal#accessibility"], ["All legal documents", "/legal"]];
+const legal: [string, string][] = [["Privacy", "/privacy"], ["Cookies", "/privacy#cookies"], ["Website terms", "/legal#terms"], ["Accessibility", "/legal#accessibility"], ["All legal documents", "/legal"]];
 const gaps = [1.5, 1.2, 0.9, 0.6, 0.35];
 const sh = (14.4 - 4.55) / 6; let y = 3.6; const bands: { y: number; h: number }[] = [];
 for (let k = 0; k < 6; k++) { bands.push({ y, h: sh }); y += sh + (gaps[k] ?? 0); }

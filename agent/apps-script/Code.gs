@@ -5,6 +5,7 @@
  * Setup steps are in agent/README.md.
  */
 const NOTIFY = "support@relyxus.com";
+const REPLAY_FOLDER = "Relyxus replays";
 const HEAD = ["Received", "Name", "Work email", "Company", "Sector", "Regulators", "Interest", "Questions", "Page", "Referrer", "Chat"];
 
 function doPost(e) {
@@ -24,6 +25,17 @@ function doPost(e) {
       }
       return out({ ok: false });
     }
+    let folderUrl = "";
+    if (d.kind === "replay" && Array.isArray(d.files) && d.files.length) {
+      const root = folderNamed(REPLAY_FOLDER);
+      const f = root.createFolder(clean(lead.company, 80) + ", " + Utilities.formatDate(new Date(), "Europe/London", "yyyy-MM-dd HH:mm"));
+      d.files.slice(0, 10).forEach(function (x) {
+        const bytes = Utilities.base64Decode(String(x.data || ""));
+        if (bytes.length > 0 && bytes.length <= 15 * 1024 * 1024) f.createFile(Utilities.newBlob(bytes, String(x.type || "application/octet-stream"), clean(x.name, 120)));
+      });
+      folderUrl = f.getUrl();
+      lead.interest = "Replay, files in " + folderUrl;
+    }
     sh.appendRow([new Date(), clean(lead.name, 80), email, clean(lead.company, 120), clean(lead.sector, 80), clean(lead.regulators, 120),
       clean(lead.interest, 200), clean((lead.questions || []).join(" | "), 2000), clean(d.page, 200), clean(d.referrer, 300), clean(d.transcript, 40000)]);
     MailApp.sendEmail({
@@ -38,6 +50,12 @@ function doPost(e) {
   } finally {
     lock.releaseLock();
   }
+}
+
+// Files stay private in the owner's Google Drive; only the owner can open them.
+function folderNamed(name) {
+  const it = DriveApp.getFoldersByName(name);
+  return it.hasNext() ? it.next() : DriveApp.createFolder(name);
 }
 
 function sheet() {

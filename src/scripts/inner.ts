@@ -18,12 +18,26 @@ export function wire() {
   demoForm();
   calculator();
   toc();
+  docs();
+  trust();
+  smallBits();
+}
+
+// Legal document cards: the privacy notice opens; signed documents are sent on request.
+function docs() {
+  $$(".lh-doc").forEach((d) => {
+    const t = d.querySelector("b")?.textContent?.trim() || "";
+    const href = /privacy/i.test(t) ? "/privacy" : `mailto:support@relyxus.com?subject=${encodeURIComponent(t + " request")}`;
+    d.style.cursor = "pointer"; d.setAttribute("role", "link"); d.tabIndex = 0; d.setAttribute("aria-label", t);
+    d.addEventListener("click", () => (location.href = href));
+    d.addEventListener("keydown", (e) => { if (e.key === "Enter") location.href = href; });
+  });
 }
 
 // Article contents links scroll to their heading.
 function toc() {
-  const heads = $$(".ar-txt h2");
-  $$(".ar-toc a").forEach((a) => {
+  const heads = $$(".pgm h2");
+  $$(".ar-toc a, .lg-toc a").forEach((a) => {
     const t = a.textContent?.trim().toLowerCase() || "";
     const h = heads.find((x) => x.textContent?.trim().toLowerCase().startsWith(t));
     if (!h) return;
@@ -88,7 +102,7 @@ function askChips() {
   });
   const box = document.querySelector<HTMLElement>(".vg-ask");
   if (box) {
-    const live = (import.meta.env.PUBLIC_LIVE_DEMO_URL as string | undefined) || "/demo#live";
+    const live = (import.meta.env.PUBLIC_LIVE_DEMO_URL as string | undefined) || "/demo#book";
     box.style.cursor = "pointer"; box.setAttribute("role", "link"); box.tabIndex = 0;
     box.addEventListener("click", () => (location.href = live));
   }
@@ -98,9 +112,44 @@ function replay() {
   const body = "Hello,\n\nI'd like a free replay of one of our past incidents. I've attached what we have:\n\n- The postmortem or incident review\n- The timeline\n- Chat or bridge notes, with names removed\n- Which regulators we reported to\n\nName:\nCompany:\n";
   const href = `mailto:support@relyxus.com?subject=${encodeURIComponent("Replay my outage")}&body=${encodeURIComponent(body)}`;
   $$(".rpl-up").forEach((u) => {
-    u.style.cursor = "pointer"; u.setAttribute("role", "link"); u.tabIndex = 0;
-    u.addEventListener("click", () => (location.href = href));
-    u.addEventListener("keydown", (e) => { if (e.key === "Enter") location.href = href; });
+    const send = u.querySelector<HTMLElement>(".b1");
+    if (!leadsOn) {
+      u.style.cursor = "pointer"; u.setAttribute("role", "link"); u.tabIndex = 0;
+      u.addEventListener("click", () => (location.href = href));
+      u.addEventListener("keydown", (e) => { if (e.key === "Enter") location.href = href; });
+      return;
+    }
+    // With the lead sheet connected: real upload into a private Google Drive folder.
+    const pick = document.createElement("input"); pick.type = "file"; pick.multiple = true; pick.hidden = true;
+    pick.accept = ".pdf,.doc,.docx,.txt,.md,.csv,.xlsx,.json,.log,.zip";
+    const box = document.createElement("div"); box.className = "rpl-form";
+    box.innerHTML = `<input name="name" placeholder="Your name" autocomplete="name"><input name="email" type="email" placeholder="Work email" autocomplete="email"><input name="company" placeholder="Company" autocomplete="organization"><p class="rpl-files">No files chosen yet</p><p class="dm-err" role="alert"></p>`;
+    u.append(pick); send?.before(box);
+    let files: File[] = [];
+    const list = box.querySelector<HTMLElement>(".rpl-files")!, err = box.querySelector<HTMLElement>(".dm-err")!;
+    const take = (fl: FileList | null) => { files = [...(fl || [])].slice(0, 10); list.textContent = files.length ? files.map((f) => f.name).join(", ") : "No files chosen yet"; };
+    u.addEventListener("click", (e) => { if ((e.target as HTMLElement).closest("input, .b1")) return; pick.click(); });
+    pick.addEventListener("change", () => take(pick.files));
+    u.addEventListener("dragover", (e) => { e.preventDefault(); u.classList.add("drag"); });
+    u.addEventListener("dragleave", () => u.classList.remove("drag"));
+    u.addEventListener("drop", (e) => { e.preventDefault(); u.classList.remove("drag"); take(e.dataTransfer?.files || null); });
+    send?.setAttribute("role", "button"); if (send) { send.tabIndex = 0; send.style.cursor = "pointer"; }
+    send?.addEventListener("click", async () => {
+      const v = (n: string) => (box.querySelector<HTMLInputElement>(`[name=${n}]`)?.value || "").trim();
+      const name = v("name"), email = v("email"), company = v("company");
+      if (!name || !company) { err.textContent = "Add your name and company."; return; }
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || FREE_MAIL.test(email)) { err.textContent = "Add your work email."; return; }
+      if (!files.length) { err.textContent = "Choose at least one file, or email them to support@relyxus.com."; return; }
+      const total = files.reduce((a, f) => a + f.size, 0);
+      if (total > 20 * 1024 * 1024) { err.textContent = "Up to 20 MB in total. Email larger files to support@relyxus.com."; return; }
+      err.textContent = ""; send.textContent = "Sending";
+      const enc = (f: File) => new Promise<{ name: string; type: string; data: string }>((ok) => { const r = new FileReader(); r.onload = () => ok({ name: f.name, type: f.type, data: String(r.result).split(",")[1] || "" }); r.readAsDataURL(f); });
+      const payload = { kind: "replay", lead: { name, email, company, questions: [], interest: "Replay" }, files: await Promise.all(files.map(enc)), page: location.pathname, sentAt: new Date().toISOString() };
+      try {
+        await fetch(import.meta.env.PUBLIC_VIGIL_LEADS_URL as string, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) });
+        u.innerHTML = `<h3>Sent for replay</h3><p>Thank you, ${name.split(" ")[0]}. The team will confirm by email to ${email}, usually with a few questions.</p>`;
+      } catch { send.textContent = "Send for replay"; err.textContent = "That did not send. Email your files to support@relyxus.com instead."; }
+    });
   });
 }
 
@@ -216,4 +265,81 @@ function calculator() {
     const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "incident-deadlines.ics"; a.click(); URL.revokeObjectURL(a.href);
   });
   btn(how, () => (location.href = "/reporting"));
+}
+
+// Trust Center: follow your data, controls, hosting and document requests.
+const DATA: Record<string, [string, string, string, string]> = {
+  "Incident timeline": ["Database, your region", "Your responders", "Your setting, with legal hold", "Only a session you approve"],
+  "Staff contacts": ["Database, your region", "Your admins and the paging system", "Until a person is removed, through SCIM or by hand", "Only a session you approve"],
+  "Logs and metrics": ["In your own tools", "Responders on the incident, through your connectors", "As your own tools keep them", "Only a session you approve"],
+  "Evidence": ["Your evidence store, locked", "Responders and the auditors you name", "Seven years, locked so nobody can change it", "Only a session you approve"],
+  "Card numbers": ["Redacted before any AI sees the text", "Nobody, the AI sees a placeholder", "Never kept in prompts or answers", "Never"],
+};
+const CONTROLS: Record<string, [string, string][]> = {
+  "Access": [["Single sign on", "SAML or OIDC through your own identity provider"], ["Passkeys", "Phishing resistant sign in to NIST AAL2, with no SMS codes"], ["Fresh sign in", "Required again for risky actions, within five minutes"], ["Leavers", "Removed everywhere at once through SCIM from Entra ID or Okta"]],
+  "Encryption": [["In transit", "TLS 1.2 or 1.3 only, with HSTS for two years"], ["At rest", "One customer managed key encrypts the database, secrets, evidence, backups and logs"], ["Your own key", "Bring your own key. Revoke it and every copy becomes unreadable"], ["In the browser", "A strict content security policy, no framing, and tokens never held in the browser"]],
+  "Network": [["Private nodes", "The cluster nodes and the database are not reachable from the internet"], ["One way in", "A single load balancer, with optional address ranges and a web firewall"], ["Default deny", "Inside the cluster, only Relyxus's own services can talk to each other"], ["Machine API", "Monitoring webhooks reach only the machine API, nothing else"]],
+  "Supply chain": [["Locked dependencies", "Updated weekly, and every test must pass before they ship"], ["Scanned images", "Blocked on any critical vulnerability that has a fix"], ["Signed releases", "Every image carries a software bill of materials and build provenance, and is signed"], ["Secrets scanning", "Every change is checked for secrets, and deploy credentials are never stored"]],
+  "Isolation": [["Your own install", "Relyxus runs in your cloud account, apart from every other customer"], ["Workspaces apart", "Row level security, forced in the database, keeps each workspace separate"], ["Least privilege", "Roles per workspace and time boxed grants"], ["Hardened containers", "Non root, read only, with every capability dropped"]],
+};
+function tabs(group: HTMLElement, onPick: (label: string) => void) {
+  const items = $$("span", group);
+  items.forEach((s) => {
+    s.setAttribute("role", "tab"); s.tabIndex = 0; s.style.cursor = "pointer";
+    const pick = () => { items.forEach((x) => { x.classList.toggle("on", x === s); x.setAttribute("aria-selected", String(x === s)); }); onPick(s.childNodes[0]?.textContent?.trim() || ""); };
+    s.addEventListener("click", pick);
+    s.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(); } });
+  });
+  group.setAttribute("role", "tablist");
+}
+function trust() {
+  const pick = document.querySelector<HTMLElement>(".tc-pick"), det = document.querySelector<HTMLElement>(".tc-det");
+  if (pick && det) tabs(pick, (k) => {
+    const v = DATA[k]; if (!v) return;
+    det.querySelector("h3")!.textContent = k;
+    $$(".tc-dr b", det).forEach((b, i) => (b.textContent = v[i]));
+  });
+  const ct = document.querySelector<HTMLElement>(".tc-ct"), grid = ct?.parentElement?.querySelector<HTMLElement>(".g2");
+  if (ct && grid) tabs(ct, (k) => {
+    const v = CONTROLS[k]; if (!v) return;
+    $$(".cd", grid).forEach((c, i) => { c.querySelector("h3")!.textContent = v[i][0]; c.querySelector("p")!.textContent = v[i][1]; });
+  });
+  const tg = document.querySelector<HTMLElement>(".tc-tg");
+  if (tg) {
+    const zero = tg.parentElement!.querySelector<HTMLElement>(".tc-zero")!, lead = tg.parentElement!.querySelector<HTMLElement>(".lead")!;
+    tabs(tg, (k) => {
+      const hosted = /Apporine/.test(k);
+      zero.textContent = hosted ? "1" : "0";
+      lead.textContent = hosted ? "sub processor. Amazon Web Services runs the infrastructure, in the region you choose." : "sub processors. Relyxus runs in your cloud, so nobody else is involved.";
+    });
+  }
+  const docs = $$(".tc-dc"), rq = document.querySelector<HTMLElement>(".tc-rq");
+  if (docs.length && rq) {
+    const count = rq.querySelector("span")!, go = rq.querySelector<HTMLAnchorElement>("a, .b1")!;
+    const sync = () => {
+      const sel = docs.filter((d) => d.classList.contains("sel")).map((d) => d.querySelector("b")?.textContent?.trim());
+      count.textContent = `${sel.length} ${sel.length === 1 ? "document" : "documents"} selected`;
+      const href = `mailto:support@relyxus.com?subject=${encodeURIComponent("Trust Center documents request")}&body=${encodeURIComponent("Please send these documents:\n" + sel.map((x) => "- " + x).join("\n") + "\n\nName:\nCompany:\n")}`;
+      if (go instanceof HTMLAnchorElement) go.href = href; else go.onclick = () => (location.href = href);
+    };
+    docs.forEach((d) => {
+      const tag = d.querySelector<HTMLElement>(".tc-dm span");
+      if (tag && /notify/i.test(tag.textContent || "")) return;
+      d.style.cursor = "pointer"; d.setAttribute("role", "checkbox"); d.tabIndex = 0;
+      const flip = () => { d.classList.toggle("sel"); d.setAttribute("aria-checked", String(d.classList.contains("sel"))); if (tag) tag.textContent = d.classList.contains("sel") ? "Selected" : "Select"; sync(); };
+      d.addEventListener("click", flip);
+      d.addEventListener("keydown", (e) => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); flip(); } });
+    });
+    sync();
+  }
+}
+
+function smallBits() {
+  // Product: the timeline step under the pointer is the one lit.
+  const steps = $$(".pt-st");
+  steps.forEach((s) => s.addEventListener("pointerenter", () => steps.forEach((x) => x.classList.toggle("on", x === s))));
+  // Payments: feature flag switches flip.
+  $$(".pf-sw").forEach((s) => { s.setAttribute("role", "switch"); s.tabIndex = 0; s.style.cursor = "pointer"; s.setAttribute("aria-checked", String(s.classList.contains("on")));
+    const flip = () => { s.classList.toggle("on"); s.setAttribute("aria-checked", String(s.classList.contains("on"))); };
+    s.addEventListener("click", flip); s.addEventListener("keydown", (e) => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); flip(); } }); });
 }

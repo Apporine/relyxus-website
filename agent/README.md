@@ -16,6 +16,7 @@ Everything runs free.
 | Email alert for each lead | Apps Script MailApp, to support@relyxus.com | Free, up to 100 a day |
 | Answers to questions outside the published facts | Cloudflare Workers AI (`agent/worker`), optional | Free up to 10,000 Neurons a day, roughly 150 questions |
 | Booking | A Google Calendar appointment schedule, or any booking link | Free |
+| Demo requests and replay files | The same Apps Script: demo requests become rows, replay files go to a private Drive folder | Free |
 
 With nothing set up, Vigil still works: it answers from its built in knowledge
 and keeps the conversation in the visitor's browser only.
@@ -29,7 +30,7 @@ and keeps the conversation in the visitor's browser only.
 5. Click Deploy, then New deployment.
 6. Click the gear next to Select type, choose Web app.
 7. Set Description to `Vigil leads`, Execute as to `Me`, Who has access to `Anyone`.
-8. Click Deploy. Approve the permissions Google asks for (the script writes to this sheet and sends email as you).
+8. Click Deploy. Approve the permissions Google asks for. The script writes to this sheet, sends email as you, and saves replay files into a private Google Drive folder called `Relyxus replays` that only you can open.
 9. Copy the Web app URL. It ends in `/exec`.
 
 The first lead creates a `Leads` tab with these columns: Received, Name, Work

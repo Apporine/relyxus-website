@@ -8,7 +8,7 @@ import Nav from "../Nav.astro";
   <Nav />
   <div class="copy">
     <h1 id="hero-title">Every <span class="slot"></span> goes down.<br />The best come back first.</h1>
-    <p class="sub">Relyxus finds what broke, gets the fix approved by the right people and writes the record your regulator asks for. It runs inside your own cloud.</p>
+    <p class="sub">Relyxus finds what broke, proposes the fix and runs it once the right people approve. It checks the fix worked, rolls back if it did not, and drafts your regulator report as it goes. It runs inside your own cloud.</p>
     <div class="cta"><a href="/demo#book" class="btn b1">Book a demo</a><a href="/replay" class="btn b2">Replay an outage free</a></div>
   </div>
   <div class="con" aria-hidden="true">
@@ -111,7 +111,7 @@ import { mkGL, FS_L } from "../../scripts/flare";
 const root = document.querySelector<HTMLElement>(".r-hero")!;
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const draw = mkGL(root.querySelector("canvas.fl") as HTMLCanvasElement, FS_L, 1, 0);
-const words = ["bank", "fintech", "platform", "insurer", "system"];
+const words = ["bank", "payment firm", "fintech", "SaaS platform"];
 function mask(el: HTMLElement, f: number) {
   const gaps = [0.09, 0.075, 0.06, 0.045, 0.03], n = 6, tot = gaps.reduce((x, y) => x + y, 0) * f, bh = (1 - tot) / n;
   let y = 0; const parts: string[] = [];

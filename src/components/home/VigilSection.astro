@@ -1,0 +1,75 @@
+---
+// Section 8, Vigil (locked 15 Nov 2026): "AI you can defend to your regulator."
+// Three proof lines on the left, a Vigil answer on the right: ranked causes,
+// evidence, the drafted fix waiting for approval. The suggestion chips open
+// the website assistant with that question.
+---
+<section class="r-vig2" id="vigil" aria-labelledby="vig-title">
+<div class="w"><div>
+ <h2 id="vig-title">AI you can defend <span>to your regulator.</span></h2>
+ <p class="lead">Vigil, the AI investigator inside Relyxus, finds the cause, shows every piece of evidence it used and drafts the fix. Nothing runs until your people approve.</p>
+ <div class="pr">
+  <div><i>1</i><p><b>Every claim cites its source</b><span>A release, a metric, a log line. Click any answer and see exactly what it is based on.</span></p></div>
+  <div><i>2</i><p><b>Account numbers never reach the model</b><span>Card, sort code, account and NI numbers are redacted first. The model runs inside your cloud.</span></p></div>
+  <div><i>3</i><p><b>It cannot run a fix on its own</b><span>Vigil drafts the change. Two named people approve it with a passkey.</span></p></div>
+ </div>
+ <div class="bts"><a class="b1" href="/vigil">Meet Vigil</a><a class="b2" href="/demo">Ask it in the live demo</a></div>
+</div>
+<div class="vw"><div class="hd"><b><i>V</i>Vigil, INC 2047</b><span>Inside your cloud</span></div>
+ <div class="bd">
+  <div class="q">Card payments are failing across the UK. What changed in the last hour, and what do we owe the FCA?</div>
+  <div class="a"><i>V</i><div>
+   <p class="tx">Errors began <b>two minutes after release 4.18.2</b> of card authorisation went out. I am <b>92% confident</b> it is the cause.</p>
+   <div class="bl"><div class="bh"><span>Likely causes</span><span>3 sources</span></div>
+    <div class="hy"><b>1</b><div><b>Release 4.18.2, card authorisation</b><small>Deployed 03:10, failed a timeout test in staging</small></div><u><s style="width:92%"></s></u><strong>92%</strong></div>
+    <div class="hy"><em>2</em><div>Database connection pool<small>Saturation rose after errors began</small></div><u><s style="width:6%"></s></u><strong>6%</strong></div>
+    <div class="hy"><em>3</em><div>Card network upstream<small>Its status page is green</small></div><u><s style="width:2%"></s></u><strong>2%</strong></div></div>
+   <div class="bl"><div class="bh"><span>Evidence</span><span>Sample data</span></div>
+    <div class="tl"><em>03:10</em><span>Release 4.18.2 deployed to card authorisation</span><sup>Change</sup></div>
+    <div class="tl"><em>03:12</em><span>Error rate rose from 0.2% to 38%</span><sup>Metric</sup></div>
+    <div class="lg">03:12:04 ERROR card_auth auth_timeout after 3000ms<br>03:12:04 ERROR card_auth auth_timeout after 3000ms</div></div>
+   <p class="tx" style="margin-top:12px">The FCA initial notification is drafted from this timeline. It waits for your signature.</p>
+   <div class="pp"><div><b>Roll back card authorisation to 4.18.1</b><small>Needs two approvers with a passkey. I cannot run it myself.</small></div><span>Send for approval</span></div>
+   <div class="sg"><button type="button" data-ask="Show me how Relyxus drafts an FCA report">Show the FCA draft</button><button type="button" data-ask="How does Relyxus draft customer notices?">Draft the customer notice</button><button type="button" data-ask="How does Relyxus show who else is affected?">Who else is affected?</button></div>
+  </div></div>
+ </div></div>
+</div></section>
+<style is:global>
+.r-vig2{position:relative;overflow:hidden;background:#fff;color:#0A0C10;padding:128px 0!important;font-family:var(--body)}
+.r-vig2 .w{max-width:1312px;margin:0 auto;padding:0 64px;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:72px;align-items:center}
+.r-vig2 h2{font-family:var(--display);font-variation-settings:'opsz' 96;font-weight:650;font-size:58px;line-height:1;letter-spacing:-.045em;margin:0;color:#0A0C10}
+.r-vig2 h2 span{color:#3F66B0}
+.r-vig2 .lead{font-size:19px;line-height:1.55;color:#2B3340;margin:22px 0 0}
+.r-vig2 .pr{margin-top:40px;border-top:1px solid #E3E8EF}
+.r-vig2 .pr div{display:grid;grid-template-columns:44px 1fr;gap:16px;padding:20px 0;border-bottom:1px solid #E3E8EF}
+.r-vig2 .pr i{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:#0A0C10;color:#fff;font-style:normal;font-weight:600;font-size:15px}
+.r-vig2 .pr b{display:block;font-size:18px;font-weight:600;color:#0A0C10}.r-vig2 .pr span{display:block;font-size:15px;color:#2B3340;margin-top:4px;line-height:1.5}
+.r-vig2 .bts{display:flex;gap:12px;margin-top:34px}
+.r-vig2 .b1{background:#0A0C10;color:#fff;border-radius:999px;padding:14px 24px;font-size:15.5px;font-weight:600}.r-vig2 .b2{border:1px solid #C9D1DC;border-radius:999px;padding:14px 24px;font-size:15.5px;font-weight:600;color:#0A0C10}
+.vw{border-radius:22px;background:#0B0F18;border:1px solid #232C3C;box-shadow:0 50px 110px rgba(15,25,45,.32);overflow:hidden;color:#fff}
+.vw .hd{display:flex;justify-content:space-between;align-items:center;padding:15px 20px;border-bottom:1px solid #1E2635;font-size:14px}
+.vw .hd b{display:flex;align-items:center;gap:10px;font-weight:600}.vw .hd b i{display:grid;place-items:center;width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,#9FB4D6,#5C4EE5);font-style:normal;font-size:12px;font-weight:700}
+.vw .hd span{font-size:12.5px;font-weight:600;padding:5px 10px;border-radius:999px;background:#123326;color:#8BE6BE}
+.vw .bd{padding:22px}
+.vw .q{margin-left:auto;max-width:430px;background:#1C2433;border-radius:16px 16px 4px 16px;padding:13px 16px;font-size:15px;line-height:1.45}
+.vw .a{margin-top:18px;display:grid;grid-template-columns:30px 1fr;gap:12px}
+.vw .a>i{display:grid;place-items:center;width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#9FB4D6,#5C4EE5);font-style:normal;font-size:13px;font-weight:700}
+.vw .tx{font-size:15px;line-height:1.55;color:#E9EEF5}.vw .tx b{color:#fff}
+.vw .bl{margin-top:12px;border:1px solid #232C3C;border-radius:14px;background:#0E131D;overflow:hidden}
+.vw .bh{display:flex;justify-content:space-between;padding:10px 14px;border-bottom:1px solid #1C2433;font-size:12.5px;font-weight:600;color:#C9D3E3}
+.vw .hy{display:grid;grid-template-columns:20px 1fr 130px 44px;gap:10px;align-items:center;padding:10px 14px;font-size:13.5px;border-bottom:1px solid #161D2A}.vw .hy:last-child{border:0}
+.vw .hy em{font-style:normal;color:#C9D3E3;font-size:12.5px}.vw .hy u{text-decoration:none;display:block;height:6px;border-radius:3px;background:#1C2433;overflow:hidden}.vw .hy u s{display:block;height:100%;background:linear-gradient(90deg,#FF6B4A,#FFB199)}
+.vw .hy small{display:block;font-size:12px;color:#C9D3E3;margin-top:1px}.vw .hy b{font-weight:600}.vw .hy strong{text-align:right;font-weight:600}
+.vw .tl{display:grid;grid-template-columns:58px 1fr 70px;gap:10px;padding:8px 14px;font-size:13px;border-bottom:1px solid #161D2A}.vw .tl em{font-style:normal;color:#C9D3E3}.vw .tl sup{font-size:11px;color:#9FB4D6;text-align:right;top:0}
+.vw .lg{padding:10px 14px;font-size:12.5px;line-height:1.7;color:#D4DBE5}
+.vw .pp{margin-top:12px;display:flex;justify-content:space-between;align-items:center;gap:14px;padding:14px;border-radius:14px;border:1px solid #5A3326;background:#1A1410}
+.vw .pp b{display:block;font-size:15px}.vw .pp small{display:block;font-size:12.5px;color:#E9D7CF;margin-top:3px}
+.vw .pp span{flex:none;font-size:13.5px;font-weight:600;padding:9px 14px;border-radius:999px;background:#FF6B4A;color:#0A0C10}
+.vw .sg{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}.vw .sg button{font-family:inherit;background:transparent;cursor:pointer;font-size:12.5px;padding:7px 12px;border-radius:999px;border:1px solid #2A3548;color:#E9EEF5}
+.vw .lg{font-family:'IBM Plex Mono',ui-monospace,monospace}
+.vw .sg button:hover{border-color:#9FB4D6}
+.r-vig2 .b1,.r-vig2 .b2{text-decoration:none;display:inline-flex;transition:transform .2s}
+.r-vig2 .b1:hover,.r-vig2 .b2:hover{transform:translateY(-2px)}
+@media (max-width:1100px){.r-vig2 .w{grid-template-columns:1fr;gap:48px;padding:0 24px}.r-vig2 h2{font-size:42px}}
+@media (max-width:640px){.r-vig2{padding:88px 0!important}.r-vig2 h2{font-size:34px}.vw .hy{grid-template-columns:18px 1fr 44px}.vw .hy u{display:none}.vw .pp{flex-direction:column;align-items:flex-start}.r-vig2 .bts{flex-wrap:wrap}}
+</style>

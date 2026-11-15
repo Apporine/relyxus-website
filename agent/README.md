@@ -23,14 +23,16 @@ and keeps the conversation in the visitor's browser only.
 
 ## Step 0. Live voice (Gemini Live)
 
-This is what makes Vigil talk like a person: a live call, not record and send.
+This one key powers both Vigil's typed answers and her live voice. Without it, Vigil uses the simple built in backup, which only matches keywords.
+
+How visitors use it, like New Relic's assistant: **Speaker** on and Vigil greets them out loud; **Mic** on and they talk to her live (the mic is off until they switch it on); typing works at any time and she answers by voice while the speaker is on.
 
 1. Go to aistudio.google.com and sign in with the Apporine Google account.
 2. Click Get API key, then Create API key. Choose or create a project called `Relyxus website`.
 3. Copy the key. It starts with `AIza`. Never put it in the code or send it in chat.
 4. In Vercel, open relyxus-website, then Settings, then Environment Variables.
 5. Add `GEMINI_API_KEY` with the key, for Production and Preview.
-6. Optional: add `VIGIL_VOICE` to change the voice (default `Sulafat`, warm), `VIGIL_LIVE_MODEL` to change the model (default `gemini-3.8-live`; if it is not available on your key, use `gemini-3.1-flash-live-preview`), and `VIGIL_CALL_MINUTES` for the longest call (default 10).
+6. Optional: add `VIGIL_CHAT_MODEL` for typed chat (default `gemini-flash-latest`), `VIGIL_VOICE` to change the voice (default `Sulafat`, warm), `VIGIL_LIVE_MODEL` to change the model (default `gemini-3.8-live`; if it is not available on your key, use `gemini-3.1-flash-live-preview`), and `VIGIL_CALL_MINUTES` for the longest call (default 10).
 7. Redeploy. Open the site, click Ask Vigil, then Talk live with Vigil, and allow the microphone.
 
 To hear the voices before choosing, open aistudio.google.com, choose Stream, and switch voices in the settings. Good matches for a warm, pleasant assistant: Sulafat (warm), Achird (friendly), Despina (smooth), Aoede (breezy).

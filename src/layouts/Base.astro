@@ -5,8 +5,8 @@ import "@fontsource/ibm-plex-sans/600.css";
 import "@tabler/icons-webfont/dist/tabler-icons-outline.min.css";
 import "../styles/global.css";
 import Assistant from "../components/assistant/Assistant.astro";
-interface Props { title: string; description: string; path?: string }
-const { title, description, path = "/" } = Astro.props;
+interface Props { title: string; description: string; path?: string; bodyClass?: string }
+const { title, description, path = "/", bodyClass } = Astro.props;
 const canonical = new URL(path, "https://relyxus.com").toString();
 ---
 <!doctype html>
@@ -24,7 +24,7 @@ const canonical = new URL(path, "https://relyxus.com").toString();
     <meta name="theme-color" content="#05070C" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   </head>
-  <body>
+  <body class={bodyClass}>
     <a class="skip" href="#main">Skip to content</a>
     <slot />
     <Assistant />

@@ -1,0 +1,127 @@
+<!-- title: Reporting and resilience | Relyxus -->
+<style>
+.rp-doc{position:relative}
+.rp-doc .doc{padding:30px 34px}
+.rp-doc .tag{position:absolute;right:-18px;bottom:-30px;transform:rotate(4deg);background:#0A0C10;color:#fff;border-radius:14px;padding:14px 16px;font-size:13.5px;box-shadow:0 20px 40px rgba(0,0,0,.4)}
+.rp-doc .tag b{display:block;font-size:20px;font-family:var(--display)}
+.rp-clk .tr{grid-template-columns:1.1fr 1.3fr 1fr 1.3fr 150px}
+.rp-clk b small{display:block;font-weight:400;font-size:13px;color:#C9D3E3;margin-top:2px}
+.rp-clk .dl{font-family:var(--display);font-weight:600;font-size:26px;letter-spacing:-.03em;color:#fff}
+.rp-map{display:grid;grid-template-columns:1fr 90px 1fr;align-items:center;margin-top:64px}
+.rp-ev{display:flex;flex-direction:column;gap:10px}
+.rp-ev div{display:grid;grid-template-columns:62px 1fr;gap:12px;padding:15px 16px;border-radius:14px;border:1px solid #E3E8EF;background:#fff;font-size:14.5px}
+.rp-ev em{font-style:normal;font-weight:600;color:#2B4F94}
+.rp-mid{position:relative;height:100%}.rp-mid svg{position:absolute;inset:0;width:100%;height:100%}
+.rp-fl{border-radius:20px;background:#fff;border:1px solid #E3E8EF;box-shadow:0 30px 70px rgba(15,25,45,.12);overflow:hidden}
+.rp-fl .h{padding:16px 20px;background:#0A0C10;color:#fff;font-size:14.5px;font-weight:600;display:flex;justify-content:space-between}
+.rp-fl .f{display:grid;grid-template-columns:150px 1fr;gap:12px;padding:13px 20px;border-bottom:1px solid #F1F3F6;font-size:14px}.rp-fl .f span{color:#3E4652}
+.rp-fl .f b{font-weight:600}.rp-fl .f.hl{background:#FFF4EF}
+.rp-sign{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:64px}
+.rp-sign .cd{min-height:260px;display:flex;flex-direction:column}
+.rp-sign .cd .vis{margin-top:auto;padding-top:20px}
+.rp-board{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.rp-page{border-radius:14px;background:#fff;box-shadow:0 24px 50px rgba(15,25,45,.16);padding:22px;min-height:330px;font-size:13px;color:#2B3340;border:1px solid #E3E8EF}
+.rp-page h5{margin:0 0 12px;font-family:var(--display);font-size:20px;letter-spacing:-.02em;color:#0A0C10}
+.rp-page .kpi{display:grid;grid-template-columns:1fr 1fr;gap:10px}.rp-page .kpi div{background:#F6F8FA;border-radius:10px;padding:12px}.rp-page .kpi b{display:block;font-family:var(--display);font-size:26px;color:#0A0C10;letter-spacing:-.03em}
+.rp-page li{margin:6px 0}
+.rp-pir .win{padding:0}
+.rp-pir .sec{padding:18px 22px;border-bottom:1px solid #1A2230}.rp-pir .sec:last-child{border:0}
+.rp-pir h5{margin:0 0 10px;font-size:12.5px;color:#BFD0EE;font-weight:600}
+.rp-act{display:grid;grid-template-columns:1fr 120px 100px;gap:10px;padding:9px 0;font-size:14px;border-bottom:1px solid #161D2A;align-items:center}.rp-act:last-child{border:0}
+.rp-tol{padding:26px}
+.rp-tol .row{display:grid;grid-template-columns:150px 1fr 120px;gap:16px;align-items:center;padding:14px 0;border-bottom:1px solid #F1F3F6;font-size:14.5px}
+.rp-tol .bar{position:relative;height:12px;border-radius:6px;background:#EEF1F5}.rp-tol .bar s{position:absolute;left:0;top:0;bottom:0;border-radius:6px;background:#3DAE80}
+.rp-tol .bar i{position:absolute;top:-6px;bottom:-6px;width:3px;border-radius:2px;background:#0A0C10}
+.rp-tol .bar s.r{background:#FF6B4A}
+.rp-aud{padding:0}
+.rp-aud .sec{padding:18px 22px;border-bottom:1px solid #1A2230}
+.rp-reg .tr{grid-template-columns:1.2fr 1fr 1fr 1fr 120px}
+.rp-fan{position:relative;height:520px}
+.rp-fan .doc{position:absolute;width:440px;padding:24px 26px}
+.rp-d3{right:0;top:0;transform:rotate(7deg);opacity:.97}.rp-d2{right:60px;top:40px;transform:rotate(-4deg)}.rp-d1{right:110px;top:110px;transform:rotate(1deg);box-shadow:0 50px 100px rgba(15,25,45,.35)!important}
+</style>
+
+<section class="MF hero" aria-label="Reporting and resilience"><div class="w"><div class="split">
+ <div><div class="kick"><i style="background:#9FB4D6"></i>Reporting and resilience</div>
+  <h1>Your regulator reports, <span>drafted while you fix.</span></h1>
+  <p class="lead">One outage starts a clock with every regulator you answer to. Relyxus drafts each report from the live incident, your team signs it, and it goes out long before the deadline.</p>
+  <div class="bts"><span class="b1">Book a demo</span><span class="b2">See every deadline we track</span></div></div>
+ <div class="rp-fan">
+  <div class="doc rp-d3"><div class="dh"><span>Monetary Authority of Singapore</span><span>Sent 03:59</span></div><h4>Incident notification</h4><div class="fr"><span>Discovered</span><b>03:12</b></div><div class="sg"><span>Signed, Emma Clarke</span><span class="stamp">SENT</span></div></div>
+  <div class="doc rp-d2"><div class="dh"><span>European Union, DORA</span><span>Draft</span></div><h4>Initial notification</h4><div class="fr"><span>Classified as major</span><b>03:20</b></div><div class="fr"><span>Clients affected</span><b>18,400</b></div><div class="sg"><span>Due 07:20</span><span>Draft</span></div></div>
+  <div class="doc rp-d1"><div class="dh"><span>Financial Conduct Authority</span><span>Draft</span></div><h4>Initial incident report</h4><div class="fr"><span>Threshold met</span><b>10:11 UTC</b></div><div class="fr"><span>Important business service</span><b>Card payments</b></div><div class="fr"><span>Customers affected</span><b>18,400</b></div><div class="fr"><span>Cause so far</span><b>Card authorisation change</b></div><div class="sg"><span>Head of Operational Resilience</span><span>Waiting for signature</span></div></div>
+ </div></div></div></section>
+
+<section class="K rp-clk" aria-label="Every regulator, its own clock"><div class="w">
+ <h2>Every regulator. <span>Its own clock.</span></h2><p class="lead">Relyxus knows when each clock starts, what each regulator wants and when it is due. It starts drafting the moment a trigger is met.</p>
+ <div class="tb mt">
+  <div class="tr h"><span>Regulator</span><span>What they want</span><span>First deadline</span><span>Clock starts when</span><span>Relyxus</span></div>
+  <div class="tr"><b>MAS<small>Singapore</small></b><span>Incident notification</span><span class="dl">1 hour</span><span>The incident is discovered</span><span class="chip co">Drafts at once</span></div>
+  <div class="tr"><b>DORA<small>European Union</small></b><span>Initial notification, then intermediate and final</span><span class="dl">4 hours</span><span>Classified as major, at most 24 hours after awareness</span><span class="chip co">Drafts at once</span></div>
+  
+  <div class="tr"><b>FCA and PRA<small>United Kingdom, from 18 March 2027</small></b><span>Initial incident report</span><span class="dl">24 hours</span><span>The reporting threshold is met</span><span class="chip st">Drafts and tracks</span></div>
+  <div class="tr"><b>US banking agencies<small>Fed, OCC, FDIC</small></b><span>Incident notification</span><span class="dl">36 hours</span><span>Judged notifiable</span><span class="chip st">Drafts and tracks</span></div>
+  <div class="tr"><b>NYDFS<small>New York</small></b><span>Cybersecurity event notice</span><span class="dl">72 hours</span><span>Determined to be reportable</span><span class="chip st">Drafts and tracks</span></div>
+ </div><p class="note">Summarised from each regulator's published rules. Your own legal team decides what applies to you.</p></div></section>
+
+<section class="M" aria-label="Drafted from the live incident"><div class="w">
+ <h2>Drafted from what happened, <span>not from memory.</span></h2><p class="lead">Every field in the report comes from the incident record, with a link to where it came from. Change the record and the draft follows.</p>
+ <div class="rp-map">
+  <div class="rp-ev"><div><em>03:12</em>412 alerts grouped into INC 2047</div><div><em>03:16</em>Vigil: release 4.18.2 is the likely cause</div><div><em>03:19</em>Rollback approved by two people</div><div><em>03:23</em>Error rate back to normal, verified</div><div><em>10:11</em>Customer impact crossed the FCA threshold</div></div>
+  <div class="rp-mid"><svg viewBox="0 0 90 400" preserveAspectRatio="none"><path d="M0 40 C45 40 45 100 90 100" stroke="#FF6B4A" stroke-width="2" fill="none"/><path d="M0 120 C45 120 45 180 90 180" stroke="#9FB4D6" stroke-width="2" fill="none"/><path d="M0 200 C45 200 45 220 90 220" stroke="#3DAE80" stroke-width="2" fill="none"/><path d="M0 280 C45 280 45 260 90 260" stroke="#3DAE80" stroke-width="2" fill="none"/><path d="M0 360 C45 360 45 60 90 60" stroke="#F2C27B" stroke-width="2" fill="none"/></svg></div>
+  <div class="rp-fl"><div class="h"><span>FCA initial incident report</span><span>14 fields, 14 linked</span></div>
+   <div class="f hl"><span>Threshold met</span><b>10:11 UTC</b></div><div class="f"><span>Started</span><b>03:12 UTC</b></div><div class="f"><span>Likely cause</span><b>Card authorisation release 4.18.2</b></div><div class="f"><span>Action taken</span><b>Rolled back, approved by two people</b></div><div class="f"><span>Recovered</span><b>03:23 UTC</b></div><div class="f"><span>Customers affected</span><b>18,400</b></div></div>
+ </div></div></section>
+
+<section class="L" aria-label="You sign"><div class="w">
+ <h2>Nothing is sent <span>until you sign it.</span></h2><p class="lead">Relyxus drafts. Your accountable person reviews, signs and sends. The receipt goes into the evidence record.</p>
+ <div class="rp-sign">
+  <div class="cd"><div class="ic">1</div><h3>Drafted</h3><p>The report is drafted the moment its trigger is met, and kept up to date as the incident changes.</p><div class="vis"><span class="chip st">Draft, updated 03:24</span></div></div>
+  <div class="cd"><div class="ic">2</div><h3>Signed</h3><p>The accountable person reviews it and signs with a passkey. Who signed and when is recorded.</p><div class="vis"><div class="who"><span class="av s">EC</span><div>Emma Clarke<small>Head of Operational Resilience</small></div><em class="ok">Signed 10:43</em></div></div></div>
+  <div class="cd"><div class="ic">3</div><h3>Sent, with proof</h3><p>The submission and its receipt are sealed into the evidence vault, locked for seven years.</p><div class="vis"><span class="stamp">SENT 10:43</span></div></div>
+ </div></div></section>
+
+<section class="M" id="board" aria-label="Board report"><div class="w">
+ <div class="split" style="grid-template-columns:.8fr 1.2fr"><div><h2>The board report <span>writes itself.</span></h2><p class="lead">What happened, what it cost, who decided what and what changes next. In the language your board reads, from a record nobody edited. This is the real screen.</p></div>
+ <div class="real"><div class="rb"><i></i><i></i><i></i><b style="color:#fff;margin-left:8px">Board report</b><span>Real console, demo workspace</span></div><img src="/media/console/analytics_board.jpg" alt="The Relyxus board report on operational resilience for the last 30 days"></div></div>
+</div></section>
+
+<section class="K rp-pir" aria-label="Reviews"><div class="w"><div class="feat">
+ <div><h2>The review is half written <span>before the incident ends.</span></h2><p class="lead">Relyxus drafts the post incident review from the timeline and the decisions, then tracks every action until it is done.</p>
+  <ul class="ul"><li><b>Replay every minute,</b> with who did what and why</li><li><b>Actions with owners and dates,</b> chased until closed</li><li><b>Patterns across incidents,</b> so the same failure is spotted</li></ul></div>
+ <div class="win"><div class="wh"><b>Post incident review, INC 2047</b><span>Drafted, sample</span></div>
+  <div class="sec"><h5>What happened</h5><p style="font-size:14.5px;line-height:1.55;color:#E9EEF5">A release changed the card authorisation timeout. It had failed in staging, but the failure did not block the release.</p></div>
+  <div class="sec"><h5>Actions</h5><div class="rp-act"><span>Block releases on failed timeout tests</span><span>Sam Taylor</span><span class="chip co">Due Fri</span></div><div class="rp-act"><span>Card payments drill</span><span>Raj Kapoor</span><span class="chip np">Due 28 Nov</span></div><div class="rp-act"><span>Review the tolerance</span><span>Emma Clarke</span><span class="chip ok">Done</span></div></div>
+  <div class="sec"><h5>Seen before</h5><p style="font-size:14.5px;color:#E9EEF5">INC 1873 in March followed the same pattern.</p></div></div>
+</div></div></section>
+
+<section class="L" id="resilience" aria-label="Drills and impact tolerances"><div class="w"><div class="feat rev">
+ <div><h2>Know you can stay <span>inside your tolerances.</span></h2><p class="lead">Map your important business services, set how long each can be down, and test it with drills before a real outage does.</p>
+  <ul class="ul"><li><b>Important business services</b> and their impact tolerances</li><li><b>Scenario drills</b> that run like a real incident</li><li><b>Evidence for your self assessment</b> under the UK operational resilience rules</li></ul></div>
+ <div class="wl rp-tol"><div style="display:flex;justify-content:space-between;align-items:center"><h3 style="font-size:21px">Important business services</h3><span class="chip np">Example</span></div>
+  <div class="row"><b>Card payments</b><div class="bar"><s style="width:9%"></s><i style="left:60%"></i></div><span class="chip ok">11m of 2h</span></div>
+  <div class="row"><b>Online banking</b><div class="bar"><s style="width:30%"></s><i style="left:70%"></i></div><span class="chip ok">Drill passed</span></div>
+  <div class="row"><b>Faster payments</b><div class="bar"><s class="r" style="width:82%"></s><i style="left:70%"></i></div><span class="chip nx">Over in drill</span></div>
+  <div class="row" style="border:0"><b>Mortgage servicing</b><div class="bar"><s style="width:12%"></s><i style="left:80%"></i></div><span class="chip np">Drill due</span></div>
+  <p class="note">The black line is the tolerance. Bars show the longest disruption in the last drill or incident.</p></div>
+</div></div></section>
+
+<section class="K" id="auditor" aria-label="Auditor room"><div class="w">
+ <div class="cen"><h2>Give auditors a room, <span>not a pile of exports.</span></h2><p class="lead c">A read only room with exactly the incidents and evidence you choose, for as long as you choose. Every page they open is recorded.</p></div>
+ <div class="anno mt" style="max-width:940px;margin-left:auto;margin-right:auto">
+  <div class="real"><div class="rb"><i></i><i></i><i></i><b style="color:#fff;margin-left:8px">Auditor room</b><span>Real console, demo workspace</span></div><img src="/media/console/compliance_auditor-room.jpg" alt="The Relyxus auditor room with time limited access"></div>
+  <div class="co" style="left:-200px;top:120px"><em>1</em><b>Named auditors</b>Signed in with their own passkeys, until the date you set.</div>
+  <div class="co" style="right:-200px;top:90px"><em>2</em><b>Exactly what you chose</b>Incidents, evidence, drills and policies. Nothing else.</div>
+  <div class="co" style="right:-180px;bottom:60px"><em>3</em><b>What they opened</b>Every page an auditor views is recorded for you.</div>
+ </div></div></section>
+
+<section class="M rp-reg" aria-label="DORA register of information"><div class="w">
+ <h2>Your DORA register, <span>kept current for you.</span></h2><p class="lead">The register of information lists every ICT supplier behind your critical functions. Relyxus keeps it in step with the services and connectors it already knows about.</p>
+ <div class="tb mt">
+  <div class="tr h"><span>Supplier</span><span>Service</span><span>Supports</span><span>Criticality</span><span>Exit plan</span></div>
+  <div class="tr"><b>Cloud provider</b><span>Infrastructure</span><span>Card payments</span><span class="chip co">Critical</span><span class="chip ok">On file</span></div>
+  <div class="tr"><b>Card processor</b><span>Authorisation</span><span>Card payments</span><span class="chip co">Critical</span><span class="chip ok">On file</span></div>
+  <div class="tr"><b>Relyxus</b><span>Incident response</span><span>All services</span><span class="chip st">Important</span><span class="chip ok">On file</span></div>
+  <div class="tr"><b>Messaging provider</b><span>Customer texts</span><span>Notifications</span><span class="chip np">Standard</span><span class="chip nx">Missing</span></div>
+ </div><p class="note">Example register entries.</p></div></section>
+

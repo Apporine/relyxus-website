@@ -128,6 +128,8 @@ const checks = [["Alert received", "sha256 7c1e 09ab"], ["Fix approved by two pe
 
 <style is:global>
 .r-nav{position:absolute;left:0;right:0;top:52px;z-index:30;font-family:var(--body);color:#0A0C10}
+.r-nav.pin{position:fixed;z-index:70}
+.r-nav.pin.lift .pl,.r-nav.pin.lift .pr{box-shadow:0 14px 40px rgba(5,7,12,.22)}
 .r-nav .in{position:relative;max-width:1240px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;gap:16px}
 .r-nav .pl,.r-nav .pr{display:flex;align-items:center;background:rgba(255,255,255,.95);-webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4);border:1px solid #E3E8EF;border-radius:999px;box-shadow:0 10px 30px rgba(10,14,22,.12)}
 .r-nav .pl{padding:6px 6px 6px 18px;gap:14px}
@@ -224,6 +226,14 @@ const checks = [["Alert received", "sha256 7c1e 09ab"], ["Fix approved by two pe
 <script>
 const root = document.querySelector<HTMLElement>("[data-nav]");
 if (root) {
+  // Pinned navbar: it sits where the design puts it, then stays in view at the
+  // top of the window however far the page scrolls.
+  const base = parseFloat(getComputedStyle(root).top) || 24;
+  const skip = document.querySelector(".skip");
+  (skip ? skip.after(root) : document.body.prepend(root));
+  root.classList.add("pin");
+  const place = () => { root.style.top = Math.max(14, base - window.scrollY) + "px"; root.classList.toggle("lift", window.scrollY > base); };
+  place(); addEventListener("scroll", place, { passive: true });
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const hoverable = matchMedia("(hover: hover) and (pointer: fine)").matches;
   const btns = [...root.querySelectorAll<HTMLButtonElement>(".it")];

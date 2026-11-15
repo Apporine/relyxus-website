@@ -195,7 +195,7 @@ export class Engine {
   private finish(prefix = ""): Reply {
     const n = first(this.lead.name), e = this.lead.email, ty = n ? `Thank you, ${n}.` : "Thank you.";
     const by: Record<Kind, Reply> = {
-      demo: { text: `${ty} Pick a time that suits you and the team will have your details ready.`, book: true, chips: ["Show me the product"] },
+      demo: { text: `${ty} Pick a time that suits you, and the team will be ready for you.`, book: true, chips: ["Show me the product"] },
       replay: { text: `${ty} The team will email ${e} with a safe way to send your incident. Remove anything you would rather not share.`, chips: ["What do you need from us?"] },
       quote: { text: `${ty} The team will send a written quote to ${e}. They may ask a few questions about what you run, so it is accurate.`, chips: ["Book a demo too"] },
       human: { text: `${ty} Someone from the team will reply to ${e}.`, chips: ["Show me the product"] },

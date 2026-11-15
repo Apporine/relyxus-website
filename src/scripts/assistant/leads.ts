@@ -5,6 +5,13 @@
 import type { Lead } from "./engine";
 
 const URL = import.meta.env.PUBLIC_VIGIL_LEADS_URL as string | undefined;
+export const leadsOn = !!URL;
+
+// Until the sheet is connected, the visitor sends their details by email.
+export function mailto(lead: Lead) {
+  const body = `Name: ${lead.name || ""}\nWork email: ${lead.email || ""}\nCompany: ${lead.company || ""}\nInterested in: ${lead.interest || ""}\n\nMy questions:\n${lead.questions.join("\n")}`;
+  return `mailto:support@relyxus.com?subject=${encodeURIComponent("Relyxus enquiry from " + (lead.company || lead.name || "the website"))}&body=${encodeURIComponent(body)}`;
+}
 export type Line = { who: "visitor" | "vigil"; text: string; at: string };
 
 function payload(kind: "lead" | "transcript", lead: Lead, lines: Line[]) {

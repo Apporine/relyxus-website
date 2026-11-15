@@ -97,10 +97,10 @@ import { Engine, type Reply } from "../../scripts/assistant/engine";
 import { opener, factsFor } from "../../scripts/assistant/knowledge";
 import { Voice } from "../../scripts/assistant/voice";
 import { Halo } from "../../scripts/assistant/halo";
-import { sendLead, sendTranscript, type Line } from "../../scripts/assistant/leads";
+import { sendLead, sendTranscript, leadsOn, mailto, type Line } from "../../scripts/assistant/leads";
 import { askRemote, remoteOn } from "../../scripts/assistant/remote";
 
-const BOOK = (import.meta.env.PUBLIC_VIGIL_BOOKING_URL as string | undefined) || "/demo#book";
+const BOOK = (import.meta.env.PUBLIC_VIGIL_BOOKING_URL as string | undefined) || "mailto:support@relyxus.com?subject=" + encodeURIComponent("Book a Relyxus demo");
 const KEY = "vigil.chat.v1";
 const root = document.querySelector<HTMLElement>("[data-vg]")!;
 const $ = <T extends HTMLElement>(s: string) => root.querySelector<T>(s)!;
@@ -187,7 +187,14 @@ async function send(raw: string) {
   }
   dots.remove();
   vigilSays(r);
-  if (r.leadReady && !leadSent) { leadSent = true; sendLead(engine.lead, lines); }
+  if (r.leadReady && !leadSent) {
+    if (leadsOn) { leadSent = true; sendLead(engine.lead, lines); }
+    else {
+      const d = log.lastElementChild as HTMLElement, a = document.createElement("a");
+      a.className = "vg-cta"; a.href = mailto(engine.lead); a.textContent = "Send my details to the team";
+      d.appendChild(document.createElement("br")); d.appendChild(a);
+    }
+  }
   save();
   busy = false;
   if (talk || speaker) {

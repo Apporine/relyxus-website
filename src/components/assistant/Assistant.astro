@@ -329,7 +329,7 @@ async function send(raw: string) {
   let said = "";
   if (brain !== "backup") {
     try {
-      const stop = new AbortController(), timer = setTimeout(() => stop.abort(), 20000);
+      const stop = new AbortController(), timer = setTimeout(() => stop.abort(), 25000);
       const r = await fetch("/api/vigil-chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ history: lines.slice(-24), page: location.pathname }), signal: stop.signal }).finally(() => clearTimeout(timer));
       if (r.status === 503 || r.status === 404 || r.status === 405) brain = "backup";
       else if (r.ok) {

@@ -212,7 +212,28 @@ function leadDone(lead: Record<string, string>, saved: boolean, host: HTMLElemen
 }
 
 // Speaking with the browser's voice, only when Gemini Live is not available
-async function speakBackup(t: string) { if (!speakerOn || call) return; setState("speaking"); await voice.speak(t); setState("idle"); if (micOn) listenBackup(); }
+let spokenNow = "", interrupted = false, stopWatch: () => void = () => {};
+function watchForVisitor() {
+  stopWatch();
+  if (!micOn || !voice.canListen || !voice.speaking) return;
+  interrupted = false;
+  stopWatch = voice.watch(spokenNow, (heard) => { setState("idle"); send(fixNames(heard)); }, () => { interrupted = true; setState("listening"); });
+}
+async function speakBackup(t: string) {
+  if (!speakerOn || call) return;
+  setState("speaking");
+  spokenNow = t; interrupted = false;
+  const done = voice.speak(t);
+  watchForVisitor();
+  await done;
+  if (interrupted) return;
+  // A brief wait lets an interruption that started at the very end come through.
+  await new Promise((ok) => setTimeout(ok, 300));
+  if (interrupted) return;
+  stopWatch(); stopWatch = () => {};
+  setState("idle");
+  if (micOn) listenBackup();
+}
 
 // Text messages
 async function send(raw: string) {
@@ -338,13 +359,14 @@ async function setSpeaker(on: boolean) {
 async function setMic(on: boolean) {
   if (on === micOn) return;
   micOn = on; paint();
-  if (!on) { if (call) await call.setMic(false); voice.stopListening(); listening = false; return; }
+  if (!on) { if (call) await call.setMic(false); stopWatch(); stopWatch = () => {}; voice.stopListening(); listening = false; return; }
   if (call) {
     try { await call.setMic(true); } catch { micOn = false; paint(); bubble("v", "Your microphone is blocked. Allow it in your browser and switch the mic on again, or type here."); }
     return;
   }
   if (!speakerOn) { await setSpeaker(true); if (call) return; }
-  if (!call) listenBackup();
+  if (call) return;
+  if (voice.speaking) watchForVisitor(); else listenBackup();
 }
 
 async function listenBackup() {

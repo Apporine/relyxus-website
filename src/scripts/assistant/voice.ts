@@ -87,6 +87,32 @@ export class Voice {
     });
   }
 
+  // While the backup voice speaks, keep listening. The microphone also hears
+  // the speaker, so words that belong to the reply being read are ignored;
+  // as soon as two words arrive that are not in it, the visitor is talking:
+  // the voice stops at once and what they say is passed on.
+  watch(spoken: string, onBarge: (heard: string) => void, onStart: () => void = () => {}): () => void {
+    const C = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!C) return () => {};
+    const words = (t: string) => t.toLowerCase().replace(/[^a-z0-9' ]+/g, " ").split(/\s+/).filter(Boolean);
+    const own = new Set(words(spoken));
+    const r: Rec = new C();
+    r.lang = "en-GB"; r.interimResults = true; r.continuous = true;
+    let barged = false, heard = "", done = false;
+    const finish = () => { if (done) return; done = true; try { r.stop(); } catch {} if (barged && heard.trim()) onBarge(heard.trim()); };
+    r.onresult = (e: any) => {
+      let t = "", final = false;
+      for (let k = e.resultIndex; k < e.results.length; k++) { t += e.results[k][0].transcript; if (e.results[k].isFinal) final = true; }
+      const extra = words(t).filter((w) => !own.has(w));
+      if (!barged && extra.length >= 2) { barged = true; onStart(); this.stopSpeaking(); }
+      if (barged) { heard = t; if (final) finish(); }
+    };
+    r.onerror = () => finish();
+    r.onend = () => finish();
+    try { r.start(); } catch { return () => {}; }
+    return () => { if (!barged) { done = true; try { r.abort(); } catch {} } };
+  }
+
   stopListening() { try { this.rec?.stop(); } catch {} this.listening = false; }
 
   private async meter() {

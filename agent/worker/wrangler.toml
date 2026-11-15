@@ -1,0 +1,15 @@
+name = "vigil-ai"
+main = "src/index.ts"
+compatibility_date = "2026-10-01"
+
+[ai]
+binding = "AI"
+
+[vars]
+ALLOWED_ORIGINS = "https://relyxus.com,https://www.relyxus.com"
+MODEL = "@cf/meta/llama-3.1-8b-instruct"
+
+# Create it with: npx wrangler kv namespace create LIMIT, then paste the id here
+[[kv_namespaces]]
+binding = "LIMIT"
+id = "REPLACE_WITH_YOUR_KV_ID"

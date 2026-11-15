@@ -1,0 +1,259 @@
+---
+// Vigil, the website assistant (15 Nov 2026). A Halo launcher at the bottom
+// right opens a panel where visitors type or talk. Vigil answers from the
+// published facts, shows real product screens beside the chat, asks a few
+// qualifying questions, takes name, work email and company for a demo, a
+// replay, a quote or a person, and books a meeting. Setup: agent/README.md.
+---
+<div class="vg" data-vg>
+  <button class="vg-launch" type="button" aria-haspopup="dialog" aria-controls="vg-panel" data-vg-open>
+    <canvas class="vg-mini" width="44" height="44" aria-hidden="true"></canvas>
+    <span>Ask Vigil</span>
+  </button>
+
+  <div class="vg-shell" hidden data-vg-shell>
+    <aside class="vg-stage" hidden data-vg-stage aria-label="Shared by Vigil">
+      <div class="vg-sh"><span>Shared by Vigil</span><button type="button" class="vg-ic" aria-label="Close shared screen" data-vg-unstage><i class="ti ti-x"></i></button></div>
+      <figure class="vg-fig"><img alt="" data-vg-img /><figcaption data-vg-cap></figcaption></figure>
+      <a class="vg-open" href="/" data-vg-href>Open this page <i class="ti ti-arrow-up-right" aria-hidden="true"></i></a>
+    </aside>
+
+    <section class="vg-panel" id="vg-panel" role="dialog" aria-modal="false" aria-label="Chat with Vigil">
+      <header class="vg-top">
+        <div class="vg-bar">
+          <a class="vg-book" href="/demo#book" target="_blank" rel="noopener" data-vg-book><i class="ti ti-calendar" aria-hidden="true"></i>Book a meeting</a>
+          <div class="vg-ctl">
+            <button type="button" class="vg-ic" aria-pressed="false" aria-label="Read answers aloud" title="Read answers aloud" data-vg-speaker><i class="ti ti-volume-off"></i></button>
+            <button type="button" class="vg-ic" aria-label="Close chat" title="Close" data-vg-close><i class="ti ti-x"></i></button>
+          </div>
+        </div>
+        <canvas class="vg-halo" aria-hidden="true" data-vg-halo></canvas>
+        <p class="vg-state" aria-live="polite" data-vg-state>Vigil, the Relyxus assistant</p>
+      </header>
+
+      <div class="vg-log" role="log" aria-live="polite" data-vg-log></div>
+      <div class="vg-chips" data-vg-chips></div>
+
+      <form class="vg-in" data-vg-form>
+        <label class="sr-only" for="vg-text">Message Vigil</label>
+        <textarea id="vg-text" rows="1" placeholder="Ask about Relyxus" maxlength="600" data-vg-text></textarea>
+        <button type="button" class="vg-mic" aria-label="Talk to Vigil" title="Talk to Vigil" data-vg-mic><i class="ti ti-microphone"></i></button>
+        <button type="submit" class="vg-send" aria-label="Send"><i class="ti ti-arrow-up"></i></button>
+      </form>
+      <p class="vg-legal">Vigil is an AI assistant and can make mistakes. If you share your name and email, we keep them with this chat so the team can reply. <a href="/privacy">Privacy notice</a></p>
+    </section>
+  </div>
+</div>
+
+<style is:global>
+.vg{--vg-bg:#06080C;--vg-line:#1E2635;--vg-tx:#E9EEF5;--vg-sub:#C9D3E3;font-family:var(--body)}
+.vg-launch{position:fixed;right:24px;bottom:24px;z-index:80;display:flex;align-items:center;gap:10px;padding:6px 18px 6px 6px;border-radius:999px;border:1px solid #232C3C;background:#06080C;color:#fff;font-size:15px;font-weight:600;cursor:pointer;box-shadow:0 18px 50px rgba(5,7,12,.35);transition:transform .2s}
+.vg-launch:hover{transform:translateY(-2px)}
+.vg-mini{width:44px;height:44px;border-radius:50%;background:#06080C;display:block}
+.vg-shell{position:fixed;right:24px;bottom:24px;z-index:90;display:flex;gap:14px;align-items:flex-end;max-height:calc(100vh - 48px)}
+.vg-shell[hidden],.vg-stage[hidden]{display:none}
+.vg-panel{width:404px;height:min(700px,calc(100vh - 48px));display:flex;flex-direction:column;border-radius:24px;background:var(--vg-bg);border:1px solid var(--vg-line);color:var(--vg-tx);box-shadow:0 40px 110px rgba(5,7,12,.5);overflow:hidden}
+.vg-top{position:relative;height:196px;padding:14px;border-bottom:1px solid var(--vg-line);display:flex;flex-direction:column;justify-content:space-between}
+.vg-bar{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2}
+.vg-book{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;padding:8px 13px;border-radius:999px;background:#fff;color:#0A0C10}
+.vg-ctl{display:flex;gap:6px}
+.vg-ic{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;border:1px solid #2A3548;background:transparent;color:var(--vg-tx);cursor:pointer;font-size:17px}
+.vg-ic[aria-pressed="true"]{background:#1C2433;border-color:#9FB4D6}
+.vg-halo{position:absolute;inset:0;width:100%;height:100%;display:block}
+.vg-state{position:relative;z-index:2;margin:0;text-align:center;font-size:13px;color:var(--vg-sub)}
+.vg-log{flex:1;overflow-y:auto;padding:16px 16px 6px;display:flex;flex-direction:column;gap:12px;scrollbar-width:thin}
+.vg-m{max-width:88%;font-size:14.5px;line-height:1.55;padding:11px 14px;border-radius:16px;white-space:pre-wrap}
+.vg-m.v{align-self:flex-start;background:#0F141E;border:1px solid var(--vg-line);border-radius:16px 16px 16px 4px}
+.vg-m.u{align-self:flex-end;background:#1C2433;border-radius:16px 16px 4px 16px}
+.vg-m.p{opacity:1;color:var(--vg-sub);font-style:italic}
+.vg-m a.vg-lk{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:13.5px;font-weight:600;color:#9FB4D6}
+.vg-m .vg-cta{display:inline-flex;align-items:center;gap:7px;margin-top:10px;font-size:13.5px;font-weight:600;padding:8px 13px;border-radius:999px;background:#FF6B4A;color:#0A0C10}
+.vg-m .vg-thumb{display:none;margin-top:10px;border-radius:10px;border:1px solid var(--vg-line);width:100%}
+.vg-dots{display:inline-flex;gap:4px}.vg-dots i{width:6px;height:6px;border-radius:50%;background:#9FB4D6;animation:vgd 1s infinite}.vg-dots i:nth-child(2){animation-delay:.15s}.vg-dots i:nth-child(3){animation-delay:.3s}
+@keyframes vgd{0%,100%{opacity:.3}50%{opacity:1}}
+.vg-chips{display:flex;flex-wrap:wrap;gap:6px;padding:4px 16px 10px}
+.vg-chips button{font-size:13px;padding:7px 12px;border-radius:999px;border:1px solid #2A3548;background:transparent;color:var(--vg-tx);cursor:pointer}
+.vg-chips button:hover{border-color:#9FB4D6}
+.vg-in{display:flex;align-items:flex-end;gap:6px;margin:0 12px;padding:6px 6px 6px 14px;border-radius:18px;border:1px solid #2A3548;background:#0B0F18}
+.vg-in textarea{flex:1;resize:none;border:0;background:transparent;color:var(--vg-tx);font:inherit;font-size:14.5px;line-height:1.45;padding:7px 0;max-height:110px;outline:none}
+.vg-in textarea::placeholder{color:#AEB8C8}
+.vg-mic,.vg-send{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;border:0;cursor:pointer;font-size:18px}
+.vg-mic{background:#1C2433;color:#fff}.vg-mic.on{background:#FF6B4A;color:#0A0C10}
+.vg-send{background:#fff;color:#0A0C10}
+.vg-legal{margin:0;padding:8px 16px 12px;font-size:11.5px;line-height:1.45;color:#AEB8C8}
+.vg-legal a{color:#C9D3E3;text-decoration:underline}
+.vg-stage{width:min(620px,calc(100vw - 480px));border-radius:24px;background:#fff;border:1px solid #E3E8EF;box-shadow:0 40px 110px rgba(5,7,12,.35);padding:14px;color:#0A0C10}
+.vg-sh{display:flex;justify-content:space-between;align-items:center;font-size:13.5px;font-weight:600;color:#2B3340}
+.vg-stage .vg-ic{border-color:#DDE3EA;color:#0A0C10}
+.vg-fig{margin:10px 0 0}.vg-fig img{display:block;width:100%;border-radius:14px;border:1px solid #E3E8EF}
+.vg-fig figcaption{font-size:13.5px;color:#2B3340;margin-top:10px}
+.vg-open{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:14px;font-weight:600;color:#2F5CA8}
+@media (max-width:1000px){.vg-stage{display:none!important}.vg-m .vg-thumb{display:block}}
+@media (max-width:560px){.vg-top{height:170px}.vg-launch{right:16px;bottom:16px}.vg-shell{inset:0;right:0;bottom:0;max-height:none}.vg-panel{width:100vw;height:100dvh;border-radius:0;border:0}}
+</style>
+
+<script>
+import { Engine, type Reply } from "../../scripts/assistant/engine";
+import { opener, factsFor } from "../../scripts/assistant/knowledge";
+import { Voice } from "../../scripts/assistant/voice";
+import { Halo } from "../../scripts/assistant/halo";
+import { sendLead, sendTranscript, type Line } from "../../scripts/assistant/leads";
+import { askRemote, remoteOn } from "../../scripts/assistant/remote";
+
+const BOOK = (import.meta.env.PUBLIC_VIGIL_BOOKING_URL as string | undefined) || "/demo#book";
+const KEY = "vigil.chat.v1";
+const root = document.querySelector<HTMLElement>("[data-vg]")!;
+const $ = <T extends HTMLElement>(s: string) => root.querySelector<T>(s)!;
+const shell = $("[data-vg-shell]"), log = $("[data-vg-log]"), chips = $("[data-vg-chips]"), form = $<HTMLFormElement>("[data-vg-form]");
+const text = $<HTMLTextAreaElement>("[data-vg-text]"), mic = $("[data-vg-mic]"), speakerBtn = $("[data-vg-speaker]"), stateEl = $("[data-vg-state]");
+const stage = $("[data-vg-stage]"), img = $<HTMLImageElement>("[data-vg-img]"), cap = $("[data-vg-cap]"), href = $<HTMLAnchorElement>("[data-vg-href]");
+const launch = $("[data-vg-open]");
+$<HTMLAnchorElement>("[data-vg-book]").href = BOOK;
+
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const voice = new Voice();
+const engine = new Engine(location.pathname);
+const lines: Line[] = [];
+let talk = false, speaker = false, busy = false, leadSent = false;
+
+type Saved = { lines: Line[]; lead: typeof engine.lead; open: boolean; speaker: boolean; leadSent: boolean };
+function save(open = !shell.hidden) {
+  try { sessionStorage.setItem(KEY, JSON.stringify({ lines: lines.slice(-40), lead: engine.lead, open, speaker, leadSent } satisfies Saved)); } catch {}
+}
+
+// Halos: a small one in the launcher, a large one in the panel.
+const mini = new Halo(root.querySelector<HTMLCanvasElement>(".vg-mini")!, 700, 0.34, "6,8,12");
+const big = new Halo($<HTMLCanvasElement>("[data-vg-halo]"), 2600, 0.29, "6,8,12");
+big.dy = -6;
+let last = performance.now();
+function loop(now: number) {
+  const dt = Math.min(0.05, (now - last) / 1000); last = now;
+  const lv = voice.tick(now / 1000);
+  if (!document.hidden) { if (shell.hidden) mini.frame(dt, 0); else big.frame(dt, lv); }
+  if (!reduce) requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+if (reduce) { for (let i = 0; i < 40; i++) { mini.frame(0.016, 0); } }
+
+function setState(s: "idle" | "listening" | "thinking" | "speaking") {
+  big.state = s;
+  stateEl.textContent = s === "listening" ? "Listening" : s === "thinking" ? "Thinking" : s === "speaking" ? "Speaking" : "Vigil, the Relyxus assistant";
+}
+
+function bubble(who: "u" | "v" | "p", body: string) {
+  const d = document.createElement("div"); d.className = "vg-m " + who; d.textContent = body;
+  log.appendChild(d); log.scrollTop = log.scrollHeight; return d;
+}
+
+function renderChips(list?: string[]) {
+  chips.innerHTML = "";
+  (list || []).slice(0, 4).forEach((c) => {
+    const b = document.createElement("button"); b.type = "button"; b.textContent = c;
+    b.onclick = () => (c === "Pick a time" ? window.open(BOOK, "_blank", "noopener") : send(c));
+    chips.appendChild(b);
+  });
+}
+
+function showStage(s: NonNullable<Reply["show"]>) {
+  img.src = s.src; img.alt = s.caption; cap.textContent = s.caption + ". The real product, in our demo workspace.";
+  href.href = s.href || "/product"; stage.hidden = false;
+}
+
+function vigilSays(r: Reply) {
+  const d = bubble("v", r.text);
+  if (r.show) {
+    showStage(r.show);
+    const t = document.createElement("img"); t.className = "vg-thumb"; t.src = r.show.src; t.alt = r.show.caption; d.appendChild(t);
+  }
+  if (r.link) { const a = document.createElement("a"); a.className = "vg-lk"; a.href = r.link.href; a.textContent = r.link.label; d.appendChild(document.createElement("br")); d.appendChild(a); }
+  if (r.book) { const a = document.createElement("a"); a.className = "vg-cta"; a.href = BOOK; a.target = "_blank"; a.rel = "noopener"; a.textContent = "Pick a time"; d.appendChild(document.createElement("br")); d.appendChild(a); }
+  renderChips(r.chips);
+  lines.push({ who: "vigil", text: r.text, at: new Date().toISOString() });
+}
+
+async function send(raw: string) {
+  const q = raw.trim(); if (!q || busy) return;
+  busy = true; voice.stopSpeaking();
+  bubble("u", q); renderChips([]);
+  lines.push({ who: "visitor", text: q, at: new Date().toISOString() });
+  setState("thinking");
+  const dots = bubble("v", ""); dots.innerHTML = '<span class="vg-dots" aria-label="Vigil is thinking"><i></i><i></i><i></i></span>';
+  let r = engine.reply(q);
+  await new Promise((ok) => setTimeout(ok, 450 + Math.min(900, r.text.length * 3)));
+  if (r.unknown && remoteOn) {
+    const hist = lines.slice(-7, -1).map((l) => ({ role: l.who === "vigil" ? "assistant" as const : "user" as const, content: l.text }));
+    const a = await askRemote(q, factsFor([...(r.topics || []), "what"]), hist);
+    if (a) r = { text: a, chips: ["Book a demo", "Talk to a person"] };
+  }
+  dots.remove();
+  vigilSays(r);
+  if (r.leadReady && !leadSent) { leadSent = true; sendLead(engine.lead, lines); }
+  save();
+  busy = false;
+  if (talk || speaker) {
+    setState("speaking");
+    await voice.speak(r.text);
+  }
+  setState("idle");
+  if (talk) listen();
+}
+
+async function listen() {
+  if (!voice.canListen) { bubble("v", "Your browser cannot take voice here. Chrome, Edge or Safari can, or you can type instead."); talk = false; mic.classList.remove("on"); return; }
+  setState("listening");
+  const p = bubble("p", "Listening");
+  try {
+    const said = await voice.listen((t) => (p.textContent = t || "Listening"));
+    p.remove();
+    if (said) send(said);
+    else { talk = false; mic.classList.remove("on"); setState("idle"); }
+  } catch (e) {
+    p.remove(); talk = false; mic.classList.remove("on"); setState("idle");
+    if ((e as Error).message === "not-allowed") bubble("v", "I can't hear you, as the microphone is blocked. You can allow it in your browser, or type instead.");
+  }
+}
+
+function open(first = true) {
+  shell.hidden = false; launch.hidden = true;
+  big.resize();
+  if (first && !log.children.length) { const o = opener(location.pathname); vigilSays({ text: o.text, chips: o.chips }); }
+  setTimeout(() => text.focus(), 50); save(true);
+}
+function close() {
+  voice.stopSpeaking(); voice.stopListening(); talk = false; mic.classList.remove("on");
+  shell.hidden = true; launch.hidden = false; stage.hidden = true; save(false); launch.focus();
+}
+
+launch.addEventListener("click", () => open());
+$("[data-vg-close]").addEventListener("click", close);
+$("[data-vg-unstage]").addEventListener("click", () => (stage.hidden = true));
+document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !shell.hidden) close(); });
+form.addEventListener("submit", (e) => { e.preventDefault(); const v = text.value; text.value = ""; text.style.height = ""; send(v); });
+text.addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); form.requestSubmit(); } });
+text.addEventListener("input", () => { text.style.height = ""; text.style.height = Math.min(110, text.scrollHeight) + "px"; });
+mic.addEventListener("click", () => {
+  if (talk) { talk = false; mic.classList.remove("on"); voice.stopListening(); voice.stopSpeaking(); setState("idle"); return; }
+  talk = true; mic.classList.add("on"); listen();
+});
+speakerBtn.addEventListener("click", () => {
+  speaker = !speaker; speakerBtn.setAttribute("aria-pressed", String(speaker));
+  speakerBtn.innerHTML = `<i class="ti ti-volume${speaker ? "" : "-off"}"></i>`;
+  if (!speaker) voice.stopSpeaking(); save();
+});
+document.addEventListener("click", (e) => {
+  const t = (e.target as HTMLElement).closest<HTMLElement>("[data-ask]"); if (!t) return;
+  e.preventDefault(); open(false); send(t.dataset.ask || "");
+});
+addEventListener("pagehide", () => { if (leadSent) sendTranscript(engine.lead, lines); });
+
+// Pick up the conversation after moving to another page.
+try {
+  const s: Saved | null = JSON.parse(sessionStorage.getItem(KEY) || "null");
+  if (s) {
+    Object.assign(engine.lead, s.lead, { page: location.pathname }); leadSent = s.leadSent; speaker = s.speaker;
+    if (speaker) { speakerBtn.setAttribute("aria-pressed", "true"); speakerBtn.innerHTML = '<i class="ti ti-volume"></i>'; }
+    s.lines.forEach((l) => { bubble(l.who === "vigil" ? "v" : "u", l.text); lines.push(l); });
+    if (s.open) open(false);
+  }
+} catch {}
+</script>

@@ -1,0 +1,109 @@
+<!-- title: Integrations | Relyxus -->
+<style>
+.in-orb{position:relative;height:560px;margin-top:40px}
+.in-orb .ring{position:absolute;left:50%;top:50%;border-radius:50%;border:1.5px dashed rgba(63,102,176,.35);transform:translate(-50%,-50%)}
+.in-orb .core{position:absolute;left:50%;top:50%;width:170px;height:170px;margin:-85px 0 0 -85px;border-radius:44px;background:#0A0C10;display:grid;place-items:center;box-shadow:0 40px 80px rgba(15,25,45,.35),0 0 0 16px rgba(255,255,255,.6)}
+.in-orb .core span{color:#fff;font-weight:700;letter-spacing:.08em;font-size:17px}
+.in-orb .c{position:absolute;transform:translate(-50%,-50%);background:#fff;border:1px solid #E3E8EF;border-radius:14px;padding:11px 16px;font-size:14.5px;font-weight:600;box-shadow:0 14px 30px rgba(15,25,45,.1);white-space:nowrap}
+.in-orb .c i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;vertical-align:1px}
+.in-cat{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:64px}
+.in-cat .cd{padding:28px}
+.in-cat .cd h3{font-size:22px;display:flex;justify-content:space-between;align-items:center}.in-cat .cd h3 span{font-family:var(--body);font-size:13px;color:#2B4F94;font-weight:600;letter-spacing:0}
+.in-cat .tg{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.in-cat .tg span{font-size:13.5px;font-weight:600;padding:8px 12px;border-radius:10px;background:#F3F5F9;color:#0A0C10}
+.in-cat .cd p{font-size:14.5px}
+.in-ra .tr{grid-template-columns:1.1fr 1.6fr 1.6fr}
+.in-kit{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:64px}
+.in-kit pre{margin:0;padding:22px 24px;font-size:13.5px;line-height:1.75;color:#E9EEF5;white-space:pre-wrap}
+.in-kit .k{color:#9FB4D6}.in-kit .v{color:#8BE6BE}.in-kit .c{color:#FFB199}
+.in-kit .res{padding:22px}
+.in-lines>div{display:grid;grid-template-columns:260px 1fr;gap:24px;padding:22px 0;border-top:1px solid #E3E8EF;font-size:16px}.in-lines>div:last-child{border-bottom:1px solid #E3E8EF}
+.in-lines b{font-size:19px}.in-lines span{color:#2B3340;line-height:1.55}
+.in-pick{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:900px;margin:40px auto 0}
+.in-pick span{font-size:16px;font-weight:600;padding:13px 20px;border-radius:999px;background:#fff;border:1px solid #DDE3EA}
+.in-pick span.on{background:#0A0C10;color:#fff;border-color:#0A0C10}
+</style>
+
+<section class="LF hero" aria-label="Integrations"><div class="w">
+ <div class="cen"><div class="kick" style="justify-content:center"><i style="background:#3DAE80"></i>Integrations</div>
+ <h1>Keep every tool <span>you run.</span></h1>
+ <p class="lead c">36 ready made connectors for your clouds, monitoring, logs, tickets and chat, and a connector kit for anything else with an API. Nothing to rip out, nothing to retrain.</p>
+ <div class="bts"><span class="b1">Book a demo</span><span class="b2">Ask about a connector</span></div></div>
+ <div class="in-orb">
+  <div class="ring" style="width:420px;height:420px"></div><div class="ring" style="width:760px;height:540px"></div><div class="ring" style="width:1120px;height:560px;border-color:rgba(63,102,176,.2)"></div>
+  <div class="core"><span>RELYXUS</span></div>
+  <div class="c" style="left:50%;top:6%"><i style="background:#FF6B4A"></i>Prometheus</div>
+  <div class="c" style="left:30%;top:16%"><i style="background:#9FB4D6"></i>AWS</div>
+  <div class="c" style="left:70%;top:16%"><i style="background:#9FB4D6"></i>Azure</div>
+  <div class="c" style="left:17%;top:38%"><i style="background:#FF6B4A"></i>Datadog</div>
+  <div class="c" style="left:83%;top:38%"><i style="background:#3DAE80"></i>Slack</div>
+  <div class="c" style="left:33%;top:42%"><i style="background:#9FB4D6"></i>Kubernetes</div>
+  <div class="c" style="left:67%;top:42%"><i style="background:#F2C27B"></i>Splunk</div>
+  <div class="c" style="left:8%;top:62%"><i style="background:#FF6B4A"></i>Dynatrace</div>
+  <div class="c" style="left:92%;top:62%"><i style="background:#5C4EE5"></i>BMC Helix</div>
+  <div class="c" style="left:31%;top:66%"><i style="background:#F2C27B"></i>Elastic</div>
+  <div class="c" style="left:69%;top:66%"><i style="background:#3DAE80"></i>Mattermost</div>
+  <div class="c" style="left:20%;top:86%"><i style="background:#FF6B4A"></i>New Relic</div>
+  <div class="c" style="left:40%;top:92%"><i style="background:#9FB4D6"></i>Terraform Cloud</div>
+  <div class="c" style="left:60%;top:92%"><i style="background:#5C4EE5"></i>Zendesk</div>
+  <div class="c" style="left:80%;top:86%"><i style="background:#5C4EE5"></i>ConfigCat</div>
+ </div>
+</div></section>
+
+<section class="L" aria-label="Every category"><div class="w">
+ <div class="top2"><div><h2>Clouds, monitoring, logs, <span>tickets and chat.</span></h2><p class="lead">Connect what you already run. Each connector reads what Relyxus needs, and only some can act, with your approval.</p></div><span class="b1">Request a connector</span></div>
+ <div class="in-cat">
+  <div class="cd"><h3>Clouds and platforms<span>7</span></h3><div class="tg"><span>AWS</span><span>Azure</span><span>Google Cloud</span><span>Oracle Cloud</span><span>Alibaba Cloud</span><span>vSphere</span><span>Kubernetes</span></div></div>
+  <div class="cd"><h3>Monitoring<span>7</span></h3><div class="tg"><span>Prometheus</span><span>Datadog</span><span>Dynatrace</span><span>New Relic</span><span>Nagios</span><span>Zabbix</span><span>SolarWinds</span></div></div>
+  <div class="cd"><h3>Logs<span>5</span></h3><div class="tg"><span>Grafana Loki</span><span>Splunk</span><span>Elastic</span><span>Sumo Logic</span><span>Graylog</span></div></div>
+  <div class="cd"><h3>Changes and delivery<span>4</span></h3><div class="tg"><span>Terraform Cloud</span><span>Harness</span><span>Spinnaker</span><span>Backstage</span></div></div>
+  <div class="cd"><h3>Feature flags<span>2</span></h3><div class="tg"><span>ConfigCat</span><span>Flagsmith</span></div></div>
+  <div class="cd"><h3>Security<span>2</span></h3><div class="tg"><span>IBM QRadar</span><span>Microsoft Sentinel</span></div></div>
+  <div class="cd"><h3>Tickets and service desk<span>2</span></h3><div class="tg"><span>BMC Helix</span><span>Zendesk</span></div></div>
+  <div class="cd"><h3>Chat and paging<span>3</span></h3><div class="tg"><span>Slack</span><span>Google Chat</span><span>Mattermost</span></div><p style="margin-top:14px">Plus text, email and phone calls through your own providers.</p></div>
+  <div class="cd" style="background:#0A0C10;border-color:#0A0C10"><h3 style="color:#fff">AI tools<span style="color:#BFD0EE">MCP</span></h3><p style="color:#D4DBE5">Relyxus speaks MCP both ways. Your AI assistants can ask it about incidents, and Vigil can use your own MCP tools as read only evidence.</p></div>
+ </div><p class="note">Names are trademarks of their owners and are used only to show compatibility.</p></div></section>
+
+<section class="K" aria-label="How a signal flows"><div class="w">
+ <h2>From one signal <span>to a proven fix.</span></h2><p class="lead">What happens between a metric crossing a line and your regulator report.</p>
+ <div class="steps mt"><div class="stp"><i>1</i><b>A signal arrives</b><span>From any connector, by webhook or by polling</span></div><div class="stp"><i>2</i><b>It is grouped</b><span>With every other signal from the same failure</span></div><div class="stp"><i>3</i><b>Vigil reads around it</b><span>Recent changes, metrics and logs, through the same connectors</span></div><div class="stp"><i>4</i><b>A fix is approved</b><span>And run through the connector that can act, inside your cloud</span></div><div class="stp"><i>5</i><b>Evidence is sealed</b><span>Every read and every action, in the hash chained log</span></div></div>
+</div></section>
+
+<section class="M in-ra" aria-label="Read and act"><div class="w">
+ <h2>Most connectors read. <span>A few can act.</span></h2><p class="lead">Acting connectors follow your approval rules. Nothing changes in your systems without the people your policy names.</p>
+ <div class="tb mt">
+  <div class="tr h"><span>Connector</span><span>What Relyxus reads</span><span>What it can do, with approval</span></div>
+  <div class="tr"><b>Kubernetes</b><span>Events, rollouts, pod health</span><span>Roll back, restart, scale, pause a rollout</span></div>
+  <div class="tr"><b>AWS and Azure</b><span>Metrics, logs, health events</span><span>Restart an instance, change scaling, fail over a load balancer</span></div>
+  <div class="tr"><b>ConfigCat and Flagsmith</b><span>Flag changes and who made them</span><span>Switch a feature flag off</span></div>
+  <div class="tr"><b>Slack, Google Chat, Mattermost</b><span>Who acknowledged, and when</span><span>Page people, open an incident channel, post updates</span></div>
+  <div class="tr"><b>BMC Helix</b><span>Tickets and change records</span><span>Create and update the change record for every action</span></div>
+  <div class="tr"><b>Prometheus, Datadog, Splunk</b><span>Metrics, traces, logs</span><span>Read only</span></div>
+ </div></div></section>
+
+<section class="KF" aria-label="Connector kit"><div class="w">
+ <h2>No connector yet? <span>Build your own.</span></h2><p class="lead">The connector kit turns any HTTP API into a Relyxus connector, from a short definition or straight from its OpenAPI file.</p>
+ <div class="in-kit">
+  <div class="win"><div class="wh"><b>card_processor.yaml</b><span>Connector kit</span></div>
+<pre class="mono"><span class="k">name</span>: <span class="v">card_processor</span>
+<span class="k">base_url</span>: <span class="v">https://api.processor.example</span>
+<span class="k">auth</span>: <span class="v">bearer_token</span>   <span class="c"># kept in your secrets store</span>
+<span class="k">queries</span>:
+  - <span class="k">name</span>: <span class="v">authorisation_errors</span>
+    <span class="k">path</span>: <span class="v">/v1/stats/errors</span>
+    <span class="k">params</span>: [<span class="v">region</span>, <span class="v">since</span>]
+  - <span class="k">name</span>: <span class="v">status</span>
+    <span class="k">path</span>: <span class="v">/v1/status</span></pre></div>
+  <div class="win res"><b style="font-size:18px">Connected: card_processor</b><p style="font-size:14.5px;color:#D4DBE5;margin-top:8px">Two queries available to Vigil and to your runbooks.</p>
+   <div class="rr" style="margin-top:18px"><span>authorisation_errors</span><em class="ok">Tested</em></div><div class="rr"><span>status</span><em class="ok">Tested</em></div><div class="rr"><span>Credentials</span><em>Your secrets store</em></div><div class="rr"><span>Access</span><em>Read only</em></div>
+   <p class="note" style="color:#C9D3E3">Example definition for an imaginary processor.</p></div>
+ </div></div></section>
+
+<section class="L" aria-label="Safe by default"><div class="w" style="display:grid;grid-template-columns:440px 1fr;gap:80px;align-items:start">
+ <div><h2>Connected, <span>without opening the doors.</span></h2></div>
+ <div class="in-lines"><div><b>Runs in your cloud</b><span>Connectors run inside your install, next to the systems they read.</span></div><div><b>Scoped keys</b><span>Service keys are scoped, hashed, expiring and revocable.</span></div><div><b>One way in</b><span>Monitoring webhooks reach only the machine API, nothing else.</span></div><div><b>Every call recorded</b><span>What was read and what was changed, in your audit log.</span></div></div>
+</div></section>
+
+<section class="LF close" aria-label="Tell us your stack"><div class="w">
+ <h2>Tell us what you run. <span>We will show it working.</span></h2>
+ <div class="in-pick"><span class="on">AWS</span><span>Azure</span><span class="on">Kubernetes</span><span class="on">Prometheus</span><span>Datadog</span><span class="on">Splunk</span><span>Dynatrace</span><span class="on">Slack</span><span>Microsoft Sentinel</span><span>BMC Helix</span><span>Something else</span></div>
+ <div class="bts" style="justify-content:center"><span class="b1">Book a demo with my stack</span></div></div></section>

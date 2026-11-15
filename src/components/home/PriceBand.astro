@@ -1,0 +1,42 @@
+---
+// One licence (tweak 16, 15 Nov 2026): how Relyxus is priced, without a
+// figure. One annual licence for the whole organisation, shown as the
+// licence itself, with a written quote one click away.
+const rows: [string, string][] = [["Every feature", "Included"], ["Every user, 5 or 500", "Included"], ["Vigil, the AI investigator", "Included"], ["Seat fees", "None"], ["Charges per incident", "None"], ["Exit fees", "None"]];
+---
+<section class="r-price" aria-labelledby="price-title">
+  <div class="inner">
+    <div class="l">
+      <h2 class="T" id="price-title">One licence. <span>Every feature.</span> <span class="k">Every user.</span></h2>
+      <p class="lead">One annual licence covers your whole organisation. Your price depends on the estate you run, not on how many people you wake up. Tell us what you run and we will send a written quote.</p>
+      <div class="bts"><a class="b1" href="/demo#book" data-ask="Get a quote">Get your quote</a><a class="b2" href="/pricing">See how pricing works</a></div>
+    </div>
+    <div class="lic" aria-label="What the licence covers">
+      <div class="hd"><span>Relyxus annual licence</span><span class="seal">Whole organisation</span></div>
+      {rows.map(([k, v]) => <div class="rw"><span>{k}</span><b class={v === "None" ? "z" : "y"}>{v}</b></div>)}
+      <div class="ft">Founding partners: five places at founder pricing. <a href="/pricing#founding">Read more</a></div>
+    </div>
+  </div>
+</section>
+<style is:global>
+.r-price{position:relative;overflow:hidden;padding:120px 0;background:radial-gradient(40% 60% at 100% 0%,rgba(189,235,214,.55),transparent 70%),radial-gradient(40% 60% at 0% 100%,rgba(255,138,102,.28),transparent 70%),#F6F8FA;color:#0A0C10;font-family:var(--body)}
+.r-price .inner{position:relative;max-width:1240px;margin:0 auto;padding:0 36px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:80px;align-items:center}
+.r-price .T{font-family:var(--display);font-variation-settings:'opsz' 96;font-weight:600;font-size:clamp(38px,5.2vw,72px);line-height:.98;letter-spacing:-.05em;margin:0;color:#0A0C10}
+.r-price .T span{display:block;color:#3F66B0}.r-price .T span.k{color:#0A0C10}
+.r-price .lead{font-size:18px;line-height:1.55;color:#2B3340;margin:22px 0 0;max-width:540px}
+.r-price .bts{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+.r-price .b1,.r-price .b2{display:inline-flex;padding:14px 24px;border-radius:999px;font-size:15.5px;font-weight:600;transition:transform .2s}
+.r-price .b1{background:#0A0C10;color:#fff}.r-price .b2{background:#fff;border:1px solid #C9D1DC;color:#0A0C10}
+.r-price .b1:hover,.r-price .b2:hover{transform:translateY(-2px)}
+.r-price .lic{border-radius:24px;background:#fff;border:1px solid #E3E8EF;box-shadow:0 40px 90px rgba(15,25,45,.16);padding:8px 26px 22px;transform:rotate(1.2deg);transition:transform .4s}
+.r-price .lic:hover{transform:rotate(0)}
+.r-price .hd{display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1.5px solid #0A0C10;font-family:var(--display);font-size:20px;font-weight:600;letter-spacing:-.02em}
+.r-price .seal{font-family:var(--body);font-size:12.5px;font-weight:600;padding:5px 11px;border-radius:999px;background:#0A0C10;color:#fff;letter-spacing:0}
+.r-price .rw{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #EEF1F5;font-size:16px}
+.r-price .rw b{font-size:14px;font-weight:600;padding:4px 11px;border-radius:999px}
+.r-price .rw b.y{background:#DDF3E9;color:#17694A}.r-price .rw b.z{background:#EEF1F5;color:#0A0C10}
+.r-price .ft{margin-top:16px;font-size:14px;color:#2B3340}.r-price .ft a{font-weight:600;text-decoration:underline;text-underline-offset:3px}
+@media (max-width:1023px){.r-price{padding:88px 0}.r-price .inner{grid-template-columns:minmax(0,1fr);gap:48px}.r-price .lic{transform:none}}
+@media (max-width:620px){.r-price .inner{padding:0 20px}.r-price .lic{padding:6px 18px 18px}}
+@media (prefers-reduced-motion:reduce){.r-price .lic{transform:none}}
+</style>

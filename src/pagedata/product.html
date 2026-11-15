@@ -1,0 +1,150 @@
+<!-- title: Product tour | Relyxus -->
+<style>
+.pt-hero .win{margin-top:72px}
+.pt-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:64px}
+.pt-st{position:relative;border-radius:22px;padding:24px;border:1px solid #E3E8EF;background:#fff;min-height:330px;display:flex;flex-direction:column}
+.pt-st .tm{font-family:var(--display);font-weight:600;font-size:34px;letter-spacing:-.04em;line-height:1}
+.pt-st .nm{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;margin-top:18px}.pt-st .nm i{width:10px;height:10px;border-radius:3px}
+.pt-st h3{font-size:22px;margin-top:6px}.pt-st p{font-size:14.5px;line-height:1.5;color:#2B3340;margin-top:10px}
+.pt-st .ev{margin-top:auto;padding-top:16px;border-top:1px solid #EEF1F5;font-size:13px;color:#2B3340}.pt-st .ev b{display:block;color:#0A0C10;font-size:14px}
+.pt-st.on{background:#0A0C10;border-color:#0A0C10;color:#fff}.pt-st.on h3{color:#fff}.pt-st.on p,.pt-st.on .ev{color:#D4DBE5}.pt-st.on .ev{border-color:#232C3C}.pt-st.on .ev b{color:#fff}
+.pt-arrow{position:absolute;right:-12px;top:50%;width:22px;height:22px;border-radius:50%;background:#fff;border:1px solid #E3E8EF;z-index:2;display:grid;place-items:center;font-size:12px}
+.esc{padding:18px}
+.esc .row{display:grid;grid-template-columns:70px 34px 1fr 110px;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid #1A2230;font-size:14px}.esc .row:last-child{border:0}
+.esc .row em{font-style:normal;color:#C9D3E3;font-size:13px}.esc .row small{display:block;color:#C9D3E3;font-size:12.5px}
+.esc .row .s{justify-self:end;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px}
+.esc .s.p{background:#3A1A12;color:#FFB199}.esc .s.w{background:#1C2433;color:#E9EEF5}.esc .s.o{background:#123326;color:#8BE6BE}
+.esc .ft{margin-top:12px;padding:12px 14px;border-radius:12px;background:#123326;color:#8BE6BE;font-size:13.5px;font-weight:600}
+.hyb .hy{display:grid;grid-template-columns:26px 1fr 160px 48px;gap:12px;align-items:center;padding:14px 18px;border-bottom:1px solid #1A2230;font-size:14.5px}.hyb .hy:last-child{border:0}
+.hyb .hy small{display:block;font-size:12.5px;color:#C9D3E3;margin-top:2px}.hyb u{display:block;height:7px;border-radius:4px;background:#1C2433;overflow:hidden}.hyb u s{display:block;height:100%;background:linear-gradient(90deg,#FF6B4A,#FFB199)}
+.hyb strong{text-align:right}
+.src{display:flex;flex-wrap:wrap;gap:8px;padding:14px 18px;border-top:1px solid #1A2230}.src span{font-size:12.5px;padding:6px 11px;border-radius:999px;background:#141B28;border:1px solid #2A3548;color:#E9EEF5}
+.apv{padding:22px}
+.apv .ch{display:flex;justify-content:space-between;align-items:center}.apv h4{margin:0;font-size:19px}
+.apv .rule{margin-top:14px;padding:12px 14px;border-radius:12px;background:#F3F5F9;font-size:13.5px;color:#2B3340}
+.apv .chk{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.apv .chk span{display:flex;align-items:center;gap:8px;font-size:13px;padding:9px 11px;border-radius:10px;border:1px solid #E3E8EF}.apv .chk span:before{content:'';width:8px;height:8px;border-radius:50%;background:#3DAE80}
+.apv .vr{margin-top:14px;padding:14px;border-radius:12px;background:#0A0C10;color:#fff;font-size:13.5px}
+.apv .vr svg{display:block;margin-top:8px}
+.pt-out .gc{min-height:470px;display:flex;flex-direction:column}
+.pt-out .gc .glass{margin-top:auto}
+.pt-out .gc .glass .fr{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid rgba(10,12,16,.08)}.pt-out .gc .glass .fr:last-child{border:0}
+.pt-pr{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:16px;margin-top:64px}
+.pt-pr .cd{min-height:300px;display:flex;flex-direction:column}
+.pt-pr .cd .ft{margin-top:auto;padding-top:18px;font-size:13.5px;color:#C9D3E3;border-top:1px solid #232C3C}
+.pt-cap{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#E3E8EF;border:1px solid #E3E8EF;border-radius:22px;overflow:hidden;margin-top:56px}
+.pt-cap div{background:#fff;padding:26px 24px;min-height:150px}
+.pt-cap b{display:block;font-size:17px}.pt-cap span{display:block;font-size:14px;color:#2B3340;margin-top:6px;line-height:1.5}
+.pt-cap i{display:block;width:30px;height:4px;border-radius:2px;margin-bottom:18px}
+.pt-dep{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:56px}
+.pt-dep .cd{min-height:200px}.pt-dep b{font-family:var(--display);font-size:30px;font-weight:600;letter-spacing:-.03em;display:block}
+.pt-src{display:flex;align-items:center;gap:14px;padding:20px 26px;border-radius:18px;background:#0A0C10;color:#fff;font-size:17px;max-width:620px;margin-left:auto;margin-right:auto}
+.pt-src .pt-meta{margin-left:auto;font-size:13.5px;color:#C9D3E3}
+.pt-fan{height:70px}.pt-fan svg{width:100%;height:100%}
+.pt-close{padding:0!important;min-height:720px;position:relative}
+.pt-shot{position:absolute;right:-120px;top:80px;width:1000px;opacity:.9;border-radius:22px;overflow:hidden;transform:perspective(1400px) rotateY(-14deg);box-shadow:0 60px 120px rgba(0,0,0,.6)}
+.pt-shot img{display:block;width:100%}
+.pt-close:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#05070C 38%,rgba(5,7,12,.05) 75%);pointer-events:none}
+.pt-ov{position:relative;z-index:2;padding-top:210px!important;max-width:1312px}
+</style>
+
+<section class="KF hero pt-hero" aria-label="Product tour"><div class="w">
+ <div class="cen"><h1>One platform for <span class="fl">the whole outage.</span></h1>
+ <p class="lead c">From the first alert to the signed regulator report, Relyxus runs the night your systems fail. It sits inside your own cloud, and nothing happens without your people.</p>
+ <div class="bts"><span class="b1">Book a demo</span><span class="b2">Open the live demo</span></div></div>
+ <div class="win"><div class="cs"><div class="sd"><div class="lg"><i>R</i>RELYXUS</div><div class="it on"><span>Command centre</span></div><div class="it"><span>Incidents</span><b>1</b></div><div class="it"><span>On call</span></div><div class="it"><span>Approvals</span><b>1</b></div><div class="it"><span>Regulators</span></div><div class="it"><span>Status pages</span></div><div class="it"><span>Evidence</span></div><div class="it"><span>Drills</span></div><div class="it"><span>Connectors</span><span>36</span></div></div>
+  <div class="mn"><div class="gr"><div><b>Good evening, Emma</b><small>One severity 1 needs you. Vigil has a likely cause.</small></div><span class="bt">Join war room</span></div>
+   <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:14px">
+    <div class="pn"><div class="pt"><span>Happening now</span><span>Sample incident</span></div>
+     <div class="inc"><div class="t"><span class="sev">SEV1</span>INC 2047<span style="margin-left:auto">Started 03:12, 9 min ago</span></div><h4>Card authorisation failures, United Kingdom</h4>
+      <div class="stg"><i class="d"></i><i class="d"></i><i class="c"></i><i></i><i></i></div><div class="stl"><span>Spotted</span><span>Team on it</span><b>Fixing</b><span>Recovered</span><span>Resolved</span></div>
+      <div class="kv"><div><b>18,400</b>customers affected</div><div><b>GBP 184,000</b>payments at risk</div><div><b>3 in the room</b>commander, comms, ops</div></div></div>
+     <div class="rr" style="margin-top:12px"><span>Vigil: release 4.18.2 is the likely cause</span><em class="co">92% confident</em></div>
+     <div class="rr"><span>Rollback to 4.18.1</span><em>1 of 2 approvals</em></div></div>
+    <div><div class="pn"><div class="pt"><span>Regulator clocks</span><span>4 running</span></div>
+      <div class="rr"><span>MAS, Singapore</span><em class="co">38 min left</em></div><div class="rr"><span>FCA, United Kingdom</span><em>23h 41m</em></div><div class="rr"><span>DORA, Ireland</span><em>3h 50m</em></div><div class="rr"><span>US banks</span><em>35h 48m</em></div></div>
+     <div class="pn" style="margin-top:14px"><div class="pt"><span>On call now</span></div>
+      <div class="who"><span class="av c">ST</span><div>Sam Taylor<small>Payments, primary</small></div><em class="ok">Took it 03:14</em></div><div class="who"><span class="av s">EC</span><div>Emma Clarke<small>Duty manager</small></div><em>Approver</em></div></div></div>
+   </div></div></div></div>
+ <div class="pbar" style="margin-left:auto;margin-right:auto"><span>Respond</span><span>Understand</span><span>Fix safely</span><span>Tell people</span><span>Prove it</span><span>Runs in your cloud</span></div>
+</div></section>
+
+<section class="L" aria-label="Five jobs, one timeline"><div class="w">
+ <div class="top2"><div><h2>Five jobs. <span>One timeline.</span></h2><p class="lead">Every outage asks the same five things of your team. Relyxus does each one inside the same incident, so nothing is copied, chased or lost.</p></div><span class="chip np">Sample night, times in UTC</span></div>
+ <div class="pt-flow">
+  <div class="pt-st"><div class="tm">03:12</div><div class="nm"><i style="background:#FF6B4A"></i>Respond</div><h3>One owner in seconds</h3><p>412 alerts become one incident. The right person is paged by Slack, text and a real phone call.</p><div class="ev"><b>Sam took it at 03:14</b>Two people slept through it</div></div>
+  <div class="pt-st"><div class="tm">03:16</div><div class="nm"><i style="background:#5C4EE5"></i>Understand</div><h3>The cause, with proof</h3><p>Vigil reads your changes, alerts, metrics and logs, and ranks the likely causes with evidence.</p><div class="ev"><b>Release 4.18.2, 92%</b>Three sources cited</div></div>
+  <div class="pt-st on"><div class="tm">03:19</div><div class="nm"><i style="background:#F2C27B"></i>Fix safely</div><h3>Two keys on every fix</h3><p>Relyxus runs the rollback once two named people approve, then checks it worked.</p><div class="ev"><b>Recovered at 03:23</b>Rollback verified in 4 minutes</div></div>
+  <div class="pt-st"><div class="tm">03:21</div><div class="nm"><i style="background:#9FB4D6"></i>Tell people</div><h3>Everyone told, first</h3><p>Status page, customer notice and every regulator report, drafted from the live incident.</p><div class="ev"><b>FCA draft ready</b>Waiting for your signature</div></div>
+  <div class="pt-st"><div class="tm">Friday</div><div class="nm"><i style="background:#3DAE80"></i>Prove it</div><h3>So it never repeats</h3><p>Board report, replay, drills against your impact tolerances, and an auditor room.</p><div class="ev"><b>Board pack sent</b>Every decision on the record</div></div>
+ </div></div></section>
+
+<section class="M" aria-label="Respond"><div class="w">
+ <div class="top2"><div><div class="kick"><i style="background:#FF6B4A"></i>Respond</div><h2>Wake one person. <span>Let everyone else sleep.</span></h2><p class="lead">Rotas, quiet hours and time off live in Relyxus. The right person is reached by Slack, text, email or a real phone call, and the next one only if they do not answer.</p></div><span class="tl1">See how Respond works</span></div>
+ <div class="real mt"><div class="rb"><i></i><i></i><i></i><b style="color:#fff;margin-left:8px">On call</b><span>Real console, demo workspace</span></div><img src="/media/console/on-call.jpg" alt="The Relyxus on call screen with rotas for a week"></div>
+</div></section>
+
+<section class="K" aria-label="Understand"><div class="w"><div class="feat rev">
+ <div><div class="kick"><i style="background:#5C4EE5"></i>Understand</div><h2>Find the cause <span>before the bridge call starts.</span></h2>
+  <p class="lead">Vigil, the AI investigator inside Relyxus, ranks the likely causes and shows the evidence for each. When it is not sure, it says so.</p>
+  <ul class="ul"><li><b>Every claim cites its source:</b> a release, a metric, a log line</li><li><b>Account numbers are redacted</b> before any text reaches the model</li><li><b>It runs inside your cloud,</b> and it cannot act on its own</li></ul>
+  <span class="lk" style="color:#fff">Meet Vigil</span></div>
+ <div class="win hyb"><div class="wh"><b>Vigil, likely causes</b><span>INC 2047, sample</span></div>
+  <div class="hy"><b>1</b><div><b>Release 4.18.2, card authorisation</b><small>Deployed 03:10, two minutes before the first error</small></div><u><s style="width:92%"></s></u><strong>92%</strong></div>
+  <div class="hy"><span>2</span><div>Database connection pool<small>Saturation rose after the errors began</small></div><u><s style="width:6%"></s></u><strong>6%</strong></div>
+  <div class="hy"><span>3</span><div>Card network upstream<small>Its status page reports no issue</small></div><u><s style="width:2%"></s></u><strong>2%</strong></div>
+  <div class="src"><span>Change: terraform apply 03:10:08</span><span>Metric: error rate 0.2% to 38%</span><span>Test: auth timeout failed Tuesday</span></div></div>
+</div></div></section>
+
+<section class="L" aria-label="Fix safely"><div class="w">
+ <div class="cen"><div class="kick" style="justify-content:center"><i style="background:#F2C27B"></i>Fix safely</div><h2>Every fix gets <span>two keys.</span></h2><p class="lead c">The real approval screen: what will happen, what it affects, who has signed and what is still needed.</p></div>
+ <div class="anno mt" style="max-width:940px;margin-left:auto;margin-right:auto">
+  <div class="real"><div class="rb"><i></i><i></i><i></i><b style="color:#fff;margin-left:8px">Restart payments api</b><span>Real console, demo workspace</span></div><img src="/media/console/approvals_approval-restart-payments-api.jpg" alt="A Relyxus approval request needing two approvals"></div>
+  <div class="co" style="left:-200px;top:110px"><em>1</em><b>The exact command</b>What will run, where, and the expected result.</div>
+  <div class="co" style="left:-180px;bottom:80px"><em>2</em><b>The effect</b>Which services and customers it touches.</div>
+  <div class="co" style="right:-200px;top:130px"><em>3</em><b>Two approvals</b>From different roles. The proposer can never approve.</div>
+ </div></div></section>
+
+<section class="M" aria-label="Tell people"><div class="w">
+ <div class="kick"><i style="background:#9FB4D6"></i>Tell people</div><h2>One record. <span>Every message drafted from it.</span></h2><p class="lead">Customers, regulators and clients get the same facts, because every message comes from the same incident record. Nothing is sent until a person signs it.</p>
+ <div class="pt-src mt"><span class="dot co"></span><b>INC 2047, the incident record</b><span class="pt-meta">Timeline, impact, cause, actions, decisions</span></div>
+ <div class="pt-fan"><svg viewBox="0 0 1184 70" preserveAspectRatio="none"><path d="M592 0 C592 40 197 30 197 70 M592 0 L592 70 M592 0 C592 40 987 30 987 70" stroke="#9FB4D6" stroke-width="2" fill="none"/></svg></div>
+ <div class="g3">
+  <div class="doc"><div class="dh"><span>Status page</span><span>Public</span></div><h4>Card payments degraded</h4><div class="fr"><span>Affected</span><b>Card payments</b></div><div class="fr"><span>Next update</span><b>03:45</b></div><div class="sg"><span>Signed by Raj Kapoor</span><span>Published 03:24</span></div></div>
+  <div class="doc"><div class="dh"><span>FCA initial report</span><span>Regulator</span></div><h4>Card authorisation failures</h4><div class="fr"><span>Threshold met</span><b>10:11 UTC</b></div><div class="fr"><span>Customers affected</span><b>18,400</b></div><div class="sg"><span>Waiting for Emma Clarke</span><span>Draft</span></div></div>
+  <div class="doc"><div class="dh"><span>Client notice</span><span>12 business clients</span></div><h4>Service disruption notice</h4><div class="fr"><span>Contract deadline</span><b>4 hours</b></div><div class="fr"><span>Status</span><b>Fix applied</b></div><div class="sg"><span>Waiting to sign</span><span>Draft</span></div></div>
+ </div></div></section>
+
+<section class="K" aria-label="Prove it"><div class="w">
+ <div class="kick"><i style="background:#3DAE80"></i>Prove it</div><h2>The proof your board <span>and auditors ask for.</span></h2>
+ <div class="pt-pr">
+  <div class="cd"><h3>Board report</h3><p>What happened, what it cost, who decided what and what changes next. Written from the record, not from memory.</p><div class="doc" style="margin-top:22px;padding:18px 20px;box-shadow:none"><div class="dh"><span>Board report, INC 2047</span><span>Example</span></div><div class="fr"><span>Customers affected</span><b>18,400</b></div><div class="fr"><span>Time to recover</span><b>11 minutes</b></div><div class="fr"><span>Regulator reports</span><b>4 of 4 on time</b></div></div></div>
+  <div class="cd"><h3>Replay and review</h3><p>Every minute of the incident, replayed, with the review drafted for your team to finish.</p><div style="margin-top:22px;display:grid;gap:9px;font-size:13px;color:#D4DBE5"><div style="display:grid;grid-template-columns:120px 1fr 44px;gap:10px;align-items:center">Arguing<u style="display:block;height:7px;border-radius:4px;background:#FF6B4A;width:100%"></u><b>70m</b></div><div style="display:grid;grid-template-columns:120px 1fr 44px;gap:10px;align-items:center">Waiting to approve<u style="display:block;height:7px;border-radius:4px;background:#FFB199;width:44%"></u><b>31m</b></div><div style="display:grid;grid-template-columns:120px 1fr 44px;gap:10px;align-items:center">Nobody owned it<u style="display:block;height:7px;border-radius:4px;background:#9FB4D6;width:24%"></u><b>17m</b></div></div><div class="ft">Minutes your old process lost, example</div></div>
+  <div class="cd"><h3>Drills and auditor room</h3><p>Test your important services against their impact tolerances, and give auditors a read only room with the evidence.</p><div style="margin-top:22px;display:grid;gap:10px;font-size:13px"><div class="rr"><span>Card payments, tolerance 2h</span><em class="ok">Recovered in 11m</em></div><div class="rr"><span>Online banking, tolerance 4h</span><em class="ok">Drill passed</em></div><div class="rr"><span>Faster payments, tolerance 1h</span><em class="co">Drill due</em></div></div><div class="ft">Evidence locked for seven years</div></div>
+ </div></div></section>
+
+<section class="L" aria-label="Everything around it"><div class="w">
+ <h2>Built for how <span>regulated teams really work.</span></h2><p class="lead">The details that matter at three in the morning, already built in.</p>
+ <div class="pt-cap">
+  <div><i style="background:#FF6B4A"></i><b>Wall mode</b><span>The command centre on your operations screens</span></div>
+  <div><i style="background:#9FB4D6"></i><b>Group view</b><span>Every brand and entity in one picture</span></div>
+  <div><i style="background:#5C4EE5"></i><b>Vigil voice</b><span>Phone calls to on call people, through your own provider</span></div>
+  <div><i style="background:#3DAE80"></i><b>Private incidents</b><span>Fraud and security cases only named people can open</span></div>
+  <div><i style="background:#F2C27B"></i><b>Change windows</b><span>Freezes and approved windows, enforced</span></div>
+  <div><i style="background:#FF6B4A"></i><b>Customer impact</b><span>Customers affected and payments at risk, live</span></div>
+  <div><i style="background:#9FB4D6"></i><b>Runbooks</b><span>Your steps, attached to the incident they fix</span></div>
+  <div><i style="background:#5C4EE5"></i><b>Service levels</b><span>Objectives and error budgets for every service</span></div>
+  <div><i style="background:#3DAE80"></i><b>DORA register</b><span>Your register of information, kept current</span></div>
+  <div><i style="background:#F2C27B"></i><b>Questionnaires</b><span>Vendor questionnaires answered from the live install</span></div>
+  <div><i style="background:#FF6B4A"></i><b>Stakeholder updates</b><span>Executives updated on a schedule you set</span></div>
+  <div><i style="background:#9FB4D6"></i><b>Single sign on</b><span>SAML, OIDC, SCIM and passkeys</span></div>
+ </div></div></section>
+
+<section class="L" aria-label="Runs in your cloud"><div class="w">
+ <h2>It runs in your cloud. <span>Not ours.</span></h2><p class="lead">Your incident data never leaves your walls. Apporine has no standing access.</p>
+ <div class="words mt"><span>AWS</span><span class="o">Azure</span><span>Kubernetes</span><span class="o">Air gapped</span></div>
+ <p class="note">Installed into your own account with one script or a Helm chart, in the region you choose. Air gapped installs run models inside the install.</p></div></section>
+
+<section class="N pt-close" aria-label="See it run"><div class="pt-shot"><img src="/media/console/home.jpg" alt=""></div><div class="w pt-ov">
+ <h2 style="font-size:72px">See it run <span>on a real night.</span></h2><p class="lead">Open the live demo, or send us one of your incidents and we will replay it.</p>
+ <div class="bts"><span class="b1">Book a demo</span><span class="b2">Open the live demo</span></div></div></section>

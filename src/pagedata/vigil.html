@@ -1,0 +1,136 @@
+<!-- title: Vigil, the AI investigator | Relyxus -->
+<style>
+.vg-brief{padding:0}
+.vg-brief .sec{padding:16px 20px;border-bottom:1px solid #1A2230}.vg-brief .sec:last-child{border:0}
+.vg-brief .lb{font-size:12px;font-weight:600;color:#BFD0EE;margin-bottom:8px}
+.vg-brief .big1{font-family:var(--display);font-size:24px;font-weight:600;letter-spacing:-.02em;line-height:1.2}
+.vg-brief .cf{display:flex;align-items:center;gap:12px;margin-top:12px}.vg-brief .cf u{flex:1;height:8px;border-radius:4px;background:#1C2433;overflow:hidden}.vg-brief .cf s{display:block;height:100%;width:92%;background:linear-gradient(90deg,#FF6B4A,#FFB199)}
+.vg-ev{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.vg-ev div{border:1px solid #2A3548;border-radius:12px;padding:11px;font-size:12.5px;color:#C9D3E3;background:#0B0F18}.vg-ev b{display:block;color:#fff;font-size:13.5px;margin-top:3px}
+.vg-src{display:grid;grid-template-columns:1fr 160px 1fr;gap:30px;align-items:center;margin-top:64px}
+.vg-ins{display:flex;flex-direction:column;gap:10px}
+.vg-ins div{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;border-radius:16px;border:1px solid #E3E8EF;background:#fff;font-size:16px;font-weight:600}.vg-ins div span{font-size:13px;font-weight:500;color:#2B3340}
+.vg-core{position:relative;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#B9C8F0,#5C4EE5 70%);display:grid;place-items:center;color:#fff;font-family:var(--display);font-size:30px;font-weight:650;box-shadow:0 0 0 14px rgba(92,78,229,.10),0 0 0 30px rgba(92,78,229,.05),0 30px 60px rgba(92,78,229,.35)}
+.vg-out{border-radius:20px;background:#0B0F18;color:#fff;padding:22px;box-shadow:0 30px 70px rgba(15,25,45,.25)}
+.vg-out p{font-size:15px;line-height:1.55;color:#E9EEF5}.vg-out sup{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:5px;background:#3F66B0;color:#fff;font-size:11px;font-weight:700;vertical-align:2px;margin-left:2px}
+.vg-out .cit{margin-top:16px;display:grid;gap:8px}.vg-out .cit div{display:grid;grid-template-columns:22px 1fr;gap:10px;font-size:13px;color:#C9D3E3;padding:10px;border-radius:10px;background:#121826}.vg-out .cit i{display:grid;place-items:center;width:20px;height:20px;border-radius:5px;background:#3F66B0;color:#fff;font-style:normal;font-size:11px;font-weight:700}
+.vg-unsure{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:64px}
+.vg-unsure .win{padding:0}
+.vg-unsure .msg{padding:22px;font-size:15.5px;line-height:1.55;color:#E9EEF5}
+.vg-unsure .ask{margin:0 22px 22px;display:flex;gap:8px;flex-wrap:wrap}.vg-unsure .ask span{font-size:13px;padding:8px 12px;border-radius:999px;border:1px solid #2A3548}
+.vg-q{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:56px}
+.vg-q .cd{padding:26px}
+.vg-q .qq{display:inline-block;background:#0A0C10;color:#fff;border-radius:14px 14px 14px 4px;padding:12px 15px;font-size:15px;font-weight:500}
+.vg-q .aa{margin-top:16px;font-size:15px;line-height:1.55;color:#1F2630}.vg-q .aa b{color:#0A0C10}
+.vg-q .ft{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}
+.vg-lad{margin-top:64px;display:grid;grid-template-columns:repeat(5,1fr);gap:12px;align-items:end}
+.vg-l{border-radius:20px;padding:24px;border:1px solid #232C3C;background:#0E131D;display:flex;flex-direction:column}
+.vg-l em{font-style:normal;font-family:var(--display);font-weight:600;font-size:40px;letter-spacing:-.04em}
+.vg-l b{font-size:18px;margin-top:10px}.vg-l span{font-size:14px;color:#D4DBE5;margin-top:6px;line-height:1.5}
+.vg-l .chip{margin-top:18px;align-self:flex-start}
+.vg-l.off{border-style:dashed;background:transparent}.vg-l.off em,.vg-l.off b{color:#9FB4D6}
+.vg-ho .doc{padding:30px 34px}
+.vg-ho .doc p{font-size:14px;line-height:1.6;color:#1F2630;margin-top:10px}
+.vg-ho .doc ul{margin:10px 0 0;padding-left:18px;font-size:14px;line-height:1.7;color:#1F2630}
+.vg-call{width:380px;margin:0 auto;border-radius:34px;background:#0B0F18;border:1px solid #2A3548;padding:34px 28px;text-align:center;box-shadow:0 40px 90px rgba(0,0,0,.5)}
+.vg-call .ring{width:92px;height:92px;margin:0 auto;border-radius:50%;background:linear-gradient(135deg,#9FB4D6,#5C4EE5);display:grid;place-items:center;font-family:var(--display);font-size:34px;font-weight:650;box-shadow:0 0 0 12px rgba(92,78,229,.15),0 0 0 26px rgba(92,78,229,.07)}
+.vg-call h4{margin:22px 0 4px;font-size:22px}.vg-call p{font-size:14px;color:#C9D3E3}
+.vg-call .say{margin-top:20px;padding:14px;border-radius:14px;background:#141B28;font-size:14px;line-height:1.5;color:#E9EEF5;text-align:left}
+.vg-call .bb{display:flex;gap:10px;margin-top:20px}.vg-call .bb span{flex:1;padding:13px;border-radius:999px;font-size:14px;font-weight:600}
+.vg-gov .cd{min-height:220px}
+.vg-conv{max-width:880px;margin:56px auto 0}
+.vg-q2{margin-left:auto;max-width:560px;background:#fff;color:#0A0C10;border-radius:22px 22px 6px 22px;padding:18px 22px;font-size:19px;font-weight:500;box-shadow:0 20px 40px rgba(0,0,0,.35)}
+.vg-a2{display:flex;gap:14px;align-items:flex-start;margin-top:22px}
+.vg-callw{display:grid;grid-template-columns:1fr 380px 1fr;gap:40px;align-items:center;margin-top:56px}
+.vg-cap b{display:block;font-size:20px;color:#fff}.vg-cap span{display:block;font-size:15px;color:#D4DBE5;margin-top:6px}
+.vg-ask{max-width:780px;margin:40px auto 0;display:flex;align-items:center;gap:14px;padding:12px 12px 12px 26px;border-radius:999px;background:#fff;border:1px solid #DDE3EA;box-shadow:0 30px 60px rgba(15,25,45,.15);font-size:19px;color:#2B3340;text-align:left}
+.vg-ask span{flex:1}.vg-ask b{padding:15px 24px;border-radius:999px;background:#0A0C10;color:#fff;font-size:15.5px}
+.vg-sug{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:18px}.vg-sug span{font-size:14px;padding:9px 14px;border-radius:999px;background:rgba(255,255,255,.8);border:1px solid #E3E8EF}
+</style>
+
+<section class="KF hero" aria-label="Vigil"><div class="w">
+ <div class="cen"><div class="kick" style="justify-content:center"><i style="background:#5C4EE5"></i>Vigil, the AI investigator inside Relyxus</div>
+  <h1>AI you can defend <span class="fl">to your regulator.</span></h1>
+  <p class="lead c">Vigil finds the cause, shows every piece of evidence it used and drafts the fix. It runs inside your cloud, never sees account numbers, and nothing runs until your people approve.</p></div>
+ <div class="vg-conv">
+  <div class="vg-q2">Card payments are failing across the UK. What changed in the last hour?</div>
+  <div class="vg-a2"><span class="av v" style="width:38px;height:38px">V</span><div class="win vg-brief" style="flex:1"><div class="wh"><b>Vigil brief, INC 2047</b><span>03:16, sample</span></div>
+   <div class="sec"><div class="lb">Most likely cause</div><div class="big1">Release 4.18.2 of card authorisation, deployed at 03:10</div><div class="cf"><u><s></s></u><b>92% confident</b></div></div>
+   <div class="sec"><div class="lb">Evidence, 3 sources</div><div class="vg-ev"><div>Change<b>Deployed 03:10:08</b></div><div>Metric<b>Errors 0.2% to 38%</b></div><div>Test<b>Failed in staging</b></div></div></div>
+   <div class="sec" style="display:flex;justify-content:space-between;align-items:center"><div><div class="lb" style="margin:0">Suggested fix</div><b style="font-size:16px">Roll back to 4.18.1</b></div><span class="chip co">Send for approval</span></div></div></div>
+ </div>
+ <div class="pbar" style="margin-left:auto;margin-right:auto"><span>What it reads</span><span>Ranked causes</span><span>Ask anything</span><span>What it may do</span><span>Handover</span><span>Voice</span><span>Your model</span></div>
+</div></section>
+
+<section class="M" aria-label="What Vigil reads"><div class="w">
+ <div class="cen"><h2>It reads everything you already run. <span>It answers with sources.</span></h2>
+ <p class="lead c">Vigil reads your changes, alerts, metrics, logs and tickets through the connectors you already have, then explains what happened in plain words, with a citation for every claim.</p></div>
+ <div class="vg-src">
+  <div class="vg-ins"><div>Changes<span>Deploys, Terraform, feature flags</span></div><div>Alerts<span>412 grouped into one incident</span></div><div>Metrics<span>Prometheus, CloudWatch, Datadog</span></div><div>Logs<span>Loki, Splunk, Elastic</span></div><div>Tickets and runbooks<span>Your own know how</span></div></div>
+  <div style="display:grid;place-items:center"><div class="vg-core">V</div></div>
+  <div class="vg-out"><p>Card authorisation started failing at 03:12, two minutes after release 4.18.2 went out<sup>1</sup>. The error rate rose from 0.2% to 38%<sup>2</sup>, and the same change failed a timeout test in staging on Tuesday<sup>3</sup>.</p>
+   <div class="cit"><div><i>1</i>terraform apply card_auth v4.18.2, 03:10:08</div><div><i>2</i>card_auth error rate, Prometheus</div><div><i>3</i>test_auth_timeout FAILED, build 8812</div></div></div>
+ </div></div></section>
+
+<section class="K" aria-label="Ranked causes"><div class="w">
+ <h2>Ranked causes, real confidence. <span>And when it is not sure, it says so.</span></h2>
+ <p class="lead">Vigil does not guess to sound helpful. Below your confidence threshold, it tells you what it needs and who should look.</p>
+ <div class="vg-unsure">
+  <div class="win"><div class="wh"><b>Confident</b><span class="chip ok" style="color:#17694A">Above your 85% threshold</span></div>
+   <div class="msg">Release 4.18.2 is the cause, at <b>92% confidence</b>. Three independent sources agree. I have drafted a rollback to 4.18.1 for your approvers.</div>
+   <div class="ask"><span>Show the evidence</span><span>Who approved 4.18.2?</span></div></div>
+  <div class="win"><div class="wh"><b>Not sure</b><span class="chip nx">Below threshold</span></div>
+   <div class="msg">I am <b>48% confident</b> the settlement delay comes from the upstream bank. I cannot see their side. I suggest asking the treasury on call to check the payment queue, and I have not drafted a fix.</div>
+   <div class="ask"><span>Page treasury on call</span><span>What would raise confidence?</span></div></div>
+ </div>
+ <p class="note">Examples. The threshold is yours to set, per action and per service.</p>
+</div></section>
+
+<section class="L" aria-label="Ask anything"><div class="w">
+ <div class="top2"><div><h2>Ask it anything <span>about the incident.</span></h2><p class="lead">This is the real Vigil, in our demo workspace. Your commander, your comms lead and your compliance team each get the answer they need from the same record.</p></div><span class="chip np">Real console, demo workspace</span></div>
+ <div class="real mt"><div class="rb"><i></i><i></i><i></i><b style="color:#fff;margin-left:8px">Ask Vigil</b><span>Recorded in Relyxus</span></div><img src="/media/console/vigil_ask.jpg" alt="Vigil answering why card payments are failing, with sources"></div>
+</div></section>
+
+<section class="K" aria-label="What Vigil may do"><div class="w">
+ <h2>You decide how far <span>Vigil may go.</span></h2><p class="lead">Set a level for each kind of fix and each service. Every level keeps a person in charge, and the highest one is not even on offer.</p>
+ <div class="vg-lad">
+  <div class="vg-l" style="min-height:250px"><em>L0</em><b>Observe</b><span>Diagnoses only. Nothing is proposed.</span></div>
+  <div class="vg-l" style="min-height:290px"><em>L1</em><b>Suggest</b><span>The exact command and its expected effect. A person runs it.</span><span class="chip np">Database failover stays here</span></div>
+  <div class="vg-l" style="min-height:330px"><em>L2</em><b>One click</b><span>One named person approves. Relyxus runs it and checks it worked.</span></div>
+  <div class="vg-l" style="min-height:370px;border-color:#5A3326;background:#1A1410"><em>L3</em><b>Four eyes</b><span>Two people from different roles approve. The proposer never can.</span><span class="chip co">Our advice for production</span></div>
+  <div class="vg-l off" style="min-height:410px"><em>L4</em><b>Fully automatic</b><span>Not offered. Every action is capped at four eyes.</span><span class="chip np">By design</span></div>
+ </div></div></section>
+
+<section class="M vg-ho" aria-label="Handover"><div class="w"><div class="feat">
+ <div><h2>The handover <span>writes itself.</span></h2><p class="lead">When the shift changes, the next person gets a brief: what happened, what was tried, what is waiting and who to call. No one has to read two hours of chat.</p>
+  <ul class="ul"><li><b>Briefs for the next shift,</b> the executive team and the board</li><li><b>Every line links</b> to the record it came from</li><li><b>Reviewed by a person</b> before it goes anywhere</li></ul></div>
+ <div class="doc"><div class="dh"><span>Shift handover, INC 2047</span><span>Drafted by Vigil, 07:00</span></div>
+  <h4>Card payments recovered, monitoring continues</h4>
+  <p>Card authorisation failed from 03:12 to 03:23 after release 4.18.2. The rollback to 4.18.1 was approved by Emma Clarke and Daniel Reyes and verified at 03:23.</p>
+  <ul><li>Waiting: FCA initial report, needs Emma's signature</li><li>Waiting: customer notice to 12 business clients</li><li>Watch: settlement queue, back to normal at 04:10</li><li>Call: Sam Taylor if errors return</li></ul>
+  <div class="sg"><span>Reviewed by Raj Kapoor, 07:04</span><span>3 sources</span></div></div>
+</div></div></section>
+
+<section class="N" aria-label="Vigil voice"><div class="w">
+ <div class="cen"><h2>Vigil calls <span>the right person.</span></h2><p class="lead c">A real phone call, through your own telephony provider, that explains what is wrong before anyone opens a laptop.</p></div>
+ <div class="vg-callw">
+  <div class="vg-cap" style="text-align:right"><b>Press 1 to take it</b><span>Press 2 to pass it to the next person</span></div>
+  <div class="vg-call"><div class="ring">V</div><h4>Vigil, Relyxus</h4><p>Incoming call, 03:12</p>
+   <div class="say">"Card payments are failing in the UK. Severity 1. The likely cause is last night's release. You are primary on call for payments."</div>
+   <div class="bb"><span style="background:#3DAE80;color:#0A0C10">1 Take it</span><span style="background:#1C2433;color:#fff">2 Pass on</span></div></div>
+  <div class="vg-cap"><b>Your provider, your numbers</b><span>Every call recorded in the incident timeline</span></div>
+ </div></div></section>
+
+<section class="L" aria-label="Your model, your rules"><div class="w" style="display:grid;grid-template-columns:420px 1fr;gap:72px">
+ <div><h2>Your model, <span>your rules.</span></h2><p class="lead">The questions your model risk team will ask, answered.</p></div>
+ <div class="tb"><div class="tr h" style="grid-template-columns:1fr 1.3fr"><span>Question</span><span>Answer</span></div>
+  <div class="tr" style="grid-template-columns:1fr 1.3fr"><b>Where does the model run?</b><span>Inside your install. An outside model is used only if you switch it on.</span></div>
+  <div class="tr" style="grid-template-columns:1fr 1.3fr"><b>What can it see?</b><span>Changes, alerts, metrics and logs, after account numbers are redacted.</span></div>
+  <div class="tr" style="grid-template-columns:1fr 1.3fr"><b>Is every answer recorded?</b><span>Yes. The question, the sources and the answer go to your audit log.</span></div>
+  <div class="tr" style="grid-template-columns:1fr 1.3fr"><b>How do we know it is right?</b><span>AI quality reports show how often Vigil was right, and where it was not.</span></div>
+  <div class="tr" style="grid-template-columns:1fr 1.3fr"><b>Can it act on its own?</b><span>No. Every action needs approval, capped at four eyes.</span></div>
+ </div></div></section>
+
+<section class="LF close" aria-label="Ask Vigil"><div class="w">
+ <h2>Ask Vigil about <span>a real incident.</span></h2>
+ <div class="vg-ask"><span>Why did card payments fail last night?</span><b>Ask in the live demo</b></div>
+ <div class="vg-sug"><span>What do we owe the FCA?</span><span>Who is affected?</span><span>Has this happened before?</span><span>Draft the customer notice</span></div></div></section>

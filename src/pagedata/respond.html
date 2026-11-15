@@ -1,0 +1,119 @@
+<!-- title: Respond: paging, on call and war room | Relyxus -->
+<style>
+.rs-hero{padding-bottom:0!important;min-height:980px}
+.rs-stage{position:relative;height:620px;margin-top:56px}
+.rs-stage .phone{position:absolute;left:50%;top:0;margin-left:-170px}
+.rs-zz{position:absolute;top:150px;width:260px;padding:20px;border-radius:20px;background:#0E131D;border:1px solid #232C3C;color:#D4DBE5;font-size:14px}
+.rs-zz .who{border:0;padding:0}.rs-zz b.z{display:block;font-family:var(--display);font-size:30px;color:#9FB4D6;margin-top:14px;letter-spacing:-.02em}
+.rs-noise{display:grid;grid-template-columns:1fr 120px 1fr;gap:24px;align-items:center;margin-top:64px}
+.rs-al{display:flex;flex-direction:column;gap:6px;max-height:440px;overflow:hidden;-webkit-mask:linear-gradient(#000 70%,transparent);mask:linear-gradient(#000 70%,transparent)}
+.rs-al div{display:grid;grid-template-columns:70px 1fr 90px;gap:10px;padding:10px 14px;border-radius:10px;background:#0E131D;border:1px solid #1E2635;font-size:13px;color:#D4DBE5}
+.rs-al em{font-style:normal;color:#C9D3E3}.rs-al b{justify-self:end;font-size:11.5px;color:#FFB199}
+.rs-arrow{display:grid;place-items:center}.rs-arrow span{font-family:var(--display);font-size:80px;font-weight:600;color:#3F66B0;line-height:1}
+.rs-one .big2{font-family:var(--display);font-weight:600;font-size:120px;letter-spacing:-.06em;line-height:.9}
+.rs-cal{margin-top:56px;border-radius:24px;background:#fff;border:1px solid #E3E8EF;overflow:hidden}
+.rs-cal .hd{display:grid;grid-template-columns:200px repeat(7,1fr);border-bottom:1px solid #EEF1F5;font-size:13px;font-weight:600;color:#3E4652}
+.rs-cal .hd div,.rs-cal .rw>div{padding:14px 12px}
+.rs-cal .rw{display:grid;grid-template-columns:200px repeat(7,1fr);border-bottom:1px solid #F1F3F6;font-size:13.5px;align-items:center}
+.rs-cal .rw div.b{margin:6px 4px;padding:10px;border-radius:10px;font-weight:600;font-size:12.5px}
+.rs-cal .ft{display:flex;gap:22px;padding:16px 20px;font-size:13px;color:#2B3340;background:#FAFBFC}.rs-cal .ft span{display:flex;gap:7px;align-items:center}.rs-cal .ft i{width:12px;height:12px;border-radius:4px}
+.rs-war{display:grid;grid-template-columns:1fr 1.4fr 1fr;min-height:470px}
+.rs-war>div{padding:20px;border-right:1px solid #1E2635}.rs-war>div:last-child{border:0}
+.rs-war h5{margin:0 0 12px;font-size:12.5px;font-weight:600;color:#BFD0EE}
+.rs-tl{position:relative;padding-left:18px}.rs-tl:before{content:'';position:absolute;left:4px;top:4px;bottom:4px;width:2px;background:#232C3C}
+.rs-tl div{position:relative;font-size:13.5px;padding:7px 0;color:#E9EEF5}.rs-tl div:before{content:'';position:absolute;left:-18px;top:12px;width:10px;height:10px;border-radius:50%;background:var(--c,#9FB4D6)}
+.rs-tl em{font-style:normal;color:#C9D3E3;margin-right:8px;font-size:12.5px}
+.rs-task{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;background:#0E131D;border:1px solid #1E2635;font-size:13px;margin-bottom:8px}
+.rs-task i{width:16px;height:16px;border-radius:5px;border:1.5px solid #5B6B85;flex:none}.rs-task i.d{background:#3DAE80;border-color:#3DAE80}
+.rs-sp{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:64px}
+.rs-stat{padding:24px}
+.rs-stat .sv{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #EEF1F5;font-size:15px}
+.rs-bars{display:flex;gap:2px;margin-top:8px}.rs-bars i{flex:1;height:26px;border-radius:2px;background:#3DAE80}.rs-bars i.r{background:#FF6B4A}.rs-bars i.a{background:#F2C27B}
+.rs-priv{display:grid;grid-template-columns:1.2fr 1fr;gap:64px;align-items:center}
+.rs-slack{border-radius:18px;background:#fff;border:1px solid #E3E8EF;padding:20px;font-size:14px;color:#0A0C10}
+.rs-slack .m{display:grid;grid-template-columns:36px 1fr;gap:12px;padding:12px 0}
+.rs-slack .m i{display:grid;place-items:center;width:36px;height:36px;border-radius:9px;background:#0A0C10;color:#fff;font-style:normal;font-weight:700}
+.rs-slack .bx{margin-top:8px;border-left:3px solid #FF6B4A;padding:10px 12px;background:#F6F8FA;border-radius:0 10px 10px 0}
+.rs-move{display:grid;grid-template-columns:440px 1fr;gap:80px}
+</style>
+
+<section class="KF hero rs-hero" aria-label="Respond"><div class="w">
+ <div class="cen"><div class="kick" style="justify-content:center"><i style="background:#FF6B4A"></i>Respond</div>
+  <h1>Wake one person. <span class="fl">Let everyone else sleep.</span></h1>
+  <p class="lead c">Relyxus turns a storm of alerts into one incident, rings the right person on the channel they will notice, and only moves on when they do not answer.</p></div>
+ <div class="rs-stage">
+  <div class="rs-zz" style="left:60px"><div class="who"><span class="av s">EC</span><div style="color:#fff">Emma Clarke<small>Duty manager</small></div></div><b class="z">Asleep</b>Called only if Sam does not answer in five minutes.</div>
+  <div class="phone"><div class="tm">03:12</div><div class="dt">Friday 15 November</div>
+   <div class="nt" style="background:rgba(255,107,74,.25);border:1px solid rgba(255,107,74,.5)"><b>Relyxus, phone call<span>now</span></b>Severity 1, card payments failing in the UK. Press 1 to take it.</div>
+   <div class="nt"><b>Relyxus, Slack<span>now</span></b>INC 2047: 412 alerts grouped. You are primary on call for payments.</div>
+   <div class="nt"><b>Relyxus, text<span>now</span></b>SEV1 INC 2047. Open in Relyxus to take it.</div>
+   <div class="nt" style="background:rgba(61,174,128,.22);border:1px solid rgba(61,174,128,.5)"><b>Relyxus<span>03:14</span></b>You took INC 2047. The war room is open.</div></div>
+  <div class="rs-zz" style="right:60px"><div class="who"><span class="av m">RK</span><div style="color:#fff">Raj Kapoor<small>Team lead</small></div></div><b class="z">Quiet hours</b>Not disturbed until 07:00, unless the incident needs him.</div>
+ </div>
+</div></section>
+
+<section class="L" id="noise" aria-label="Alert noise"><div class="w">
+ <h2>412 alerts. <span>One incident.</span></h2><p class="lead">Every alert from the same failure is grouped, across every tool, so your team works one problem instead of four hundred.</p>
+ <div class="rs-noise">
+  <div class="rs-al">
+   <div><em>03:12:01</em><span>card_auth error rate above 5%</span><b>Prometheus</b></div><div><em>03:12:01</em><span>auth_timeout spike, eu region</span><b>Loki</b></div><div><em>03:12:02</em><span>Payment gateway 5xx responses</span><b>CloudWatch</b></div><div><em>03:12:02</em><span>Pod restarts, card_auth</span><b>Kubernetes</b></div><div><em>03:12:03</em><span>Synthetic check failed, checkout</span><b>Datadog</b></div><div><em>03:12:03</em><span>Queue depth rising, settlement</span><b>Prometheus</b></div><div><em>03:12:04</em><span>auth_timeout after 3000ms</span><b>Splunk</b></div><div><em>03:12:04</em><span>Error budget burn, payments</span><b>Relyxus</b></div><div><em>03:12:05</em><span>Customer complaints rising</span><b>Zendesk</b></div></div>
+  <div class="rs-arrow"><span>→</span></div>
+  <div class="win rs-one" style="padding:30px"><div class="big2">1</div><h3 style="margin-top:10px">INC 2047, card authorisation failures</h3><p style="font-size:15px;color:#D4DBE5;margin-top:10px">412 alerts from 7 tools, grouped as they arrived. One owner, one timeline, one room.</p>
+   <div class="stg" style="margin-top:20px"><i class="d"></i><i class="c"></i><i></i><i></i><i></i></div><div class="stl"><span>Spotted</span><b>Team on it</b><span>Fixing</span><span>Recovered</span><span>Resolved</span></div></div>
+ </div><p class="note">Example incident. Tools shown are among the 36 ready made connectors.</p></div></section>
+
+<section class="M" id="on-call" aria-label="On call"><div class="w">
+ <div class="top2"><div><h2>On call that respects <span>people's lives.</span></h2><p class="lead">Rotas, quiet hours and time off live in Relyxus. Gaps are flagged before the weekend, not discovered at 3am.</p></div><span class="chip nx">1 gap flagged this week</span></div>
+ <div class="rs-cal">
+  <div class="hd"><div>Rota</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div></div>
+  <div class="rw"><div><b>Payments primary</b></div><div class="b" style="background:#FFD9C4">Sam</div><div class="b" style="background:#FFD9C4">Sam</div><div class="b" style="background:#D5DEEC">Priya</div><div class="b" style="background:#D5DEEC">Priya</div><div class="b" style="background:#FFD9C4">Sam</div><div class="b" style="background:#BDEBD6">Raj</div><div class="b" style="background:#BDEBD6">Raj</div></div>
+  <div class="rw"><div><b>Payments secondary</b></div><div class="b" style="background:#D5DEEC">Priya</div><div class="b" style="background:#BDEBD6">Raj</div><div class="b" style="background:#FFD9C4">Sam</div><div class="b" style="background:#FCEBD9;color:#8A4A0B">Cover needed</div><div class="b" style="background:#D5DEEC">Priya</div><div class="b" style="background:#FFD9C4">Sam</div><div class="b" style="background:#D5DEEC">Priya</div></div>
+  <div class="rw"><div><b>Duty manager</b></div><div class="b" style="background:#E7EEFA">Emma</div><div class="b" style="background:#E7EEFA">Emma</div><div class="b" style="background:#E7EEFA">Emma</div><div class="b" style="background:#EEF1F5">Daniel</div><div class="b" style="background:#EEF1F5">Daniel</div><div class="b" style="background:#EEF1F5">Daniel</div><div class="b" style="background:#EEF1F5">Daniel</div></div>
+  <div class="ft"><span><i style="background:#FFD9C4"></i>Slack, text and a phone call</span><span><i style="background:#FCEBD9"></i>Gap flagged on Monday</span><span><i style="background:#EEF1F5"></i>Quiet hours respected</span></div></div>
+</div></section>
+
+<section class="K" id="war-room" aria-label="War room"><div class="w">
+ <h2>A war room <span>in one click.</span></h2><p class="lead">Everyone in their role, one timeline, one task list. Decisions are recorded as they happen, so the review is half written before the incident ends.</p>
+ <div class="win mt"><div class="wh"><b>War room, INC 2047, card authorisation failures</b><span>3 in the room, 11 minutes, sample</span></div>
+  <div class="rs-war">
+   <div><h5>People and roles</h5><div class="who"><span class="av s">EC</span><div>Emma Clarke<small>Incident commander</small></div></div><div class="who"><span class="av c">ST</span><div>Sam Taylor<small>Operations</small></div></div><div class="who"><span class="av m">RK</span><div>Raj Kapoor<small>Communications</small></div></div><div class="who"><span class="av v">V</span><div>Vigil<small>Investigator</small></div></div></div>
+   <div><h5>Timeline</h5><div class="rs-tl"><div style="--c:#FF6B4A"><em>03:12</em>412 alerts grouped into INC 2047</div><div><em>03:14</em>Sam took the page</div><div style="--c:#5C4EE5"><em>03:16</em>Vigil: release 4.18.2 is the likely cause, 92%</div><div><em>03:17</em>Emma declared severity 1</div><div style="--c:#F2C27B"><em>03:19</em>Rollback approved by Emma and Daniel</div><div style="--c:#3DAE80"><em>03:23</em>Error rate back to normal, fix verified</div><div><em>03:24</em>Status page updated, customers told</div></div></div>
+   <div><h5>Tasks</h5><div class="rs-task"><i class="d"></i>Confirm the cause</div><div class="rs-task"><i class="d"></i>Approve the rollback</div><div class="rs-task"><i class="d"></i>Update the status page</div><div class="rs-task"><i></i>Sign the FCA initial report</div><div class="rs-task"><i></i>Notify 12 business clients</div><h5 style="margin-top:18px">Channels</h5><div class="rr"><span>Slack #inc-2047</span><em class="ok">Linked</em></div><div class="rr"><span>Bridge call</span><em>Open</em></div></div>
+  </div></div></div></section>
+
+<section class="L" aria-label="Command centre"><div class="w">
+ <div class="cen"><h2>Everything about the incident, <span>on one screen.</span></h2><p class="lead c">The real incident page, recorded in our demo workspace. No tabs to chase, no spreadsheet on the side.</p></div>
+ <div class="anno mt" style="max-width:960px;margin-left:auto;margin-right:auto">
+  <div class="real"><div class="rb"><i></i><i></i><i></i><b style="color:#fff;margin-left:8px">Incident INC 2041</b><span>Real console, demo workspace</span></div><img src="/media/console/incidents_INC-2041.jpg" alt="A Relyxus incident page during a sample incident"></div>
+  <div class="co" style="left:-190px;top:90px"><em>1</em><b>Impact, live</b>Failed transactions, money at risk and how long it has been open.</div>
+  <div class="co" style="left:-170px;bottom:70px"><em>2</em><b>What we know</b>Vigil's likely causes, with how confident it is.</div>
+  <div class="co" style="right:-190px;top:200px"><em>3</em><b>People</b>Who is on it, who is paged, and who decides.</div>
+ </div></div></section>
+
+<section class="M" id="customer-updates" aria-label="Customer updates"><div class="w">
+ <h2>Tell customers first, <span>before they tell you.</span></h2><p class="lead">Status pages and client notices are drafted from the live incident, in plain words, and sent when a person signs them.</p>
+ <div class="rs-sp">
+  <div class="wl rs-stat"><div style="display:flex;justify-content:space-between;align-items:center"><h3 style="font-size:21px">status.examplebank.co.uk</h3><span class="chip nx">Degraded</span></div>
+   <div class="sv"><b>Card payments</b><span class="chip nx">Degraded</span></div><div class="rs-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="a"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="r"></i></div>
+   <div class="sv"><b>Online banking</b><span class="chip ok">Working</span></div><div class="rs-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+   <p style="margin-top:16px;font-size:14px;color:#2B3340;line-height:1.5"><b>03:24</b> Some card payments are failing. We have found the cause and are fixing it. Next update 03:45.</p></div>
+  <div class="doc"><div class="dh"><span>Client notice, 12 business clients</span><span>Drafted 03:22</span></div><h4>Service disruption: card payments</h4>
+   <div class="fr"><span>Started</span><b>03:12 UTC</b></div><div class="fr"><span>Services affected</span><b>Card authorisation</b></div><div class="fr"><span>Current status</span><b>Fix applied, monitoring</b></div><div class="fr"><span>Contract deadline</span><b>Within 4 hours</b></div>
+   <div class="sg"><span>Waiting for Raj Kapoor to sign</span><span class="stamp" style="border-color:#C79A8C;color:#B5361C">DRAFT</span></div></div>
+ </div><p class="note">Examples. Example Bank is not a real customer.</p></div></section>
+
+<section class="K" aria-label="Private incidents"><div class="w rs-priv">
+ <p class="stmt">Fraud and security cases page people <s>without saying a word about them.</s> Only named people can open them, and every view is recorded.</p>
+ <div class="rs-slack"><div style="font-weight:600;color:#3E4652;font-size:13px">#inc-2051, restricted</div>
+  <div class="m"><i>R</i><div><b>Relyxus</b> <span style="color:#3E4652;font-size:12.5px">02:47</span><div class="bx">A restricted severity 2 incident needs you. Details are hidden here.<div style="margin-top:10px"><span class="chip np" style="background:#0A0C10;color:#fff">Open in Relyxus</span></div></div></div></div>
+  <div style="display:flex;align-items:center;gap:8px;margin-top:8px;font-size:13px;color:#2B3340"><span class="av c">ST</span><span class="av s" style="margin-left:-12px">EC</span><span class="av m" style="margin-left:-12px">MW</span>Only these 3 named people can open it</div></div>
+</div></section>
+
+<section class="L" aria-label="Moving over"><div class="w rs-move">
+ <div><h2>Move over <span>without a big bang.</span></h2><p class="lead">Keep your current paging tool running until your team trusts Relyxus. Switch when they say so, not before.</p></div>
+ <div class="vt">
+  <div style="--c:#FF6B4A"><b>Connect</b><span>Your monitoring, logs and chat, through the ready made connectors.</span></div>
+  <div style="--c:#C79A8C"><b>Import</b><span>Services, rotas and escalation rules from the tool you use today.</span></div>
+  <div style="--c:#9FB4D6"><b>Run side by side</b><span>Both tools run. Your team compares every page and every incident.</span></div>
+  <div style="--c:#3DAE80"><b>Switch</b><span>After a practice incident, on the day your team chooses.</span></div>
+ </div></div></section>

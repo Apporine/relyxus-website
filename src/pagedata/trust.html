@@ -1,0 +1,232 @@
+<!-- title: Trust Center | Relyxus -->
+<style>
+.tc-term{width:600px;margin-left:auto}
+.tc-rec{grid-template-columns:84px 1fr 140px}.tc-rec code{justify-self:end;display:flex;align-items:center;gap:7px;font-size:12.5px;color:#BFD0EE}
+.tc-rec code i{width:15px;height:15px;border-radius:50%;background:#3DAE80}
+.tc-rec.v{background:rgba(61,174,128,.07)}
+.tc-vf{margin:16px 20px 20px;border:1px solid #2E7D5B;background:rgba(61,174,128,.1);border-radius:14px;padding:14px 16px;font-size:15px;font-weight:600;color:#8BE6BE}
+.tc-vf small{display:block;font-weight:400;color:#D4DBE5;font-size:13px;margin-top:4px}
+.tc-rw{display:grid;grid-template-columns:100px 1fr 420px 160px;gap:28px;align-items:center;padding:26px 0;border-top:1px solid #E3E8EF}.tc-rw:last-child{border-bottom:1px solid #E3E8EF}
+.tc-rw em{font-style:normal;font-family:var(--display);font-weight:650;font-size:50px;letter-spacing:-.05em;line-height:1;background:linear-gradient(90deg,#FF6B4A,#FFB199);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tc-rw b{font-size:24px;font-weight:600;letter-spacing:-.015em}.tc-rw p{font-size:15px;line-height:1.5;color:#2B3340}.tc-rw p small{display:block;font-size:12.5px;color:#3F66B0;font-weight:600;margin-bottom:4px}.tc-rw .chip{justify-self:end}
+.tc-pc{height:480px;display:flex;flex-direction:column}.tc-pc h3{font-size:40px}.tc-pc .q{font-size:16px;margin-top:10px;color:#1F2630;line-height:1.45}
+.tc-pc ul{list-style:none;margin:auto 0 0;padding:6px 18px;border-radius:18px;background:rgba(255,255,255,.84)}
+.tc-pc li{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid rgba(10,12,16,.08);font-size:16px;font-weight:500}.tc-pc li:last-child{border:0}.tc-pc li span{color:#2B4F94;font-size:14px}
+.tc-map{position:relative;height:470px;border-radius:24px;background:#0E131D;border:1px solid #232C3C}
+.tc-bd{position:absolute;left:30px;top:44px;width:470px;height:384px;border:2px dashed #6F8FCB;border-radius:24px}
+.tc-bd>em{position:absolute;left:22px;top:-13px;background:#0E131D;padding:0 10px;font-style:normal;font-size:15px;font-weight:600;color:#DCE6F7}
+.tc-nd{position:absolute;width:176px;background:#141B28;border:1px solid #2A3548;border-radius:16px;padding:15px;font-size:13px;color:#C9D3E3}.tc-nd b{display:block;font-size:15.5px;color:#fff;font-weight:600;margin-bottom:2px}
+.tc-nd.hi{border-color:#FF6B4A;box-shadow:0 0 0 7px rgba(255,107,74,.16)}
+.tc-ap{position:absolute;right:30px;top:170px;width:170px;background:#141B28;border:1px solid #2A3548;border-radius:16px;padding:15px;font-size:13px;color:#C9D3E3}.tc-ap b{display:block;font-size:15.5px;color:#fff}
+.tc-gt{position:absolute;left:500px;top:212px;width:76px;height:2px;background:repeating-linear-gradient(90deg,#FF6B4A 0 7px,transparent 7px 13px)}
+.tc-x{position:absolute;left:524px;top:198px;width:28px;height:28px;border-radius:9px;background:#0E131D;border:1.5px solid #FF6B4A;color:#FF6B4A;display:grid;place-items:center;font-weight:700;font-size:13px}
+.tc-pick{display:flex;flex-wrap:wrap;gap:8px}.tc-pick span{font-size:14px;padding:9px 15px;border-radius:999px;border:1px solid #2A3548;color:#D4DBE5}.tc-pick span.on{background:#fff;color:#0A0C10;font-weight:600}
+.tc-det{margin-top:16px;padding:22px}.tc-det h3{font-size:22px;margin-bottom:10px!important}
+.tc-dr{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid #1C2433;font-size:14.5px;color:#C9D3E3}.tc-dr b{color:#fff;font-weight:600;text-align:right}.tc-dr:last-child{border:0}
+.tc-lg{font-size:15px;line-height:1.85;padding:26px;background:#0B0F18;color:#E9EEF5}.tc-lg i{font-style:normal;background:#3F66B0;color:#fff;border-radius:5px;padding:1px 5px}
+.tc-cv li{list-style:none;font-size:15px;line-height:1.45;padding:9px 0 9px 26px;position:relative;color:#2B3340}.tc-cv ul{margin:14px 0 0;padding:0}
+.tc-cv li:before{content:'';position:absolute;left:0;top:13px;width:13px;height:7px;border:solid #3DAE80;border-width:0 0 2.5px 2.5px;transform:rotate(-45deg)}
+.tc-cv.nv{background:#0B0D11!important;border-color:#0B0D11}.tc-cv.nv h3{color:#fff}.tc-cv.nv li{color:#E9EEF5}
+.tc-cv.nv li:before,.tc-cv.nv li:after{content:'';position:absolute;left:0;top:17px;width:13px;height:2.5px;background:#FF6B4A;border:0;transform:rotate(45deg)}.tc-cv.nv li:after{transform:rotate(-45deg)}
+.tc-ct{display:flex;flex-direction:column;gap:8px}.tc-ct span{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-radius:16px;font-size:18px;font-weight:500;color:#2B3340;border:1px solid transparent}
+.tc-ct span.on{background:#fff;border-color:#E3E8EF;color:#0A0C10;font-weight:600;box-shadow:0 14px 30px rgba(15,25,45,.07)}.tc-ct span i{font-style:normal;font-size:13.5px;color:#2B4F94}
+.tc-al{grid-template-columns:110px 170px 190px 1fr 130px}.tc-al .a{color:#FFB199;font-weight:600}.tc-al code{justify-self:end;font-size:12.5px;color:#BFD0EE}
+.tc-alh{font-size:12.5px;color:#C9D3E3!important;padding-top:11px;padding-bottom:11px}
+.tc-tlw{position:relative;margin-top:70px;height:130px}
+.tc-tlw:before{content:'';position:absolute;left:0;right:0;top:46px;height:2px;background:linear-gradient(90deg,#3DAE80 0 42%,#C9D1DC 42%)}
+.tc-tp{position:absolute;top:35px;transform:translateX(-50%);text-align:center;width:220px}
+.tc-tp i{display:block;margin:0 auto;width:24px;height:24px;border-radius:50%;border:3px solid #9AA6B8;background:#fff}.tc-tp.d i{background:#3DAE80;border-color:#3DAE80}
+.tc-tp b{display:block;font-size:16px;margin-top:14px}.tc-tp span{display:block;font-size:13.5px;color:#3E4652;margin-top:3px}
+.tc-today{position:absolute;left:42%;top:0;transform:translateX(-50%);background:#FF6B4A;color:#0A0C10;font-size:12.5px;font-weight:700;padding:5px 12px;border-radius:999px}
+.tc-today:after{content:'';position:absolute;left:50%;top:100%;width:2px;height:18px;background:#FF6B4A}
+.tc-cr{grid-template-columns:300px 170px 1fr 220px}.tc-cr em{font-style:normal;font-size:14px;font-weight:600;color:#2B4F94;justify-self:end}
+.tc-hy{margin-top:34px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:16px;font-weight:600}.tc-hy span{font-size:14px;padding:9px 15px;border-radius:999px;background:#0A0C10;color:#fff}
+.tc-rs{display:grid;grid-template-columns:1.2fr 1fr 1fr;grid-template-rows:220px 220px;gap:16px}
+.tc-rc{border-radius:22px;border:1px solid #232C3C;background:#0E131D;padding:30px;display:flex;flex-direction:column}
+.tc-rc em{font-style:normal;font-family:var(--display);font-weight:600;font-size:72px;letter-spacing:-.05em;line-height:1;color:#fff}
+.tc-rc b{margin-top:auto;font-size:18px;color:#fff}.tc-rc span{font-size:14.5px;color:#C9D3E3;margin-top:5px;line-height:1.45}
+.tc-rc.bg2{grid-row:span 2;background:linear-gradient(160deg,#17694A,#0B2B20);border-color:#2E7D5B}.tc-rc.bg2 em{font-size:150px}
+.tc-tg{display:inline-flex;border:1px solid #E3E8EF;border-radius:999px;padding:4px;background:#fff}.tc-tg span{font-size:15px;padding:10px 18px;border-radius:999px;color:#2B3340}.tc-tg span.on{background:#0A0C10;color:#fff;font-weight:600}
+.tc-zero{font-family:var(--display);font-weight:650;font-size:200px;letter-spacing:-.06em;line-height:.85;margin-top:36px}
+.tc-sp{grid-template-columns:1fr 1.3fr 1fr}
+.tc-xb{height:6px;border-radius:3px;background:#EEF1F5;margin-top:26px;overflow:hidden}.tc-xb i{display:block;height:100%;width:100%;background:#3DAE80}
+.tc-xc em{display:block;font-style:normal;font-size:13.5px;font-weight:600;color:#17694A;margin-top:10px}
+.tc-dc{border:1px solid #E3E8EF;border-radius:20px;overflow:hidden;background:#fff}
+.tc-cov{height:170px;position:relative;padding:18px;display:flex;align-items:flex-end}.tc-cov b{font-family:var(--display);font-weight:650;font-size:25px;letter-spacing:-.03em;line-height:1.05}
+.tc-cov .wm{position:absolute;right:16px;top:16px;font-size:11.5px;font-weight:700;padding:4px 9px;border-radius:7px;background:rgba(255,255,255,.88)}
+.tc-dm{padding:15px 18px;display:flex;justify-content:space-between;font-size:14px;color:#2B3340}.tc-dm span{font-weight:600;color:#0A0C10}
+.tc-dc.sel{outline:2px solid #0A0C10}
+.tc-rq{margin-top:18px;display:flex;justify-content:space-between;align-items:center;padding:18px 24px;border-radius:18px;background:#0A0C10;color:#fff;font-size:16px}.tc-rq .b1{background:#fff!important;color:#0A0C10!important}
+.tc-tl2{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:64px}
+.tc-tl2:before{content:'';position:absolute;left:12px;right:12px;top:11px;height:2px;background:linear-gradient(90deg,#FF6B4A,#9FB4D6,#3DAE80)}
+.tc-tn i{display:block;width:24px;height:24px;border-radius:50%;background:#0B0D11;border:5px solid var(--c);position:relative}
+.tc-tn em{display:block;font-style:normal;font-family:var(--display);font-weight:600;font-size:48px;letter-spacing:-.04em;margin-top:22px;color:#fff}
+.tc-tn b{display:block;font-size:19px;color:#fff;margin-top:6px}.tc-tn span{display:block;font-size:15px;color:#D4DBE5;margin-top:5px;line-height:1.45}
+.tc-cts{display:flex;gap:16px;margin-top:52px}.tc-cts div{flex:1;border:1px solid #2A3548;border-radius:18px;padding:22px 24px;background:#0E131D;font-size:14px;color:#C9D3E3}.tc-cts b{display:block;font-size:20px;color:#fff;margin-top:5px}
+.tc-fw{max-width:680px;margin:40px auto 0;text-align:left}
+.tc-fw .ln{display:flex;gap:10px;padding:18px 20px;align-items:center;border-bottom:1px solid #EEF1F5}.tc-fw .ln span:first-child{flex:1;font-size:16px;background:#F3F5F9;border-radius:12px;padding:13px 16px}
+.tc-fw p{padding:20px;font-size:16px;line-height:1.6;color:#2B3340}
+</style>
+
+<section class="KF hero" aria-label="Trust Center"><div class="w">
+ <div class="split"><div>
+  <h1>Don't take our word for it. <span class="fl">Check.</span></h1>
+  <p class="lead">Relyxus runs inside your production systems, so we built it for your risk team first. Every claim on this page links to its proof, and every status carries its date.</p>
+  <div class="bts"><span class="b1">Download the security pack</span><span class="b2">Request documents</span></div>
+  <div class="pills"><span><i></i>Runs in your cloud, by design</span><span><i></i>UK GDPR processor terms, in place</span><span><i style="background:#F2C27B"></i>Penetration test, before first go live</span><span><i style="background:#9FB4D6"></i>SOC 2, not yet started</span></div>
+ </div>
+ <div class="win tc-term"><div class="wh"><b>Evidence ledger, INC 2047</b><span>Sample record</span></div>
+  <div class="wr tc-rec v"><em>03:12:04</em><div><b>412 alerts grouped</b><small>Into one incident</small></div><code class="mono">7c1e 09ab<i></i></code></div>
+  <div class="wr tc-rec v"><em>03:16:40</em><div><b>Cause cited by Vigil</b><small>Release 4.18.2, three sources</small></div><code class="mono">a94b 3d12<i></i></code></div>
+  <div class="wr tc-rec v"><em>03:19:02</em><div><b>Rollback approved</b><small>Two people, signed with passkeys</small></div><code class="mono">e03f 5c70<i></i></code></div>
+  <div class="wr tc-rec v"><em>03:21:15</em><div><b>FCA report drafted</b><small>Initial notification</small></div><code class="mono">5d28 c1f4<i></i></code></div>
+  <div class="tc-vf">Chain intact. 4 of 4 records verified.<small>Append only, hash chained, locked for seven years. Nobody can edit it, including us.</small></div></div></div>
+ <div class="pbar"><span>Promises</span><span>Security, privacy, AI</span><span>Your data</span><span>AI and card data</span><span>Controls</span><span>Audit log</span><span>Compliance</span><span>Resilience</span><span>Documents</span><span>Report a flaw</span></div>
+</div></section>
+
+<section class="L" id="promises" aria-label="Five things Relyxus will never do"><div class="w">
+ <h2>Five things Relyxus <span>will never do.</span></h2><p class="lead">Each promise is enforced by the product itself, not by a policy document.</p>
+ <div class="mt">
+  <div class="tc-rw"><em>01</em><b>Never see your incident data</b><p><small>Enforced by</small>No standing access. Support needs a ticket, your admins' approval, four hours at most</p><span class="chip ok">In the product</span></div>
+  <div class="tc-rw"><em>02</em><b>Never show the AI an account number</b><p><small>Enforced by</small>Card, sort code, account, IBAN and NI numbers redacted before any model</p><span class="chip ok">In the product</span></div>
+  <div class="tc-rw"><em>03</em><b>Never run a fix without a person</b><p><small>Enforced by</small>Policy check, named approvers, and the proposer can never approve</p><span class="chip ok">In the product</span></div>
+  <div class="tc-rw"><em>04</em><b>Never edit the record</b><p><small>Enforced by</small>Append only, hash chained log, evidence locked for seven years</p><span class="chip ok">In the product</span></div>
+  <div class="tc-rw"><em>05</em><b>Never hold your data hostage</b><p><small>Enforced by</small>Every setting exports as YAML, every piece of evidence as files</p><span class="chip ok">In the product</span></div>
+ </div></div></section>
+
+<section class="M" aria-label="Security, privacy and AI"><div class="w">
+ <h2>Security, privacy and AI. <span>Checked separately.</span></h2><p class="lead">Your security, privacy and AI reviewers each get their own way in.</p>
+ <div class="g3 mt">
+  <div class="gc co tc-pc"><h3>Security</h3><p class="q">How Relyxus keeps attackers, and us, out.</p><ul><li>Controls<span>Five areas</span></li><li>Audit log<span>Hash chained</span></li><li>Resilience<span>Tested quarterly</span></li></ul></div>
+  <div class="gc st tc-pc"><h3>Privacy</h3><p class="q">Whose data it is, where it lives, and your rights over it.</p><ul><li>Your data<span>One region</span></li><li>Sub processors<span>Named</span></li><li>Data rights<span>Access, erasure, hold</span></li></ul></div>
+  <div class="gc mi tc-pc"><h3>Responsible AI</h3><p class="q">What Vigil can see, what it can do, and what it never will.</p><ul><li>Redaction<span>Before any model</span></li><li>Approvals<span>People decide</span></li><li>Citations<span>Every answer</span></li></ul></div>
+ </div></div></section>
+
+<section class="K" id="your-data" aria-label="Follow your data"><div class="w">
+ <h2>Follow your data. <span>It never leaves your cloud.</span></h2><p class="lead">Pick a kind of data and see where it lives, who can reach it and how long it is kept.</p>
+ <div class="mt" style="display:grid;grid-template-columns:1fr 380px;gap:28px">
+  <div class="tc-map"><div class="tc-bd"><em>Your cloud, one region fixed at install</em></div>
+   <div class="tc-nd hi" style="left:66px;top:90px"><b>Relyxus console</b>Private nodes</div>
+   <div class="tc-nd hi" style="left:270px;top:90px"><b>Database</b>Isolated per workspace</div>
+   <div class="tc-nd" style="left:66px;top:206px"><b>Vigil AI</b>Inside the install</div>
+   <div class="tc-nd hi" style="left:270px;top:206px"><b>Evidence vault</b>Locked seven years</div>
+   <div class="tc-nd" style="left:66px;top:330px;width:380px;background:#1A1410;border-color:#5A3326"><b>Your encryption key</b>Encrypts the database, evidence and backups</div>
+   <div class="tc-gt"></div><div class="tc-x">✕</div><div class="tc-ap"><b>Apporine</b>No standing access</div></div>
+  <div><div class="tc-pick"><span class="on">Incident timeline</span><span>Staff contacts</span><span>Logs and metrics</span><span>Evidence</span><span>Card numbers</span></div>
+   <div class="cd tc-det"><h3>Incident timeline</h3><div class="tc-dr">Where it lives<b>Database, your region</b></div><div class="tc-dr">Who can see it<b>Your responders</b></div><div class="tc-dr">How long it is kept<b>Your setting, with legal hold</b></div><div class="tc-dr">Apporine access<b>Only a session you approve</b></div></div></div>
+ </div></div></section>
+
+<section class="L" aria-label="Responsible AI"><div class="w">
+ <h2>Account numbers <span>never reach the AI.</span></h2><p class="lead">Vigil works on what is left after redaction, inside your install, and it cannot act on its own.</p>
+ <div class="mt" style="display:grid;grid-template-columns:1fr 1.3fr;gap:32px;align-items:start">
+  <div class="wl"><div class="wh"><b>One log line, INC 2047</b><span>Example data</span></div>
+   <div class="tc-lg mono">payment declined card <i>[CARD]</i> sort code <i>[SORT CODE]</i> account <i>[ACCOUNT]</i> iban <i>[IBAN]</i> ni <i>[NI NUMBER]</i> reason=auth_timeout</div>
+   <div class="wr" style="background:#F3F5F9;font-weight:600">What Vigil sees, after redaction</div></div>
+  <div class="g3" style="gap:14px">
+   <div class="cd tc-cv" style="padding:24px"><h3 style="font-size:20px">Vigil can see</h3><ul><li>Changes, alerts, metrics and logs, after redaction</li><li>Only what the person asking can see</li></ul></div>
+   <div class="cd tc-cv" style="padding:24px"><h3 style="font-size:20px">Vigil can do</h3><ul><li>Rank likely causes with evidence</li><li>Draft fixes and reports</li><li>Cite every source</li></ul></div>
+   <div class="cd tc-cv nv" style="padding:24px"><h3 style="font-size:20px">Vigil can never</h3><ul><li>Run a fix without approval</li><li>See account numbers</li><li>Use an outside model unless you switch it on</li></ul></div>
+  </div></div></div></section>
+
+<section class="M" aria-label="Controls"><div class="w">
+ <h2>Built to the controls <span>your auditors already test.</span></h2>
+ <div class="mt" style="display:grid;grid-template-columns:300px 1fr;gap:28px">
+  <div class="tc-ct"><span class="on">Access<i>4 controls</i></span><span>Encryption<i>4 controls</i></span><span>Network<i>4 controls</i></span><span>Supply chain<i>4 controls</i></span><span>Isolation<i>4 controls</i></span></div>
+  <div class="g2">
+   <div class="cd"><div class="ic">1</div><h3 style="font-size:21px">Single sign on</h3><p>SAML or OIDC through your own identity provider</p></div>
+   <div class="cd"><div class="ic">2</div><h3 style="font-size:21px">Passkeys</h3><p>Phishing resistant sign in to NIST AAL2, with no SMS codes</p></div>
+   <div class="cd"><div class="ic">3</div><h3 style="font-size:21px">Fresh sign in</h3><p>Required again for risky actions, within five minutes</p></div>
+   <div class="cd"><div class="ic">4</div><h3 style="font-size:21px">Leavers</h3><p>Removed everywhere at once through SCIM from Entra ID or Okta</p></div>
+  </div></div></div></section>
+
+<section class="K" aria-label="Audit log"><div class="w">
+ <h2>Every action recorded. <span>Nothing ever edited.</span></h2><p class="lead">Who did what, acting as whom, before and after, written to storage nobody can change, including us.</p>
+ <div class="win mt">
+  <div class="wh"><div style="display:flex;gap:8px"><span class="chip np">Person</span><span class="chip np">Action</span><span class="chip np">Today</span></div><div style="display:flex;gap:8px"><span class="chip np">Export</span><span class="chip co">Stream to your SIEM</span></div></div>
+  <div class="wr tc-al tc-alh"><span>Time</span><span>Person</span><span>Action</span><span>Record</span><span style="justify-self:end">Hash</span></div>
+  <div class="wr tc-al"><em>03:31:08</em><span>Raj Kapoor</span><span class="a">Exported evidence</span><span>INC 2047, with hash chain</span><code class="mono">9e21 f04a</code></div>
+  <div class="wr tc-al"><em>03:24:40</em><span>Emma Clarke</span><span class="a">Approved session</span><span>Support ticket 4471, four hours</span><code class="mono">b7c3 1d90</code></div>
+  <div class="wr tc-al"><em>03:23:02</em><span>Support</span><span class="a">Requested session</span><span>Ticket 4471, waiting for you</span><code class="mono">40de 77a1</code></div>
+  <div class="wr tc-al"><em>03:21:15</em><span>Vigil</span><span class="a">Drafted report</span><span>FCA initial notification</span><code class="mono">5d28 c1f4</code></div>
+  <div class="wr tc-al"><em>03:19:02</em><span>Daniel Reyes</span><span class="a">Approved rollback</span><span>Second of two approvals</span><code class="mono">e03f 5c70</code></div>
+  <div class="wr tc-al"><em>03:18:20</em><span>Emma Clarke</span><span class="a">Approved rollback</span><span>card auth to 4.18.1</span><code class="mono">c2b8 0e66</code></div>
+  <div class="wr" style="display:flex;justify-content:space-between;font-size:13px;color:#C9D3E3"><span>Append only, hash chained, evidence locked for seven years</span><span>Sample data</span></div>
+ </div></div></section>
+
+<section class="L" id="compliance" aria-label="Compliance with dates"><div class="w">
+ <h2>Compliance with dates, <span>not adjectives.</span></h2><p class="lead">We only say in place when it is. Everything else shows its real status.</p>
+ <div class="tc-tlw"><span class="tc-today">Today</span>
+  <div class="tc-tp d" style="left:9%"><i></i><b>Controls built</b><span>Mapped to the code</span></div>
+  <div class="tc-tp d" style="left:30%"><i></i><b>UK GDPR terms</b><span>DPA in place</span></div>
+  <div class="tc-tp" style="left:62%"><i></i><b>Penetration test</b><span>Before first go live</span></div>
+  <div class="tc-tp" style="left:89%"><i></i><b>SOC 2, ISO 27001</b><span>Not yet started</span></div></div>
+ <div class="tb">
+  <div class="tr tc-cr"><b>UK GDPR processor terms</b><span class="chip ok">In place</span><span>Apporine is your processor under Article 28</span><em>Now</em></div>
+  <div class="tr tc-cr"><b>Independent penetration test</b><span class="chip nx">Not done yet</span><span>CREST tester, report shared under NDA</span><em>Before first go live</em></div>
+  <div class="tr tc-cr"><b>SOC 2 Type II and ISO 27001</b><span class="chip np">Not certified</span><span>Controls are built to map onto both</span><em>Not yet started</em></div>
+  <div class="tr tc-cr"><b>Cyber Essentials Plus</b><span class="chip np">Not held</span><span>Often asked for by UK banks</span><em>Not yet started</em></div></div>
+ <div class="tc-hy">Relyxus helps you meet<span>DORA</span><span>FCA PS21/3</span><span>PRA SS1/21</span><span>FCA PS26/2</span><span>NYDFS 500.16</span></div>
+</div></section>
+
+<section class="K" aria-label="Resilience"><div class="w">
+ <h2>When something breaks, <span>Relyxus keeps running.</span></h2><p class="lead">The tool you use in an outage cannot be the next outage.</p>
+ <div class="tc-rs mt"><div class="tc-rc bg2"><em>2+</em><b>copies of every service</b><span>Spread across zones, so one failure takes nothing down</span></div>
+  <div class="tc-rc"><em>35</em><b>days of point in time recovery</b></div><div class="tc-rc"><em>Daily</em><b>backup, stored apart</b></div>
+  <div class="tc-rc"><em>Quarterly</em><b>restore, tested for real</b></div><div class="tc-rc"><em>Monthly</em><b>disaster drill</b></div></div></div></section>
+
+<section class="M" aria-label="Sub processors"><div class="w">
+ <div style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:end">
+  <div><h2>Every company that touches your data, <span>named.</span></h2>
+   <div style="margin-top:34px" class="tc-tg"><span class="on">Self hosted</span><span>Hosted by Apporine</span></div>
+   <div class="tc-zero">0</div><p class="lead">sub processors. Relyxus runs in your cloud, so nobody else is involved.</p></div>
+  <div class="tb"><div class="tr tc-sp h"><span>Company</span><span>What it does</span><span>Where</span></div>
+   <div class="tr tc-sp"><b>None</b><span>Everything runs in your own cloud account</span><span>Your region</span></div>
+   <div class="tr tc-sp"><b>AI models</b><span>Run inside the install</span><span>Outside models only if you allow</span></div>
+   <div class="tr tc-sp" style="background:#FAFBFC"><b>If hosted by Apporine</b><span>Amazon Web Services, infrastructure</span><span>Your chosen region only</span></div></div></div>
+</div></section>
+
+<section class="L" aria-label="Exit"><div class="w">
+ <h2>Leave any day. <span>Take everything with you.</span></h2><p class="lead">Your DORA exit plan needs an answer for every supplier. Here is ours.</p>
+ <div class="g3 mt">
+  <div class="cd tc-xc"><h3 style="font-size:23px">Every setting</h3><p>Rotas, policies, approval rules and connectors export as YAML</p><div class="tc-xb"><i></i></div><em>settings.yaml ready</em></div>
+  <div class="cd tc-xc"><h3 style="font-size:23px">All evidence</h3><p>As files, with the hash chain that proves nothing changed</p><div class="tc-xb"><i></i></div><em>evidence ready</em></div>
+  <div class="cd tc-xc"><h3 style="font-size:23px">The database</h3><p>On a self hosted install it was always yours</p><div class="tc-xb"><i></i></div><em>already yours</em></div></div></div></section>
+
+<section class="M" id="documents" aria-label="Documents"><div class="w">
+ <div class="top2"><div><h2>Every document <span>a reviewer asks for.</span></h2><p class="lead">Pick what you need. Shared under NDA.</p></div></div>
+ <div class="g4 mt2">
+  <div class="tc-dc sel"><div class="tc-cov" style="background:linear-gradient(135deg,#FFD9C4,#FF8A66)"><span class="wm">PDF</span><b>Security pack</b></div><div class="tc-dm">Under NDA<span>Selected</span></div></div>
+  <div class="tc-dc sel"><div class="tc-cov" style="background:linear-gradient(135deg,#D5DEEC,#9FB4D6)"><span class="wm">PDF</span><b>Due diligence answers</b></div><div class="tc-dm">Under NDA<span>Selected</span></div></div>
+  <div class="tc-dc"><div class="tc-cov" style="background:linear-gradient(135deg,#BDEBD6,#7FD0AE)"><span class="wm">SIG, CAIQ</span><b>Pre filled questionnaire</b></div><div class="tc-dm">Under NDA<span>Select</span></div></div>
+  <div class="tc-dc"><div class="tc-cov" style="background:linear-gradient(135deg,#E9EEF5,#C9D1DC)"><span class="wm">PDF</span><b>Data Processing Agreement</b></div><div class="tc-dm">Public<span>Select</span></div></div>
+  <div class="tc-dc"><div class="tc-cov" style="background:linear-gradient(135deg,#FFE7DB,#FFC2A3)"><span class="wm">PDF</span><b>Software Licence Agreement</b></div><div class="tc-dm">Public<span>Select</span></div></div>
+  <div class="tc-dc"><div class="tc-cov" style="background:linear-gradient(135deg,#DDE6F5,#B7C8E6)"><span class="wm">PDF</span><b>Exit plan</b></div><div class="tc-dm">Under NDA<span>Select</span></div></div>
+  <div class="tc-dc"><div class="tc-cov" style="background:linear-gradient(135deg,#D9F2E6,#A6DDC4)"><span class="wm">PDF</span><b>Architecture and data flows</b></div><div class="tc-dm">Under NDA<span>Select</span></div></div>
+  <div class="tc-dc"><div class="tc-cov" style="background:linear-gradient(135deg,#F1F3F6,#DDE3EA)"><span class="wm">After the test</span><b>Penetration test report</b></div><div class="tc-dm">Under NDA<span>Notify me</span></div></div>
+ </div>
+ <div class="tc-rq"><span>2 documents selected</span><span class="b1">Request documents</span></div></div></section>
+
+<section class="K" id="disclosure" aria-label="Report a flaw"><div class="w">
+ <h2>Found a weakness? <span>Tell us first.</span></h2><p class="lead">We will not take legal action against research done in good faith. Banks running Relyxus hear about a fix first.</p>
+ <div class="tc-tl2"><div class="tc-tn" style="--c:#FF6B4A"><i></i><em>Day 1</em><b>We acknowledge it</b><span>A named person replies</span></div>
+  <div class="tc-tn" style="--c:#C79A8C"><i></i><em>Day 5</em><b>First assessment</b><span>How serious it is, and the plan</span></div>
+  <div class="tc-tn" style="--c:#9FB4D6"><i></i><em>Day 7</em><b>Critical issues fixed</b><span>Ahead of everything else</span></div>
+  <div class="tc-tn" style="--c:#3DAE80"><i></i><em>Day 30</em><b>High issues fixed</b><span>And we tell you when it ships</span></div></div>
+ <div class="tc-cts"><div>Email<b>support@relyxus.com</b></div><div>Machine readable<b>/.well-known/security.txt</b></div><div>Supported versions<b>The latest and the one before</b></div></div></div></section>
+
+<section class="L" aria-label="Questions"><div class="w">
+ <div style="display:grid;grid-template-columns:440px 1fr;gap:64px">
+  <div><h2>Questions your risk team <span>will ask.</span></h2><p class="lead">Short answers here. Full answers, mapped to the code, in the security pack.</p></div>
+  <div class="faq">
+   <div class="qi on"><b>Who controls our data?</b><p>You do. Apporine is your processor under UK GDPR Article 28, and a service provider under GLBA and NYDFS for US banks.</p></div>
+   <div class="qi"><b>Where is it stored?</b><p>In one region chosen at install.</p></div>
+   <div class="qi"><b>Can Apporine see our incidents?</b><p>No.</p></div>
+   <div class="qi"><b>Does the AI see customer account data?</b><p>No.</p></div>
+   <div class="qi"><b>What happens if Apporine has a breach?</b><p>We tell you without undue delay.</p></div>
+   <div class="qi"><b>Can we bring our own encryption key?</b><p>Yes.</p></div>
+  </div></div></div></section>
+
+<section class="LF close" aria-label="Send this page to your risk team"><div class="w">
+ <h2>Send this page <span>to your risk team.</span></h2><p class="lead c">They will have everything they need before your first call with us.</p>
+ <div class="wl tc-fw"><div class="ln"><span>relyxus.com/trust</span><span class="b1" style="background:#0A0C10;color:#fff">Copy link</span></div><p>"Before we book the demo, can you check Relyxus against our vendor standards? Everything is on this page."</p></div>
+ <div class="bts" style="justify-content:center"><span class="b1">Book a security call</span><span class="b2">Download the security pack</span></div></div></section>

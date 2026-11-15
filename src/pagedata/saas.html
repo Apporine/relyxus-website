@@ -1,0 +1,68 @@
+<!-- title: Relyxus for SaaS that serves banks -->
+<style>
+.ss-inbox{position:relative;height:560px;margin-top:70px}
+.ss-mail{position:absolute;width:430px;border-radius:18px;background:#fff;border:1px solid #E3E8EF;box-shadow:0 30px 70px rgba(15,25,45,.18);padding:20px 22px;font-size:14px}
+.ss-mail .fr2{display:flex;justify-content:space-between;font-size:12.5px;color:#3E4652}
+.ss-mail h4{margin:10px 0 6px;font-size:18px;font-family:var(--display);letter-spacing:-.02em}
+.ss-mail p{color:#2B3340;line-height:1.5}
+.ss-mail .cl{margin-top:14px;display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:12px;background:#F6F8FA;font-weight:600}
+.ss-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:250px;padding:22px;border-radius:22px;background:#0A0C10;color:#fff;text-align:center;box-shadow:0 40px 80px rgba(15,25,45,.35)}
+.ss-core b{display:block;font-family:var(--display);font-size:22px;letter-spacing:-.02em}.ss-core span{display:block;font-size:13px;color:#C9D3E3;margin-top:6px}
+.ss-clients .tr{grid-template-columns:1.3fr 1fr 1fr 1fr 150px}
+.ss-clients .cd2{font-family:var(--display);font-size:22px;font-weight:600;color:#fff;letter-spacing:-.02em}
+.ss-dora{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:64px}
+.ss-dora .gc{min-height:380px;display:flex;flex-direction:column}.ss-dora .glass{margin-top:auto}
+.ss-dora .glass .fr{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid rgba(10,12,16,.08)}.ss-dora .glass .fr:last-child{border:0}
+.ss-tp{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.ss-tp .wl{padding:0}
+.ss-tp .bar2{height:8px}
+.ss-tp .hd{padding:18px 20px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #EEF1F5}
+.ss-tp .lg{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-weight:700;color:#fff}
+.ss-tp .bd{padding:16px 20px;font-size:13.5px}
+.ss-tp .row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #F1F3F6}
+</style>
+
+<section class="LF hero" aria-label="SaaS that serves banks"><div class="w">
+ <div class="cen"><div class="kick" style="justify-content:center"><i style="background:#5C4EE5"></i>For SaaS companies that serve banks</div>
+ <h1>Your bank customers <span>need your incident reports too.</span></h1>
+ <p class="lead c">When you go down, every bank you serve has a clock running, set by their regulator and written into your contract. Relyxus tracks each one and drafts each notice from the live incident.</p>
+ <div class="bts"><span class="b1">Book a demo</span><span class="b2">See your contract clocks</span></div></div>
+ <div class="ss-inbox">
+  <div class="ss-mail" style="left:0;top:30px;transform:rotate(-3deg)"><div class="fr2"><span>To: Example Bank, UK</span><span>Due in 4 hours</span></div><h4>Service incident notice</h4><p>Our API returned errors from 03:12 to 03:23 UTC. Card authorisation requests were affected.</p><div class="cl"><span>Contract clause 14.2</span><span class="chip co">2h 12m left</span></div></div>
+  <div class="ss-mail" style="right:0;top:0;transform:rotate(3deg)"><div class="fr2"><span>To: Example Bank, Ireland</span><span>DORA, within 24 hours</span></div><h4>ICT incident information</h4><p>Details your client needs for its own DORA initial notification.</p><div class="cl"><span>Their regulator deadline</span><span class="chip nx">Their clock: 3h 41m</span></div></div>
+  <div class="ss-mail" style="left:22%;bottom:0;transform:rotate(-1deg)"><div class="fr2"><span>To: Example Credit Union, US</span><span>Due in 36 hours</span></div><h4>Computer security incident notice</h4><p>Required so your client can notify its own regulator in time.</p><div class="cl"><span>Contract schedule B</span><span class="chip st">35h 48m left</span></div></div>
+  <div class="ss-core"><b>INC 2047</b><span>One incident, 12 clients, 12 deadlines</span></div>
+ </div>
+ <p class="note" style="text-align:center">Example clients and deadlines.</p>
+</div></section>
+
+<section class="K ss-clients" aria-label="Contract clocks"><div class="w">
+ <h2>One incident. <span>A clock for every client.</span></h2><p class="lead">Load each client's notice terms once. When an incident starts, Relyxus works out who must be told, by when, and what they need.</p>
+ <div class="tb mt">
+  <div class="tr h"><span>Client</span><span>Their notice term</span><span>Channel</span><span>Time left</span><span>Notice</span></div>
+  <div class="tr"><b>Example Bank, UK</b><span>4 hours, by contract</span><span>Email and portal</span><span class="cd2">2h 12m</span><span class="chip co">Waiting to sign</span></div>
+  <div class="tr"><b>Example Bank, Ireland</b><span>Fast enough for DORA</span><span>Email</span><span class="cd2">3h 41m</span><span class="chip nx">Drafted</span></div>
+  <div class="tr"><b>Example Credit Union, US</b><span>36 hours</span><span>Email</span><span class="cd2">35h 48m</span><span class="chip st">Tracking</span></div>
+  <div class="tr"><b>Example Building Society</b><span>Next working day</span><span>Account manager</span><span class="cd2">21h 05m</span><span class="chip st">Tracking</span></div>
+  <div class="tr"><b>Nine more clients</b><span>Not affected</span><span>None</span><span class="cd2">None</span><span class="chip ok">No notice due</span></div>
+ </div></div></section>
+
+<section class="L" aria-label="You are in their register"><div class="w" style="display:grid;grid-template-columns:480px 1fr;gap:80px">
+ <div><h2>Under DORA, you are in <span>your clients' register.</span></h2><p class="lead">EU banks must record every ICT supplier behind their critical functions, report incidents involving them and keep an exit plan. That makes your incident response part of theirs.</p><p class="note">Summary, not legal advice.</p></div>
+ <div class="vt">
+  <div style="--c:#FF6B4A"><b>Their incident reports need your facts</b><span>When your outage hits them, they report it. Relyxus gives them your timeline and root cause, with evidence, fast.</span></div>
+  <div style="--c:#C79A8C"><b>Their audits include you</b><span>Questionnaires answered from the live product, and a read only auditor room instead of a spreadsheet.</span></div>
+  <div style="--c:#9FB4D6"><b>Their exit plan needs yours</b><span>Settings and evidence export any day, so each client can show how it would leave you.</span></div>
+  <div style="--c:#3DAE80"><b>Their register needs your details</b><span>Your services, sub contractors and locations, kept current on each client's trust page.</span></div>
+ </div></div></section>
+
+<section class="M" aria-label="A trust page for every client"><div class="w">
+ <div class="top2"><div><h2>A trust page <span>for every client.</span></h2><p class="lead">Give each bank client its own trust page, behind an NDA, with the documents and incident history they are entitled to see. Every view is recorded.</p></div><span class="chip np">Example pages</span></div>
+ <div class="ss-tp mt">
+  <div class="wl"><div class="hd"><span class="lg" style="background:#3F66B0">EB</span><div><b>Example Bank, UK</b><div style="font-size:12.5px;color:#3E4652">NDA accepted 3 Nov</div></div></div><div class="bd"><div class="row"><span>Security pack</span><b>Viewed</b></div><div class="row"><span>Incident history</span><b>2 this year</b></div><div class="row" style="border:0"><span>Next review</span><b>February</b></div></div></div>
+  <div class="wl"><div class="hd"><span class="lg" style="background:#17694A">EI</span><div><b>Example Bank, Ireland</b><div style="font-size:12.5px;color:#3E4652">NDA accepted 18 Oct</div></div></div><div class="bd"><div class="row"><span>DORA information</span><b>Shared</b></div><div class="row"><span>Exit plan</span><b>Downloaded</b></div><div class="row" style="border:0"><span>Audit request</span><b>Open</b></div></div></div>
+  <div class="wl"><div class="hd"><span class="lg" style="background:#E5482A">EC</span><div><b>Example Credit Union</b><div style="font-size:12.5px;color:#3E4652">Invitation sent</div></div></div><div class="bd"><div class="row"><span>Security pack</span><b>Waiting</b></div><div class="row"><span>Questionnaire</span><b>Answered</b></div><div class="row" style="border:0"><span>Status page</span><b>Subscribed</b></div></div></div>
+ </div></div></section>
+
+
+

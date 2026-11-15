@@ -1,0 +1,129 @@
+<!-- title: Relyxus for banks and building societies -->
+<style>
+.bk-hero{min-height:960px;padding-bottom:0!important}
+.bk-sky{position:absolute;left:0;right:0;bottom:0;height:300px;display:flex;align-items:flex-end;gap:10px;padding:0 40px;z-index:0}
+.bk-t{position:relative;flex:1;background:#0D121C;border:1px solid #1E2635;border-bottom:0;border-radius:6px 6px 0 0}
+.bk-t i{position:absolute;inset:12px 8px 0;background-image:radial-gradient(#F2C27B 2px,transparent 2.6px);background-size:14px 16px;opacity:.9}
+.bk-t.out{border-color:#5A3326}.bk-t.out i{opacity:.08}
+.bk-t.out:after{content:'';position:absolute;left:50%;top:-26px;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:#FF6B4A;box-shadow:0 0 0 8px rgba(255,107,74,.2),0 0 40px #FF6B4A}
+.bk-hero .w{z-index:2}
+.bk-alert{position:absolute;right:64px;top:250px;width:360px;z-index:3}
+.bk-rules{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:64px}
+.bk-rules .gc{min-height:420px;display:flex;flex-direction:column}
+.bk-rules .dt{font-family:var(--display);font-weight:600;font-size:46px;letter-spacing:-.04em;line-height:1}
+.bk-rules .gc h3{margin-top:14px}.bk-rules .glass{margin-top:auto;font-size:13.5px;line-height:1.5}
+.bk-night{position:relative;margin-top:70px}
+.bk-night:before{content:'';position:absolute;left:150px;top:0;bottom:0;width:2px;background:linear-gradient(#FF6B4A,#9FB4D6 50%,#3DAE80)}
+.bk-m{display:grid;grid-template-columns:120px 60px 1fr 330px;gap:0 20px;align-items:start;padding:20px 0}
+.bk-m em{font-style:normal;font-family:var(--display);font-weight:600;font-size:30px;letter-spacing:-.03em;text-align:right;color:#fff}
+.bk-m em small{display:block;font-family:var(--body);font-size:12.5px;letter-spacing:0;font-weight:500;color:#C9D3E3}
+.bk-m .dt{justify-self:center;width:18px;height:18px;border-radius:50%;background:#0B0D11;border:4px solid var(--c);margin-top:8px}
+.bk-m b{display:block;font-size:20px}.bk-m p{font-size:15px;color:#D4DBE5;margin-top:6px!important;line-height:1.5}
+.bk-m .wh2{font-size:13px;color:#C9D3E3;padding:12px 14px;border-radius:12px;background:#0E131D;border:1px solid #232C3C}.bk-m .wh2 b{font-size:14px;color:#fff;margin-bottom:3px}
+.bk-roles{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:64px}
+.bk-roles .cd{padding:24px;min-height:360px;display:flex;flex-direction:column}
+.bk-roles .cd .who2{font-size:13px;font-weight:600;color:#2B4F94}
+.bk-roles .cd h3{font-size:21px;margin-top:8px}
+.bk-roles .cd ul{list-style:none;margin:auto 0 0;padding:0}.bk-roles .cd li{font-size:14px;padding:9px 0;border-top:1px solid #EEF1F5;color:#1F2630}
+.bk-acc .doc .row{display:grid;grid-template-columns:70px 1fr 150px;gap:12px;padding:12px 0;border-bottom:1px solid #EEF1F5;font-size:14px;align-items:center}
+.bk-acc .doc .row em{font-style:normal;color:#3E4652}
+.bk-map{position:relative;height:460px;border-radius:24px;background:#0E131D;border:1px solid #232C3C}
+.bk-n{position:absolute;box-sizing:border-box;padding:11px 12px;border-radius:14px;background:#141B28;border:1px solid #2A3548;font-size:13px;color:#C9D3E3}.bk-n b{display:block;font-size:15px;color:#fff}
+.bk-n.ibs{background:#1A1410;border-color:#FF6B4A;box-shadow:0 0 0 7px rgba(255,107,74,.14)}
+.bk-map svg{position:absolute;inset:0;width:100%;height:100%}
+.bk-dd{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:56px}
+.bk-dd .cd{min-height:220px}
+.bk-fp{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center}
+.bk-fp .gc{min-height:360px;display:flex;flex-direction:column;justify-content:space-between}
+.bk-fp .big{font-size:150px}
+.bk-dates{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:64px}
+.bk-dates>div{border-top:4px solid var(--c);padding-top:24px}
+.bk-dates em{display:block;font-style:normal;font-family:var(--display);font-weight:600;font-size:76px;letter-spacing:-.05em;line-height:1}
+.bk-dates h3{font-size:24px;margin-top:22px}.bk-dates p{font-size:16px;line-height:1.55;color:#2B3340;margin-top:10px}
+.bk-dates b{display:block;font-size:15.5px;line-height:1.5;margin-top:18px;padding:14px 16px;border-radius:14px;background:#F3F5F8;font-weight:500;color:#0A0C10}
+.bk-ddg{display:grid;grid-template-columns:420px 1fr;gap:72px;align-items:start}
+.bk-q{border-radius:22px;background:#fff;border:1px solid #E3E8EF;box-shadow:0 30px 80px rgba(15,25,45,.12);overflow:hidden}
+.bk-q .qh{display:flex;justify-content:space-between;padding:18px 26px;background:#0A0C10;color:#fff;font-size:15px}.bk-q .qh span{color:#C9D3E3;font-size:13.5px}
+.bk-q .qr{padding:20px 26px;border-top:1px solid #EEF1F5}.bk-q .qr span{display:block;font-size:14px;font-weight:600;color:#2F5CA8}
+.bk-q .qr p{font-size:17px;line-height:1.5;color:#0A0C10;margin-top:6px}
+</style>
+
+<section class="KF hero bk-hero" aria-label="Banks and building societies">
+ <div class="bk-sky"><div class="bk-t" style="height:150px"><i></i></div><div class="bk-t" style="height:230px"><i></i></div><div class="bk-t" style="height:180px"><i></i></div><div class="bk-t" style="height:260px"><i></i></div><div class="bk-t" style="height:200px"><i></i></div><div class="bk-t out" style="height:280px"><i></i></div><div class="bk-t" style="height:210px"><i></i></div><div class="bk-t" style="height:170px"><i></i></div><div class="bk-t" style="height:245px"><i></i></div><div class="bk-t" style="height:190px"><i></i></div><div class="bk-t" style="height:140px"><i></i></div></div>
+ <div class="w"><div style="max-width:720px">
+  <div class="kick"><i style="background:#F2C27B"></i>For banks and building societies</div>
+  <h1>Built for the night <span class="fl">your bank goes down.</span></h1>
+  <p class="lead">One owner in seconds, the cause with its evidence, a fix two named people approve, and every regulator report drafted while you recover. Inside your own cloud.</p>
+  <div class="bts"><span class="b1">Book a demo</span><span class="b2">Replay one of your outages</span></div></div></div>
+ <div class="win bk-alert"><div class="wh"><b>INC 2047, severity 1</b><span>Sample</span></div><div class="wr" style="grid-template-columns:1fr auto"><span>Card payments failing, UK</span><span class="chip co">Fixing</span></div><div class="wr" style="grid-template-columns:1fr auto"><span>Customers affected</span><b>18,400</b></div><div class="wr" style="grid-template-columns:1fr auto"><span>FCA clock</span><b>23h 41m</b></div><div class="wr" style="grid-template-columns:1fr auto"><span>Rollback approvals</span><b>1 of 2</b></div></div>
+</section>
+
+<section class="L" aria-label="What regulators now expect"><div class="w">
+ <div class="top2"><div><h2>Three rules. <span>One platform.</span></h2><p class="lead">UK banks now answer for how they stay up, how fast they tell the regulator and who they depend on. Relyxus is built around all three.</p></div><span class="chip np">Summary, not legal advice</span></div>
+ <div class="bk-dates">
+  <div style="--c:#9FB4D6"><em>2025</em><h3>Stay inside your tolerances</h3><p>Operational resilience rules ask you to map important business services, set impact tolerances and prove you can stay within them.</p><b>Relyxus keeps your services, tolerances, drills and the evidence for your self assessment.</b></div>
+  <div style="--c:#FF6B4A"><em>Mar 2027</em><h3>Report within a day</h3><p>The new FCA and PRA incident reporting rules generally expect the first report within 24 hours.</p><b>Relyxus drafts every report from the live incident, against its own clock, for you to sign.</b></div>
+  <div style="--c:#3DAE80"><em>DORA</em><h3>Know your suppliers</h3><p>EU entities keep a register of every ICT supplier behind their critical functions, with exit plans.</p><b>Relyxus keeps the register in step with your services, with its own exit plan on file.</b></div>
+ </div></div></section>
+
+<section class="K" aria-label="A night at a bank"><div class="w">
+ <h2>One night at a bank, <span>minute by minute.</span></h2><p class="lead">What a severity 1 looks like with Relyxus, from the first alert to the board pack. A sample incident, the real product.</p>
+ <div class="bk-night">
+  <div class="bk-m"><em>23:48<small>Thursday</small></em><span class="dt" style="--c:#FF6B4A"></span><div><b>Card payments start failing</b><p>412 alerts from seven tools become one incident. The command centre shows GBP 184,000 of payments at risk.</p></div><div class="wh2"><b>On call engineer</b>Paged by Slack, text and a phone call. Takes it in two minutes.</div></div>
+  <div class="bk-m"><em>23:52</em><span class="dt" style="--c:#C79A8C"></span><div><b>The cause, with its evidence</b><p>Vigil ranks the likely causes. A configuration change in payments is 82% likely, with three sources cited.</p></div><div class="wh2"><b>Incident commander</b>Joins the war room with the cause already on screen.</div></div>
+  <div class="bk-m"><em>23:55</em><span class="dt" style="--c:#F2C27B"></span><div><b>A fix two people approve</b><p>The duty manager and a director sign the rollback with passkeys. Relyxus runs it and watches the error rate.</p></div><div class="wh2"><b>Duty manager and director</b>Approve from their phones. Neither can approve their own proposal.</div></div>
+  <div class="bk-m"><em>00:02</em><span class="dt" style="--c:#9FB4D6"></span><div><b>Customers told first</b><p>The status page and the customer message go out in plain words, before the complaints arrive.</p></div><div class="wh2"><b>Communications lead</b>Edits and signs one draft instead of writing three.</div></div>
+  <div class="bk-m"><em>00:10</em><span class="dt" style="--c:#9FB4D6"></span><div><b>The regulator notice drafted</b><p>The DORA and FCA clocks are already running. Each report is drafted from the record and waits for a signature.</p></div><div class="wh2"><b>Head of operational resilience</b>Reviews and signs. The receipt is sealed in the evidence vault.</div></div>
+  <div class="bk-m"><em>Monday</em><span class="dt" style="--c:#3DAE80"></span><div><b>The board report</b><p>What happened, what it cost, who decided what and what changes next, from a record nobody edited.</p></div><div class="wh2"><b>The board</b>Reads one page, with every decision and its owner.</div></div>
+ </div></div></section>
+
+<section class="M" aria-label="Everyone gets what they need"><div class="w">
+ <h2>Five people. <span>One version of the truth.</span></h2><p class="lead">Each role sees what it needs, from the same incident record.</p>
+ <div class="bk-roles">
+  <div class="cd"><span class="who2">On call engineer</span><h3>The cause, before the call</h3><p style="font-size:14.5px;margin-top:10px;line-height:1.5">Opens the incident to find the likely cause, its evidence and the runbook already there.</p><ul><li>One page, not four hundred</li><li>Ranked causes with proof</li><li>The runbook for this service</li></ul></div>
+  <div class="cd"><span class="who2">Duty manager</span><h3>Decide in one tap</h3><p style="font-size:14.5px;margin-top:10px;line-height:1.5">Gets a clear request on their phone: what will change, how far it reaches and who else must sign.</p><ul><li>Approve with a passkey</li><li>See the blast radius first</li><li>A kill switch for anything</li></ul></div>
+  <div class="cd"><span class="who2">Operational resilience</span><h3>Every clock, handled</h3><p style="font-size:14.5px;margin-top:10px;line-height:1.5">Sees every regulator clock, every draft report and every tolerance in one place.</p><ul><li>Reports drafted live</li><li>Tolerances tracked</li><li>Drills and evidence</li></ul></div>
+  <div class="cd"><span class="who2">Chief technology officer</span><h3>Fewer, shorter outages</h3><p style="font-size:14.5px;margin-top:10px;line-height:1.5">Sees which changes cause incidents and whether the fixes from last time were done.</p><ul><li>Change preflight</li><li>Patterns across incidents</li><li>Actions chased to done</li></ul></div>
+  <div class="cd" style="background:#0A0C10;border-color:#0A0C10"><span class="who2" style="color:#BFD0EE">The board</span><h3 style="color:#fff">One page they trust</h3><p style="font-size:14.5px;margin-top:10px;line-height:1.5;color:#D4DBE5">Reads one page, written from a record nobody could edit, with a name on every decision.</p><ul><li style="color:#E9EEF5;border-color:#232C3C">What it cost</li><li style="color:#E9EEF5;border-color:#232C3C">Who decided what</li><li style="color:#E9EEF5;border-color:#232C3C">What changes next</li></ul></div>
+ </div></div></section>
+
+<section class="L bk-acc" aria-label="Named accountability"><div class="w"><div class="feat">
+ <div><h2>Every decision <span>has a name on it.</span></h2><p class="lead">Senior managers are accountable for what happens in an outage. Relyxus records who declared it, who approved each fix and who signed each report, with passkeys and timestamps nobody can change.</p>
+  <ul class="ul"><li><b>Named approvers,</b> never the person who proposed the fix</li><li><b>Passkey signatures</b> for every decision that matters</li><li><b>A hash chained record</b> your auditors can check</li></ul></div>
+ <div class="doc"><div class="dh"><span>Decision record, INC 2047</span><span>Sealed, sample</span></div><h4 style="margin-bottom:8px">Who decided what</h4>
+  <div class="row"><em>03:17</em><span>Declared severity 1</span><b>Emma Clarke</b></div>
+  <div class="row"><em>03:18</em><span>Approved rollback, key 1</span><b>Emma Clarke</b></div>
+  <div class="row"><em>03:19</em><span>Approved rollback, key 2</span><b>Daniel Reyes</b></div>
+  <div class="row"><em>03:24</em><span>Signed customer notice</span><b>Raj Kapoor</b></div>
+  <div class="row" style="border:0"><em>10:43</em><span>Signed FCA report</span><b>Emma Clarke</b></div>
+  <div class="sg"><span>Hash chain intact, 5 of 5</span><span class="stamp">VERIFIED</span></div></div>
+</div></div></section>
+
+<section class="K" aria-label="Important business services"><div class="w"><div class="feat rev">
+ <div><h2>See which customers feel it <span>the moment it breaks.</span></h2><p class="lead">Relyxus knows which important business service each system supports, so an alert on one server becomes "card payments are at risk" before anyone asks.</p>
+  <ul class="ul"><li><b>Services mapped to systems</b> and suppliers</li><li><b>Impact tolerance clocks</b> start with the incident</li><li><b>Customer impact</b> counted as it happens</li></ul></div>
+ <div class="bk-map"><svg viewBox="0 0 600 460" preserveAspectRatio="none"><path d="M300 100 L106 220 M300 100 L300 220 M300 100 L494 220 M106 240 L84 360 M106 240 L227 360 M300 240 L227 360 M494 240 L373 360 M494 240 L516 360" stroke="#2A3548" stroke-width="2" fill="none"/><path d="M300 100 L300 220 M300 240 L227 360" stroke="#FF6B4A" stroke-width="2.5" fill="none"/></svg>
+  <div class="bk-n ibs" style="left:50%;top:50px;transform:translateX(-50%)"><b>Card payments</b>Tolerance 2 hours, 11 min used</div>
+  <div class="bk-n" style="left:3%;top:200px;width:29%"><b>Fraud scoring</b>Healthy</div>
+  <div class="bk-n" style="left:35.5%;top:200px;width:29%;border-color:#FF6B4A"><b>Card authorisation</b>Failing</div>
+  <div class="bk-n" style="right:3%;top:200px;width:29%"><b>Payment gateway</b>Healthy</div>
+  <div class="bk-n" style="left:2%;top:345px;width:23%"><b>Rules engine</b>Healthy</div>
+  <div class="bk-n" style="left:26.3%;top:345px;width:23%;border-color:#FF6B4A"><b>Release 4.18.2</b>The likely cause</div>
+  <div class="bk-n" style="left:50.6%;top:345px;width:23%"><b>Card processor</b>Supplier</div>
+  <div class="bk-n" style="right:2%;top:345px;width:23%"><b>Cloud region</b>Supplier</div></div>
+</div></div></section>
+
+<section class="L" aria-label="Built for due diligence"><div class="w bk-ddg">
+ <div><h2>Built to pass <span>your vendor review.</span></h2><p class="lead">The questions your risk, security and procurement teams ask first, answered before the first call.</p><span class="b1" style="display:inline-flex;margin-top:28px">Visit the Trust Center</span></div>
+ <div class="bk-q"><div class="qh"><b>Vendor due diligence</b><span>Relyxus answers</span></div>
+  <div class="qr"><span>Where does it run, and who holds the data?</span><p>In your own AWS or Azure account, or on your Kubernetes. Air gapped if you need it.</p></div>
+  <div class="qr"><span>Can the vendor reach our systems?</span><p>No standing access. Your admins approve any support session, for four hours at most.</p></div>
+  <div class="qr"><span>What documents can we review?</span><p>Security pack, due diligence answers, pre filled questionnaires and the DPA.</p></div>
+  <div class="qr"><span>How would we leave?</span><p>Every setting and all evidence export any day, for your DORA register and exit plan.</p></div></div>
+</div></section>
+
+<section class="M" aria-label="Your DORA register"><div class="w">
+ <div class="cen"><h2>Your supplier register, <span>drafted for you.</span></h2><p class="lead c">Relyxus builds the DORA register of information from the dependency map it already keeps: every provider, the functions it supports, its exit plan and when its contract is due for review.</p></div>
+ <div class="real mt"><img src="media/console/compliance_dora-register.jpg" alt="Relyxus DORA register of information screen"></div>
+ <p class="note" style="text-align:center">The real product, showing the demo workspace.</p></div></section>
+

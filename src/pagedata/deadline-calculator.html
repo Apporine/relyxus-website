@@ -1,0 +1,68 @@
+<!-- title: Incident deadline calculator | Relyxus -->
+<style>
+.dc-app{display:grid;grid-template-columns:420px 1fr;gap:0;border-radius:26px;overflow:hidden;box-shadow:0 50px 110px rgba(15,25,45,.28);margin-top:64px;border:1px solid #E3E8EF}
+.dc-in{background:#fff;padding:34px}
+.dc-in h3{font-size:24px}
+.dc-f{margin-top:22px}.dc-f label{display:block;font-size:13.5px;font-weight:600;color:#2B3340;margin-bottom:8px}
+.dc-f .ip{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-radius:14px;border:1px solid #DDE3EA;font-size:15.5px;background:#FAFBFC}
+.dc-f .ip span{color:#3E4652;font-size:13px}
+.dc-ck{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.dc-ck span{display:flex;align-items:center;gap:9px;padding:12px 13px;border-radius:12px;border:1px solid #DDE3EA;font-size:14px;font-weight:500}
+.dc-ck span i{width:18px;height:18px;border-radius:6px;border:2px solid #9AA6B8;flex:none}
+.dc-ck span.on{border-color:#0A0C10;background:#F6F8FA}.dc-ck span.on i{background:#0A0C10;border-color:#0A0C10;position:relative}
+.dc-ck span.on i:after{content:'';position:absolute;left:4px;top:1px;width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.dc-out{background:#0B0D11;color:#fff;padding:34px}
+.dc-out .hd{display:flex;justify-content:space-between;align-items:flex-end}
+.dc-out .hd b{font-family:var(--display);font-size:26px;letter-spacing:-.02em}.dc-out .hd span{font-size:13.5px;color:#C9D3E3}
+.dc-line{position:relative;margin-top:34px;height:90px}
+.dc-line:before{content:'';position:absolute;left:0;right:0;top:40px;height:2px;background:#232C3C}
+.dc-p{position:absolute;top:30px;transform:translateX(-50%);text-align:center}
+.dc-p i{display:block;margin:0 auto;width:22px;height:22px;border-radius:50%;border:4px solid var(--c);background:#0B0D11}
+.dc-p b{display:block;font-size:13px;margin-top:10px;white-space:nowrap}
+.dc-row{display:grid;grid-template-columns:150px 1fr 170px 150px;gap:14px;align-items:center;padding:16px 0;border-top:1px solid #1A2230;font-size:14.5px}
+.dc-row b{font-size:15.5px}.dc-row small{display:block;font-size:12.5px;color:#C9D3E3;margin-top:2px}
+.dc-row .t{font-family:var(--display);font-weight:600;font-size:22px;letter-spacing:-.02em}
+.dc-act{display:flex;gap:10px;margin-top:24px}
+.dc-act span{font-size:14px;font-weight:600;padding:11px 16px;border-radius:999px;border:1px solid #3A4458}
+.dc-act span.p{background:#fff;color:#0A0C10;border-color:#fff}
+.dc-why>div{padding:24px 0;border-top:1.5px solid #0A0C10}.dc-why>div+div{border-top:1px solid #DDE3EA}
+.dc-why b{display:block;font-family:var(--display);font-size:28px;letter-spacing:-.03em}.dc-why span{display:block;font-size:17px;line-height:1.55;color:#2B3340;margin-top:8px;max-width:620px}
+</style>
+
+<section class="LF hero" aria-label="Deadline calculator"><div class="w">
+ <div class="cen"><div class="kick" style="justify-content:center"><i style="background:#FF6B4A"></i>Free tool</div>
+ <h1>Every incident deadline, <span>in one minute.</span></h1>
+ <p class="lead c">Tell us when the incident started and when you classified it. See every regulator deadline that applies, in your own time zone.</p></div>
+ <div class="dc-app">
+  <div class="dc-in"><h3>Your incident</h3>
+   <div class="dc-f"><label>When was it detected?</label><div class="ip"><b>Thu 14 Nov, 23:48</b><span>Europe/London</span></div></div>
+   <div class="dc-f"><label>When was it classified as major or reportable?</label><div class="ip"><b>Fri 15 Nov, 01:10</b><span>Europe/London</span></div></div>
+   <div class="dc-f"><label>Which rules apply to you?</label><div class="dc-ck"><span class="on"><i></i>FCA and PRA</span><span class="on"><i></i>DORA</span><span class="on"><i></i>MAS</span><span><i></i>US banks</span><span><i></i>US service provider</span><span class="on"><i></i>Your contracts</span></div></div>
+   <div class="dc-f"><label>Contract notice term</label><div class="ip"><b>4 hours</b><span>From detection</span></div></div>
+   <div style="margin-top:26px" class="b1">Work out my deadlines</div></div>
+  <div class="dc-out"><div class="hd"><b>Your deadlines</b><span>4 rules apply, example</span></div>
+   <div class="dc-line"><div class="dc-p" style="left:4%;--c:#9FB4D6"><i></i><b>Detected</b></div><div class="dc-p" style="left:20%;--c:#FF6B4A"><i></i><b>MAS 00:48</b></div><div class="dc-p" style="left:44%;--c:#FFB199"><i></i><b>Contract 03:48</b></div><div class="dc-p" style="left:62%;--c:#F2C27B"><i></i><b>DORA 05:10</b></div><div class="dc-p" style="left:92%;--c:#3DAE80"><i></i><b>UK 01:10 Sat</b></div></div>
+   <div class="dc-row"><div><b>MAS</b><small>Singapore</small></div><span>Notify within 1 hour of discovery</span><span class="t">Fri 00:48</span><span class="chip co">Most urgent</span></div>
+   <div class="dc-row"><div><b>Your contract</b><small>4 hours from detection</small></div><span>Notice to affected clients</span><span class="t">Fri 03:48</span><span class="chip nx">Next</span></div>
+   <div class="dc-row"><div><b>DORA</b><small>European Union</small></div><span>Initial notification, 4 hours from classification</span><span class="t">Fri 05:10</span><span class="chip st">Then 72h, 1 month</span></div>
+   <div class="dc-row"><div><b>FCA and PRA</b><small>United Kingdom</small></div><span>Initial report, generally 24 hours</span><span class="t">Sat 01:10</span><span class="chip st">Final in 30 working days</span></div>
+   <div class="dc-act"><span class="p">Email me these deadlines</span><span>Add to calendar</span><span>See how Relyxus drafts them</span></div>
+   <p class="note" style="color:#C9D3E3">Guidance only, not legal advice. Your compliance team decides what applies and when each clock starts.</p></div>
+ </div>
+</div></section>
+
+<section class="L" aria-label="How it works"><div class="w" style="display:grid;grid-template-columns:440px 1fr;gap:80px;align-items:start">
+ <div><h2>Built from <span>the published rules.</span></h2><p class="lead">The calculator follows the same rules Relyxus uses inside the product, where every clock starts automatically from the incident record.</p></div>
+ <div class="dc-why"><div><b>Different start points</b><span>Some clocks start at discovery, others at classification or at your reportability decision. The calculator asks for each.</span></div><div><b>Your time zone</b><span>Deadlines are shown where your team is, with the regulator's own time beside them.</span></div><div><b>Your contracts too</b><span>Add the notice terms your clients wrote into your contracts, so nothing is missed.</span></div></div>
+</div></section>
+
+<section class="K" aria-label="In the product"><div class="w"><div class="feat">
+ <div><h2>In Relyxus, <span>nobody has to calculate.</span></h2><p class="lead">The moment an incident crosses a trigger, its clock starts, its report is drafted and the right person is asked to sign.</p>
+  <ul class="ul"><li><b>Clocks start from the record,</b> not from memory</li><li><b>Drafts follow the incident</b> as it changes</li><li><b>Every submission sealed</b> with its receipt</li></ul><span class="lk" style="color:#fff">See reporting and resilience</span></div>
+ <div class="win"><div class="wh"><b>Regulator clocks, INC 2047</b><span>Sample</span></div>
+  <div class="wr" style="grid-template-columns:1fr auto auto"><span>MAS, Singapore</span><span class="chip ok">Sent 03:59</span><b>Done</b></div>
+  <div class="wr" style="grid-template-columns:1fr auto auto"><span>DORA, European Union</span><span class="chip ok">Sent 06:58</span><b>Done</b></div>
+  <div class="wr" style="grid-template-columns:1fr auto auto"><span>FCA, United Kingdom</span><span class="chip nx">Waiting to sign</span><b>23h 27m</b></div>
+  <div class="wr" style="grid-template-columns:1fr auto auto"><span>US banks</span><span class="chip st">Drafting</span><b>35h 28m</b></div></div>
+</div></div></section>
+

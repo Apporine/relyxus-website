@@ -1,0 +1,73 @@
+<!-- title: The first hour decides the fine | Relyxus -->
+<style>
+.ar-hero{min-height:720px}
+.ar-meta{display:flex;gap:12px;align-items:center;font-size:14px;color:#D4DBE5;margin-top:30px}
+.ar-cover{position:absolute;right:64px;top:-30px;width:470px;height:420px;border-radius:26px;background:radial-gradient(70% 60% at 20% 20%,#FF8A6B,transparent),radial-gradient(60% 60% at 90% 90%,#E5482A,transparent),#FFC4A8;box-shadow:0 40px 90px rgba(0,0,0,.45);overflow:hidden}
+.ar-cover .card{position:absolute;left:40px;right:40px;top:70px;background:#fff;border-radius:18px;padding:22px;transform:rotate(3deg);box-shadow:0 24px 50px rgba(10,15,30,.3);color:#0A0C10}
+.ar-cover .card b{display:block;font-size:20px;margin-top:8px}
+.ar-cover .ring{position:absolute;left:40px;bottom:36px;display:flex;align-items:center;gap:16px;color:#0A0C10;font-weight:600}
+.ar-body{display:grid;grid-template-columns:240px minmax(0,720px);gap:80px;justify-content:center}
+.ar-toc{position:relative;font-size:14px}.ar-toc b{display:block;font-size:13px;color:#2B4F94;margin-bottom:12px}
+.ar-toc a{display:block;padding:9px 0 9px 14px;border-left:2px solid #E3E8EF;color:#2B3340}.ar-toc a.on{border-left-color:#0A0C10;color:#0A0C10;font-weight:600}
+.ar-txt p{font-size:18.5px;line-height:1.75;color:#1F2630;margin-top:22px!important}
+.ar-txt .dek{font-family:var(--display);font-size:28px;line-height:1.3;letter-spacing:-.02em;color:#0A0C10;font-weight:500;margin-top:0!important}
+.ar-txt h2{font-size:38px;margin-top:64px}
+.ar-txt .pq{margin:44px 0;padding:30px 34px;border-radius:22px;background:#0B0D11;color:#fff;font-family:var(--display);font-size:30px;line-height:1.25;letter-spacing:-.02em}
+.ar-txt .pq span{display:block;font-family:var(--body);font-size:14px;color:#C9D3E3;margin-top:14px;letter-spacing:0}
+.ar-tb{margin-top:30px}.ar-tb .tr{grid-template-columns:1.2fr .9fr 1.4fr 1.4fr;font-size:14px}
+.ar-fine{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:30px}
+.ar-fine div{border-radius:20px;padding:24px;border:1px solid #E3E8EF}.ar-fine b{display:block;font-family:var(--display);font-size:52px;letter-spacing:-.04em;font-weight:600}.ar-fine span{font-size:14.5px;color:#2B3340}
+.ar-four{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:26px}
+.ar-four div{border-radius:18px;padding:20px;background:#F6F8FA}.ar-four b{display:block;font-size:17px}.ar-four span{display:block;font-size:14.5px;color:#2B3340;margin-top:6px;line-height:1.5}
+.ar-ck{list-style:none;padding:0;margin:26px 0 0;counter-reset:c}
+.ar-ck li{counter-increment:c;display:grid;grid-template-columns:44px 1fr;gap:16px;padding:18px 0;border-top:1px solid #E3E8EF;font-size:16.5px;line-height:1.6;color:#1F2630}
+.ar-ck li:before{content:counter(c);display:grid;place-items:center;width:36px;height:36px;border-radius:11px;background:#0A0C10;color:#fff;font-weight:600;font-size:14px}
+.ar-ck b{color:#0A0C10}
+.ar-src{margin-top:56px;padding-top:24px;border-top:1px solid #E3E8EF;font-size:14px;color:#2B3340;line-height:1.9}
+.ar-src b{display:block;font-size:15px;color:#0A0C10;margin-bottom:6px}
+.ar-end{max-width:1040px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:40px;padding:40px 44px;border-radius:26px;background:#0A0C10;color:#fff}
+.ar-end b{display:block;font-family:var(--display);font-size:34px;letter-spacing:-.03em}.ar-end span{display:block;font-size:16px;color:#D4DBE5;margin-top:8px;max-width:560px;line-height:1.5}
+.ar-end .b1{background:#fff!important;color:#0A0C10!important}
+</style>
+
+<section class="KF hero ar-hero" aria-label="Article"><div class="w">
+ <div style="max-width:640px"><div class="kick"><i style="background:#FF6B4A"></i>Regulation, 8 minute read</div>
+  <h1 style="font-size:70px">The first hour <span class="fl">decides the fine.</span></h1>
+  <p class="lead">What went wrong at TSB, and what the first sixty minutes of a serious outage need to look like now.</p>
+  <div class="ar-meta"><span class="av v">R</span><span>From the Relyxus team</span><span>14 November 2026</span></div></div>
+ <div class="ar-cover"><div class="card"><span class="sev">SEV1</span> <span style="font-size:13px;color:#3E4652">INC 2041</span><b>Card authorisation failures in UK</b><div style="margin-top:12px;font-size:13px;color:#3E4652">Team on it, 3 in the room</div></div>
+  <div class="ring"><svg width="84" height="84" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" stroke="rgba(10,12,16,.15)" stroke-width="9" fill="none"/><circle cx="50" cy="50" r="40" stroke="#0A0C10" stroke-width="9" fill="none" stroke-linecap="round" stroke-dasharray="251" stroke-dashoffset="190" transform="rotate(-90 50 50)"/><text x="50" y="57" text-anchor="middle" font-family="Bricolage Grotesque Variable,sans-serif" font-weight="650" font-size="24" fill="#0A0C10">1h</text></svg><span>The hour that<br>matters most</span></div></div>
+</div></section>
+
+<section class="L" aria-label="Article body"><div class="w"><div class="ar-body">
+ <nav class="ar-toc"><b>In this article</b><a class="on">The TSB lesson</a><a>The clocks that start</a><a>Where the first hour goes</a><a>A first hour checklist</a><a>The real deadline</a></nav>
+ <div class="ar-txt">
+  <p class="dek">Every bank goes down. What regulators now judge is what you did in the first hour, how you told them, and whether you can prove it.</p>
+  <p>From 18 March 2027, UK banks must send the FCA and PRA an initial incident report, generally within 24 hours of deciding an incident crosses the threshold. Singapore has asked for a call within one hour since 2014. The EU's DORA wants four hours from classification. American banks have 36. The outage itself is rarely the failure that gets fined. The failure is a slow, confused first hour that turns a bad night into a public story.</p>
+  <h2>The TSB lesson</h2>
+  <p>In spring 2018, TSB moved about 5 million customers onto a new IT platform as part of its separation from Lloyds. Millions were locked out of their accounts across online, mobile, phone and branch. Problems lasted for weeks, and the bank did not return to business as usual until December.</p>
+  <div class="ar-fine"><div><b>£48.65m</b><span>fined by the FCA and PRA, December 2022</span></div><div><b>£32.7m</b><span>already paid to customers in redress</span></div></div>
+  <p>Read the findings closely and the technology is not the headline. The regulators pointed to a migration programme that was not properly organised or controlled, weak control of a critical third party supplier, and risk management that was not up to the job. One line matters most for anyone who runs incidents: TSB's early public response <b>understated the scale of the problem.</b></p>
+  <div class="pq">Outages are forgiven far more easily than confusion about them.<span>When nobody can say what broke, who is fixing it and how many customers are affected, every later message carries less trust.</span></div>
+  <h2>The clocks that start when production breaks</h2>
+  <p>A bank that serves customers in more than one market now runs several regulatory clocks at once, each with its own trigger and its own first deadline.</p>
+  <div class="tb ar-tb"><div class="tr h"><span>Regulator</span><span>First report</span><span>Clock starts</span><span>What follows</span></div>
+   <div class="tr"><b>MAS, Singapore</b><span>Within 1 hour</span><span>Discovery of a severe, widespread incident</span><span>Root cause report within 14 days</span></div>
+   <div class="tr"><b>EU, DORA</b><span>Within 4 hours</span><span>Classified as major, at most 24 hours after detection</span><span>Intermediate in 72 hours, final within a month</span></div>
+   <div class="tr"><b>FCA and PRA, UK</b><span>Generally 24 hours</span><span>Deciding the threshold is met</span><span>Final report within 30 working days</span></div>
+   <div class="tr"><b>US banking agencies</b><span>36 hours</span><span>Determining a notification incident</span><span>Service providers tell banks after 4 hours of disruption</span></div></div>
+  <p>The clocks start at different moments. MAS counts from discovery. The UK counts from your decision that the threshold is met. DORA counts from classification but caps it at 24 hours from detection. A good record of exactly when each decision was made is no longer paperwork. It is your evidence.</p>
+  <h2>Where the first hour actually goes</h2>
+  <p>Ask any bank's on call engineers where the first hour of a major outage went, and the answer is rarely "fixing it". It goes in four places.</p>
+  <div class="ar-four"><div><b>Finding the right person</b><span>The person who knows the payments service may be the fifth to wake up.</span></div><div><b>Agreeing what broke</b><span>Thirty minutes proving it is not the network, then not the database.</span></div><div><b>Getting permission</b><span>The rollback waits for an approver nobody can reach.</span></div><div><b>Writing it down</b><span>Nobody keeps a clean timeline, and the regulator will ask for one.</span></div></div>
+  <h2>A first hour checklist for banks</h2>
+  <ol class="ar-ck"><li><span><b>Page one owner, not a crowd.</b> Escalate only if the first person does not answer, and respect quiet hours for everyone else.</span></li><li><span><b>Group the noise.</b> Four hundred alerts from one failure should arrive as one incident.</span></li><li><span><b>Put the evidence in one place,</b> so the cause is argued from data in minutes.</span></li><li><span><b>Make approvals real and fast,</b> from a phone, with strong authentication and a record.</span></li><li><span><b>Keep private incidents private.</b> No details in pages for fraud or security cases.</span></li><li><span><b>Log every decision with a timestamp.</b> These are the moments each clock starts from.</span></li><li><span><b>Draft the regulator report from the record,</b> and practise on your last serious outage.</span></li></ol>
+  <h2>The real deadline is the first hour</h2>
+  <p>The new UK rules give banks until 18 March 2027. The work is not filling in a new form. It is making sure that when production breaks at 03:12, the right person is awake in two minutes, the cause is on screen in ten, the fix is approved properly, and every decision is already written down.</p>
+  <p>We built Relyxus for exactly that hour. Send us one past outage and we will replay it with you, inside your own cloud.</p>
+  <div class="ar-src"><b>Sources</b>TLT: FCA and PRA final rules on operational incident reporting<br>Computing: TSB fined £48 million over botched migration<br>Pinsent Masons and MAS: incident reporting within 1 hour<br>Bastion: DORA incident reporting timelines<br>OCC Bulletin 2021 55: computer security incident notification<br><i>Not legal advice. Check the current rules with your compliance team.</i></div>
+ </div></div></div></section>
+
+<section class="M" aria-label="Replay"><div class="w"><div class="ar-end">
+ <div><b>Time your own first hour.</b><span>Send us one past incident. We will show you where every minute went, and what your regulator would have seen.</span></div>
+ <div class="bts" style="margin-top:0"><span class="b1">Replay my outage free</span></div></div></div></section>

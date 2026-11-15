@@ -1,0 +1,81 @@
+/* Inner pages: working controls inside the approved designs, and the phone
+   and tablet layout. The 1440 px designs are untouched above 1024 px. */
+.pgm a.b1,.pgm a.b2,.pgm a.lk{text-decoration:none;cursor:pointer;transition:transform .2s}
+.pgm a.b1:hover,.pgm a.b2:hover{transform:translateY(-2px)}
+.pgm a.lk{display:inline-block;margin-top:24px;font-size:15px;font-weight:600;text-decoration:underline;text-underline-offset:4px}
+.pgm button{font:inherit;cursor:pointer}
+.dm-f input.ip{width:100%;font:inherit;font-size:15px;outline:none}
+.dm-f input.ip:focus{border-color:#3F66B0;background:#fff}
+.dm-f input.ip::placeholder{color:#5B6472}
+.dm-cal button{border:1px solid #DDE3EA;border-radius:12px;padding:10px;text-align:center;font-size:12.5px;color:#2B3340;background:#fff}
+.dm-cal button b{display:block;font-size:17px;color:#0A0C10}
+.dm-cal button.on{background:#0A0C10;border-color:#0A0C10;color:#D4DBE5}.dm-cal button.on b{color:#fff}
+.dm-sl button{font-size:13.5px;font-weight:600;padding:9px 14px;border-radius:10px;border:1px solid #DDE3EA;background:#fff;color:#0A0C10}
+.dm-sl button.on{border-color:#FF6B4A;background:#FFF1EC;color:#B5361C}
+button.dm-go{width:100%;border:0}
+.dm-err{margin:10px 0 0;font-size:14px;color:#B5361C;text-align:center;min-height:1px}
+.dm-ok{font-size:17px;line-height:1.55;color:#2B3340;margin-top:14px!important}
+.dc-f .ip{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.dc-f .ip input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-size:15.5px;font-weight:600;color:#0A0C10;outline:none}
+.dc-f .ip:focus-within{border-color:#3F66B0;background:#fff}
+.dc-p{transition:left .3s}
+.pgm [role="button"]:focus-visible,.pgm [role="checkbox"]:focus-visible{outline:2px solid #3F66B0;outline-offset:3px}
+
+@media (max-width:1023px){
+  .pgm .w{padding:0 24px}
+  .pgm section{padding:88px 0}
+  .pgm .hero{min-height:0;padding:140px 0 72px!important}
+  .pgm .lead{font-size:17px}
+  .pg-1,.split,.g2,.g3,.g4,.feat{grid-template-columns:minmax(0,1fr)!important}
+  .split,.feat{gap:40px!important}
+  .split.rev>:first-child{order:0}
+  .top2{flex-direction:column;align-items:flex-start;gap:20px}
+  .pbar{overflow-x:auto;scrollbar-width:none;margin-top:48px}
+  .mt{margin-top:40px}
+  .pgm [style*="position:absolute"]{max-width:100%}
+  .tb .tr.h{display:none}
+  .tb .tr{gap:6px!important;padding:16px 18px!important}
+}
+@media (max-width:640px){
+  .pgm .w{padding:0 20px}
+  .pgm section{padding:72px 0}
+  .pgm .hero{padding:120px 0 56px!important}
+  .bts{flex-direction:column;align-items:stretch}
+  .bts .b1,.bts .b2{justify-content:center}
+  .pgm .lead{font-size:16.5px}
+}
+@media (max-width:1023px){
+  .anno{display:flex;flex-direction:column;gap:16px}
+  .anno .real{order:-1}
+  .anno .co{position:relative!important;inset:auto!important;width:auto!important;max-width:none!important;margin-left:12px}
+}
+
+/* Phone: visuals drawn at a fixed size are shown whole, scaled to the screen */
+@media (max-width:1023px){
+  .bk-alert{position:relative!important;right:auto!important;top:auto!important;width:auto!important;margin:40px 24px 0}
+  .pf-kpi{position:relative!important;right:auto!important;top:auto!important;width:auto!important;margin-top:32px}
+  .pf-bg{height:240px!important}
+  .rs-zz{display:none}
+  .rs-cal{overflow-x:auto}.rs-cal .hd,.rs-cal .rw{min-width:640px}
+  .bk-night:before{display:none}.bk-m{gap:8px!important}.bk-m em{text-align:left!important}.bk-m .dt{display:none}
+  [class*="-cal"]{overflow-x:auto}
+  .dc-line{display:none}
+  .dc-act{flex-wrap:wrap}
+  .tc-tlw{overflow-x:auto}.tc-tlw>*{min-width:760px}
+}
+@media (max-width:700px){
+  .pgm .rp-fan{width:700px;zoom:.46}
+  .in-orb{width:760px;zoom:.42;margin-left:auto;margin-right:auto}
+  .bk-map{width:600px!important;zoom:.58}
+  .tc-map{width:720px;zoom:.48}
+  .dc-f .ip span{display:none}
+}
+@media (max-width:1023px){
+  .pr-row{grid-template-columns:minmax(0,1fr)!important;gap:28px!important}
+  .pgm .pr-zero{grid-template-columns:1fr 1fr!important;margin-top:48px!important}
+  .dm-cal{grid-template-columns:repeat(5,minmax(0,1fr))!important;overflow:visible!important}
+  .dm-cal button{padding:9px 2px}
+  .ar-cover{position:relative!important;right:auto!important;top:auto!important;width:auto!important;height:300px!important;margin-top:40px}
+  .ar-end{flex-direction:column;align-items:flex-start!important;padding:30px 26px!important}
+  .ar-toc{position:static!important}
+}

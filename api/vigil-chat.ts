@@ -7,7 +7,10 @@
 import { GoogleGenAI, type Content, type Part } from "@google/genai";
 import { SYSTEM_PROMPT_TEXT, TOOLS } from "./_vigil-config.js";
 
-const MODEL = process.env.VIGIL_CHAT_MODEL || "gemini-flash-latest";
+// Fast models first, tried in order; the first that answers wins. Thinking is
+// turned off where the model allows it, so replies come back in a second or two.
+const MODELS = [process.env.VIGIL_CHAT_MODEL, "gemini-flash-lite-latest", "gemini-2.5-flash-lite", "gemini-2.5-flash", "gemini-flash-latest"].filter((m, i, a): m is string => !!m && a.indexOf(m) === i);
+const quick = (m: string) => /lite|2\.5-flash/.test(m);
 const LEADS = process.env.PUBLIC_VIGIL_LEADS_URL || "";
 const ALLOWED = /^https:\/\/((www\.)?relyxus\.com|relyxus-website[a-z0-9-]*\.vercel\.app)$|^http:\/\/localhost(:\d+)?$/;
 const FREE = /@(gmail|googlemail|yahoo|hotmail|outlook|live|msn|icloud|me|aol|proton|protonmail|gmx|mail|yandex|zoho)\./i;
@@ -61,25 +64,33 @@ export async function POST(req: Request): Promise<Response> {
   while (history.length && history[0].role === "model") history.shift();
   if (!history.length) return json({ error: "bad_request" }, 400, origin);
 
-  const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY, httpOptions: { timeout: 15000, retryOptions: { attempts: 1 } } });
-  const actions: Action[] = [];
-  const contents: Content[] = [{ role: "user", parts: [{ text: `(The visitor is on the page ${page} of relyxus.com.)` }] }, { role: "model", parts: [{ text: "Understood." }] }, ...history];
-  try {
-    for (let round = 0; round < 4; round++) {
-      const r = await ai.models.generateContent({ model: MODEL, contents, config: { systemInstruction: SYSTEM_PROMPT_TEXT, tools: TOOLS as never, temperature: 0.5, maxOutputTokens: 500 } });
-      const calls = r.functionCalls || [];
-      if (!calls.length) return json({ text: (r.text || "").trim(), actions }, 200, origin);
-      const modelParts = (r.candidates?.[0]?.content?.parts || []) as Part[];
-      contents.push({ role: "model", parts: modelParts });
-      const responses: Part[] = [];
-      for (const c of calls) responses.push({ functionResponse: { id: c.id, name: c.name, response: { result: await runTool(c.name || "", (c.args || {}) as Record<string, unknown>, actions, page) } } });
-      contents.push({ role: "user", parts: responses });
+  const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY, httpOptions: { timeout: 7000, retryOptions: { attempts: 1 } } });
+  const started = Date.now();
+  let lastCode = 0;
+  for (const model of MODELS) {
+    if (Date.now() - started > 12000) break;
+    const actions: Action[] = [];
+    const contents: Content[] = [{ role: "user", parts: [{ text: `(The visitor is on the page ${page} of relyxus.com.)` }] }, { role: "model", parts: [{ text: "Understood." }] }, ...history];
+    try {
+      for (let round = 0; round < 4; round++) {
+        const r = await ai.models.generateContent({ model, contents, config: { systemInstruction: SYSTEM_PROMPT_TEXT, tools: TOOLS as never, temperature: 0.5, maxOutputTokens: 500, ...(quick(model) ? { thinkingConfig: { thinkingBudget: 0 } } : {}) } });
+        const calls = r.functionCalls || [];
+        if (!calls.length) return json({ text: (r.text || "").trim(), actions, model, ms: Date.now() - started }, 200, origin);
+        const modelParts = (r.candidates?.[0]?.content?.parts || []) as Part[];
+        contents.push({ role: "model", parts: modelParts });
+        const responses: Part[] = [];
+        for (const c of calls) responses.push({ functionResponse: { id: c.id, name: c.name, response: { result: await runTool(c.name || "", (c.args || {}) as Record<string, unknown>, actions, page) } } });
+        contents.push({ role: "user", parts: responses });
+      }
+      return json({ text: "", actions, model }, 200, origin);
+    } catch (e) {
+      lastCode = (e as { status?: number }).status || 0;
+      console.error("vigil-chat", model, lastCode, String(e).slice(0, 300));
+      // A lead or screen already handed over is not repeated with another model.
+      if (actions.some((a) => a.type === "lead")) return json({ text: "Thank you, I have passed your details to the team.", actions, model }, 200, origin);
     }
-    return json({ text: "", actions }, 200, origin);
-  } catch (e) {
-    console.error("vigil-chat", e);
-    return json({ error: "unavailable", code: (e as { status?: number }).status || 0 }, 502, origin);
   }
+  return json({ error: "unavailable", code: lastCode }, 502, origin);
 }
 
 export function OPTIONS(req: Request): Response {

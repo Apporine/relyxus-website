@@ -1,0 +1,35 @@
+---
+import Page from "../../layouts/Page.astro";
+const toc = ["What counts as a major incident", "The three reports and their clocks", "What the initial notification asks for", "How Relyxus drafts it", "Free template"];
+---
+<Page title="DORA incident reporting guide | Relyxus" description="A clear guide to DORA major ICT incident reporting: the 4 hour initial notification, 72 hour intermediate report and one month final report." path="/regulations/dora" tone="light" current="/solutions/banks">
+  <section class="k-sec k-white gd-hero"><div class="grid-bg" aria-hidden="true"></div><div class="wrap"><span class="k-tag"><i class="d"></i>Guide, DORA</span><h1 class="k-h1" style="margin-top:16px;max-width:980px">DORA incident reporting, <span>without the fog.</span></h1><p class="k-lede">Three reports, three clocks, and one template. Written for the person who has to send the first one at 3am.</p><div class="meta">12 minute read<span>Updated 15 Nov 2026</span><span>Sources linked in every section</span></div></div></section>
+  <section class="k-sec k-white gd-body" style="padding-top:20px"><div class="wrap cols">
+    <nav class="toc" aria-label="Contents"><b>Contents</b>{toc.map((t, i) => <a href={`#s${i}`} class={i === 1 ? "on" : ""}>{t}</a>)}<div class="prog"><i></i></div></nav>
+    <article>
+      <h2 id="s1" class="k-h2" style="font-size:36px">The three reports and their clocks</h2>
+      <p>Once you classify an ICT related incident as major, three reports follow. The clocks below come from Article 5 of Commission Delegated Regulation (EU) 2025/301.</p>
+      <div class="clocks"><div class="ck"><b>4 h</b><span>Initial notification</span><small>Within 4 hours of classifying it major, and no later than 24 hours after you became aware of it</small></div><div class="ck"><b>72 h</b><span>Intermediate report</span><small>Within 72 hours of the initial notification, then updates without undue delay</small></div><div class="ck"><b>1 month</b><span>Final report</span><small>No later than one month after the latest intermediate report</small></div></div>
+      <p class="src">Source: <a href="https://www.springlex.eu/en/packages/dora/rts-ir-regulation/article-5/">Delegated Regulation (EU) 2025/301, Article 5</a></p>
+      <div class="checker k-card"><b>Is this a major incident?</b><p>Answer five questions about clients affected, duration, services and data. The checker shows which DORA criteria you meet and why.</p><div class="qq"><span class="on">Critical services affected</span><span class="on">Clients affected above threshold</span><span>Data losses</span><span>Duration over 24 hours</span><span>Geographical spread</span></div><em>2 criteria met. Likely major: start the 4 hour clock.</em></div>
+      <div class="tpl"><div><b>Free DORA report template</b><span>Every field of the initial notification, with notes on where each answer comes from.</span></div><a class="k-b1" href="#">Download the template</a></div>
+    </article></div></section>
+</Page>
+<style is:global>
+.gd-hero{padding:96px 0 40px}.gd-hero .grid-bg{position:absolute;inset:0;background-image:linear-gradient(#E8EEF7 1px,transparent 1px),linear-gradient(90deg,#E8EEF7 1px,transparent 1px);background-size:32px 32px;-webkit-mask-image:linear-gradient(180deg,#000,transparent 85%);mask-image:linear-gradient(180deg,#000,transparent 85%)}
+.gd-hero .wrap{position:relative}.gd-hero .meta{display:flex;gap:18px;flex-wrap:wrap;margin-top:26px;font-size:14px;font-weight:600}.gd-hero .meta span{color:var(--muted);font-weight:500}
+.gd-body .cols{display:grid;grid-template-columns:260px minmax(0,1fr);gap:56px}
+.gd-body .toc{position:sticky;top:90px;align-self:start;display:flex;flex-direction:column;gap:4px;font-size:15px}
+.gd-body .toc b{font-size:13px;color:var(--muted);margin-bottom:8px}.gd-body .toc a{padding:8px 12px;border-left:2px solid var(--line);color:var(--muted)}.gd-body .toc a.on{border-color:#3F66B0;color:var(--ink);font-weight:600}
+.gd-body .prog{height:4px;border-radius:2px;background:var(--line);margin-top:14px}.gd-body .prog i{display:block;height:100%;width:38%;background:#FF6B4A;border-radius:2px}
+.gd-body article{max-width:760px}.gd-body article p{font-size:18px;line-height:1.7;color:#1F2630}
+.gd-body .clocks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:26px 0 10px}
+.gd-body .ck{border:1px solid var(--line);border-radius:16px;padding:20px;border-top:4px solid #3F66B0}.gd-body .ck:nth-child(2){border-top-color:#7FA0D6}.gd-body .ck:nth-child(3){border-top-color:#3DAE80}
+.gd-body .ck b{display:block;font-family:var(--display);font-size:46px;letter-spacing:-.04em;line-height:1}.gd-body .ck span{display:block;font-weight:600;margin-top:8px}.gd-body .ck small{display:block;font-size:14px;color:var(--muted);margin-top:6px;line-height:1.45}
+.gd-body .src{font-size:14px!important;color:var(--muted)!important}.gd-body .src a{text-decoration:underline}
+.gd-body .checker{padding:24px;margin-top:30px;background:#0A0C10;color:#fff;border-color:#0A0C10}.gd-body .checker p{color:#C9D1DC!important;font-size:16px!important}
+.gd-body .qq{display:flex;flex-wrap:wrap;gap:8px}.gd-body .qq span{border:1px solid #3A4458;border-radius:999px;padding:8px 13px;font-size:14px}.gd-body .qq span.on{background:#fff;color:#0A0C10}
+.gd-body .checker em{display:block;font-style:normal;margin-top:16px;color:#FF8A66;font-weight:600}
+.gd-body .tpl{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-top:22px;padding:22px;border-radius:16px;background:#F3F6FB;border:1px solid #D3DEEF}.gd-body .tpl b{display:block;font-size:18px}.gd-body .tpl span{color:var(--muted)}
+@media (max-width:900px){.gd-body .cols{grid-template-columns:1fr}.gd-body .toc{position:static}.gd-body .clocks{grid-template-columns:1fr}}
+</style>

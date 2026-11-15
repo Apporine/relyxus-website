@@ -1,0 +1,33 @@
+---
+import Page from "../../layouts/Page.astro";
+const tx = Array.from({ length: 16 }).map((_, i) => ({ id: `TX ${(48210 + i * 37).toString()}`, amt: `£${(12 + ((i * 47) % 380)).toFixed(2)}`, d: i * 0.25 }));
+---
+<Page title="Relyxus for payment and electronic money firms" description="When cards fail, every minute is a sale someone else takes. Tell merchants first and stop risky changes at the gate." path="/solutions/payments" tone="dark" current="/solutions/banks">
+  <section class="k-sec k-dark py-hero">
+    <div class="wrap k-split"><div><span class="k-tag"><i class="d"></i>Payment and electronic money firms</span><h1 class="k-h1" style="margin-top:16px">When cards fail, <span>every minute is a sale someone else takes.</span></h1><p class="k-lede">Relyxus spots the failure, gets the right engineer and the fix approved, and tells your merchants before they find out on social media.</p><div class="k-btns"><a class="k-b3" href="/demo#book">Book a demo</a><a class="k-b2" href="/replay">Replay an outage</a></div></div>
+      <div class="ticker k-card" aria-hidden="true"><div class="th"><span>Live authorisations</span><span class="rate">Approval rate <b>98.9%</b></span></div><div class="rows">{tx.map((t) => <div class="t" style={`animation-delay:${t.d}s`}><span>{t.id}</span><span>{t.amt}</span><em><i class="ok">Approved</i><i class="no">Declined</i></em></div>)}</div></div></div>
+  </section>
+  <section class="k-sec k-white py-merch">
+    <div class="wrap k-split"><div class="stack" aria-hidden="true"><div class="nt n1"><b>Paylane status</b><span>Card payments are slower than usual. We are on it.</span><small>now</small></div><div class="nt n2"><b>Paylane status</b><span>Fix approved. Payments recovering.</span><small>9 min later</small></div><div class="nt n3"><b>Paylane status</b><span>All card payments working normally.</span><small>14 min later</small></div></div>
+      <div><h2 class="k-h2">Your merchants hear it from you, <span>not from social media.</span></h2><p class="k-lede">Merchant notices and status page updates are drafted from the live incident, checked by a second person, then sent. Example messages shown.</p></div></div>
+  </section>
+  <section class="k-sec k-navy py-gate"><div class="wrap k-split"><div><h2 class="k-h2">Most payment outages <span>start with a change.</span></h2><p class="k-lede">Change preflight holds a risky rollout at the gate when card authorisation is already under strain, and shows exactly why.</p><div class="k-btns"><a class="k-b3" href="/product/approvals">See safe change</a></div></div><div class="shot k-card"><img src="/media/one-night/preflight-mid.jpg" alt="Change preflight in the Relyxus console" /></div></div></section>
+</Page>
+<style is:global>
+.py-hero{padding:96px 0}
+.py-hero .ticker{padding:0;overflow:hidden;font-variant-numeric:tabular-nums}
+.py-hero .th{display:flex;justify-content:space-between;padding:14px 18px;border-bottom:1px solid #232B3A;font-size:14px;color:#C9D1DC}.py-hero .th b{color:#8BE6BE;animation:py-rate 6s steps(1) infinite}
+@keyframes py-rate{40%{color:#FF8A66}75%{color:#8BE6BE}}
+.py-hero .rows{height:360px;overflow:hidden}
+.py-hero .t{display:grid;grid-template-columns:1fr 100px 90px;gap:10px;padding:11px 18px;border-bottom:1px solid #161C28;font-size:14.5px;color:#E9EEF5}
+.py-hero .t em{justify-self:end;font-style:normal;font-size:12px;font-weight:600;border-radius:999px;padding:3px 10px;animation:py-st 6s infinite;animation-delay:inherit}
+.py-hero .t em{position:relative;min-width:84px;text-align:center}.py-hero .t em i{font-style:normal}.py-hero .t em .no{position:absolute;inset:3px 10px;animation:py-no 6s infinite;animation-delay:inherit}.py-hero .t em .ok{animation:py-ok 6s infinite;animation-delay:inherit}
+@keyframes py-no{0%,30%{opacity:0}40%,65%{opacity:1}75%,100%{opacity:0}}@keyframes py-ok{0%,30%{opacity:1}40%,65%{opacity:0}75%,100%{opacity:1}}
+@keyframes py-st{0%,30%{background:#13261E;color:#8BE6BE}40%,65%{background:#3A1A14;color:#FF8A66}75%,100%{background:#13261E;color:#8BE6BE}}
+.py-merch .stack{display:flex;flex-direction:column;gap:12px;max-width:420px;justify-self:center;width:100%}
+.py-merch .nt{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:16px 18px;border-radius:20px;background:rgba(240,242,246,.9);border:1px solid var(--line);box-shadow:0 12px 30px rgba(20,30,50,.12);animation:py-in 6s ease infinite both}
+.py-merch .n2{animation-delay:.8s}.py-merch .n3{animation-delay:1.6s}
+@keyframes py-in{0%{opacity:0;transform:translateY(-14px)}12%,88%{opacity:1;transform:none}100%{opacity:0}}
+.py-merch .nt b{font-size:14.5px}.py-merch .nt span{grid-column:1/-1;font-size:15px;color:#1F2630}.py-merch .nt small{grid-row:1;grid-column:2;color:var(--muted-2)}
+.py-gate .shot{padding:0;overflow:hidden}.py-gate img{display:block;width:100%}
+</style>

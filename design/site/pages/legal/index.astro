@@ -1,0 +1,21 @@
+---
+import Page from "../../layouts/Page.astro";
+const docs: [string, string, string][] = [["For everyone", "Website Terms", "The rules for using this website"], ["For everyone", "Privacy Notice", "What we collect, why, and your rights"], ["For everyone", "Cookie Notice", "The few cookies we use, and how to opt out"], ["For everyone", "Accessibility Statement", "How we meet WCAG 2.2 AA, and how to tell us when we do not"], ["For everyone", "Company information and trademarks", "Who we are and where we are registered"], ["For customers", "Software Licence Agreement", "The terms for installing Relyxus"], ["For customers", "Support and Service Levels", "Response times and how to reach us"], ["For customers", "Data Processing Agreement", "For support access and outage replays"], ["For customers", "Replay Audit Terms", "What happens to an incident you send us"], ["For customers", "AI and Vigil Notice", "What Vigil does, and what it never does"]];
+---
+<Page title="Legal | Relyxus" description="Every Relyxus legal document, each with a plain words summary at the top." path="/legal" tone="light" current="">
+  <section class="k-sec k-white lg"><div class="wrap cols">
+    <nav class="list" aria-label="Legal documents"><h1 class="k-h2" style="font-size:40px">Legal, <span>in plain words.</span></h1>{["For everyone", "For customers"].map((g) => <div><h2>{g}</h2>{docs.filter((d) => d[0] === g).map(([, t], i) => <a href="#" class={t === "Privacy Notice" ? "on" : ""}>{t}</a>)}</div>)}</nav>
+    <div class="doc k-card"><small>Legal, Privacy Notice, draft for review</small><h2 class="k-h2" style="font-size:38px;margin-top:8px">Privacy Notice</h2>
+      <div class="plain"><b>In plain words</b><ul><li>We collect only what you send us in forms and replays, and simple site statistics.</li><li>We never sell your data, and incidents you send never train AI.</li><li>Replays are deleted after we deliver your report, or sooner if you ask.</li><li>You can ask to see, correct or delete your data at any time.</li></ul><p>This summary helps you read the notice. The full text below is what applies.</p></div>
+      <div class="ph"><span></span><span></span><span class="s"></span><span></span><span class="s"></span></div><p class="k-note">Every document is a draft until reviewed by a lawyer. Company details appear here once Apporine is registered.</p></div>
+  </div></section>
+</Page>
+<style is:global>
+.lg .cols{display:grid;grid-template-columns:320px minmax(0,1fr);gap:48px;align-items:start}
+.lg .list{position:sticky;top:96px;display:flex;flex-direction:column;gap:20px}.lg .list h2{font-size:13px;color:var(--muted);margin:0 0 6px}
+.lg .list a{display:block;padding:9px 12px;border-radius:9px;font-size:15.5px}.lg .list a.on{background:#0A0C10;color:#fff}.lg .list a:hover:not(.on){background:#F3F5F9}
+.lg .doc{padding:32px}.lg .doc small{color:var(--muted)}
+.lg .plain{margin-top:22px;padding:22px;border-radius:14px;background:#F4FBF8;border:1px solid #CDE9DC}.lg .plain b{color:#17694A}.lg .plain ul{margin:10px 0;padding-left:20px;line-height:1.8;font-size:16px}.lg .plain p{margin:0;font-size:14px;color:var(--muted)}
+.lg .ph{display:flex;flex-direction:column;gap:12px;margin-top:28px}.lg .ph span{height:12px;border-radius:6px;background:#EEF1F5}.lg .ph span.s{width:70%}
+@media (max-width:900px){.lg .cols{grid-template-columns:1fr}.lg .list{position:static}}
+</style>

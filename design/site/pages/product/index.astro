@@ -1,0 +1,45 @@
+---
+import Page from "../../layouts/Page.astro";
+const S: [string, string, [string, string][]][] = [["Respond", "#FF6B4A", [["Command centre", "/product/respond"], ["War room", "/product/respond"], ["Paging and on call", "/product/respond"]]], ["Understand", "#5C4EE5", [["Vigil", "/product/vigil"], ["Evidence ledger", "/product/vigil"]]], ["Fix safely", "#3DAE80", [["Two person approval", "/product/approvals"], ["Change preflight", "/product/approvals"], ["Alert noise", "/product/respond"]]], ["Tell people", "#7FA0D6", [["Status pages", "/product/customer-updates"], ["Regulator reports", "/product/regulator-reporting"], ["Board report", "/product/resilience"]]], ["Prove it", "#F2B84B", [["Replay", "/product/resilience"], ["Drills and tolerances", "/product/resilience"], ["Auditor room", "/product/regulator-reporting"]]]];
+---
+<Page title="Product tour | Relyxus" description="Everything between the first alert and the board report, recorded in the real Relyxus console." path="/product" tone="dark" current="/product">
+  <section class="k-sec k-dark pt-hero">
+    <div class="wrap k-split" style="grid-template-columns:minmax(0,340px) minmax(0,1fr);align-items:start">
+      <div><span class="k-tag"><i class="d"></i>Product tour</span><h1 class="k-h1" style="margin-top:16px;font-size:clamp(40px,4.6vw,64px)">Everything between the first alert <span>and the board report.</span></h1><p class="k-lede" style="font-size:16px">The real console, recorded in our demo workspace. Pick a chapter, or let it play.</p>
+        <div class="chaps">{S.map(([st, c, items], si) => <div class="st"><h4 style={`color:${c}`}>{st}</h4>{items.map(([t], i) => <button class={si === 0 && i === 0 ? "on" : ""}>{t}</button>)}</div>)}</div></div>
+      <div class="win"><div class="chrome"><span class="live"><i></i>Recorded</span><span class="u">app.relyxus.com / payments-uk / home</span></div><video muted playsinline loop autoplay preload="metadata" poster="/media/one-night/command.jpg" src="/media/one-night/command.mp4"></video><div class="cap"><span>Command centre</span><b>1 of 14</b></div></div>
+    </div>
+  </section>
+  <section class="k-sec k-white pt-map">
+    <div class="wrap"><h2 class="k-h2">Five stages. <span>One product.</span></h2>
+      <div class="metro">{S.map(([st, c, items]) => <div class="line" style={`--c:${c}`}><b>{st}</b><div class="stops">{items.map(([t, h]) => <a href={h}><i></i><span>{t}</span></a>)}</div></div>)}</div></div>
+  </section>
+  <section class="k-sec k-dark pt-diff">
+    <div class="wrap"><h2 class="k-h2" style="margin-bottom:40px">What makes it different.</h2>
+      <p class="big"><s>Software as a service.</s> Installed in your cloud.</p><p class="big"><s>A black box AI.</s> Every answer cites its evidence.</p><p class="big"><s>One click fixes.</s> Two people approve every change.</p></div>
+  </section>
+</Page>
+<style is:global>
+.pt-hero{padding:80px 0 96px}
+.pt-hero .chaps{margin-top:24px;display:flex;flex-direction:column;gap:14px}
+.pt-hero .st h4{margin:0 0 4px;font-size:13.5px;font-weight:600}
+.pt-hero .st button{all:unset;display:block;cursor:pointer;padding:7px 12px;border-radius:9px;font-size:15.5px;color:#C9D1DC}
+.pt-hero .st button.on{background:#0E1320;color:#fff;font-weight:600}.pt-hero .st button:hover{color:#fff}
+.pt-hero .win{position:sticky;top:90px;border:1px solid #1E2430;border-radius:16px;overflow:hidden;background:#0B0E14;box-shadow:0 60px 120px rgba(0,0,0,.6)}
+.pt-hero .chrome{display:flex;gap:12px;align-items:center;padding:11px 16px;border-bottom:1px solid #1E2430;font-size:13px;color:#C9D1DC}
+.pt-hero .live{display:inline-flex;align-items:center;gap:7px;color:#fff}.pt-hero .live i{width:7px;height:7px;border-radius:50%;background:#F0503C}
+.pt-hero .u{flex:1;background:#05070A;border:1px solid #1E2430;border-radius:7px;padding:5px 10px}
+.pt-hero video{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}
+.pt-hero .cap{display:flex;justify-content:space-between;padding:14px 18px;border-top:1px solid #1E2430;color:#C9D1DC;font-size:14px}
+.pt-map .metro{margin-top:48px;display:flex;flex-direction:column;gap:26px}
+.pt-map .line{display:grid;grid-template-columns:160px 1fr;align-items:center;gap:20px}
+.pt-map .line b{font-size:18px;color:var(--c)}
+.pt-map .stops{position:relative;display:flex;justify-content:space-between;gap:10px}
+.pt-map .stops::before{content:"";position:absolute;left:0;right:0;top:11px;height:6px;border-radius:3px;background:var(--c);opacity:.85}
+.pt-map .stops a{position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;flex:1;text-align:center;font-size:15px;font-weight:500}
+.pt-map .stops a i{width:28px;height:28px;border-radius:50%;background:#fff;border:5px solid var(--c);transition:transform .3s}
+.pt-map .stops a:hover i{transform:scale(1.25)}
+.pt-diff .big{font-family:var(--display);font-variation-settings:'opsz' 96;font-weight:500;font-size:clamp(30px,4.4vw,60px);letter-spacing:-.035em;line-height:1.1;margin:0 0 22px}
+.pt-diff .big s{color:#5E6A7E;text-decoration-color:#FF6B4A;text-decoration-thickness:4px;margin-right:14px}
+@media (max-width:900px){.pt-map .line{grid-template-columns:1fr}}
+</style>

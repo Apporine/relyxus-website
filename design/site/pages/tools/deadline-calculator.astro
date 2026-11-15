@@ -1,0 +1,27 @@
+---
+import Page from "../../layouts/Page.astro";
+---
+<Page title="Regulator deadline calculator | Relyxus" description="Enter when an incident was found and classified, and see the reporting deadlines under DORA, the FCA and PRA, MAS and the US bank rule." path="/tools/deadline-calculator" tone="dark" current="/solutions/banks">
+  <section class="k-sec k-dark dc"><div class="wrap k-split" style="align-items:start">
+    <div><span class="k-tag"><i class="d"></i>Free tool</span><h1 class="k-h1" style="margin-top:16px">Every regulator clock, <span>from one time.</span></h1><p class="k-lede">Enter when you became aware of the incident and when you classified it. The calculator shows the first reporting deadline for each regime, with its source.</p>
+      <form class="in k-card" onsubmit="event.preventDefault()"><label>Became aware<input type="datetime-local" id="aw" value="2026-11-14T23:48" /></label><label>Classified as major or serious<input type="datetime-local" id="cl" value="2026-11-15T00:20" /></label><p class="k-note" style="margin:0">A summary for planning. Always check the rules that apply to your firm.</p></form></div>
+    <div class="panel" aria-live="polite"><div class="row" data-k="mas"><b>MAS, Singapore</b><small>Notify within 1 hour of discovery</small><em></em></div><div class="row" data-k="dora"><b>DORA, initial notification</b><small>Within 4 hours of classification, at most 24 hours from awareness</small><em></em></div><div class="row" data-k="uk"><b>FCA and PRA, initial report</b><small>Generally within 24 hours, from 18 March 2027</small><em></em></div><div class="row" data-k="us"><b>US banks, primary regulator</b><small>No later than 36 hours after determining</small><em></em></div></div>
+  </div></section>
+</Page>
+<style is:global>
+.dc{padding:96px 0}.dc .in{margin-top:30px;padding:22px;display:flex;flex-direction:column;gap:14px}
+.dc label{display:flex;flex-direction:column;gap:6px;font-size:14px;color:#C9D1DC}.dc input{font:inherit;font-size:17px;color:#fff;background:#0E1320;border:1px solid #2C3546;border-radius:10px;padding:12px;color-scheme:dark}
+.dc .panel{display:flex;flex-direction:column;gap:12px}
+.dc .row{display:grid;grid-template-columns:1fr auto;gap:2px 14px;padding:20px 22px;border:1px solid #232B3A;border-radius:16px;background:#0B0F18}
+.dc .row b{font-size:18px}.dc .row small{grid-column:1;color:#C9D1DC;font-size:14px}
+.dc .row em{grid-column:2;grid-row:1/3;align-self:center;font-style:normal;font-family:var(--display);font-size:28px;font-variant-numeric:tabular-nums;color:#FF8A66;text-align:right}
+</style>
+<script>
+const aw = document.getElementById("aw") as HTMLInputElement, cl = document.getElementById("cl") as HTMLInputElement;
+const fmt = (d: Date) => d.toLocaleString("en-GB", { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+function calc() { const a = new Date(aw.value), c = new Date(cl.value); if (isNaN(+a) || isNaN(+c)) return; const h = (d: Date, n: number) => new Date(+d + n * 3600e3);
+  const dora = new Date(Math.min(+h(c, 4), +h(a, 24)));
+  const out: Record<string, Date> = { mas: h(a, 1), dora, uk: h(c, 24), us: h(c, 36) };
+  document.querySelectorAll<HTMLElement>(".dc .row").forEach((r) => { r.querySelector("em")!.textContent = fmt(out[r.dataset.k!]); }); }
+aw.oninput = cl.oninput = calc; calc();
+</script>

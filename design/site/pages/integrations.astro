@@ -1,0 +1,27 @@
+---
+import Page from "../layouts/Page.astro";
+const groups: [string, string[]][] = [["Monitoring and metrics", ["Prometheus", "Datadog", "Dynatrace", "New Relic", "Nagios", "Zabbix", "SolarWinds"]], ["Logs and security", ["Grafana Loki", "Splunk", "Elastic", "Sumo Logic", "Graylog", "IBM QRadar", "Microsoft Sentinel"]], ["Chat", ["Slack", "Google Chat", "Mattermost"]], ["Changes and delivery", ["Terraform Cloud", "Harness", "Spinnaker", "ConfigCat", "Flagsmith", "Backstage"]], ["Tickets", ["BMC Helix", "Zendesk"]], ["Cloud and platform", ["AWS", "Azure", "Google Cloud", "Oracle Cloud", "Alibaba Cloud", "Kubernetes", "VMware vSphere"]]];
+const orbit = ["Prometheus", "Slack", "Splunk", "Datadog", "Kubernetes", "Dynatrace", "BMC Helix", "Elastic"];
+---
+<Page title="Integrations | Relyxus" description="Relyxus connects to the tools you already run, read only by default, and changes nothing without asking." path="/integrations" tone="dark" current="/product">
+  <section class="k-sec k-dark in-hero"><div class="wrap k-split"><div><span class="k-tag"><i class="d"></i>Integrations</span><h1 class="k-h1" style="margin-top:16px">Connects to what you already run. <span>Changes nothing without asking.</span></h1><p class="k-lede">Ready made connectors for clouds, monitoring, logs, tickets and chat. Nothing to rip out, nothing to retrain.</p></div>
+    <div class="orb" aria-hidden="true"><div class="core">RELYXUS</div>{orbit.map((t, i) => <span style={`--a:${i * 45}deg;--d:${i * 0.4}s`}>{t}</span>)}</div></div></section>
+  <section class="k-sec k-white in-ro"><div class="wrap k-split"><div><h2 class="k-h2">Read only <span>until you say otherwise.</span></h2><p class="k-lede">Every connector starts read only. Turning on an action, like restarting a service, takes an approval, and every action still needs two people.</p></div>
+    <div class="sw k-card">{["Read alerts", "Read logs", "Read changes", "Restart services", "Roll back releases"].map((t, i) => <div class="row"><span>{t}</span><span class={`tg ${i < 3 ? "on" : ""}`}><i></i></span><small>{i < 3 ? "On by default" : "Needs approval to enable"}</small></div>)}</div></div></section>
+  <section class="k-sec k-mist in-dir"><div class="wrap"><h2 class="k-h2">Every connector, <span>by what it does.</span></h2><div class="srch"><i class="ti ti-search"></i><span>Search connectors</span></div><div class="grps">{groups.map(([g, list]) => <div class="g"><h3>{g}</h3><div class="items">{list.map((t) => <span><i>{t[0]}</i>{t}</span>)}</div></div>)}</div><p class="k-note">Tool names are trademarks of their owners and are used only to describe compatibility.</p></div></section>
+</Page>
+<style is:global>
+.in-hero{padding:96px 0}.in-hero .orb{position:relative;height:420px}
+.in-hero .core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff;color:#05070C;font-weight:700;letter-spacing:.08em;border-radius:16px;padding:18px 22px;box-shadow:0 0 70px rgba(159,180,214,.45)}
+.in-hero .orb span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(var(--a)) translateX(170px) rotate(calc(var(--a) * -1));border:1px solid #2C3546;background:#0B0F18;border-radius:999px;padding:7px 13px;font-size:14px;color:#C9D1DC;animation:in-lit 4s ease-in-out infinite;animation-delay:var(--d)}
+@keyframes in-lit{0%,100%{border-color:#2C3546;color:#C9D1DC}40%,60%{border-color:#3DAE80;color:#fff;box-shadow:0 0 18px rgba(61,174,128,.4)}}
+.in-ro .sw{padding:8px 0}.in-ro .row{display:grid;grid-template-columns:1fr 56px;gap:4px 14px;padding:14px 22px;border-bottom:1px solid var(--line-2)}.in-ro .row span:first-child{font-size:17px;font-weight:500}.in-ro .row small{color:var(--muted);font-size:13.5px}
+.in-ro .tg{grid-row:span 2;align-self:center;width:52px;height:30px;border-radius:15px;background:#D5DCE6;position:relative}.in-ro .tg i{position:absolute;left:3px;top:3px;width:24px;height:24px;border-radius:50%;background:#fff;transition:left .3s}
+.in-ro .tg.on{background:#3DAE80}.in-ro .tg.on i{left:25px}
+.in-dir .srch{display:flex;align-items:center;gap:10px;margin-top:32px;padding:14px 18px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--muted);font-size:16px;max-width:520px}
+.in-dir .grps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:22px}
+.in-dir .g{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px}.in-dir h3{margin:0 0 14px;font-size:16px}
+.in-dir .items{display:flex;flex-wrap:wrap;gap:8px}.in-dir .items span{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:14.5px}
+.in-dir .items i{width:22px;height:22px;border-radius:6px;background:#0A0C10;color:#fff;font-style:normal;font-size:11px;font-weight:700;display:grid;place-items:center}
+@media (max-width:900px){.in-dir .grps{grid-template-columns:1fr}.in-hero .orb span{transform:translate(-50%,-50%) rotate(var(--a)) translateX(130px) rotate(calc(var(--a) * -1))}}
+</style>

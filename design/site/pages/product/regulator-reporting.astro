@@ -1,0 +1,87 @@
+---
+import Page from "../../layouts/Page.astro";
+const events = [["23:48", "Card authorisation failing, UK", "#E5482A"], ["23:49", "Severity 1, payments SRE paged", "#7FA0D6"], ["23:52", "Cause: config change to payments-api", "#7FA0D6"], ["23:55", "Restart proposed, 1 of 2 approved", "#3DAE80"], ["00:02", "Customer update approved and sent", "#3DAE80"]];
+const fields = [["Incident reference", "INC-2041", "incident record"], ["When it was detected", "14 Nov 2026, 23:48 GMT", "timeline"], ["What happened", "Card authorisations failed for about 4.2% of attempts", "a person"], ["Classification", "Critical services affected; clients affected", "classification"], ["Services affected", "Card payments", "services"]];
+const regimes = [["DORA", "EU", "Initial notice within 4 hours of classifying it major"], ["FCA", "UK", "Initial report, generally within 24 hours, from 18 March 2027"], ["PRA", "UK", "Initial report, generally within 24 hours, from 18 March 2027"], ["MAS", "Singapore", "Notification within 1 hour of discovery"]];
+---
+<Page title="Regulator reporting | Relyxus" description="DORA, FCA, PRA and MAS reports drafted from the live incident, every answer sourced, nothing sent without a named person." path="/product/regulator-reporting" tone="dark" current="/product">
+  <section class="k-sec k-dark rg-hero">
+    <div class="wrap">
+      <span class="k-tag"><i class="d"></i>Regulator reporting</span>
+      <h1 class="k-h1" style="margin-top:16px;max-width:980px">The report writes itself <span>while you fix the outage.</span></h1>
+      <div class="split2">
+        <div class="col ev"><h3>Live incident</h3>{events.map(([t, e, c], i) => <div class="e" style={`--c:${c};animation-delay:${i * 0.7}s`}><em>{t}</em><span>{e}</span></div>)}</div>
+        <div class="col nf"><h3>DORA initial notice, draft</h3>{fields.map(([k, v, s], i) => <div class="f" style={`animation-delay:${0.5 + i * 0.7}s`}><small>{k}<span>From: {s}</span></small><b>{v}</b></div>)}</div>
+      </div>
+      <p class="k-note">Recorded from the demo workspace. Sample incident.</p>
+    </div>
+  </section>
+
+  <section class="k-sec k-white rg-src">
+    <div class="wrap k-split">
+      <div><h2 class="k-h2">Every answer shows <span>where it came from.</span></h2><p class="k-lede">Hover any answer in a draft and Relyxus draws a line back to the event, record or person it came from. Your compliance team checks the source, not the wording.</p></div>
+      <div class="doc k-card">
+        <div class="row"><small>When it was detected</small><b>14 Nov 2026, 23:48 GMT</b></div>
+        <svg viewBox="0 0 400 120" aria-hidden="true"><path class="ln" d="M40 0 C40 60, 360 40, 360 110" fill="none" stroke="#5C4EE5" stroke-width="2" stroke-dasharray="6 6"/></svg>
+        <div class="src"><span class="k-pill" style="background:#EEECFE;color:#3C3489">Timeline</span><b>23:48:02 Prometheus: 5xx rate above 22%</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="k-sec k-navy rg-orbit">
+    <div class="wrap k-split">
+      <div class="orbit" aria-hidden="true"><div class="core">INC-2041</div>{regimes.map(([n], i) => <span class={`sat s${i}`}>{n}</span>)}<div class="o o1"></div><div class="o o2"></div></div>
+      <div><h2 class="k-h2">One incident. <span>Every regulator's format.</span></h2>
+        <div class="regs">{regimes.map(([n, r, d]) => <div class="rr"><b>{n}<small>{r}</small></b><span>{d}</span></div>)}</div>
+        <p class="k-note">Deadlines summarised from each regulator's published rules. Check the rules that apply to your firm.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="k-sec k-white rg-sign">
+    <div class="wrap k-split">
+      <div><h2 class="k-h2">Nothing reaches a regulator <span>without a named person.</span></h2><p class="k-lede">Relyxus drafts. A named person approves with a passkey, then exports in the regulator's own template. Every version is kept.</p></div>
+      <div class="pad k-card"><small>Approved by</small><svg viewBox="0 0 220 60" aria-hidden="true"><path class="sig" d="M8 44c12-18 20-30 26-28 6 2-12 30-6 30s18-26 24-24-6 20 0 20 12-16 18-16 2 12 8 12 10-10 16-10 4 8 10 8 8-6 14-6 2 4 6 4c8 0 20-6 28-8" fill="none" stroke="#1B2A44" stroke-width="2.2" stroke-linecap="round"/></svg><b>Amelia Evans, Head of Operational Resilience</b><span class="seal"><i class="ti ti-fingerprint"></i>Passkey verified</span></div>
+    </div>
+  </section>
+
+  <section class="k-sec k-mist rg-room">
+    <div class="wrap k-split">
+      <div class="door k-card"><div class="badge"><b>Ashby and Rowe LLP</b><span>Read only access</span><em class="cnt">18 days left</em></div><ul><li>Incidents July to October</li><li>Reviews, evidence and drills</li><li>Every page they open is logged</li></ul></div>
+      <div><h2 class="k-h2">When the auditor arrives, <span>the room is ready.</span></h2><p class="k-lede">Give auditors time limited, read only access to exactly what they need, with every click written to the audit log. The DORA register of information stays current on its own.</p><div class="k-btns"><a class="k-b1" href="/tools/deadline-calculator">Try the deadline calculator</a></div></div>
+    </div>
+  </section>
+</Page>
+<style is:global>
+.rg-hero{padding:96px 0 90px;background:radial-gradient(60% 50% at 70% 0%,rgba(127,160,214,.2),transparent 70%),#05070C}
+.rg-hero .split2{display:grid;grid-template-columns:1fr 1.2fr;gap:18px;margin-top:44px}
+.rg-hero .col{border:1px solid #232B3A;border-radius:18px;background:#0B0F18;padding:22px}
+.rg-hero h3{margin:0 0 14px;font-size:14px;font-weight:600;color:#9FB4D6}
+.rg-hero .e{display:grid;grid-template-columns:60px 1fr;gap:12px;padding:12px 0;border-top:1px solid #161C28;font-size:15px;animation:rg-in 7s ease both infinite}
+.rg-hero .e em{font-style:normal;color:var(--c);font-weight:600;font-variant-numeric:tabular-nums}
+.rg-hero .f{padding:12px 0;border-top:1px solid #161C28;animation:rg-in 7s ease both infinite}
+.rg-hero .f small{display:flex;justify-content:space-between;font-size:13px;color:#C9D1DC}.rg-hero .f small span{color:#9FB4D6}
+.rg-hero .f b{display:block;font-size:16px;margin-top:4px}
+@keyframes rg-in{0%{opacity:0;transform:translateY(6px)}10%,90%{opacity:1;transform:none}100%{opacity:0}}
+.rg-src .doc{padding:24px}.rg-src .row small,.rg-src .src{font-size:14px;color:var(--muted)}.rg-src .row b{display:block;font-size:20px;margin-top:4px}
+.rg-src svg{display:block;width:100%;height:110px}.rg-src .ln{animation:rg-dash 2s linear infinite}
+@keyframes rg-dash{to{stroke-dashoffset:-24}}
+.rg-src .src{display:flex;align-items:center;gap:10px;justify-content:flex-end}.rg-src .src b{color:var(--ink)}
+.rg-orbit .orbit{position:relative;height:420px}
+.rg-orbit .core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:120px;height:120px;border-radius:50%;background:#fff;color:#0A0F1E;display:grid;place-items:center;font-weight:700;box-shadow:0 0 60px rgba(159,180,214,.4)}
+.rg-orbit .o{position:absolute;left:50%;top:50%;border:1px dashed #3A4458;border-radius:50%;transform:translate(-50%,-50%)}.rg-orbit .o1{width:250px;height:250px}.rg-orbit .o2{width:380px;height:380px}
+.rg-orbit .sat{position:absolute;left:50%;top:50%;background:#141A26;border:1px solid #3A4458;color:#fff;border-radius:999px;padding:8px 14px;font-weight:600;z-index:1;animation:rg-orb 18s linear infinite}
+.rg-orbit .s0{--r:125px;animation-delay:0s}.rg-orbit .s1{--r:190px;animation-delay:-4.5s}.rg-orbit .s2{--r:125px;animation-delay:-9s}.rg-orbit .s3{--r:190px;animation-delay:-13.5s}
+@keyframes rg-orb{from{transform:translate(-50%,-50%) rotate(0) translateX(var(--r)) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg) translateX(var(--r)) rotate(-360deg)}}
+.rg-orbit .regs{margin-top:28px;display:flex;flex-direction:column;gap:10px}
+.rg-orbit .rr{display:grid;grid-template-columns:110px 1fr;gap:14px;padding:14px 16px;border:1px solid #232B3A;border-radius:12px;background:#0B0F18}
+.rg-orbit .rr b{font-size:18px}.rg-orbit .rr b small{display:block;font-size:12.5px;color:#9FB4D6;font-weight:500}.rg-orbit .rr span{font-size:15px;color:#E9EEF5}
+.rg-sign .pad{padding:28px}.rg-sign small{color:var(--muted);font-size:14px}.rg-sign svg{display:block;width:100%;height:90px;border-bottom:1px solid #0A0C10}
+.rg-sign .sig{stroke-dasharray:420;stroke-dashoffset:420;animation:rg-sig 4s ease infinite}
+@keyframes rg-sig{30%,100%{stroke-dashoffset:0}}
+.rg-sign b{display:block;margin-top:10px;font-size:16px}.rg-sign .seal{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:14px;font-weight:600;color:#17694A;background:#DDF3E9;border-radius:999px;padding:6px 12px}
+.rg-room .door{padding:0;overflow:hidden}.rg-room .badge{background:#0A0C10;color:#fff;padding:26px}
+.rg-room .badge b{display:block;font-size:20px}.rg-room .badge span{color:#C9D1DC;font-size:14px}.rg-room .cnt{display:inline-block;margin-top:14px;font-style:normal;font-family:var(--display);font-size:30px;color:#FF8A66}
+.rg-room ul{margin:0;padding:22px 26px 24px 44px;font-size:16px;line-height:1.9;color:var(--muted)}
+@media (max-width:900px){.rg-hero .split2{grid-template-columns:1fr}.rg-orbit .orbit{height:360px;transform:scale(.85)}}
+</style>

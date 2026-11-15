@@ -8,14 +8,16 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "npm run vigil:config && astro build",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "vigil:config": "esbuild scripts/vigil-config.ts --bundle --platform=node --format=esm --outfile=.vigil-config.mjs --log-level=warning && node .vigil-config.mjs"
   },
   "dependencies": {
     "@fontsource-variable/bricolage-grotesque": "^5.2.8",
     "@fontsource-variable/geist": "^5.2.8",
     "@fontsource/ibm-plex-sans": "^5.2.8",
+    "@google/genai": "2.32.0",
     "@tabler/icons-webfont": "^3.19.0",
     "astro": "5.13.2"
   }

@@ -160,7 +160,7 @@ function demoForm() {
   $$(".dm-f .ip", f).forEach((ip, i) => {
     const [n, t, ph, ac] = fields[i] || ["x", "text", "", "off"];
     const label = ip.parentElement!.querySelector("label")!;
-    const inp = document.createElement("input"); inp.className = "ip"; inp.type = t; inp.name = n; inp.placeholder = ph; inp.autocomplete = ac; inp.id = "dm-" + n; inp.required = n !== "role";
+    const inp = document.createElement("input"); inp.className = "ip"; inp.type = t; inp.name = n; inp.placeholder = ph; inp.setAttribute("autocomplete", ac); inp.id = "dm-" + n; inp.required = n !== "role";
     label.htmlFor = inp.id; ip.replaceWith(inp);
   });
   const cal = f.querySelector<HTMLElement>(".dm-cal")!, sl = f.querySelector<HTMLElement>(".dm-sl")!, go = f.querySelector<HTMLElement>(".dm-go")!;
@@ -320,7 +320,7 @@ function trust() {
       const sel = docs.filter((d) => d.classList.contains("sel")).map((d) => d.querySelector("b")?.textContent?.trim());
       count.textContent = `${sel.length} ${sel.length === 1 ? "document" : "documents"} selected`;
       const href = `mailto:support@relyxus.com?subject=${encodeURIComponent("Trust Center documents request")}&body=${encodeURIComponent("Please send these documents:\n" + sel.map((x) => "- " + x).join("\n") + "\n\nName:\nCompany:\n")}`;
-      if (go instanceof HTMLAnchorElement) go.href = href; else go.onclick = () => (location.href = href);
+      if (go instanceof HTMLAnchorElement) go.href = href; else (go as HTMLElement).onclick = () => (location.href = href);
     };
     docs.forEach((d) => {
       const tag = d.querySelector<HTMLElement>(".tc-dm span");

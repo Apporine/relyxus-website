@@ -15,7 +15,7 @@ const SCREENS = new Set(["command_centre", "incident", "timeline", "vigil", "app
 const seen = new Map<string, number[]>();
 
 type Line = { who: "visitor" | "vigil"; text: string };
-type Action = { type: "screen"; screen: string } | { type: "booking" } | { type: "page"; path: string } | { type: "lead"; saved: boolean; lead: Record<string, string> };
+type Action = { type: "screen"; screen: string } | { type: "form"; prefill: Record<string, string> } | { type: "booking" } | { type: "page"; path: string } | { type: "lead"; saved: boolean; lead: Record<string, string> };
 
 function json(body: unknown, status: number, origin: string) {
   return new Response(JSON.stringify(body), { status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store", "Access-Control-Allow-Origin": origin, Vary: "Origin" } });
@@ -23,6 +23,7 @@ function json(body: unknown, status: number, origin: string) {
 
 async function runTool(name: string, a: Record<string, unknown>, actions: Action[], page: string) {
   if (name === "show_screen") { const s = String(a.screen); if (!SCREENS.has(s)) return { ok: false }; actions.push({ type: "screen", screen: s }); return { ok: true, shown: true }; }
+  if (name === "open_contact_form") { const pre: Record<string, string> = {}; for (const k of ["email", "first_name", "last_name", "company", "notes"]) if (a[k]) pre[k] = String(a[k]); actions.push({ type: "form", prefill: pre }); return { ok: true, note: "The form is open beside the chat." }; }
   if (name === "open_booking") { actions.push({ type: "booking" }); return { ok: true, note: "A Pick a time button is now in the chat." }; }
   if (name === "open_page") { actions.push({ type: "page", path: String(a.path || "/product") }); return { ok: true }; }
   if (name === "save_lead") {

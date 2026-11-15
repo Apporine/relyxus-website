@@ -13,9 +13,29 @@
 
   <div class="va-shell" hidden data-va-shell>
     <aside class="va-stage" hidden data-va-stage aria-label="Shared by the Relyxus assistant">
-      <div class="va-sh"><span>Shared by the Relyxus assistant</span><button type="button" class="va-ic" aria-label="Close shared screen" data-va-unstage><i class="ti ti-x"></i></button></div>
-      <figure class="va-fig"><img alt="" data-va-img /><figcaption data-va-cap></figcaption></figure>
+      <div class="va-sh"><span class="va-tag">Content shared by the Relyxus assistant</span><button type="button" class="va-ic" aria-label="Close shared screen" data-va-unstage><i class="ti ti-x"></i></button></div>
+      <figure class="va-fig" data-va-figure><img alt="" data-va-img /><figcaption data-va-cap></figcaption></figure>
       <a class="va-open" href="/" data-va-href>Open this page <i class="ti ti-arrow-up-right" aria-hidden="true"></i></a>
+      <form class="va-lead" hidden novalidate data-va-lead>
+        <h3>Talk to the Relyxus team</h3>
+        <p class="va-lead-sub">Tell us a little about you. A person from the team replies, usually with a time for a demo.</p>
+        <div class="va-row">
+          <label>Business email<input name="email" type="email" autocomplete="email" placeholder="jsmith@yourbank.com" required /></label>
+        </div>
+        <div class="va-row two">
+          <label>First name<input name="first" autocomplete="given-name" required /></label>
+          <label>Last name<input name="last" autocomplete="family-name" required /></label>
+        </div>
+        <div class="va-row two">
+          <label>Company<input name="company" autocomplete="organization" required /></label>
+          <label>Country<input name="country" autocomplete="country-name" required /></label>
+        </div>
+        <div class="va-row"><label>Phone number, optional<input name="phone" type="tel" autocomplete="tel" placeholder="+44 20 0000 0000" /></label></div>
+        <div class="va-row"><label>What would you like to talk about?<textarea name="notes" rows="3" placeholder="For example, a demo for our payments team, a quote, or the security pack"></textarea></label></div>
+        <p class="va-lead-legal">By sending this you agree that Relyxus may contact you about this request. We handle your details as our <a href="/privacy">privacy notice</a> explains.</p>
+        <p class="va-lead-err" role="alert" data-va-lead-err></p>
+        <button type="submit" class="va-lead-go">Send to the team</button>
+      </form>
     </aside>
 
     <section class="va-panel" id="va-panel" role="dialog" aria-modal="false" aria-label="Chat with the Relyxus assistant">
@@ -41,7 +61,7 @@
         <textarea id="va-text" rows="1" placeholder="Type here" maxlength="600" data-va-text></textarea>
         <button type="submit" class="va-send" aria-label="Send"><i class="ti ti-arrow-up"></i></button>
       </form>
-      <p class="va-legal">This AI assistant can make mistakes. Chats and voice are processed by Google to run it. If you share your name and email, we keep them with this chat so the team can reply. <a href="/privacy">Privacy notice</a></p>
+      <p class="va-legal">By chatting or turning on voice, you agree this AI assistant is recorded and processed by Google to run it, and that details you share are kept so the team can reply, per our <a href="/privacy">Privacy notice</a> and <a href="/legal#terms">Website terms</a>. It can make mistakes.</p>
     </section>
   </div>
 </div>
@@ -97,6 +117,21 @@ body.nav-open .va-launch{display:none}
 .va-stage .va-ic{border-color:#DDE3EA;color:#0A0C10}
 .va-fig{flex:1;min-height:0;margin:12px 0 0;display:flex;flex-direction:column}.va-fig img{flex:1;min-height:0;width:100%;object-fit:contain;object-position:top center;border-radius:14px;background:#05070C;border:1px solid #E3E8EF}
 .va-fig figcaption{font-size:13.5px;color:#2B3340;margin-top:10px}
+.va-tag{display:inline-flex;padding:6px 12px;border-radius:999px;background:#0A0C10;color:#fff;font-size:12.5px;font-weight:600}
+.va-lead{flex:1;min-height:0;overflow:auto;margin-top:14px;padding:6px 6px 10px;display:flex;flex-direction:column;gap:14px;max-width:820px}
+.va-lead[hidden],.va-fig[hidden],.va-open[hidden]{display:none}
+.va-lead h3{margin:0;font-family:var(--display);font-size:28px;letter-spacing:-.03em;color:#0A0C10}
+.va-lead-sub{margin:-6px 0 4px;font-size:15px;color:#2B3340}
+.va-row{display:grid;gap:14px}.va-row.two{grid-template-columns:1fr 1fr}
+.va-lead label{display:flex;flex-direction:column;gap:7px;font-size:13.5px;font-weight:600;color:#1F2630}
+.va-lead input,.va-lead textarea{font:inherit;font-size:15px;font-weight:400;padding:13px 14px;border-radius:12px;border:1px solid #DDE3EA;background:#F6F8FA;color:#0A0C10;outline:none;resize:vertical}
+.va-lead input:focus,.va-lead textarea:focus{border-color:#3F66B0;background:#fff}
+.va-lead input.bad{border-color:#E5482A;background:#FFF4F1}
+.va-lead-legal{font-size:12.5px;line-height:1.5;color:#3E4652;margin:0}.va-lead-legal a{text-decoration:underline}
+.va-lead-err{min-height:1px;margin:0;font-size:14px;color:#B5361C;font-weight:600}
+.va-lead-go{align-self:flex-start;padding:15px 34px;border-radius:999px;border:0;background:#0A0C10;color:#fff;font:inherit;font-size:15.5px;font-weight:600;cursor:pointer}
+.va-lead-done{margin:auto;text-align:center;max-width:420px}.va-lead-done h3{margin:0 0 8px}
+@media (max-width:640px){.va-row.two{grid-template-columns:1fr}}
 .va-open{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:14px;font-weight:600;color:#2F5CA8}
 @media (max-width:1000px){.va-stage{left:10px;right:10px;top:10px;bottom:10px;z-index:95}.va-stage:not(.zoom){display:none!important}.va-m .va-thumb{display:block}}
 @media (min-width:1001px) and (max-height:700px){.va-stage{top:12px;bottom:12px}}
@@ -127,6 +162,7 @@ const shell = $("[data-va-shell]"), log = $("[data-va-log]"), chips = $("[data-v
 const text = $<HTMLTextAreaElement>("[data-va-text]"), micBtn = $("[data-va-mic]"), spkBtn = $("[data-va-speaker]"), stateEl = $("[data-va-state]");
 const stage = $("[data-va-stage]"), img = $<HTMLImageElement>("[data-va-img]"), cap = $("[data-va-cap]"), href = $<HTMLAnchorElement>("[data-va-href]");
 const launch = $("[data-va-open]");
+const figure = $("[data-va-figure]"), leadForm = $<HTMLFormElement>("[data-va-lead]"), leadErr = $("[data-va-lead-err]");
 $<HTMLAnchorElement>("[data-va-book]").href = BOOK;
 
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -174,9 +210,16 @@ function renderChips(list?: string[]) {
   chips.innerHTML = ""; sug.hidden = !(list && list.length);
   (list || []).slice(0, 4).forEach((c) => {
     const b = document.createElement("button"); b.type = "button"; b.textContent = c;
-    b.onclick = () => send(c);
+    b.onclick = () => (c === "Talk to sales" ? talkToSales() : send(c));
     chips.appendChild(b);
   });
+}
+function talkToSales() {
+  renderChips([]);
+  bubble("u", "Talk to sales"); record("visitor", "Talk to sales");
+  const t = "Lovely. I have opened a short form beside the chat, so the right person can get back to you. You can also just tell me what you need here.";
+  bubble("v", t); record("vigil", t); showForm();
+  if (call) call.say("(The visitor asked to talk to sales and the contact form is now open beside the chat. Tell them warmly in one sentence.)");
 }
 function attach(host: HTMLElement | null, node: HTMLElement) {
   const lastEl = log.lastElementChild as HTMLElement | null;
@@ -186,7 +229,7 @@ function attach(host: HTMLElement | null, node: HTMLElement) {
 function showScreen(key: string, host: HTMLElement | null) {
   const sc = SCREENS[key]; if (!sc) return false;
   img.src = sc.src; img.alt = sc.caption; cap.textContent = sc.caption + ". The real product, in our demo workspace.";
-  href.href = sc.href; stage.hidden = false;
+  href.href = sc.href; stage.hidden = false; showPicture();
   stage.classList.remove("zoom");
   const t = document.createElement("img"); t.className = "va-thumb"; t.src = sc.src; t.alt = sc.caption; t.dataset.screen = key; attach(host, t);
   return true;
@@ -195,7 +238,41 @@ log.addEventListener("click", (e) => {
   const t = (e.target as HTMLElement).closest<HTMLImageElement>("img.va-thumb"); if (!t) return;
   img.src = t.src; img.alt = t.alt; cap.textContent = t.alt + ". The real product, in our demo workspace.";
   const sc = t.dataset.screen ? SCREENS[t.dataset.screen] : null; href.href = sc ? sc.href : "/product";
+  stage.hidden = false; showPicture(); stage.classList.add("zoom");
+});
+
+// The Talk to the team form, shared in the big window like New Relic's.
+function showPicture() { figure.hidden = false; href.hidden = false; leadForm.hidden = true; }
+function showForm(pre: Record<string, string> = {}) {
+  figure.hidden = true; href.hidden = true; leadForm.hidden = false;
+  if (!leadForm.querySelector("input")) return;
+  const set = (n: string, v?: string) => { const el = leadForm.elements.namedItem(n) as HTMLInputElement | null; if (el && v && !el.value) el.value = v; };
+  const nm = (pre.first_name || engine.lead.name || "").split(" ");
+  set("email", pre.email || engine.lead.email); set("first", nm[0]); set("last", pre.last_name || nm.slice(1).join(" "));
+  set("company", pre.company || engine.lead.company); set("notes", pre.notes);
   stage.hidden = false; stage.classList.add("zoom");
+  const empty = [...leadForm.querySelectorAll<HTMLInputElement>("input[required]")].find((i) => !i.value);
+  setTimeout(() => (empty || leadForm.querySelector<HTMLInputElement>("textarea"))?.focus(), 60);
+}
+leadForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const f = (n: string) => ((leadForm.elements.namedItem(n) as HTMLInputElement).value || "").trim();
+  leadForm.querySelectorAll(".bad").forEach((x) => x.classList.remove("bad"));
+  const missing = ["email", "first", "last", "company", "country"].filter((n) => !f(n));
+  missing.forEach((n) => (leadForm.elements.namedItem(n) as HTMLElement).classList.add("bad"));
+  if (missing.length) { leadErr.textContent = "Please fill in the highlighted fields."; return; }
+  const email = f("email").toLowerCase();
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { (leadForm.elements.namedItem("email") as HTMLElement).classList.add("bad"); leadErr.textContent = "Please enter a valid email, for example name@yourcompany.com."; return; }
+  if (FREE.test(email)) { (leadForm.elements.namedItem("email") as HTMLElement).classList.add("bad"); leadErr.textContent = "Please use your business email, so the team can prepare for your company."; return; }
+  leadErr.textContent = "";
+  Object.assign(engine.lead, { name: `${f("first")} ${f("last")}`, email, company: f("company"), interest: "Talk to the team" + (f("country") ? `, ${f("country")}` : "") + (f("phone") ? `, phone ${f("phone")}` : "") });
+  if (f("notes")) engine.lead.questions.push(f("notes"));
+  let msg: string;
+  if (leadsOn) { leadSent = true; await sendLead(engine.lead, lines); msg = `Thank you, ${f("first")}. Your details are with the team, and they will reply to ${email}.`; }
+  else { location.href = mailto(engine.lead); msg = `Thank you, ${f("first")}. Your email app has opened with your details. Press send and the team will reply to ${email}.`; }
+  leadForm.innerHTML = `<div class="va-lead-done"><h3>Thank you, ${f("first").replace(/[<>&"]/g, "")}</h3><p>${leadsOn ? "Your details are with the Relyxus team. They will be in touch soon." : "Your email app has opened with your details. Press send, and the team will be in touch soon."}</p></div>`;
+  bubble("v", msg); record("vigil", msg); save();
+  if (call) call.say(`(The visitor just sent the contact form: ${engine.lead.name}, ${email}, ${engine.lead.company}. Thank them warmly in one sentence.)`);
 });
 function cta(label: string, url: string, host: HTMLElement | null, blank = false) {
   const a = document.createElement("a"); a.className = "va-cta"; a.href = url; a.textContent = label;
@@ -258,6 +335,7 @@ async function send(raw: string) {
         for (const a of j.actions || []) {
           if (a.type === "screen" && a.screen) showScreen(a.screen, el);
           if (a.type === "booking") cta("Pick a time", BOOK, el, true);
+          if (a.type === "form") showForm((a as { prefill?: Record<string, string> }).prefill || {});
           if (a.type === "page" && a.path) pageLink(a.path, el);
           if (a.type === "lead" && a.lead) leadDone(a.lead, !!a.saved, el);
         }
@@ -282,6 +360,7 @@ function backupSays(r: Reply) {
   if (r.show) { img.src = r.show.src; img.alt = r.show.caption; cap.textContent = r.show.caption + ". The real product, in our demo workspace."; href.href = r.show.href || "/product"; stage.hidden = false; const t = document.createElement("img"); t.className = "va-thumb"; t.src = r.show.src; t.alt = r.show.caption; attach(d, t); }
   if (r.link) pageLink(r.link.href, d);
   if (r.book) cta("Pick a time", BOOK, d, true);
+  if (r.form) showForm();
   if (r.leadReady && !leadSent) { if (leadsOn) { leadSent = true; sendLead(engine.lead, lines); } else cta("Send my details to the team", mailto(engine.lead), d); }
   renderChips(r.chips);
   record("vigil", r.text);
@@ -297,6 +376,7 @@ function liveBubble(who: "u" | "v", t: string, done: boolean) {
 }
 async function tool(name: string, a: Record<string, unknown>) {
   if (name === "show_screen") return { ok: showScreen(String(a.screen), meEl) };
+  if (name === "open_contact_form") { const pre: Record<string, string> = {}; for (const k of ["email", "first_name", "last_name", "company", "notes"]) if (a[k]) pre[k] = String(a[k]); showForm(pre); return { ok: true, note: "The form is open beside the chat." }; }
   if (name === "open_booking") { cta("Pick a time", BOOK, meEl, true); return { ok: true, note: "A Pick a time button is now in the chat." }; }
   if (name === "open_page") { pageLink(String(a.path || "/product"), meEl); return { ok: true }; }
   if (name === "save_lead") {
@@ -390,7 +470,14 @@ async function listenBackup() {
 function open(first = true) {
   shell.hidden = false; launch.hidden = true;
   big.resize();
-  if (first && !log.children.length) { const o = opener(location.pathname); bubble("v", o.text); record("vigil", o.text); renderChips(o.chips); }
+  if (first && !log.children.length) {
+    const o = opener(location.pathname);
+    let back = false; try { back = localStorage.getItem("relyxus.visited") === "1"; localStorage.setItem("relyxus.visited", "1"); } catch {}
+    const ask = o.text.replace(/^Hi, I'm the Relyxus assistant\.\s*/, "");
+    const hello = [back ? "Hey there, welcome back!" : "Hi there, welcome to Relyxus!", "I'm the Relyxus assistant, here to answer any question you have about Relyxus.", "I can show you the product, walk you through how it works, and connect you with our team.", /\?$/.test(ask) && !/^I can walk you through/.test(ask) ? ask : "What can I help you with today?"];
+    hello.forEach((h) => bubble("v", h)); record("vigil", hello.join(" "));
+    renderChips([...o.chips.filter((c) => c !== "Book a demo").slice(0, 2), "Talk to sales"]);
+  }
   setTimeout(() => text.focus(), 50); save(true);
 }
 function close() {

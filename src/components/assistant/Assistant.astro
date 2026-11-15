@@ -8,22 +8,22 @@
 <div class="va" data-vg>
   <button class="va-launch" type="button" aria-haspopup="dialog" aria-controls="va-panel" data-va-open>
     <canvas class="va-mini" width="44" height="44" aria-hidden="true"></canvas>
-    <span>Ask Vigil</span>
+    <span>Ask Relyxus</span>
   </button>
 
   <div class="va-shell" hidden data-va-shell>
-    <aside class="va-stage" hidden data-va-stage aria-label="Shared by Vigil">
-      <div class="va-sh"><span>Shared by Vigil</span><button type="button" class="va-ic" aria-label="Close shared screen" data-va-unstage><i class="ti ti-x"></i></button></div>
+    <aside class="va-stage" hidden data-va-stage aria-label="Shared by the Relyxus assistant">
+      <div class="va-sh"><span>Shared by the Relyxus assistant</span><button type="button" class="va-ic" aria-label="Close shared screen" data-va-unstage><i class="ti ti-x"></i></button></div>
       <figure class="va-fig"><img alt="" data-va-img /><figcaption data-va-cap></figcaption></figure>
       <a class="va-open" href="/" data-va-href>Open this page <i class="ti ti-arrow-up-right" aria-hidden="true"></i></a>
     </aside>
 
-    <section class="va-panel" id="va-panel" role="dialog" aria-modal="false" aria-label="Chat with Vigil">
+    <section class="va-panel" id="va-panel" role="dialog" aria-modal="false" aria-label="Chat with the Relyxus assistant">
       <header class="va-top">
         <div class="va-orb">
           <canvas class="va-halo" aria-hidden="true" data-va-halo></canvas>
           <button type="button" class="va-ic va-x" aria-label="Close chat" title="Close" data-va-close><i class="ti ti-x"></i></button>
-          <p class="va-state" aria-live="polite" data-va-state>Vigil, the Relyxus assistant</p>
+          <p class="va-state" aria-live="polite" data-va-state>Relyxus assistant</p>
         </div>
         <a class="va-book" href="/demo#book" target="_blank" rel="noopener" data-va-book>Book a meeting</a>
         <div class="va-av">
@@ -37,11 +37,11 @@
       <div class="va-chips" data-va-chips></div>
 
       <form class="va-in" data-va-form>
-        <label class="sr-only" for="va-text">Message Vigil</label>
+        <label class="sr-only" for="va-text">Message the Relyxus assistant</label>
         <textarea id="va-text" rows="1" placeholder="Type here" maxlength="600" data-va-text></textarea>
         <button type="submit" class="va-send" aria-label="Send"><i class="ti ti-arrow-up"></i></button>
       </form>
-      <p class="va-legal">Vigil is an AI assistant and can make mistakes. Chats and voice are processed by Google to run Vigil. If you share your name and email, we keep them with this chat so the team can reply. <a href="/privacy">Privacy notice</a></p>
+      <p class="va-legal">This AI assistant can make mistakes. Chats and voice are processed by Google to run it. If you share your name and email, we keep them with this chat so the team can reply. <a href="/privacy">Privacy notice</a></p>
     </section>
   </div>
 </div>
@@ -91,13 +91,15 @@ body.nav-open .va-launch{display:none}
 .va-send{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;border:0;cursor:pointer;font-size:18px;background:#fff;color:#0A0C10}
 .va-legal{margin:0;padding:8px 16px 12px;font-size:11.5px;line-height:1.45;color:#AEB8C8}
 .va-legal a{color:#C9D3E3;text-decoration:underline}
-.va-stage{width:min(620px,calc(100vw - 480px));border-radius:24px;background:#fff;border:1px solid #E3E8EF;box-shadow:0 40px 110px rgba(5,7,12,.35);padding:14px;color:#0A0C10}
-.va-sh{display:flex;justify-content:space-between;align-items:center;font-size:13.5px;font-weight:600;color:#2B3340}
+.va-stage{position:fixed;left:24px;top:24px;bottom:24px;right:452px;z-index:89;display:flex;flex-direction:column;border-radius:24px;background:#fff;border:1px solid #E3E8EF;box-shadow:0 40px 110px rgba(5,7,12,.35);padding:16px 18px;color:#0A0C10}
+.va-sh{display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:600;color:#2B3340}
+.va-m .va-thumb{cursor:zoom-in}
 .va-stage .va-ic{border-color:#DDE3EA;color:#0A0C10}
-.va-fig{margin:10px 0 0}.va-fig img{display:block;width:100%;border-radius:14px;border:1px solid #E3E8EF}
+.va-fig{flex:1;min-height:0;margin:12px 0 0;display:flex;flex-direction:column}.va-fig img{flex:1;min-height:0;width:100%;object-fit:contain;object-position:top center;border-radius:14px;background:#05070C;border:1px solid #E3E8EF}
 .va-fig figcaption{font-size:13.5px;color:#2B3340;margin-top:10px}
 .va-open{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:14px;font-weight:600;color:#2F5CA8}
-@media (max-width:1000px){.va-stage{display:none!important}.va-m .va-thumb{display:block}}
+@media (max-width:1000px){.va-stage{left:10px;right:10px;top:10px;bottom:10px;z-index:95}.va-stage:not(.zoom){display:none!important}.va-m .va-thumb{display:block}}
+@media (min-width:1001px) and (max-height:700px){.va-stage{top:12px;bottom:12px}}
 @media (max-width:560px){.va-orb{height:140px}.va-launch{right:16px;bottom:16px}.va-shell{inset:0;right:0;bottom:0;max-height:none}.va-panel{width:100vw;height:100dvh;border-radius:0;border:0}}
 </style>
 
@@ -147,7 +149,7 @@ const mini = new Halo(root.querySelector<HTMLCanvasElement>(".va-mini")!, 700, 0
 const big = new Halo($<HTMLCanvasElement>("[data-va-halo]"), 2600, 0.31, "6,8,12");
 big.dy = -10;
 let last = performance.now();
-const STATE_TEXT: Record<string, string> = { idle: "Vigil, the Relyxus assistant", listening: "Listening", thinking: "Thinking", speaking: "Speaking" };
+const STATE_TEXT: Record<string, string> = { idle: "Relyxus assistant", listening: "Listening", thinking: "Thinking", speaking: "Speaking" };
 function loop(now: number) {
   const dt = Math.min(0.05, (now - last) / 1000); last = now;
   let lv = voice.tick(now / 1000);
@@ -185,9 +187,16 @@ function showScreen(key: string, host: HTMLElement | null) {
   const sc = SCREENS[key]; if (!sc) return false;
   img.src = sc.src; img.alt = sc.caption; cap.textContent = sc.caption + ". The real product, in our demo workspace.";
   href.href = sc.href; stage.hidden = false;
-  const t = document.createElement("img"); t.className = "va-thumb"; t.src = sc.src; t.alt = sc.caption; attach(host, t);
+  stage.classList.remove("zoom");
+  const t = document.createElement("img"); t.className = "va-thumb"; t.src = sc.src; t.alt = sc.caption; t.dataset.screen = key; attach(host, t);
   return true;
 }
+log.addEventListener("click", (e) => {
+  const t = (e.target as HTMLElement).closest<HTMLImageElement>("img.va-thumb"); if (!t) return;
+  img.src = t.src; img.alt = t.alt; cap.textContent = t.alt + ". The real product, in our demo workspace.";
+  const sc = t.dataset.screen ? SCREENS[t.dataset.screen] : null; href.href = sc ? sc.href : "/product";
+  stage.hidden = false; stage.classList.add("zoom");
+});
 function cta(label: string, url: string, host: HTMLElement | null, blank = false) {
   const a = document.createElement("a"); a.className = "va-cta"; a.href = url; a.textContent = label;
   if (blank) { a.target = "_blank"; a.rel = "noopener"; }
@@ -213,7 +222,7 @@ async function send(raw: string) {
   busy = true; voice.stopSpeaking();
   bubble("u", q); record("visitor", q);
   setState("thinking");
-  const dots = bubble("v", ""); dots.innerHTML = '<span class="va-dots" aria-label="Vigil is thinking"><i></i><i></i><i></i></span>';
+  const dots = bubble("v", ""); dots.innerHTML = '<span class="va-dots" aria-label="Thinking"><i></i><i></i><i></i></span>';
   let said = "";
   if (brain !== "backup") {
     try {
@@ -303,7 +312,7 @@ async function startLive(withMic: boolean) {
 function paint() {
   spkBtn.setAttribute("aria-pressed", String(speakerOn)); spkBtn.querySelector("i")!.className = `ti ti-volume${speakerOn ? "" : "-off"}`;
   micBtn.setAttribute("aria-pressed", String(micOn)); micBtn.querySelector("i")!.className = `ti ti-microphone${micOn ? "" : "-off"}`;
-  spkBtn.setAttribute("aria-label", speakerOn ? "Turn Vigil's voice off" : "Turn Vigil's voice on");
+  spkBtn.setAttribute("aria-label", speakerOn ? "Turn the assistant's voice off" : "Turn the assistant's voice on");
   micBtn.setAttribute("aria-label", micOn ? "Turn your microphone off" : "Turn your microphone on and talk");
 }
 
@@ -367,7 +376,7 @@ function close() {
 
 launch.addEventListener("click", () => open());
 $("[data-va-close]").addEventListener("click", close);
-$("[data-va-unstage]").addEventListener("click", () => (stage.hidden = true));
+$("[data-va-unstage]").addEventListener("click", () => { stage.hidden = true; stage.classList.remove("zoom"); });
 spkBtn.addEventListener("click", () => setSpeaker(!speakerOn));
 micBtn.addEventListener("click", () => setMic(!micOn));
 document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !shell.hidden) close(); });

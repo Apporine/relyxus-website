@@ -69,8 +69,8 @@ export class LiveCall {
     const past = history.filter((l) => l.text).slice(-12);
     const turns = past.map((l) => ({ role: l.who === "vigil" ? "model" : "user", parts: [{ text: l.text }] }));
     const cue = past.length > 1
-      ? `(The visitor just switched on Vigil's voice on the page ${page}. The conversation above happened by text. Do not greet again or repeat yourself: in one short, warm sentence, say you can talk now and pick up where you left off.)`
-      : `(The visitor just switched on Vigil's voice on the page ${page} of relyxus.com. Greet them warmly in one or two short sentences as Vigil, say what you can help with, and ask what brings them here today. ${mic ? "Their microphone is on." : "Their microphone is off for now, so they may type or switch it on."})`;
+      ? `(The visitor just switched on your voice on the page ${page}. The conversation above happened by text. Do not greet again or repeat yourself: in one short, warm sentence, say you can talk now and pick up where you left off.)`
+      : `(The visitor just switched on your voice on the page ${page} of relyxus.com. Greet them warmly and cheerfully in one or two short sentences as the Relyxus assistant, say what you can help with, and ask what brings them here today. ${mic ? "Their microphone is on." : "Their microphone is off for now, so they may type or switch it on."})`;
     this.session.sendClientContent({ turns: [...turns, { role: "user", parts: [{ text: cue }] }], turnComplete: true });
     this.waiting = true;
     this.ev.state("thinking");

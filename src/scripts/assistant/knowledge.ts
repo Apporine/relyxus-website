@@ -19,7 +19,7 @@ const shot = (f: string) => `/media/console/${f}.jpg`;
 export const TOPICS: Topic[] = [
   {
     id: "what",
-    words: ["what is relyxus", "what do you do", "what does it do", "what is this", "overview", "explain", "tell me about", "relyxus"],
+    words: ["what is relyxus", "what do you do", "what does it do", "what it does", "what is this", "what this product", "this product", "the product", "product about", "overview", "explain", "tell me about", "relyxus"],
     answer: "Relyxus is incident response for banks, payment firms, fintechs and the SaaS companies that serve them. When production breaks, it finds what broke, proposes the fix and runs it once the right people approve. It checks the fix worked, rolls back if it did not, and drafts your regulator report as it goes. It runs inside your own cloud.",
     show: { src: shot("home"), caption: "The command centre, in the demo workspace", href: "/product" },
     link: { label: "Take the product tour", href: "/product" },
@@ -180,9 +180,16 @@ export const TOPICS: Topic[] = [
   },
   {
     id: "company",
-    words: ["who are you", "who built", "who makes", "apporine", "company", "team", "founder", "about", "where are you based"],
+    words: ["who built relyxus", "who makes", "apporine", "your company", "the company behind", "team behind", "founder", "about apporine", "where are you based"],
     answer: "Relyxus is built by Apporine, a software company building serious tools for regulated businesses. Our engineers have run on call, incident response and cloud platforms for large regulated organisations.",
     link: { label: "About Apporine", href: "/about" },
+  },
+  {
+    id: "built",
+    words: ["how is it built", "how this platform", "how you built", "how did you build", "built on", "technology", "tech stack", "architecture", "how does it work under", "containers"],
+    answer: "Relyxus runs as containers on Kubernetes inside your own cloud, installed with Helm, or in your AWS or Azure account. Every action goes into a hash chained audit log that nobody can edit, and its AI investigator, Vigil, uses the model provider you choose. It is built by Apporine's engineers, who have run incident response for large regulated organisations.",
+    link: { label: "Read the Trust Center", href: "/trust" },
+    follow: ["Where does it run?", "What data leaves our network?", "Can I see a demo?"],
   },
   {
     id: "contact",
@@ -209,13 +216,13 @@ export const SMALL = {
 export function opener(path: string): { text: string; chips: string[] } {
   const p = path.replace(/\/$/, "") || "/";
   const by: Record<string, [string, string[]]> = {
-    "/": ["Hello, I'm Vigil. I can walk you through Relyxus, show you the product, or set up a demo. What brings you here today?", ["What is Relyxus?", "How does it fix an incident?", "Show me the product", "Book a demo"]],
-    "/pricing": ["Hello, I'm Vigil. Pricing is one annual licence with every feature and every user. Would you like a written quote?", ["Get a quote", "What is included?", "What is a founding partner?"]],
-    "/trust": ["Hello, I'm Vigil. I can point you to the security pack, the DPA or how Relyxus keeps your data in your cloud.", ["Where does it run?", "What data leaves our network?", "Do you have a security pack?"]],
-    "/banks": ["Hello, I'm Vigil. Are you looking at Relyxus for a bank or building society? I can show you how it handles the new reporting rules.", ["How does reporting work?", "Where does it run?", "Book a demo"]],
-    "/payments-and-fintechs": ["Hello, I'm Vigil. I can show you how Relyxus keeps payments, partners and regulators covered during an outage.", ["Show me the product", "How does it fix an incident?", "Book a demo"]],
-    "/saas": ["Hello, I'm Vigil. If you serve banks, I can show you how Relyxus handles each client's notice deadline.", ["We are a SaaS serving banks", "How does reporting work?", "Book a demo"]],
-    "/replay": ["Hello, I'm Vigil. Want to replay one of your past outages for free? I can start that for you.", ["Replay my outage", "What do you need from us?"]],
+    "/": ["Hi, I'm the Relyxus assistant. I can walk you through Relyxus, show you the product, or set up a demo. What brings you here today?", ["What is Relyxus?", "How does it fix an incident?", "Show me the product", "Book a demo"]],
+    "/pricing": ["Hi, I'm the Relyxus assistant. Pricing is one annual licence with every feature and every user. Would you like a written quote?", ["Get a quote", "What is included?", "What is a founding partner?"]],
+    "/trust": ["Hi, I'm the Relyxus assistant. I can point you to the security pack, the DPA or how Relyxus keeps your data in your cloud.", ["Where does it run?", "What data leaves our network?", "Do you have a security pack?"]],
+    "/banks": ["Hi, I'm the Relyxus assistant. Are you looking at Relyxus for a bank or building society? I can show you how it handles the new reporting rules.", ["How does reporting work?", "Where does it run?", "Book a demo"]],
+    "/payments-and-fintechs": ["Hi, I'm the Relyxus assistant. I can show you how Relyxus keeps payments, partners and regulators covered during an outage.", ["Show me the product", "How does it fix an incident?", "Book a demo"]],
+    "/saas": ["Hi, I'm the Relyxus assistant. If you serve banks, I can show you how Relyxus handles each client's notice deadline.", ["We are a SaaS serving banks", "How does reporting work?", "Book a demo"]],
+    "/replay": ["Hi, I'm the Relyxus assistant. Want to replay one of your past outages for free? I can start that for you.", ["Replay my outage", "What do you need from us?"]],
   };
   const [text, chips] = by[p] || by["/"];
   return { text, chips };

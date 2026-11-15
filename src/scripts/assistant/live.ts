@@ -39,31 +39,55 @@ export class LiveCall {
   private ended = false;
   private buf = new Uint8Array(512);
 
+  model = "";
+  private ready?: { ok: () => void; fail: (e: Error) => void };
+
   constructor(private ev: CallEvents) {}
+
+  // Opens the session and waits for Gemini to accept the setup; a model that
+  // is not available closes the connection instead.
+  private async connect(token: string, model: string) {
+    const ai = new GoogleGenAI({ apiKey: token, httpOptions: { apiVersion: "v1alpha" } });
+    const accepted = new Promise<void>((ok, fail) => { this.ready = { ok, fail }; setTimeout(() => fail(new Error("timeout")), 8000); });
+    accepted.catch(() => {});
+    const opened = ai.live.connect({
+      model,
+      config: { responseModalities: [Modality.AUDIO] },
+      callbacks: {
+        onmessage: (m: LiveServerMessage) => { if (this.ready) { this.ready.ok(); this.ready = undefined; } this.onMessage(m); },
+        onerror: () => { if (this.ready) { this.ready.fail(new Error("refused")); this.ready = undefined; } else this.finish("error"); },
+        onclose: () => { if (this.ready) { this.ready.fail(new Error("refused")); this.ready = undefined; } else this.finish("closed"); },
+      },
+    }).then((sess) => (this.session = sess));
+    opened.catch(() => {});
+    try {
+      await Promise.race([accepted, opened.then(() => accepted)]);
+      await opened;
+    } catch (e) {
+      this.ready = undefined;
+      opened.then((sess) => { try { sess.close(); } catch {} }).catch(() => {});
+      this.session = undefined;
+      throw e;
+    }
+  }
 
   // Speaker on starts the call with the microphone off; Mic on switches it on.
   async start(page: string, history: { who: "visitor" | "vigil"; text: string }[] = [], mic = false) {
     this.muted = !mic;
     this.ev.state("connecting");
-    const r = await fetch("/api/vigil-token", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" });
-    if (!r.ok) throw new Error(r.status === 503 ? "not_configured" : r.status === 429 ? "busy" : "unavailable");
-    const { token, model } = await r.json();
-
     this.outCtx = new AudioContext();
     this.outGain = this.outCtx.createGain();
     this.analyser = this.outCtx.createAnalyser(); this.analyser.fftSize = 1024;
     this.outGain.connect(this.analyser); this.analyser.connect(this.outCtx.destination);
 
-    const ai = new GoogleGenAI({ apiKey: token, httpOptions: { apiVersion: "v1alpha" } });
-    this.session = await ai.live.connect({
-      model,
-      config: { responseModalities: [Modality.AUDIO] },
-      callbacks: {
-        onmessage: (m: LiveServerMessage) => this.onMessage(m),
-        onerror: () => this.finish("error"),
-        onclose: () => this.finish("closed"),
-      },
-    });
+    // Try each live voice model until one accepts the call.
+    for (let attempt = 0; ; attempt++) {
+      const r = await fetch("/api/vigil-token", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ attempt }) });
+      if (!r.ok) throw new Error(r.status === 503 ? "not_configured" : r.status === 429 ? "busy" : "unavailable");
+      const { token, model, more } = await r.json();
+      try { await this.connect(token, model); this.model = model; break; }
+      catch (e) { if (!more) throw e; }
+    }
 
     if (mic) await this.setMic(true);
     const past = history.filter((l) => l.text).slice(-12);
@@ -71,7 +95,7 @@ export class LiveCall {
     const cue = past.length > 1
       ? `(The visitor just switched on your voice on the page ${page}. The conversation above happened by text. Do not greet again or repeat yourself: in one short, warm sentence, say you can talk now and pick up where you left off.)`
       : `(The visitor just switched on your voice on the page ${page} of relyxus.com. Greet them warmly and cheerfully in one or two short sentences as the Relyxus assistant, say what you can help with, and ask what brings them here today. ${mic ? "Their microphone is on." : "Their microphone is off for now, so they may type or switch it on."})`;
-    this.session.sendClientContent({ turns: [...turns, { role: "user", parts: [{ text: cue }] }], turnComplete: true });
+    this.session?.sendClientContent({ turns: [...turns, { role: "user", parts: [{ text: cue }] }], turnComplete: true });
     this.waiting = true;
     this.ev.state("thinking");
   }

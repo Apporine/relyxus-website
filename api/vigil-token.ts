@@ -6,7 +6,9 @@
 import { GoogleGenAI, Modality } from "@google/genai";
 import { SYSTEM_PROMPT, TOOLS } from "./_vigil-config.js";
 
-const MODEL = process.env.VIGIL_LIVE_MODEL || "gemini-3.8-live";
+// Tried in order until one connects: the one set in Vercel, then the newest
+// live voice models, then older ones that are widely available.
+const MODELS = [process.env.VIGIL_LIVE_MODEL, "gemini-3.8-live", "gemini-3.1-flash-live-preview", "gemini-2.5-flash-native-audio-preview-09-2025", "gemini-live-2.5-flash-preview"].filter((m, i, a): m is string => !!m && a.indexOf(m) === i);
 const VOICE = process.env.VIGIL_VOICE || "Leda";
 const CALL_MINUTES = Number(process.env.VIGIL_CALL_MINUTES || 10);
 const ALLOWED = /^https:\/\/((www\.)?relyxus\.com|relyxus-website[a-z0-9-]*\.vercel\.app)$|^http:\/\/localhost(:\d+)?$/;
@@ -21,12 +23,15 @@ export async function POST(req: Request): Promise<Response> {
   if (!ALLOWED.test(origin)) return json({ error: "forbidden" }, 403);
   if (!process.env.GEMINI_API_KEY) return json({ error: "voice_not_configured" }, 503, origin);
 
-  // At most 6 calls per visitor address every 30 minutes.
+  // At most 12 key requests per visitor address every 30 minutes.
   const ip = (req.headers.get("x-forwarded-for") || "").split(",")[0].trim() || "unknown";
   const now = Date.now(), recent = (seen.get(ip) || []).filter((t) => now - t < 30 * 60e3);
-  if (recent.length >= 6) return json({ error: "too_many_calls" }, 429, origin);
+  if (recent.length >= 12) return json({ error: "too_many_calls" }, 429, origin);
   seen.set(ip, [...recent, now]);
 
+  let attempt = 0;
+  try { attempt = Math.max(0, Math.min(MODELS.length - 1, Number((await req.json()).attempt) || 0)); } catch {}
+  const MODEL = MODELS[attempt];
   try {
     const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY, httpOptions: { apiVersion: "v1alpha" } });
     const token = await ai.authTokens.create({
@@ -48,7 +53,7 @@ export async function POST(req: Request): Promise<Response> {
         lockAdditionalFields: [],
       },
     });
-    return json({ token: token.name, model: MODEL, minutes: CALL_MINUTES }, 200, origin);
+    return json({ token: token.name, model: MODEL, minutes: CALL_MINUTES, more: attempt < MODELS.length - 1 }, 200, origin);
   } catch (e) {
     console.error("vigil-token", e);
     return json({ error: "voice_unavailable" }, 502, origin);

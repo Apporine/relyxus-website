@@ -14,6 +14,10 @@
 .dm-sl button.on{border-color:#FF6B4A;background:#FFF1EC;color:#B5361C}
 button.dm-go{width:100%;border:0}
 .dm-err{margin:10px 0 0;font-size:14px;color:#B5361C;text-align:center;min-height:1px}
+.rpl-form{display:grid;gap:8px;margin-top:18px;text-align:left}
+.rpl-form input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid #DDE3EA;background:#FAFBFC;font:inherit;font-size:15px}
+.rpl-files{font-size:13.5px;color:#2B3340;margin:4px 0 0}
+.rpl-up.drag{border-color:#3F66B0!important;background:#F2F6FC}
 .dm-ok{font-size:17px;line-height:1.55;color:#2B3340;margin-top:14px!important}
 .dc-f .ip{display:flex;justify-content:space-between;align-items:center;gap:10px}
 .dc-f .ip input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-size:15.5px;font-weight:600;color:#0A0C10;outline:none}
@@ -44,7 +48,7 @@ button.dm-go{width:100%;border:0}
   .bts .b1,.bts .b2{justify-content:center}
   .pgm .lead{font-size:16.5px}
 }
-@media (max-width:1023px){
+@media (max-width:1279px){
   .anno{display:flex;flex-direction:column;gap:16px}
   .anno .real{order:-1}
   .anno .co{position:relative!important;inset:auto!important;width:auto!important;max-width:none!important;margin-left:12px}

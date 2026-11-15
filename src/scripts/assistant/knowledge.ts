@@ -151,9 +151,9 @@ export const TOPICS: Topic[] = [
   {
     id: "demo",
     words: ["demo", "see it", "walkthrough", "meeting", "book", "talk to sales", "speak to", "schedule"],
-    answer: "There are two ways. Open the live demo, a bank called Harbour Bank in the middle of an incident, with no sign up. Or book a demo with the team and see it with your own stack. Shall I book one for you?",
+    answer: "The team runs the live demo for you: Harbour Bank, a sample bank, in the middle of a real incident, running on real servers. In forty five minutes you see every step from the first alert to the signed regulator report, with your own questions answered. Shall I book one for you?",
     show: { src: shot("incidents_INC-2041"), caption: "INC 2041, the live demo incident", href: "/demo" },
-    link: { label: "Open the live demo", href: "/demo" },
+    link: { label: "See what happens on the call", href: "/demo" },
     capture: "demo",
   },
   {

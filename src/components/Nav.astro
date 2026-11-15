@@ -57,7 +57,21 @@ const checks = [["Alert received", "sha256 7c1e 09ab"], ["Fix approved by two pe
         ))}
       </ul>
     </nav>
-    <div class="pr"><a href="/demo#book" class="bk"><span>Book a demo</span></a></div>
+    <div class="pr"><button type="button" class="mb" aria-expanded="false" aria-controls="nav-sheet" aria-label="Open the menu" data-mb><i class="ti ti-menu-2" aria-hidden="true"></i></button><a href="/demo#book" class="bk"><span>Book a demo</span></a></div>
+    <div class="sheet" id="nav-sheet" hidden data-sheet>
+      {menus.map((m) => (
+        <details>
+          <summary>{m.label}<i class="ti ti-chevron-down" aria-hidden="true"></i></summary>
+          <div class="sg">
+            {m.cols.flat().map((g) => (
+              <div><p>{g.g}</p>{g.l.filter((l) => !l.soon).map((l) => <a href={l.h}>{l.t}</a>)}</div>
+            ))}
+            {m.strip && <div><p>More</p>{m.strip.map((l) => <a href={l.h}>{l.t}</a>)}</div>}
+          </div>
+        </details>
+      ))}
+      <div class="sh-ft"><a href="/demo#book" class="sh-b1">Book a demo</a><a href="/replay" class="sh-b2">Replay my outage free</a></div>
+    </div>
 
     <div class="mm" data-mm>
       {menus.map((m) => (
@@ -220,6 +234,21 @@ const checks = [["Alert received", "sha256 7c1e 09ab"], ["Fix approved by two pe
 @keyframes rn-ring{from{stroke-dashoffset:251}}
 @media (max-width:1100px){.r-nav .it{padding:9px 9px;font-size:14px}.r-nav .pn{grid-template-columns:260px minmax(0,1fr)}.r-nav .cols{gap:4px 18px;padding:16px 16px 12px}}
 @media (max-width:980px){.r-nav ul,.r-nav .mm{display:none}.r-nav .pl{padding:6px 18px}}
+.r-nav .mb{display:none;place-items:center;width:40px;height:40px;margin-right:6px;border:0;border-radius:50%;background:#EEF1F5;color:#0A0C10;font-size:20px;cursor:pointer}
+.r-nav .mb[aria-expanded="true"]{background:#0A0C10;color:#fff}
+.r-nav .sheet{position:absolute;left:12px;right:12px;top:calc(100% + 10px);max-height:calc(100dvh - 120px);overflow:auto;border-radius:22px;background:#fff;border:1px solid #E3E8EF;box-shadow:0 30px 80px rgba(5,7,12,.3);padding:8px 18px 18px}
+.r-nav .sheet[hidden]{display:none}
+.r-nav .sheet details{border-bottom:1px solid #EEF1F5}
+.r-nav .sheet summary{list-style:none;display:flex;justify-content:space-between;align-items:center;padding:16px 4px;font-size:17px;font-weight:600;color:#0A0C10;cursor:pointer}
+.r-nav .sheet summary::-webkit-details-marker{display:none}
+.r-nav .sheet details[open] summary i{transform:rotate(180deg)}
+.r-nav .sheet .sg{display:grid;gap:14px;padding:0 4px 18px}
+.r-nav .sheet .sg p{margin:0 0 4px;font-size:12.5px;font-weight:600;color:#3F66B0}
+.r-nav .sheet .sg a{display:block;padding:7px 0;font-size:15.5px;color:#1F2630}
+.r-nav .sh-ft{display:grid;gap:10px;margin-top:16px}
+.r-nav .sh-b1,.r-nav .sh-b2{display:flex;justify-content:center;padding:14px;border-radius:999px;font-weight:600;font-size:15.5px}
+.r-nav .sh-b1{background:#0A0C10;color:#fff}.r-nav .sh-b2{border:1px solid #C9D1DC;color:#0A0C10}
+@media (max-width:980px){.r-nav .mb{display:grid}}
 @media (max-width:640px){.r-nav{top:48px}.r-nav .in{padding:0 16px}.r-nav .bk{padding:9px 16px;font-size:14px}}
 </style>
 
@@ -232,6 +261,14 @@ if (root) {
   const skip = document.querySelector(".skip");
   (skip ? skip.after(root) : document.body.prepend(root));
   root.classList.add("pin");
+  const mb = root.querySelector<HTMLButtonElement>("[data-mb]"), sheet = root.querySelector<HTMLElement>("[data-sheet]");
+  if (mb && sheet) {
+    const setOpen = (o: boolean) => { sheet.hidden = !o; document.body.classList.toggle("nav-open", o); mb.setAttribute("aria-expanded", String(o)); mb.setAttribute("aria-label", o ? "Close the menu" : "Open the menu"); mb.innerHTML = `<i class="ti ti-${o ? "x" : "menu-2"}" aria-hidden="true"></i>`; };
+    mb.addEventListener("click", () => setOpen(sheet.hidden));
+    sheet.addEventListener("click", (e) => { if ((e.target as HTMLElement).closest("a")) setOpen(false); });
+    addEventListener("keydown", (e) => { if (e.key === "Escape" && !sheet.hidden) { setOpen(false); mb.focus(); } });
+    addEventListener("resize", () => { if (innerWidth > 980) setOpen(false); });
+  }
   const place = () => { root.style.top = Math.max(14, base - window.scrollY) + "px"; root.classList.toggle("lift", window.scrollY > base); };
   place(); addEventListener("scroll", place, { passive: true });
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;

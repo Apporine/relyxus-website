@@ -1,15 +1,16 @@
 ---
 import Base from "../layouts/Base.astro";
-import Wordmark from "../components/Wordmark.astro";
+import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
 ---
-<Base title="Page not found | Relyxus" description="This page does not exist yet or has moved.">
+<Base title="Page not found | Relyxus" description="This page does not exist or has moved." bodyClass="inner">
   <main id="main" class="r-404">
-    <header class="wrap top"><a href="/" aria-label="Relyxus home"><Wordmark id="wm-404" color="#fff" width={92} /></a></header>
+    <Nav />
     <div class="wrap body">
       <p class="code">404</p>
       <h1>This page went down.<br /><span>Bringing you back.</span></h1>
-      <p class="sub">The page you asked for does not exist yet, or it has moved. Most of the site is still being built, so it may arrive soon.</p>
+      <p class="sub">The page you asked for does not exist, or it has moved. These are the pages people look for most.</p>
+      <ul class="go"><li><a href="/product">Product tour</a></li><li><a href="/trust">Trust Center</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/replay">Replay my outage</a></li><li><a href="/incident-reporting-rules">Incident reporting rules</a></li></ul>
       <div class="line" aria-hidden="true"><canvas></canvas></div>
       <div class="cta"><a class="b1" href="/">Back to the homepage</a><a class="b2" href="/demo#book">Book a demo</a></div>
     </div>
@@ -18,8 +19,10 @@ import Footer from "../components/Footer.astro";
 </Base>
 <style is:global>
 .r-404{background:#05070C;color:#fff;min-height:80vh;position:relative;overflow:hidden}
-.r-404 .top{padding-top:28px;padding-bottom:28px}
-.r-404 .body{padding-top:60px;padding-bottom:90px}
+.r-404 .body{padding-top:170px;padding-bottom:90px}
+.r-404 .go{list-style:none;padding:0;margin:24px 0 0;display:flex;flex-wrap:wrap;gap:8px}
+.r-404 .go a{display:inline-flex;padding:9px 15px;border-radius:999px;background:#141A25;border:1px solid #2A3548;font-size:14.5px}
+.r-404 .go a:hover{border-color:#9FB4D6}
 .r-404 .code{font-size:14px;font-weight:600;color:#FF8A66;margin:0}
 .r-404 h1{font-family:var(--display);font-variation-settings:'opsz' 96;font-weight:500;letter-spacing:-.04em;line-height:1.02;font-size:clamp(44px,7vw,92px);margin:12px 0 0}
 .r-404 h1 span{color:#8BE6BE}

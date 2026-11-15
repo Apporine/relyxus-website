@@ -1,0 +1,95 @@
+---
+// Section 9, One night (locked): one sample incident told by a big clock, every
+// frame recorded in the real Relyxus console (demo workspace, sample data).
+const N = [
+  { k: "command", time: "23:48", day: "Thursday night, card payments failing across the UK", t: "23:48", l: "Spotted", d: "The command centre lights up: card authorisation failing in the UK, GBP 184,000 at risk, the DORA clock already running." },
+  { k: "incident", time: "23:49", day: "One minute in", t: "23:49", l: "The right people, paged", d: "The war room opens itself. The on call engineers are paged by Slack and text, and a lead is in the room." },
+  { k: "vigil", time: "23:52", day: "Four minutes in", t: "23:52", l: "The cause, with its evidence", d: "Vigil ranks the likely causes. A config change to payments-api, 82% likely, with six pieces of evidence behind it." },
+  { k: "evidence", time: "23:53", day: "Five minutes in", t: "23:53", l: "Evidence, sealed", d: "Every signal is captured as it happens and verified in the ledger. Nobody can edit it later." },
+  { k: "approval", time: "23:55", day: "Seven minutes in", t: "23:55", l: "A fix two people approve", d: "Restart payments-api. Exact command, blast radius, automatic rollback. Two approvers, each confirming it is really them." },
+  { k: "status", time: "00:02", day: "Fourteen minutes in", t: "00:02", l: "Customers told first", d: "The status page update waits for a second person, then goes to 12,480 subscribers." },
+  { k: "report", time: "00:10", day: "Twenty two minutes in", t: "00:10", l: "Regulator notice drafted", d: "The DORA initial notice writes itself from the incident. Every answer shows where it came from." },
+  { k: "board", time: "09:00", day: "Monday morning", t: "Monday", l: "The board report", d: "Thirty days of resilience in plain English, numbers checked, ready to send as a PDF." },
+  { k: "replay", time: "Fri", day: "Friday review", t: "Friday", l: "The team replays it", d: "Every event, in order, for the review and for training the next person on call." },
+  { k: "drills", time: "1 Dec", day: "Next month", t: "1 Dec", l: "Drilled, so it never repeats", d: "Fail over card payments on purpose, safely, and check you stay inside your impact tolerance." },
+];
+const NM = [
+  { k: "preflight", t: "Change preflight", d: "Check a change before it ships. Relyxus says wait when the service is already hurting." },
+  { k: "noise", t: "Alert noise", d: "412 alerts reached people last week. 31 needed someone. Fix the rest in one click." },
+  { k: "oncall", t: "On call rotas", d: "Rotas with no gaps, and a clear chain of who gets called if nobody answers." },
+  { k: "auditor", t: "Auditor room", d: "Time limited, read only access for auditors. Everything they open is logged." },
+];
+---
+<section class="r-night" id="one-night" aria-labelledby="night-title">
+  <div class="wrap in">
+    <div class="night">
+      <div class="clock" aria-live="polite"><span class="ck fl">23:48</span><small class="ckd">Thursday night, card payments failing across the UK</small></div>
+      <div>
+        <h2 id="night-title">One real night in Relyxus, from the first alert to the board report.</h2>
+        <p class="lede">Every frame is the Relyxus console, recorded in our demo workspace. The incident is a sample. The product is not.</p>
+      </div>
+    </div>
+    <div class="stagec">
+      <div class="scr"><video muted playsinline preload="metadata" poster="/media/one-night/command.jpg" aria-label="Recording of the Relyxus console"></video><div class="bar"></div></div>
+      <div class="say"><b class="cst">{N[0].t} {N[0].l}</b><span class="csd">{N[0].d}</span></div>
+    </div>
+    <div class="line"><div class="ticks"><div class="fillc"></div>{N.map((n) => <button class="tick" type="button"><i></i><time>{n.t}</time><b>{n.l}</b></button>)}</div></div>
+    <div class="more"><p>Before the next one</p>{NM.map((m) => <button type="button" data-k={m.k}>{m.t}</button>)}</div>
+  </div>
+  <script type="application/json" class="night-data" set:html={JSON.stringify({ N, NM })}></script>
+</section>
+<style is:global>
+.r-night{position:relative;overflow:hidden;padding:110px 0 96px;background:#000;color:#F4F6FA}
+.r-night::before{content:"";position:absolute;left:50%;top:-340px;width:1400px;height:700px;transform:translateX(-50%);pointer-events:none;background:radial-gradient(closest-side,rgba(255,107,74,.28),rgba(127,160,214,.16) 55%,transparent 80%);filter:blur(10px)}
+.r-night .in{position:relative}
+.r-night .night{display:grid;grid-template-columns:minmax(0,auto) minmax(0,1fr);gap:48px;align-items:end;margin-bottom:36px}
+.r-night .clock{font-family:var(--display);font-variation-settings:'opsz' 96;font-weight:500;font-size:clamp(84px,13vw,176px);line-height:.82;letter-spacing:-.05em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.r-night .clock small{display:block;font-family:var(--body);font-size:15px;letter-spacing:0;font-weight:500;color:#C3CBD8;margin-top:16px;line-height:1.4;white-space:normal}
+.r-night h2{font-family:var(--display);font-variation-settings:'opsz' 96;font-weight:500;letter-spacing:-.035em;line-height:1.04;margin:0 0 14px;font-size:clamp(32px,3.6vw,48px);color:#F4F6FA;text-wrap:balance}
+.r-night .lede{font-size:17px;line-height:1.55;color:#C3CBD8;margin:0;max-width:52ch}
+.r-night .fl{--k:#F4F6FA;--acc:#FF6B4A;--acc2:#FF9A7A;background-image:linear-gradient(100deg,var(--k) 0%,var(--k) 4%,var(--acc) 16%,var(--acc2) 24%,var(--k) 36%,var(--k) 50%,var(--k) 54%,var(--acc) 66%,var(--acc2) 74%,var(--k) 86%,var(--k) 100%);background-size:200% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:r-flow 6s linear infinite}
+.r-night .stagec{position:relative;border:1px solid #1E2430;border-radius:18px;overflow:hidden;background:#0B0E14;box-shadow:0 60px 120px rgba(0,0,0,.65)}
+.r-night .scr{position:relative;aspect-ratio:16/9}
+.r-night video{display:block;width:100%;height:100%;object-fit:cover;background:#05070A}
+.r-night .bar{position:absolute;left:0;bottom:0;height:2px;width:0;background:linear-gradient(90deg,#FF6B4A,#7FA0D6)}
+.r-night .say{position:absolute;left:20px;bottom:20px;max-width:min(540px,calc(100% - 40px));background:rgba(5,7,10,.92);border:1px solid #2A3242;border-radius:12px;padding:14px 16px;backdrop-filter:blur(8px)}
+.r-night .say b{display:block;font-size:16px;font-weight:600;margin-bottom:4px}
+.r-night .say span{font-size:14.5px;line-height:1.5;color:#C3CBD8}
+.r-night .line{position:relative;margin-top:26px;overflow-x:auto;padding-bottom:6px}
+.r-night .ticks{position:relative;display:grid;grid-template-columns:repeat(10,minmax(104px,1fr));min-width:1040px}
+.r-night .ticks::before{content:"";position:absolute;left:0;right:0;top:15px;height:2px;background:#1B2130}
+.r-night .fillc{position:absolute;left:0;top:15px;height:2px;width:0;background:linear-gradient(90deg,#FF6B4A,#7FA0D6,#3DAE80);transition:width .5s cubic-bezier(.2,.7,.1,1)}
+.r-night .tick{all:unset;cursor:pointer;position:relative;display:block;padding:0 10px 4px 0}
+.r-night .tick i{display:block;width:12px;height:12px;border-radius:50%;background:#000;border:2px solid #3A4558;margin:10px 0 14px;position:relative;z-index:1;transition:all .3s}
+.r-night .tick time{display:block;font-size:13.5px;font-weight:600;color:#7FA0D6;font-variant-numeric:tabular-nums}
+.r-night .tick b{display:block;font-size:14px;font-weight:550;line-height:1.35;color:#C3CBD8;margin-top:3px}
+.r-night .tick.done i{border-color:#7FA0D6;background:#7FA0D6}
+.r-night .tick.on i{border-color:#fff;background:#fff;box-shadow:0 0 0 5px rgba(255,255,255,.14)}
+.r-night .tick.on b{color:#F4F6FA}
+.r-night .tick:focus-visible,.r-night .more button:focus-visible{outline:2px solid #7FA0D6;outline-offset:2px}
+.r-night .more{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:26px;padding-top:22px;border-top:1px solid #1E2430}
+.r-night .more p{margin:0 6px 0 0;font-size:14px;color:#C3CBD8}
+.r-night .more button{font:500 14px var(--body);color:#F4F6FA;background:#0E121A;border:1px solid #1E2430;border-radius:999px;padding:8px 14px;cursor:pointer}
+.r-night .more button.on{background:#fff;color:#000;border-color:#fff}
+@media (max-width:980px){.r-night .night{grid-template-columns:1fr;gap:20px}}
+@media (max-width:560px){.r-night .say{position:static;max-width:none;border-radius:0;border-width:1px 0 0}}
+</style>
+<script>
+type Item = { k: string; time?: string; day?: string; t: string; l?: string; d: string };
+const root = document.querySelector<HTMLElement>(".r-night")!;
+const { N, NM } = JSON.parse(root.querySelector(".night-data")!.textContent!) as { N: Item[]; NM: Item[] };
+const cv = root.querySelector("video")!, ticks = [...root.querySelectorAll<HTMLElement>(".tick")], fillc = root.querySelector<HTMLElement>(".fillc")!, cbar = root.querySelector<HTMLElement>(".bar")!;
+const more = [...root.querySelectorAll<HTMLButtonElement>(".more button")];
+const ck = root.querySelector<HTMLElement>(".ck")!, ckd = root.querySelector<HTMLElement>(".ckd")!, cst = root.querySelector<HTMLElement>(".cst")!, csd = root.querySelector<HTMLElement>(".csd")!;
+let ci = 0, extra = -1, started = false;
+function playIn(k: string) { if (cv.dataset.cur !== k) { cv.dataset.cur = k; cv.poster = `/media/one-night/${k}.jpg`; cv.src = `/media/one-night/${k}.mp4`; } cv.currentTime = 0; if (started) cv.play().catch(() => {}); }
+function goC(i: number) { ci = i; extra = -1; const n = N[i]; more.forEach((m) => m.classList.remove("on"));
+  ticks.forEach((t, j) => { t.classList.toggle("on", j === i); t.classList.toggle("done", j < i); }); fillc.style.width = ticks[i].offsetLeft + 6 + "px";
+  ck.textContent = n.time!; ckd.textContent = n.day!; cst.textContent = `${n.t} ${n.l}`; csd.textContent = n.d; playIn(n.k); }
+function goX(j: number) { extra = j; const m = NM[j]; more.forEach((b, i) => b.classList.toggle("on", i === j)); ck.textContent = "Next"; ckd.textContent = "Before the next incident"; cst.textContent = m.t; csd.textContent = m.d; playIn(m.k); }
+ticks.forEach((t, i) => (t.onclick = () => goC(i))); more.forEach((b, j) => (b.onclick = () => goX(j)));
+cv.addEventListener("timeupdate", () => { if (cv.duration) cbar.style.width = (cv.currentTime / cv.duration) * 100 + "%"; });
+cv.addEventListener("ended", () => { if (extra >= 0) goX((extra + 1) % NM.length); else goC((ci + 1) % N.length); });
+new IntersectionObserver((e) => { if (e[0].isIntersecting) { if (!started) { started = true; goC(0); } else cv.play().catch(() => {}); } else cv.pause(); }, { threshold: 0.25 }).observe(root.querySelector(".stagec")!);
+if (matchMedia("(prefers-reduced-motion: reduce)").matches) { started = false; cv.removeAttribute("autoplay"); }
+</script>

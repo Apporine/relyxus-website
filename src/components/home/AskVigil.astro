@@ -1,0 +1,107 @@
+---
+// Section 8, Ask Vigil (locked, option A): every point colour matched to the
+// evidence card it cites; Vigil refuses to run a fix without two approvals.
+const PTS = ["Release 4.18.2 of card-auth went out at 03:10, two minutes before errors started.", "The card-auth error rate jumped from 0.2% to 38% at 03:12.", "The same change failed an auth timeout test in staging on Tuesday."];
+const SPK = '<polyline fill="none" stroke="#C9D1DC" stroke-width="1.5" points="0,26 40,26 70,25 95,25 110,24 118,6 140,4 170,5 200,4"/><polyline fill="none" stroke="#E5482A" stroke-width="2" points="110,24 118,6 140,4 170,5 200,4"/>';
+const T = [2.2, 3.6, 5];
+---
+<section class="r-vig" id="vigil" aria-labelledby="vig-title">
+  <div class="dots" aria-hidden="true"></div>
+  <div class="halo" aria-hidden="true" style="left:8%;top:34%;width:420px;height:320px;background:radial-gradient(closest-side,rgba(159,180,214,.6),transparent)"></div>
+  <div class="halo" aria-hidden="true" style="right:6%;top:52%;width:420px;height:320px;background:radial-gradient(closest-side,rgba(189,235,214,.7),transparent)"></div>
+  <div class="wrap in">
+    <h2 class="T" id="vig-title">AI that cites its sources <span>and asks before it acts.</span></h2>
+    <div class="chipsrow"><span><i style="background:#5C4EE5"></i>Every claim linked to evidence</span><span><i style="background:#E5482A"></i>Never runs a fix alone</span><span><i style="background:#3DAE80"></i>Stays inside your cloud</span></div>
+    <div class="card two">
+      <div class="chat">
+        <div class="hd"><span><b>Vigil</b>, INC 2047, card payments</span><span class="pill pg">Inside your cloud</span></div>
+        <div class="msg me" data-t=".6">Why are card payments failing?</div>
+        <div class="msg vg" data-t="1.5"><span class="av">V</span><div class="bd">Here is what I found:<ul class="ol">{PTS.map((p, i) => <li class={`c${i + 1}`} data-i={i + 1} data-t={T[i]} tabindex="0"><span class="hl"></span><span class="ci">{i + 1}</span><span>{p}</span></li>)}</ul><div class="conf" data-t="6.2"><span>Release 4.18.2 is the cause</span><span class="bar"><i></i></span><b>92% confident</b></div></div></div>
+        <div class="msg me" data-t="7.8">Roll it back now.</div>
+        <div class="msg vg" data-t="8.8"><span class="av">V</span><div class="bd">I can't run changes on my own. I've drafted the rollback to 4.18.1 and asked for two approvals.<div class="gr"><b><i class="ti ti-alert-triangle" aria-hidden="true"></i>Four eyes on every fix: needs 2 people with a passkey</b><div class="ap"><span><i>EC</i>Emma Clarke, duty manager</span><span><i>DR</i>Daniel Reyes, CTO</span></div></div></div></div>
+      </div>
+      <div class="srcs"><h3>Evidence Vigil used <span>3 sources</span></h3>
+        <div class="sc c1" data-i="1"><span class="n">1</span><div><b>Release 4.18.2, card-auth<em>CITED</em></b><small>Deployed 03:10, 2 minutes before the first error</small><code>terraform apply card-auth v4.18.2, 03:10:08</code></div></div>
+        <div class="sc c2" data-i="2"><span class="n">2</span><div><b>Error rate, card-auth<em>CITED</em></b><small>From 0.2% to 38% at 03:12</small><svg class="spark" viewBox="0 0 200 28" preserveAspectRatio="none" aria-hidden="true" set:html={SPK}></svg></div></div>
+        <div class="sc c3" data-i="3"><span class="n">3</span><div><b>Staging test, Tuesday<em>CITED</em></b><small>The same change failed the auth timeout test</small><code>test_auth_timeout FAILED, build 8812</code></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<style is:global>
+.r-vig{position:relative;overflow:hidden;padding:110px 0 96px;background:#fff;color:#0A0C10}
+.r-vig .in{position:relative}
+.r-vig .dots{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(#C9D3E0 1.2px,transparent 1.3px);background-size:22px 22px;-webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 55%,#000 20%,transparent 75%);mask-image:radial-gradient(ellipse 70% 60% at 50% 55%,#000 20%,transparent 75%)}
+.r-vig .halo{position:absolute;pointer-events:none;border-radius:50%;filter:blur(40px);opacity:.55;animation:r-drift2 14s ease-in-out infinite alternate}
+@keyframes r-drift2{to{transform:translate(40px,-20px) scale(1.08)}}
+.r-vig .T{position:relative;z-index:2;margin:0 auto;font-family:var(--display);font-variation-settings:'opsz' 96;font-weight:500;letter-spacing:-.035em;color:#0A0C10;font-size:clamp(36px,4.4vw,58px);line-height:1.05;text-align:center;max-width:900px}
+.r-vig .T span{display:block;color:#667085}
+.r-vig .chipsrow{position:relative;z-index:2;display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:24px}
+.r-vig .chipsrow span{font-size:13.5px;font-weight:500;padding:7px 13px;border-radius:999px;background:#fff;border:1px solid #E3E8EF;color:#1F2630;display:inline-flex;align-items:center;gap:7px}
+.r-vig .chipsrow span i{width:7px;height:7px;border-radius:50%}
+.r-vig .pill{font-size:11px;font-weight:600;padding:3px 9px;border-radius:999px;white-space:nowrap}.r-vig .pg{background:#DDF3E9;color:#17694A}
+.r-vig .c1{--c:#5C4EE5;--cb:#EEECFE}.r-vig .c2{--c:#E5482A;--cb:#FDE9E4}.r-vig .c3{--c:#17694A;--cb:#DDF3E9}
+.r-vig .card{position:relative;z-index:2;margin:44px auto 0;max-width:1100px;border:1px solid #E3E8EF;border-radius:16px;overflow:hidden;box-shadow:0 40px 90px rgba(20,30,50,.12);background:#fff;color:#0A0C10}
+.r-vig .two{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+.r-vig .chat{padding:22px 24px;display:flex;flex-direction:column;gap:12px;background:linear-gradient(#fff,#FAFBFC);min-height:540px;border-right:1px solid #EEF1F5}
+.r-vig .chat .hd{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#5B6472;padding-bottom:10px;border-bottom:1px solid #EEF1F5}
+.r-vig .chat .hd b{color:#0A0C10;font-weight:600}
+.r-vig .msg{max-width:90%;font-size:14.5px;line-height:1.55;opacity:0;transform:translateY(6px);transition:all .4s}
+.r-vig .msg.on{opacity:1;transform:none}
+.r-vig .me{align-self:flex-end;background:#0A0C10;color:#fff;padding:10px 14px;border-radius:14px 14px 4px 14px}
+.r-vig .vg{align-self:flex-start;display:grid;grid-template-columns:28px 1fr;gap:10px;width:92%}
+.r-vig .vg .av{width:28px;height:28px;border-radius:50%;background:conic-gradient(from 200deg,#FF6B4A,#9FB4D6,#3DAE80,#FF6B4A);display:grid;place-items:center;color:#fff;font-size:11.5px;font-weight:700}
+.r-vig .vg .bd{background:#F6F8FA;border:1px solid #EEF1F5;padding:13px 15px;border-radius:4px 14px 14px 14px;color:#1F2630}
+.r-vig .ol{list-style:none;margin:8px 0 0;padding:0}
+.r-vig .ol li{position:relative;display:grid;grid-template-columns:24px 1fr;gap:8px;align-items:start;padding:8px;margin:0 -8px;border-radius:8px;opacity:0;transform:translateX(-4px);transition:opacity .35s,transform .35s;cursor:pointer}
+.r-vig .ol li.on{opacity:1;transform:none}
+.r-vig .ol li .hl{position:absolute;inset:0;border-radius:8px;background:var(--cb);transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(.2,.7,.1,1);z-index:0}
+.r-vig .ol li.hot .hl{transform:scaleX(1)}
+.r-vig .ol li>*:not(.hl){position:relative;z-index:1}
+.r-vig .ci{display:inline-grid;place-items:center;width:21px;height:21px;border-radius:6px;background:var(--cb);color:var(--c);font-size:11px;font-weight:700;transition:all .2s;margin-top:1px}
+.r-vig .hot .ci{background:var(--c);color:#fff}
+.r-vig .conf{margin-top:8px;padding-top:8px;border-top:1px solid #E9EDF2;display:flex;align-items:center;gap:10px;font-size:13px;opacity:0;transition:opacity .4s}
+.r-vig .conf.on{opacity:1}
+.r-vig .conf .bar{flex:1;height:5px;border-radius:3px;background:#E9EDF2;overflow:hidden}.r-vig .conf .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#5C4EE5,#E5482A,#3DAE80);transition:width 1s}
+.r-vig .conf b{color:#17694A;font-weight:600}
+.r-vig .gr{margin-top:8px;border:1px solid #F6D5CC;background:#FFF7F4;border-radius:10px;padding:10px 12px;font-size:13px}
+.r-vig .gr b{display:flex;align-items:center;gap:6px;color:#B4382C;font-weight:600}
+.r-vig .gr .ap{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.r-vig .gr .ap span{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;padding:4px 9px 4px 4px;border-radius:999px;background:#fff;border:1px solid #EEF1F5;color:#1F2630}
+.r-vig .gr .ap span i{width:18px;height:18px;border-radius:50%;background:#EEF1F5;font-style:normal;font-size:8.5px;font-weight:700;display:grid;place-items:center}
+.r-vig .srcs{padding:22px 24px;background:#fff}
+.r-vig .srcs h3{margin:0 0 12px;font-size:13.5px;font-weight:600;color:#0A0C10;display:flex;justify-content:space-between}
+.r-vig .srcs h3 span{font-weight:500;color:#5B6472}
+.r-vig .sc{position:relative;display:grid;grid-template-columns:24px 1fr;gap:10px;padding:13px 13px 13px 15px;border:1px solid #EEF1F5;border-radius:10px;margin-bottom:10px;transition:all .4s;background:#fff;color:#0A0C10;overflow:hidden}
+.r-vig .sc>div{min-width:0}
+.r-vig .sc:before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--c);transform:scaleY(0);transition:transform .4s}
+.r-vig .sc.hot{border-color:var(--c);box-shadow:0 14px 30px rgba(20,30,50,.10);transform:translateY(-2px);background:linear-gradient(90deg,var(--cb),#fff 60%)}
+.r-vig .sc.hot:before{transform:scaleY(1)}
+.r-vig .sc .n{width:23px;height:23px;border-radius:6px;background:var(--cb);color:var(--c);font-size:11px;font-weight:700;display:grid;place-items:center;transition:all .3s}
+.r-vig .sc.hot .n{background:var(--c);color:#fff}
+.r-vig .sc b{display:flex;justify-content:space-between;gap:8px;font-size:13.5px;font-weight:600;color:#0A0C10}
+.r-vig .sc b em{font-style:normal;font-size:10.5px;font-weight:700;color:var(--c);opacity:0;transition:opacity .3s}
+.r-vig .sc.hot b em{opacity:1}
+.r-vig .sc small{display:block;font-size:12.5px;color:#5B6472;margin-top:2px;line-height:1.4}
+.r-vig .sc code{display:block;margin-top:7px;font-family:ui-monospace,'SFMono-Regular',Menlo,monospace;font-size:11.5px;color:#3E4652;background:#F6F8FA;border-radius:6px;padding:5px 7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.r-vig .spark{display:block;margin-top:7px;height:26px;width:100%}
+@media (max-width:860px){.r-vig .two{grid-template-columns:1fr}.r-vig .chat{border-right:0}}
+</style>
+<script>
+const root = document.querySelector<HTMLElement>(".r-vig")!;
+const MS = [...root.querySelectorAll<HTMLElement>(".msg")], LI = [...root.querySelectorAll<HTMLElement>(".ol li")], CF = root.querySelector<HTMLElement>(".conf")!, SC = [...root.querySelectorAll<HTMLElement>(".sc")];
+let t = 0, manual = 0;
+function show(c: number) { LI.forEach((l) => l.classList.toggle("hot", +l.dataset.i! === c)); SC.forEach((s) => s.classList.toggle("hot", +s.dataset.i! === c)); }
+LI.forEach((l) => { const pick = () => { if (!l.classList.contains("on")) return; manual = 4; show(+l.dataset.i!); };
+  l.onmouseenter = pick; l.onclick = pick; l.onfocus = pick; l.onmouseleave = () => { manual = Math.min(manual, 1.2); }; });
+show(0);
+function tick(dt: number) {
+  t += dt; if (manual > 0) { manual -= dt; return; } if (t > 16) t = 0;
+  MS.forEach((m) => m.classList.toggle("on", t > +m.dataset.t!)); LI.forEach((l) => l.classList.toggle("on", t > +l.dataset.t!));
+  CF.classList.toggle("on", t > +CF.dataset.t!); (CF.querySelector(".bar i") as HTMLElement).style.width = t > +CF.dataset.t! ? "92%" : "0";
+  let c = 0; LI.forEach((l, i) => { if (t > +l.dataset.t!) c = i + 1; }); if (t > 6.2) c = 0; show(c);
+}
+let vis = false, last = 0; new IntersectionObserver((e) => (vis = e[0].isIntersecting), { threshold: 0.2 }).observe(root);
+function loop(ts: number) { const s = ts / 1000, dt = Math.min(0.05, s - last || 0.016); last = s; if (vis) tick(dt); requestAnimationFrame(loop); }
+if (matchMedia("(prefers-reduced-motion: reduce)").matches) tick(9.5); else requestAnimationFrame(loop);
+</script>

@@ -1,0 +1,71 @@
+---
+// Section 6, "Where your minutes went" (locked): an example postmortem marked up
+// live, with the minutes Relyxus would have saved added up on the right.
+---
+<section class="r-rep" aria-labelledby="rep-title">
+  <div class="inner">
+    <div class="guides" aria-hidden="true"></div>
+    <div class="head"><h2 class="T" id="rep-title">Your worst outage, replayed. <span>Send us one past incident. In a few days you get a report your board will read.</span></h2><div class="cta"><a class="btn bk" href="/replay">Replay my outage free <i class="ti ti-arrow-right" aria-hidden="true"></i></a><a class="btn ol" href="/replay#sample">See a sample</a></div></div>
+    <div class="pm">
+      <div class="doc"><div class="dh"><div><b>Your postmortem, INC 1873</b><small>Card payments outage, as your team wrote it</small></div><span class="ex">Example</span></div><div class="lines"></div></div>
+      <div class="side"><div class="gl"></div><small>Minutes we found in your timeline</small><div class="found">0</div><div class="u">of 134 minutes could have been saved</div>
+        <div class="stack"><i style="background:#FF5A36"></i><i style="background:#FFB08F"></i><i style="background:#9FB4D6"></i><i style="background:#BDEBD6"></i></div>
+        <ul class="leg"><li><i style="background:#FF5A36"></i><span>Arguing without evidence</span><b>70 min</b></li><li><i style="background:#FFB08F"></i><span>Waiting for approval</span><b>31 min</b></li><li><i style="background:#9FB4D6"></i><span>Nobody owned it</span><b>17 min</b></li><li><i style="background:#BDEBD6"></i><span>Manual rollback</span><b>5 min</b></li></ul>
+        <div class="f">Replayed with Relyxus: <b>recovered in 11 minutes, 1 person woken, FCA draft ready at 03:31.</b></div></div>
+    </div>
+  </div>
+</section>
+<style is:global>
+.r-rep{position:relative;overflow:hidden;padding:104px 0 96px;background:#F6F8FA;color:#0A0C10}
+.r-rep .inner{position:relative;max-width:1240px;margin:0 auto;padding:0 40px}
+.r-rep .guides{position:absolute;inset:-104px 0 -96px;pointer-events:none;background:linear-gradient(90deg,transparent 0,#E8ECF1 0,#E8ECF1 1px,transparent 1px,transparent calc(100% - 1px),#E8ECF1 calc(100% - 1px))}
+.r-rep .T{position:relative;z-index:2;margin:0;font-family:var(--display);font-variation-settings:'opsz' 96;font-weight:500;font-size:clamp(30px,3.6vw,46px);line-height:1.1;letter-spacing:-.035em;max-width:760px;color:#0A0C10}
+.r-rep .T span{color:#667085}
+.r-rep .btn{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:500;white-space:nowrap;cursor:pointer;transition:transform .2s}
+.r-rep .btn:hover{transform:translateY(-1px)}
+.r-rep .bk{background:#0A0C10;color:#fff}.r-rep .ol{border:1px solid #C9D1DC;color:#0A0C10;background:#fff}
+.r-rep .head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;position:relative;z-index:2}
+.r-rep .cta{display:flex;gap:10px;flex-wrap:wrap}
+.r-rep .ex{font-size:11.5px;font-weight:600;color:#3E4652;background:#fff;border:1px solid #E3E8EF;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.r-rep .pm{position:relative;z-index:2;margin-top:44px;display:grid;grid-template-columns:1fr 340px;background:#fff;border:1px solid #E3E8EF;border-radius:16px;overflow:hidden;box-shadow:0 40px 80px rgba(20,30,50,.10)}
+.r-rep .doc{padding:24px 26px 20px;border-right:1px solid #EEF1F5;min-width:0}
+.r-rep .doc .dh{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:12px;border-bottom:1px solid #EEF1F5}
+.r-rep .doc .dh b{font-size:15px;font-weight:600}.r-rep .doc .dh small{display:block;font-size:12.5px;color:#5B6472;margin-top:2px}
+.r-rep .ln{position:relative;display:grid;grid-template-columns:64px 1fr;gap:12px;padding:10px 8px;font-size:14px;color:#1F2630;border-bottom:1px dashed #EEF1F5}
+.r-rep .ln em{font-style:normal;font-size:13px;color:#5B6472;font-variant-numeric:tabular-nums}
+.r-rep .ln .hl{position:absolute;left:0;top:4px;bottom:4px;width:0;border-radius:4px;background:linear-gradient(90deg,rgba(255,107,74,.22),rgba(255,138,102,.14));transition:width .9s cubic-bezier(.2,.7,.1,1);z-index:0}
+.r-rep .ln.on .hl{width:100%}.r-rep .ln>*{position:relative;z-index:1}
+.r-rep .gap{display:flex;align-items:center;gap:8px;padding:6px 8px 6px 84px;font-size:12.5px;font-weight:600;color:#B4382C;opacity:0;transform:translateX(-6px);transition:all .5s}
+.r-rep .gap.on{opacity:1;transform:none}.r-rep .gap:before{content:'';width:14px;height:1px;background:#FF5A36;flex:none}
+.r-rep .side{position:relative;background:#0B0D11;color:#fff;padding:24px 24px 22px;display:flex;flex-direction:column;overflow:hidden}
+.r-rep .side .gl{position:absolute;right:-140px;top:-120px;width:380px;height:380px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,107,74,.45),rgba(255,107,74,0));pointer-events:none}
+.r-rep .side small{position:relative;font-size:13px;color:#C9CED6}
+.r-rep .found{position:relative;font-family:var(--display);font-variation-settings:'opsz' 96;font-size:76px;line-height:1;letter-spacing:-.045em;margin-top:6px;font-variant-numeric:tabular-nums;background:linear-gradient(90deg,#FFB08F,#FF6B4A);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.r-rep .side .u{position:relative;font-size:15px;color:#E9EEF5;margin-top:4px}
+.r-rep .stack{position:relative;display:flex;height:12px;border-radius:4px;overflow:hidden;margin-top:18px;background:rgba(255,255,255,.08)}
+.r-rep .stack i{display:block;height:100%;width:0;transition:width .8s cubic-bezier(.2,.7,.1,1)}
+.r-rep .leg{position:relative;margin:14px 0 0;list-style:none;padding:0}
+.r-rep .leg li{display:grid;grid-template-columns:10px 1fr auto;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:13.5px;color:#9AA3B2;transition:color .4s}
+.r-rep .leg li.on{color:#E9EEF5}
+.r-rep .leg li i{width:10px;height:10px;border-radius:3px}.r-rep .leg li b{font-weight:600;font-variant-numeric:tabular-nums}
+.r-rep .side .f{position:relative;margin-top:auto;padding-top:16px;font-size:13px;color:#C9CED6;line-height:1.5}.r-rep .side .f b{color:#8BE6BE;font-weight:600}
+@media (max-width:900px){.r-rep .pm{grid-template-columns:1fr}.r-rep .inner{padding:0 24px}}
+</style>
+<script>
+const root = document.querySelector<HTMLElement>(".r-rep")!;
+const LN: [string, string, [number, string] | null][] = [["03:12", "412 alerts fired. Pages sent to the payments, platform and network rotas", null], ["03:31", "First engineer online, starts checking dashboards", [0, "17 min found: nobody owned it. Relyxus would have called Sam at 03:14"]], ["03:58", "Bridge call opened, 9 people joined", null], ["04:46", "Release 4.18.2 spotted in the deploy log", [1, "70 min found: arguing without evidence. Vigil would have shown it at 03:19"]], ["05:20", "Rollback approved by the duty manager, by email", [2, "31 min found: waiting for approval. Two passkeys would have taken 3 minutes"]], ["05:26", "Customers can pay again", [3, "5 min found: manual rollback steps"]], ["Next day", "Regulator report written from chat history and memory", [4, "Relyxus would have had the FCA draft ready at 03:31"]]];
+const lines = root.querySelector<HTMLElement>(".lines")!; const G: [HTMLElement, HTMLElement, number][] = [];
+LN.forEach((l) => { const d = document.createElement("div"); d.className = "ln"; d.innerHTML = `<span class="hl"></span><em>${l[0]}</em><span>${l[1]}</span>`; lines.appendChild(d);
+  if (l[2]) { const g = document.createElement("div"); g.className = "gap"; g.textContent = l[2][1]; lines.appendChild(g); G.push([d, g, l[2][0]]); } });
+const STK = [...root.querySelectorAll<HTMLElement>(".stack i")], LEG = [...root.querySelectorAll<HTMLElement>(".leg li")], W = [70, 31, 17, 5], ORDER = [2, 0, 1, 3];
+const fd = root.querySelector<HTMLElement>(".found")!; let ta = 0, shown = 0;
+function fA(dt: number) {
+  ta += dt; if (ta > 15) { ta = 0; G.forEach(([d, g]) => { d.classList.remove("on"); g.classList.remove("on"); }); STK.forEach((s) => (s.style.width = "0")); LEG.forEach((l) => l.classList.remove("on")); }
+  let found = 0;
+  G.forEach(([d, g, k], i) => { if (ta > 0.8 + i * 1.5) { d.classList.add("on"); g.classList.add("on"); if (k < 4) { const li = ORDER[k]; found += W[li]; STK[li].style.width = (W[li] / 134) * 100 + "%"; LEG[li].classList.add("on"); } } });
+  shown = shown + (found - shown) * Math.min(1, dt * 5); fd.textContent = String(Math.round(shown));
+}
+let vis = false, last = 0; new IntersectionObserver((e) => (vis = e[0].isIntersecting), { threshold: 0.2 }).observe(root);
+function loop(ts: number) { const t = ts / 1000, dt = Math.min(0.05, t - last || 0.016); last = t; if (vis) fA(dt); requestAnimationFrame(loop); }
+if (matchMedia("(prefers-reduced-motion: reduce)").matches) { fA(14); fA(1); } else requestAnimationFrame(loop);
+</script>

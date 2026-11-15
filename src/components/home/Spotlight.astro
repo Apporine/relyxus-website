@@ -1,0 +1,72 @@
+---
+// Section 10, Spotlight articles (locked): one large card whose coloured light
+// changes per article, with tabs underneath that rotate automatically.
+import { articles } from "../../data/articles";
+const P: Record<string, string> = {
+  inc: '<div class="row"><span class="pill" style="background:#FDE9E4;color:#B5361C">SEV1</span><span class="mut">INC-2041</span></div><div class="ft">Card authorisation failures in UK</div><div class="steps"><i class="on"></i><i class="on"></i><i></i><i></i></div><div class="row mut" style="margin-top:7px"><span>Team on it</span><span class="ink">3 in the room</span></div>',
+  ai: '<div class="ft">Restart payments-api</div><div class="row ln"><span><i class="ti ti-circle-check" style="color:#17694A"></i> Emma Clarke</span><span class="mut">approved</span></div><div class="row ln"><span><i class="ti ti-fingerprint" style="color:#5C4EE5"></i> Daniel Hughes</span><span class="pill" style="background:#EEECFE;color:#3C3489">passkey</span></div>',
+  aud: '<div class="row" style="margin-bottom:6px"><span class="ft" style="margin:0">Evidence, INC-2041</span><span class="pill" style="background:#DDF3E9;color:#0F5C3E"><i class="ti ti-lock"></i> Sealed</span></div><div class="row ln"><span>5xx spike</span><span style="color:#17694A">Verified</span></div><div class="row ln"><span>CHG-88421 rollout</span><span style="color:#17694A">Verified</span></div>',
+  cld: '<div style="margin-bottom:8px"><span class="pill" style="background:#E6EEF9;color:#26467E"><i class="ti ti-map-pin"></i> United Kingdom, self hosted</span></div><div class="row ln"><span class="mut">Data sent to Relyxus</span><span class="ink">None</span></div><div class="row ln"><span class="mut">Keys</span><span class="ink">Yours</span></div>',
+};
+const first = articles[0];
+---
+<section class="r-spot" aria-labelledby="spot-title">
+  <div class="wrap">
+    <div class="top"><h2 id="spot-title">From the Relyxus team</h2><a class="all" href="/articles">All articles <i class="ti ti-arrow-right" aria-hidden="true"></i></a></div>
+    <div class="sp" style={`background:${first.b}`}>
+      <div class="bl b1" style={`background:${first.a}`}></div><div class="bl b2" style={`background:${first.colour}`}></div><div class="dts"></div>
+      <div class="txt" aria-live="polite"><div class="fd"><div class="tg" style={`color:${first.colour}`}>{first.topic}, {first.read}</div><h3>{first.title}</h3><p>{first.summary}</p><a class="read" href={`/articles/${first.slug}`}>Read the article</a></div></div>
+      <div class="frag"><div class="fd" set:html={P[first.piece]}></div></div>
+    </div>
+    <div class="tabs" role="tablist">{articles.map((a, i) => <button role="tab" type="button" aria-selected={i === 0 ? "true" : "false"} class={i === 0 ? "tb on" : "tb"} style={`--c:${a.colour}`}><s><i></i></s>{a.title}</button>)}</div>
+  </div>
+  <script type="application/json" class="spot-data" set:html={JSON.stringify({ articles, P })}></script>
+</section>
+<style is:global>
+.r-spot{background:#fff;color:#0A0C10;padding:104px 0 96px}
+.r-spot .top{display:flex;justify-content:space-between;align-items:end;gap:16px}
+.r-spot h2{font-family:var(--display);font-variation-settings:'opsz' 96;font-weight:500;letter-spacing:-.035em;line-height:1.04;margin:0;font-size:clamp(32px,3.8vw,48px)}
+.r-spot .all{display:inline-flex;align-items:center;gap:6px;font-size:15px;font-weight:500;border:1px solid #C9D1DC;border-radius:999px;padding:9px 16px}
+.r-spot .sp{position:relative;height:420px;border-radius:22px;overflow:hidden;margin-top:28px;transition:background .8s}
+.r-spot .bl{position:absolute;border-radius:50%;filter:blur(34px);transition:background 1s;animation:r-dr 8s ease-in-out infinite alternate}
+.r-spot .b1{width:60%;height:120%;left:-10%;top:-30%}.r-spot .b2{width:55%;height:110%;right:-10%;bottom:-40%;animation-delay:-4s}
+@keyframes r-dr{to{transform:translate(16%,10%) scale(1.15)}}
+.r-spot .dts{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.75) 1px,transparent 1.2px);background-size:16px 16px;-webkit-mask-image:linear-gradient(90deg,transparent 30%,#000);mask-image:linear-gradient(90deg,transparent 30%,#000)}
+.r-spot .txt{position:absolute;left:44px;top:46px;width:52%}
+.r-spot .tg{font-size:14px;font-weight:600}
+.r-spot h3{font-family:var(--display);font-variation-settings:'opsz' 96;font-weight:500;font-size:clamp(32px,3.6vw,52px);letter-spacing:-.035em;line-height:1.02;margin:10px 0 14px;color:#0A0C10}
+.r-spot .txt p{font-size:17px;line-height:1.5;color:#1F2630;margin:0 0 20px;max-width:46ch}
+.r-spot .read{display:inline-flex;align-items:center;gap:6px;background:#0A0C10;color:#fff;border-radius:999px;padding:11px 20px;font-size:15px;font-weight:500}
+.r-spot .read.soon{background:#fff;color:#0A0C10;border:1px solid #C9D1DC;cursor:default}
+.r-spot .frag{position:absolute;right:48px;top:50%;width:min(340px,34%);transform:translateY(-50%) rotate(3deg);background:#fff;border:1px solid #E3E8EF;border-radius:13px;padding:14px 15px;box-shadow:0 22px 44px -16px rgba(10,15,30,.45);font-size:13.5px;color:#0A0C10}
+.r-spot .frag .row{display:flex;align-items:center;justify-content:space-between;gap:6px}
+.r-spot .frag .ln{padding:6px 0;border-top:1px solid #EEF1F5}
+.r-spot .frag .ft{font-weight:600;font-size:15px;margin:8px 0 9px}
+.r-spot .frag .mut{color:#4A5463}.r-spot .frag .ink{color:#0A0C10;font-weight:600}
+.r-spot .frag .pill{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px}
+.r-spot .frag .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}.r-spot .frag .steps i{height:4px;border-radius:2px;background:#E3E8EF}.r-spot .frag .steps i.on{background:#E5482A}
+.r-spot .tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:16px}
+.r-spot .tb{all:unset;cursor:pointer;font-size:14.5px;line-height:1.35;color:#4A5463;padding-top:14px;position:relative}
+.r-spot .tb.on{color:#0A0C10;font-weight:600}
+.r-spot .tb s{position:absolute;left:0;right:0;top:0;height:3px;border-radius:2px;background:#E3E8EF;text-decoration:none}.r-spot .tb s i{display:block;height:100%;width:0;border-radius:2px;background:var(--c)}
+.r-spot .tb:focus-visible{outline:2px solid #3F66B0;outline-offset:3px;border-radius:4px}
+.r-spot .fd{animation:r-fd .5s ease}@keyframes r-fd{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (max-width:860px){.r-spot .sp{height:auto;padding:34px 26px 26px}.r-spot .txt{position:relative;left:auto;top:auto;width:auto}.r-spot .frag{position:relative;right:auto;top:auto;transform:rotate(2deg);width:auto;margin-top:26px}.r-spot .tabs{grid-template-columns:1fr 1fr}}
+</style>
+<script>
+type A = { slug: string; title: string; topic: string; colour: string; a: string; b: string; read: string; summary: string; ready: boolean; piece: string };
+const root = document.querySelector<HTMLElement>(".r-spot")!;
+const { articles, P } = JSON.parse(root.querySelector(".spot-data")!.textContent!) as { articles: A[]; P: Record<string, string> };
+const sp = root.querySelector<HTMLElement>(".sp")!, b1 = root.querySelector<HTMLElement>(".b1")!, b2 = root.querySelector<HTMLElement>(".b2")!, txt = root.querySelector<HTMLElement>(".txt")!, frag = root.querySelector<HTMLElement>(".frag")!;
+const TB = [...root.querySelectorAll<HTMLElement>(".tb")];
+let ci = 0, ct = 0, paused = false;
+function setC(i: number) { ci = i; ct = 0; const a = articles[i]; sp.style.background = a.b; b1.style.background = a.a; b2.style.background = a.colour;
+  const link = a.ready ? `<a class="read" href="/articles/${a.slug}">Read the article</a>` : `<span class="read soon">Publishing soon</span>`;
+  txt.innerHTML = `<div class="fd"><div class="tg" style="color:${a.colour}">${a.topic}, ${a.read}</div><h3>${a.title}</h3><p>${a.summary}</p>${link}</div>`;
+  frag.innerHTML = `<div class="fd">${P[a.piece]}</div>`;
+  TB.forEach((x, j) => { x.classList.toggle("on", j === i); x.setAttribute("aria-selected", String(j === i)); (x.querySelector("i") as HTMLElement).style.width = j < i ? "100%" : "0"; }); }
+TB.forEach((t, i) => (t.onclick = () => setC(i)));
+sp.addEventListener("pointerenter", () => (paused = true)); sp.addEventListener("pointerleave", () => (paused = false));
+let vis = false; new IntersectionObserver((e) => (vis = e[0].isIntersecting), { threshold: 0.3 }).observe(root);
+if (!matchMedia("(prefers-reduced-motion: reduce)").matches) setInterval(() => { if (!vis || paused) return; ct += 50; const p = Math.min(1, ct / 4500); (TB[ci].querySelector("i") as HTMLElement).style.width = p * 100 + "%"; if (p >= 1) setC((ci + 1) % articles.length); }, 50);
+</script>

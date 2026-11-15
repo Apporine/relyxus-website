@@ -22,6 +22,7 @@ const LINKS: Record<string, string> = {
   "Request documents": mail("Trust Center documents request"),
   "Open the deadline calculator": "/deadline-calculator",
   "Open the live demo": LIVE_DEMO,
+  "See the live demo": LIVE_DEMO,
   "Replay my outage free": "/replay#send",
   "Replay one of your outages": "/replay",
   "Visit the Trust Center": "/trust",

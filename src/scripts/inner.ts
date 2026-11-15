@@ -19,6 +19,7 @@ export function wire() {
   calculator();
   toc();
   docs();
+  clearStorage();
   trust();
   smallBits();
 }
@@ -32,6 +33,14 @@ function docs() {
     d.addEventListener("click", () => (location.href = href));
     d.addEventListener("keydown", (e) => { if (e.key === "Enter") location.href = href; });
   });
+}
+
+// Privacy page: one button clears everything the site keeps in the browser.
+function clearStorage() {
+  $$<HTMLButtonElement>("[data-clear-storage]").forEach((b) => b.addEventListener("click", () => {
+    try { localStorage.removeItem("relyxus.visited"); sessionStorage.removeItem("vigil.chat.v2"); } catch {}
+    b.textContent = "Cleared. Nothing from this site is stored in your browser"; b.disabled = true;
+  }));
 }
 
 // Article contents links scroll to their heading.

@@ -164,14 +164,16 @@ const shell = $("[data-va-shell]"), log = $("[data-va-log]"), chips = $("[data-v
 const text = $<HTMLTextAreaElement>("[data-va-text]"), micBtn = $("[data-va-mic]"), spkBtn = $("[data-va-speaker]"), stateEl = $("[data-va-state]");
 const stage = $("[data-va-stage]"), img = $<HTMLImageElement>("[data-va-img]"), cap = $("[data-va-cap]"), href = $<HTMLAnchorElement>("[data-va-href]");
 const launch = $("[data-va-open]");
-const figure = $("[data-va-figure]"), leadForm = $<HTMLFormElement>("[data-va-lead]"), leadErr = $("[data-va-lead-err]");
+const figure = $("[data-va-figure]"), leadForm = $<HTMLFormElement>("[data-va-lead]");
+let leadErr = $("[data-va-lead-err]");
+const FORM_HTML = leadForm.innerHTML;
 const bookBtn = $<HTMLAnchorElement>("[data-va-book]");
 bookBtn.href = BOOK;
 if (BOOK === "#book-form") { bookBtn.removeAttribute("target"); bookBtn.onclick = (e) => { e.preventDefault(); showForm({ notes: BOOK_NOTE }); }; }
 
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const voice = new Voice();
-const engine = new Engine(location.pathname);
+let engine = new Engine(location.pathname);
 const lines: Line[] = [];
 let speakerOn = false, micOn = false, busy = false, leadSent = false, listening = false;
 let brain: "unknown" | "gemini" | "backup" = "unknown";
@@ -479,16 +481,33 @@ function open(first = true) {
   if (first && !log.children.length) {
     const o = opener(location.pathname);
     let back = false; try { back = localStorage.getItem("relyxus.visited") === "1"; localStorage.setItem("relyxus.visited", "1"); } catch {}
-    const ask = o.text.replace(/^Hi, I'm the Relyxus assistant\.\s*/, "");
-    const hello = [back ? "Hey there, welcome back!" : "Hi there, welcome to Relyxus!", "I'm the Relyxus assistant, here to answer any question you have about Relyxus.", "I can show you the product, walk you through how it works, and connect you with our team.", /\?$/.test(ask) && !/^I can walk you through/.test(ask) ? ask : "What can I help you with today?"];
-    hello.forEach((h) => bubble("v", h)); record("vigil", hello.join(" "));
+    // Two bubbles: a hello, then what the assistant can do, ending with a
+    // question. Inner pages with their own opener ask that page's question.
+    const own = o.text !== opener("/").text;
+    const hello = [
+      back ? "Welcome back! Good to see you again." : "Hi there, welcome to Relyxus! I'm the Relyxus assistant.",
+      own ? o.text.replace(/^Hi, I'm the Relyxus assistant\.\s*/, "") : "Ask me anything about how Relyxus handles an outage, from the first alert to the regulator report, and I can show you real product screens as we talk. Are you with a bank, a payment firm, or a SaaS company?",
+    ];
+    hello.forEach((h) => { bubble("v", h); record("vigil", h); });
     renderChips([...o.chips.filter((c) => c !== "Book a demo").slice(0, 2), "Talk to sales"]);
   }
   setTimeout(() => text.focus(), 50); save(true);
 }
-function close() {
+// Escape tucks the panel away; the conversation is still there when it opens again.
+function hide() {
   setSpeaker(false);
   shell.hidden = true; launch.hidden = false; stage.hidden = true; save(false); launch.focus();
+}
+// The X ends the conversation: voice stops, a lead's chat goes to the team,
+// and the next open starts fresh with a new welcome.
+function close() {
+  setSpeaker(false);
+  if (leadSent) sendTranscript(engine.lead, lines);
+  lines.length = 0; log.innerHTML = ""; leadSent = false; toldBackup = false;
+  engine = new Engine(location.pathname);
+  leadForm.innerHTML = FORM_HTML; leadErr = leadForm.querySelector<HTMLElement>("[data-va-lead-err]") || leadErr;
+  try { sessionStorage.removeItem(KEY); } catch {}
+  shell.hidden = true; launch.hidden = false; stage.hidden = true; launch.focus();
 }
 
 launch.addEventListener("click", () => open());
@@ -496,7 +515,7 @@ $("[data-va-close]").addEventListener("click", close);
 $("[data-va-unstage]").addEventListener("click", () => { stage.hidden = true; stage.classList.remove("zoom"); });
 spkBtn.addEventListener("click", () => setSpeaker(!speakerOn));
 micBtn.addEventListener("click", () => setMic(!micOn));
-document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !shell.hidden) close(); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !shell.hidden) hide(); });
 form.addEventListener("submit", (e) => { e.preventDefault(); const v = text.value; text.value = ""; text.style.height = ""; send(v); });
 text.addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); form.requestSubmit(); } });
 text.addEventListener("input", () => { text.style.height = ""; text.style.height = Math.min(110, text.scrollHeight) + "px"; });

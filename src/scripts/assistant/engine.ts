@@ -102,7 +102,9 @@ export class Engine {
     }
 
     if (/\b(can|do) you hear me\b|\bare you there\b|\bhello\?/.test(q)) return { text: "Yes, I can hear you. What would you like to know about Relyxus?", chips: ["What is Relyxus?", "Show me the product", "Book a demo"] };
-    if (has(q, SMALL.bot)) return { text: "I'm Vigil, an AI assistant for the Relyxus website. I answer from what Relyxus has published, and I'll tell you when I don't know. A person from the team is always one message away.", chips: ["What is Relyxus?", "Talk to a person"] };
+    if (/\bhow are you\b|\bhow'?s it going\b/.test(q)) return { text: "I'm very well, thank you for asking. How can I help you with Relyxus today?", chips: ["What is Relyxus?", "Show me the product", "Book a demo"] };
+    if (/\byour name\b|\bwho are you\b|\b(are you|you are) (a )?(male|female|man|woman|boy|girl|human|person|real|bot|robot|ai)\b|\bmale\b|\bfemale\b/.test(q)) return { text: "I'm the Relyxus assistant, an AI. I don't have a gender, just a voice. I answer from what Relyxus has published, and a person from the team is always one message away. What would you like to know?", chips: ["What is Relyxus?", "Show me the product", "Talk to a person"] };
+    if (has(q, SMALL.bot)) return { text: "I'm the Relyxus assistant, an AI for the Relyxus website. I answer from what Relyxus has published, and I'll tell you when I don't know. A person from the team is always one message away.", chips: ["What is Relyxus?", "Talk to a person"] };
     const ranked = rank(raw);
     if (!ranked.length && has(q, SMALL.greet)) return { text: "Hello. I can explain Relyxus, show you the product or set up a demo. What would help most?", chips: ["What is Relyxus?", "Show me the product", "Book a demo"] };
     if (!ranked.length && has(q, SMALL.thanks)) return { text: "You're welcome. Is there anything else you'd like to see?", chips: ["Show me the product", "Book a demo"] };
@@ -116,6 +118,15 @@ export class Engine {
       return { text: "Here is the command centre, from our demo workspace. Every screen I show you is the real product. What would you like to see next?", show: t.show, chips: ["How does it fix an incident?", "Show me Vigil", "Show me a regulator report"] };
     }
 
+    const corr = raw.match(/\b(?:it'?s|its|company is|we are|we're|the company is)\s+([A-Za-z0-9&' .-]{2,60})$/i);
+    if (this.complete && corr && !ranked.length) {
+      this.lead.company = corr[1].trim();
+      return { text: `Got it, ${this.lead.company}. I have updated your details.`, leadReady: true };
+    }
+    if ((!ranked.length || ranked[0].s < 2) && this.lead.email) {
+      this.lead.questions.push(raw);
+      return { text: `I don't have a confirmed answer to that, so I have noted your question for the team. They will reply to ${this.lead.email}.`, chips: ["What is Relyxus?", "Show me the product"], unknown: true, topics: ranked.slice(0, 3).map((x) => x.t.id) };
+    }
     if (!ranked.length || ranked[0].s < 2) {
       return { text: FALLBACK, chips: ["Leave my email", "Book a demo"], unknown: true, topics: ranked.slice(0, 3).map((x) => x.t.id) };
     }

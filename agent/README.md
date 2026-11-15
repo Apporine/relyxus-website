@@ -32,10 +32,10 @@ How visitors use it, like New Relic's assistant: **Speaker** on and Vigil greets
 3. Copy the key. It starts with `AIza`. Never put it in the code or send it in chat.
 4. In Vercel, open relyxus-website, then Settings, then Environment Variables.
 5. Add `GEMINI_API_KEY` with the key, for Production and Preview.
-6. Optional: add `VIGIL_CHAT_MODEL` for typed chat (default `gemini-flash-latest`), `VIGIL_VOICE` to change the voice (default `Sulafat`, warm), `VIGIL_LIVE_MODEL` to change the model (default `gemini-3.8-live`; if it is not available on your key, use `gemini-3.1-flash-live-preview`), and `VIGIL_CALL_MINUTES` for the longest call (default 10).
+6. Optional: add `VIGIL_CHAT_MODEL` for typed chat (default `gemini-flash-latest`), `VIGIL_VOICE` to change the voice (default `Leda`, youthful and bright), `VIGIL_LIVE_MODEL` to change the model (default `gemini-3.8-live`; if it is not available on your key, use `gemini-3.1-flash-live-preview`), and `VIGIL_CALL_MINUTES` for the longest call (default 10).
 7. Redeploy. Open the site, click Ask Vigil, then Talk live with Vigil, and allow the microphone.
 
-To hear the voices before choosing, open aistudio.google.com, choose Stream, and switch voices in the settings. Good matches for a warm, pleasant assistant: Sulafat (warm), Achird (friendly), Despina (smooth), Aoede (breezy).
+To hear the voices before choosing, open aistudio.google.com, choose Stream, and switch voices in the settings. Good matches for a young, pleasant assistant: Leda (youthful), Aoede (breezy), Autonoe (bright), Laomedeia (upbeat), Achernar (soft).
 
 **Free or paid tier.** The free tier costs nothing, but Google may use free tier conversations to improve its products. For a website that talks to banks, turn on billing for the project in AI Studio: calls then cost about 2p a minute (audio in $0.005, audio out $0.018 per minute) and are not used for training. Set a monthly budget alert in Google Cloud billing.
 

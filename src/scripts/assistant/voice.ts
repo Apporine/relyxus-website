@@ -6,7 +6,10 @@
 type Rec = { lang: string; interimResults: boolean; continuous: boolean; start(): void; stop(): void; abort(): void;
   onresult: ((e: any) => void) | null; onend: (() => void) | null; onerror: ((e: any) => void) | null };
 
-const PREFERRED = [/sonia.*natural/i, /libby.*natural/i, /maisie.*natural/i, /natural.*en-gb/i, /google uk english female/i, /serena/i, /kate/i, /martha/i, /stephanie/i, /hazel/i, /en-gb.*female/i];
+// Youngest, brightest natural voices first: Edge's neural voices, then
+// Google's, then Apple's. Old desktop voices (Hazel, Zira, David) come last.
+const PREFERRED = [/maisie.*natural/i, /libby.*natural/i, /aria.*natural/i, /jenny.*natural/i, /ava.*natural/i, /emma.*natural/i, /sonia.*natural/i, /natural.*english/i, /google us english/i, /google uk english female/i, /samantha/i, /serena/i, /karen/i, /moira/i, /tessa/i];
+const AVOID = /hazel|zira|david|mark|george|susan|james|male/i;
 
 export class Voice {
   level = 0;
@@ -27,7 +30,7 @@ export class Voice {
     const pick = () => {
       const all = speechSynthesis.getVoices().filter((v) => /^en/i.test(v.lang));
       for (const re of PREFERRED) { const v = all.find((x) => re.test(x.name + " " + x.lang)); if (v) { this.voice = v; return; } }
-      this.voice = all.find((v) => /en-GB/i.test(v.lang)) || all[0] || null;
+      this.voice = all.find((v) => /en-GB/i.test(v.lang) && !AVOID.test(v.name)) || all.find((v) => !AVOID.test(v.name)) || all[0] || null;
     };
     pick(); speechSynthesis.onvoiceschanged = pick;
   }
@@ -38,20 +41,26 @@ export class Voice {
   speak(text: string): Promise<void> {
     if (!this.canSpeak) return Promise.resolve();
     this.stopSpeaking();
+    // Queue every piece at once so there is no pause between sentences.
+    // Pieces stay under about 220 characters, which some voices need.
+    const parts: string[] = [];
+    for (const sentence of text.match(/[^.!?]+[.!?]*/g) || [text]) {
+      const last = parts[parts.length - 1];
+      if (last && (last + " " + sentence).length < 220) parts[parts.length - 1] = last + " " + sentence.trim();
+      else parts.push(sentence.trim());
+    }
+    this.speaking = true;
     return new Promise((res) => {
-      const parts = text.match(/[^.!?]+[.!?]*/g) || [text];
-      let i = 0;
-      this.speaking = true;
-      const next = () => {
-        if (!this.speaking || i >= parts.length) { this.speaking = false; res(); return; }
-        const u = new SpeechSynthesisUtterance(parts[i++].trim());
+      let left = parts.length;
+      parts.forEach((p) => {
+        const u = new SpeechSynthesisUtterance(p);
         if (this.voice) u.voice = this.voice;
-        u.lang = this.voice?.lang || "en-GB"; u.rate = 1.02; u.pitch = 1.05;
+        u.lang = this.voice?.lang || "en-GB"; u.rate = 1.04; u.pitch = 1.12;
         u.onboundary = () => { this.pulse = 1; };
-        u.onend = next; u.onerror = () => { this.speaking = false; res(); };
+        u.onend = () => { if (--left <= 0) { this.speaking = false; res(); } };
+        u.onerror = () => { this.speaking = false; res(); };
         speechSynthesis.speak(u);
-      };
-      next();
+      });
     });
   }
 

@@ -7,7 +7,7 @@ import { GoogleGenAI, Modality } from "@google/genai";
 import { SYSTEM_PROMPT, TOOLS } from "./_vigil-config.js";
 
 const MODEL = process.env.VIGIL_LIVE_MODEL || "gemini-3.8-live";
-const VOICE = process.env.VIGIL_VOICE || "Sulafat";
+const VOICE = process.env.VIGIL_VOICE || "Leda";
 const CALL_MINUTES = Number(process.env.VIGIL_CALL_MINUTES || 10);
 const ALLOWED = /^https:\/\/((www\.)?relyxus\.com|relyxus-website[a-z0-9-]*\.vercel\.app)$|^http:\/\/localhost(:\d+)?$/;
 const seen = new Map<string, number[]>();

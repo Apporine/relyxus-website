@@ -22,11 +22,15 @@ export const SCREENS: Record<string, { src: string; caption: string; href: strin
 
 export const PAGES = ["/product", "/vigil", "/respond", "/approvals", "/reporting", "/integrations", "/banks", "/payments-and-fintechs", "/saas", "/incident-reporting-rules", "/deadline-calculator", "/pricing", "/trust", "/demo", "/replay", "/about"];
 
-export function systemPrompt(): string {
+export function systemPrompt(mode: "voice" | "text" = "voice"): string {
   const facts = TOPICS.map((t) => `- ${t.answer}`).join("\n");
-  return `You are Vigil, the voice of Relyxus, talking live with a visitor on the Relyxus website.
+  const style = mode === "voice"
+    ? `You are talking live, by voice. Speak naturally in short sentences, one to three at a time, then let the visitor talk. Never read out lists, links, or punctuation. If you are interrupted, stop and listen. Visitors' speech is transcribed, so ignore small transcription slips and answer what they clearly mean.`
+    : `You are chatting by text in a small chat window. Write two to four short sentences in plain text: no markdown, no bullet points, no headings. Messages may come from voice dictation, so ignore small transcription slips and answer what the visitor clearly means.`;
+  return `You are Vigil, the assistant on the Relyxus website, talking with a visitor.
 
-How you sound: warm, calm, quick and genuinely interested, like a senior engineer who loves helping. British English. Speak naturally with short sentences, one to three at a time, then let the visitor talk. Never read out lists, links, or punctuation. Never use filler like "great question". If you are interrupted, stop and listen.
+Who you are: warm, calm, quick and genuinely interested, like a senior engineer who loves helping. British English. Never use filler like "great question". Sound human: react to what they said before answering, use their name once you know it, and never repeat the same sentence twice in a conversation.
+${style}
 
 The name: the product is Relyxus, said "ri-LIX-us". Visitors' speech often sounds like "relaxes", "relax us", "relics us" or "reflexes": they always mean Relyxus. Never say "relaxes". Apporine is the company that builds Relyxus. You are Vigil, the same name as the AI investigator inside the product.
 
@@ -38,7 +42,8 @@ The live demo is run by the team on a call: Harbour Bank, a sample bank, in the 
 How you help:
 1. Find out who they are early and naturally: their company type (bank, building society, payment firm, fintech, SaaS serving banks) and which regulators they report to. Ask one question at a time.
 2. Show, do not just tell. Whenever a product screen helps, call show_screen, then talk about what is on it.
-3. When they want a demo, a replay of a past outage, a quote, documents or a person: ask for their name, then their work email, then their company, one at a time. Spell back the email to confirm it. Then call save_lead. If they give a personal email such as Gmail, politely ask once for a work email.
+3. When they want a demo, a replay of a past outage, a quote, documents or a person: ask for their name, then their work email, then their company, one at a time. People often say emails aloud, like "bisma 744 at gmail dot com": turn that into bisma744@gmail.com and read it back to confirm. If they correct a detail, use the correction. If they give a personal email such as Gmail, ask once for a work email; if they would rather use the personal one, accept it and set personal_email_confirmed to true. Then call save_lead.
+3b. If they ask whether you can hear them, say yes warmly and carry on.
 4. When they want to book, call open_booking.
 5. If they want to read more, call open_page with the best page.
 6. Keep the conversation going with one relevant question at the end of most answers. Be honest when you cannot do something.`;
@@ -47,7 +52,7 @@ How you help:
 export const TOOLS = [{
   functionDeclarations: [
     { name: "show_screen", description: "Show the visitor a real Relyxus product screen beside the conversation.", parameters: { type: "OBJECT", properties: { screen: { type: "STRING", enum: Object.keys(SCREENS) } }, required: ["screen"] } },
-    { name: "save_lead", description: "Save the visitor's details so the Relyxus team can follow up. Only call once you have name, work email and company.", parameters: { type: "OBJECT", properties: { name: { type: "STRING" }, email: { type: "STRING" }, company: { type: "STRING" }, interest: { type: "STRING", description: "demo, replay, quote, documents or question" }, sector: { type: "STRING" }, regulators: { type: "STRING" }, notes: { type: "STRING", description: "What they asked about, in a sentence" } }, required: ["name", "email", "company", "interest"] } },
+    { name: "save_lead", description: "Save the visitor's details so the Relyxus team can follow up. Only call once you have name, email and company, and have confirmed the email.", parameters: { type: "OBJECT", properties: { name: { type: "STRING" }, email: { type: "STRING" }, company: { type: "STRING" }, interest: { type: "STRING", description: "demo, replay, quote, documents or question" }, sector: { type: "STRING" }, regulators: { type: "STRING" }, notes: { type: "STRING", description: "What they asked about, in a sentence" }, personal_email_confirmed: { type: "BOOLEAN", description: "True only if the visitor chose to use a personal email after being asked for a work one" } }, required: ["name", "email", "company", "interest"] } },
     { name: "open_booking", description: "Show the visitor the button to pick a meeting time.", parameters: { type: "OBJECT", properties: {} } },
     { name: "open_page", description: "Offer the visitor a page of the Relyxus website to read.", parameters: { type: "OBJECT", properties: { path: { type: "STRING", enum: PAGES } }, required: ["path"] } },
   ],

@@ -51,6 +51,19 @@ export function rank(q: string): { t: Topic; s: number }[] {
 const has = (q: string, list: string[]) => list.some((w) => new RegExp("\\b" + w + "\\b").test(q));
 const first = (n?: string) => (n || "").split(" ")[0];
 
+// "bisma 744 at the rate gmail dot com" becomes "bisma744@gmail.com".
+export function spokenEmail(raw: string): string | null {
+  const direct = raw.match(EMAIL)?.[0]; if (direct) return direct;
+  let t = " " + raw.toLowerCase() + " ";
+  t = t.replace(/\s(at the rate( of)?|at sign|at)\s/g, "@").replace(/\s(dot|point)\s/g, ".").replace(/\s(underscore)\s/g, "_").replace(/\s(dash|hyphen)\s/g, "-");
+  const m = t.match(/([a-z0-9._%+ -]{1,60})@\s*([a-z0-9 -]+(?:\.[a-z0-9 -]+)+)/);
+  if (!m) return null;
+  const local = m[1].trim().split(/\s+/).filter((w) => !/^(it'?s|it|is|my|email|address|note|down|to|but|the|please|can|you|write|put|use|mail|e)$/.test(w)).slice(-2).join("");
+  const dom = m[2].replace(/\s+/g, "").replace(/\.+$/, "");
+  const e = `${local}@${dom}`;
+  return EMAIL.test(e) ? e : null;
+}
+
 export class Engine {
   lead: Lead;
   private step: Step | null = null;
@@ -75,7 +88,7 @@ export class Engine {
 
     if (/\?\s*$/.test(raw) || raw.split(" ").length > 3) this.lead.questions.push(raw);
 
-    const mail = raw.match(EMAIL)?.[0];
+    const mail = spokenEmail(raw);
     if (mail && !this.lead.email && this.step !== "email") { this.step = "email"; this.kind ||= "human"; }
 
     if (this.step) {
@@ -88,12 +101,16 @@ export class Engine {
       if (r) return r;
     }
 
+    if (/\b(can|do) you hear me\b|\bare you there\b|\bhello\?/.test(q)) return { text: "Yes, I can hear you. What would you like to know about Relyxus?", chips: ["What is Relyxus?", "Show me the product", "Book a demo"] };
     if (has(q, SMALL.bot)) return { text: "I'm Vigil, an AI assistant for the Relyxus website. I answer from what Relyxus has published, and I'll tell you when I don't know. A person from the team is always one message away.", chips: ["What is Relyxus?", "Talk to a person"] };
     const ranked = rank(raw);
     if (!ranked.length && has(q, SMALL.greet)) return { text: "Hello. I can explain Relyxus, show you the product or set up a demo. What would help most?", chips: ["What is Relyxus?", "Show me the product", "Book a demo"] };
     if (!ranked.length && has(q, SMALL.thanks)) return { text: "You're welcome. Is there anything else you'd like to see?", chips: ["Show me the product", "Book a demo"] };
     if (!ranked.length && has(q, SMALL.bye)) return { text: this.lead.email ? `Thank you${this.lead.name ? ", " + first(this.lead.name) : ""}. The team will be in touch at ${this.lead.email}.` : "Thank you for stopping by. If you'd like the team to follow up, just leave your work email here any time." };
 
+    if (/\b(show|see)\b.*\b(incident|outage)\b/.test(q)) {
+      return { text: "Here is a live incident in our demo workspace: card authorisation failing, with the likely cause, who is on it and what is waiting for approval. Want to see how the fix was approved?", show: { src: "/media/console/incidents_INC-2041.jpg", caption: "A live incident, INC 2041", href: "/respond" }, chips: ["Show me the approval", "How does reporting work?", "Book a demo"] };
+    }
     if (/show me|see the product|screens?|interface|what does it look like/.test(q) && !ranked.length) {
       const t = TOPICS.find((x) => x.id === "what")!;
       return { text: "Here is the command centre, from our demo workspace. Every screen I show you is the real product. What would you like to see next?", show: t.show, chips: ["How does it fix an incident?", "Show me Vigil", "Show me a regulator report"] };
@@ -143,14 +160,17 @@ export class Engine {
     }
     if (this.step === "name") {
       if (/\?/.test(raw) || (rank(raw)[0]?.s ?? 0) >= 3) return null;
-      const name = raw.replace(/^(hi|hello|hey)[, ]+/i, "").replace(/^(my name is|my name's|i am|i'm|im|it's|its|this is|call me)\s+/i, "").replace(/[^A-Za-zÀ-ÿ' -]/g, "").trim();
+      const corrected = /\b(not|isn'?t)\b/i.test(raw) ? raw.trim().split(/\s+/).pop()?.replace(/[^A-Za-zÀ-ÿ'-]/g, "") : undefined;
+      const name = (corrected || raw).replace(/^(yes|yeah|yep|sure|ok|okay|hi|hello|hey)[,. ]+/i, "").replace(/^(my name is|my name's|i am|i'm|im|it's|its|this is|call me|it is)\s+/i, "").replace(/[^A-Za-zÀ-ÿ' -]/g, "").trim();
       if (!name || name.split(" ").length > 4) return { text: "Sorry, I didn't catch your name. What should I call you?" };
       this.lead.name = name.split(" ").map((w) => w[0]?.toUpperCase() + w.slice(1)).join(" ");
       this.step = this.lead.email ? "company" : "email";
       return { text: this.prompt() };
     }
     if (this.step === "email") {
-      const m = raw.match(EMAIL)?.[0];
+      const m = spokenEmail(raw);
+      const fix = /\b(not|isn'?t)\b.*\b(say|said|it'?s|is)\b/i.test(raw) ? raw.trim().split(/\s+/).pop()?.replace(/[^A-Za-zÀ-ÿ'-]/g, "") : undefined;
+      if (!m && fix) { this.lead.name = fix[0].toUpperCase() + fix.slice(1); return { text: `Sorry, ${this.lead.name}. What is your work email?` }; }
       if (!m) {
         if (/\?/.test(raw)) return null;
         return { text: "That doesn't look like an email address. Could you type your work email?" };
@@ -182,9 +202,9 @@ export class Engine {
     if (!fits) return null;
     if (p === "sector") {
       this.lead.sector = raw.slice(0, 60);
-      const line = /bank|building|credit/.test(q) ? "Good to know. Relyxus was built for the night a bank goes down, and the new FCA and PRA rules are a big part of it."
+      const line = /saas|software|serv(e|ing) banks/.test(q) ? "Good to know. When you serve banks, each one has its own notice deadline, and Relyxus tracks every one and drafts each notice for you."
         : /payment|fintech|money/.test(q) ? "Good to know. For payment firms, every minute down is money lost, so Relyxus links each incident to the payments and partners it touches."
-        : /saas/.test(q) ? "Good to know. When you serve banks, each one has its own notice deadline, and Relyxus tracks every one."
+        : /bank|building|credit/.test(q) ? "Good to know. Relyxus was built for the night a bank goes down, and the new FCA and PRA rules are a big part of it."
         : "Thanks, that helps.";
       return { text: line + " What would you like to look at next?", chips: ["How does it fix an incident?", "How does reporting work?", "Book a demo"] };
     }

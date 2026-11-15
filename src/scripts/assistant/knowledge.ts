@@ -181,7 +181,7 @@ export const TOPICS: Topic[] = [
   {
     id: "company",
     words: ["who built relyxus", "who makes", "apporine", "your company", "the company behind", "team behind", "founder", "about apporine", "where are you based"],
-    answer: "Relyxus is built by Apporine, a software company building serious tools for regulated businesses. Our engineers have run on call, incident response and cloud platforms for large regulated organisations.",
+    answer: "Relyxus is built by Apporine, a software company building serious tools for regulated businesses. Our engineers have run on call, incident response and cloud platforms for large regulated organisations. Our UK office is in Park Royal, London.",
     link: { label: "About Apporine", href: "/about" },
   },
   {

@@ -26,7 +26,7 @@ for (let k = 0; k < 6; k++) { bands.push({ y, h: sh }); y += sh + (gaps[k] ?? 0)
       </svg>
     </div>
     <div class="base">
-      <span>© 2026 Apporine. Relyxus is a product of Apporine.</span>
+      <span>© 2026 Apporine. Relyxus is a product of Apporine.<br /><span class="addr">Office 20, Space House, Space Business Park, Abbey Road, Park Royal, London NW10 7SU, United Kingdom</span></span>
       <nav aria-label="Legal"><ul>{legal.map(([t, href]) => <li><a href={href}>{t}</a></li>)}</ul></nav>
     </div>
   </div>
@@ -46,6 +46,7 @@ for (let k = 0; k < 6; k++) { bands.push({ y, h: sh }); y += sh + (gaps[k] ?? 0)
 .r-foot .mark svg{display:block;width:100%;height:auto;overflow:visible}
 .r-foot .band{fill:#fff;transition:fill .3s}
 .r-foot .base{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:28px;padding-top:18px;border-top:1px solid #1C2330;font-size:13.5px;color:#C9D1DC}
+.r-foot .base .addr{color:#8E99AB}
 .r-foot .base ul{flex-direction:row;flex-wrap:wrap;gap:18px}.r-foot .base a{color:#C9D1DC}.r-foot .base a:hover{color:#fff}
 @media (max-width:900px){.r-foot .topf{grid-template-columns:1fr}.r-foot .cols{grid-template-columns:1fr 1fr}}
 .rot{display:inline-block;transition:opacity .35s,transform .35s}

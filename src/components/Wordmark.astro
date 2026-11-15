@@ -1,0 +1,16 @@
+---
+// The locked "Resolve lines" wordmark: RELYXUS cut into six horizontal stripes
+// whose gaps close toward the baseline.
+interface Props { color?: string; width?: number; id: string }
+const { color = "#0A0C10", width = 78, id } = Astro.props;
+const gaps = [1.5, 1.2, 0.9, 0.6, 0.35];
+const sh = (14.4 - 4.55) / 6;
+let y = 3.6;
+const rects: { y: number; h: number }[] = [];
+for (let k = 0; k < 6; k++) { rects.push({ y, h: sh }); y += sh + (gaps[k] ?? 0); }
+const height = Math.round(width * 0.205);
+---
+<svg width={width} height={height} viewBox="0 0 100 20" role="img" aria-label="Relyxus" style="display:block">
+  <defs><mask id={id}>{rects.map((r) => <rect x="0" y={r.y.toFixed(2)} width="100" height={r.h.toFixed(2)} fill="#fff" />)}</mask></defs>
+  <text x="0" y="18" textLength="99" lengthAdjust="spacingAndGlyphs" font-family="IBM Plex Sans, Geist, sans-serif" font-weight="600" font-size="20" fill={color} mask={`url(#${id})`}>RELYXUS</text>
+</svg>

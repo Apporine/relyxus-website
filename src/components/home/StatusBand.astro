@@ -1,0 +1,37 @@
+---
+// Section 3, status lights band (locked): small round lights from coral through
+// steel to recovery green, softly switching on and off.
+---
+<section class="r-band" aria-hidden="true"><canvas></canvas></section>
+<style is:global>
+.r-band{background:#000;padding:28px 0}
+.r-band canvas{display:block;width:100%;height:46px}
+</style>
+<script>
+const c3 = document.querySelector<HTMLCanvasElement>(".r-band canvas")!;
+const x3 = c3.getContext("2d")!;
+type C = number[];
+const CO = [255, 107, 74], GR = [61, 174, 128], GL = [139, 230, 190], ST = [159, 180, 214], SI = [230, 233, 238], DK = [22, 26, 31];
+const mix = (a: C, b: C, k: number) => a.map((v, i) => Math.round(v + (b[i] - v) * k));
+const rgb = (c: C) => `rgb(${c[0]},${c[1]},${c[2]})`;
+let seed = 11; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const DOT: number[] = []; for (let i = 0; i < 600; i++) DOT.push(rnd());
+function colAt(f: number, k: number): C {
+  if (f < 0.28) return k < 0.25 ? SI : CO; if (f < 0.42) return mix(CO, ST, (f - 0.28) / 0.14);
+  if (f < 0.62) return k < 0.3 ? SI : ST; if (f < 0.75) return mix(ST, GR, (f - 0.62) / 0.13); return k < 0.35 ? GL : GR;
+}
+function band(t: number) {
+  const D = Math.min(2, devicePixelRatio || 1), w = c3.clientWidth, h = c3.clientHeight; if (!w) return;
+  if (c3.width !== Math.round(w * D)) { c3.width = w * D; c3.height = h * D; }
+  x3.setTransform(D, 0, 0, D, 0, 0); x3.clearRect(0, 0, w, h);
+  const s = 9, rows = Math.floor(h / s); let n = 0;
+  for (let r = 0; r < rows; r++) for (let x = s / 2; x < w; x += s) {
+    const f = x / w, k = DOT[n++ % 600], on = Math.sin(t * 1.3 + k * 20 + r) > -0.55;
+    x3.fillStyle = on ? rgb(colAt(f, k)) : rgb(DK); x3.beginPath(); x3.arc(x, r * s + s / 2 + 1, 3.1, 0, 6.283); x3.fill();
+  }
+}
+let vis = true; new IntersectionObserver((e) => (vis = e[0].isIntersecting)).observe(c3);
+if (matchMedia("(prefers-reduced-motion: reduce)").matches) band(0);
+else { const loop = (ts: number) => { if (vis) band(ts / 1000); requestAnimationFrame(loop); }; requestAnimationFrame(loop); }
+addEventListener("resize", () => band(performance.now() / 1000));
+</script>

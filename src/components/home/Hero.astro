@@ -1,0 +1,180 @@
+---
+import Wordmark from "../Wordmark.astro";
+---
+<section class="r-hero" aria-labelledby="hero-title">
+  <div class="lower" aria-hidden="true"></div>
+  <canvas class="fl" aria-hidden="true"></canvas>
+  <div class="bar">New: replay one of your past outages and see the minutes you would save. <a href="/replay"><u>Try it free</u></a></div>
+  <nav class="nav" aria-label="Main">
+    <a href="/" aria-label="Relyxus home"><Wordmark id="wm-hero" color="#0A0C10" width={86} /></a>
+    <a href="/product" class="first">Platform</a><a href="/solutions/banks">Solutions</a><a href="/trust">Trust Center</a><a href="/pricing">Pricing</a><a href="/articles">Articles</a>
+    <span class="sp"></span>
+    <a href="/demo" class="si">Live demo</a><a href="/demo#book" class="btn b1 sm">Book a demo</a>
+  </nav>
+  <div class="copy">
+    <h1 id="hero-title">Every <span class="slot"></span> goes down.<br />The best come back first.</h1>
+    <p class="sub">Relyxus finds what broke, gets the fix approved by the right people and writes the record your regulator asks for. It runs inside your own cloud.</p>
+    <div class="cta"><a href="/demo#book" class="btn b1">Book a demo</a><a href="/replay" class="btn b2">Replay an outage free</a></div>
+  </div>
+  <div class="con" aria-hidden="true">
+    <div class="sd"><div class="lg"><i>R</i>RELYXUS</div><div class="it on"><span>Command centre</span></div><div class="it"><span>Incidents</span><b class="ib" style="display:none">1</b></div><div class="it"><span>On call</span></div><div class="it"><span>Approvals</span></div><div class="it"><span>Regulators</span></div><div class="it"><span>Connectors</span><span class="n">36</span></div></div>
+    <div class="mn"><div class="gr"><div><b>Good morning, Sam</b><small class="gs">All calm. Nothing is open right now.</small></div><span class="dc">Declare incident</span></div>
+      <div class="g2"><div class="pn"><div class="pt"><span>Happening now</span><span class="ago"></span></div><div class="inc"><i class="idot"></i><div><b class="it2">Nothing is happening</b><small class="is">New incidents appear here the moment they start.</small></div><span class="sv" style="display:none">SEV 1</span></div>
+        <div class="tl"><div><em>09:41</em><i style="background:#EF5A50"></i><span>412 alerts grouped into one incident</span></div><div><em>09:41</em><i style="background:#9FB4D6"></i><span>Sam paged on Slack and by phone</span></div><div><em>09:46</em><i style="background:#9FB4D6"></i><span>Vigil found the cause, 92% confident</span></div><div><em>09:50</em><i style="background:#3DAE80"></i><span>Rollback approved by 2 people</span></div><div><em>09:52</em><i style="background:#3DAE80"></i><span>Card payments recovered in 11 min</span></div></div></div>
+        <div><div class="pn"><div class="pt"><span>Regulator clocks</span></div><div class="rr"><span>MAS, Singapore</span><em class="r1">idle</em></div><div class="rr"><span>FCA, UK</span><em class="r2">idle</em></div><div class="rr"><span>US banks</span><em class="r3">idle</em></div></div>
+          <div class="pn" style="margin-top:10px"><div class="pt"><span>On call now</span></div><div class="oc"><span class="a">ST</span><div>Sam Taylor<small>Payments, primary</small></div></div><div class="oc"><span class="a">EC</span><div>Emma Clarke<small>Duty manager</small></div></div></div></div></div></div>
+  </div>
+  <div class="fcd f1" aria-hidden="true"><div class="l"><i></i>Vigil found the cause</div><div class="v">Last night's change to card authorisation, release 4.18.2</div><div class="bar2"><b></b></div><small>92% confident, 3 pieces of evidence</small></div>
+  <div class="fcd f2" aria-hidden="true"><div class="l g"><i></i>Rollback approved</div><div class="v">Return to release 4.18.1</div><div class="who"><span><i>EC</i>Duty manager</span><span><i>DR</i>CTO</span></div><small>Both signed with a passkey</small></div>
+  <div class="fade" aria-hidden="true"></div>
+  <div class="proof"><div><b>36</b><span>connectors ready, nothing to replace</span></div><div><b>46 of 46</b><span>security checks passed in our lab</span></div><div><b>4</b><span>ways to page: Slack, text, email, phone</span></div><div><b>2</b><span>people approve every fix</span></div></div>
+</section>
+
+<style is:global>
+.r-hero{position:relative;height:920px;overflow:hidden;background:#F6F8FA;color:#0A0C10;font-family:var(--body)}
+.r-hero canvas.fl{position:absolute;left:0;top:0;width:100%;height:620px}
+.r-hero .lower{position:absolute;left:0;right:0;top:560px;bottom:0;background:#0B0D11;z-index:1}
+.r-hero .lower:before{content:'';position:absolute;left:0;right:0;top:-140px;height:140px;background:linear-gradient(rgba(11,13,17,0),#0B0D11)}
+.r-hero .bar{position:absolute;left:0;right:0;top:0;height:36px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:13px;z-index:6;color:#3E4652;border-bottom:1px solid #E3E8EF;background:rgba(255,255,255,.6)}
+.r-hero .bar u{color:#0A0C10;text-underline-offset:3px}
+.r-hero .nav{position:absolute;left:0;right:0;top:52px;max-width:1240px;margin:0 auto;padding:0 32px;height:40px;display:flex;align-items:center;gap:24px;font-size:14.5px;z-index:6}
+.r-hero .nav a{color:#0A0C10}.r-hero .nav a.first{margin-left:18px}.r-hero .nav .si{color:#3E4652}
+.r-hero .nav .sp{flex:1}
+.r-hero .btn{border-radius:999px;padding:11px 20px;font-size:14.5px;font-weight:500;display:inline-block;white-space:nowrap;transition:transform .2s}
+.r-hero .btn:hover{transform:translateY(-1px)}
+.r-hero .btn.sm{padding:8px 16px;font-size:14px}
+.r-hero .b1{background:#0A0C10;color:#fff!important}.r-hero .b2{border:1px solid #C9D1DC;color:#0A0C10;background:rgba(255,255,255,.75)}
+.r-hero .copy{position:absolute;left:0;right:0;top:140px;text-align:center;z-index:5;padding:0 20px}
+.r-hero h1{font-family:var(--display);font-variation-settings:'opsz' 96;font-weight:680;font-size:clamp(40px,5vw,68px);line-height:1.03;letter-spacing:-.04em;margin:0;color:#000}
+.r-hero .slot{display:inline-block;position:relative;vertical-align:top;height:1.1em;transition:width .55s cubic-bezier(.7,0,.2,1);text-align:left}
+.r-hero .wd{position:absolute;left:0;top:0;white-space:nowrap;line-height:1.1em}
+.r-hero .sub{margin:20px auto 0;max-width:600px;font-size:17px;line-height:1.55;color:#3E4652}
+.r-hero .cta{display:flex;gap:10px;justify-content:center;margin-top:26px;flex-wrap:wrap}
+.r-hero .con{position:absolute;left:50%;width:860px;margin-left:-430px;top:470px;height:500px;border-radius:16px;overflow:hidden;z-index:3;display:grid;grid-template-columns:170px 1fr;transform:perspective(1600px) rotateX(10deg);transform-origin:50% 0;background:#0C0E12;border:1px solid rgba(255,255,255,.14);box-shadow:0 40px 90px rgba(10,14,22,.45);color:#fff;font-size:13px}
+.r-hero .con .sd{padding:16px 13px;background:#08090C;border-right:1px solid rgba(255,255,255,.07);color:#C9CED6;font-size:12.5px}
+.r-hero .con .sd .lg{font-weight:700;letter-spacing:.06em;font-size:12px;margin-bottom:18px;display:flex;align-items:center;gap:7px;color:#fff}
+.r-hero .con .sd .lg i{width:20px;height:20px;border-radius:5px;display:grid;place-items:center;font-style:normal;font-size:10.5px;background:#fff;color:#000}
+.r-hero .con .sd div.it{padding:7px 9px;border-radius:7px;margin-bottom:1px;display:flex;justify-content:space-between}
+.r-hero .con .sd div.on{background:#171A20;color:#fff}
+.r-hero .con .sd div.it b{font-weight:600;font-size:10.5px;padding:0 6px;border-radius:999px;background:#EF5A50;color:#fff}
+.r-hero .con .sd .n{font-size:11px}
+.r-hero .con .mn{padding:16px 18px;overflow:hidden}
+.r-hero .con .gr{display:flex;justify-content:space-between;align-items:center}
+.r-hero .con .gr b{font-size:16px;font-weight:600;letter-spacing:-.01em}
+.r-hero .con .gr small,.r-hero .con .inc small,.r-hero .con .oc small{display:block;font-size:12px;margin-top:2px;color:#C9CED6}
+.r-hero .con .dc{font-size:11.5px;font-weight:600;padding:6px 11px;border-radius:7px;background:#fff;color:#000}
+.r-hero .con .g2{display:grid;grid-template-columns:1.45fr 1fr;gap:12px;margin-top:14px}
+.r-hero .con .pn{border-radius:10px;padding:12px 13px;background:#111419;border:1px solid rgba(255,255,255,.07)}
+.r-hero .con .pt{font-size:11.5px;font-weight:600;display:flex;justify-content:space-between}
+.r-hero .con .pt .ago{font-weight:500}
+.r-hero .con .inc{display:grid;grid-template-columns:10px 1fr auto;gap:8px;margin-top:10px;align-items:start}
+.r-hero .con .inc i{width:8px;height:8px;border-radius:50%;margin-top:5px;background:#9AA3B2;transition:background .4s}
+.r-hero .con .inc b{font-size:13.5px;font-weight:600;display:block}
+.r-hero .con .inc .sv{font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px;white-space:nowrap}
+.r-hero .con .tl{margin-top:12px;display:flex;flex-direction:column;gap:6px}
+.r-hero .con .tl div{display:grid;grid-template-columns:42px 10px 1fr;gap:8px;align-items:center;font-size:12px;opacity:.28;transition:opacity .4s}
+.r-hero .con .tl div.on{opacity:1}
+.r-hero .con .tl em{font-style:normal;font-variant-numeric:tabular-nums}
+.r-hero .con .tl i{width:7px;height:7px;border-radius:50%}
+.r-hero .con .rr{display:grid;grid-template-columns:1fr auto;gap:6px;font-size:12px;padding:7px 0;align-items:center;border-top:1px solid rgba(255,255,255,.06);color:#E9EEF5}
+.r-hero .con .rr em{font-style:normal;font-variant-numeric:tabular-nums;font-weight:600}
+.r-hero .con .oc{display:flex;align-items:center;gap:8px;margin-top:9px;font-size:12.5px}
+.r-hero .con .oc span.a{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:9.5px;font-weight:600;background:#2A2F37;color:#fff}
+.r-hero .fcd{position:absolute;z-index:6;width:250px;border-radius:12px;padding:13px 15px;background:#fff;color:#0A0C10;border:1px solid #E3E8EF;box-shadow:0 30px 60px rgba(10,14,22,.28);opacity:0;transform:translateY(14px);transition:all .6s cubic-bezier(.2,.7,.1,1);font-size:12.5px}
+.r-hero .fcd.on{opacity:1;transform:none}
+.r-hero .f1{left:calc(50% - 520px);top:640px}.r-hero .f2{left:calc(50% + 280px);top:690px;width:236px}
+.r-hero .fcd .l{font-size:11.5px;font-weight:600;color:#35507A;display:flex;align-items:center;gap:6px}
+.r-hero .fcd .l i{width:6px;height:6px;border-radius:50%;background:#9FB4D6}
+.r-hero .fcd .l.g{color:#17694A}.r-hero .fcd .l.g i{background:#3DAE80}
+.r-hero .fcd .v{font-size:14px;font-weight:600;margin-top:5px;line-height:1.35;letter-spacing:-.01em}
+.r-hero .fcd .bar2{height:4px;border-radius:2px;background:#EEF1F5;margin-top:9px;overflow:hidden}.r-hero .fcd .bar2 b{display:block;height:100%;width:92%;background:linear-gradient(90deg,#9FB4D6,#3DAE80)}
+.r-hero .fcd small{display:block;color:#5B6472;font-size:11.5px;margin-top:6px}
+.r-hero .fcd .who{display:flex;gap:6px;margin-top:9px}
+.r-hero .fcd .who span{display:flex;align-items:center;gap:5px;font-size:11.5px;font-weight:500;padding:3px 8px 3px 3px;border-radius:999px;background:#DDF3E9;color:#17694A}
+.r-hero .fcd .who span i{width:18px;height:18px;border-radius:50%;background:#3DAE80;color:#04130D;font-style:normal;font-size:8.5px;font-weight:700;display:grid;place-items:center}
+.r-hero .fade{position:absolute;left:0;right:0;bottom:96px;height:160px;z-index:5;pointer-events:none;background:linear-gradient(rgba(11,13,17,0),#0B0D11)}
+.r-hero .proof{position:absolute;left:0;right:0;bottom:0;height:96px;z-index:7;background:#0B0D11;color:#fff}
+.r-hero .proof{display:grid;grid-template-columns:repeat(4,1fr);padding:0 max(32px,calc((100% - 1240px)/2 + 32px))}
+.r-hero .proof div{padding:18px 18px 0;border-left:1px solid rgba(255,255,255,.14)}
+.r-hero .proof div:first-child{border-left:0;padding-left:0}
+.r-hero .proof b{display:block;font-weight:300;font-size:34px;letter-spacing:-.04em;line-height:1}
+.r-hero .proof span{display:block;font-size:13px;margin-top:6px;line-height:1.35;color:#C9CED6}
+@media (max-width:980px){
+  .r-hero .nav a:not(.b1):not(:first-child){display:none}
+  .r-hero .con{width:94%;margin-left:-47%;grid-template-columns:1fr}.r-hero .con .sd{display:none}
+  .r-hero .f1,.r-hero .f2{display:none}
+}
+@media (max-width:640px){
+  .r-hero{height:auto;padding-bottom:0}
+  .r-hero .copy{position:relative;top:auto;padding:150px 20px 0}
+  .r-hero .con{position:relative;left:auto;top:auto;margin:40px auto 0;width:calc(100% - 32px);height:420px;transform:none}
+  .r-hero .con .g2{grid-template-columns:1fr}
+  .r-hero .lower{top:520px}
+  .r-hero .fade{display:none}
+  .r-hero .proof{position:relative;height:auto;grid-template-columns:1fr 1fr;padding:20px 20px 24px;row-gap:18px}
+  .r-hero .proof div:nth-child(3){border-left:0;padding-left:0}
+}
+</style>
+
+<script>
+import { mkGL, FS_L } from "../../scripts/flare";
+const root = document.querySelector<HTMLElement>(".r-hero")!;
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const draw = mkGL(root.querySelector("canvas.fl") as HTMLCanvasElement, FS_L, 1, 0);
+const words = ["bank", "fintech", "platform", "insurer", "system"];
+function mask(el: HTMLElement, f: number) {
+  const gaps = [0.09, 0.075, 0.06, 0.045, 0.03], n = 6, tot = gaps.reduce((x, y) => x + y, 0) * f, bh = (1 - tot) / n;
+  let y = 0; const parts: string[] = [];
+  for (let k = 0; k < n; k++) { parts.push(`#000 ${(y * 100).toFixed(2)}% ${((y + bh) * 100).toFixed(2)}%`); y += bh;
+    if (k < n - 1) { parts.push(`transparent ${(y * 100).toFixed(2)}% ${((y + gaps[k] * f) * 100).toFixed(2)}%`); y += gaps[k] * f; } }
+  const m = `linear-gradient(${parts.join(",")})`; el.style.webkitMaskImage = m; el.style.maskImage = m;
+}
+function anim(ms: number, fn: (k: number) => void, done?: () => void) {
+  const s0 = performance.now();
+  const st = (n: number) => { const k = Math.min(1, (n - s0) / ms); fn(k); if (k < 1) requestAnimationFrame(st); else done?.(); };
+  requestAnimationFrame(st);
+}
+const slot = root.querySelector<HTMLElement>(".slot")!;
+const meas = document.createElement("span");
+meas.style.cssText = "position:absolute;visibility:hidden;white-space:nowrap;left:-9999px";
+slot.parentElement!.appendChild(meas);
+let cur: HTMLElement | null = null;
+function setWord(w: string, first: boolean) {
+  meas.textContent = w; slot.style.width = meas.getBoundingClientRect().width + "px";
+  const el = document.createElement("span"); el.className = "wd"; el.textContent = w; slot.appendChild(el);
+  if (cur) { const old = cur; anim(300, (k) => { mask(old, k); old.style.opacity = String(1 - k); old.style.transform = `translateY(${(-k * 18).toFixed(1)}%)`; }, () => old.remove()); }
+  cur = el;
+  if (first) { mask(el, 0); return; }
+  mask(el, 1); el.style.opacity = "0";
+  anim(380, (k) => { const e = 1 - Math.pow(1 - k, 3); el.style.opacity = String(e); el.style.transform = `translateY(${((1 - e) * 22).toFixed(1)}%)`; },
+    () => anim(800, (k) => { const e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2; mask(el, 1 - e); }));
+}
+document.fonts?.ready.then(() => setWord(words[0], true)) ?? setWord(words[0], true);
+const q = <T extends Element>(s: string) => root.querySelector(s) as T;
+const c = { gs: q<HTMLElement>(".gs"), it: q<HTMLElement>(".it2"), is: q<HTMLElement>(".is"), dot: q<HTMLElement>(".idot"), sv: q<HTMLElement>(".sv"), ago: q<HTMLElement>(".ago"), ib: q<HTMLElement>(".ib"),
+  tl: [...root.querySelectorAll<HTMLElement>(".tl div")], r: [q<HTMLElement>(".r1"), q<HTMLElement>(".r2"), q<HTMLElement>(".r3")], f1: q<HTMLElement>(".f1"), f2: q<HTMLElement>(".f2"), ph: -1 };
+function phase(p: number, t: number) {
+  if (p !== c.ph) { c.ph = p;
+    if (p === 0) { c.gs.textContent = "All calm. Nothing is open right now."; c.it.textContent = "Nothing is happening"; c.is.textContent = "New incidents appear here the moment they start."; c.dot.style.background = "#9AA3B2"; c.sv.style.display = "none"; c.ib.style.display = "none"; c.f1.classList.remove("on"); c.f2.classList.remove("on"); c.r.forEach((x) => { x.textContent = "idle"; x.style.color = ""; }); }
+    else { c.it.textContent = "Card payments failing, UK"; c.is.textContent = "Severity 1, 18,400 customers, 412 alerts grouped"; c.sv.style.display = ""; c.ib.style.display = ""; }
+    if (p === 1) { c.gs.textContent = "1 incident open. Vigil is on it."; c.dot.style.background = "#EF5A50"; c.sv.style.background = "#FDE7E3"; c.sv.style.color = "#B4382C"; }
+    if (p === 2) c.f1.classList.add("on");
+    if (p === 3) c.f2.classList.add("on");
+    if (p === 4) { c.gs.textContent = "All calm. Last incident fixed in 11 minutes."; c.dot.style.background = "#3DAE80"; c.sv.textContent = "RESOLVED"; c.sv.style.background = "#DDF3E9"; c.sv.style.color = "#17694A"; c.f1.classList.remove("on"); }
+    if (p < 4) c.sv.textContent = "SEV 1";
+  }
+  c.tl.forEach((d, i) => d.classList.toggle("on", p >= 1 && i <= Math.min(4, p)));
+  if (p >= 1) { const m = Math.max(0, (t % 14 - 2.2) * 1.6); c.ago.textContent = p >= 4 ? "11 min" : Math.floor(m) + " min";
+    const rows: [string, number][] = [["MAS", 1], ["FCA", 24], ["US", 36]];
+    c.r.forEach((x, i) => { if (p >= 4) { x.textContent = "Drafted"; x.style.color = "#3DAE80"; } else { const left = rows[i][1] - m / 60; x.textContent = Math.floor(left) + "h " + String(Math.floor((left % 1) * 60)).padStart(2, "0") + "m"; x.style.color = i === 0 ? "#FF6B4A" : ""; } });
+  } else c.ago.textContent = "";
+}
+let lastW = -1, wi = 0, visible = true;
+new IntersectionObserver((e) => { visible = e[0].isIntersecting; }).observe(root);
+function frame(t: number) {
+  const wv = Math.floor(t / 3.4);
+  if (wv !== lastW) { if (lastW >= 0) { wi = (wi + 1) % words.length; setWord(words[wi], false); } lastW = wv; }
+  draw(t); const p = t % 14; phase(p < 2.2 ? 0 : p < 4.5 ? 1 : p < 6.5 ? 2 : p < 8.5 ? 3 : 4, t);
+}
+if (reduce) frame(10); else { const loop = (ts: number) => { if (visible) frame(ts / 1000); requestAnimationFrame(loop); }; requestAnimationFrame(loop); }
+</script>

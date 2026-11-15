@@ -1,0 +1,65 @@
+---
+// Section 12, footer: the interactive Resolve lines wordmark. Each stripe of the
+// word drifts out of line near the cursor, then settles back into place.
+const cols: [string, [string, string][]][] = [
+  ["Platform", [["Product tour", "/product"], ["Vigil", "/product/vigil"], ["Respond", "/product/respond"], ["Approvals and safe change", "/product/approvals"], ["Regulator reporting", "/product/regulator-reporting"], ["Customer updates", "/product/customer-updates"], ["Resilience and reviews", "/product/resilience"], ["Integrations", "/integrations"]]],
+  ["Solutions", [["Banks and building societies", "/solutions/banks"], ["Payment and electronic money firms", "/solutions/payments"], ["SaaS that serves banks", "/solutions/saas"], ["DORA guide", "/regulations/dora"], ["UK incident reporting", "/regulations/uk"], ["Deadline calculator", "/tools/deadline-calculator"]]],
+  ["Start", [["Replay my outage", "/replay"], ["Live demo", "/demo"], ["Book a demo", "/demo#book"], ["Pricing", "/pricing"], ["Deployment", "/deployment"]]],
+  ["Trust and company", [["Trust Center", "/trust"], ["Responsible disclosure", "/trust#disclosure"], ["Articles", "/articles"], ["About and contact", "/about"]]],
+];
+const legal: [string, string][] = [["Privacy", "/legal/privacy"], ["Cookies", "/legal/cookies"], ["Website terms", "/legal/website-terms"], ["Accessibility", "/legal/accessibility"], ["All legal documents", "/legal"]];
+const gaps = [1.5, 1.2, 0.9, 0.6, 0.35];
+const sh = (14.4 - 4.55) / 6; let y = 3.6; const bands: { y: number; h: number }[] = [];
+for (let k = 0; k < 6; k++) { bands.push({ y, h: sh }); y += sh + (gaps[k] ?? 0); }
+---
+<footer class="r-foot" aria-labelledby="foot-title">
+  <h2 class="sr-only" id="foot-title">Site footer</h2>
+  <div class="wrap">
+    <div class="topf">
+      <div class="lead"><p class="line">Every bank goes down.<br />The best come back first.</p><div class="ctas"><a class="b1" href="/demo#book">Book a demo</a><a class="b2" href="/replay">Replay an outage free</a></div></div>
+      <nav class="cols" aria-label="Footer">{cols.map(([h, links]) => <div><h3>{h}</h3><ul>{links.map(([t, href]) => <li><a href={href}>{t}</a></li>)}</ul></div>)}</nav>
+    </div>
+    <div class="mark" aria-hidden="true">
+      <svg viewBox="0 0 100 20" preserveAspectRatio="xMidYMid meet">
+        <defs>{bands.map((b, i) => <clipPath id={`fb${i}`}><rect x="-5" y={b.y.toFixed(2)} width="110" height={b.h.toFixed(2)} /></clipPath>)}</defs>
+        {bands.map((_, i) => <g clip-path={`url(#fb${i})`}><text class="band" data-i={i} x="0" y="18" textLength="99" lengthAdjust="spacingAndGlyphs" font-family="IBM Plex Sans, Geist, sans-serif" font-weight="600" font-size="20">RELYXUS</text></g>)}
+      </svg>
+    </div>
+    <div class="base">
+      <span>© 2026 Apporine. Relyxus is a product of Apporine.</span>
+      <nav aria-label="Legal"><ul>{legal.map(([t, href]) => <li><a href={href}>{t}</a></li>)}</ul></nav>
+    </div>
+  </div>
+</footer>
+<style is:global>
+.r-foot{background:#05070C;color:#E9EEF5;padding:88px 0 28px;border-top:1px solid #141A26;overflow:hidden}
+.r-foot .topf{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:56px}
+.r-foot .line{font-family:var(--display);font-variation-settings:'opsz' 96;font-weight:500;letter-spacing:-.03em;font-size:28px;line-height:1.12;margin:0;color:#fff}
+.r-foot .ctas{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.r-foot .b1{background:#fff;color:#05070C;border-radius:999px;padding:10px 18px;font-size:14.5px;font-weight:600}
+.r-foot .b2{border:1px solid #3A4458;color:#fff;border-radius:999px;padding:9px 17px;font-size:14.5px;font-weight:500}
+.r-foot .cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
+.r-foot h3{font-size:13.5px;font-weight:600;color:#9FB4D6;margin:0 0 14px}
+.r-foot ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.r-foot .cols a{font-size:14.5px;color:#D7DDE6;transition:color .2s}.r-foot .cols a:hover{color:#fff}
+.r-foot .mark{margin:72px -6px 0;cursor:crosshair}
+.r-foot .mark svg{display:block;width:100%;height:auto;overflow:visible}
+.r-foot .band{fill:#fff;transition:fill .3s}
+.r-foot .base{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:28px;padding-top:18px;border-top:1px solid #1C2330;font-size:13.5px;color:#C9D1DC}
+.r-foot .base ul{flex-direction:row;flex-wrap:wrap;gap:18px}.r-foot .base a{color:#C9D1DC}.r-foot .base a:hover{color:#fff}
+@media (max-width:900px){.r-foot .topf{grid-template-columns:1fr}.r-foot .cols{grid-template-columns:1fr 1fr}}
+</style>
+<script>
+const mark = document.querySelector<HTMLElement>(".r-foot .mark")!;
+const bands = [...mark.querySelectorAll<SVGTextElement>(".band")];
+const cols = ["#FF6B4A", "#FF8A66", "#9FB4D6", "#9FB4D6", "#3DAE80", "#3DAE80"];
+let px = -1, energy = 0; const off = bands.map(() => 0);
+mark.addEventListener("pointermove", (e) => { const r = mark.getBoundingClientRect(); px = (e.clientX - r.left) / r.width; energy = 1; });
+mark.addEventListener("pointerleave", () => { px = -1; });
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+function loop(ts: number) { const t = ts / 1000; energy *= px < 0 ? 0.92 : 0.985;
+  bands.forEach((b, i) => { const target = energy * Math.sin(t * 7 + i * 1.7) * (6 - i) * 0.55 * (px < 0 ? 1 : 0.4 + px);
+    off[i] += (target - off[i]) * 0.18; b.setAttribute("transform", `translate(${off[i].toFixed(2)} 0)`); b.style.fill = energy > 0.15 ? cols[i] : "#fff"; });
+  requestAnimationFrame(loop); }
+if (!reduce) requestAnimationFrame(loop);
+</script>

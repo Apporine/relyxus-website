@@ -1,0 +1,21 @@
+---
+// Section 2, customer marquee (locked). Shown only when real, signed off customer
+// logos exist. Add files to public/logos and list them here; never add example logos.
+const logos: { name: string; src: string; width: number }[] = [];
+const show = logos.length >= 4;
+---
+{show && (
+  <section class="r-marquee" aria-label="Customers">
+    <div class="cap">Trusted by teams that come back first</div>
+    <div class="lane"><div class="mq">{[...logos, ...logos, ...logos].map((l) => <div><img src={l.src} alt={l.name} width={l.width} height="28" /></div>)}</div><div class="fd"></div></div>
+  </section>
+)}
+<style is:global>
+.r-marquee{background:#000;color:#fff;overflow:hidden;position:relative}
+.r-marquee .cap{text-align:center;font-size:14px;color:#C9CED6;padding-top:48px}
+.r-marquee .lane{position:relative;height:48px;margin:22px 0 48px}
+.r-marquee .mq{position:absolute;top:0;display:flex;gap:72px;align-items:center;height:48px;animation:r-mq 60s linear infinite}
+.r-marquee .lane:hover .mq{animation-duration:200s}
+.r-marquee .fd{position:absolute;inset:0;background:linear-gradient(90deg,#000 0,transparent 14%,transparent 86%,#000 100%);pointer-events:none}
+@keyframes r-mq{to{transform:translateX(-33.333%)}}
+</style>

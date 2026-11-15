@@ -1,0 +1,30 @@
+---
+import "@fontsource-variable/bricolage-grotesque/opsz.css";
+import "@fontsource-variable/geist/index.css";
+import "@fontsource/ibm-plex-sans/600.css";
+import "@tabler/icons-webfont/dist/tabler-icons-outline.min.css";
+import "../styles/global.css";
+interface Props { title: string; description: string; path?: string }
+const { title, description, path = "/" } = Astro.props;
+const canonical = new URL(path, "https://relyxus.com").toString();
+---
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta name="theme-color" content="#05070C" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,315 @@
+---
+// Main navbar (locked 15 Nov 2026, homepage tweaks 1 to 6).
+// Two floating white pills: logo and menu on the left, Book a demo on the right.
+// The wordmark is pure black on a 95% white surface so the hero flare never shows
+// through its stripes. Each menu item opens a mega menu: a dark feature card on
+// the left (picture window on top, heading below on solid dark) and link columns.
+import Wordmark from "./Wordmark.astro";
+
+type Link = { t: string; h?: string; soon?: boolean };
+type Group = { g: string; l: Link[] };
+type Menu = { k: string; label: string; cols: Group[][]; strip?: Link[] };
+
+const menus: Menu[] = [
+  { k: "platform", label: "Platform", strip: [{ t: "Deployment", h: "/deployment" }, { t: "Integrations", h: "/integrations" }, { t: "Product tour", h: "/product" }],
+    cols: [
+      [{ g: "Respond", l: [{ t: "Command centre", h: "/product/respond" }, { t: "War room", h: "/product/respond#war-room" }, { t: "Paging and on call", h: "/product/respond#on-call" }] },
+       { g: "Understand", l: [{ t: "Vigil, AI with evidence", h: "/product/vigil" }, { t: "Evidence ledger", h: "/product/vigil#evidence" }] }],
+      [{ g: "Fix safely", l: [{ t: "Two person approval", h: "/product/approvals" }, { t: "Change preflight", h: "/product/approvals#preflight" }, { t: "Alert noise", h: "/product/respond#noise" }] },
+       { g: "Tell people", l: [{ t: "Status pages", h: "/product/customer-updates" }, { t: "Regulator reports", h: "/product/regulator-reporting" }, { t: "Board report", h: "/product/regulator-reporting#board" }] }],
+      [{ g: "Prove it", l: [{ t: "Replay", h: "/replay" }, { t: "Drills and tolerances", h: "/product/resilience" }, { t: "Auditor room", h: "/product/resilience#auditor" }] }],
+    ] },
+  { k: "solutions", label: "Solutions",
+    cols: [
+      [{ g: "By industry", l: [{ t: "Banks and building societies", h: "/solutions/banks" }, { t: "Payment and electronic money firms", h: "/solutions/payments" }, { t: "SaaS that serves banks", h: "/solutions/saas" }] }],
+      [{ g: "By regulation", l: [{ t: "DORA guide", h: "/regulations/dora" }, { t: "UK incident reporting, FCA and PRA", h: "/regulations/uk" }, { t: "Deadline calculator", h: "/tools/deadline-calculator" }] }],
+      [{ g: "By role", l: [{ t: "Operations and SRE", h: "/product/respond" }, { t: "Risk and compliance", h: "/product/regulator-reporting" }, { t: "Engineering leaders", h: "/product/vigil" }, { t: "Security teams", h: "/trust" }] }],
+    ] },
+  { k: "trust", label: "Trust Center",
+    cols: [
+      [{ g: "Proof", l: [{ t: "Evidence and test results", h: "/trust#evidence" }, { t: "Five promises", h: "/trust#promises" }, { t: "Done and booked, with dates", h: "/trust#dates" }] }],
+      [{ g: "Security", l: [{ t: "Runs in your cloud", h: "/deployment" }, { t: "What leaves your network", h: "/trust#network" }, { t: "Responsible disclosure", h: "/trust#disclosure" }] }],
+      [{ g: "Documents", l: [{ t: "Security pack", h: "/trust#documents" }, { t: "Data Processing Agreement", h: "/legal#dpa" }, { t: "Software Licence Agreement", h: "/legal#licence" }, { t: "Vendor questionnaire", h: "/trust#questionnaire" }] }],
+    ] },
+  { k: "pricing", label: "Pricing",
+    cols: [
+      [{ g: "Pricing", l: [{ t: "One price, every feature", h: "/pricing" }, { t: "What is included", h: "/pricing#included" }, { t: "Founding partners", h: "/pricing#founding" }] }],
+      [{ g: "For procurement", l: [{ t: "Procurement pack", h: "/pricing#procurement" }, { t: "Questions about price", h: "/pricing#questions" }] }],
+      [{ g: "Start free", l: [{ t: "Replay my outage", h: "/replay" }, { t: "Open the live demo", h: "/demo" }] }],
+    ] },
+  { k: "articles", label: "Articles",
+    cols: [
+      [{ g: "Latest", l: [{ t: "The first hour decides the fine", h: "/articles/the-first-hour-decides-the-fine" }, { t: "Should AI touch production?", soon: true }, { t: "What an auditor wants after an outage", soon: true }] }],
+      [{ g: "Guides", l: [{ t: "DORA incident reporting", h: "/regulations/dora" }, { t: "UK incident reporting", h: "/regulations/uk" }] }],
+      [{ g: "Free tools", l: [{ t: "Deadline calculator", h: "/tools/deadline-calculator" }, { t: "Replay my outage", h: "/replay" }] }],
+    ] },
+];
+const towers = [62, 98, 80, 118, 72, 90];
+const checks = [["Alert received", "sha256 7c1e 09ab"], ["Fix approved by two people", "sha256 a94b 3d12"], ["Regulator report drafted", "sha256 e03f 5c70"]];
+---
+<header class="r-nav" data-nav>
+  <div class="in">
+    <nav class="pl" aria-label="Main">
+      <a href="/" class="lg" aria-label="Relyxus home"><Wordmark id="wm-nav" color="#000000" width={86} /></a>
+      <ul>
+        {menus.map((m) => (
+          <li><button type="button" class="it" data-k={m.k} aria-expanded="false" aria-controls={`mm-${m.k}`}>{m.label}<svg width="11" height="11" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" /></svg></button></li>
+        ))}
+      </ul>
+    </nav>
+    <div class="pr"><a href="/demo#book" class="bk"><span>Book a demo</span></a></div>
+
+    <div class="mm" data-mm>
+      {menus.map((m) => (
+        <div class="pn" id={`mm-${m.k}`} data-p={m.k} role="region" aria-label={`${m.label} menu`} hidden>
+          <div class="mcard">
+            {m.k === "platform" && (<>
+              <div class="win" aria-hidden="true">
+                <div class="cbar"><i></i><b>INC 2041, SEV1</b><span>Sample</span></div>
+                <div class="crow">Owner<span>On call, Payments</span></div>
+                <div class="crow">Cause<span>Vigil, with evidence</span></div>
+                <div class="crow">Fix<span class="ok">Approved by two</span></div>
+                <div class="prg"><div></div></div>
+              </div>
+              <div class="tx"><p class="t1">One real night in Relyxus</p><p class="t2">Every frame recorded in the real console.</p><a class="go" href="/#one-night">Watch the recording</a></div>
+            </>)}
+            {m.k === "solutions" && (<>
+              <div class="win" aria-hidden="true">
+                <div class="glow"></div>
+                <div class="sky">{towers.map((h, i) => <div class={`bd${i === 3 ? " out" : ""}`} style={`height:${h}px`}><div class="wn"></div></div>)}</div>
+              </div>
+              <div class="tx"><p class="t1">Built for the night your bank goes down</p><p class="t2">One owner, the cause, an approved fix and the regulator report.</p><a class="go" href="/solutions/banks">Banks and building societies</a></div>
+            </>)}
+            {m.k === "trust" && (<>
+              <div class="win" aria-hidden="true">
+                <span class="smp">Sample record</span>
+                <div class="vlist">{checks.map((c) => <div class="vr"><span class="ic"></span><div><b>{c[0]}</b><small>{c[1]}</small></div></div>)}</div>
+                <div class="vf">3 of 3 records match the chain</div>
+              </div>
+              <div class="tx"><p class="t1">Don't take our word for it. Check.</p><p class="t2">Every action is hashed and chained, so you can test it yourself.</p><a class="go" href="/trust">Open the Trust Center</a></div>
+            </>)}
+            {m.k === "pricing" && (<>
+              <div class="win">
+                <div class="sl">
+                  <label for="nav-team">Engineers on call <b class="n">40</b></label>
+                  <input id="nav-team" type="range" min="5" max="500" value="40" />
+                  <div class="pz">$25,000</div>
+                  <div class="ps">a year, at 5 engineers or 500</div>
+                </div>
+              </div>
+              <div class="tx"><p class="t1">One price, however big your team</p><p class="t2">Every feature, every user, in your cloud. Excluding VAT.</p><a class="go" href="/pricing">See pricing</a></div>
+            </>)}
+            {m.k === "articles" && (<>
+              <div class="win" aria-hidden="true">
+                <div class="glow c"></div>
+                <div class="rgw">
+                  <svg width="92" height="92" viewBox="0 0 100 100"><defs><linearGradient id="nav-rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFB199" /><stop offset="1" stop-color="#E5482A" /></linearGradient></defs><circle cx="50" cy="50" r="40" stroke="#2E2230" stroke-width="9" fill="none" /><circle class="arc" cx="50" cy="50" r="40" stroke="url(#nav-rg)" stroke-width="9" fill="none" stroke-linecap="round" stroke-dasharray="251" stroke-dashoffset="63" transform="rotate(-90 50 50)" /><text x="50" y="52" text-anchor="middle" font-family="Bricolage Grotesque Variable, sans-serif" font-weight="650" font-size="26" fill="#fff">4h</text><text x="50" y="67" text-anchor="middle" font-family="Geist Variable, sans-serif" font-size="9" fill="#fff">first report</text></svg>
+                  <p><b>DORA</b><br />First report due within 4 hours of classifying a major incident.</p>
+                </div>
+              </div>
+              <div class="tx"><p class="t1">The first hour decides the fine</p><p class="t2">What went wrong at TSB, and what the first hour needs now.</p><a class="go" href="/articles/the-first-hour-decides-the-fine">Read the article</a></div>
+            </>)}
+          </div>
+          <div class="cols">
+            {m.cols.map((c) => (
+              <div>{c.map((g) => (
+                <div class="grp"><p class="gh">{g.g}</p>
+                  {g.l.map((l) => l.soon ? <span class="lk soon">{l.t}<em>Publishing soon</em></span> : <a class="lk" href={l.h}>{l.t}</a>)}
+                </div>))}
+              </div>
+            ))}
+            {m.strip && <div class="strip">{m.strip.map((s) => <a href={s.h}>{s.t}</a>)}</div>}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</header>
+
+<style is:global>
+.r-nav{position:absolute;left:0;right:0;top:52px;z-index:30;font-family:var(--body);color:#0A0C10}
+.r-nav .in{position:relative;max-width:1240px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.r-nav .pl,.r-nav .pr{display:flex;align-items:center;background:rgba(255,255,255,.95);-webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4);border:1px solid #E3E8EF;border-radius:999px;box-shadow:0 10px 30px rgba(10,14,22,.12)}
+.r-nav .pl{padding:6px 6px 6px 18px;gap:14px}
+.r-nav .pr{padding:6px}
+.r-nav .lg{display:block;padding:4px 0}
+.r-nav ul{list-style:none;margin:0;padding:0;display:flex;gap:2px}
+.r-nav .it{appearance:none;border:0;background:transparent;display:inline-flex;align-items:center;gap:5px;padding:9px 13px;border-radius:999px;font-size:14.5px;color:#0A0C10;cursor:pointer;white-space:nowrap;transition:background .2s,color .2s}
+.r-nav .it:hover{background:#F1F3F6}
+.r-nav .it svg{transition:transform .3s}
+.r-nav .it[aria-expanded="true"]{background:#0A0C10;color:#fff}
+.r-nav .it[aria-expanded="true"] svg{transform:rotate(180deg)}
+/* Book a demo: lifts 2px while coral sweeps in from the left (tweak 6) */
+.r-nav .bk{position:relative;display:inline-flex;overflow:hidden;isolation:isolate;border-radius:999px;padding:10px 20px;font-size:14.5px;font-weight:600;background:#0A0C10;color:#fff;white-space:nowrap;transition:transform .35s cubic-bezier(.2,.7,.1,1),box-shadow .35s,color .35s}
+.r-nav .bk:before{content:'';position:absolute;inset:0;z-index:-1;background:#FF6B4A;transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.2,.7,.1,1)}
+.r-nav .bk:hover,.r-nav .bk:focus-visible{transform:translateY(-2px);color:#0A0C10;box-shadow:0 10px 24px rgba(255,107,74,.45)}
+.r-nav .bk:hover:before,.r-nav .bk:focus-visible:before{transform:scaleX(1)}
+.r-nav .bk:focus-visible{outline:2px solid #0A0C10;outline-offset:3px}
+.r-nav .bk:active{transform:translateY(0);box-shadow:0 4px 10px rgba(255,107,74,.35)}
+@media (prefers-reduced-motion:reduce){.r-nav .bk:hover,.r-nav .bk:focus-visible,.r-nav .bk:active{transform:none}}
+/* Mega menu */
+.r-nav .mm{position:absolute;left:32px;right:32px;top:calc(100% + 10px);pointer-events:none}
+.r-nav .pn{display:grid;grid-template-columns:300px minmax(0,1fr);background:#fff;border:1px solid #E3E8EF;border-radius:22px;box-shadow:0 30px 70px rgba(10,14,22,.22);overflow:hidden;padding:10px;opacity:0;transform:translateY(-6px);transition:opacity .25s,transform .35s cubic-bezier(.2,.7,.1,1)}
+.r-nav .pn[hidden]{display:none}
+.r-nav .pn.on{opacity:1;transform:none;pointer-events:auto}
+.r-nav .mcard{position:relative;display:flex;flex-direction:column;background:#07090E;color:#fff;border-radius:14px;padding:12px;min-height:340px;perspective:700px}
+.r-nav .win{position:relative;height:200px;border-radius:12px;overflow:hidden;border:1px solid #232C3C;background:#0B0F18;transition:transform .2s ease-out}
+.r-nav .tx{display:flex;flex-direction:column;flex:1;padding:16px 6px 6px}
+.r-nav .t1{margin:0;font-family:var(--display);font-variation-settings:'opsz' 48;font-weight:600;font-size:22px;letter-spacing:-.03em;line-height:1.08;color:#fff}
+.r-nav .t2{margin:7px 0 0;font-size:13px;line-height:1.45;color:#E9EEF5}
+.r-nav .go{align-self:flex-start;margin-top:auto;background:#fff;color:#0A0C10;border-radius:999px;padding:8px 14px;font-size:13px;font-weight:600;transition:background .2s}
+.r-nav .go:hover{background:#FFD9CC}
+.r-nav .cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px 28px;padding:18px 24px 14px;align-content:start}
+.r-nav .grp{margin-bottom:14px}
+.r-nav .gh{margin:0 0 8px;padding-bottom:8px;border-bottom:1px solid #EEF1F5;font-size:12.5px;font-weight:600;color:#3F66B0}
+.r-nav .lk{display:block;margin:0 -9px;padding:7px 9px;border-radius:8px;font-size:14px;line-height:1.3;color:#0A0C10;transition:background .15s}
+.r-nav a.lk:hover,.r-nav a.lk:focus-visible{background:#F3F5F9}
+.r-nav .lk.soon{color:#3E4652;cursor:default}
+.r-nav .lk.soon em{display:block;font-style:normal;font-size:11.5px;color:#5B6472;margin-top:2px}
+.r-nav .strip{grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap;padding-top:12px;border-top:1px solid #EEF1F5}
+.r-nav .strip a{font-size:13px;font-weight:600;border:1px solid #E3E8EF;border-radius:999px;padding:6px 13px;transition:background .15s}
+.r-nav .strip a:hover{background:#F3F5F9}
+/* Platform card */
+.r-nav .cbar{height:30px;display:flex;align-items:center;gap:7px;padding:0 12px;border-bottom:1px solid #232C3C;font-size:11.5px}
+.r-nav .cbar i{width:8px;height:8px;border-radius:50%;background:#FF6B4A;animation:rn-pulse 1.4s ease-in-out infinite}
+.r-nav .cbar b{font-weight:600}.r-nav .cbar span{margin-left:auto;color:#E9EEF5}
+.r-nav .crow{display:flex;justify-content:space-between;align-items:center;margin:10px 12px 0;font-size:11.5px;color:#E9EEF5}
+.r-nav .crow span{background:#141B28;border:1px solid #2A3548;border-radius:999px;padding:3px 9px;font-size:11px;color:#fff}
+.r-nav .crow span.ok{border-color:#2E7D5B}
+.r-nav .prg{margin:14px 12px 0;height:6px;border-radius:3px;background:#1C2433;overflow:hidden}
+.r-nav .prg div{height:100%;width:8%;background:linear-gradient(90deg,#FF6B4A,#3DAE80);animation:rn-prog 5s ease-in-out infinite}
+@keyframes rn-pulse{50%{opacity:.35}}
+@keyframes rn-prog{0%{width:8%}80%,100%{width:100%}}
+/* Solutions card: one bank's lights go out and come back */
+.r-nav .glow{position:absolute;inset:0;background:radial-gradient(70% 60% at 50% 0%,rgba(63,102,176,.35),transparent)}
+.r-nav .glow.c{background:radial-gradient(60% 60% at 15% 10%,rgba(255,107,74,.45),transparent)}
+.r-nav .sky{position:absolute;left:0;right:0;bottom:0;height:150px;display:flex;align-items:flex-end;gap:6px;padding:0 12px}
+.r-nav .bd{position:relative;flex:1;background:#0D121C;border:1px solid #1E2635;border-bottom:0}
+.r-nav .wn{position:absolute;inset:6px 3px 0;background-image:radial-gradient(#F2C27B 1.6px,transparent 2px);background-size:9px 11px}
+.r-nav .bd.out .wn{animation:rn-out 6s infinite}
+.r-nav .bd.out:after{content:'';position:absolute;left:50%;top:-15px;width:8px;height:8px;margin-left:-4px;border-radius:50%;background:#FF6B4A;opacity:0;animation:rn-alert 6s infinite}
+@keyframes rn-out{0%,38%{opacity:1}42%,68%{opacity:.06}72%,100%{opacity:1}}
+@keyframes rn-alert{0%,38%{opacity:0}42%,68%{opacity:1}72%,100%{opacity:0}}
+/* Trust Center card: live check */
+.r-nav .smp{position:absolute;right:10px;top:9px;font-size:11px;color:#D4DDEB}
+.r-nav .vlist{padding-top:26px}
+.r-nav .vr{display:flex;align-items:center;gap:9px;margin:6px 12px 0;padding:6px 9px;border-radius:9px;background:#0F1522;border:1px solid #26324A;transition:border-color .3s}
+.r-nav .vr b{display:block;font-size:12px;font-weight:600;color:#fff}.r-nav .vr small{display:block;font-size:10.5px;color:#BFD0EE}
+.r-nav .vr .ic{width:16px;height:16px;border-radius:50%;flex:none;border:2px solid #3A4A68;border-top-color:#BFD0EE;animation:rn-spin .8s linear infinite}
+.r-nav .vr.ok{border-color:#2E7D5B}
+.r-nav .vr.ok .ic{animation:none;border:0;background:#3DAE80 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.3 2.3 4.7-4.8' stroke='%2305070C' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") center/16px}
+.r-nav .vf{position:absolute;left:12px;right:12px;bottom:9px;font-size:11.5px;font-weight:600;color:#7FE0B4;opacity:0;transition:opacity .3s}
+.r-nav .vf.on{opacity:1}
+@keyframes rn-spin{to{transform:rotate(360deg)}}
+/* Pricing card: team size slider */
+.r-nav .sl{padding:30px 16px}
+.r-nav .sl label{display:flex;justify-content:space-between;font-size:12.5px;color:#E9EEF5}
+.r-nav .sl label b{color:#fff;font-variant-numeric:tabular-nums}
+.r-nav .sl input{width:100%;margin:12px 0 14px;accent-color:#FF6B4A;cursor:pointer}
+.r-nav .pz{font-family:var(--display);font-weight:650;font-size:42px;letter-spacing:-.05em;line-height:1;color:#fff;transition:color .25s}
+.r-nav .pz.fl{color:#FF8A66}
+.r-nav .ps{font-size:12px;color:#E9EEF5;margin-top:5px}
+/* Articles card: deadline ring */
+.r-nav .rgw{position:absolute;inset:0 14px;display:flex;gap:12px;align-items:center}
+.r-nav .rgw svg{flex:none}
+.r-nav .rgw p{margin:0;font-size:12.5px;line-height:1.4;color:#fff}
+.r-nav .rgw p b{display:inline-block;background:#FF6B4A;color:#0A0C10;border-radius:999px;padding:2px 8px;font-size:11px;margin-bottom:6px}
+.r-nav .pn.on .arc{animation:rn-ring 1.2s cubic-bezier(.2,.7,.1,1) both}
+@keyframes rn-ring{from{stroke-dashoffset:251}}
+@media (max-width:1100px){.r-nav .it{padding:9px 9px;font-size:14px}.r-nav .pn{grid-template-columns:260px minmax(0,1fr)}.r-nav .cols{gap:4px 18px;padding:16px 16px 12px}}
+@media (max-width:980px){.r-nav ul,.r-nav .mm{display:none}.r-nav .pl{padding:6px 18px}}
+@media (max-width:640px){.r-nav{top:48px}.r-nav .in{padding:0 16px}.r-nav .bk{padding:9px 16px;font-size:14px}}
+</style>
+
+<script>
+const root = document.querySelector<HTMLElement>("[data-nav]");
+if (root) {
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const hoverable = matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const btns = [...root.querySelectorAll<HTMLButtonElement>(".it")];
+  const panels = new Map([...root.querySelectorAll<HTMLElement>(".pn")].map((p) => [p.dataset.p!, p]));
+  let cur = "";
+  let stop: (() => void) | null = null;
+  let openT = 0, closeT = 0;
+
+  const inits: Record<string, (p: HTMLElement) => (() => void) | void> = {
+    trust(p) {
+      const rows = [...p.querySelectorAll<HTMLElement>(".vr")];
+      const vf = p.querySelector<HTMLElement>(".vf")!;
+      const reset = () => { rows.forEach((r) => r.classList.remove("ok")); vf.classList.remove("on"); };
+      if (reduce) { rows.forEach((r) => r.classList.add("ok")); vf.classList.add("on"); return; }
+      reset();
+      let s = 0;
+      const t = window.setInterval(() => {
+        s++;
+        if (s <= 3) rows[s - 1].classList.add("ok");
+        if (s === 4) vf.classList.add("on");
+        if (s === 8) { reset(); s = 0; }
+      }, 800);
+      return () => window.clearInterval(t);
+    },
+    pricing(p) {
+      const r = p.querySelector<HTMLInputElement>("input")!;
+      const n = p.querySelector<HTMLElement>(".n")!;
+      const z = p.querySelector<HTMLElement>(".pz")!;
+      let to = 0;
+      r.oninput = () => { n.textContent = r.value; z.classList.add("fl"); window.clearTimeout(to); to = window.setTimeout(() => z.classList.remove("fl"), 300); };
+    },
+  };
+
+  function tilt(p: HTMLElement) {
+    const card = p.querySelector<HTMLElement>(".mcard"), win = p.querySelector<HTMLElement>(".win");
+    if (!card || !win || reduce || !hoverable) return;
+    card.onmousemove = (e) => {
+      const b = win.getBoundingClientRect(), x = (e.clientX - b.left) / b.width - 0.5, y = (e.clientY - b.top) / b.height - 0.5;
+      win.style.transform = `rotateY(${(x * 8).toFixed(2)}deg) rotateX(${(-y * 8).toFixed(2)}deg)`;
+    };
+    card.onmouseleave = () => { win.style.transform = ""; };
+  }
+
+  function open(k: string) {
+    window.clearTimeout(closeT);
+    if (k === cur) return;
+    stop?.(); stop = null;
+    const prev = panels.get(cur);
+    if (prev) { prev.classList.remove("on"); prev.hidden = true; }
+    cur = k;
+    btns.forEach((b) => b.setAttribute("aria-expanded", String(b.dataset.k === k)));
+    const p = panels.get(k)!;
+    p.hidden = false;
+    void p.offsetWidth;
+    p.classList.add("on");
+    stop = inits[k]?.(p) || null;
+    tilt(p);
+  }
+
+  function close(focusBtn = false) {
+    window.clearTimeout(openT);
+    if (!cur) return;
+    const p = panels.get(cur)!;
+    const was = cur;
+    stop?.(); stop = null;
+    p.classList.remove("on");
+    btns.forEach((b) => b.setAttribute("aria-expanded", "false"));
+    cur = "";
+    window.setTimeout(() => { if (cur !== was) p.hidden = true; }, 260);
+    if (focusBtn) btns.find((b) => b.dataset.k === was)?.focus();
+  }
+
+  btns.forEach((b) => {
+    const k = b.dataset.k!;
+    b.addEventListener("click", () => (cur === k ? close() : open(k)));
+    if (hoverable) {
+      b.addEventListener("mouseenter", () => { window.clearTimeout(openT); openT = window.setTimeout(() => open(k), cur ? 0 : 80); });
+      b.addEventListener("mouseleave", () => window.clearTimeout(openT));
+    }
+  });
+  if (hoverable) {
+    root.addEventListener("mouseenter", () => window.clearTimeout(closeT));
+    root.addEventListener("mouseleave", () => { window.clearTimeout(openT); closeT = window.setTimeout(() => close(), 180); });
+  }
+  root.addEventListener("keydown", (e) => { if (e.key === "Escape" && cur) { e.preventDefault(); close(true); } });
+  root.addEventListener("focusout", (e) => { if (!root.contains(e.relatedTarget as Node | null)) close(); });
+  document.addEventListener("click", (e) => { if (cur && !root.contains(e.target as Node)) close(); });
+}
+</script>

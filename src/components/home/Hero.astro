@@ -1,16 +1,11 @@
 ---
-import Wordmark from "../Wordmark.astro";
+import Nav from "../Nav.astro";
 ---
 <section class="r-hero" aria-labelledby="hero-title">
   <div class="lower" aria-hidden="true"></div>
   <canvas class="fl" aria-hidden="true"></canvas>
   <div class="bar">New: replay one of your past outages and see the minutes you would save. <a href="/replay"><u>Try it free</u></a></div>
-  <nav class="nav" aria-label="Main">
-    <a href="/" aria-label="Relyxus home"><Wordmark id="wm-hero" color="#0A0C10" width={86} /></a>
-    <a href="/product" class="first">Platform</a><a href="/solutions/banks">Solutions</a><a href="/trust">Trust Center</a><a href="/pricing">Pricing</a><a href="/articles">Articles</a>
-    <span class="sp"></span>
-    <a href="/demo" class="si">Live demo</a><a href="/demo#book" class="btn b1 sm">Book a demo</a>
-  </nav>
+  <Nav />
   <div class="copy">
     <h1 id="hero-title">Every <span class="slot"></span> goes down.<br />The best come back first.</h1>
     <p class="sub">Relyxus finds what broke, gets the fix approved by the right people and writes the record your regulator asks for. It runs inside your own cloud.</p>
@@ -37,12 +32,8 @@ import Wordmark from "../Wordmark.astro";
 .r-hero .lower:before{content:'';position:absolute;left:0;right:0;top:-140px;height:140px;background:linear-gradient(rgba(11,13,17,0),#0B0D11)}
 .r-hero .bar{position:absolute;left:0;right:0;top:0;height:36px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:13px;z-index:6;color:#3E4652;border-bottom:1px solid #E3E8EF;background:rgba(255,255,255,.6)}
 .r-hero .bar u{color:#0A0C10;text-underline-offset:3px}
-.r-hero .nav{position:absolute;left:0;right:0;top:52px;max-width:1240px;margin:0 auto;padding:0 32px;height:40px;display:flex;align-items:center;gap:24px;font-size:14.5px;z-index:6}
-.r-hero .nav a{color:#0A0C10}.r-hero .nav a.first{margin-left:18px}.r-hero .nav .si{color:#3E4652}
-.r-hero .nav .sp{flex:1}
 .r-hero .btn{border-radius:999px;padding:11px 20px;font-size:14.5px;font-weight:500;display:inline-block;white-space:nowrap;transition:transform .2s}
 .r-hero .btn:hover{transform:translateY(-1px)}
-.r-hero .btn.sm{padding:8px 16px;font-size:14px}
 .r-hero .b1{background:#0A0C10;color:#fff!important}.r-hero .b2{border:1px solid #C9D1DC;color:#0A0C10;background:rgba(255,255,255,.75)}
 .r-hero .copy{position:absolute;left:0;right:0;top:140px;text-align:center;z-index:5;padding:0 20px}
 .r-hero h1{font-family:var(--display);font-variation-settings:'opsz' 96;font-weight:680;font-size:clamp(40px,5vw,68px);line-height:1.03;letter-spacing:-.04em;margin:0;color:#000}
@@ -100,7 +91,6 @@ import Wordmark from "../Wordmark.astro";
 .r-hero .proof b{display:block;font-weight:300;font-size:34px;letter-spacing:-.04em;line-height:1}
 .r-hero .proof span{display:block;font-size:13px;margin-top:6px;line-height:1.35;color:#C9CED6}
 @media (max-width:980px){
-  .r-hero .nav a:not(.b1):not(:first-child){display:none}
   .r-hero .con{width:94%;margin-left:-47%;grid-template-columns:1fr}.r-hero .con .sd{display:none}
   .r-hero .f1,.r-hero .f2{display:none}
 }

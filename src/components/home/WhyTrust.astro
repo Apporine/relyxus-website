@@ -1,0 +1,69 @@
+---
+// Why trust us (tweak 16, 15 Nov 2026): the five promises from the Trust
+// Center, each enforced by the product, and the honest status of every
+// certificate with its date. Rows light one by one like a chain being checked.
+const promises: [string, string][] = [
+  ["Never see your incident data", "No standing access. A support session needs your admins' approval and lasts four hours at most."],
+  ["Never show the AI an account number", "Card, sort code, account, IBAN and NI numbers are redacted before any model sees them."],
+  ["Never run a fix without a person", "Every risky fix needs two named approvers, and the proposer can never approve it."],
+  ["Never edit the record", "An append only, hash chained log, with evidence locked for seven years."],
+  ["Never hold your data hostage", "Every setting exports as YAML and every piece of evidence as files, any day."],
+];
+const status: [string, string][] = [["ok", "Runs in your cloud, by design"], ["ok", "UK GDPR processor terms, in place"], ["nx", "Penetration test, before first go live"], ["np", "SOC 2, not yet started"]];
+---
+<section class="r-why" aria-labelledby="why-title">
+  <div class="inner">
+    <div class="l">
+      <h2 class="T" id="why-title">Built to be checked, <span>not believed.</span></h2>
+      <p class="lead">Relyxus runs inside your production systems, so it was built for your risk team first. Five promises the product enforces, and every certificate shown with its real status.</p>
+      <ul class="sts">{status.map(([k, t]) => <li><i class={k}></i>{t}</li>)}</ul>
+      <a class="b1" href="/trust">Open the Trust Center</a>
+    </div>
+    <ol class="pr" data-why>
+      {promises.map(([h, p], i) => (
+        <li><em>{String(i + 1).padStart(2, "0")}</em><div><b>{h}</b><p>{p}</p></div><span class="ck">Enforced in the product</span></li>
+      ))}
+      <li class="sum"><span>Hash chain intact</span><b data-why-n>0 of 5 checked</b></li>
+    </ol>
+  </div>
+</section>
+<style is:global>
+.r-why{position:relative;overflow:hidden;padding:120px 0;background:radial-gradient(40% 60% at 0% 0%,rgba(61,174,128,.18),transparent 70%),radial-gradient(40% 60% at 100% 100%,rgba(159,180,214,.16),transparent 70%),#0B0D11;color:#fff;font-family:var(--body)}
+.r-why .inner{position:relative;max-width:1240px;margin:0 auto;padding:0 36px;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:72px;align-items:start}
+.r-why .T{font-family:var(--display);font-variation-settings:'opsz' 96;font-weight:500;font-size:clamp(32px,3.8vw,50px);line-height:1.05;letter-spacing:-.035em;margin:0;color:#fff}
+.r-why .T span{color:#9FB4D6}
+.r-why .lead{font-size:18px;line-height:1.55;color:#D4DBE5;margin:20px 0 0}
+.r-why .sts{list-style:none;padding:0;margin:28px 0 0;display:grid;gap:10px}
+.r-why .sts li{display:flex;align-items:center;gap:10px;font-size:15px;color:#E9EEF5}
+.r-why .sts i{width:9px;height:9px;border-radius:50%}
+.r-why .sts i.ok{background:#3DAE80}.r-why .sts i.nx{background:#F2C27B}.r-why .sts i.np{background:#9FB4D6}
+.r-why .b1{display:inline-flex;margin-top:32px;padding:14px 24px;border-radius:999px;background:#fff;color:#0A0C10;font-size:15.5px;font-weight:600;transition:transform .2s}
+.r-why .b1:hover{transform:translateY(-2px)}
+.r-why .pr{list-style:none;margin:0;padding:0;border-radius:24px;border:1px solid #232C3C;background:rgba(14,19,29,.8);overflow:hidden}
+.r-why .pr li{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:14px;align-items:start;padding:20px 24px;border-bottom:1px solid #1C2433;transition:background .4s}
+.r-why .pr em{font-style:normal;font-family:var(--display);font-weight:600;font-size:22px;color:#FF8A66}
+.r-why .pr b{display:block;font-size:17px;font-weight:600;color:#fff}
+.r-why .pr p{font-size:14.5px;line-height:1.5;color:#D4DBE5;margin:5px 0 0}
+.r-why .pr .ck{font-size:12.5px;font-weight:600;padding:5px 11px;border-radius:999px;background:#1C2433;color:#C9D3E3;white-space:nowrap;transition:background .4s,color .4s}
+.r-why .pr li.on .ck{background:#123326;color:#8BE6BE}
+.r-why .pr li.on{background:rgba(61,174,128,.06)}
+.r-why .pr .sum{display:flex;justify-content:space-between;align-items:center;border-bottom:0;background:#0E131D;font-size:14px;color:#C9D3E3}
+.r-why .pr .sum b{font-size:15px;color:#8BE6BE}
+@media (max-width:1023px){.r-why{padding:88px 0}.r-why .inner{grid-template-columns:minmax(0,1fr);gap:48px}}
+@media (max-width:620px){.r-why .inner{padding:0 20px}.r-why .pr li{grid-template-columns:34px minmax(0,1fr);padding:18px}.r-why .pr .ck{grid-column:2;justify-self:start}}
+</style>
+<script>
+const list = document.querySelector<HTMLElement>("[data-why]");
+if (list) {
+  const rows = [...list.querySelectorAll<HTMLElement>("li:not(.sum)")], n = list.querySelector<HTMLElement>("[data-why-n]")!;
+  const set = (k: number) => { rows.forEach((r, i) => r.classList.toggle("on", i < k)); n.textContent = k >= rows.length ? `${rows.length} of ${rows.length} verified` : `${k} of ${rows.length} checked`; };
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) set(rows.length);
+  else {
+    let k = 0, timer = 0;
+    new IntersectionObserver((e) => {
+      if (e[0].isIntersecting && !timer) timer = window.setInterval(() => { k = k > rows.length + 2 ? 0 : k + 1; set(Math.min(k, rows.length)); }, 900);
+      else if (!e[0].isIntersecting && timer) { window.clearInterval(timer); timer = 0; }
+    }, { threshold: 0.3 }).observe(list);
+  }
+}
+</script>

@@ -1,0 +1,78 @@
+---
+// How it works (tweak 16, 15 Nov 2026): the real resolve loop in five steps,
+// as the product runs it. A light runs along the track and lights each step.
+const steps: [string, string, string, string][] = [
+  ["03:12", "One incident, one person", "Alerts from every tool become one incident. One person is paged by Slack, text and a phone call.", "#FF6B4A"],
+  ["03:16", "The cause, with evidence", "Vigil ranks the likely causes and cites the release, the metric and the log line behind each.", "#FFB199"],
+  ["03:19", "Two people approve", "Relyxus proposes the fix and checks it against your policy. Two named people sign with a passkey.", "#9FB4D6"],
+  ["03:21", "It runs, then it checks", "An agent inside your cloud runs the fix, watches the error rate and rolls back if it did not work.", "#5C8BD6"],
+  ["03:23", "Every report drafted", "Each regulator clock starts from the record. The reports wait for a named person to sign.", "#3DAE80"],
+];
+---
+<section class="r-how" aria-labelledby="how-title">
+  <div class="inner">
+    <div class="top">
+      <h2 class="T" id="how-title">How Relyxus brings you back. <span>Five steps, one record, nothing runs without your people.</span></h2>
+      <a class="lk" href="/product">See the product tour</a>
+    </div>
+    <ol class="track" data-how>
+      <li class="rail" aria-hidden="true"><i></i></li>
+      {steps.map(([t, h, p, c], i) => (
+        <li class="st" style={`--c:${c}`} data-i={i}>
+          <span class="dot" aria-hidden="true"></span>
+          <em>{t}</em>
+          <b>{h}</b>
+          <p>{p}</p>
+        </li>
+      ))}
+    </ol>
+    <p class="note">Times from a sample incident. Database failover and backup restore always stay with a person.</p>
+  </div>
+</section>
+<style is:global>
+.r-how{position:relative;overflow:hidden;padding:120px 0 104px;background:#fff;color:#0A0C10;font-family:var(--body)}
+.r-how .inner{position:relative;max-width:1240px;margin:0 auto;padding:0 36px}
+.r-how .top{display:flex;justify-content:space-between;align-items:flex-end;gap:40px}
+.r-how .T{font-family:var(--display);font-variation-settings:'opsz' 96;font-weight:500;font-size:clamp(30px,3.6vw,46px);line-height:1.08;letter-spacing:-.035em;margin:0;max-width:820px;color:#0A0C10}
+.r-how .T span{color:#3F66B0}
+.r-how .lk{flex:none;font-size:15px;font-weight:600;padding:12px 20px;border-radius:999px;border:1px solid #C9D1DC;transition:transform .2s}
+.r-how .lk:hover{transform:translateY(-2px)}
+.r-how .track{position:relative;list-style:none;margin:72px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:28px}
+.r-how .rail{position:absolute;left:0;right:0;top:9px;height:2px;background:#E3E8EF}
+.r-how .rail i{position:absolute;left:0;top:0;bottom:0;width:var(--fill,0%);background:linear-gradient(90deg,#FF6B4A,#FFB199 25%,#9FB4D6 55%,#3DAE80);transition:width .8s cubic-bezier(.2,.7,.1,1)}
+.r-how .st{position:relative;padding-top:40px}
+.r-how .dot{position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;background:#fff;border:2px solid #C9D1DC;transition:border-color .4s,box-shadow .4s,background .4s}
+.r-how .st.on .dot{border-color:var(--c);background:var(--c);box-shadow:0 0 0 7px color-mix(in srgb,var(--c) 22%,transparent)}
+.r-how .st em{display:block;font-style:normal;font-family:var(--display);font-weight:600;font-size:30px;letter-spacing:-.03em;color:#0A0C10}
+.r-how .st b{display:block;font-size:18px;font-weight:600;margin-top:10px;color:#0A0C10}
+.r-how .st p{font-size:15px;line-height:1.55;color:#2B3340;margin:8px 0 0}
+.r-how .note{margin:44px 0 0;font-size:13.5px;color:#3E4652}
+@media (max-width:1023px){
+  .r-how{padding:88px 0 72px}
+  .r-how .top{flex-direction:column;align-items:flex-start;gap:24px}
+  .r-how .track{grid-template-columns:minmax(0,1fr);gap:0;margin-top:48px;padding-left:36px}
+  .r-how .rail{left:9px;right:auto;top:0;bottom:0;width:2px;height:auto}
+  .r-how .rail i{width:2px;height:var(--fill,0%);transition:height .8s}
+  .r-how .st{padding:0 0 32px}
+  .r-how .dot{left:-36px}
+  .r-how .st em{font-size:24px}
+}
+@media (max-width:620px){.r-how .inner{padding:0 20px}}
+</style>
+<script>
+const track = document.querySelector<HTMLElement>("[data-how]");
+if (track) {
+  const st = [...track.querySelectorAll<HTMLElement>(".st")];
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const show = (n: number) => { st.forEach((s, i) => s.classList.toggle("on", i < n)); track.style.setProperty("--fill", n ? `${Math.min(100, ((n - 0.5) / st.length) * 100)}%` : "0%"); };
+  if (reduce) show(st.length);
+  else {
+    let n = 0, timer = 0;
+    const run = () => { n = n >= st.length + 2 ? 0 : n + 1; show(Math.min(n, st.length)); };
+    new IntersectionObserver((e) => {
+      if (e[0].isIntersecting && !timer) { run(); timer = window.setInterval(run, 1400); }
+      else if (!e[0].isIntersecting && timer) { window.clearInterval(timer); timer = 0; }
+    }, { threshold: 0.3 }).observe(track);
+  }
+}
+</script>

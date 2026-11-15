@@ -2,29 +2,32 @@
 import Base from "../layouts/Base.astro";
 import Hero from "../components/home/Hero.astro";
 import Marquee from "../components/home/Marquee.astro";
-import StatusBand from "../components/home/StatusBand.astro";
 import RegulatorOutbox from "../components/home/RegulatorOutbox.astro";
 import Bento from "../components/home/Bento.astro";
 import ReplayMinutes from "../components/home/ReplayMinutes.astro";
 import Stakes from "../components/home/Stakes.astro";
 import VigilSection from "../components/home/VigilSection.astro";
 import OneNight from "../components/home/OneNight.astro";
-import Spotlight from "../components/home/Spotlight.astro";
+import HowItWorks from "../components/home/HowItWorks.astro";
+import WhyTrust from "../components/home/WhyTrust.astro";
+import PriceBand from "../components/home/PriceBand.astro";
 import ThreeWays from "../components/home/ThreeWays.astro";
 import Footer from "../components/Footer.astro";
 ---
 <Base title="Relyxus: every bank goes down, the best come back first" description="Relyxus finds what broke, proposes the fix, runs it once the right people approve and drafts your regulator report as it goes. It runs inside your own cloud.">
   <main id="main">
+    <!-- Order locked by tweak 16, 15 Nov 2026. The articles spotlight returns once three articles are published. -->
     <Hero />
     <Marquee />
-    <StatusBand />
-    <RegulatorOutbox />
-    <Bento />
-    <ReplayMinutes />
     <Stakes />
+    <RegulatorOutbox />
+    <HowItWorks />
+    <Bento />
     <VigilSection />
     <OneNight />
-    <Spotlight />
+    <ReplayMinutes />
+    <WhyTrust />
+    <PriceBand />
     <ThreeWays />
   </main>
   <Footer />

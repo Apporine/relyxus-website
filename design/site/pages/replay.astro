@@ -1,0 +1,181 @@
+---
+import Page from "../layouts/Page.astro";
+const log = [
+  ["03:12:04", "PagerDuty", "Paged <x>Sam Taylor</x> (payments primary) for card-auth 5xx"],
+  ["03:14:40", "Slack", "<x>Emma Clarke</x>: anyone looking at card auth?"],
+  ["03:31:09", "Slack", "<x>Sam Taylor</x>: online, checking Grafana"],
+  ["03:58:22", "Zoom", "Bridge opened by <x>Raj Kapoor</x>, 9 joined"],
+  ["04:46:13", "GitHub", "Release 4.18.2 by <x>d.reyes@yourbank.co.uk</x> spotted in deploy log"],
+  ["05:20:51", "Email", "Rollback approved by <x>Emma Clarke</x>, duty manager"],
+];
+---
+<Page title="Replay my outage | Relyxus" description="Send one past incident. In a few days you get a report your board will read, showing where the minutes went." path="/replay" tone="dark" current="">
+  <!-- 1 Hero: the form is the hero -->
+  <section class="k-sec k-navy rp-hero">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="wrap k-split">
+      <div>
+        <span class="k-tag"><i class="d"></i>Free outage replay</span>
+        <h1 class="k-h1" style="margin-top:16px">Send us your worst night.<br /><span>Get back the hour you lost.</span></h1>
+        <p class="k-lede">Upload one past incident: the postmortem, a chat export or a timeline. We replay it through Relyxus and show you, minute by minute, where the time went and what would have been different.</p>
+        <ul class="ticks"><li><i class="ti ti-check"></i>Free, and nothing to install</li><li><i class="ti ti-check"></i>Your report in a few working days</li><li><i class="ti ti-check"></i>Deleted when we are done, never used to train AI</li></ul>
+      </div>
+      <form class="drop k-card" onsubmit="event.preventDefault()">
+        <div class="dz"><i class="ti ti-file-upload"></i><b>Drop your incident here</b><span>Postmortem, timeline, chat or ticket export. PDF, DOCX, CSV, JSON or TXT.</span></div>
+        <div class="file"><i class="ti ti-file-text"></i><div><b>inc-1873-postmortem.pdf</b><small>Card payments outage, 2.1 MB</small></div><span class="ok"><i class="ti ti-circle-check"></i>Ready</span></div>
+        <label>Your role<select><option>Head of operations</option><option>Head of SRE</option><option>CTO or CIO</option><option>Operational resilience</option></select></label>
+        <label>Work email<input type="email" placeholder="name@yourbank.co.uk" /></label>
+        <button class="k-b3 go" type="submit">Replay my outage <i class="ti ti-arrow-right"></i></button>
+        <p class="fine">By sending this you agree to the <a href="/legal/replay-terms">Replay Audit Terms</a>. Remove names first; we only need the times and events.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- 2 How it works: film strip -->
+  <section class="k-sec k-white rp-film">
+    <div class="wrap">
+      <h2 class="k-h2">Three steps. <span>Nothing to install.</span></h2>
+      <div class="strip">
+        <div class="holes" aria-hidden="true"></div>
+        <div class="frames">
+          <article><em>Day 1</em><div class="pic p1"><i class="ti ti-upload"></i><span>inc-1873.pdf</span></div><h3 class="k-h3">You send one incident</h3><p>Any format. Remove the names first, keep the timestamps.</p></article>
+          <article><em>Days 2 to 4</em><div class="pic p2"><span class="lane l1"></span><span class="lane l2"></span><span class="lane l3"></span><span class="cur"></span></div><h3 class="k-h3">We replay it through Relyxus</h3><p>Every alert, page, decision and approval, run again with Relyxus in the loop.</p></article>
+          <article><em>Day 5</em><div class="pic p3"><b>123</b><span>minutes found</span></div><h3 class="k-h3">You get the report</h3><p>A board ready report and a 30 minute walkthrough with the team that built it.</p></article>
+        </div>
+        <div class="holes" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 What you get: fanned report pages -->
+  <section class="k-sec k-mist rp-fan" id="sample">
+    <div class="wrap k-split">
+      <div>
+        <h2 class="k-h2">A report your board will actually read.</h2>
+        <p class="k-lede">Four pages. The minutes found, the moments that cost them, what would have changed, and the regulator report you could have sent on time.</p>
+        <div class="k-btns"><a class="k-b1" href="#start">Replay my outage free</a><a class="k-b2" href="/media/sample-replay-report.pdf">Download a sample</a></div>
+        <p class="k-note">The sample uses an example incident, not a customer's.</p>
+      </div>
+      <div class="desk" aria-hidden="true">
+        <div class="pg g1"><b>Where the minutes went</b><div class="bars"><i style="width:52%;background:#FF5A36"></i><i style="width:23%;background:#FFB08F"></i><i style="width:13%;background:#9FB4D6"></i><i style="width:4%;background:#BDEBD6"></i></div><div class="lines"><span></span><span></span><span></span></div></div>
+        <div class="pg g2"><b>The night, replayed</b><div class="tl"><span></span><span></span><span class="c"></span><span></span><span class="c"></span><span></span></div></div>
+        <div class="pg g3"><small>Outage replay, INC 1873</small><div class="big">123<span>minutes found</span></div><div class="lines"><span></span><span></span><span></span><span></span></div><div class="lens"><span>134 min to recover<br /><b>11 min with Relyxus</b></span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 What to send: redaction -->
+  <section class="k-sec k-dark rp-red">
+    <div class="wrap k-split">
+      <div class="logbox k-card" aria-label="A sample incident log with personal details blacked out">
+        <div class="lh"><span>slack-export-inc-1873.txt</span><span class="k-pill" style="background:#13261E;color:#8BE6BE">Names removed</span></div>
+        {log.map(([t, src, msg]) => <div class="lr"><em>{t}</em><span class="src">{src}</span><span set:html={msg.replace(/<x>(.*?)<\/x>/g, '<mark><span>$1</span></mark>')}></span></div>)}
+      </div>
+      <div>
+        <h2 class="k-h2">Remove the names. <span>Keep the timestamps.</span></h2>
+        <p class="k-lede">The replay needs what happened and when, not who. Black out names, emails and customer details before you send it. If anything slips through, we remove it on arrival.</p>
+        <ul class="keep"><li><b>Keep</b>Times, alerts, systems, decisions, approvals</li><li><b>Remove</b>Names, emails, phone numbers, customer data</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 Your data -->
+  <section class="k-sec k-white rp-seal">
+    <div class="wrap k-split">
+      <div>
+        <h2 class="k-h2">Your incident stays yours.</h2>
+        <p class="k-lede">We treat a replay the way your bank treats a supplier with sensitive data, under a data processing agreement you can read before you send anything.</p>
+        <ol class="rules"><li><b>Only for your report.</b> Nothing else, ever.</li><li><b>Never trains AI.</b> Not ours, not anyone's.</li><li><b>Kept in the UK,</b> encrypted at rest and in transit.</li><li><b>Deleted after delivery,</b> or sooner if you ask.</li></ol>
+      </div>
+      <div class="box" aria-hidden="true"><div class="lid"></div><div class="body"><span>INC 1873</span><b>Sealed</b></div><div class="stamp">Deleted after<br />your report</div></div>
+    </div>
+  </section>
+
+  <!-- 6 Three doors -->
+  <section class="k-sec k-dark rp-doors" id="start">
+    <div class="wrap">
+      <h2 class="k-h2">Start free, <span>go deeper, or run a pilot.</span></h2>
+      <div class="doors">
+        <a class="door open" href="#top" style="--c:#FF6B4A"><div class="in"><b>A report on your worst night</b><p>One incident, replayed. A board ready report and a 30 minute walkthrough.</p><span>Free</span></div><div class="lf"><em>Door 1</em><b>Replay one outage</b><i></i></div></a>
+        <a class="door" href="/demo#book" style="--c:#9FB4D6"><div class="in"><b>Three incidents, one working session</b><p>We replay three incidents and map them against your approval rules and regulator clocks.</p><span>Guided</span></div><div class="lf"><em>Door 2</em><b>Go deeper with our engineers</b><i></i></div></a>
+        <a class="door" href="/pricing#founding-partners" style="--c:#3DAE80"><div class="in"><b>Relyxus inside your cloud</b><p>A 30 day pilot on your real systems, with read only connectors and founder pricing after.</p><span>Pilot</span></div><div class="lf"><em>Door 3</em><b>Run a pilot</b><i></i></div></a>
+      </div>
+    </div>
+  </section>
+</Page>
+<style is:global>
+.rp-hero{padding:96px 0 104px}
+.rp-hero .glow{position:absolute;right:-200px;top:-200px;width:760px;height:620px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,107,74,.35),rgba(127,160,214,.18) 60%,transparent);filter:blur(20px)}
+.rp-hero .wrap{position:relative}
+.rp-hero .ticks{list-style:none;padding:0;margin:26px 0 0;display:flex;flex-direction:column;gap:10px;font-size:16px;color:#E9EEF5}
+.rp-hero .ticks i{color:#8BE6BE;margin-right:8px}
+.rp-hero .drop{padding:22px;display:flex;flex-direction:column;gap:14px;box-shadow:0 40px 90px rgba(0,0,0,.45)}
+.rp-hero .dz{border:2px dashed #3A4458;border-radius:14px;padding:26px 20px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;background:linear-gradient(180deg,rgba(255,107,74,.08),transparent);animation:rp-ants 1.2s linear infinite}
+@keyframes rp-ants{50%{border-color:#FF8A66}}
+.rp-hero .dz i{font-size:34px;color:#FF8A66}.rp-hero .dz b{font-size:17px}.rp-hero .dz span{font-size:13.5px;color:#C9D1DC;max-width:36ch}
+.rp-hero .file{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:center;padding:12px 14px;border:1px solid #232B3A;border-radius:12px;background:#0E1320}
+.rp-hero .file>i{font-size:24px;color:#9FB4D6}.rp-hero .file b{display:block;font-size:14.5px}.rp-hero .file small{color:#C9D1DC;font-size:12.5px}
+.rp-hero .file .ok{font-size:12.5px;font-weight:600;color:#8BE6BE;display:inline-flex;align-items:center;gap:5px}
+.rp-hero label{display:flex;flex-direction:column;gap:6px;font-size:13.5px;color:#C9D1DC}
+.rp-hero select,.rp-hero input{font:inherit;font-size:15px;color:#fff;background:#0E1320;border:1px solid #2C3546;border-radius:10px;padding:11px 12px}
+.rp-hero input::placeholder{color:#8F9AAD}
+.rp-hero .go{justify-content:center;font-weight:600}
+.rp-hero .fine{font-size:12.5px;color:#C9D1DC;margin:0;line-height:1.5}.rp-hero .fine a{color:#fff;text-decoration:underline}
+.rp-film .strip{margin-top:48px;background:#0A0C10;border-radius:18px;padding:0 18px}
+.rp-film .holes{height:26px;background-image:radial-gradient(circle,#2A2F37 5px,transparent 5.5px);background-size:30px 26px;background-position:center;animation:rp-holes 3s linear infinite}
+@keyframes rp-holes{to{background-position:30px center}}
+.rp-film .frames{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.rp-film article{background:#fff;border-radius:12px;padding:18px;color:#0A0C10}
+.rp-film article em{font-style:normal;font-size:13px;font-weight:600;color:#3F66B0}
+.rp-film article p{font-size:15px;color:#3E4652;line-height:1.5;margin:8px 0 0}
+.rp-film .pic{height:150px;border-radius:10px;margin:12px 0 16px;background:#F3F5F9;position:relative;overflow:hidden;display:grid;place-items:center}
+.rp-film .p1 i{font-size:40px;color:#E5482A}.rp-film .p1 span{position:absolute;bottom:14px;font-size:13px;font-weight:600;background:#fff;border:1px solid #E3E8EF;border-radius:8px;padding:5px 10px}
+.rp-film .p2 .lane{position:absolute;left:14px;right:14px;height:10px;border-radius:5px}
+.rp-film .p2 .l1{top:34px;background:linear-gradient(90deg,#FF5A36 0 30%,#E9EDF2 30%)}.rp-film .p2 .l2{top:70px;background:linear-gradient(90deg,#E9EDF2 0 20%,#9FB4D6 20% 55%,#E9EDF2 55%)}.rp-film .p2 .l3{top:106px;background:linear-gradient(90deg,#E9EDF2 0 60%,#3DAE80 60%)}
+.rp-film .p2 .cur{position:absolute;top:18px;bottom:18px;width:2px;background:#0A0C10;left:14px;animation:rp-scan 3.2s ease-in-out infinite}
+@keyframes rp-scan{50%{left:calc(100% - 16px)}}
+.rp-film .p3{background:#0B0D11;color:#fff}.rp-film .p3 b{font-family:var(--display);font-size:64px;letter-spacing:-.05em;line-height:1;background:linear-gradient(90deg,#FFB08F,#FF6B4A);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.rp-film .p3 span{position:absolute;bottom:18px;font-size:13px;color:#C9D1DC}
+.rp-fan .desk{position:relative;height:460px}
+.rp-fan .pg{position:absolute;width:300px;height:390px;background:#fff;border:1px solid #E3E8EF;border-radius:12px;box-shadow:0 30px 60px rgba(20,30,50,.15);padding:22px;transition:transform .5s cubic-bezier(.2,.7,.1,1)}
+.rp-fan .pg b{font-size:15px}
+.rp-fan .g1{left:4%;top:40px;transform:rotate(-9deg)}.rp-fan .g2{left:24%;top:20px;transform:rotate(-2deg)}.rp-fan .g3{left:44%;top:30px;transform:rotate(6deg)}
+.rp-fan .desk:hover .g1{transform:rotate(-12deg) translate(-30px,-6px)}.rp-fan .desk:hover .g3{transform:rotate(8deg) translate(30px,-10px)}
+.rp-fan .bars{display:flex;flex-direction:column;gap:9px;margin:18px 0}.rp-fan .bars i{display:block;height:14px;border-radius:4px}
+.rp-fan .lines{display:flex;flex-direction:column;gap:8px;margin-top:16px}.rp-fan .lines span{height:8px;border-radius:4px;background:#EEF1F5}.rp-fan .lines span:nth-child(2n){width:80%}
+.rp-fan .tl{margin-top:18px;display:flex;flex-direction:column;gap:12px}.rp-fan .tl span{height:10px;border-radius:5px;background:#EEF1F5}.rp-fan .tl span.c{background:#FFD2C2}
+.rp-fan .g3 small{color:#5B6472;font-size:12px}.rp-fan .big{font-family:var(--display);font-size:84px;letter-spacing:-.05em;line-height:1;margin-top:10px;color:#0A0C10}
+.rp-fan .big span{display:block;font-family:var(--body);font-size:14px;letter-spacing:0;color:#3E4652;margin-top:4px}
+.rp-fan .lens{position:absolute;right:-40px;bottom:30px;width:170px;height:170px;border-radius:50%;background:#fff;border:6px solid #0A0C10;box-shadow:0 20px 40px rgba(0,0,0,.25);display:grid;place-items:center;text-align:center;font-size:13px;color:#3E4652;line-height:1.4}
+.rp-fan .lens b{color:#17694A;font-size:15px}
+.rp-red .logbox{padding:8px 0;font-size:14px;overflow:hidden}
+.rp-red .lh{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;border-bottom:1px solid #232B3A;font-size:13.5px;color:#C9D1DC}
+.rp-red .lr{display:grid;grid-template-columns:78px 78px 1fr;gap:12px;padding:12px 18px;border-bottom:1px solid #161C28;color:#E9EEF5;line-height:1.45}
+.rp-red .lr em{font-style:normal;color:#9FB4D6;font-variant-numeric:tabular-nums}.rp-red .lr .src{color:#C9D1DC}
+.rp-red mark{position:relative;background:transparent;color:inherit}
+.rp-red mark::after{content:"";position:absolute;left:-2px;right:-2px;top:1px;bottom:1px;background:#000;border:1px solid #2C3546;border-radius:3px;transform-origin:left;animation:rp-redact 4s ease-in-out infinite}
+@keyframes rp-redact{0%,15%{transform:scaleX(0)}35%,85%{transform:scaleX(1)}100%{transform:scaleX(0)}}
+.rp-red .keep{list-style:none;padding:0;margin:28px 0 0;display:flex;flex-direction:column;gap:12px}
+.rp-red .keep li{display:grid;grid-template-columns:90px 1fr;gap:12px;font-size:16px;color:#E9EEF5;padding:14px 16px;border:1px solid #232B3A;border-radius:12px}
+.rp-red .keep b{color:#8BE6BE}.rp-red .keep li:nth-child(2) b{color:#FF8A66}
+.rp-seal .rules{margin:28px 0 0;padding:0;list-style:none;counter-reset:r;display:flex;flex-direction:column;gap:12px}
+.rp-seal .rules li{font-size:17px;color:#3E4652;padding-left:44px;position:relative;line-height:1.5}
+.rp-seal .rules li b{color:#0A0C10}
+.rp-seal .rules li::before{counter-increment:r;content:counter(r);position:absolute;left:0;top:-1px;width:30px;height:30px;border-radius:50%;background:#0A0C10;color:#fff;font-size:13px;font-weight:600;display:grid;place-items:center}
+.rp-seal .box{position:relative;height:380px;display:grid;place-items:center}
+.rp-seal .box .body{width:300px;height:220px;border-radius:18px;background:linear-gradient(160deg,#141A26,#05070C);color:#fff;display:flex;flex-direction:column;justify-content:flex-end;padding:22px;box-shadow:0 40px 80px rgba(10,14,22,.35)}
+.rp-seal .box .body span{font-size:13px;color:#C9D1DC}.rp-seal .box .body b{font-family:var(--display);font-size:34px;letter-spacing:-.03em}
+.rp-seal .box .lid{position:absolute;top:58px;width:320px;height:44px;border-radius:12px;background:#232B3A;box-shadow:0 10px 20px rgba(0,0,0,.2)}
+.rp-seal .stamp{position:absolute;right:8%;top:40%;transform:rotate(-12deg);border:3px solid #E5482A;color:#E5482A;font-weight:700;font-size:15px;line-height:1.2;text-align:center;padding:10px 14px;border-radius:10px;background:rgba(255,255,255,.9);animation:rp-stamp 4s ease-in-out infinite}
+@keyframes rp-stamp{0%,20%{transform:rotate(-12deg) scale(1.6);opacity:0}30%,90%{transform:rotate(-12deg) scale(1);opacity:1}100%{opacity:0}}
+.rp-doors .doors{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:44px;perspective:1100px}
+.rp-doors .door{position:relative;height:360px;border-radius:18px;overflow:hidden;background:#0B0F18;border:1px solid #232B3A;display:block}
+.rp-doors .in{position:absolute;inset:0;padding:24px;display:flex;flex-direction:column;justify-content:flex-end;background:radial-gradient(120% 80% at 50% 100%,color-mix(in srgb,var(--c) 50%,transparent),transparent 70%)}
+.rp-doors .in b{font-size:19px}.rp-doors .in p{font-size:15px;line-height:1.5;color:#E6EBF2;margin:8px 0 14px}
+.rp-doors .in span{align-self:flex-start;font-size:13px;font-weight:600;background:#fff;color:#05070C;border-radius:999px;padding:5px 12px}
+.rp-doors .lf{position:absolute;inset:0;background:linear-gradient(160deg,#151B28,#0B0F18);border-right:1px solid #2C3546;transform-origin:left center;transition:transform .8s cubic-bezier(.2,.7,.1,1);display:flex;flex-direction:column;padding:24px}
+.rp-doors .lf em{font-style:normal;font-size:13px;color:#C9D1DC}.rp-doors .lf b{font-family:var(--display);font-size:28px;font-weight:500;letter-spacing:-.025em;line-height:1.12;margin-top:8px}
+.rp-doors .lf i{margin-top:auto;align-self:flex-end;width:10px;height:10px;border-radius:50%;background:var(--c);box-shadow:0 0 18px var(--c)}
+.rp-doors .door:hover .lf,.rp-doors .door:focus-visible .lf,.rp-doors .door.open .lf{transform:rotateY(-70deg)}
+@media (max-width:900px){.rp-film .frames,.rp-doors .doors{grid-template-columns:1fr}.rp-fan .desk{height:420px;transform:scale(.85)}}
+</style>

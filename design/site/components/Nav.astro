@@ -1,0 +1,28 @@
+---
+// Sticky top navigation for inner pages. tone "light" or "dark" matches the hero below it.
+import Wordmark from "./Wordmark.astro";
+interface Props { tone?: "light" | "dark"; current?: string }
+const { tone = "light", current = "" } = Astro.props;
+const links: [string, string][] = [["Platform", "/product"], ["Solutions", "/solutions/banks"], ["Trust Center", "/trust"], ["Pricing", "/pricing"], ["Articles", "/articles"]];
+---
+<header class={`k-nav ${tone}`}>
+  <div class="wrap row">
+    <a href="/" aria-label="Relyxus home"><Wordmark id={`wm-nav-${tone}`} color={tone === "dark" ? "#fff" : "#0A0C10"} width={86} /></a>
+    <nav aria-label="Main">{links.map(([t, h]) => <a href={h} class={current === h ? "on" : ""}>{t}</a>)}</nav>
+    <span class="sp"></span>
+    <a href="/demo" class="lnk">Live demo</a><a href="/demo#book" class="cta">Book a demo</a>
+  </div>
+</header>
+<style is:global>
+.k-nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;border-bottom:1px solid var(--line)}
+.k-nav.light{background:rgba(255,255,255,.94);backdrop-filter:saturate(1.4) blur(12px);color:var(--ink)}
+.k-nav.dark{background:rgba(5,7,12,.92);backdrop-filter:saturate(1.4) blur(12px);color:#fff;border-bottom-color:#1C2330}
+.k-nav .row{display:flex;align-items:center;gap:26px;height:64px}
+.k-nav nav{display:flex;gap:24px;margin-left:18px;font-size:14.5px}
+.k-nav nav a.on{text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:2px}
+.k-nav .sp{flex:1}.k-nav .lnk{font-size:14.5px}
+.k-nav .cta{font-size:14px;font-weight:500;border-radius:999px;padding:8px 16px}
+.k-nav.light .cta{background:#0A0C10;color:#fff}.k-nav.dark .cta{background:#fff;color:#05070C}
+.k-nav.dark .lnk{color:#C9D1DC}
+@media (max-width:900px){.k-nav nav,.k-nav .lnk{display:none}}
+</style>

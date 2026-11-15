@@ -1,0 +1,56 @@
+---
+import Page from "../layouts/Page.astro";
+const tries = [["Find the cause", "Ask Vigil why card payments are failing", "vigil"], ["Approve the fix", "Be the second approver on the restart", "approval"], ["Draft the regulator notice", "See every answer and its source", "report"], ["Tell customers", "Check the status page update before it goes", "status"], ["Replay the night", "Watch the incident again, event by event", "replay"]];
+const days = ["Mon 16", "Tue 17", "Wed 18", "Thu 19", "Fri 20"];
+const slots = [["10:00", "14:30"], ["09:30", "11:00", "16:00"], ["13:00"], ["10:30", "15:00"], ["09:00", "12:00"]];
+---
+<Page title="Live demo | Relyxus" description="Open Harbour Bank, a sample bank in the middle of an incident, in the real Relyxus console. Or book a call." path="/demo" tone="dark">
+  <section class="k-sec k-dark dm-hero">
+    <div class="wrap">
+      <div class="top"><span class="k-tag"><i class="d"></i>Live demo</span><h1 class="k-h1" style="margin-top:16px">Open a bank that is <span>having a bad night.</span></h1><p class="k-lede">Harbour Bank is a sample bank in the middle of a Severity 1. Walk through the real Relyxus console. No sign up, no sales call.</p></div>
+      <a class="enter" href="#" aria-label="Enter Harbour Bank">
+        <video muted playsinline loop autoplay preload="metadata" poster="/media/one-night/command.jpg" src="/media/one-night/command.mp4"></video>
+        <span class="btn"><i class="ti ti-player-play"></i>Enter Harbour Bank</span>
+        <span class="lbl">Sample data</span>
+      </a>
+    </div>
+  </section>
+  <section class="k-sec k-white dm-try">
+    <div class="wrap">
+      <h2 class="k-h2">Five things to try <span>in ten minutes.</span></h2>
+      <ol class="list">{tries.map(([t, d, k], i) => <li class={i < 2 ? "done" : ""}><span class="chk"><i class="ti ti-check"></i></span><div><b>{t}</b><small>{d}</small></div><img src={`/media/one-night/${k}-mid.jpg`} alt="" loading="lazy" /></li>)}</ol>
+    </div>
+  </section>
+  <section class="k-sec k-mist dm-book" id="book">
+    <div class="wrap k-split">
+      <div><h2 class="k-h2">Rather talk it through? <span>Pick a time.</span></h2><p class="k-lede">Thirty minutes with one of the people building Relyxus. Bring your hardest outage.</p></div>
+      <div class="cal k-card"><div class="ch"><b>November 2026</b><span>30 minutes, video call, UK time</span></div>
+        <div class="days">{days.map((d, i) => <div class="day"><em>{d}</em>{slots[i].map((s, j) => <button type="button" class={i === 1 && j === 1 ? "on" : ""}>{s}</button>)}</div>)}</div>
+        <p class="k-note" style="margin:16px 0 0">Times shown are an example. The live calendar shows real free slots.</p>
+      </div>
+    </div>
+  </section>
+</Page>
+<style is:global>
+.dm-hero{padding:96px 0 110px;background:radial-gradient(70% 60% at 50% 0%,rgba(127,160,214,.22),transparent 70%),#05070C}
+.dm-hero .top{text-align:center;max-width:860px;margin:0 auto}.dm-hero .top .k-lede{margin-left:auto;margin-right:auto}
+.dm-hero .enter{position:relative;display:block;margin:52px auto 0;max-width:1100px;border-radius:20px;overflow:hidden;border:1px solid #232B3A;box-shadow:0 60px 120px rgba(0,0,0,.6),0 0 0 8px rgba(127,160,214,.08)}
+.dm-hero video{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;filter:brightness(.6) saturate(.9);transition:filter .5s}
+.dm-hero .enter:hover video{filter:brightness(1)}
+.dm-hero .btn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:10px;background:#fff;color:#05070C;border-radius:999px;padding:18px 30px;font-size:19px;font-weight:600;box-shadow:0 20px 40px rgba(0,0,0,.4);transition:transform .3s}
+.dm-hero .enter:hover .btn{transform:translate(-50%,-50%) scale(1.05)}
+.dm-hero .lbl{position:absolute;right:16px;top:16px;background:rgba(5,7,12,.85);border:1px solid #2C3546;color:#E9EEF5;font-size:12.5px;font-weight:600;border-radius:999px;padding:5px 11px}
+.dm-try .list{list-style:none;padding:0;margin:40px 0 0;display:flex;flex-direction:column;gap:10px}
+.dm-try li{display:grid;grid-template-columns:44px 1fr 180px;gap:18px;align-items:center;padding:14px 16px;border:1px solid var(--line);border-radius:16px;transition:background .3s}
+.dm-try li:hover{background:#F6F8FA}
+.dm-try .chk{width:36px;height:36px;border-radius:50%;border:2px solid #C9D1DC;display:grid;place-items:center;color:transparent}
+.dm-try li.done .chk{background:#3DAE80;border-color:#3DAE80;color:#fff}
+.dm-try li b{font-size:18px}.dm-try li small{display:block;font-size:15px;color:var(--muted);margin-top:3px}
+.dm-try img{width:180px;height:100px;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
+.dm-book .cal{padding:22px}.dm-book .ch{display:flex;justify-content:space-between;gap:12px;font-size:14px}.dm-book .ch span{color:var(--muted-2)}
+.dm-book .days{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:18px}
+.dm-book .day em{display:block;font-style:normal;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:8px}
+.dm-book .day button{display:block;width:100%;margin-bottom:8px;border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 0;font-size:14px;cursor:pointer}
+.dm-book .day button.on,.dm-book .day button:hover{background:#0A0C10;color:#fff;border-color:#0A0C10}
+@media (max-width:760px){.dm-try li{grid-template-columns:44px 1fr}.dm-try img{display:none}.dm-book .days{grid-template-columns:repeat(3,1fr)}}
+</style>

@@ -1,0 +1,113 @@
+---
+import Page from "../layouts/Page.astro";
+const evidence = [["Security, load and resilience test report", "Our own testing: attack scans, load, soak and chaos tests", "Nov 2026", "Done"], ["46 automated security checks", "Run against every build of the installation kit", "Every release", "Passing"], ["Four eyes approval with passkeys", "Every production action needs two named people", "Built in", "Live"], ["External penetration test", "By a CREST accredited firm, summary letter shared", "Booking", "Next"], ["SOC 2 Type I", "Independent audit of our controls", "Planned", "Next"]];
+const promises = [["Never see your incident data", "It stays in your cloud. We have no copy and no access."], ["Never train AI on your data", "Not our models, not anyone's."], ["Never act without a person", "Every fix needs approval. Vigil prepares, people decide."], ["Never hide an answer's source", "Every AI answer links to the evidence behind it."], ["Never claim what we cannot show", "Every status on this page carries a date."]];
+const docs = [["Security pack", "Architecture, data flows, controls"], ["Test report summary", "Methods and results, Nov 2026"], ["Data Processing Agreement", "For support access and replays"], ["Software Licence Agreement", "The terms for installing Relyxus"], ["Vendor questionnaire", "Pre filled answers"], ["Incident response plan", "How we handle our own incidents"]];
+---
+<Page title="Trust Center | Relyxus" description="Proof, not claims: Relyxus security tests, controls, documents and responsible disclosure, each with its date." path="/trust" tone="light" current="/trust">
+  <section class="k-sec k-white tr-hero">
+    <div class="wrap k-split">
+      <div>
+        <span class="k-tag"><i class="d"></i>Trust Center</span>
+        <h1 class="k-h1" style="margin-top:16px">Don't take our word for it. <span>Check.</span></h1>
+        <p class="k-lede">Banks buy Relyxus after their risk team has checked it. Everything they usually ask for is here, with the date it was true.</p>
+        <div class="k-btns"><a class="k-b1" href="#documents">Request the security pack</a><a class="k-b2" href="#disclosure">Report a vulnerability</a></div>
+      </div>
+      <div class="ev k-card">
+        <div class="eh"><b>Evidence</b><span>Updated 15 Nov 2026</span></div>
+        {evidence.map(([t, d, when, st]) => <div class="er"><div><b>{t}</b><small>{d}</small></div><span class="when">{when}</span><span class={`st ${st === "Next" ? "nx" : "ok"}`}>{st === "Next" ? "Booked next" : st}</span></div>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="k-sec k-dark tr-promise">
+    <div class="wrap">
+      <h2 class="k-h2">Five things Relyxus will never do.</h2>
+      <div class="seals">{promises.map(([t, d], i) => <div class="seal"><div class="wax"><span>{i + 1}</span></div><b>{t}</b><p>{d}</p></div>)}</div>
+    </div>
+  </section>
+
+  <section class="k-sec k-mist tr-track">
+    <div class="wrap">
+      <h2 class="k-h2">What is done, what is booked, <span>with dates.</span></h2>
+      <div class="track">
+        <div class="node done"><i></i><em>Nov 2026</em><b>Security, load and resilience tests</b></div>
+        <div class="node done"><i></i><em>Nov 2026</em><b>46 security checks in every release</b></div>
+        <div class="node"><i></i><em>Booking now</em><b>External penetration test, CREST firm</b></div>
+        <div class="node"><i></i><em>Planned</em><b>SOC 2 Type I</b></div>
+        <div class="node"><i></i><em>Planned</em><b>ISO 27001</b></div>
+      </div>
+      <p class="k-note">Solid dots are complete. Outlined dots are booked or planned and will show their date once confirmed.</p>
+    </div>
+  </section>
+
+  <section class="k-sec k-navy tr-radar">
+    <div class="wrap k-split">
+      <div>
+        <h2 class="k-h2">We attacked it <span>before anyone else could.</span></h2>
+        <p class="k-lede">Before launch we ran our own attack scans, load and soak tests, and chaos tests that kill parts of the system mid incident. The full summary is in the test report.</p>
+        <div class="k-btns"><a class="k-b3" href="#documents">Request the test report</a></div>
+      </div>
+      <svg class="rad" viewBox="0 0 320 320" aria-label="Test areas covered: attack scans, access control, load, soak, chaos and recovery">
+        <g fill="none" stroke="#2C3546">{[40, 80, 120].map((r) => <circle cx="160" cy="160" r={r} />)}<line x1="160" y1="20" x2="160" y2="300" /><line x1="38" y1="90" x2="282" y2="230" /><line x1="38" y1="230" x2="282" y2="90" /></g>
+        <polygon class="poly" points="160,44 270,96 262,222 160,276 58,222 52,98" fill="rgba(61,174,128,.22)" stroke="#3DAE80" stroke-width="2" />
+        <g font-family="Geist Variable, Geist, sans-serif" font-size="12" fill="#E9EEF5" text-anchor="middle"><text x="160" y="14">Attack scans</text><text x="296" y="88">Access</text><text x="292" y="244">Load</text><text x="160" y="314">Soak</text><text x="26" y="244">Chaos</text><text x="28" y="88">Recovery</text></g>
+      </svg>
+    </div>
+  </section>
+
+  <section class="k-sec k-white tr-docs" id="documents">
+    <div class="wrap">
+      <h2 class="k-h2">Ask for anything <span>your risk team needs.</span></h2>
+      <div class="shelf">{docs.map(([t, d], i) => <div class="spine" style={`--h:${300 - (i % 3) * 22}px`}><b>{t}</b><span>{d}</span><a href="/demo#book">Request</a></div>)}</div>
+    </div>
+  </section>
+
+  <section class="k-sec k-dark tr-disc" id="disclosure">
+    <div class="wrap k-split">
+      <div>
+        <h2 class="k-h2">Found a flaw? <span>Here is exactly what happens next.</span></h2>
+        <p class="k-lede">Email security@relyxus.com or use the address in /.well-known/security.txt. We will not take legal action against good faith research.</p>
+      </div>
+      <ol class="flow"><li><b>We reply</b><span>Within 2 working days, with a named person</span></li><li><b>We fix it</b><span>Critical issues are prioritised over everything else</span></li><li><b>We tell you</b><span>When it is fixed, and credit you if you want</span></li></ol>
+    </div>
+  </section>
+</Page>
+<style is:global>
+.tr-hero{padding:100px 0}
+.tr-hero .ev{overflow:hidden;box-shadow:0 30px 70px rgba(20,30,50,.12)}
+.tr-hero .eh{display:flex;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--line);font-size:14px}.tr-hero .eh span{color:var(--muted-2)}
+.tr-hero .er{display:grid;grid-template-columns:1fr 96px 110px;gap:12px;align-items:center;padding:15px 20px;border-bottom:1px solid var(--line-2)}
+.tr-hero .er b{display:block;font-size:15px}.tr-hero .er small{display:block;color:var(--muted-2);font-size:13px;margin-top:2px}
+.tr-hero .when{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.tr-hero .st{justify-self:end;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px}
+.tr-hero .st.ok{background:#DDF3E9;color:#17694A}.tr-hero .st.nx{background:#EEF1F5;color:#3E4652}
+.tr-hero .st.ok::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#3DAE80;margin-right:6px;vertical-align:1px}
+.tr-promise .seals{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin-top:44px}
+.tr-promise .seal{border:1px solid #232B3A;border-radius:18px;padding:22px 18px;background:#0B0F18;min-height:260px;display:flex;flex-direction:column;transition:transform .4s}
+.tr-promise .seal:hover{transform:translateY(-4px)}
+.tr-promise .wax{width:58px;height:58px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FF8A66,#B4382C);display:grid;place-items:center;box-shadow:inset 0 -4px 8px rgba(0,0,0,.3),0 8px 20px rgba(229,72,42,.35);margin-bottom:auto;position:relative}
+.tr-promise .wax span{font-family:var(--display);font-size:22px;font-weight:600;color:#fff}
+.tr-promise .seal:hover .wax{animation:tr-crack .6s ease forwards}
+@keyframes tr-crack{50%{transform:scale(1.15) rotate(-8deg)}100%{transform:scale(1) rotate(0)}}
+.tr-promise .seal b{font-size:17px;margin-top:22px;line-height:1.3}.tr-promise .seal p{font-size:14.5px;color:#C9D1DC;margin:8px 0 0;line-height:1.5}
+.tr-track .track{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:56px}
+.tr-track .track::before{content:"";position:absolute;left:0;right:0;top:9px;height:2px;background:linear-gradient(90deg,#3DAE80 0 40%,#C9D1DC 40%)}
+.tr-track .node i{display:block;width:20px;height:20px;border-radius:50%;border:2px solid #9AA6B8;background:var(--mist);position:relative;z-index:1}
+.tr-track .node.done i{background:#3DAE80;border-color:#3DAE80;box-shadow:0 0 0 6px rgba(61,174,128,.18)}
+.tr-track .node em{display:block;font-style:normal;font-size:13.5px;font-weight:600;color:#3F66B0;margin-top:16px}.tr-track .node b{display:block;font-size:16px;margin-top:4px;line-height:1.35}
+.tr-radar .rad{width:100%;max-width:440px;justify-self:center}
+.tr-radar .poly{transform-origin:160px 160px;animation:tr-draw 4s ease-in-out infinite alternate}
+@keyframes tr-draw{from{transform:scale(.4);opacity:.3}to{transform:scale(1);opacity:1}}
+.tr-docs .shelf{display:flex;gap:12px;align-items:flex-end;margin-top:44px;padding-bottom:10px;border-bottom:8px solid #0A0C10;overflow-x:auto}
+.tr-docs .spine{flex:1 0 170px;height:var(--h);border-radius:10px 10px 0 0;background:linear-gradient(180deg,#141A26,#0A0C10);color:#fff;padding:18px 16px;display:flex;flex-direction:column;transition:transform .35s cubic-bezier(.2,.7,.1,1);cursor:pointer}
+.tr-docs .spine:nth-child(2n){background:linear-gradient(180deg,#26467E,#13284A)}.tr-docs .spine:nth-child(3n){background:linear-gradient(180deg,#0F5C3E,#08321F)}
+.tr-docs .spine:hover{transform:translateY(-22px)}
+.tr-docs .spine b{font-size:17px;line-height:1.25}.tr-docs .spine span{font-size:13.5px;color:#C9D1DC;margin-top:8px}
+.tr-docs .spine a{margin-top:auto;align-self:flex-start;background:#fff;color:#0A0C10;border-radius:999px;padding:6px 13px;font-size:13px;font-weight:600}
+.tr-disc .flow{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;counter-reset:f}
+.tr-disc .flow li{display:grid;grid-template-columns:48px 1fr;gap:4px 14px;padding:18px 20px;border:1px solid #232B3A;border-radius:14px;background:#0B0F18}
+.tr-disc .flow li::before{counter-increment:f;content:counter(f);grid-row:span 2;width:40px;height:40px;border-radius:50%;background:#fff;color:#05070C;font-weight:700;display:grid;place-items:center}
+.tr-disc .flow b{font-size:18px}.tr-disc .flow span{font-size:15px;color:#C9D1DC}
+@media (max-width:980px){.tr-promise .seals{grid-template-columns:1fr 1fr}.tr-track .track{grid-template-columns:1fr;gap:22px}.tr-track .track::before{display:none}}
+</style>

@@ -1,0 +1,106 @@
+---
+import Page from "../../layouts/Page.astro";
+const causes = [["Configuration regression in payments-api", 82, "#E5482A", "6 pieces of evidence for, 1 against"], ["Database connection pool saturation", 31, "#7FA0D6", "2 pieces of evidence for"], ["Card network outage", 4, "#9AA6B8", "Ruled out: network status and synthetic checks healthy"]];
+const qs = [["Why did INC-2041 happen?", "vigil"], ["Show me the evidence", "evidence"], ["How can we fix it safely?", "approval"], ["Draft the regulator notice", "report"]];
+---
+<Page title="Vigil | Relyxus" description="Vigil is the Relyxus AI. It shows its working, cites every source, says when it is unsure, and never acts without two people." path="/product/vigil" tone="light" current="/product">
+  <section class="k-sec k-white vg-hero">
+    <div class="wrap k-split">
+      <div>
+        <span class="k-tag" style="color:#5C4EE5"><i class="d"></i>Vigil</span>
+        <h1 class="k-h1" style="margin-top:16px">An AI that <span>shows its working.</span></h1>
+        <p class="k-lede">Vigil reads your alerts, changes, logs and metrics, then tells you what broke and why, with a link to every piece of evidence it used.</p>
+        <div class="k-btns"><a class="k-b1" href="/demo">Ask Vigil in the demo</a><a class="k-b2" href="/legal/ai-notice">Read the AI notice</a></div>
+      </div>
+      <div class="shot">
+        <video muted playsinline loop autoplay preload="metadata" poster="/media/one-night/vigil.jpg" src="/media/one-night/vigil.mp4"></video>
+        <span class="cite c1"><b>1</b>Deploy log</span><span class="cite c2"><b>2</b>Error rate</span><span class="cite c3"><b>3</b>Staging test</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="k-sec k-dark vg-rank">
+    <div class="wrap k-split">
+      <div><h2 class="k-h2">It ranks causes by evidence, <span>not by guesswork.</span></h2><p class="k-lede">Each likely cause carries the evidence for it and against it. Weak ideas are ruled out in writing, so nobody chases them on the bridge call.</p><p class="k-note">Figures from the demo workspace, sample data.</p></div>
+      <div class="bars">{causes.map(([t, v, c, d], i) => <div class="bar" style={`--v:${v}%;--c:${c};animation-delay:${i * 0.25}s`}><div class="tt"><b>{t}</b><span>{v}% likely</span></div><div class="trk"><i></i></div><small>{d}</small></div>)}</div>
+    </div>
+  </section>
+
+  <section class="k-sec k-mist vg-unsure">
+    <div class="wrap k-split">
+      <div class="quiet k-card"><div class="q">What caused the login slowdown at 14:05?</div><div class="a"><span class="typed">I don't know yet.</span><p>No change, alert or metric explains it with enough confidence. These would tell us:</p><ul><li>Identity provider latency for 13:50 to 14:10</li><li>Session store memory on login-api</li><li>Any network change in eu-west-2</li></ul></div></div>
+      <div><h2 class="k-h2">When the evidence is not there, <span>it says so.</span></h2><p class="k-lede">A confident wrong answer at 3am costs more than an honest one. Vigil says "I don't know" early and tells you what would settle it.</p></div>
+    </div>
+  </section>
+
+  <section class="k-sec k-white vg-lock">
+    <div class="wrap">
+      <h2 class="k-h2" style="text-align:center">It prepares the fix. <span>People press the button.</span></h2>
+      <div class="vault">
+        <div class="pk on"><i class="ti ti-fingerprint"></i><b>Emma Clarke</b><small>Duty manager, approved</small></div>
+        <div class="big"><i class="ti ti-lock"></i><span>Restart payments-api</span><small>Unlocks after 2 approvals</small></div>
+        <div class="pk"><i class="ti ti-fingerprint"></i><b>Daniel Hughes</b><small>Waiting for passkey</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="k-sec k-navy vg-model">
+    <div class="wrap k-split">
+      <div><h2 class="k-h2">Your choice of model. <span>Your data trains nothing.</span></h2><p class="k-lede">Pick the model route your risk team approves, in the region you choose, or run a model inside your own network. Vigil never sends your data to train anyone's model.</p></div>
+      <div class="routes"><div class="r on"><b>Cloud model, UK region</b><span>Through your own cloud account</span><i class="ti ti-circle-check"></i></div><div class="r"><b>Cloud model, EU region</b><span>Through your own cloud account</span></div><div class="r"><b>Model inside your network</b><span>For air gapped installs</span></div><div class="map" aria-hidden="true"><span class="dot uk"></span><span class="dot eu"></span></div></div>
+    </div>
+  </section>
+
+  <section class="k-sec k-white vg-ask">
+    <div class="wrap">
+      <h2 class="k-h2">Ask what you would ask <span>a senior engineer.</span></h2>
+      <div class="chips">{qs.map(([q], i) => <button type="button" class={i === 0 ? "on" : ""}>{q}</button>)}</div>
+      <div class="frame"><img src="/media/one-night/vigil-mid.jpg" alt="Vigil answering in the Relyxus console" /></div>
+    </div>
+  </section>
+</Page>
+<style is:global>
+.vg-hero{padding:96px 0;background:radial-gradient(50% 60% at 80% 30%,rgba(92,78,229,.12),transparent 70%),#fff}
+.vg-hero .shot{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:0 40px 80px rgba(20,30,50,.18)}
+.vg-hero video{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}
+.vg-hero .cite{position:absolute;display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px 6px 6px;font-size:13.5px;font-weight:600;box-shadow:0 12px 24px rgba(20,30,50,.18);animation:vg-pop 6s ease infinite both}
+.vg-hero .cite b{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:12px}
+.vg-hero .c1{left:6%;top:12%}.vg-hero .c1 b{background:#5C4EE5}.vg-hero .c2{right:5%;top:40%;animation-delay:.6s}.vg-hero .c2 b{background:#E5482A}.vg-hero .c3{left:12%;bottom:10%;animation-delay:1.2s}.vg-hero .c3 b{background:#17694A}
+@keyframes vg-pop{0%{opacity:0;transform:translateY(10px) scale(.9)}12%,85%{opacity:1;transform:none}100%{opacity:0}}
+.vg-rank .bars{display:flex;flex-direction:column;gap:26px}
+.vg-rank .tt{display:flex;justify-content:space-between;gap:12px;font-size:17px}.vg-rank .tt span{font-family:var(--display);font-size:24px;font-weight:600;color:var(--c)}
+.vg-rank .trk{height:12px;border-radius:6px;background:#161C28;margin-top:10px;overflow:hidden}
+.vg-rank .trk i{display:block;height:100%;width:var(--v);border-radius:6px;background:var(--c);animation:vg-race 4s cubic-bezier(.2,.7,.1,1) infinite both;animation-delay:inherit}
+@keyframes vg-race{0%{width:0}35%,100%{width:var(--v)}}
+.vg-rank small{display:block;font-size:14px;color:#C9D1DC;margin-top:8px}
+.vg-unsure .quiet{padding:24px}
+.vg-unsure .q{align-self:flex-end;background:#0A0C10;color:#fff;border-radius:14px 14px 4px 14px;padding:11px 15px;font-size:15px;width:fit-content;margin-left:auto}
+.vg-unsure .a{margin-top:16px;background:#F6F8FA;border:1px solid var(--line-2);border-radius:4px 14px 14px 14px;padding:16px 18px;font-size:15px;color:#1F2630}
+.vg-unsure .typed{font-family:var(--display);font-size:26px;font-weight:600;border-right:2px solid #5C4EE5;padding-right:4px;animation:vg-caret 1s steps(1) infinite}
+@keyframes vg-caret{50%{border-color:transparent}}
+.vg-unsure .a ul{margin:8px 0 0;padding-left:18px;line-height:1.7}
+.vg-lock .vault{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:20px;align-items:center;margin-top:52px}
+.vg-lock .pk{border:1px solid var(--line);border-radius:18px;padding:26px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px}
+.vg-lock .pk i{font-size:46px;color:#9AA6B8}.vg-lock .pk.on{border-color:#3DAE80;background:#F4FBF8}.vg-lock .pk.on i{color:#17694A}
+.vg-lock .pk b{font-size:17px}.vg-lock .pk small{color:var(--muted);font-size:14px}
+.vg-lock .pk:not(.on) i{animation:vg-press 2.4s ease-in-out infinite}
+@keyframes vg-press{50%{color:#5C4EE5;transform:scale(1.12)}}
+.vg-lock .big{background:#0A0C10;color:#fff;border-radius:24px;padding:42px 24px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;box-shadow:0 30px 60px rgba(10,14,22,.25)}
+.vg-lock .big i{font-size:40px;color:#FF8A66}.vg-lock .big span{font-family:var(--display);font-size:28px;font-weight:600}.vg-lock .big small{color:#C9D1DC;font-size:15px}
+.vg-model .routes{position:relative;display:flex;flex-direction:column;gap:10px}
+.vg-model .r{display:grid;grid-template-columns:1fr auto;padding:16px 18px;border:1px solid #232B3A;border-radius:14px;background:#0B0F18;cursor:pointer}
+.vg-model .r b{font-size:17px}.vg-model .r span{grid-column:1;font-size:14px;color:#C9D1DC;margin-top:3px}.vg-model .r i{grid-row:1/3;grid-column:2;align-self:center;color:#8BE6BE;font-size:22px}
+.vg-model .r.on{border-color:#3DAE80;background:#0E1A16}
+.vg-model .map{height:120px;border-radius:14px;border:1px solid #232B3A;background-image:radial-gradient(#2C3546 1px,transparent 1.3px);background-size:12px 12px;position:relative}
+.vg-model .dot{position:absolute;width:14px;height:14px;border-radius:50%;background:#3DAE80;box-shadow:0 0 0 8px rgba(61,174,128,.2)}.vg-model .uk{left:38%;top:30%}.vg-model .eu{left:52%;top:48%;background:#3A4458;box-shadow:none}
+.vg-ask .chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:32px}
+.vg-ask .chips button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:10px 16px;font-size:15px;cursor:pointer}
+.vg-ask .chips button.on{background:#5C4EE5;color:#fff;border-color:#5C4EE5}
+.vg-ask .frame{margin-top:22px;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 60px rgba(20,30,50,.12)}.vg-ask .frame img{display:block;width:100%}
+@media (max-width:900px){.vg-lock .vault{grid-template-columns:1fr}}
+</style>
+<script>
+const qs = [["vigil"], ["evidence"], ["approval"], ["report"]];
+const btns = [...document.querySelectorAll<HTMLButtonElement>(".vg-ask .chips button")], img = document.querySelector<HTMLImageElement>(".vg-ask .frame img")!;
+btns.forEach((b, i) => (b.onclick = () => { btns.forEach((x) => x.classList.toggle("on", x === b)); img.src = `/media/one-night/${qs[i][0]}-mid.jpg`; }));
+</script>

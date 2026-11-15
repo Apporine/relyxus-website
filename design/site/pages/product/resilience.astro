@@ -1,0 +1,39 @@
+---
+import Page from "../../layouts/Page.astro";
+const acts = [["Lower the card-auth timeout alert threshold", "Done"], ["Add staging test result to release gate", "Done"], ["Rehearse payments failover", "In progress"], ["Update the restart runbook", "Open"]];
+---
+<Page title="Resilience and reviews | Relyxus" description="Drills, impact tolerances, replays, reviews that end in fixes, and a board report in plain English." path="/product/resilience" tone="dark" current="/product">
+  <section class="k-sec k-dark rz-hero"><div class="wrap k-split"><div><span class="k-tag"><i class="d"></i>Resilience and reviews</span><h1 class="k-h1" style="margin-top:16px">Practise the outage <span>before it practises on you.</span></h1><p class="k-lede">Plan drills, fail over on purpose, and check you stay inside your impact tolerance, with the results kept for your board and your regulator.</p></div>
+    <div class="cd" aria-hidden="true"><small>Drill: fail over card payments to eu-west-1</small><div class="num">00:00:<span>10</span></div><div class="bar"><i></i></div><b>Planned failover, 1 December, 22:00</b></div></div></section>
+  <section class="k-sec k-white rz-tol"><div class="wrap k-split"><div><h2 class="k-h2">Know which failures would <span>break your tolerance.</span></h2><p class="k-lede">Set the maximum tolerable disruption for each important business service. Relyxus tracks every incident and drill against it and shows the ones that came close.</p></div>
+    <svg class="chart" viewBox="0 0 520 260" role="img" aria-label="Chart of four drills against a 4 hour impact tolerance; one ran over"><rect x="40" y="20" width="460" height="70" fill="#FDEDEA"/><line x1="40" y1="90" x2="500" y2="90" stroke="#E5482A" stroke-dasharray="6 5" stroke-width="2"/><text x="44" y="84" font-size="12" fill="#B4382C" font-family="Geist Variable,sans-serif">Impact tolerance, 4 hours</text>
+      <g font-size="12" fill="#3E4652" font-family="Geist Variable,sans-serif"><rect x="80" y="170" width="56" height="70" rx="6" fill="#3DAE80"/><text x="80" y="256">Oct</text><rect x="190" y="150" width="56" height="90" rx="6" fill="#3DAE80"/><text x="190" y="256">Sept</text><rect class="over" x="300" y="70" width="56" height="170" rx="6" fill="#FF6B4A"/><text x="300" y="256">Jul</text><rect x="410" y="196" width="56" height="44" rx="6" fill="#3DAE80"/><text x="410" y="256">Aug</text></g></svg></div></section>
+  <section class="k-sec k-navy rz-film"><div class="wrap"><h2 class="k-h2">Watch any incident again, <span>minute by minute.</span></h2><div class="sc"><img src="/media/one-night/replay-mid.jpg" alt="Incident replay in the Relyxus console" /><div class="scrub"><i></i><span style="left:12%"></span><span style="left:30%"></span><span style="left:48%"></span><span style="left:63%"></span><span style="left:81%"></span></div></div></div></section>
+  <section class="k-sec k-mist rz-rev"><div class="wrap k-split"><div><h2 class="k-h2">Reviews that end in fixes, <span>not folders.</span></h2><p class="k-lede">Every review produces owned actions with dates. Relyxus follows them until they are done, and shows the board what is still open.</p></div><div class="acts">{acts.map(([a, s]) => <div class={`ac ${s === "Done" ? "dn" : s === "Open" ? "op" : "ip"}`}><span>{a}</span><em>{s}</em></div>)}</div></div></section>
+  <section class="k-sec k-white rz-board"><div class="wrap k-split"><div class="printer" aria-hidden="true"><div class="slot"></div><div class="paper"><b>Operational resilience: the last 30 days</b><div class="kv"><span>Resilience score<b>772</b></span><span>SEV1 incidents<b>2</b></span><span>Median time to resolve<b>1h 22m</b></span></div><div class="ln"></div><div class="ln s"></div><div class="ln"></div></div></div><div><h2 class="k-h2">The board report, <span>in plain English.</span></h2><p class="k-lede">Thirty days of resilience on one page, numbers checked against the records, ready as a PDF for the risk committee. Figures shown are from the demo workspace.</p></div></div></section>
+</Page>
+<style is:global>
+.rz-hero{padding:96px 0}.rz-hero .cd{border:1px solid #232B3A;border-radius:22px;padding:30px;background:#0B0F18}
+.rz-hero .cd small{color:#C9D1DC;font-size:14px}.rz-hero .num{font-family:var(--display);font-size:clamp(64px,8vw,110px);letter-spacing:-.04em;font-variant-numeric:tabular-nums;margin:10px 0}.rz-hero .num span{color:#FF8A66}
+.rz-hero .bar{height:10px;border-radius:5px;background:#161C28;overflow:hidden}.rz-hero .bar i{display:block;height:100%;width:30%;background:linear-gradient(90deg,#FF6B4A,#3DAE80);animation:rz-fill 5s linear infinite}
+@keyframes rz-fill{from{width:0}to{width:100%}}
+.rz-hero .cd b{display:block;margin-top:16px;color:#8BE6BE}
+.rz-tol .chart{width:100%}.rz-tol .over{animation:rz-blink 2s ease-in-out infinite}@keyframes rz-blink{50%{opacity:.6}}
+.rz-film .sc{margin-top:40px;border-radius:18px;overflow:hidden;border:1px solid #232B3A;position:relative}.rz-film img{display:block;width:100%}
+.rz-film .scrub{position:absolute;left:24px;right:24px;bottom:22px;height:6px;border-radius:3px;background:rgba(255,255,255,.25)}
+.rz-film .scrub i{position:absolute;left:0;top:0;bottom:0;width:0;background:#fff;border-radius:3px;animation:rz-fill 8s linear infinite}
+.rz-film .scrub span{position:absolute;top:-4px;width:14px;height:14px;border-radius:50%;background:#7FA0D6;border:2px solid #fff}
+.rz-rev .acts{display:flex;flex-direction:column;gap:10px}
+.rz-rev .ac{display:flex;justify-content:space-between;gap:12px;padding:16px 18px;border-radius:12px;background:#fff;border:1px solid var(--line);font-size:16px;animation:rz-slide 6s ease infinite both}
+.rz-rev .ac em{font-style:normal;font-weight:600;font-size:13px;border-radius:999px;padding:3px 10px}
+.rz-rev .dn em{background:#DDF3E9;color:#17694A}.rz-rev .ip em{background:#E8EEF7;color:#45608A}.rz-rev .op em{background:#FDE9E4;color:#B4382C}
+.rz-rev .ac:nth-child(2){animation-delay:.4s}.rz-rev .ac:nth-child(3){animation-delay:.8s}.rz-rev .ac:nth-child(4){animation-delay:1.2s}
+@keyframes rz-slide{0%{transform:translateX(-12px);opacity:0}12%,90%{transform:none;opacity:1}100%{opacity:0}}
+.rz-board .printer{position:relative;height:420px;max-width:440px;width:100%;justify-self:center}
+.rz-board .slot{position:absolute;left:0;right:0;top:0;height:46px;border-radius:12px;background:#0A0C10}
+.rz-board .paper{position:absolute;left:22px;right:22px;top:26px;background:#fff;border:1px solid var(--line);box-shadow:0 20px 40px rgba(20,30,50,.12);padding:24px;animation:rz-print 6s ease-in-out infinite;transform-origin:top}
+@keyframes rz-print{0%{clip-path:inset(0 0 100% 0)}40%,100%{clip-path:inset(0 0 0 0)}}
+.rz-board .paper b{font-size:16px}.rz-board .kv{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}
+.rz-board .kv span{font-size:12px;color:var(--muted)}.rz-board .kv span b{display:block;font-family:var(--display);font-size:26px;color:var(--ink);margin-top:4px}
+.rz-board .ln{height:9px;border-radius:4px;background:#EEF1F5;margin-top:10px}.rz-board .ln.s{width:70%}
+</style>

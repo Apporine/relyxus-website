@@ -1,0 +1,89 @@
+---
+import Page from "../layouts/Page.astro";
+const lines = ["Command centre and war room", "Paging by Slack, text, email and phone", "On call rotas and handover", "Vigil, with evidence on every answer", "Four eyes approvals with passkeys", "Change preflight and change windows", "Regulator reports: DORA, FCA, PRA, MAS", "Status pages and client notices", "Drills, tolerances, replays and reviews", "Auditor room and evidence export", "Single sign on, SCIM and custom roles", "Installation kit and upgrades"];
+const faq = [["Is it really one price?", "Yes. $25,000 a year covers every feature for one production installation. There are no seat limits and no add ons."], ["What does it cost to run?", "Relyxus runs in your cloud, so you pay your cloud provider for the servers it uses. The sizing guide shows the expected size for your bank."], ["Do you charge per user or per incident?", "No. Add as many people and incidents as you need."], ["Is VAT included?", "No. Prices exclude VAT and local taxes, which are added where they apply."], ["Can we try it first?", "Yes. Replay one past outage for free, open the live demo, or run a 30 day pilot inside your cloud."]];
+---
+<Page title="Pricing | Relyxus" description="One published price: $25,000 a year, every feature, installed in your own cloud." path="/pricing" tone="light" current="/pricing">
+  <section class="k-sec k-white pr-hero">
+    <div class="wrap">
+      <span class="k-tag"><i class="d"></i>Pricing</span>
+      <h1 class="k-h1" style="margin-top:16px;max-width:900px">One price. Every feature. <span>Your cloud.</span></h1>
+      <div class="price"><span class="cur">$</span><span class="dig">25,000</span><span class="per">a year<br /><small>per production installation, excluding VAT</small></span></div>
+      <div class="k-btns"><a class="k-b1" href="/demo#book">Book a demo</a><a class="k-b2" href="/replay">Replay an outage free</a></div>
+    </div>
+  </section>
+
+  <section class="k-sec k-mist pr-receipt">
+    <div class="wrap k-split">
+      <div>
+        <h2 class="k-h2">No add ons. <span>No per seat surprises.</span></h2>
+        <p class="k-lede">Everything Relyxus does is in the one licence. The receipt on the right is the whole list.</p>
+      </div>
+      <div class="paper" aria-label="Everything included in the licence">
+        <div class="ph"><b>RELYXUS</b><span>Annual licence</span></div>
+        {lines.map((l, i) => <div class="li" style={`animation-delay:${i * 0.18}s`}><span>{l}</span><em>Included</em></div>)}
+        <div class="tot"><span>Total</span><b>$25,000</b></div>
+        <div class="cut" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="k-sec k-dark pr-founding" id="founding-partners">
+    <div class="wrap k-split">
+      <div>
+        <h2 class="k-h2">Founder pricing <span>for the first five.</span></h2>
+        <p class="k-lede">Five banks or fintechs get founder pricing in return for a named case study and two reference calls a year. You also get a direct line to the people building Relyxus.</p>
+        <div class="k-btns"><a class="k-b3" href="/demo#book">Apply for a place</a></div>
+      </div>
+      <div class="ledger">{[1, 2, 3, 4, 5].map((n) => <div class="seat"><em>Place {n}</em><b>Open</b><i></i></div>)}</div>
+    </div>
+  </section>
+
+  <section class="k-sec k-white pr-proc">
+    <div class="wrap k-split">
+      <div class="folder" aria-hidden="true"><div class="tab">Procurement pack</div><div class="sheet s1">Software Licence Agreement</div><div class="sheet s2">Data Processing Agreement</div><div class="sheet s3">Security pack</div><div class="sheet s4">Company details</div></div>
+      <div>
+        <h2 class="k-h2">Everything your procurement team <span>will ask for.</span></h2>
+        <p class="k-lede">The licence, data processing agreement, security pack and company details, in one folder, before the first call.</p>
+        <div class="k-btns"><a class="k-b1" href="/demo#book">Request the pack</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="k-sec k-mist pr-faq">
+    <div class="wrap">
+      <h2 class="k-h2">Straight answers <span>about price.</span></h2>
+      <div class="cards">{faq.map(([q, a], i) => <details class="card" open={i === 0}><summary>{q}<i class="ti ti-plus"></i></summary><p>{a}</p></details>)}</div>
+    </div>
+  </section>
+</Page>
+<style is:global>
+.pr-hero{padding:100px 0 110px;background:radial-gradient(60% 80% at 85% 10%,rgba(255,107,74,.16),transparent 70%),radial-gradient(50% 70% at 10% 90%,rgba(61,174,128,.12),transparent 70%),#fff}
+.pr-hero .price{display:flex;align-items:flex-start;gap:10px;margin-top:42px}
+.pr-hero .cur{font-family:var(--display);font-size:64px;font-weight:500;line-height:1;margin-top:18px}
+.pr-hero .dig{font-family:var(--display);font-variation-settings:'opsz' 96;font-weight:600;font-size:clamp(96px,15vw,210px);letter-spacing:-.06em;line-height:.85;font-variant-numeric:tabular-nums;background:linear-gradient(100deg,#0A0C10 0 55%,#FF6B4A 70%,#0A0C10 85%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:r-flow 7s linear infinite}
+.pr-hero .per{font-size:22px;font-weight:500;margin-top:30px;line-height:1.3}.pr-hero .per small{font-size:15px;color:var(--muted);font-weight:400}
+.pr-receipt .paper{position:relative;background:#fff;border-radius:6px;padding:28px 30px 40px;box-shadow:0 30px 70px rgba(20,30,50,.14);font-family:ui-monospace,'SFMono-Regular',Menlo,monospace;font-size:14px;max-width:460px;justify-self:center;width:100%}
+.pr-receipt .ph{display:flex;justify-content:space-between;padding-bottom:14px;border-bottom:2px dashed #C9D1DC;margin-bottom:8px}
+.pr-receipt .li{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px dotted #E3E8EF;animation:pr-print 5s ease both infinite}
+@keyframes pr-print{0%{opacity:0;transform:translateY(-6px)}10%,92%{opacity:1;transform:none}100%{opacity:0}}
+.pr-receipt .li em{font-style:normal;color:#17694A}
+.pr-receipt .tot{display:flex;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:2px solid #0A0C10;font-size:18px}
+.pr-receipt .cut{position:absolute;left:0;right:0;bottom:-10px;height:20px;background:radial-gradient(circle at 10px 0,transparent 10px,#fff 10.5px) 0 0/20px 20px repeat-x}
+.pr-founding .ledger{display:flex;flex-direction:column;gap:10px}
+.pr-founding .seat{display:grid;grid-template-columns:110px 1fr 14px;align-items:center;gap:14px;padding:18px 20px;border:1px dashed #3A4458;border-radius:14px}
+.pr-founding .seat em{font-style:normal;color:#C9D1DC}.pr-founding .seat b{font-size:18px;color:#8BE6BE}
+.pr-founding .seat i{width:10px;height:10px;border-radius:50%;background:#3DAE80;box-shadow:0 0 12px #3DAE80;animation:r-ping 2s infinite}
+.pr-proc .folder{position:relative;height:380px;max-width:480px;width:100%}
+.pr-proc .tab{position:absolute;left:0;top:0;background:#0A0C10;color:#fff;border-radius:12px 12px 0 0;padding:10px 18px;font-weight:600;font-size:14px}
+.pr-proc .folder::before{content:"";position:absolute;left:0;right:0;top:38px;bottom:0;background:linear-gradient(160deg,#141A26,#0A0C10);border-radius:0 16px 16px 16px}
+.pr-proc .sheet{position:absolute;left:24px;right:24px;height:64px;background:#fff;border-radius:10px;box-shadow:0 10px 24px rgba(0,0,0,.25);padding:20px 18px;font-weight:600;font-size:15px;transition:transform .4s}
+.pr-proc .s1{top:70px}.pr-proc .s2{top:146px}.pr-proc .s3{top:222px}.pr-proc .s4{top:298px}
+.pr-proc .folder:hover .sheet{transform:translateX(18px)}
+.pr-faq .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:40px}
+.pr-faq .card{padding:20px 22px;background:#fff;border:1px solid var(--line);border-radius:14px;border-top:4px solid #0A0C10}
+.pr-faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:12px;font-size:18px;font-weight:600}
+.pr-faq summary::-webkit-details-marker{display:none}
+.pr-faq p{font-size:16px;color:var(--muted);line-height:1.55;margin:12px 0 0}
+@media (max-width:900px){.pr-faq .cards{grid-template-columns:1fr}}
+</style>

@@ -1,0 +1,12 @@
+---
+import Base from "./Base.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+interface Props { title: string; description: string; path: string; tone?: "light" | "dark"; current?: string }
+const { title, description, path, tone = "light", current } = Astro.props;
+---
+<Base title={title} description={description} path={path}>
+  <Nav tone={tone} current={current} />
+  <main id="main" class="k"><slot /></main>
+  <Footer />
+</Base>

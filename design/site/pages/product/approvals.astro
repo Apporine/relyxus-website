@@ -1,0 +1,55 @@
+---
+import Page from "../../layouts/Page.astro";
+const checks = [["Live incident on this service", "INC-2041 is open", "Blocks"], ["Change window", "No freeze covers this time", "Clear"], ["Recent stability", "2 serious incidents in 30 days", "Plan around"], ["On call cover", "Someone is on call", "Clear"], ["Rollback", "A rollback plan is given", "Clear"]];
+---
+<Page title="Approvals and safe change | Relyxus" description="Four eyes on every fix, change checks before anything ships, freeze windows your tools respect, and a way back for every change." path="/product/approvals" tone="light" current="/product">
+  <section class="k-sec k-white ap-hero">
+    <div class="wrap k-split"><div><span class="k-tag" style="color:#17694A"><i class="d"></i>Approvals and safe change</span><h1 class="k-h1" style="margin-top:16px">Four eyes on every fix. <span>Even at 3am.</span></h1><p class="k-lede">Every production action needs two named people, each confirming with a passkey that it is really them. Your rules, enforced by the software, not by memory.</p></div>
+      <div class="prints"><div class="fp a"><i class="ti ti-fingerprint"></i><span>Emma Clarke</span></div><div class="lockx"><i class="ti ti-lock-open"></i><b>Restart payments-api</b><small>Approved by 2 of 2</small></div><div class="fp b"><i class="ti ti-fingerprint"></i><span>Daniel Hughes</span></div></div></div>
+  </section>
+  <section class="k-sec k-dark ap-gate">
+    <div class="wrap k-split"><div><h2 class="k-h2">It tells you to wait <span>when waiting is right.</span></h2><p class="k-lede">Change preflight checks a change before it ships: open incidents, freeze windows, recent stability, on call cover and the rollback plan.</p></div>
+      <div class="gate k-card"><div class="gh"><b>card-auth v4.14, raise pool limit to 200</b><span class="k-pill" style="background:#3A1A14;color:#FF8A66">Risk 75 of 100</span></div><div class="verdict">Wait until the open incident on this service is resolved.</div>{checks.map(([a, b, c]) => <div class="ck"><span>{a}</span><small>{b}</small><em class={c === "Blocks" ? "bad" : c === "Clear" ? "ok" : "mid"}>{c}</em></div>)}</div></div>
+  </section>
+  <section class="k-sec k-mist ap-frost">
+    <div class="wrap"><h2 class="k-h2">Freeze periods <span>your tools actually respect.</span></h2>
+      <div class="month">{Array.from({ length: 28 }).map((_, i) => <div class={`d ${[19, 20, 21, 22, 23].includes(i) ? "fz" : ""} ${i === 20 ? "hit" : ""}`}><em>{i + 1}</em>{[19, 20, 21, 22, 23].includes(i) && <span>Freeze</span>}{i === 20 && <b>Change blocked</b>}</div>)}</div></div>
+  </section>
+  <section class="k-sec k-white ap-rew">
+    <div class="wrap k-split"><div class="loop" aria-hidden="true"><svg viewBox="0 0 300 300"><circle cx="150" cy="150" r="110" fill="none" stroke="#E3E8EF" stroke-width="14"/><circle class="arc" cx="150" cy="150" r="110" fill="none" stroke="#3DAE80" stroke-width="14" stroke-linecap="round" stroke-dasharray="690" /></svg><div class="mid"><b>Rolled back</b><small>Check failed: 5xx above 2%</small></div></div>
+      <div><h2 class="k-h2">Every fix arrives <span>with its way back.</span></h2><p class="k-lede">Each action carries its check and its rollback. If the check fails, Relyxus rolls back to the last good version on its own and tells the room.</p></div></div>
+  </section>
+  <section class="k-sec k-navy ap-dial">
+    <div class="wrap k-split"><div><h2 class="k-h2">Small safe actions run alone, <span>inside rules you wrote.</span></h2><p class="k-lede">Restarting one pod outside business hours should not need two directors. Earned autonomy lets low risk actions run on their own, only after a team's track record shows they are safe.</p></div>
+      <div class="dial"><svg viewBox="0 0 300 180" aria-hidden="true"><path d="M30 160 A120 120 0 0 1 270 160" fill="none" stroke="#232B3A" stroke-width="18" stroke-linecap="round"/><path class="lvl" d="M30 160 A120 120 0 0 1 270 160" fill="none" stroke="url(#g)" stroke-width="18" stroke-linecap="round" stroke-dasharray="377"/><defs><linearGradient id="g"><stop offset="0" stop-color="#3DAE80"/><stop offset="1" stop-color="#FF6B4A"/></linearGradient></defs></svg><div class="lbls"><span>Always ask</span><b>Low risk runs alone</b><span>Never alone</span></div></div></div>
+  </section>
+</Page>
+<style is:global>
+.ap-hero{padding:96px 0}.ap-hero .prints{display:grid;grid-template-columns:1fr 1.2fr 1fr;gap:14px;align-items:center}
+.ap-hero .fp{display:flex;flex-direction:column;align-items:center;gap:10px;padding:26px 10px;border:1px solid var(--line);border-radius:20px;font-size:14px;font-weight:600}
+.ap-hero .fp i{font-size:64px;color:#17694A;animation:ap-press 3s ease-in-out infinite}.ap-hero .fp.b i{animation-delay:1.2s}
+@keyframes ap-press{0%,100%{transform:scale(1);color:#9AA6B8}20%,60%{transform:scale(1.12);color:#17694A}}
+.ap-hero .lockx{background:#0A0C10;color:#fff;border-radius:22px;padding:30px 18px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;box-shadow:0 30px 60px rgba(10,14,22,.25)}
+.ap-hero .lockx i{font-size:40px;color:#8BE6BE}.ap-hero .lockx b{font-size:18px}.ap-hero .lockx small{color:#C9D1DC}
+.ap-gate .gate{padding:0;overflow:hidden}.ap-gate .gh{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:16px 20px;border-bottom:1px solid #232B3A}
+.ap-gate .verdict{padding:16px 20px;font-family:var(--display);font-size:22px;border-bottom:1px solid #232B3A;background:linear-gradient(90deg,rgba(229,72,42,.18),transparent)}
+.ap-gate .ck{display:grid;grid-template-columns:1fr 1fr 110px;gap:10px;padding:13px 20px;border-bottom:1px solid #161C28;font-size:15px}
+.ap-gate .ck small{color:#C9D1DC;font-size:14px}.ap-gate .ck em{font-style:normal;font-weight:600;text-align:right}
+.ap-gate .bad{color:#FF8A66}.ap-gate .ok{color:#8BE6BE}.ap-gate .mid{color:#F2C27B}
+.ap-frost .month{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;margin-top:40px}
+.ap-frost .d{position:relative;height:96px;border-radius:12px;background:#fff;border:1px solid var(--line);padding:10px;overflow:hidden}
+.ap-frost .d em{font-style:normal;font-size:13px;color:var(--muted-2)}
+.ap-frost .d.fz{background:linear-gradient(160deg,#EAF1FB,#D5E3F6);border-color:#B9CDEA}
+.ap-frost .d.fz::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,rgba(255,255,255,.5) 0 6px,transparent 6px 14px)}
+.ap-frost .d span{position:absolute;left:10px;bottom:10px;font-size:12.5px;font-weight:600;color:#26467E;z-index:1}
+.ap-frost .d.hit b{position:absolute;left:8px;right:8px;top:30px;background:#E5482A;color:#fff;font-size:12px;border-radius:6px;padding:4px 6px;z-index:2;animation:ap-bounce 2s ease infinite}
+@keyframes ap-bounce{0%,100%{transform:none}50%{transform:translateY(-6px)}}
+.ap-rew .loop{position:relative;width:min(340px,100%);justify-self:center}.ap-rew svg{display:block;width:100%;transform:rotate(-90deg)}
+.ap-rew .arc{animation:ap-rew 5s ease-in-out infinite}
+@keyframes ap-rew{0%{stroke-dashoffset:690}45%{stroke-dashoffset:200;stroke:#FF6B4A}55%{stroke:#FF6B4A}100%{stroke-dashoffset:690;stroke:#3DAE80}}
+.ap-rew .mid{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}.ap-rew .mid b{font-family:var(--display);font-size:28px}.ap-rew .mid small{color:var(--muted)}
+.ap-dial .dial{text-align:center}.ap-dial svg{width:100%;max-width:420px}.ap-dial .lvl{stroke-dashoffset:250;animation:ap-dial 5s ease-in-out infinite alternate}
+@keyframes ap-dial{to{stroke-dashoffset:150}}
+.ap-dial .lbls{display:flex;justify-content:space-between;max-width:420px;margin:0 auto;font-size:14px;color:#C9D1DC}.ap-dial .lbls b{color:#fff}
+@media (max-width:900px){.ap-hero .prints{grid-template-columns:1fr}.ap-frost .d{height:70px}.ap-frost .d span,.ap-frost .d.hit b{display:none}}
+</style>

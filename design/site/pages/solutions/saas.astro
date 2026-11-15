@@ -1,0 +1,30 @@
+---
+import Page from "../../layouts/Page.astro";
+const q = [["Do you notify us of incidents within 4 hours?", "Yes. Contract clocks are tracked per client, with drafts ready."], ["Can you show who approved production changes?", "Yes. Every change has two named approvers with passkeys."], ["Do you keep incident evidence unchanged?", "Yes. Evidence is sealed in a ledger when collected."], ["Do you test your recovery?", "Yes. Drills run against impact tolerances, with results kept."]];
+const clients = ["Northfield Bank", "Union Point Bank", "Harbour Bank"];
+---
+<Page title="Relyxus for SaaS that serves banks" description="Your bank customers will audit you. Answer their questionnaires from real records and send each one its own incident notice." path="/solutions/saas" tone="light" current="/solutions/banks">
+  <section class="k-sec k-white ss-hero">
+    <div class="wrap k-split"><div><span class="k-tag"><i class="d"></i>SaaS that serves banks</span><h1 class="k-h1" style="margin-top:16px">Your bank customers will audit you. <span>Be ready first.</span></h1><p class="k-lede">Banks now have to prove their suppliers are resilient too. Relyxus gives you the records to prove it, and fills in their questionnaires from what really happened.</p></div>
+      <div class="qn k-card"><div class="qh"><b>Supplier resilience questionnaire</b><span>Filled from records</span></div>{q.map(([a, b], i) => <div class="qr" style={`animation-delay:${i * 0.8}s`}><small>{a}</small><p>{b}</p></div>)}</div></div>
+  </section>
+  <section class="k-sec k-dark ss-fan"><div class="wrap k-split"><div><h2 class="k-h2">Each bank customer <span>gets its own update.</span></h2><p class="k-lede">One incident fans out into separate notices, each with that client's contract clock, the services they use and only what they are allowed to see. Client names are examples.</p></div>
+    <div class="fan" aria-hidden="true"><div class="src">INC-2041</div>{clients.map((c, i) => <div class={`cl c${i}`}><b>{c}</b><span>Notice sent, 2h 10m early</span></div>)}</div></div></section>
+  <section class="k-sec k-mist ss-pack"><div class="wrap k-split"><div class="bundle" aria-hidden="true"><div class="f">timeline.pdf</div><div class="f">approvals.csv</div><div class="f">evidence.zip</div><div class="seal"><i class="ti ti-lock"></i>Sealed, hash recorded</div></div><div><h2 class="k-h2">Send the evidence pack <span>in minutes, not weeks.</span></h2><p class="k-lede">Export the full record of an incident as one sealed bundle: timeline, decisions, approvals and evidence, with a receipt your customer can verify.</p></div></div></section>
+</Page>
+<style is:global>
+.ss-hero{padding:96px 0}.ss-hero .qn{padding:0;overflow:hidden;box-shadow:0 30px 60px rgba(20,30,50,.12)}
+.ss-hero .qh{display:flex;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--line);font-size:14px}.ss-hero .qh span{color:#17694A;font-weight:600}
+.ss-hero .qr{padding:14px 20px;border-bottom:1px solid var(--line-2)}.ss-hero .qr small{font-size:14px;color:var(--muted)}
+.ss-hero .qr p{margin:6px 0 0;font-size:16px;padding:8px 12px;border-radius:8px;background:#F4FBF8;border-left:3px solid #3DAE80;animation:ss-type 6s ease both infinite;animation-delay:inherit}
+@keyframes ss-type{0%{clip-path:inset(0 100% 0 0)}20%,90%{clip-path:inset(0 0 0 0)}100%{clip-path:inset(0 100% 0 0)}}
+.ss-fan .fan{position:relative;height:340px}
+.ss-fan .src{position:absolute;left:0;top:50%;transform:translateY(-50%);background:#fff;color:#05070C;font-weight:700;border-radius:14px;padding:16px 18px}
+.ss-fan .cl{position:absolute;right:0;width:58%;padding:16px 18px;border:1px solid #232B3A;border-radius:14px;background:#0B0F18;animation:ss-out 5s ease infinite both}
+.ss-fan .cl b{display:block;font-size:16px}.ss-fan .cl span{font-size:14px;color:#8BE6BE}
+.ss-fan .c0{top:20px}.ss-fan .c1{top:130px;animation-delay:.4s}.ss-fan .c2{top:240px;animation-delay:.8s}
+@keyframes ss-out{0%{transform:translateX(-40%);opacity:0}20%,90%{transform:none;opacity:1}100%{opacity:0}}
+.ss-pack .bundle{position:relative;display:flex;flex-direction:column;gap:10px;max-width:380px;width:100%;justify-self:center;padding:22px;border-radius:20px;background:#fff;border:1px solid var(--line);box-shadow:0 30px 60px rgba(20,30,50,.12)}
+.ss-pack .f{padding:14px 16px;border:1px solid var(--line);border-radius:10px;font-family:ui-monospace,Menlo,monospace;font-size:14px}
+.ss-pack .seal{display:flex;align-items:center;gap:8px;justify-content:center;padding:12px;border-radius:10px;background:#0A0C10;color:#8BE6BE;font-weight:600;animation:ap-bounce 3s ease infinite}
+</style>

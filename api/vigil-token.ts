@@ -33,7 +33,7 @@ export async function POST(req: Request): Promise<Response> {
   try { attempt = Math.max(0, Math.min(MODELS.length - 1, Number((await req.json()).attempt) || 0)); } catch {}
   const MODEL = MODELS[attempt];
   try {
-    const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY, httpOptions: { apiVersion: "v1alpha" } });
+    const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY, httpOptions: { apiVersion: "v1alpha", timeout: 8000, retryOptions: { attempts: 1 } } });
     const token = await ai.authTokens.create({
       config: {
         uses: 1,
@@ -50,13 +50,12 @@ export async function POST(req: Request): Promise<Response> {
             outputAudioTranscription: {},
           },
         },
-        lockAdditionalFields: [],
       },
     });
     return json({ token: token.name, model: MODEL, minutes: CALL_MINUTES, more: attempt < MODELS.length - 1 }, 200, origin);
   } catch (e) {
     console.error("vigil-token", e);
-    return json({ error: "voice_unavailable" }, 502, origin);
+    return json({ error: "voice_unavailable", code: (e as { status?: number }).status || 0 }, 502, origin);
   }
 }
 

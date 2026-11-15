@@ -154,7 +154,9 @@ import { SCREENS } from "../../scripts/assistant/prompt";
 // Typing works at any time. One brain (Gemini) answers text and voice;
 // without it, the built in backup answers and the browser's voice speaks.
 
-const BOOK = (import.meta.env.PUBLIC_VIGIL_BOOKING_URL as string | undefined) || "mailto:support@relyxus.com?subject=" + encodeURIComponent("Book a Relyxus demo");
+// Until a calendar link is set, booking opens the Talk to the team form beside the chat.
+const BOOK = (import.meta.env.PUBLIC_VIGIL_BOOKING_URL as string | undefined) || "#book-form";
+const BOOK_NOTE = "I would like to book a meeting";
 const KEY = "vigil.chat.v2";
 const root = document.querySelector<HTMLElement>("[data-vg]")!;
 const $ = <T extends HTMLElement>(s: string) => root.querySelector<T>(s)!;
@@ -163,7 +165,9 @@ const text = $<HTMLTextAreaElement>("[data-va-text]"), micBtn = $("[data-va-mic]
 const stage = $("[data-va-stage]"), img = $<HTMLImageElement>("[data-va-img]"), cap = $("[data-va-cap]"), href = $<HTMLAnchorElement>("[data-va-href]");
 const launch = $("[data-va-open]");
 const figure = $("[data-va-figure]"), leadForm = $<HTMLFormElement>("[data-va-lead]"), leadErr = $("[data-va-lead-err]");
-$<HTMLAnchorElement>("[data-va-book]").href = BOOK;
+const bookBtn = $<HTMLAnchorElement>("[data-va-book]");
+bookBtn.href = BOOK;
+if (BOOK === "#book-form") { bookBtn.removeAttribute("target"); bookBtn.onclick = (e) => { e.preventDefault(); showForm({ notes: BOOK_NOTE }); }; }
 
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const voice = new Voice();
@@ -276,7 +280,8 @@ leadForm.addEventListener("submit", async (e) => {
 });
 function cta(label: string, url: string, host: HTMLElement | null, blank = false) {
   const a = document.createElement("a"); a.className = "va-cta"; a.href = url; a.textContent = label;
-  if (blank) { a.target = "_blank"; a.rel = "noopener"; }
+  if (url === "#book-form") { a.onclick = (e) => { e.preventDefault(); showForm({ notes: BOOK_NOTE }); }; }
+  else if (blank) { a.target = "_blank"; a.rel = "noopener"; }
   attach(host, a);
 }
 function pageLink(path: string, host: HTMLElement | null) {
@@ -324,7 +329,8 @@ async function send(raw: string) {
   let said = "";
   if (brain !== "backup") {
     try {
-      const r = await fetch("/api/vigil-chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ history: lines.slice(-24), page: location.pathname }) });
+      const stop = new AbortController(), timer = setTimeout(() => stop.abort(), 20000);
+      const r = await fetch("/api/vigil-chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ history: lines.slice(-24), page: location.pathname }), signal: stop.signal }).finally(() => clearTimeout(timer));
       if (r.status === 503 || r.status === 404 || r.status === 405) brain = "backup";
       else if (r.ok) {
         brain = "gemini";
